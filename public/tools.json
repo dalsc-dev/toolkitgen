@@ -45,7 +45,7 @@
       "Sensor",
       "Resolution"
     ],
-    "description": "Test your webcam's real delivered FPS, native sensor resolution, and exposure latency online. Verify 60FPS vs 30FPS, detect dropped frames, and diagnose low-light stuttering 100% privately.",
+    "description": "Test your webcam's real delivered FPS, native sensor resolution, and exposure latency online. Verify 60FPS vs 30FPS, detect dropped frames, and diagnose low-light stuttering locally in your browser.",
     "featured": true,
     "dateAdded": "2026-11-03"
   },

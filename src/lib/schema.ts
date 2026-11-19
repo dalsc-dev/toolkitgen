@@ -72,7 +72,7 @@ export function generateJsonLd(options: SchemaOptions) {
         price: '0',
         priceCurrency: 'USD',
       },
-      featureList: '100% Client-Side Processing, Instant Execution, Zero Data Logging, Offline Capable',
+      featureList: 'In-Browser Execution, Instant Processing, Offline Capable, Free to Use',
     });
 
     if (options.howTo && options.howTo.length > 0) {

@@ -11,9 +11,9 @@
   "author": "ToolkitGen Engineering Team",
   "quickAnswer": "The Amsler Grid is a clinical diagnostic pattern used to detect early symptoms of Age-Related Macular Degeneration (AMD) and central vision loss. By fixating on a central dot with one eye covered, patients identify wavy, distorted, or missing lines (metamorphopsia).",
   "features": [
-    "100% Client-Side Processing",
+    "Local Browser Processing",
     "Instant Zero-Latency Execution",
-    "Zero Server Uploads & Zero Logging",
+    "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
   "howTo": [
@@ -27,11 +27,11 @@
     },
     {
       "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
     },
     {
       "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
     }
   ],
   "faq": [

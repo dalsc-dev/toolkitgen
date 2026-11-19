@@ -9,12 +9,12 @@ export const GET: APIRoute = async () => {
 
   let text = `# ToolkitGen - Full Knowledge Base for AI Engines (LLMs)
 
-> Complete structured documentation of ${tools.length} privacy-first, client-side web tools. All calculations execute locally in the client browser with zero data transmission.
+> Complete structured documentation of ${tools.length} client-side web tools. Calculations run in your browser, and inputs are not uploaded to our servers.
 
 ---
 
 ## Executive Summary
-Toolkit Gen is a web utility directory and developer suite where all tool inputs are processed in your browser and never uploaded. It provides instant, zero-latency execution across finance, health screening, developer formatting, audio analysis, and system diagnostics.
+Toolkit Gen brings developer utilities, financial calculators, health metrics and productivity tools into one consistent workspace. Each tool runs in your browser, requires no account, and is written to be clear, accurate and fast. Calculations run in your browser, and your inputs are not uploaded to our servers.
 
 ---
 

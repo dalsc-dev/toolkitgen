@@ -35,7 +35,7 @@ const canonicalUrl = `https://toolkitgen.com/category/${categorySlug}`;
 const jsonLd = generateJsonLd({
   type: 'website',
   title: `${categoryName} Tools & Utilities | Toolkit Gen`,
-  description: `Browse all free client-side tools and utilities under ${categoryName}. 100% private, browser-based execution.`,
+  description: `Browse all free client-side tools and utilities under ${categoryName}. Calculations run in your browser. Inputs are not uploaded.`,
   url: canonicalUrl,
   breadcrumbs: [
     { name: 'Home', url: '/' },
@@ -47,7 +47,7 @@ const jsonLd = generateJsonLd({
 
 <BaseLayout
   title={`${categoryName} Tools & Utilities | Toolkit Gen`}
-  description={`Browse free online utilities and calculators in ${categoryName}. All tools execute 100% locally in your browser with zero remote server logging.`}
+  description={`Browse free online utilities and calculators in ${categoryName}. Calculations run in your browser, and your inputs are not uploaded to our servers.`}
   canonical={canonicalUrl}
   jsonLd={jsonLd}
 >

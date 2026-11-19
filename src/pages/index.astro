@@ -4,37 +4,38 @@ import ToolCard from '@components/ToolCard.astro';
 import AdSlot from '@components/AdSlot.astro';
 import { getCollection } from 'astro:content';
 import { generateJsonLd } from '@lib/schema';
+import { HERO_COPY, TRUST_COPY } from '@lib/copy';
 
 // Build-time SSR data fetching - Zero empty containers!
 const tools = await getCollection('tools');
 
 const jsonLd = generateJsonLd({
   type: 'website',
-  title: 'Toolkit Gen | 126+ Free Client-Side Web Tools & Online Utilities',
-  description: 'Complete directory of 100% private, browser-based utilities, calculators, and diagnostic tools. Fast, secure, and zero remote server logging.',
+  title: 'Toolkit Gen | Professional Online Tools and Calculators',
+  description: HERO_COPY.sub,
   url: 'https://toolkitgen.com',
 });
 ---
 
 <BaseLayout
-  title="Toolkit Gen | Free 100% Client-Side Web Tools & Offline Utilities"
-  description="Explore 126+ free online tools, converters, calculators, and developer diagnostics. All data processes locally in your browser with zero remote server logging."
+  title="Toolkit Gen | Professional Online Tools and Calculators"
+  description={HERO_COPY.sub}
   canonical="https://toolkitgen.com"
   jsonLd={jsonLd}
 >
   <!-- Hero Section -->
   <section class="py-12 sm:py-16 text-center space-y-6 max-w-4xl mx-auto">
-    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-50 border border-orange-200/80 text-[#EE6C4D] text-xs font-bold uppercase tracking-wider">
-      <span class="w-2 h-2 rounded-full bg-[#EE6C4D] animate-ping"></span>
-      100% Private • Local Browser Execution
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold tracking-wide">
+      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+      {TRUST_COPY.trustLine}
     </div>
 
     <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-      Free Web Utilities That <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#EE6C4D] to-orange-500">Never Touch a Server</span>
+      {HERO_COPY.h1}
     </h1>
 
     <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-      ToolkitGen delivers client-side calculators, developer linting engines, and diagnostics that execute entirely within your browser memory. Your files, parameters, and private inputs are never uploaded or tracked.
+      {HERO_COPY.sub}
     </p>
 
     <!-- Search / Filter Interactive Bar (Progressive Enhancement) -->
@@ -123,13 +124,13 @@ const jsonLd = generateJsonLd({
   <section class="my-16 bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm">
     <div class="max-w-3xl space-y-4">
       <h2 class="text-2xl font-black text-slate-900 tracking-tight">
-        Why Client-Side Execution Matters for Security &amp; Privacy
+        {HERO_COPY.introHeading}
       </h2>
       <p class="text-sm text-slate-600 leading-relaxed">
-        Traditional online converters and utility sites force users to upload their PDFs, passwords, code snippets, and health data to remote servers. This introduces third-party data collection risks, data retention vulnerabilities, and artificial server queue delays.
+        {HERO_COPY.introBody}
       </p>
       <p class="text-sm text-slate-600 leading-relaxed">
-        ToolkitGen operates on a fundamentally different engineering paradigm: all logic executes on your CPU/GPU using modern Web APIs (WebAssembly, WebRTC, WebGPU, and Canvas). Once the page loads, the tool functions completely offline without sending a single byte of your operational data to external servers.
+        {TRUST_COPY.browserExecution} {TRUST_COPY.localStorage}
       </p>
     </div>
   </section>

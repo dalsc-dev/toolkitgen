@@ -2,7 +2,7 @@
   "id": "av_sync_flash_tool",
   "name": "Audio Video Sync Test",
   "title": "A/V Sync Calibrator: High-Precision Audio-Video Drift Diagnostic",
-  "description": "Fix lip-sync issues and monitor lag. The professional A/V Sync Calibrator for video editors and broadcasters. Detect audio-video drift with frame-accurate visual pulses. 100% private, local-first utility.",
+  "description": "Fix lip-sync issues and monitor lag. The professional A/V Sync Calibrator for video editors and broadcasters. Detect audio-video drift with frame-accurate visual pulses. client-side, local-first utility.",
   "category": "Professional Creator Suite",
   "tags": [
     "av sync tool",
@@ -18,11 +18,11 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "A/V Sync Calibrator: High-Precision Audio-Video Drift Diagnostic is a free, privacy-first web utility operating 100% locally in your browser. Fix lip-sync issues and monitor lag. The professional A/V Sync Calibrator for video editors and broadcasters. Detect audio-video drift with frame-accurate visual pulses. 100% private, local-first utility. All calculations and processing occur on-device with zero server uploads.",
+  "quickAnswer": "A/V Sync Calibrator: High-Precision Audio-Video Drift Diagnostic is a browser-based utility for developers and professionals. Fix lip-sync issues and monitor lag. The professional A/V Sync Calibrator for video editors and broadcasters. Detect audio-video drift with frame-accurate visual pulses. client-side, local-first utility. Calculations run in your browser, and your inputs are not uploaded to our servers.",
   "features": [
-    "100% Client-Side Processing",
+    "Local Browser Processing",
     "Instant Zero-Latency Execution",
-    "Zero Server Uploads & Zero Logging",
+    "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
   "howTo": [
@@ -36,11 +36,11 @@
     },
     {
       "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
     },
     {
       "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
     }
   ],
   "faq": [

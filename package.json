@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build && node scripts/check-limits.mjs",
+    "build": "node scripts/check-copy.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-limits.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
     "new:tool": "node scripts/scaffold-tool.mjs",
+    "check:copy": "node scripts/check-copy.mjs",
     "check:limits": "node scripts/check-limits.mjs"
   },
   "browserslist": [

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 - Page Not Found | Toolkit Gen"
+  description="The page you requested could not be found. Explore our directory of 126+ free client-side tools."
+  noindex={true}
+>
+  <div class="py-20 text-center space-y-6 max-w-lg mx-auto">
+    <div class="w-20 h-20 rounded-3xl bg-orange-100 text-[#EE6C4D] mx-auto flex items-center justify-center font-black text-3xl shadow-sm">
+      404
+    </div>
+
+    <h1 class="text-3xl font-black text-slate-900 tracking-tight">Page Not Found</h1>
+
+    <p class="text-sm text-slate-600 leading-relaxed">
+      The tool or resource you are looking for may have been updated, consolidated into one of our specialized OS suites, or moved.
+    </p>
+
+    <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/"
+        class="px-5 py-2.5 text-xs font-bold text-white bg-[#EE6C4D] hover:bg-[#d75a3c] rounded-xl shadow-sm transition-colors"
+      >
+        Return to Homepage
+      </a>
+      <a
+        href="/tool"
+        class="px-5 py-2.5 text-xs font-bold text-slate-700 bg-white border border-slate-200/80 hover:bg-slate-50 rounded-xl transition-colors"
+      >
+        Browse Tool Directory
+      </a>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,55 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ToolLayout from '@layouts/ToolLayout.astro';
+import AmslerGridIsland from '@tools/amsler_grid_macular/AmslerGridIsland';
+import DockerLinterIsland from '@tools/docker_compose_linter/DockerLinterIsland';
+import AirDropIsland from '@tools/airdrop_web_universal/AirDropIsland';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  return tools.map((tool) => ({
+    params: { slug: tool.data.id },
+    props: { tool },
+  }));
+}
+
+interface Props {
+  tool: CollectionEntry<'tools'>;
+}
+
+const { tool } = Astro.props;
+const {
+  id,
+  title,
+  description,
+  category,
+  quickAnswer,
+  faq,
+  howTo,
+  related,
+  datePublished,
+  dateModified,
+  articleHtml,
+} = tool.data;
+---
+
+<ToolLayout
+  id={id}
+  title={title}
+  description={description}
+  category={category}
+  quickAnswer={quickAnswer}
+  faq={faq}
+  howTo={howTo}
+  related={related}
+  datePublished={datePublished}
+  dateModified={dateModified}
+>
+  <div slot="tool-ui">
+    {id === 'amsler_grid_macular' && <AmslerGridIsland client:visible />}
+    {id === 'docker_compose_linter' && <DockerLinterIsland client:visible />}
+    {id === 'airdrop_web_universal' && <AirDropIsland client:visible />}
+  </div>
+
+  <div slot="article" set:html={articleHtml} />
+</ToolLayout>

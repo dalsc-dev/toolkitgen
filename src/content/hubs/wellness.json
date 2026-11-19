@@ -1,0 +1,15 @@
+{
+  "id": "wellness",
+  "title": "Mental Focus & Bio-Tracking Health Suite",
+  "description": "Ergonomic, neurological, and vision self-testing suite for computer workers. Features tech neck posture alarms, blink tracking, and brain fog RAM calculators.",
+  "subtitle": "Clinical bio-ergonomic diagnostics to prevent digital burnout and fatigue.",
+  "toolsIncluded": [
+    "Brain Fog & Mental RAM Calculator",
+    "Eye Strain & Blink Counter",
+    "Tech Neck Posture Alarm",
+    "Screen Distance Checker",
+    "Brain Dump Note & Trash",
+    "Phone Distraction Calculator"
+  ],
+  "dateModified": "2026-11-06T00:00:00Z"
+}

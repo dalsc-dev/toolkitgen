@@ -1,0 +1,73 @@
+---
+// Google Consent Mode v2 + GDPR/ePrivacy Compliant Banner
+---
+
+<div id="consent-banner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-50 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 p-5 hidden transition-all duration-300">
+  <div class="flex items-start gap-3">
+    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+      </svg>
+    </div>
+    <div class="space-y-1.5">
+      <h3 class="text-sm font-bold text-slate-900">Privacy &amp; Cookie Choices</h3>
+      <p class="text-xs text-slate-600 leading-relaxed">
+        We use essential local browser processing for all our tools. With your permission, we also use cookies for site analytics and Google AdSense to keep this directory free.
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-4 flex items-center justify-end gap-2">
+    <button id="consent-reject" class="px-3.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors">
+      Essential Only
+    </button>
+    <button id="consent-accept" class="px-4 py-1.5 text-xs font-bold text-white bg-[#EE6C4D] hover:bg-[#d75a3c] rounded-lg shadow-sm transition-colors">
+      Accept All
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    var consent = localStorage.getItem('tg_cookie_consent');
+    var banner = document.getElementById('consent-banner');
+    
+    if (!consent && banner) {
+      banner.classList.remove('hidden');
+    } else if (consent === 'all') {
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted',
+          'analytics_storage': 'granted'
+        });
+      }
+    }
+
+    var btnAccept = document.getElementById('consent-accept');
+    var btnReject = document.getElementById('consent-reject');
+
+    if (btnAccept) {
+      btnAccept.addEventListener('click', function() {
+        localStorage.setItem('tg_cookie_consent', 'all');
+        if (typeof window.gtag === 'function') {
+          window.gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+          });
+        }
+        if (banner) banner.classList.add('hidden');
+      });
+    }
+
+    if (btnReject) {
+      btnReject.addEventListener('click', function() {
+        localStorage.setItem('tg_cookie_consent', 'essential');
+        if (banner) banner.classList.add('hidden');
+      });
+    }
+  })();
+</script>

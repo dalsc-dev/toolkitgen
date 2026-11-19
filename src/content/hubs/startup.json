@@ -1,0 +1,15 @@
+{
+  "id": "startup",
+  "title": "Founder's Forge - Startup Operating System",
+  "description": "Comprehensive diagnostic and modeling suite for founders: runway calculators, AI server burn simulators, co-founder equity splits, and SaaS economics.",
+  "subtitle": "Critical financial simulations and operational tools for seed to Series-A founders.",
+  "toolsIncluded": [
+    "Freemium / AI Server Death Simulator",
+    "Co-Founder Equity Engine",
+    "Working Capital Death Spiral Engine",
+    "Dynamic Runway Calculator",
+    "Cap Table Simulator",
+    "Exit Waterfall Simulator"
+  ],
+  "dateModified": "2026-11-06T00:00:00Z"
+}

@@ -1,0 +1,106 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ToolCard from '@components/ToolCard.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { generateJsonLd } from '@lib/schema';
+
+const tools = await getCollection('tools');
+
+// Unique categories
+const categories = Array.from(new Set(tools.map((t) => t.data.category))).sort();
+
+const jsonLd = generateJsonLd({
+  type: 'website',
+  title: 'All Tools & Categories | Toolkit Gen Directory',
+  description: 'Browse our complete directory of free online tools, calculators, and converters categorized by Health, Developer utilities, DevOps, and Privacy.',
+  url: 'https://toolkitgen.com/tool',
+  breadcrumbs: [
+    { name: 'Home', url: '/' },
+    { name: 'Directory', url: '/tool' },
+  ],
+});
+---
+
+<BaseLayout
+  title="All Tools & Categories | Toolkit Gen Directory"
+  description="Browse our complete directory of free online tools, calculators, and converters categorized by Health, Developer utilities, DevOps, and Privacy."
+  canonical="https://toolkitgen.com/tool"
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Directory', url: '/tool' }]} />
+
+  <section class="py-8 space-y-4">
+    <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+      Tools &amp; Utilities Directory
+    </h1>
+    <p class="text-sm text-slate-600 max-w-2xl leading-relaxed">
+      Explore all {tools.length} active browser-based tools. Every utility executes 100% locally on your machine with zero server communication.
+    </p>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex flex-wrap gap-2 pt-4">
+      <button
+        type="button"
+        class="category-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-900 text-white shadow-sm transition-all"
+        data-filter="all"
+      >
+        All Tools ({tools.length})
+      </button>
+      {categories.map((cat) => (
+        <button
+          type="button"
+          class="category-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-white border border-slate-200/80 text-slate-600 hover:bg-slate-50 transition-all"
+          data-filter={cat}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <!-- Tools Grid -->
+  <section class="my-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="directory-grid">
+      {tools.map((tool) => (
+        <ToolCard
+          id={tool.data.id}
+          name={tool.data.name}
+          description={tool.data.description}
+          category={tool.data.category}
+          featured={tool.data.featured}
+          tags={tool.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const filterBtns = document.querySelectorAll('.category-filter-btn');
+  const directoryGrid = document.getElementById('directory-grid');
+
+  if (directoryGrid) {
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => {
+          b.classList.remove('bg-slate-900', 'text-white', 'shadow-sm');
+          b.classList.add('bg-white', 'border', 'border-slate-200/80', 'text-slate-600');
+        });
+        btn.classList.remove('bg-white', 'border', 'border-slate-200/80', 'text-slate-600');
+        btn.classList.add('bg-slate-900', 'text-white', 'shadow-sm');
+
+        const cat = btn.getAttribute('data-filter');
+        const cards = directoryGrid.querySelectorAll('[data-category]');
+
+        cards.forEach((card) => {
+          if (cat === 'all' || card.getAttribute('data-category') === cat) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+</script>

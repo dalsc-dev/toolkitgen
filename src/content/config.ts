@@ -33,7 +33,10 @@ const toolsCollection = defineCollection({
       sidebar: z.boolean().default(true),
       bottom: z.boolean().default(true),
     }).default({ top: true, sidebar: true, bottom: true }),
+    externalScripts: z.array(z.string()).default([]),
     articleHtml: z.string().default(''),
+    toolHtml: z.string().default(''),
+    toolScript: z.string().default(''),
   }),
 });
 
@@ -46,6 +49,8 @@ const hubsCollection = defineCollection({
     subtitle: z.string().optional(),
     toolsIncluded: z.array(z.string()).default([]),
     dateModified: z.string().default('2026-11-06T00:00:00Z'),
+    hubHtml: z.string().default(''),
+    hubScript: z.string().default(''),
   }),
 });
 

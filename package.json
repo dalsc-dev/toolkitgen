@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && node scripts/check-limits.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
-    "new:tool": "node scripts/scaffold-tool.mjs"
+    "new:tool": "node scripts/scaffold-tool.mjs",
+    "check:limits": "node scripts/check-limits.mjs"
   },
   "browserslist": [
     "defaults and fully supports es6-module"

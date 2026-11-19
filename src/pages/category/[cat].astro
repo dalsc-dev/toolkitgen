@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ToolCard from '@components/ToolCard.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { generateJsonLd } from '@lib/schema';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  const catMap = new Map<string, { name: string; tools: typeof tools }>();
+
+  for (const t of tools) {
+    const slug = t.data.category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    if (!catMap.has(slug)) {
+      catMap.set(slug, { name: t.data.category, tools: [] });
+    }
+    catMap.get(slug)!.tools.push(t);
+  }
+
+  return Array.from(catMap.entries()).map(([slug, data]) => ({
+    params: { cat: slug },
+    props: { categoryName: data.name, categorySlug: slug, tools: data.tools },
+  }));
+}
+
+interface Props {
+  categoryName: string;
+  categorySlug: string;
+  tools: Array<any>;
+}
+
+const { categoryName, categorySlug, tools } = Astro.props;
+const canonicalUrl = `https://toolkitgen.com/category/${categorySlug}`;
+
+const jsonLd = generateJsonLd({
+  type: 'website',
+  title: `${categoryName} Tools & Utilities | Toolkit Gen`,
+  description: `Browse all free client-side tools and utilities under ${categoryName}. 100% private, browser-based execution.`,
+  url: canonicalUrl,
+  breadcrumbs: [
+    { name: 'Home', url: '/' },
+    { name: 'Categories', url: '/tool' },
+    { name: categoryName, url: canonicalUrl },
+  ],
+});
+---
+
+<BaseLayout
+  title={`${categoryName} Tools & Utilities | Toolkit Gen`}
+  description={`Browse free online utilities and calculators in ${categoryName}. All tools execute 100% locally in your browser with zero remote server logging.`}
+  canonical={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[
+    { name: 'Directory', url: '/tool' },
+    { name: categoryName, url: canonicalUrl },
+  ]} />
+
+  <section class="py-6 space-y-3">
+    <div class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-orange-50 text-[#EE6C4D] border border-orange-200/60">
+      Category
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+      {categoryName} Utilities ({tools.length})
+    </h1>
+    <p class="text-sm text-slate-600 max-w-2xl leading-relaxed">
+      Curated client-side web tools in the {categoryName} collection. Zero data uploads, instant local calculations.
+    </p>
+  </section>
+
+  <section class="my-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {tools.map((tool) => (
+        <ToolCard
+          id={tool.data.id}
+          name={tool.data.name}
+          description={tool.data.description}
+          category={tool.data.category}
+          featured={tool.data.featured}
+          tags={tool.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

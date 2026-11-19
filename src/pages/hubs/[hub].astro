@@ -1,0 +1,55 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { generateJsonLd } from '@lib/schema';
+
+export async function getStaticPaths() {
+  const hubs = await getCollection('hubs');
+  return hubs.map((hub) => ({
+    params: { hub: hub.data.id },
+    props: { hub },
+  }));
+}
+
+interface Props {
+  hub: CollectionEntry<'hubs'>;
+}
+
+const { hub } = Astro.props;
+const { id, title, description, hubHtml, hubScript } = hub.data;
+const canonicalUrl = `https://toolkitgen.com/hubs/${id}`;
+
+const jsonLd = generateJsonLd({
+  type: 'hub',
+  title,
+  description,
+  url: canonicalUrl,
+  breadcrumbs: [
+    { name: 'Home', url: '/' },
+    { name: 'Hubs', url: '/hubs/freelancer' },
+    { name: title, url: canonicalUrl },
+  ],
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonicalUrl}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[
+    { name: 'Hubs', url: '/hubs/freelancer' },
+    { name: title, url: canonicalUrl }
+  ]} />
+
+  <!-- Pre-Rendered Hub Stage -->
+  <div class="hub-stage-container" set:html={hubHtml} />
+
+  <!-- Hub Client Engine Logic -->
+  {hubScript && (
+    <script is:inline set:html={hubScript} />
+  )}
+</BaseLayout>

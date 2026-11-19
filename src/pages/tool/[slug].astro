@@ -29,7 +29,10 @@ const {
   related,
   datePublished,
   dateModified,
+  externalScripts = [],
   articleHtml,
+  toolHtml = '',
+  toolScript = '',
 } = tool.data;
 ---
 
@@ -46,9 +49,22 @@ const {
   dateModified={dateModified}
 >
   <div slot="tool-ui">
+    {externalScripts && externalScripts.map((src: string) => (
+      <script src={src} is:inline></script>
+    ))}
+
     {id === 'amsler_grid_macular' && <AmslerGridIsland client:visible />}
     {id === 'docker_compose_linter' && <DockerLinterIsland client:visible />}
     {id === 'airdrop_web_universal' && <AirDropIsland client:visible />}
+
+    {!['amsler_grid_macular', 'docker_compose_linter', 'airdrop_web_universal'].includes(id) && (
+      <div>
+        <div class="tool-stage-card overflow-hidden" set:html={toolHtml} />
+        {toolScript && (
+          <script is:inline set:html={toolScript} />
+        )}
+      </div>
+    )}
   </div>
 
   <div slot="article" set:html={articleHtml} />

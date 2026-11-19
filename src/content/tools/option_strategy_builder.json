@@ -1,8 +1,8 @@
 {
   "id": "option_strategy_builder",
   "name": "Options Strategy Builder",
-  "title": "Options Strategy Architect: Iron Condor & Straddle Builder",
-  "description": "Build and visualize complex options strategies. Calculate Profit/Loss zones for Iron Condors, Straddles, and Butterflies using this free interactive payout diagram tool. Local-first, private, and secure.",
+  "title": "Options Strategy Payoff Builder | Toolkit Gen",
+  "description": "Free online options strategy payoff builder with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Quantitative Finance & Analysis",
   "tags": [
     "options profit calculator",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Options Strategy Architect: Iron Condor & Straddle Builder is a browser-based utility for developers and professionals. Build and visualize complex options strategies. Calculate Profit/Loss zones for Iron Condors, Straddles, and Butterflies using this free interactive payout diagram tool. Local-first, private, and secure. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Options Strategy Payoff Builder is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Does this work on Android or mobile?",
       "a": "Perfectly. The Options Strategy Architect is built with a responsive grid. On Android and iPhone, the strategy builder and the P/L chart stack vertically, allowing you to model complex iron condors while sitting on the train or monitoring a news break. Open Chrome, tap the dots, and select \"Add to Home Screen\" to use it as an offline financial research app."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

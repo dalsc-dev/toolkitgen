@@ -1,8 +1,8 @@
 {
   "id": "browser_history_analyzer",
   "name": "Productivity Time Analyzer",
-  "title": "Browsing Habits Analyzer: Visualize Your Digital Life",
-  "description": "Analyze your Chrome or Firefox browsing history locally. Discover your peak productivity hours, top visited sites, and digital habits without uploading your data. Professional digital forensics for everyone.",
+  "title": "Browser History Analyzer Online | Toolkit Gen",
+  "description": "Free online browser history analyzer online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Digital Analytics & Research",
   "tags": [
     "browser history analyzer",
@@ -17,10 +17,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Browsing Habits Analyzer: Visualize Your Digital Life is a browser-based utility for developers and professionals. Analyze your Chrome or Firefox browsing history locally. Discover your peak productivity hours, top visited sites, and digital habits without uploading your data. Professional digital forensics for everyone. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Browser History Analyzer Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -54,6 +54,10 @@
     {
       "q": "Does this work on Android or mobile browsers?",
       "a": "Yes. The Browsing Habits Analyzer is fully responsive. You can upload a JSON export directly from your phone's storage. If you've used Google Takeout on your mobile device, simply select the file to see your mobile browsing patterns mapped out."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

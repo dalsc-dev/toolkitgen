@@ -268,7 +268,7 @@ if (fs.existsSync(toolsDir)) {
                     'price': '0',
                     'priceCurrency': 'USD'
                 },
-                'featureList': '100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable',
+                'featureList': 'Runs in Your Browser Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable',
                 'aggregateRating': {
                     '@type': 'AggregateRating',
                     'ratingValue': '4.9',

@@ -1,8 +1,8 @@
 {
   "id": "jwt_debugger_offline",
   "name": "Token Format Viewer",
-  "title": "JWT Inspector (Local): Secure JSON Web Token Debugger",
-  "description": "Decode, verify, and debug JSON Web Tokens (JWT) locally in your browser. Check expiration, verify signatures, and view claims without sending tokens to a server. client-side, local-first security tool.",
+  "title": "JWT Token Debugger Online | Toolkit Gen",
+  "description": "Free online jwt token debugger online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "System Administration & Data Safety",
   "tags": [
     "jwt debugger",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "JWT Inspector (Local): Secure JSON Web Token Debugger is a browser-based utility for developers and professionals. Decode, verify, and debug JSON Web Tokens (JWT) locally in your browser. Check expiration, verify signatures, and view claims without sending tokens to a server. client-side, local-first security tool. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "JWT Token Debugger Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Why doesn't the signature verify when I use the correct key?",
       "a": "The most common reason is Encoding Mismatch. Some systems expect the secret key to be Base64-encoded, while others expect it as a UTF-8 string. Our tool currently expects a UTF-8 string. Additionally, ensure the algorithm in the header is HS256. If your token uses RS256, it requires a Public/Private key pair, which is not supported in this version."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

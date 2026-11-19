@@ -1,8 +1,8 @@
 {
   "id": "hrv_biofeedback_trainer",
   "name": "HRV Biofeedback Trainer",
-  "title": "HRV Biofeedback Trainer | Heart Rate Variability Breathing Tool",
-  "description": "Free online HRV biofeedback trainer using webcam. Measure heart rate variability in real-time and learn resonance breathing for stress reduction and optimal wellness.",
+  "title": "HRV Biofeedback Breathing Trainer | Toolkit Gen",
+  "description": "Free online hrv biofeedback breathing trainer with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Health",
   "tags": [
     "HRV trainer",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "HRV Biofeedback Trainer | Heart Rate Variability Breathing Tool is a browser-based utility for developers and professionals. Free online HRV biofeedback trainer using webcam. Measure heart rate variability in real-time and learn resonance breathing for stress reduction and optimal wellness. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "HRV Biofeedback Breathing Trainer is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],

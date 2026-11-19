@@ -1,8 +1,8 @@
 {
   "id": "dark_pattern_simulator",
   "name": "User Interface Hell",
-  "title": "User Interface Hell: Dark Pattern Simulator & Ethics Quiz",
-  "description": "A satirical puzzle game exposing deceptive design. Can you unsubscribe from the newsletter while the UI fights back? Learn about Dark Patterns and UX ethics.",
+  "title": "Dark Pattern UI Simulator | Toolkit Gen",
+  "description": "Free online dark pattern ui simulator with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Satire & Challenge",
   "tags": [
     "dark patterns",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "User Interface Hell: Dark Pattern Simulator & Ethics Quiz is a browser-based utility for developers and professionals. A satirical puzzle game exposing deceptive design. Can you unsubscribe from the newsletter while the UI fights back? Learn about Dark Patterns and UX ethics. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Dark Pattern UI Simulator is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Why do companies use dark patterns if users hate them?",
       "a": "Short-term metrics. A/B testing might show that a confusing button increases sign-ups by 15%. Managers focused on quarterly goals may implement the pattern to hit their targets, ignoring the long-term erosion of brand trust and customer loyalty."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [],

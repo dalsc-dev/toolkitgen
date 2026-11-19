@@ -1,8 +1,8 @@
 {
   "id": "aes_gcm_vault_local",
   "name": "File Protection Utility",
-  "title": "AES-256 Client-Side Vault: Free Browser-Based File Encryption & Technical Guide",
-  "description": "Securely encrypt and decrypt files locally using AES-256 GCM. Private keys never leave your browser. A zero-knowledge cybersecurity tool for protecting sensitive data.",
+  "title": "AES-256 File Encryption Online | Toolkit Gen",
+  "description": "Free online aes-256 file encryption online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "System Administration & Data Safety",
   "tags": [
     "aes encryption",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "AES-256 Client-Side Vault: Free Browser-Based File Encryption & Technical Guide is a browser-based utility for developers and professionals. Securely encrypt and decrypt files locally using AES-256 GCM. Private keys never leave your browser. A zero-knowledge cybersecurity tool for protecting sensitive data. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "AES-256 File Encryption Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "What happens if Toolkit Gen goes offline?",
       "a": "Since this vault uses standard implementations (Web Crypto API), your files are not \"locked\" to this specific website. Any tool using AES-256-GCM and PBKDF2-SHA256 can decrypt your file as long as you have the password. Your data security is platform-independent."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

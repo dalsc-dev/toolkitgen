@@ -1,8 +1,8 @@
 {
   "id": "oled_burn_in_fixer",
   "name": "OLED Burn-In Remover",
-  "title": "OLED Burn-In Scrubber: Professional Image Retention & Stuck Pixel Repair",
-  "description": "Repair OLED image retention and stuck pixels. A free professional tool that cycles RGB patterns and static noise to refresh screen pixels and reduce burn-in artifacts. Comprehensive display health guide included.",
+  "title": "OLED Screen Burn-In Fixer | Toolkit Gen",
+  "description": "Free online oled screen burn-in fixer with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Display & Monitor Diagnostics",
   "tags": [
     "oled burn in fix",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "OLED Burn-In Scrubber: Professional Image Retention & Stuck Pixel Repair is a browser-based utility for developers and professionals. Repair OLED image retention and stuck pixels. A free professional tool that cycles RGB patterns and static noise to refresh screen pixels and reduce burn-in artifacts. Comprehensive display health guide included. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "OLED Screen Burn-In Fixer is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Is it safe to run the Scrubber overnight?",
       "a": "We do not recommend running this overnight. The Scrubber drives pixels at high intensity to clear retention. Long-term exposure (8+ hours) can generate significant heat. We suggest limit sessions to 120 minutes. If the retention hasn't improved after two hours, the damage is likely permanent hardware degradation."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

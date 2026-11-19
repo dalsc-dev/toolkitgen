@@ -1,8 +1,8 @@
 {
   "id": "stereo_left_right_test",
   "name": "Left/Right Stereo Speaker Test",
-  "title": "Stereo Channel Test: Left and Right Speaker Verification",
-  "description": "Verify your speaker orientation instantly. Test Left and Right audio channels, check for phase alignment, and calibrate your stereo image with this free pro-audio tool. client-side, local-first signal processing.",
+  "title": "Stereo Left Right Audio Test | Toolkit Gen",
+  "description": "Free online stereo left right audio test with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Audio & Sensory Engineering",
   "tags": [
     "stereo test",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Stereo Channel Test: Left and Right Speaker Verification is a browser-based utility for developers and professionals. Verify your speaker orientation instantly. Test Left and Right audio channels, check for phase alignment, and calibrate your stereo image with this free pro-audio tool. client-side, local-first signal processing. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Stereo Left Right Audio Test is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Is my audio data private?",
       "a": "client-side. All signal generation and panning calculations happen locally in your browser's RAM. We do not upload any audio, and we don't record your testing sessions. This tool is a \"Zero-Knowledge\" diagnostic utility, ensuring your professional acoustic environment remains your proprietary secret."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

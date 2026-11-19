@@ -1,8 +1,8 @@
 {
   "id": "stroboscope_tachometer",
   "name": "Online Stroboscope",
-  "title": "Software Stroboscope: Precision RPM Tachometer & Motion Tester",
-  "description": "Turn your monitor into a precision stroboscope. Measure RPM of rotating objects and test motion blur using high-frequency screen flashing. Free browser instrument with local privacy.",
+  "title": "Camera Stroboscope Tachometer | Toolkit Gen",
+  "description": "Free online camera stroboscope tachometer with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Display & Monitor Diagnostics",
   "tags": [
     "stroboscope online",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Software Stroboscope: Precision RPM Tachometer & Motion Tester is a browser-based utility for developers and professionals. Turn your monitor into a precision stroboscope. Measure RPM of rotating objects and test motion blur using high-frequency screen flashing. Free browser instrument with local privacy. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Camera Stroboscope Tachometer is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "How do I calculate the period of the flash?",
       "a": "The period $T$ is the inverse of the frequency. If you are strobing at 10Hz (600 RPM), the period is $1/10 = 0.1$ seconds (100 milliseconds). If your Duty Cycle is 10%, the screen will be white for 10ms and black for 90ms. This high-speed \"Pulse-Width\" logic is what creates the freezing effect."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

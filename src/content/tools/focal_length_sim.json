@@ -1,8 +1,8 @@
 {
   "id": "focal_length_sim",
   "name": "Camera Field of View Simulator",
-  "title": "Lens Field-of-View Sim: Visual Focal Length & Sensor Crop Simulator",
-  "description": "Visualize how different focal lengths and sensor sizes affect your shot. Interactive lens simulator for Full Frame, APS-C, and MFT. Essential for cinematographers and photographers.",
+  "title": "Camera Focal Length Simulator | Toolkit Gen",
+  "description": "Free online camera focal length simulator with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Professional Creator Suite",
   "tags": [
     "lens simulator",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Lens Field-of-View Sim: Visual Focal Length & Sensor Crop Simulator is a browser-based utility for developers and professionals. Visualize how different focal lengths and sensor sizes affect your shot. Interactive lens simulator for Full Frame, APS-C, and MFT. Essential for cinematographers and photographers. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Camera Focal Length Simulator is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Does this simulator work on Android?",
       "a": "Perfectly. The tool is designed with a mobile-first responsive grid. On Android and iOS, the viewfinder will scale to your screen width, and the control sliders are touch-optimized for high-precision sliding. You can use this tool on set or in the field to check your framing without needing to swap lenses on your physical camera."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

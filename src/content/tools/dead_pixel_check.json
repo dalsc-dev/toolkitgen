@@ -1,8 +1,8 @@
 {
   "id": "dead_pixel_check",
   "name": "Dead Pixel Checker",
-  "title": "Dead Pixel Detector: Professional Screen Defect & Stuck Pixel Test",
-  "description": "Check your monitor or phone screen for dead and stuck pixels. Full-screen solid color test patterns (RGB, White, Black) to spot display defects instantly. High-resolution diagnostic suite for LCD, LED, and OLED.",
+  "title": "Dead Pixel Screen Checker Online | Toolkit Gen",
+  "description": "Free online dead pixel screen checker online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Display & Monitor Diagnostics",
   "tags": [
     "dead pixel test",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Dead Pixel Detector: Professional Screen Defect & Stuck Pixel Test is a browser-based utility for developers and professionals. Check your monitor or phone screen for dead and stuck pixels. Full-screen solid color test patterns (RGB, White, Black) to spot display defects instantly. High-resolution diagnostic suite for LCD, LED, and OLED. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Dead Pixel Screen Checker Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Does this work on mobile (Android/iPhone)?",
       "a": "Absolutely. The Dead Pixel Detector is fully responsive. On Android and iOS, tapping the \"Full Screen\" button will leverage the browser's Fullscreen API to hide the URL bar and navigation, giving you a pure diagnostic field. This is the most reliable way to check a new phone for panel defects before the return period ends."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

@@ -15,9 +15,12 @@ const BANNED_RULES = [
   { regex: /cloudflare secured/i, label: 'Cloudflare Secured' },
   { regex: /verified by analytics/i, label: 'Verified by Analytics' },
   { regex: /\b(160\+|180\+|190\+)\b/, label: 'hardcoded tool count (e.g. 160+, 180+, 190+)' },
+  { regex: /100%\s*client[- ]side/i, label: '100% Client-Side' },
+  { regex: /\bzero[- ]latency\b/i, label: 'Zero Latency' },
+  { regex: /\blocalhost\b/i, label: 'localhost' },
 ];
 
-const SCAN_DIRS = ['src', 'public'];
+const SCAN_DIRS = ['src', 'public', 'dist'];
 const EXCLUDE_FILES = [
   'src/lib/copy.ts',
   'scripts/check-copy.mjs',
@@ -48,7 +51,14 @@ for (const dir of SCAN_DIRS) {
   const files = getFiles(dir);
   for (const file of files) {
     if (EXCLUDE_FILES.includes(file)) continue;
-    if (file.endsWith('.png') || file.endsWith('.ico') || file.endsWith('.gz') || file.endsWith('.svg') || file.endsWith('.jpg')) continue;
+    if (
+      file.endsWith('.png') ||
+      file.endsWith('.ico') ||
+      file.endsWith('.gz') ||
+      file.endsWith('.svg') ||
+      file.endsWith('.jpg')
+    )
+      continue;
 
     const content = fs.readFileSync(file, 'utf8');
     const lines = content.split('\n');
@@ -72,7 +82,9 @@ for (const dir of SCAN_DIRS) {
 }
 
 if (totalViolations > 0) {
-  console.error(`\n❌ Corporate Copy Standard Violation: Found ${totalViolations} banned phrase occurrence(s) across ${violationsByFile.size} file(s):\n`);
+  console.error(
+    `\n❌ Corporate Copy Standard Violation: Found ${totalViolations} banned phrase occurrence(s) across ${violationsByFile.size} file(s):\n`
+  );
   for (const [file, items] of violationsByFile.entries()) {
     console.error(`File: ${file}`);
     for (const item of items) {

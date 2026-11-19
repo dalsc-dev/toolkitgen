@@ -1,8 +1,8 @@
 {
   "id": "monitor_dead_zone_ruler",
   "name": "The Screen Ruler",
-  "title": "The Screen Ruler | Calibrate & Measure Real Objects Online",
-  "description": "A precise online screen ruler. Calibrate your monitor using a credit card to measure real-world objects in inches or centimeters directly on your screen.",
+  "title": "Screen Dead Zone Pixel Ruler | Toolkit Gen",
+  "description": "Free online screen dead zone pixel ruler with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Productivity & Utility",
   "tags": [
     "online ruler",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "The Screen Ruler | Calibrate & Measure Real Objects Online is a browser-based utility for developers and professionals. A precise online screen ruler. Calibrate your monitor using a credit card to measure real-world objects in inches or centimeters directly on your screen. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Screen Dead Zone Pixel Ruler is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Why don't you detect my screen size automatically?",
       "a": "Browsers do not provide the physical dimensions of a screen for privacy reasons (to prevent fingerprinting). They only provide the resolution. Therefore, manual calibration using a reference object is the only way to get 100% accuracy."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [],

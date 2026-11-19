@@ -1,8 +1,8 @@
 {
   "id": "seizure_flash_check",
   "name": "Video Flashing Test (Epilepsy)",
-  "title": "Photosensitive Safety Scan: Photosensitive Epilepsy Trigger Checker",
-  "description": "Protect yourself and your audience. The Photosensitive Safety Scan analyzes visual frequencies and flashing patterns to detect seizure triggers. Free accessibility tool for creators. Local-first processing.",
+  "title": "Photosensitive Flash Risk Checker | Toolkit Gen",
+  "description": "Free online photosensitive flash risk checker with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Emergency & Public Safety",
   "tags": [
     "seizure trigger checker",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Photosensitive Safety Scan: Photosensitive Epilepsy Trigger Checker is a browser-based utility for developers and professionals. Protect yourself and your audience. The Photosensitive Safety Scan analyzes visual frequencies and flashing patterns to detect seizure triggers. Free accessibility tool for creators. Local-first processing. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Photosensitive Flash Risk Checker is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Does this work on Android or mobile?",
       "a": "Perfectly. The tool is built with a responsive grid system. On Android and iPhone, the HUD visualization and the frequency readout stack vertically, allowing you to perform quick safety audits of outdoor signage or tablet content while on the move. We recommend using Chrome on Android, tapping the dots, and selecting \"Add to Home Screen\" to use it as an offline PWA."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

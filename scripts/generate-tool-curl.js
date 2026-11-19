@@ -50,7 +50,7 @@ const htmlContent = `<!DOCTYPE html>
         "price": "0",
         "priceCurrency": "USD"
       },
-      "featureList": "cURL Parser for Headers, Data, Query Params and Auth; Multi-Language Code Generation (Fetch, Axios, Node.js, Python Requests); Pretty-Printed JSON Payloads; One-Click Code Copy; 100% Client-Side Privacy",
+      "featureList": "cURL Parser for Headers, Data, Query Params and Auth; Multi-Language Code Generation (Fetch, Axios, Node.js, Python Requests); Pretty-Printed JSON Payloads; One-Click Code Copy; Runs in Your Browser Privacy",
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
@@ -251,7 +251,7 @@ const htmlContent = `<!DOCTYPE html>
                         </li>
                         <li class="flex justify-between">
                             <span class="text-slate-400 uppercase tracking-wider">Privacy:</span>
-                            <span class="font-bold text-emerald-600">100% Client-Side</span>
+                            <span class="font-bold text-emerald-600">Runs in Your Browser</span>
                         </li>
                     </ul>
                 </div>
@@ -461,7 +461,7 @@ const data = await res.json();
                             A frequent source of developer frustration occurs when a developer tests an endpoint using cURL in their terminal, receives a valid 200 OK JSON response, copies the generated code into their frontend web application, and is immediately met with a red console error:
                         </p>
                         <div class="bg-rose-50 border border-rose-200 p-4 rounded-xl font-mono text-xs text-rose-800">
-Access to fetch at 'https://api.target.com/v1' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Access to fetch at 'https://api.target.com/v1' from origin 'http://api.example.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
                         </div>
                         <p>
                             <strong>Why does this occur?</strong> cURL operates directly on the operating system socket layer without a browser environment. It is not subject to the W3C Same-Origin Policy (SOP).

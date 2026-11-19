@@ -1,8 +1,8 @@
 {
   "id": "display_color_gamut_visualizer",
   "name": "Display Color Gamut Visualizer",
-  "title": "Display Color Gamut Visualizer | Compare sRGB, DCI-P3, Adobe RGB Coverage",
-  "description": "Free display color gamut visualizer. Compare monitor color coverage against sRGB, DCI-P3, and Adobe RGB standards.",
+  "title": "Display Gamut Visualizer (sRGB) | Toolkit Gen",
+  "description": "Free online display gamut visualizer (srgb) with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Hardware & Monitors",
   "tags": [
     "color gamut visualizer",
@@ -15,10 +15,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Display Color Gamut Visualizer | Compare sRGB, DCI-P3, Adobe RGB Coverage is a browser-based utility for developers and professionals. Free display color gamut visualizer. Compare monitor color coverage against sRGB, DCI-P3, and Adobe RGB standards. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Display Gamut Visualizer (sRGB) is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],

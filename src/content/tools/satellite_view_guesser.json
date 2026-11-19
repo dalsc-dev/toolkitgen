@@ -1,8 +1,8 @@
 {
   "id": "satellite_view_guesser",
   "name": "Where on Earth?",
-  "title": "Where on Earth? | Satellite Geography & Geo-Deduction Game",
-  "description": "Test your geography skills with Where on Earth. You are dropped into a random satellite view without labels. Identify the location based on terrain, architecture, and vegetation.",
+  "title": "Satellite Geography Quiz Game | Toolkit Gen",
+  "description": "Free online satellite geography quiz game with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Gamified Knowledge",
   "tags": [
     "geography game",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Where on Earth? | Satellite Geography & Geo-Deduction Game is a browser-based utility for developers and professionals. Test your geography skills with Where on Earth. You are dropped into a random satellite view without labels. Identify the location based on terrain, architecture, and vegetation. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Satellite Geography Quiz Game is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "How many locations are in the game?",
       "a": "The database currently rotates through 25 iconic high-resolution locations, ranging from famous monuments like the Taj Mahal to natural wonders like the Grand Canyon. We regularly update the coordinate list to keep the challenge fresh."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

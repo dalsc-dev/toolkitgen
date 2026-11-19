@@ -1,8 +1,8 @@
 {
   "id": "chat_timeline_visualizer",
   "name": "Communication History Graph",
-  "title": "Relationship Timeline Gen: WhatsApp Chat Analyzer & Visualizer",
-  "description": "Analyze your WhatsApp chat history locally. Visualize message frequency, reply times, and relationship dynamics without uploading your data. Free relationship analytics tool.",
+  "title": "Chat Timeline Visualizer Online | Toolkit Gen",
+  "description": "Free online chat timeline visualizer online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Digital Analytics & Research",
   "tags": [
     "whatsapp analyzer",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Relationship Timeline Gen: WhatsApp Chat Analyzer & Visualizer is a browser-based utility for developers and professionals. Analyze your WhatsApp chat history locally. Visualize message frequency, reply times, and relationship dynamics without uploading your data. Free relationship analytics tool. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Chat Timeline Visualizer Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "What is a \"Good\" daily text average?",
       "a": "There is no universal 'good' number. However, the Stability Index suggests that healthy established relationships average between 15 and 40 messages per day. If the number is consistently over 100, you are likely in a high-intensity phase or managing a crisis. If it is under 5, you are likely living together (physical communication) or the relationship is primarily transactional."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

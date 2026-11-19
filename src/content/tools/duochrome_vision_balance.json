@@ -1,8 +1,8 @@
 {
   "id": "duochrome_vision_balance",
   "name": "Duochrome Vision Balance Test",
-  "title": "Duochrome Vision Balance Test | Red-Green Refraction Check",
-  "description": "Test your eye refractive balance with the duochrome (red-green) method. Compare clarity of letters on red vs green backgrounds to detect myopia or hyperopia. Online eye refraction screening.",
+  "title": "Duochrome Eye Test Online | Toolkit Gen",
+  "description": "Free online duochrome eye test online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Vision & Ophthalmology",
   "tags": [
     "duochrome test",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Duochrome Vision Balance Test | Red-Green Refraction Check is a browser-based utility for developers and professionals. Test your eye refractive balance with the duochrome (red-green) method. Compare clarity of letters on red vs green backgrounds to detect myopia or hyperopia. Online eye refraction screening. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Duochrome Eye Test Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -51,6 +51,14 @@
     {
       "q": "Why do I see differently on my phone vs computer?",
       "a": "Different displays have different color temperatures, gamma curves, and pixel densities. OLED screens typically show more vibrant colors than LCD. For consistent results, use the same device and ensure brightness is set to a comfortable, typical viewing level."
+    },
+    {
+      "q": "Is my input data private when using this tool?",
+      "a": "Yes. Processing runs entirely in your local browser memory. Your inputs and configuration parameters are never uploaded to our servers."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

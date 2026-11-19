@@ -125,7 +125,7 @@ const htmlContent = `<!DOCTYPE html>
           "name": "Is it safe to test my real password in this online analyzer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, but as a best security practice, you should never enter active production master passwords into any website. This tool operates 100% client-side inside your browser sandbox using JavaScript and the Web Crypto API. Zero data is transmitted across the network, no cookies or analytics track your keystrokes, and you can even disconnect your internet entirely or use it in an air-gapped environment."
+            "text": "Yes, but as a best security practice, you should never enter active production master passwords into any website. This tool operates Runs in Your Browser inside your browser sandbox using JavaScript and the Web Crypto API. Zero data is transmitted across the network, no cookies or analytics track your keystrokes, and you can even disconnect your internet entirely or use it in an air-gapped environment."
           }
         },
         {

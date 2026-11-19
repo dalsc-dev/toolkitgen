@@ -1,6 +1,6 @@
 /**
  * Shannon entropy & password strength estimation.
- * 100% client-side zero-knowledge calculation.
+ * Calculations run in your browser. Inputs are not uploaded.
  */
 
 export interface EntropyResult {

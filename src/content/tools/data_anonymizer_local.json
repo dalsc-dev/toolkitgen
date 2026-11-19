@@ -1,8 +1,8 @@
 {
   "id": "data_anonymizer_local",
   "name": "Data Anonymization Tool",
-  "title": "PII Data Scrubber: Secure Local Data Anonymizer (GDPR/HIPAA)",
-  "description": "Mask sensitive PII data locally in your browser. Free tool to anonymize emails, phone numbers, and credit cards using regex. client-side for GDPR compliance.",
+  "title": "Data Anonymizer & PII Scrubber | Toolkit Gen",
+  "description": "Free online data anonymizer & pii scrubber with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Data Science & Analytics",
   "tags": [
     "pii scrubber",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "PII Data Scrubber: Secure Local Data Anonymizer (GDPR/HIPAA) is a browser-based utility for developers and professionals. Mask sensitive PII data locally in your browser. Free tool to anonymize emails, phone numbers, and credit cards using regex. client-side for GDPR compliance. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Data Anonymizer & PII Scrubber is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Does this work on Android or mobile browsers?",
       "a": "Perfectly. The PII Data Scrubber is built with a responsive grid system. On Android and iPhone, the input and output panes stack vertically, allowing you to perform quick redactions on snippets from emails or messaging apps while on the move. Open Chrome on Android, tap the dots, and select \"Add to Home Screen\" to use it as an offline-ready PWA."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

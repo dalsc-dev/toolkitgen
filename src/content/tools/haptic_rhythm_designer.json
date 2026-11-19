@@ -1,8 +1,8 @@
 {
   "id": "haptic_rhythm_designer",
   "name": "Web-Haptic Feedback Vibration Designer",
-  "title": "Online Vibration Pattern Designer & Haptic Test (Mobile/Gamepad)",
-  "description": "The ultimate Web Haptic Feedback Designer. Test custom vibration patterns on Android phones and PC Gamepads (Xbox/DualSense). Diagnose motor health, LRA vs ERM resolution, and code vibration rhythms.",
+  "title": "Haptic Vibration Rhythm Designer | Toolkit Gen",
+  "description": "Free online haptic vibration rhythm designer with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Hardware & Peripheral Health",
   "tags": [
     "vibration api",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Online Vibration Pattern Designer & Haptic Test (Mobile/Gamepad) is a browser-based utility for developers and professionals. The ultimate Web Haptic Feedback Designer. Test custom vibration patterns on Android phones and PC Gamepads (Xbox/DualSense). Diagnose motor health, LRA vs ERM resolution, and code vibration rhythms. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Haptic Vibration Rhythm Designer is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],

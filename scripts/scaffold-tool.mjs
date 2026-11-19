@@ -133,7 +133,7 @@ const contentJson = {
   author: 'ToolkitGen Engineering Team',
   quickAnswer: `${readableName} is a client-side utility that operates directly in browser memory without sending user data to remote servers.`,
   features: [
-    '100% Client-Side Processing',
+    'Runs in Your Browser Processing',
     'Zero Data Logging',
     'Instant Local Execution',
     'Offline Capable'

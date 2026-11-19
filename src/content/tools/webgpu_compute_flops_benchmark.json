@@ -1,8 +1,8 @@
 {
   "id": "webgpu_compute_flops_benchmark",
   "name": "WebGPU Compute & TFLOPs Benchmark",
-  "title": "WebGPU Compute & TFLOPs Benchmark | Test GPU FP32/FP16 Hardware Online",
-  "description": "Benchmark your graphics card compute performance in WebGPU. Test raw FP32/FP16 TFLOPs, memory bandwidth, and thermal throttling stability online without software installations. Compatible with Nvidia, Apple Silicon, AMD, and Intel GPUs.",
+  "title": "WebGPU Compute TFLOPS Benchmark | Toolkit Gen",
+  "description": "Free online webgpu compute tflops benchmark with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Hardware & Monitors",
   "tags": [
     "NEW",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "WebGPU Compute & TFLOPs Benchmark | Test GPU FP32/FP16 Hardware Online is a browser-based utility for developers and professionals. Benchmark your graphics card compute performance in WebGPU. Test raw FP32/FP16 TFLOPs, memory bandwidth, and thermal throttling stability online without software installations. Compatible with Nvidia, Apple Silicon, AMD, and Intel GPUs. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "WebGPU Compute TFLOPS Benchmark is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "How do I enable WebGPU if my browser says it is unsupported?",
       "a": "In Google Chrome or Microsoft Edge, navigate to chrome://flags/#enable-unsafe-webgpu and set it to Enabled, then restart the browser. Ensure your browser is updated to version 113 or newer and your graphics card drivers are current."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

@@ -1,8 +1,8 @@
 {
   "id": "pwm_flicker_eye_health_scanner",
   "name": "PWM Flicker Eye Health Scanner",
-  "title": "PWM Flicker Eye-Health Scanner | Detect LED & Monitor Flicker",
-  "description": "Free online PWM Flicker Scanner. Detect invisible Pulse Width Modulation (PWM) in LED bulbs, OLED smartphones, and monitors to prevent severe eye strain and migraines.",
+  "title": "PWM Display Flicker Scanner Online | Toolkit Gen",
+  "description": "Free online pwm display flicker scanner online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Vision & Display Health",
   "tags": [
     "PWM flicker test",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "PWM Flicker Eye-Health Scanner | Detect LED & Monitor Flicker is a browser-based utility for developers and professionals. Free online PWM Flicker Scanner. Detect invisible Pulse Width Modulation (PWM) in LED bulbs, OLED smartphones, and monitors to prevent severe eye strain and migraines. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "PWM Display Flicker Scanner Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],

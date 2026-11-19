@@ -1,8 +1,8 @@
 {
   "id": "hand_tremor_stability",
   "name": "Hand Tremor Stability Analyzer",
-  "title": "Hand Tremor Stability Test | Essential Tremor Screening & Analysis",
-  "description": "Measure your hand steadiness and detect potential tremor patterns. Track finger stability over time and learn about essential tremor vs normal slight shakiness. Webcam-based screening tool.",
+  "title": "Hand Tremor Stability Test Online | Toolkit Gen",
+  "description": "Free online hand tremor stability test online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Clinical Health & Neurology",
   "tags": [
     "hand tremor test",
@@ -16,10 +16,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Hand Tremor Stability Test | Essential Tremor Screening & Analysis is a browser-based utility for developers and professionals. Measure your hand steadiness and detect potential tremor patterns. Track finger stability over time and learn about essential tremor vs normal slight shakiness. Webcam-based screening tool. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Hand Tremor Stability Test Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -53,6 +53,10 @@
     {
       "q": "Can I use Hand Tremor Stability Analyzer on mobile devices?",
       "a": "Yes, the tool is fully responsive and optimized for touchscreens on iOS and Android devices, as well as desktop browsers."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [],

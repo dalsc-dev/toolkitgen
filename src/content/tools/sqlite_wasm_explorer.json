@@ -1,8 +1,8 @@
 {
   "id": "sqlite_wasm_explorer",
   "name": "Online SQLite Viewer",
-  "title": "SQLite Browser (Local): Secure Web-Based SQL Explorer",
-  "description": "Explore and query SQLite databases instantly in your browser. No upload required. Use WebAssembly to browse .sqlite and .db files locally and securely. Professional grade database auditing tool.",
+  "title": "SQLite WASM Database Sandbox Online | Toolkit Gen",
+  "description": "Free online sqlite wasm database sandbox online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "DevOps & Code Engineering",
   "tags": [
     "sqlite browser online",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "SQLite Browser (Local): Secure Web-Based SQL Explorer is a browser-based utility for developers and professionals. Explore and query SQLite databases instantly in your browser. No upload required. Use WebAssembly to browse .sqlite and .db files locally and securely. Professional grade database auditing tool. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "SQLite WASM Database Sandbox Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Does this work on mobile/Android browsers?",
       "a": "Perfectly. Modern Android browsers (Chrome and Samsung Internet) have robust WASM support. You can select a .db file from your \"Downloads\" or \"Documents\" folder and perform queries directly on your phone. This is exceptionally useful for mobile developers debugging local storage outcomes in the field."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

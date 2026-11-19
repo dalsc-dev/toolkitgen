@@ -1,8 +1,8 @@
 {
   "id": "digital_dementia_risk_test",
   "name": "Digital Dementia Risk Screening",
-  "title": "Digital Dementia Risk Test | Cognitive Screen Time Impact Assessment",
-  "description": "Assess cognitive functions that may be affected by excessive screen time and digital device use. Evaluate your memory span, attention concentration, and short-term memory challenges to determine your digital dementia risk level.",
+  "title": "Digital Dementia Cognitive Test | Toolkit Gen",
+  "description": "Free online digital dementia cognitive test with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Psychology & Cognition",
   "tags": [
     "digital dementia",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Digital Dementia Risk Test | Cognitive Screen Time Impact Assessment is a browser-based utility for developers and professionals. Assess cognitive functions that may be affected by excessive screen time and digital device use. Evaluate your memory span, attention concentration, and short-term memory challenges to determine your digital dementia risk level. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Digital Dementia Cognitive Test is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],

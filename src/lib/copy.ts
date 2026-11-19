@@ -22,6 +22,11 @@ export const HERO_COPY = {
   introBody: 'Toolkit Gen brings developer utilities, financial calculators, health metrics and productivity tools into one consistent workspace. Each tool runs in your browser, requires no account, and is written to be clear, accurate and fast.',
 } as const;
 
+export const HOME_INTRO = {
+  heading: HERO_COPY.introHeading,
+  body: HERO_COPY.introBody,
+} as const;
+
 export const TRUST_COPY = {
   trustLine: 'Runs locally in your browser. Inputs are not uploaded.',
   browserExecution: 'Calculations run in your browser. Your inputs are not uploaded to our servers.',

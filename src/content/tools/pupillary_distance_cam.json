@@ -1,8 +1,8 @@
 {
   "id": "pupillary_distance_cam",
   "name": "Glasses PD Scanner",
-  "title": "Free PD Ruler Pro: Measure Pupillary Distance Online",
-  "description": "Instant Pupillary Distance (PD) Scanner. Use your webcam and a standard card to accurately measure your Dual and Single PD for buying glasses online. No app needed.",
+  "title": "Pupillary Distance (PD) Ruler Online | Toolkit Gen",
+  "description": "Free online pupillary distance (pd) ruler online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Shopping & Sizing Utility",
   "tags": [
     "measure PD online",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Free PD Ruler Pro: Measure Pupillary Distance Online is a browser-based utility for developers and professionals. Instant Pupillary Distance (PD) Scanner. Use your webcam and a standard card to accurately measure your Dual and Single PD for buying glasses online. No app needed. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Pupillary Distance (PD) Ruler Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Can I measure PD without a webcam?",
       "a": "Yes. You can use the physical \"Mirror Method\". Stand about 8 inches from a bathroom mirror. Hold a millimeter ruler flat against your eyebrows. Close your right eye and align the ruler's 0mm mark exactly with the center of your left pupil. Without moving the ruler, open your right eye, close your left, and read the millimeter mark that aligns with your right pupil."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

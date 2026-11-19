@@ -61,7 +61,11 @@ const {
       <div>
         <div class="tool-stage-card overflow-hidden" set:html={toolHtml} />
         {toolScript && (
-          <script is:inline set:html={toolScript} />
+          <script
+            is:inline
+            type={/^\s*import\b/m.test(toolScript) ? 'module' : undefined}
+            set:html={toolScript}
+          />
         )}
       </div>
     )}

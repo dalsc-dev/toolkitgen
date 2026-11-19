@@ -1,8 +1,8 @@
 {
   "id": "mouse_polling_rate_hz",
   "name": "Mouse Polling Rate Tester",
-  "title": "Mouse Polling Rate Test: Measure Mouse Hz & Stability Online",
-  "description": "Test your mouse polling rate in Hz. A precision hardware diagnostic tool to measure the report frequency and stability of gaming mice, trackpads, and pointing devices. 100% local-first and private.",
+  "title": "Mouse Polling Rate Tester (Hz) | Toolkit Gen",
+  "description": "Free online mouse polling rate tester (hz) with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Hardware & Peripheral Health",
   "tags": [
     "mouse polling rate test",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Mouse Polling Rate Test: Measure Mouse Hz & Stability Online is a browser-based utility for developers and professionals. Test your mouse polling rate in Hz. A precision hardware diagnostic tool to measure the report frequency and stability of gaming mice, trackpads, and pointing devices. 100% local-first and private. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Mouse Polling Rate Tester (Hz) is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Does this tool work on Android or Tablet?",
       "a": "Perfectly. The meter supports pointing devices (mice, trackballs) connected via USB-OTG or Bluetooth on Android devices. Note that mobile operating systems have much higher background overhead than desktops, so you should expect higher Jitter scores even on high-end mobile hardware."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

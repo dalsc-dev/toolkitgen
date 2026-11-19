@@ -1,8 +1,8 @@
 {
   "id": "voice_controlled_platformer",
   "name": "Scream to Jump",
-  "title": "Scream to Jump: The Viral Voice-Controlled Platformer Game",
-  "description": "Play Scream to Jump, the ultimate voice-controlled browser game. Whisper to move, scream to jump. A hilarious audio challenge powered by Web Audio API.",
+  "title": "Voice Frequency Platformer Game | Toolkit Gen",
+  "description": "Free online voice frequency platformer game with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Audio Game",
   "tags": [
     "scream to jump",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Scream to Jump: The Viral Voice-Controlled Platformer Game is a browser-based utility for developers and professionals. Play Scream to Jump, the ultimate voice-controlled browser game. Whisper to move, scream to jump. A hilarious audio challenge powered by Web Audio API. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Voice Frequency Platformer Game is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Can I play this on mobile?",
       "a": "Yes, modern mobile browsers support `getUserMedia`. However, mobile microphones are very close to the speakers, so you absolutely must use headphones on mobile to prevent a feedback loop where the game hears itself and jumps forever."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [],

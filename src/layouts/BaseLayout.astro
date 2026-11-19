@@ -13,6 +13,7 @@ interface Props {
   ogImage?: string;
   jsonLd?: Record<string, any>;
   noindex?: boolean;
+  containerClass?: string;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   ogImage = 'https://toolkitgen.com/assets/favicon/favicon-96x96.png',
   jsonLd,
   noindex = false,
+  containerClass = 'max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16',
 } = Astro.props;
 
 const siteUrl = 'https://toolkitgen.com';
@@ -103,9 +105,9 @@ const metaDescription = formatDescription(description);
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   )}
 </head>
-<body class="flex flex-col min-h-screen bg-[#f8fafc] text-[#33333b]">
+<body class="flex flex-col min-h-screen bg-[#f8fafc] text-[#33333b] antialiased overflow-x-hidden">
   <Header currentPath={Astro.url.pathname} />
-  <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class={`flex-grow w-full ${containerClass}`}>
     <slot />
   </main>
   <Footer />

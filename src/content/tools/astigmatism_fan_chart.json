@@ -1,8 +1,8 @@
 {
   "id": "astigmatism_fan_chart",
   "name": "Visual Contrast Chart",
-  "title": "Astigmatism Axis Finder Pro | Fan Chart & Vision Simulator",
-  "description": "Advanced Astigmatism test online. Identify your cylinder axis with clinical Fan Chart, simulate directional blur, and learn about corneal health. Features night mode and vision tracking.",
+  "title": "Astigmatism Fan Chart Test Online | Toolkit Gen",
+  "description": "Free online astigmatism fan chart test online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Clinical Health & Diagnostics",
   "tags": [
     "astigmatism test online",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Astigmatism Axis Finder Pro | Fan Chart & Vision Simulator is a browser-based utility for developers and professionals. Advanced Astigmatism test online. Identify your cylinder axis with clinical Fan Chart, simulate directional blur, and learn about corneal health. Features night mode and vision tracking. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Astigmatism Fan Chart Test Online is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "What is Keratoconus? ▼",
       "a": "Keratoconus is a progressive eye disease where the cornea thins and bulges into a cone shape, causing irregular astigmatism. If the lines on the fan chart look wavy or bent rather than just blurred, consult a doctor immediately."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

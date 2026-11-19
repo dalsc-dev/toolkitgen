@@ -1,8 +1,8 @@
 {
   "id": "screen_reader_sim",
   "name": "Text to Speech Preview",
-  "title": "TTS Voice Simulator: Free Text-to-Speech Accessibility Tester",
-  "description": "Test how your content sounds to screen readers. Free online Text-to-Speech (TTS) simulator with multiple voices, speed control, and pitch adjustment. Catch errors your eyes miss. Local-first, private, and secure.",
+  "title": "Screen Reader Accessibility Simulator | Toolkit Gen",
+  "description": "Free online screen reader accessibility simulator with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Professional Writing & Syntax",
   "tags": [
     "text to speech online",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "TTS Voice Simulator: Free Text-to-Speech Accessibility Tester is a browser-based utility for developers and professionals. Test how your content sounds to screen readers. Free online Text-to-Speech (TTS) simulator with multiple voices, speed control, and pitch adjustment. Catch errors your eyes miss. Local-first, private, and secure. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Screen Reader Accessibility Simulator is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Can I use this for non-English documents?",
       "a": "Yes. The Voice Selector dropdown automatically populates with every language pack currently installed on your device. If you have French, Spanish, Japanese, or German voices active in your OS settings, this tool can read text in those native phonetics with high accuracy."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

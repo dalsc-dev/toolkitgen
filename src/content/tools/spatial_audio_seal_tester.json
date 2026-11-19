@@ -1,8 +1,8 @@
 {
   "id": "spatial_audio_seal_tester",
   "name": "IEM/Earbud 'Seal' & Isolation Quality Test",
-  "title": "IEM & Earbud Seal Quality Tester: Spatial Audio Calibration Tool",
-  "description": "Test your earbud seal and passive isolation using out-of-phase low-frequency acoustics. Fix tinny audio, improve bass response, and calibrate for Dolby Atmos.",
+  "title": "Earphone Acoustic Seal & Bass Tester | Toolkit Gen",
+  "description": "Free online earphone acoustic seal & bass tester with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Audio & Sensory Engineering",
   "tags": [
     "earbud seal test",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "IEM & Earbud Seal Quality Tester: Spatial Audio Calibration Tool is a browser-based utility for developers and professionals. Test your earbud seal and passive isolation using out-of-phase low-frequency acoustics. Fix tinny audio, improve bass response, and calibrate for Dolby Atmos. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Earphone Acoustic Seal & Bass Tester is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Does this test work for Over-Ear Headphones?",
       "a": "Yes, especially for closed-back headphones. Over-ear headphones often leak bass if the user wears thick-framed glasses or has long hair that breaks the seal of the ear pads against the skin. This tool will detect that leakage as a phase shift in the lower frequencies just like it does for IEMs."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

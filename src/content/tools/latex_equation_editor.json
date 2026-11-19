@@ -1,8 +1,8 @@
 {
   "id": "latex_equation_editor",
   "name": "Online LaTeX Equation Editor",
-  "title": "LaTeX Math Architect: Visual Equation Editor & SVG Export",
-  "description": "Build complex mathematical equations visually and export them as clean LaTeX code or high-resolution SVGs. client-side, browser-based processing for academic and scientific writing.",
+  "title": "LaTeX Equation Editor & Preview | Toolkit Gen",
+  "description": "Free online latex equation editor & preview with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Professional Writing & Syntax",
   "tags": [
     "latex editor online",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "LaTeX Math Architect: Visual Equation Editor & SVG Export is a browser-based utility for developers and professionals. Build complex mathematical equations visually and export them as clean LaTeX code or high-resolution SVGs. client-side, browser-based processing for academic and scientific writing. Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "LaTeX Equation Editor & Preview is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "Is my math data private?",
       "a": "client-side. All calculations and SVG rendering happen in your browser's local RAM. We do not have a server that receives your math code, and we do not store your results in a database. This tool is \"Zero-Knowledge\" by design, ensuring your research or strategic formulas remain your proprietary property."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

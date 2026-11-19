@@ -1,8 +1,8 @@
 {
   "id": "device_motion_logger",
   "name": "Gyroscope & Accelerometer Test",
-  "title": "Gyroscope & Accelerometer Logger: Real-Time IMU Visualization & Precision Game",
-  "description": "Professional hardware diagnostic tool and stability trainer. Visualize 3-axis accelerometer/gyroscope data, test device precision with the",
+  "title": "Device Motion & Gyroscope Logger | Toolkit Gen",
+  "description": "Free online device motion & gyroscope logger with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
   "category": "Hardware & Peripheral Health",
   "tags": [
     "gyroscope test online",
@@ -18,10 +18,10 @@
   "datePublished": "2025-01-15T00:00:00Z",
   "dateModified": "2026-11-06T08:27:44Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Gyroscope & Accelerometer Logger: Real-Time IMU Visualization & Precision Game is a browser-based utility for developers and professionals. Professional hardware diagnostic tool and stability trainer. Visualize 3-axis accelerometer/gyroscope data, test device precision with the Calculations run in your browser, and your inputs are not uploaded to our servers.",
+  "quickAnswer": "Device Motion & Gyroscope Logger is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
   "features": [
     "Local Browser Processing",
-    "Instant Zero-Latency Execution",
+    "Instant Calculation",
     "no server uploads & Zero Logging",
     "Works Offline in Browser Memory"
   ],
@@ -55,6 +55,10 @@
     {
       "q": "What is the difference between \"Alpha,\" \"Beta,\" and \"Gamma\"?",
       "a": "These are the Euler Angles for rotational velocity. Alpha ($\\alpha$) measures rotation around the Z-axis (Compass heading/Yaw). Beta ($\\beta$) measures front-to-back rotation (Pitch). Gamma ($\\gamma$) measures side-to-side rotation (Roll). These three signals allow the phone to map any complex 3D rotation with 0.01-degree precision."
+    },
+    {
+      "q": "Does this tool work on mobile devices and tablets?",
+      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
     }
   ],
   "related": [

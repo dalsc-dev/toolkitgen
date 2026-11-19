@@ -1,0 +1,172 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { generateJsonLd } from '@lib/schema';
+import { getCollection } from 'astro:content';
+
+const tools = await getCollection('tools');
+const toolCount = tools.length;
+
+const canonicalUrl = 'https://toolkitgen.com/about';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'AboutPage',
+      '@id': 'https://toolkitgen.com/about#webpage',
+      url: canonicalUrl,
+      name: 'About Toolkit Gen | Client-Side Architecture & Privacy Commitment',
+      description: `Learn about Toolkit Gen's mission to provide ${toolCount} free, privacy-focused digital tools for developers, creators, and health professionals.`,
+      isPartOf: {
+        '@id': 'https://toolkitgen.com/#website',
+      },
+      inLanguage: 'en-US',
+      dateModified: '2026-11-19T00:00:00Z',
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://toolkitgen.com/#organization',
+      name: 'Toolkit Gen',
+      url: 'https://toolkitgen.com',
+      logo: 'https://toolkitgen.com/assets/favicon/favicon.svg',
+      description: `Free privacy-focused online tools and calculators. 100% client-side execution, zero data collection.`,
+      foundingDate: '2023',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'toolkitgen@gmail.com',
+        contactType: 'customer support',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://toolkitgen.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'About Us',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="About Toolkit Gen | Our Mission & Privacy Commitment"
+  description={`Toolkit Gen provides ${toolCount}+ free, client-side web utilities for developers, designers, and professionals. All tool inputs are processed in your browser and never uploaded.`}
+  canonical={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'About Us', url: '/about' }]} />
+
+  <div class="max-w-4xl mx-auto space-y-12 py-6">
+    <!-- Hero Section -->
+    <header class="text-center space-y-4">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
+        Engineered for Privacy &amp; Performance
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+        About Toolkit Gen
+      </h1>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        A directory of {toolCount} high-utility, client-side web tools. No paywalls, no mandatory signups, and zero cloud telemetry. Tool inputs are processed in your browser and never uploaded.
+      </p>
+    </header>
+
+    <!-- Key Statistics -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div class="text-3xl font-black text-[#EE6C4D]">{toolCount}+</div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Free Utilities</div>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div class="text-3xl font-black text-emerald-600">0 ms</div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Network Latency</div>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div class="text-3xl font-black text-blue-600">100%</div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Client-Side</div>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div class="text-3xl font-black text-purple-600">0 B</div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Input Stored</div>
+      </div>
+    </div>
+
+    <!-- Longform Mission Article -->
+    <article class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm prose max-w-none space-y-6">
+      <h2 class="text-2xl font-bold text-slate-900">Our Story &amp; Purpose</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Toolkit Gen was built out of frustration with modern web utilities. Simple tasks—like converting a cURL command to fetch, calculating IV drop rates, inspecting display refresh rates, or analyzing password entropy—too often require creating accounts, navigating intrusive paywalls, or unwittingly uploading sensitive credentials and telemetry to third-party backends.
+      </p>
+      <p class="text-slate-700 leading-relaxed">
+        We believe everyday tools should be <strong>instant, open, and strictly client-side</strong>. By leveraging modern browser APIs (such as WebAssembly, Web Audio API, Canvas 2D, and WebGL), our utilities execute mathematical formulas, audio tests, and formatting scripts directly in your device's memory.
+      </p>
+
+      <div class="my-8 p-6 bg-slate-50 border-l-4 border-emerald-500 rounded-r-2xl space-y-2">
+        <h3 class="text-base font-bold text-emerald-950 uppercase tracking-wider m-0">Our Core Privacy Rule</h3>
+        <p class="text-sm text-slate-700 m-0">
+          <strong>Tool inputs are processed in your browser and never uploaded.</strong> Whether you enter confidential code snippets, calculate personal health metrics, or verify encryption keys, that data never transmits across the network.
+        </p>
+      </div>
+
+      <h2 class="text-2xl font-bold text-slate-900">What We Stand For</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 not-prose">
+        <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
+          <div class="font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">✓</span>
+            Zero Account Requirement
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Every tool is accessible immediately upon page load. No email collection, no passwords, and no login walls.
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
+          <div class="font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">✓</span>
+            Audited Client-Side Computation
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            All computation occurs inside sandboxed browser memory. Inspect network tabs on any tool to verify zero outbound payloads.
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
+          <div class="font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold">✓</span>
+            Algorithmic Rigor
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            From Black-Scholes financial pricing to medical drop factor ratios and audio FFT frequency analysis, our logic is unit-tested against verified standards.
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
+          <div class="font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">✓</span>
+            Honest Sustainability
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            We support free serverless hosting through non-intrusive Google AdSense slots. Ads are strictly separated from tools and never push interactive components down.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-slate-900">How We Test Our Utilities</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Every tool calculation is implemented with strict TypeScript typings and covered by automated Vitest unit test suites. Mathematical calculations are checked against peer-reviewed formulas and standard reference libraries. For specialized medical or financial calculations, clear educational disclaimers are prominently displayed.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">Get in Touch</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Toolkit Gen is maintained by an independent group of software engineers and technical researchers. For inquiries, bug reports, or feature suggestions, reach us directly at <a href="mailto:toolkitgen@gmail.com" class="text-blue-600 font-semibold underline">toolkitgen@gmail.com</a>.
+      </p>
+    </article>
+  </div>
+</BaseLayout>

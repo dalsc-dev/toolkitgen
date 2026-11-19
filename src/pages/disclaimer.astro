@@ -1,0 +1,117 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+
+const canonicalUrl = 'https://toolkitgen.com/disclaimer';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://toolkitgen.com/disclaimer#webpage',
+      url: canonicalUrl,
+      name: 'Medical, Financial & Technical Disclaimer | Toolkit Gen',
+      description: 'Important disclaimers regarding the educational use of medical calculators, financial models, and hardware testing tools on Toolkit Gen.',
+      isPartOf: {
+        '@id': 'https://toolkitgen.com/#website',
+      },
+      inLanguage: 'en-US',
+      dateModified: '2026-11-19T00:00:00Z',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://toolkitgen.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Disclaimer',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Disclaimer | Toolkit Gen"
+  description="Important medical, financial, diagnostic, and hardware testing disclaimers for Toolkit Gen. All utilities are provided for educational and exploratory purposes."
+  canonical={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Disclaimer', url: '/disclaimer' }]} />
+
+  <div class="max-w-4xl mx-auto space-y-10 py-6">
+    <header class="text-center space-y-3">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+        Important User Notice
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+        Disclaimer
+      </h1>
+      <p class="text-sm text-slate-500 font-mono">
+        Last Updated: November 19, 2026
+      </p>
+    </header>
+
+    <article class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm prose max-w-none space-y-8">
+      <div class="p-6 bg-amber-50 border-l-4 border-amber-500 rounded-r-2xl not-prose space-y-2">
+        <h2 class="text-base font-bold text-amber-950 uppercase tracking-wider m-0">
+          General Educational &amp; Informational Notice
+        </h2>
+        <p class="text-sm text-amber-900 leading-relaxed m-0">
+          All calculators, converters, testing suites, and utilities provided on Toolkit Gen are designed strictly for educational, informational, personal productivity, and software development testing purposes. They do not constitute certified medical diagnosis, licensed healthcare treatment, or professional financial, legal, or investment advice.
+        </p>
+      </div>
+
+      <h2 class="text-2xl font-bold text-slate-900">1. Medical &amp; Clinical Health Disclaimers</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Toolkit Gen provides several health-related utilities, including:
+      </p>
+      <ul class="list-disc pl-6 space-y-1 text-slate-700">
+        <li><strong>IV Drip Rate &amp; Flow Rate Calculators</strong></li>
+        <li><strong>Vision Screening Tools (Amsler Grid, Duochrome, Astigmatism Fan Chart)</strong></li>
+        <li><strong>Motor &amp; Neurological Screeners (Hand Tremor Stability, Reaction Time)</strong></li>
+        <li><strong>Hearing &amp; Audiometry Frequency Tests</strong></li>
+        <li><strong>Webcam Heart Rate (rPPG) &amp; Respiratory Coherence Pacers</strong></li>
+      </ul>
+      <p class="text-slate-700 leading-relaxed">
+        <strong>None of these tools are FDA-cleared, CE-marked, or clinically certified medical devices.</strong> They cannot diagnose, cure, treat, or prevent any illness, ocular pathology, neurological disorder, or cardiovascular condition. Always seek the advice of a qualified physician, optometrist, or registered healthcare provider with any questions you may have regarding a medical condition.
+      </p>
+      <div class="p-4 bg-red-50 border border-red-200 rounded-xl text-red-900 text-xs leading-relaxed not-prose">
+        <strong>Emergency Notice:</strong> If you believe you are experiencing a medical emergency (such as severe chest pain, sudden vision loss, stroke symptoms, or acute anaphylaxis), immediately call your local emergency services (e.g. 911 or 112) or proceed to the nearest emergency department.
+      </div>
+
+      <h2 class="text-2xl font-bold text-slate-900">2. Financial, Quantitative &amp; Tax Disclaimers</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Financial modeling tools on Toolkit Gen (including Black-Scholes Option Pricing, Volatility Heatmaps, F.I.R.E. Retirement Calculators, and Compound Interest Estimators) execute standard mathematical models based on theoretical formulas.
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li>Theoretical pricing assumes friction-free markets, continuous dividends, and constant volatility, which do not reflect actual market conditions.</li>
+        <li>Outputs do not constitute personalized investment, trading, tax, or legal recommendations.</li>
+        <li>Past performance and theoretical projections are not indicative of future market returns. Consult a Certified Financial Planner (CFP) or registered investment advisor before committing capital.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">3. Hardware Stress &amp; Acoustic Safety Warnings</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Diagnostic tools that interface with physical hardware (including Display Dead Pixel Flashers, Stroboscopes, GPU Thermal Benchmarks, and Audio Frequency Sweepers) must be used with care:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li><strong>Photosensitivity / Epilepsy Warning:</strong> Tools utilizing high-frequency flashing light, strobe patterns, or alternating high-contrast grids may trigger seizures in individuals with photosensitive epilepsy. Discontinue use immediately if you experience dizziness, altered vision, or muscle twitching.</li>
+        <li><strong>Acoustic Exposure:</strong> When running audio sweeps or driver rattle tests, always keep amplifier volume at safe listening levels (under 75 dBA). Sustained high-frequency or high-intensity sub-bass tones can cause permanent hearing damage or voice coil burnout.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">4. Contact &amp; Questions</h2>
+      <p class="text-slate-700 leading-relaxed">
+        For technical inquiries regarding calculations or methodology, reach our team at <a href="mailto:toolkitgen@gmail.com" class="text-blue-600 underline">toolkitgen@gmail.com</a>.
+      </p>
+    </article>
+  </div>
+</BaseLayout>

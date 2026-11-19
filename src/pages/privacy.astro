@@ -1,0 +1,145 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+
+const canonicalUrl = 'https://toolkitgen.com/privacy';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://toolkitgen.com/privacy#webpage',
+      url: canonicalUrl,
+      name: 'Privacy Policy | Toolkit Gen',
+      description: 'Privacy Policy for Toolkit Gen. Transparent disclosure of client-side computation, localStorage, advertising cookies, and privacy rights.',
+      isPartOf: {
+        '@id': 'https://toolkitgen.com/#website',
+      },
+      inLanguage: 'en-US',
+      dateModified: '2026-11-19T00:00:00Z',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://toolkitgen.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Privacy Policy',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Privacy Policy | Toolkit Gen"
+  description="Toolkit Gen privacy policy: tool inputs are processed in your browser and never uploaded. Learn how we handle cookies, localStorage, and advertising."
+  canonical={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Privacy Policy', url: '/privacy' }]} />
+
+  <div class="max-w-4xl mx-auto space-y-10 py-6">
+    <header class="text-center space-y-3">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-100">
+        Privacy-First Architecture
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+        Privacy Policy
+      </h1>
+      <p class="text-sm text-slate-500 font-mono">
+        Last Updated: November 19, 2026
+      </p>
+    </header>
+
+    <article class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm prose max-w-none space-y-8">
+      <div class="p-6 bg-slate-50 border-l-4 border-emerald-500 rounded-r-2xl not-prose space-y-2">
+        <h2 class="text-base font-bold text-slate-900 uppercase tracking-wider m-0">
+          The Plain Language Summary
+        </h2>
+        <p class="text-sm text-slate-700 leading-relaxed m-0">
+          <strong>Tool inputs are processed in your browser and never uploaded.</strong> When you paste code, upload files for conversion, run health calculators, or analyze sensitive strings, all execution happens on your local device within browser memory. We never log, store, or transmit your inputs. To support free hosting, we serve non-intrusive advertisements in compliance with global privacy regulations and Google Consent Mode v2.
+        </p>
+      </div>
+
+      <h2 class="text-2xl font-bold text-slate-900">1. Client-Side Tool Processing</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Toolkit Gen is built from the ground up as a static, client-side application hosted on Cloudflare Workers. Unlike traditional web converters and SaaS utilities that send your input files and parameters to backend servers for evaluation, our tools run natively within your browser using JavaScript, WebAssembly, and standard HTML5 Web APIs.
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li>Your files, text snippets, and numerical inputs never reach our servers or any cloud database.</li>
+        <li>Network requests are never initiated to evaluate calculations.</li>
+        <li>Calculations work offline when disconnected from the internet once assets are cached.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">2. Browser LocalStorage Usage</h2>
+      <p class="text-slate-700 leading-relaxed">
+        We utilize browser <code>localStorage</code> exclusively for local user convenience. This data remains on your physical device and is never transmitted to us:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li><strong>Tool Bookmarks &amp; Favorites:</strong> Storing the list of tools you have starred for quick access.</li>
+        <li><strong>Recent Tools History:</strong> Keeping track of recently visited utilities on your device.</li>
+        <li><strong>Consent Preferences:</strong> Remembering your Google Consent Mode choices (accept/reject advertising cookies).</li>
+      </ul>
+      <p class="text-slate-700 leading-relaxed">
+        You can erase this information at any time by clearing your browser cache or site data for <code>toolkitgen.com</code>.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">3. Cookies, Web Beacons &amp; Advertising Partners</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Toolkit Gen is funded by digital advertising provided by Google AdSense and its certified advertising partners. Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites.
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li><strong>Google DoubleClick DART Cookie:</strong> Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to our site and other sites on the Internet.</li>
+        <li><strong>Opt-Out:</strong> Users may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Google Ads Settings</a> or through the <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Network Advertising Initiative</a>.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">4. Google Consent Mode v2 &amp; Regional Compliance (EEA / UK / CH)</h2>
+      <p class="text-slate-700 leading-relaxed">
+        In compliance with the General Data Protection Regulation (GDPR), the ePrivacy Directive, and the UK Data Protection Act, we implement Google Consent Mode v2:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li>By default, advertising storage (<code>ad_storage</code>), user data collection (<code>ad_user_data</code>), and ad personalization (<code>ad_personalization</code>) are set to <code>denied</code> for visitors until affirmative consent is provided.</li>
+        <li>No tracking cookies or marketing pixels are placed on your machine prior to explicit consent via our consent banner.</li>
+        <li>You can modify or revoke your consent preferences at any time by clicking the Cookie Preferences link in the footer.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">5. Cloudflare Privacy-Preserving Web Analytics</h2>
+      <p class="text-slate-700 leading-relaxed">
+        We use privacy-friendly Cloudflare Web Analytics to understand aggregate page views and performance. Cloudflare Web Analytics operates without cookies, does not collect personal data, and does not track individual visitors across sites.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">6. WebPushr / Push Notifications</h2>
+      <p class="text-slate-700 leading-relaxed">
+        If you voluntarily opt in to browser push notifications through Webpushr, a unique browser push token is registered to deliver utility updates. Push notification scripts are loaded only after your explicit confirmation. You can unsubscribe at any time via your browser settings.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">7. Your Privacy Rights (GDPR &amp; CCPA/CPRA)</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Under the California Consumer Privacy Act (CCPA) and the EU General Data Protection Regulation (GDPR):
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li><strong>Right to Know &amp; Access:</strong> You have the right to request disclosure of personal data collected. (Because tool calculations are client-side and never saved to a server, we hold zero user input records).</li>
+        <li><strong>Right to Deletion:</strong> You have the right to request deletion of any correspondence data.</li>
+        <li><strong>We Do Not Sell Personal Information:</strong> Toolkit Gen never sells, rents, or monetizes user personal data or tool inputs.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">8. Contact Us Regarding Privacy</h2>
+      <p class="text-slate-700 leading-relaxed">
+        If you have questions, comments, or data rights requests concerning this Privacy Policy, contact our Data Privacy officer directly at:
+      </p>
+      <p class="text-slate-900 font-bold">
+        Email: <a href="mailto:toolkitgen@gmail.com" class="text-blue-600 underline">toolkitgen@gmail.com</a>
+      </p>
+    </article>
+  </div>
+</BaseLayout>

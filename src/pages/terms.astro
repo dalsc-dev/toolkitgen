@@ -1,0 +1,103 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+
+const canonicalUrl = 'https://toolkitgen.com/terms';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://toolkitgen.com/terms#webpage',
+      url: canonicalUrl,
+      name: 'Terms of Service | Toolkit Gen',
+      description: 'Terms of Service governing the use of Toolkit Gen online utilities, calculators, and tools.',
+      isPartOf: {
+        '@id': 'https://toolkitgen.com/#website',
+      },
+      inLanguage: 'en-US',
+      dateModified: '2026-11-19T00:00:00Z',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://toolkitgen.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Terms of Service',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Terms of Service | Toolkit Gen"
+  description="Terms of service and acceptable use agreement for Toolkit Gen free client-side web tools, calculators, and developer utilities."
+  canonical={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Terms of Service', url: '/terms' }]} />
+
+  <div class="max-w-4xl mx-auto space-y-10 py-6">
+    <header class="text-center space-y-3">
+      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+        Terms of Service
+      </h1>
+      <p class="text-sm text-slate-500 font-mono">
+        Last Updated: November 19, 2026
+      </p>
+    </header>
+
+    <article class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm prose max-w-none space-y-8">
+      <h2 class="text-2xl font-bold text-slate-900">1. Acceptance of Terms</h2>
+      <p class="text-slate-700 leading-relaxed">
+        By accessing or using Toolkit Gen (accessible at <code>toolkitgen.com</code>), you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">2. Scope of Services &amp; Client-Side Operation</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Toolkit Gen provides free online web utilities, calculators, formatters, and diagnostic tools. All tools execute entirely client-side in your web browser. We do not operate server-side computational queues for tool execution, and tool inputs are processed in your browser and never uploaded to our servers.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">3. Permitted and Prohibited Uses</h2>
+      <p class="text-slate-700 leading-relaxed">
+        You may freely use our tools for personal, academic, open-source, and commercial projects. However, you agree not to:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li>Attempt to conduct denial-of-service attacks or disrupt the static infrastructure hosting Toolkit Gen.</li>
+        <li>Bypass security controls, scraper blocks, or advertising delivery mechanisms through automated exploit scripts.</li>
+        <li>Frame, mirror, or republish entire collections of our site interface without proper attribution.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">4. Disclaimer of Warranties ("As-Is")</h2>
+      <p class="text-slate-700 leading-relaxed">
+        The tools and materials on Toolkit Gen are provided on an "as is" and "as available" basis. While our engineering team rigorously tests calculations with automated test suites, Toolkit Gen makes no warranties, expressed or implied, and hereby disclaims all other warranties including, without limitation, implied warranties of merchantability, fitness for a particular purpose, or non-infringement.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">5. Limitation of Liability</h2>
+      <p class="text-slate-700 leading-relaxed">
+        In no event shall Toolkit Gen, its maintainers, or its affiliates be liable for any damages (including, without limitation, damages for loss of data or profit, medication calculation errors, hardware testing stress, or business interruption) arising out of the use or inability to use the tools on Toolkit Gen.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">6. Advertising &amp; Commercial Sustainability</h2>
+      <p class="text-slate-700 leading-relaxed">
+        Toolkit Gen is made freely accessible through advertisements provided by Google AdSense and third-party advertising exchanges. By using the site, you acknowledge that non-intrusive advertisements may be displayed alongside content in accordance with our Privacy Policy.
+      </p>
+
+      <h2 class="text-2xl font-bold text-slate-900">7. Governing Law &amp; Contact</h2>
+      <p class="text-slate-700 leading-relaxed">
+        These terms are governed by and construed in accordance with applicable general law. For questions regarding these Terms, contact us at <a href="mailto:toolkitgen@gmail.com" class="text-blue-600 underline">toolkitgen@gmail.com</a>.
+      </p>
+    </article>
+  </div>
+</BaseLayout>

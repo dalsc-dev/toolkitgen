@@ -1,0 +1,122 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const tools = await getCollection('tools');
+const hubs = await getCollection('hubs');
+
+// Group tools by category
+const categoriesMap = new Map<string, typeof tools>();
+tools.forEach((tool) => {
+  const cat = tool.data.category;
+  if (!categoriesMap.has(cat)) {
+    categoriesMap.set(cat, []);
+  }
+  categoriesMap.get(cat)!.push(tool);
+});
+
+// Sort categories alphabetically
+const sortedCategories = Array.from(categoriesMap.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+// Sort tools within each category
+sortedCategories.forEach(([_, catTools]) => {
+  catTools.sort((a, b) => a.data.title.localeCompare(b.data.title));
+});
+
+const canonicalUrl = 'https://toolkitgen.com/sitemap.html';
+---
+
+<BaseLayout
+  title="Complete Site Directory & HTML Sitemap | Toolkit Gen"
+  description={`Browse the full alphabetical directory of ${tools.length} free client-side tools, specialized hubs, and categories on Toolkit Gen.`}
+  canonical={canonicalUrl}
+>
+  <Breadcrumbs items={[{ name: 'HTML Sitemap', url: '/sitemap.html' }]} />
+
+  <div class="max-w-4xl mx-auto space-y-10 py-6">
+    <header class="space-y-3">
+      <h1 class="text-4xl font-black text-slate-900 tracking-tight">
+        Toolkit Gen HTML Directory &amp; Sitemap
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        A complete, structured human-readable index of all {tools.length} free client-side utilities, themed hubs, categories, and institutional pages.
+      </p>
+    </header>
+
+    <!-- Core Pages Section -->
+    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+      <h2 class="text-xl font-bold text-slate-900 border-b border-slate-100 pb-3">
+        Core Navigation
+      </h2>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+        <li><a href="/" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">Home Directory</a></li>
+        <li><a href="/tool" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">All Tools Index</a></li>
+        <li><a href="/about" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">About Us</a></li>
+        <li><a href="/contact" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">Contact</a></li>
+        <li><a href="/privacy" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">Privacy Policy</a></li>
+        <li><a href="/terms" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">Terms of Service</a></li>
+        <li><a href="/disclaimer" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">Disclaimer</a></li>
+        <li><a href="/sitemap.xml" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">XML Sitemap (Engine)</a></li>
+        <li><a href="/llms.txt" class="text-blue-600 hover:text-[#EE6C4D] hover:underline font-semibold">LLMs.txt (AI Index)</a></li>
+      </ul>
+    </section>
+
+    <!-- Specialized Hubs Section -->
+    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+      <h2 class="text-xl font-bold text-slate-900 border-b border-slate-100 pb-3">
+        Themed Professional Hubs
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {hubs.map((hub) => (
+          <a
+            href={`/hubs/${hub.data.id}`}
+            class="p-4 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-100/80 transition-colors block space-y-1"
+          >
+            <div class="font-bold text-slate-900 text-sm">{hub.data.title}</div>
+            <p class="text-xs text-slate-500 line-clamp-2">{hub.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Categories & Tools Grid -->
+    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-8">
+      <h2 class="text-xl font-bold text-slate-900 border-b border-slate-100 pb-3">
+        Tools by Category ({sortedCategories.length} Categories &bull; {tools.length} Tools)
+      </h2>
+
+      <div class="space-y-8">
+        {sortedCategories.map(([category, catTools]) => {
+          const catSlug = category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+          return (
+            <div class="space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h3 class="text-base font-bold text-slate-900">
+                  <a href={`/category/${catSlug}`} class="hover:text-[#EE6C4D] transition-colors">
+                    {category}
+                  </a>
+                </h3>
+                <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                  {catTools.length} tools
+                </span>
+              </div>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                {catTools.map((t) => (
+                  <li>
+                    <a
+                      href={`/tool/${t.data.id}`}
+                      class="text-slate-700 hover:text-[#EE6C4D] hover:underline flex items-center gap-1.5"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                      <span class="truncate">{t.data.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

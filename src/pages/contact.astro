@@ -1,0 +1,166 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+
+const canonicalUrl = 'https://toolkitgen.com/contact';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ContactPage',
+      '@id': 'https://toolkitgen.com/contact#webpage',
+      url: canonicalUrl,
+      name: 'Contact Toolkit Gen | Support & Feedback',
+      description: 'Contact the Toolkit Gen engineering team for tool requests, feedback, bug reports, and partnership inquiries.',
+      isPartOf: {
+        '@id': 'https://toolkitgen.com/#website',
+      },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://toolkitgen.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Contact',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Contact Us | Toolkit Gen Support & Feedback"
+  description="Get in touch with the Toolkit Gen engineering team. Report bugs, suggest new client-side utilities, or ask questions at toolkitgen@gmail.com."
+  canonical={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Contact', url: '/contact' }]} />
+
+  <div class="max-w-3xl mx-auto space-y-10 py-6">
+    <header class="text-center space-y-3">
+      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+        Get in Touch
+      </h1>
+      <p class="text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
+        Have a feature suggestion, spotted a bug in a tool, or want to contribute? We respond to all technical inquiries within 24 to 48 business hours.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm text-center space-y-2">
+        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="font-bold text-slate-900 text-sm">Direct Email</h3>
+        <p class="text-xs text-slate-500">Fastest channel for technical inquiries</p>
+        <a href="mailto:toolkitgen@gmail.com" class="inline-block text-xs font-bold text-blue-600 hover:underline pt-1">
+          toolkitgen@gmail.com
+        </a>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm text-center space-y-2">
+        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 class="font-bold text-slate-900 text-sm">Bug Reports</h3>
+        <p class="text-xs text-slate-500">Calculations, UI quirks, device bugs</p>
+        <span class="inline-block text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+          Priority Triage
+        </span>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm text-center space-y-2">
+        <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+        </div>
+        <h3 class="font-bold text-slate-900 text-sm">New Tool Ideas</h3>
+        <p class="text-xs text-slate-500">Got a useful utility you want built?</p>
+        <span class="inline-block text-xs font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded">
+          Client-Side Only
+        </span>
+      </div>
+    </div>
+
+    <!-- Contact Form Box -->
+    <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-sm space-y-6">
+      <h2 class="text-xl font-bold text-slate-900">Send a Message</h2>
+      <form
+        action="mailto:toolkitgen@gmail.com"
+        method="GET"
+        class="space-y-4"
+        onsubmit="event.preventDefault(); const subject = encodeURIComponent(document.getElementById('c-subj').value); const body = encodeURIComponent(document.getElementById('c-msg').value); window.location.href = `mailto:toolkitgen@gmail.com?subject=${subject}&body=${body}`;"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="c-name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              Your Name
+            </label>
+            <input
+              type="text"
+              id="c-name"
+              required
+              placeholder="Alex Doe"
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+            />
+          </div>
+          <div>
+            <label for="c-email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              Your Email
+            </label>
+            <input
+              type="email"
+              id="c-email"
+              required
+              placeholder="alex@example.com"
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="c-subj" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            Subject
+          </label>
+          <input
+            type="text"
+            id="c-subj"
+            required
+            placeholder="Feature Request: WebRTC Latency Tester"
+            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+          />
+        </div>
+
+        <div>
+          <label for="c-msg" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            Message
+          </label>
+          <textarea
+            id="c-msg"
+            rows="5"
+            required
+            placeholder="Describe your suggestion, bug report, or query in detail..."
+            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full sm:w-auto px-8 py-3 bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-bold text-sm rounded-xl transition-all shadow-md"
+        >
+          Send Message via Email Client
+        </button>
+      </form>
+    </div>
+  </div>
+</BaseLayout>

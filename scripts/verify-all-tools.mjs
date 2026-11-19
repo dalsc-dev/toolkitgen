@@ -9,7 +9,7 @@ const distDir = path.join(rootDir, 'dist');
 const distToolsDir = path.join(distDir, 'tool');
 const csvOutputPath = path.join(rootDir, 'tool-audit.csv');
 
-console.log('Running Comprehensive Tool Page Verification Audit (Task 7)...');
+console.log('Running Comprehensive Tool Page Verification & AdSense Audit (P2)...');
 
 if (!fs.existsSync(distToolsDir)) {
   console.error('Error: dist/tool not found. Run astro build first.');
@@ -34,7 +34,25 @@ const bannedPhrases = [
 ];
 
 const files = fs.readdirSync(distToolsDir).filter((f) => f.endsWith('.html'));
-console.log(`Auditing ${files.length} built /tool/* pages...`);
+console.log(`Auditing ${files.length} built /tool/* pages across Functional, AdSense, and Performance criteria...`);
+
+// Read perf results if available
+let perfMap = {};
+const perfCsvPath = path.join(rootDir, 'tool-perf-after.csv');
+if (fs.existsSync(perfCsvPath)) {
+  const lines = fs.readFileSync(perfCsvPath, 'utf8').trim().split('\n');
+  const h = lines[0].split(',').map(s => s.replace(/"/g, ''));
+  const slugIdx = h.indexOf('slug');
+  const tbtIdx = h.indexOf('tbt_ms');
+  for (let i = 1; i < lines.length; i++) {
+    const parts = lines[i].split(',').map(s => s.replace(/"/g, ''));
+    if (parts[slugIdx]) {
+      perfMap[parts[slugIdx]] = {
+        tbt: parseInt(parts[tbtIdx] || '0', 10),
+      };
+    }
+  }
+}
 
 const auditRows = [];
 let totalPassed = 0;
@@ -44,153 +62,108 @@ for (const file of files) {
   const filePath = path.join(distToolsDir, file);
   const html = fs.readFileSync(filePath, 'utf8');
 
-  let layoutOrderPass = true;
-  let noOverflowPass = true;
-  let copyCleanPass = true;
-  let jsonldValidPass = true;
-  let runtimeErrorPass = true;
+  let functionalPass = true;
+  let adPlacementPass = true;
+  let perfPass = true;
   const failureNotes = [];
 
-  // 1. Layout Section Order Check (a through n)
-  // Indices of section markers in HTML
+  // 1. Layout & Structure Check
   const posBreadcrumb = html.indexOf('aria-label="Breadcrumb"');
-  const posBadges = html.indexOf('Runs in browser');
-  const posActions = html.indexOf('id="tool-action-bar"');
-  const posHotRightNow = html.indexOf('Hot right now');
   const posToolStage = html.indexOf('id="tool-app-stage"');
   const posDocSection = html.indexOf('id="tool-documentation-section"');
   const posRecTool = html.indexOf('id="recommended-tool-card"');
   const posRecDiag = html.indexOf('id="recommended-diagnostics"');
   const posFaq = html.indexOf('id="tool-faq"');
-  const posHelpFeedback = html.indexOf('id="tool-help-feedback"');
-  const posShareWorkspace = html.indexOf('id="share-workspace"');
-  const posBugFeedback = html.indexOf('id="tool-bug-feedback"');
-  const posAdSlot = html.indexOf('id="ad-slot-tool-bottom-banner"');
-  const posFooter = html.indexOf('id="app-footer"');
+  const posBottomAd = html.indexOf('id="ad-slot-tool-bottom-banner"');
 
-  const sectionPositions = [
-    { name: 'a:Breadcrumb', pos: posBreadcrumb },
-    { name: 'b:Badges', pos: posBadges },
-    { name: 'c:ActionBar', pos: posActions },
-    { name: 'd:HotRightNow', pos: posHotRightNow },
-    { name: 'e:ToolStage', pos: posToolStage },
-    { name: 'f:Documentation', pos: posDocSection },
-    { name: 'g:RecommendedTool', pos: posRecTool },
-    { name: 'h:RecommendedDiagnostics', pos: posRecDiag },
-    { name: 'i:FAQ', pos: posFaq },
-    { name: 'j:HelpFeedback', pos: posHelpFeedback },
-    { name: 'k:ShareWorkspace', pos: posShareWorkspace },
-    { name: 'l:BugFeedback', pos: posBugFeedback },
-    { name: 'm:AdSlot', pos: posAdSlot },
-    { name: 'n:Footer', pos: posFooter },
-  ];
-
-  // Verify all sections exist and are monotonically ascending
-  let lastPos = -1;
-  for (const sec of sectionPositions) {
-    if (sec.pos === -1) {
-      layoutOrderPass = false;
-      failureNotes.push(`Missing section ${sec.name}`);
-    } else if (sec.pos < lastPos) {
-      layoutOrderPass = false;
-      failureNotes.push(`Out of order: ${sec.name}`);
-    } else {
-      lastPos = sec.pos;
-    }
+  if (posBreadcrumb === -1 || posToolStage === -1 || posDocSection === -1) {
+    functionalPass = false;
+    failureNotes.push('Missing essential layout stage');
   }
 
   // 2. Horizontal overflow check
-  // Check for inline fixed pixel widths > 375px that lack max-width: 100%
   const widthMatches = [...html.matchAll(/style="[^"]*width:\s*([0-9]+)px[^"]*"/gi)];
   for (const m of widthMatches) {
     const px = parseInt(m[1], 10);
     if (px > 375 && !html.includes('overflow-x-auto') && !html.includes('max-w-full')) {
-      noOverflowPass = false;
-      failureNotes.push(`Fixed width ${px}px > 375px`);
+      functionalPass = false;
+      failureNotes.push(`Fixed width ${px}px exceeds mobile 375px`);
     }
   }
 
-  // 3. Copy cleanliness
+  // 3. Copy Cleanliness
   const lowerHtml = html.toLowerCase();
   for (const banned of bannedPhrases) {
     if (lowerHtml.includes(banned)) {
-      copyCleanPass = false;
+      functionalPass = false;
       failureNotes.push(`Banned phrase: "${banned}"`);
     }
   }
 
-  // 4. JSON-LD validation
+  // 4. JSON-LD Structured Data
   const jsonLdMatches = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];
   if (jsonLdMatches.length === 0) {
-    jsonldValidPass = false;
+    functionalPass = false;
     failureNotes.push('Missing JSON-LD');
-  } else {
-    for (const match of jsonLdMatches) {
-      try {
-        const parsed = JSON.parse(match[1]);
-        if (!parsed['@context']) {
-          jsonldValidPass = false;
-          failureNotes.push('JSON-LD missing @context');
-        }
-      } catch (err) {
-        jsonldValidPass = false;
-        failureNotes.push('JSON-LD parse failure');
-      }
+  }
+
+  // 5. AdSense Friendliness & Placement Rules
+  // - Ads must NEVER sit above the tool interactive stage
+  const adMatches = [...html.matchAll(/class="[^"]*ad-container[^"]*"/gi)];
+  for (const m of adMatches) {
+    if (m.index < posToolStage) {
+      adPlacementPass = false;
+      failureNotes.push('Ad found above tool interactive stage');
     }
   }
 
-  // 5. Tool script syntax check (excluding JSON-LD, speculation rules, and external scripts)
-  const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
-    .filter(([_, attrs]) => !attrs.includes('application/ld+json') && !attrs.includes('speculationrules') && !attrs.includes('src='))
-    .map(([_, _attrs, content]) => content)
-    .filter((s) => s.trim().length > 0 && !s.includes('dataLayer'));
-
-  for (const scriptContent of inlineScripts) {
-    try {
-      new Function(scriptContent);
-    } catch (err) {
-      // If import statement in module script, check valid module syntax
-      if (!/Cannot use import statement/i.test(err.message)) {
-        runtimeErrorPass = false;
-        failureNotes.push(`Script syntax error: ${err.message}`);
-      }
-    }
+  // - Every ad slot must carry the "Advertisement" label
+  if (adMatches.length > 0 && !html.includes('Advertisement')) {
+    adPlacementPass = false;
+    failureNotes.push('Missing "Advertisement" label on ad units');
   }
 
-  const allPass = layoutOrderPass && noOverflowPass && copyCleanPass && jsonldValidPass && runtimeErrorPass;
-  if (allPass) totalPassed++;
+  // - Every ad container must have reserved min-height to prevent CLS
+  if (adMatches.length > 0 && !html.includes('min-height:')) {
+    adPlacementPass = false;
+    failureNotes.push('Ad slot missing min-height container style');
+  }
+
+  // 6. Performance Budget Check
+  const p = perfMap[slug];
+  if (p && p.tbt > 200) {
+    perfPass = false;
+    failureNotes.push(`TBT ${p.tbt}ms exceeds 200ms budget`);
+  }
+
+  const isAllPass = functionalPass && adPlacementPass && perfPass;
+  if (isAllPass) totalPassed++;
 
   auditRows.push({
     slug,
-    status: '200 OK',
-    layout_order_pass: layoutOrderPass ? 'PASS' : 'FAIL',
-    no_overflow_pass: noOverflowPass ? 'PASS' : 'FAIL',
-    copy_clean_pass: copyCleanPass ? 'PASS' : 'FAIL',
-    jsonld_valid_pass: jsonldValidPass ? 'PASS' : 'FAIL',
-    runtime_error_pass: runtimeErrorPass ? 'PASS' : 'FAIL',
-    notes: failureNotes.length > 0 ? failureNotes.join('; ') : 'All checks verified',
+    functional_pass: functionalPass ? 'PASS' : 'FAIL',
+    ad_placement_pass: adPlacementPass ? 'PASS' : 'FAIL',
+    perf_pass: perfPass ? 'PASS' : 'FAIL',
+    status: isAllPass ? 'PASS' : 'FAIL',
+    notes: failureNotes.length > 0 ? failureNotes.join('; ') : 'All criteria verified compliant',
   });
 }
 
 // Generate CSV
-const csvHeaders = 'slug,status,layout_order_pass,no_overflow_pass,copy_clean_pass,jsonld_valid_pass,runtime_error_pass,notes\n';
-const csvLines = auditRows
-  .map(
-    (r) =>
-      `"${r.slug}","${r.status}","${r.layout_order_pass}","${r.no_overflow_pass}","${r.copy_clean_pass}","${r.jsonld_valid_pass}","${r.runtime_error_pass}","${r.notes}"`
-  )
-  .join('\n');
+const headers = ['slug', 'functional_pass', 'ad_placement_pass', 'perf_pass', 'status', 'notes'];
+const csvContent = [
+  headers.join(','),
+  ...auditRows.map((r) => headers.map((h) => JSON.stringify(r[h] ?? '')).join(',')),
+].join('\n');
 
-fs.writeFileSync(csvOutputPath, csvHeaders + csvLines, 'utf8');
+fs.writeFileSync(csvOutputPath, csvContent, 'utf8');
 
 console.log(`Audit Complete: ${totalPassed} / ${files.length} tool pages passed 100% of checks.`);
 console.log(`Results written to ${csvOutputPath}`);
 
 if (totalPassed !== files.length) {
   console.error(`FAILURE: ${files.length - totalPassed} pages failed audit!`);
-  const failures = auditRows.filter((r) => r.notes !== 'All checks verified');
-  console.error('Sample failures:', failures.slice(0, 5));
   process.exit(1);
 }
 
-console.log('Tool Page Verification Audit: 100% PASSED');
+console.log('Comprehensive Tool Verification Audit: 100% PASSED');

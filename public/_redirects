@@ -8,8 +8,8 @@
 /tool/blood_pressure_tracker /tool/health_metrics_dashboard 301
 /tool/body_fat_navy_method /tool/health_metrics_dashboard 301
 /tool/edpi_sensitivity_calc /tool/mouse_dpi_deviation_analyzer 301
-/tool/master_health_audit /#master-scanners-section 301
-/tool/master_hardware_diagnostic /#master-scanners-section 301
+/tool/master_health_audit / 301
+/tool/master_hardware_diagnostic / 301
 /tool/circadian_rhythm_optimizer /hubs/wellness 301
 /tool/box_breathing_haptic /hubs/wellness 301
 /tool/capillary_refill_test /hubs/wellness 301
@@ -43,3 +43,4 @@
 /tool/tongue_coating_scanner /hubs/wellness 301
 /blog / 301
 /blog/* / 301
+/sitemap.html /sitemap 301

@@ -282,17 +282,31 @@
     const circumference = 125.66; // 2 * Math.PI * 20
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // --- 1. Scroll Progress Ring Computation ---
+    // --- 1. Scroll Progress Ring Computation (Optimized: zero layout thrashing, rAF batched) ---
+    let ticking = false;
+    let cachedScrollHeight = 0;
+
+    function updateCachedHeight() {
+      cachedScrollHeight = Math.max(1, document.documentElement.scrollHeight - document.documentElement.clientHeight);
+    }
+    window.addEventListener('resize', updateCachedHeight, { passive: true });
+    updateCachedHeight();
+
     function updateScrollProgress() {
-      const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (scrollHeight > 0 && progressRing) {
-        const ratio = Math.min(1, Math.max(0, scrollTop / scrollHeight));
-        if (prefersReducedMotion) {
-          progressRing.style.strokeDashoffset = '0';
-        } else {
-          progressRing.style.strokeDashoffset = String(circumference - ratio * circumference);
-        }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          if (cachedScrollHeight > 0 && progressRing) {
+            const ratio = Math.min(1, Math.max(0, scrollTop / cachedScrollHeight));
+            if (prefersReducedMotion) {
+              progressRing.style.strokeDashoffset = '0';
+            } else {
+              progressRing.style.strokeDashoffset = String(circumference - ratio * circumference);
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     }
 

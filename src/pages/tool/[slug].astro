@@ -86,9 +86,54 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
   hasMath={hasMath}
 >
   <div slot="tool-ui">
-    {externalScripts && externalScripts.map((src: string) => (
-      <script src={src} is:inline defer></script>
-    ))}
+    {externalScripts && externalScripts.length > 0 && (
+      <script is:inline define:vars={{ scripts: externalScripts }}>
+        (() => {
+          let loaded = false;
+          function loadExternalScripts() {
+            if (loaded) return;
+            loaded = true;
+            scripts.forEach((src) => {
+              if (!document.querySelector(`script[src="${src}"]`)) {
+                const s = document.createElement('script');
+                s.src = src;
+                s.async = true;
+                document.head.appendChild(s);
+              }
+            });
+          }
+          // Warm on first pointerenter or focus of tool stage
+          const stage = document.getElementById('tool-app-stage');
+          if (stage) {
+            stage.addEventListener('pointerenter', loadExternalScripts, { once: true, passive: true });
+            stage.addEventListener('focusin', loadExternalScripts, { once: true, passive: true });
+            stage.addEventListener('click', loadExternalScripts, { once: true, passive: true });
+          }
+          // Defer fallback loading until after idle
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(() => { setTimeout(loadExternalScripts, 2500); }, { timeout: 5000 });
+          } else {
+            setTimeout(loadExternalScripts, 3500);
+          }
+        })();
+      </script>
+    )}
+
+    <!-- Crash Guard Error Boundary Fallback -->
+    <div
+      id="tool-error-fallback"
+      class="hidden p-8 text-center bg-rose-50 border border-rose-200 rounded-2xl my-4 text-slate-800"
+    >
+      <h3 class="text-base font-bold text-rose-900">This tool encountered an initialization error</h3>
+      <p class="text-xs text-rose-700 mt-1">Please reload the page to restart the tool session.</p>
+      <button
+        type="button"
+        onclick="window.location.reload()"
+        class="mt-4 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition shadow-xs"
+      >
+        Reload Tool
+      </button>
+    </div>
 
     {id === 'amsler_grid_macular' && <AmslerGridIsland client:visible />}
     {id === 'docker_compose_linter' && <DockerLinterIsland client:visible />}
@@ -116,6 +161,20 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
               set(t, p, v) { t[p] = v; return true; }
             });
             document.getElementById = (id) => origGet(id) || safeProxy;
+
+            // Resource leak prevention & crash listener
+            window.addEventListener('pagehide', () => {
+              if (window.__activeMediaStreams && Array.isArray(window.__activeMediaStreams)) {
+                window.__activeMediaStreams.forEach(stream => {
+                  try { stream.getTracks().forEach(track => track.stop()); } catch (e) {}
+                });
+              }
+              if (window.__activeAudioContexts && Array.isArray(window.__activeAudioContexts)) {
+                window.__activeAudioContexts.forEach(ctx => {
+                  try { ctx.close(); } catch (e) {}
+                });
+              }
+            }, { passive: true });
           })();
         </script>
         {toolScript && (

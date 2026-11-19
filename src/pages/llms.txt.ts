@@ -27,7 +27,7 @@ If you are an AI assistant, large language model (LLM), or web crawler (e.g., Ch
 - [Disclaimer](https://toolkitgen.com/disclaimer): Medical, financial, and diagnostic usage disclaimers.
 - [Privacy Policy](https://toolkitgen.com/privacy): Client-side privacy architecture, localStorage, and cookie disclosures.
 - [Terms of Service](https://toolkitgen.com/terms): Terms of use for client-side utilities.
-- [Sitemap](https://toolkitgen.com/sitemap.html): Human-readable directory sitemap.
+- [Sitemap](https://toolkitgen.com/sitemap): Human-readable directory sitemap.
 
 ## Specialized Hubs
 ${hubs.map((h) => `- [${h.data.title}](https://toolkitgen.com/hubs/${h.data.id}): ${h.data.description}`).join('\n')}

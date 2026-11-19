@@ -40,10 +40,6 @@ Allow: /
 # SITEMAPS & CRAWL SETTINGS
 # --------------------------------------------------------
 Sitemap: https://toolkitgen.com/sitemap-index.xml
-Sitemap: https://toolkitgen.com/sitemap.xml
-Sitemap: https://toolkitgen.com/sitemap-tools.xml
-Sitemap: https://toolkitgen.com/sitemap-core.xml
-Sitemap: https://toolkitgen.com/sitemap-hubs.xml
 
 # Crawl delay for smaller, aggressive bots (Google/Bing ignore this)
 Crawl-delay: 1

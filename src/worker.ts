@@ -17,8 +17,8 @@ const REDIRECTS: Record<string, string> = {
   '/tool/blood_pressure_tracker': '/tool/health_metrics_dashboard',
   '/tool/body_fat_navy_method': '/tool/health_metrics_dashboard',
   '/tool/edpi_sensitivity_calc': '/tool/mouse_dpi_deviation_analyzer',
-  '/tool/master_health_audit': '/#master-scanners-section',
-  '/tool/master_hardware_diagnostic': '/#master-scanners-section',
+  '/tool/master_health_audit': '/',
+  '/tool/master_hardware_diagnostic': '/',
   '/tool/circadian_rhythm_optimizer': '/hubs/wellness',
   '/tool/box_breathing_haptic': '/hubs/wellness',
   '/tool/capillary_refill_test': '/hubs/wellness',
@@ -51,6 +51,7 @@ const REDIRECTS: Record<string, string> = {
   '/tool/stress_level_predictor': '/hubs/wellness',
   '/tool/tongue_coating_scanner': '/hubs/wellness',
   '/blog': '/',
+  '/sitemap.html': '/sitemap',
 };
 
 const SECURITY_HEADERS: Record<string, string> = {

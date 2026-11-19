@@ -14,7 +14,7 @@ export const GET: APIRoute = async () => {
     { loc: `${site}/privacy`, lastmod, priority: '0.5', changefreq: 'monthly' },
     { loc: `${site}/terms`, lastmod, priority: '0.5', changefreq: 'monthly' },
     { loc: `${site}/disclaimer`, lastmod, priority: '0.5', changefreq: 'monthly' },
-    { loc: `${site}/sitemap.html`, lastmod, priority: '0.7', changefreq: 'weekly' },
+    { loc: `${site}/sitemap`, lastmod, priority: '0.7', changefreq: 'weekly' },
   ];
 
   // Categories

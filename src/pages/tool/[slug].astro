@@ -87,7 +87,7 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
 >
   <div slot="tool-ui">
     {externalScripts && externalScripts.map((src: string) => (
-      <script src={src} is:inline></script>
+      <script src={src} is:inline defer></script>
     ))}
 
     {id === 'amsler_grid_macular' && <AmslerGridIsland client:visible />}

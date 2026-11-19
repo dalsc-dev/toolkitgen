@@ -6,15 +6,19 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/check-copy.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-limits.mjs && node scripts/check-tool-count.mjs",
+    "build": "node scripts/check-copy.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-limits.mjs && node scripts/check-tool-count.mjs && node scripts/check-emoji.mjs && node scripts/check-raw-latex.mjs && node scripts/check-titles.mjs && node scripts/check-left-borders.mjs",
     "preview": "astro preview",
-    "check": "astro check",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "test": "vitest run",
     "test:watch": "vitest",
     "new:tool": "node scripts/scaffold-tool.mjs",
     "check:copy": "node scripts/check-copy.mjs",
     "check:limits": "node scripts/check-limits.mjs",
     "check:count": "node scripts/check-tool-count.mjs",
+    "check:emoji": "node scripts/check-emoji.mjs",
+    "check:latex": "node scripts/check-raw-latex.mjs",
+    "check:titles": "node scripts/check-titles.mjs",
+    "check:borders": "node scripts/check-left-borders.mjs",
     "check:audit": "node scripts/verify-all-tools.mjs",
     "check:url": "node scripts/check-url-parity.mjs",
     "check:similarity": "node scripts/check-duplicate-content.mjs"
@@ -28,6 +32,7 @@
     "@tailwindcss/vite": "^4.0.12",
     "astro": "^5.4.2",
     "js-yaml": "^4.1.0",
+    "katex": "^0.19.1",
     "preact": "^10.26.4",
     "tailwindcss": "^4.0.12",
     "zod": "^3.24.2"
@@ -35,6 +40,7 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.13.10",
+    "playwright": "^1.65.1",
     "typescript": "^5.7.3",
     "vitest": "^3.0.7",
     "wrangler": "^3.111.0"

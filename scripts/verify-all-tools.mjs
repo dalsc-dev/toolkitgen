@@ -139,9 +139,9 @@ for (const file of files) {
     }
   }
 
-  // 5. Tool script syntax check (excluding JSON-LD and external scripts)
+  // 5. Tool script syntax check (excluding JSON-LD, speculation rules, and external scripts)
   const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
-    .filter(([_, attrs]) => !attrs.includes('application/ld+json') && !attrs.includes('src='))
+    .filter(([_, attrs]) => !attrs.includes('application/ld+json') && !attrs.includes('speculationrules') && !attrs.includes('src='))
     .map(([_, _attrs, content]) => content)
     .filter((s) => s.trim().length > 0 && !s.includes('dataLayer'));
 

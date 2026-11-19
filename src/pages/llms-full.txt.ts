@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { HUB_TOOLS_CATALOG } from '@lib/hubToolsCatalog';
 
 export const GET: APIRoute = async () => {
   const tools = await getCollection('tools');
@@ -9,7 +10,7 @@ export const GET: APIRoute = async () => {
 
   let text = `# ToolkitGen - Full Knowledge Base for AI Engines (LLMs)
 
-> Complete structured documentation of ${tools.length} client-side web tools. Calculations run in your browser, and inputs are not uploaded to our servers.
+> Complete structured documentation of ${tools.length} standalone client-side web tools and ${HUB_TOOLS_CATALOG.length} embedded hub utilities. Calculations run in your browser, and inputs are not uploaded to our servers.
 
 ---
 
@@ -31,13 +32,13 @@ ${hubs
 
 ---
 
-## Complete Tools Catalog (${tools.length} Tools)
+## Standalone Tools Catalog (${tools.length} Tools)
 
 `;
 
   for (const t of tools) {
     const data = t.data;
-    text += `### ${data.title}
+    text += `### ${(data.name || data.title).replace(/\s*\|\s*Toolkit Gen.*$/i, '')}
 - **URL:** https://toolkitgen.com/tool/${data.id}
 - **Category:** ${data.category}
 - **Description:** ${data.description}
@@ -55,6 +56,20 @@ ${(data.features || []).map((f: string) => `  - ${f}`).join('\n')}
     }
 
     text += '\n---\n\n';
+  }
+
+  text += `## Embedded Hub Utilities (${HUB_TOOLS_CATALOG.length} Tools)\n\n`;
+  for (const ht of HUB_TOOLS_CATALOG) {
+    text += `### ${ht.name}
+- **URL:** https://toolkitgen.com${ht.url}
+- **Category:** ${ht.category}
+- **Hub:** ${ht.hub}
+- **Description:** ${ht.description}
+- **Tags:** ${ht.tags.join(', ')}
+
+---
+
+`;
   }
 
   return new Response(text, {

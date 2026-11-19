@@ -27,6 +27,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
+  overflow-x: clip;
 }
 
 body {
@@ -38,6 +39,19 @@ body {
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Animations */
@@ -230,15 +244,15 @@ article strong, .prose strong {
 }
 
 article blockquote, .prose blockquote {
-  border-left: 4px solid #EE6C4D;
-  padding-left: 1rem;
+  border-inline-start: none !important;
+  border-left: none !important;
+  border: 1px solid #e2e8f0;
+  padding: 1rem 1.25rem;
   margin: 1.5rem 0;
   color: #475569;
   font-style: italic;
-  background: #fff8f6;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  border-radius: 0 0.5rem 0.5rem 0;
+  background: #f8fafc;
+  border-radius: 0.75rem;
 }
 
 article table, .prose table {
@@ -312,10 +326,10 @@ article kbd, .prose kbd {
 }
 
 .content-highlight {
-  background: linear-gradient(to right, rgba(238, 108, 77, 0.08), rgba(254, 215, 170, 0.08));
-  border-left: 4px solid #EE6C4D;
+  background: #fff8f6;
+  border: 1px solid #fed7aa;
   padding: 1.25rem;
-  border-radius: 0 1rem 1rem 0;
+  border-radius: 0.75rem;
   margin: 1.5rem 0;
 }
 

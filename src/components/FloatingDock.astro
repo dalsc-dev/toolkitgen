@@ -1,82 +1,129 @@
 ---
-// Floating Dock & Productivity Utilities (Zen Mode, Scratchpad, Cheat Sheets, Ambient Focus Audio, File Router)
+// Floating Dock with Scroll Progress Ring & Quick Utilities Menu
 ---
 
-<!-- Bottom-Right Floating Pill Dock -->
+<!-- Root Container for Floating Dock (z-index 60, sits below consent banner z-80) -->
 <div
-  id="floating-dock-pill"
-  class="fixed bottom-5 right-5 z-[80] flex items-center gap-1.5 p-1.5 bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-xl rounded-full transition-all duration-300 hover:shadow-2xl hover:scale-105"
-  role="toolbar"
-  aria-label="Productivity Utilities Dock"
+  id="floating-dock-root"
+  class="fixed bottom-5 right-5 z-[60] select-none hidden"
+  role="region"
+  aria-label="Quick Utilities Dock"
 >
-  <!-- Focus Audio Button -->
+  <!-- Collapsed State: Single 48x48px circular button with SVG scroll-progress ring -->
   <button
     type="button"
-    id="dock-audio-btn"
-    aria-label="Toggle Focus Audio"
-    title="Ambient Noise (Focus Audio)"
-    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+    id="dock-trigger-btn"
+    aria-expanded="false"
+    aria-haspopup="menu"
+    aria-controls="dock-floating-menu"
+    aria-label="Open productivity tools"
+    title="Productivity Tools & Scroll Progress"
+    class="relative w-12 h-12 rounded-full bg-white text-slate-700 shadow-xl border border-slate-200/90 hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center outline-none focus:ring-2 focus:ring-[#EE6C4D]"
   >
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+    <!-- SVG Circular Scroll Progress Ring (Circumference: 2 * PI * 20 ≈ 125.66) -->
+    <svg class="absolute inset-0 w-12 h-12 -rotate-90 pointer-events-none" viewBox="0 0 48 48">
+      <!-- Background track -->
+      <circle
+        cx="24"
+        cy="24"
+        r="20"
+        class="text-slate-100"
+        stroke-width="2.5"
+        stroke="currentColor"
+        fill="none"
+      />
+      <!-- Active Progress Arc -->
+      <circle
+        id="dock-progress-ring"
+        cx="24"
+        cy="24"
+        r="20"
+        class="text-[#EE6C4D] transition-[stroke-dashoffset] duration-75"
+        stroke-dasharray="125.66"
+        stroke-dashoffset="125.66"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke="currentColor"
+        fill="none"
+      />
+    </svg>
+
+    <!-- Center Icon: Toolkit Gen Chevron Up -->
+    <svg
+      id="dock-trigger-icon"
+      class="w-5 h-5 text-slate-700 pointer-events-none transition-transform duration-200"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
     </svg>
   </button>
 
-  <!-- Scratchpad Drawer Button -->
-  <button
-    type="button"
-    id="dock-scratchpad-btn"
-    aria-label="Open Scratchpad"
-    title="Scratchpad Drawer"
-    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+  <!-- Expanded State: Clean Floating Menu with the 5 tools -->
+  <div
+    id="dock-floating-menu"
+    class="hidden absolute bottom-14 right-0 mb-2 w-56 bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200 shadow-2xl p-1.5 space-y-1 z-[61] transition-all"
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="dock-trigger-btn"
   >
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-    </svg>
-  </button>
+    <!-- 1. Zen Mode -->
+    <button
+      type="button"
+      id="dock-item-zen"
+      role="menuitem"
+      class="w-full min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold text-slate-700 hover:text-[#EE6C4D] hover:bg-slate-50 flex items-center gap-2.5 transition-colors cursor-pointer outline-none focus:bg-slate-50 focus:text-[#EE6C4D]"
+    >
+      <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+      <span>Zen Mode</span>
+    </button>
 
-  <!-- Cheat Sheets Drawer Button -->
-  <button
-    type="button"
-    id="dock-cheatsheets-btn"
-    aria-label="Open Quick Cheat Sheets"
-    title="Developer Cheat Sheets"
-    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]"
-  >
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-    </svg>
-  </button>
+    <!-- 2. Scratchpad -->
+    <button
+      type="button"
+      id="dock-item-scratchpad"
+      role="menuitem"
+      class="w-full min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold text-slate-700 hover:text-[#EE6C4D] hover:bg-slate-50 flex items-center gap-2.5 transition-colors cursor-pointer outline-none focus:bg-slate-50 focus:text-[#EE6C4D]"
+    >
+      <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+      <span>Scratchpad</span>
+    </button>
 
-  <!-- Zen Mode Toggle Button -->
-  <button
-    type="button"
-    id="dock-zen-btn"
-    aria-label="Toggle Zen Dark Workspace"
-    title="Zen Mode"
-    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]"
-  >
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-    </svg>
-  </button>
+    <!-- 3. Cheat Sheets -->
+    <button
+      type="button"
+      id="dock-item-cheatsheets"
+      role="menuitem"
+      class="w-full min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold text-slate-700 hover:text-[#EE6C4D] hover:bg-slate-50 flex items-center gap-2.5 transition-colors cursor-pointer outline-none focus:bg-slate-50 focus:text-[#EE6C4D]"
+    >
+      <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+      <span>Cheat Sheets</span>
+    </button>
 
-  <!-- Back to Top Progress Ring -->
-  <button
-    type="button"
-    id="dock-btt-btn"
-    aria-label="Scroll to top"
-    title="Back to top"
-    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] relative"
-  >
-    <svg class="w-6 h-6 transform -rotate-90" viewBox="0 0 36 36">
-      <path class="text-slate-200" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-      <path id="btt-progress-svg" class="text-[#EE6C4D]" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-    </svg>
-    <svg class="w-3.5 h-3.5 absolute text-slate-600 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path>
-    </svg>
-  </button>
+    <!-- 4. Focus Audio -->
+    <button
+      type="button"
+      id="dock-item-audio"
+      role="menuitem"
+      class="w-full min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold text-slate-700 hover:text-[#EE6C4D] hover:bg-slate-50 flex items-center gap-2.5 transition-colors cursor-pointer outline-none focus:bg-slate-50 focus:text-[#EE6C4D]"
+    >
+      <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+      <span>Focus Audio</span>
+    </button>
+
+    <!-- 5. Back to Top -->
+    <button
+      type="button"
+      id="dock-item-btt"
+      role="menuitem"
+      class="w-full min-h-[44px] px-3 py-2 rounded-xl text-left text-xs font-semibold text-slate-700 hover:text-[#EE6C4D] hover:bg-slate-50 flex items-center gap-2.5 transition-colors cursor-pointer outline-none focus:bg-slate-50 focus:text-[#EE6C4D] border-t border-slate-100 mt-1"
+    >
+      <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
 </div>
 
 <!-- Ambient Focus Audio Floating Widget -->
@@ -114,11 +161,11 @@
   <p class="text-[11px] text-slate-400">Synthesized locally in your browser via Web Audio API.</p>
 </div>
 
-<!-- Scratchpad Drawer -->
+<!-- Scratchpad Drawer (Clean border, zero left-border accents) -->
 <div id="scratchpad-overlay" class="fixed inset-0 bg-slate-900/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300"></div>
 <div
   id="scratchpad-drawer"
-  class="fixed right-0 top-0 h-full w-full sm:w-96 bg-white shadow-2xl z-[95] transform translate-x-full transition-transform duration-300 border-l border-slate-200 flex flex-col"
+  class="fixed right-0 top-0 h-full w-full sm:w-96 bg-white shadow-2xl z-[95] transform translate-x-full transition-transform duration-300 border border-slate-200 flex flex-col invisible"
 >
   <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
     <div class="flex items-center gap-2">
@@ -138,250 +185,316 @@
     <div class="flex items-center justify-between text-xs text-slate-500 px-1">
       <span id="scratchpad-count">0 words • 0 chars</span>
       <div class="flex gap-2">
-        <button id="scratchpad-copy" class="text-slate-600 hover:text-[#EE6C4D] font-bold">Copy</button>
-        <span>•</span>
-        <button id="scratchpad-clear" class="text-slate-600 hover:text-red-500 font-bold">Clear</button>
+        <button id="clear-scratchpad-btn" class="hover:text-red-600 transition-colors">Clear</button>
+        <button id="copy-scratchpad-btn" class="text-[#EE6C4D] font-bold hover:underline">Copy All</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Developer Cheat Sheets Drawer -->
+<!-- Cheat Sheets Drawer (Clean border, zero left-border accents) -->
 <div id="cheatsheet-overlay" class="fixed inset-0 bg-slate-900/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300"></div>
 <div
   id="cheatsheet-drawer"
-  class="fixed right-0 top-0 h-full w-full sm:w-[480px] bg-white shadow-2xl z-[95] transform translate-x-full transition-transform duration-300 border-l border-slate-200 flex flex-col"
+  class="fixed right-0 top-0 h-full w-full sm:w-[480px] bg-white shadow-2xl z-[95] transform translate-x-full transition-transform duration-300 border border-slate-200 flex flex-col invisible"
 >
   <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-    <h3 class="text-sm font-bold text-slate-900">Quick Developer Cheat Sheets</h3>
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+      <h3 class="text-sm font-bold text-slate-900">Developer &amp; Engineer Cheat Sheets</h3>
+    </div>
     <button id="close-cheatsheet-btn" class="text-slate-400 hover:text-slate-600 p-1">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
   </div>
-  <div class="flex border-b border-slate-100 bg-slate-50/50 px-4 gap-2 pt-2" id="cheatsheet-tabs">
-    <button class="cs-tab px-3 py-2 text-xs font-bold border-b-2 border-[#EE6C4D] text-[#EE6C4D]" data-tab="git">Git</button>
-    <button class="cs-tab px-3 py-2 text-xs font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800" data-tab="regex">Regex</button>
-    <button class="cs-tab px-3 py-2 text-xs font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800" data-tab="http">HTTP Status</button>
-    <button class="cs-tab px-3 py-2 text-xs font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800" data-tab="markdown">Markdown</button>
+  <div class="p-4 border-b border-slate-100 bg-white">
+    <div class="flex gap-2 overflow-x-auto pb-1" id="sheet-tabs">
+      <button class="sheet-tab active px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white" data-target="cs-docker">Docker</button>
+      <button class="sheet-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200" data-target="cs-git">Git</button>
+      <button class="sheet-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200" data-target="cs-regex">Regex</button>
+      <button class="sheet-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200" data-target="cs-http">HTTP</button>
+      <button class="sheet-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200" data-target="cs-markdown">Markdown</button>
+    </div>
   </div>
-  <div class="p-5 flex-1 overflow-y-auto" id="cheatsheet-body">
-    <!-- Git Table -->
-    <div id="cs-content-git" class="space-y-3 font-mono text-xs">
-      <table class="w-full text-left">
-        <tbody class="divide-y divide-slate-100">
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git init</td><td class="py-2.5 text-slate-600">Initialize a new local repository</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git status -s</td><td class="py-2.5 text-slate-600">Short status report</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git add -A</td><td class="py-2.5 text-slate-600">Stage all tracked and untracked changes</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git commit -m "msg"</td><td class="py-2.5 text-slate-600">Commit with description</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git switch -c branch</td><td class="py-2.5 text-slate-600">Create &amp; switch to new branch</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git log --oneline -10</td><td class="py-2.5 text-slate-600">Compact last 10 commits</td></tr>
-        </tbody>
-      </table>
+  <div class="p-4 flex-1 overflow-y-auto font-mono text-xs text-slate-800 space-y-4" id="sheet-content">
+    <div id="cs-docker" class="sheet-pane space-y-3">
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <span class="text-slate-400 font-bold block mb-1 text-[10px] uppercase font-sans">Lifecycle</span>
+        <p class="text-slate-900 font-bold">docker compose up -d</p>
+        <p class="text-slate-500 font-sans text-[11px]">Start containers detached in the background.</p>
+      </div>
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <p class="text-slate-900 font-bold">docker compose down -v</p>
+        <p class="text-slate-500 font-sans text-[11px]">Stop containers and purge named volumes.</p>
+      </div>
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <p class="text-slate-900 font-bold">docker system prune -af --volumes</p>
+        <p class="text-slate-500 font-sans text-[11px]">Nuke all unused containers, images, and volumes.</p>
+      </div>
     </div>
-    <!-- Regex Table -->
-    <div id="cs-content-regex" class="hidden space-y-3 font-mono text-xs">
-      <table class="w-full text-left">
-        <tbody class="divide-y divide-slate-100">
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">^ / $</td><td class="py-2.5 text-slate-600">Start / End of string or line</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">\d / \D</td><td class="py-2.5 text-slate-600">Digit (0-9) / Non-digit</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">\w / \W</td><td class="py-2.5 text-slate-600">Word character / Non-word</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">\s / \S</td><td class="py-2.5 text-slate-600">Whitespace / Non-whitespace</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">(?:...)</td><td class="py-2.5 text-slate-600">Non-capturing group</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">(?&lt;=...)</td><td class="py-2.5 text-slate-600">Positive lookbehind</td></tr>
-        </tbody>
-      </table>
+    <div id="cs-git" class="sheet-pane hidden space-y-3">
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <p class="text-slate-900 font-bold">git commit -am "fix"</p>
+        <p class="text-slate-500 font-sans text-[11px]">Stage modified files and commit in one command.</p>
+      </div>
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <p class="text-slate-900 font-bold">git log --oneline --graph --decorate</p>
+        <p class="text-slate-500 font-sans text-[11px]">Compact visual commit history.</p>
+      </div>
     </div>
-    <!-- HTTP Table -->
-    <div id="cs-content-http" class="hidden space-y-3 font-mono text-xs">
-      <table class="w-full text-left">
-        <tbody class="divide-y divide-slate-100">
-          <tr><td class="py-2.5 font-bold text-emerald-600">200 OK</td><td class="py-2.5 text-slate-600">Request succeeded</td></tr>
-          <tr><td class="py-2.5 font-bold text-emerald-600">201 Created</td><td class="py-2.5 text-slate-600">Resource successfully created</td></tr>
-          <tr><td class="py-2.5 font-bold text-blue-600">301 Moved Permanently</td><td class="py-2.5 text-slate-600">Permanent URL redirect</td></tr>
-          <tr><td class="py-2.5 font-bold text-amber-600">400 Bad Request</td><td class="py-2.5 text-slate-600">Client-side malformed syntax</td></tr>
-          <tr><td class="py-2.5 font-bold text-amber-600">401 Unauthorized</td><td class="py-2.5 text-slate-600">Authentication required</td></tr>
-          <tr><td class="py-2.5 font-bold text-amber-600">404 Not Found</td><td class="py-2.5 text-slate-600">Resource missing</td></tr>
-          <tr><td class="py-2.5 font-bold text-rose-600">500 Server Error</td><td class="py-2.5 text-slate-600">Internal server failure</td></tr>
-        </tbody>
-      </table>
+    <div id="cs-regex" class="sheet-pane hidden space-y-3">
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <p class="text-slate-900 font-bold">^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{'{'}2,{'}'}$</p>
+        <p class="text-slate-500 font-sans text-[11px]">Email format validation regex.</p>
+      </div>
     </div>
-    <!-- Markdown Table -->
-    <div id="cs-content-markdown" class="hidden space-y-3 font-mono text-xs">
-      <table class="w-full text-left">
-        <tbody class="divide-y divide-slate-100">
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]"># Heading 1</td><td class="py-2.5 text-slate-600">Page header H1</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">**bold**</td><td class="py-2.5 text-slate-600">Bold text emphasis</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">[text](url)</td><td class="py-2.5 text-slate-600">Hyperlink</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">`code`</td><td class="py-2.5 text-slate-600">Inline code literal</td></tr>
-          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">```lang</td><td class="py-2.5 text-slate-600">Fenced code block</td></tr>
-        </tbody>
-      </table>
+    <div id="cs-http" class="sheet-pane hidden space-y-3">
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <p class="text-slate-900 font-bold">200 OK • 201 Created • 204 No Content</p>
+        <p class="text-slate-900 font-bold mt-2">400 Bad Request • 401 Unauthorized • 403 Forbidden</p>
+        <p class="text-slate-900 font-bold mt-2">500 Internal Error • 502 Bad Gateway • 504 Gateway Timeout</p>
+      </div>
+    </div>
+    <div id="cs-markdown" class="sheet-pane hidden space-y-3">
+      <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+        <p class="text-slate-900 font-bold"># H1  ## H2  ### H3</p>
+        <p class="text-slate-900 font-bold mt-1">**bold**  *italic*  `code`</p>
+        <p class="text-slate-900 font-bold mt-1">[Link](https://example.com)</p>
+      </div>
     </div>
   </div>
 </div>
 
 <script is:inline>
   (() => {
-    // 1. Zen Mode Toggle
-    const zenBtn = document.getElementById('dock-zen-btn');
-    if (zenBtn) {
-      zenBtn.addEventListener('click', () => {
-        document.body.classList.toggle('zen-mode');
-        localStorage.setItem('tk_zen_mode', document.body.classList.contains('zen-mode') ? 'true' : 'false');
+    const dockRoot = document.getElementById('floating-dock-root');
+    const triggerBtn = document.getElementById('dock-trigger-btn');
+    const floatingMenu = document.getElementById('dock-floating-menu');
+    const progressRing = document.getElementById('dock-progress-ring');
+    const triggerIcon = document.getElementById('dock-trigger-icon');
+
+    const itemZen = document.getElementById('dock-item-zen');
+    const itemScratchpad = document.getElementById('dock-item-scratchpad');
+    const itemCheatsheets = document.getElementById('dock-item-cheatsheets');
+    const itemAudio = document.getElementById('dock-item-audio');
+    const itemBtt = document.getElementById('dock-item-btt');
+
+    const circumference = 125.66; // 2 * Math.PI * 20
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- 1. Scroll Progress Ring Computation ---
+    function updateScrollProgress() {
+      const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (scrollHeight > 0 && progressRing) {
+        const ratio = Math.min(1, Math.max(0, scrollTop / scrollHeight));
+        if (prefersReducedMotion) {
+          progressRing.style.strokeDashoffset = '0';
+        } else {
+          progressRing.style.strokeDashoffset = String(circumference - ratio * circumference);
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // --- 2. Menu Toggle & Accessibility ---
+    let isMenuOpen = false;
+
+    function openMenu() {
+      isMenuOpen = true;
+      triggerBtn?.setAttribute('aria-expanded', 'true');
+      floatingMenu?.classList.remove('hidden');
+      if (triggerIcon) triggerIcon.style.transform = 'rotate(180deg)';
+      // Focus first item
+      itemZen?.focus();
+    }
+
+    function closeMenu() {
+      isMenuOpen = false;
+      triggerBtn?.setAttribute('aria-expanded', 'false');
+      floatingMenu?.classList.add('hidden');
+      if (triggerIcon) triggerIcon.style.transform = 'rotate(0deg)';
+    }
+
+    function toggleMenu() {
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    triggerBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    triggerBtn?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMenu();
+      }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (isMenuOpen && !dockRoot?.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+        triggerBtn?.focus();
+      }
+    });
+
+    // --- 3. Menu Item Actions ---
+
+    // Zen Mode
+    itemZen?.addEventListener('click', () => {
+      document.body.classList.toggle('zen-mode');
+      localStorage.setItem('tk_zen_mode', document.body.classList.contains('zen-mode') ? 'true' : 'false');
+      closeMenu();
+    });
+
+    // Back to Top
+    itemBtt?.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
       });
-    }
+      closeMenu();
+    });
 
-    // 2. Scratchpad Manager
-    const scratchpadBtn = document.getElementById('dock-scratchpad-btn');
-    const scratchpadDrawer = document.getElementById('scratchpad-drawer');
-    const scratchpadOverlay = document.getElementById('scratchpad-overlay');
-    const closeScratchpad = document.getElementById('close-scratchpad-btn');
-    const scratchpadText = document.getElementById('scratchpad-text');
-    const scratchpadCount = document.getElementById('scratchpad-count');
-    const scratchpadCopy = document.getElementById('scratchpad-copy');
-    const scratchpadClear = document.getElementById('scratchpad-clear');
-
-    if (scratchpadText) {
-      scratchpadText.value = localStorage.getItem('tk_scratchpad') || '';
-      updateScratchpadCount();
-
-      scratchpadText.addEventListener('input', () => {
-        localStorage.setItem('tk_scratchpad', scratchpadText.value);
-        updateScratchpadCount();
-      });
-    }
-
-    function updateScratchpadCount() {
-      if (!scratchpadText || !scratchpadCount) return;
-      const val = scratchpadText.value.trim();
-      const words = val ? val.split(/\s+/).length : 0;
-      const chars = scratchpadText.value.length;
-      scratchpadCount.textContent = `${words} words • ${chars} chars`;
-    }
+    // Scratchpad Drawer
+    const scratchDrawer = document.getElementById('scratchpad-drawer');
+    const scratchOverlay = document.getElementById('scratchpad-overlay');
+    const closeScratchBtn = document.getElementById('close-scratchpad-btn');
+    const scratchText = document.getElementById('scratchpad-text');
+    const scratchCount = document.getElementById('scratchpad-count');
+    const clearScratchBtn = document.getElementById('clear-scratchpad-btn');
+    const copyScratchBtn = document.getElementById('copy-scratchpad-btn');
 
     function openScratchpad() {
-      scratchpadDrawer?.classList.remove('translate-x-full');
-      scratchpadOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+      closeMenu();
+      scratchOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+      scratchDrawer?.classList.remove('invisible', 'translate-x-full');
+      scratchText?.focus();
     }
 
-    function hideScratchpad() {
-      scratchpadDrawer?.classList.add('translate-x-full');
-      scratchpadOverlay?.classList.add('opacity-0', 'pointer-events-none');
+    function closeScratchpad() {
+      scratchOverlay?.classList.add('opacity-0', 'pointer-events-none');
+      scratchDrawer?.classList.add('translate-x-full');
+      setTimeout(() => scratchDrawer?.classList.add('invisible'), 300);
+      triggerBtn?.focus();
     }
 
-    scratchpadBtn?.addEventListener('click', openScratchpad);
-    closeScratchpad?.addEventListener('click', hideScratchpad);
-    scratchpadOverlay?.addEventListener('click', hideScratchpad);
+    itemScratchpad?.addEventListener('click', openScratchpad);
+    closeScratchBtn?.addEventListener('click', closeScratchpad);
+    scratchOverlay?.addEventListener('click', closeScratchpad);
 
-    scratchpadCopy?.addEventListener('click', () => {
-      if (scratchpadText) {
-        navigator.clipboard.writeText(scratchpadText.value);
-        scratchpadCopy.textContent = 'Copied!';
-        setTimeout(() => (scratchpadCopy.textContent = 'Copy'), 1500);
+    if (scratchText) {
+      scratchText.value = localStorage.getItem('tk_scratchpad') || '';
+      function updateScratchCount() {
+        const val = scratchText.value || '';
+        const words = val.trim() ? val.trim().split(/\s+/).length : 0;
+        if (scratchCount) scratchCount.textContent = `${words} words • ${val.length} chars`;
+        localStorage.setItem('tk_scratchpad', val);
       }
-    });
-
-    scratchpadClear?.addEventListener('click', () => {
-      if (scratchpadText && confirm('Clear scratchpad notes?')) {
-        scratchpadText.value = '';
-        localStorage.removeItem('tk_scratchpad');
-        updateScratchpadCount();
-      }
-    });
-
-    // 3. Cheat Sheets Manager
-    const csBtn = document.getElementById('dock-cheatsheets-btn');
-    const csDrawer = document.getElementById('cheatsheet-drawer');
-    const csOverlay = document.getElementById('cheatsheet-overlay');
-    const csClose = document.getElementById('close-cheatsheet-btn');
-    const csTabs = document.querySelectorAll('#cheatsheet-tabs .cs-tab');
-
-    function openCheatSheets() {
-      csDrawer?.classList.remove('translate-x-full');
-      csOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+      updateScratchCount();
+      scratchText.addEventListener('input', updateScratchCount);
+      clearScratchBtn?.addEventListener('click', () => {
+        scratchText.value = '';
+        updateScratchCount();
+      });
+      copyScratchBtn?.addEventListener('click', () => {
+        navigator.clipboard.writeText(scratchText.value).then(() => {
+          if (copyScratchBtn) copyScratchBtn.textContent = 'Copied!';
+          setTimeout(() => { if (copyScratchBtn) copyScratchBtn.textContent = 'Copy All'; }, 2000);
+        });
+      });
     }
 
-    function hideCheatSheets() {
-      csDrawer?.classList.add('translate-x-full');
-      csOverlay?.classList.add('opacity-0', 'pointer-events-none');
+    // Cheat Sheets Drawer
+    const cheatDrawer = document.getElementById('cheatsheet-drawer');
+    const cheatOverlay = document.getElementById('cheatsheet-overlay');
+    const closeCheatBtn = document.getElementById('close-cheatsheet-btn');
+
+    function openCheatsheets() {
+      closeMenu();
+      cheatOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+      cheatDrawer?.classList.remove('invisible', 'translate-x-full');
     }
 
-    csBtn?.addEventListener('click', openCheatSheets);
-    csClose?.addEventListener('click', hideCheatSheets);
-    csOverlay?.addEventListener('click', hideCheatSheets);
+    function closeCheatsheets() {
+      cheatOverlay?.classList.add('opacity-0', 'pointer-events-none');
+      cheatDrawer?.classList.add('translate-x-full');
+      setTimeout(() => cheatDrawer?.classList.add('invisible'), 300);
+      triggerBtn?.focus();
+    }
 
-    csTabs.forEach((tab) => {
+    itemCheatsheets?.addEventListener('click', openCheatsheets);
+    closeCheatBtn?.addEventListener('click', closeCheatsheets);
+    cheatOverlay?.addEventListener('click', closeCheatsheets);
+
+    // Sheet tab switching
+    const tabs = document.querySelectorAll('.sheet-tab');
+    const panes = document.querySelectorAll('.sheet-pane');
+    tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
-        const target = tab.getAttribute('data-tab');
-        csTabs.forEach((t) => {
-          t.className = 'cs-tab px-3 py-2 text-xs font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800';
+        tabs.forEach((t) => {
+          t.classList.remove('active', 'bg-slate-900', 'text-white');
+          t.classList.add('bg-slate-100', 'text-slate-600');
         });
-        tab.className = 'cs-tab px-3 py-2 text-xs font-bold border-b-2 border-[#EE6C4D] text-[#EE6C4D]';
-
-        ['git', 'regex', 'http', 'markdown'].forEach((name) => {
-          const el = document.getElementById(`cs-content-${name}`);
-          if (el) {
-            el.className = name === target ? 'space-y-3 font-mono text-xs' : 'hidden space-y-3 font-mono text-xs';
-          }
-        });
+        tab.classList.add('active', 'bg-slate-900', 'text-white');
+        tab.classList.remove('bg-slate-100', 'text-slate-600');
+        panes.forEach((p) => p.classList.add('hidden'));
+        const targetId = tab.getAttribute('data-target');
+        if (targetId) document.getElementById(targetId)?.classList.remove('hidden');
       });
     });
 
-    // 4. Ambient Focus Audio Generator (Web Audio API buffer)
-    const audioBtn = document.getElementById('dock-audio-btn');
+    // Focus Audio Widget
     const audioWidget = document.getElementById('ambient-player-widget');
-    const closeAudioWidget = document.getElementById('close-audio-widget');
-    const playToggle = document.getElementById('ambient-play-toggle');
+    const closeAudioBtn = document.getElementById('close-audio-widget');
+    const playToggleBtn = document.getElementById('ambient-play-toggle');
     const playIcon = document.getElementById('audio-play-icon');
     const pauseIcon = document.getElementById('audio-pause-icon');
     const noiseSelect = document.getElementById('ambient-noise-select');
 
     let audioCtx = null;
     let noiseNode = null;
-    let gainNode = null;
-    let isPlaying = false;
+    let isAudioPlaying = false;
 
-    audioBtn?.addEventListener('click', () => {
-      audioWidget?.classList.toggle('hidden');
-    });
-
-    closeAudioWidget?.addEventListener('click', () => {
-      audioWidget?.classList.add('hidden');
-    });
-
-    function createNoiseBuffer(type) {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window['webkitAudioContext'])();
-      }
-      const bufferSize = 2 * audioCtx.sampleRate;
+    function buildNoiseBuffer(type) {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window['webkitAudioContext'])();
+      const bufferSize = audioCtx.sampleRate * 2;
       const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-      const output = buffer.getChannelData(0);
+      const data = buffer.getChannelData(0);
+      let lastOut = 0.0;
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
 
-      if (type === 'white') {
-        for (let i = 0; i < bufferSize; i++) {
-          output[i] = Math.random() * 2 - 1;
-        }
-      } else if (type === 'pink') {
-        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
-        for (let i = 0; i < bufferSize; i++) {
-          const white = Math.random() * 2 - 1;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        if (type === 'white') {
+          data[i] = white * 0.1;
+        } else if (type === 'brown') {
+          lastOut = (lastOut + (0.02 * white)) / 1.02;
+          data[i] = lastOut * 0.35;
+        } else if (type === 'pink') {
           b0 = 0.99886 * b0 + white * 0.0555179;
           b1 = 0.99332 * b1 + white * 0.0750759;
           b2 = 0.96900 * b2 + white * 0.1538520;
           b3 = 0.86650 * b3 + white * 0.3104856;
           b4 = 0.55000 * b4 + white * 0.5329522;
           b5 = -0.7616 * b5 - white * 0.0168980;
-          output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
+          data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.05;
           b6 = white * 0.115926;
-        }
-      } else {
-        // Brown noise
-        let lastOut = 0.0;
-        for (let i = 0; i < bufferSize; i++) {
-          const white = Math.random() * 2 - 1;
-          output[i] = (lastOut + 0.02 * white) / 1.02;
-          lastOut = output[i];
-          output[i] *= 3.5;
         }
       }
       return buffer;
@@ -390,123 +503,74 @@
     function startNoise() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window['webkitAudioContext'])();
       if (audioCtx.state === 'suspended') audioCtx.resume();
-
       if (noiseNode) {
-        noiseNode.stop();
-        noiseNode.disconnect();
+        try { noiseNode.stop(); } catch (e) {}
       }
-
       const type = noiseSelect?.value || 'brown';
-      const buffer = createNoiseBuffer(type);
+      const buffer = buildNoiseBuffer(type);
       noiseNode = audioCtx.createBufferSource();
       noiseNode.buffer = buffer;
       noiseNode.loop = true;
-
-      if (!gainNode) {
-        gainNode = audioCtx.createGain();
-        gainNode.gain.value = 0.4;
-        gainNode.connect(audioCtx.destination);
-      }
-
-      noiseNode.connect(gainNode);
+      noiseNode.connect(audioCtx.destination);
       noiseNode.start();
-      isPlaying = true;
+      isAudioPlaying = true;
       playIcon?.classList.add('hidden');
       pauseIcon?.classList.remove('hidden');
     }
 
     function stopNoise() {
       if (noiseNode) {
-        noiseNode.stop();
-        noiseNode.disconnect();
+        try { noiseNode.stop(); } catch (e) {}
         noiseNode = null;
       }
-      isPlaying = false;
+      isAudioPlaying = false;
       playIcon?.classList.remove('hidden');
       pauseIcon?.classList.add('hidden');
     }
 
-    playToggle?.addEventListener('click', () => {
-      if (isPlaying) {
-        stopNoise();
-      } else {
-        startNoise();
-      }
+    playToggleBtn?.addEventListener('click', () => {
+      if (isAudioPlaying) stopNoise();
+      else startNoise();
     });
 
     noiseSelect?.addEventListener('change', () => {
-      if (isPlaying) {
-        startNoise();
-      }
+      if (isAudioPlaying) startNoise();
     });
 
-    // 5. Back to Top Progress Ring
-    const bttBtn = document.getElementById('dock-btt-btn');
-    const bttSvg = document.getElementById('btt-progress-svg');
-
-    window.addEventListener('scroll', () => {
-      const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (scrollHeight > 0 && bttSvg) {
-        const progress = (scrollTop / scrollHeight) * 100;
-        bttSvg.style.strokeDashoffset = String(100 - progress);
-      }
-    }, { passive: true });
-
-    bttBtn?.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    itemAudio?.addEventListener('click', () => {
+      closeMenu();
+      audioWidget?.classList.toggle('hidden');
+      audioWidget?.classList.toggle('flex');
     });
 
-    // 6. Omni Drop File Anywhere Overlay Router
-    window.addEventListener('dragover', (e) => {
-      e.preventDefault();
+    closeAudioBtn?.addEventListener('click', () => {
+      audioWidget?.classList.add('hidden');
+      audioWidget?.classList.remove('flex');
     });
 
-    window.addEventListener('drop', (e) => {
-      e.preventDefault();
-      const files = e.dataTransfer?.files;
-      if (!files || files.length === 0) return;
-
-      const file = files[0];
-      const name = file.name.toLowerCase();
-      let matchedTool = null;
-
-      if (name.endsWith('.json')) {
-        matchedTool = { name: 'SQLite WASM Explorer', id: 'sqlite_wasm_explorer', action: 'Inspect JSON/DB' };
-      } else if (name.endsWith('.csv')) {
-        matchedTool = { name: 'SQLite WASM Explorer', id: 'sqlite_wasm_explorer', action: 'Load CSV Data' };
-      } else if (name.endsWith('.yml') || name.endsWith('.yaml')) {
-        matchedTool = { name: 'Docker Compose Linter', id: 'docker_compose_linter', action: 'Lint YAML File' };
-      } else if (/\.(png|jpe?g|webp|gif|svg)$/i.test(name)) {
-        matchedTool = { name: 'Color Blindness Simulator', id: 'color_blindness_sim', action: 'Simulate Vision on Image' };
+    // --- 4. Hide completely while Consent Banner is open ---
+    function checkBannerState() {
+      const banner = document.getElementById('consent-banner');
+      if (banner && !banner.classList.contains('hidden')) {
+        dockRoot?.classList.add('hidden');
+      } else {
+        dockRoot?.classList.remove('hidden');
       }
+    }
 
-      if (matchedTool) {
-        showFileDropToast(file, matchedTool);
+    function initBannerSync() {
+      const banner = document.getElementById('consent-banner');
+      if (banner) {
+        const observer = new MutationObserver(checkBannerState);
+        observer.observe(banner, { attributes: true, attributeFilter: ['class'] });
       }
-    });
+      checkBannerState();
+    }
 
-    function showFileDropToast(file, tool) {
-      document.getElementById('file-router-toast')?.remove();
-      const kb = (file.size / 1024).toFixed(1);
-      const toast = document.createElement('div');
-      toast.id = 'file-router-toast';
-      toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 z-[999] bg-slate-900 p-4 rounded-2xl shadow-2xl border border-slate-700 flex flex-col sm:flex-row items-center gap-4 w-[90%] max-w-lg animate-fade-up';
-      toast.innerHTML = `
-        <div class="flex-1 min-w-0 text-center sm:text-left">
-          <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block mb-0.5">File Detected</span>
-          <h4 class="text-white font-bold text-sm truncate">${file.name} <span class="text-slate-400 font-normal">(${kb} KB)</span></h4>
-        </div>
-        <a href="/tool/${tool.id}" class="bg-[#EE6C4D] hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition-colors whitespace-nowrap shadow-sm">
-          ${tool.action} &rarr;
-        </a>
-        <button id="close-file-toast" aria-label="Dismiss notification" class="text-slate-400 hover:text-white p-1">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-      `;
-      document.body.appendChild(toast);
-      toast.querySelector('#close-file-toast')?.addEventListener('click', () => toast.remove());
-      setTimeout(() => toast.remove(), 8000);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initBannerSync);
+    } else {
+      initBannerSync();
     }
   })();
 </script>

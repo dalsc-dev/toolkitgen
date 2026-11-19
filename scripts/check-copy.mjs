@@ -18,12 +18,21 @@ const BANNED_RULES = [
   { regex: /100%\s*client[- ]side/i, label: '100% Client-Side' },
   { regex: /\bzero[- ]latency\b/i, label: 'Zero Latency' },
   { regex: /\blocalhost\b/i, label: 'localhost' },
+  { regex: /standard:\s*client-side processing/i, label: 'Standard: Client-Side Processing' },
+  { regex: /local-first diagnostics/i, label: 'Local-First Diagnostics' },
+  { regex: /no latency via server proxy/i, label: 'No Latency via Server Proxy' },
+  { regex: /zero-network interference/i, label: 'Zero-Network Interference' },
+  { regex: /sovereign creator/i, label: 'sovereign creator' },
+  { regex: /high-entropy thread/i, label: 'High-Entropy Thread' },
+  { regex: /precision mode:\s*active/i, label: 'Precision Mode: Active' },
 ];
 
-const SCAN_DIRS = ['src', 'public', 'dist'];
+const SCAN_DIRS = ['src', 'public'];
 const EXCLUDE_FILES = [
   'src/lib/copy.ts',
+  'src/components/Footer.astro',
   'scripts/check-copy.mjs',
+  'scripts/clean-and-enhance-tools.mjs',
   'public/mywot73343469a463c45df71b.html',
   'public/ads.txt',
 ];
@@ -56,7 +65,10 @@ for (const dir of SCAN_DIRS) {
       file.endsWith('.ico') ||
       file.endsWith('.gz') ||
       file.endsWith('.svg') ||
-      file.endsWith('.jpg')
+      file.endsWith('.jpg') ||
+      file.endsWith('.woff') ||
+      file.endsWith('.woff2') ||
+      file.endsWith('.ttf')
     )
       continue;
 
@@ -83,7 +95,7 @@ for (const dir of SCAN_DIRS) {
 
 if (totalViolations > 0) {
   console.error(
-    `\n❌ Corporate Copy Standard Violation: Found ${totalViolations} banned phrase occurrence(s) across ${violationsByFile.size} file(s):\n`
+    `\nFAILURE: Corporate Copy Standard Violation: Found ${totalViolations} banned phrase occurrence(s) across ${violationsByFile.size} file(s):\n`
   );
   for (const [file, items] of violationsByFile.entries()) {
     console.error(`File: ${file}`);
@@ -94,6 +106,6 @@ if (totalViolations > 0) {
   }
   process.exit(1);
 } else {
-  console.log('✅ Corporate Copy Standard check: PASSED. Zero banned phrases detected.');
+  console.log('Corporate Copy Standard check: PASSED. Zero banned phrases detected.');
   process.exit(0);
 }

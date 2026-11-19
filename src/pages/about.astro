@@ -29,7 +29,10 @@ const jsonLd = {
       name: 'Toolkit Gen',
       url: 'https://toolkitgen.com',
       logo: 'https://toolkitgen.com/assets/favicon/favicon.svg',
-      description: `Free privacy-focused online tools and calculators. Calculations run in your browser. Your inputs are not uploaded to our servers..`,
+      sameAs: [
+        'https://github.com/dalsc2/toolkitgen'
+      ],
+      description: `Free privacy-focused online tools and calculators. Calculations run in your browser. Your inputs are not uploaded to our servers.`,
       foundingDate: '2023',
       contactPoint: {
         '@type': 'ContactPoint',
@@ -107,10 +110,10 @@ const jsonLd = {
         Toolkit Gen was built out of frustration with modern web utilities. Simple tasks—like converting a cURL command to fetch, calculating IV drop rates, inspecting display refresh rates, or analyzing password entropy—too often require creating accounts, navigating intrusive paywalls, or unwittingly uploading sensitive credentials and telemetry to third-party backends.
       </p>
       <p class="text-slate-700 leading-relaxed">
-        We believe everyday tools should be <strong>instant, open, and strictly client-side</strong>. By leveraging modern browser APIs (such as WebAssembly, Web Audio API, Canvas 2D, and WebGL), our utilities execute mathematical formulas, audio tests, and formatting scripts directly in your device's memory.
+        We believe everyday tools should be <strong>instant, open, and accessible and local-first</strong>. By leveraging modern browser APIs (such as WebAssembly, Web Audio API, Canvas 2D, and WebGL), our utilities execute mathematical formulas, audio tests, and formatting scripts directly in your device's memory.
       </p>
 
-      <div class="my-8 p-6 bg-slate-50 border-l-4 border-emerald-500 rounded-r-2xl space-y-2">
+      <div class="my-8 p-6 bg-slate-50 border border-emerald-200 bg-emerald-50/60 rounded-2xl space-y-2">
         <h3 class="text-base font-bold text-emerald-950 uppercase tracking-wider m-0">Our Core Privacy Rule</h3>
         <p class="text-sm text-slate-700 m-0">
           <strong>Calculations run in your browser. Your inputs are not uploaded to our servers.</strong> Whether you enter code snippets, calculate health metrics, or inspect cryptographic keys, processing occurs locally on your device.
@@ -121,7 +124,7 @@ const jsonLd = {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 not-prose">
         <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
           <div class="font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">✓</span>
+            <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold"><svg class="w-4 h-4 inline-block text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
             Zero Account Requirement
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">
@@ -130,7 +133,7 @@ const jsonLd = {
         </div>
         <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
           <div class="font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">✓</span>
+            <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold"><svg class="w-4 h-4 inline-block text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
             Audited In-Browser Computation
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">
@@ -139,7 +142,7 @@ const jsonLd = {
         </div>
         <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
           <div class="font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold">✓</span>
+            <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold"><svg class="w-4 h-4 inline-block text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
             Algorithmic Rigor
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">
@@ -148,7 +151,7 @@ const jsonLd = {
         </div>
         <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
           <div class="font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">✓</span>
+            <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold"><svg class="w-4 h-4 inline-block text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
             Honest Sustainability
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">

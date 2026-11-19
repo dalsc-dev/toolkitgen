@@ -2,6 +2,8 @@
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
 import AdSlot from '@components/AdSlot.astro';
+import ToolCTA from '@components/ToolCTA.astro';
+import Callout from '@components/Callout.astro';
 import { generateJsonLd } from '@lib/schema';
 
 interface FAQItem {
@@ -24,6 +26,7 @@ interface RelatedItem {
 
 interface Props {
   id: string;
+  name?: string;
   title: string;
   description: string;
   category: string;
@@ -34,10 +37,12 @@ interface Props {
   allTools?: RelatedItem[];
   datePublished?: string;
   dateModified?: string;
+  hasMath?: boolean;
 }
 
 const {
   id,
+  name,
   title,
   description,
   category,
@@ -48,19 +53,33 @@ const {
   allTools = [],
   datePublished = '2025-01-15T00:00:00Z',
   dateModified = '2026-11-19T00:00:00Z',
+  hasMath = false,
 } = Astro.props;
+
+// Clean tool name without suffix
+const cleanName = (name || title || id)
+  .replace(/\s*\|\s*Toolkit Gen.*$/i, '')
+  .trim();
+
+// Browser tab title with suffix
+const browserTitle = title.includes('|') ? title : `${cleanName} | Toolkit Gen`;
 
 const canonicalUrl = `https://toolkitgen.com/tool/${id}`;
 const categorySlug = category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
+// Compliance notices
+const isVisionTool = category === 'Vision / Optometry' || id.includes('vision') || id.includes('amsler') || id.includes('astigmatism') || id.includes('snellen') || id.includes('color_blindness');
+const isHearingTool = id.includes('hearing') || id.includes('audiogram') || id.includes('tinnitus') || id.includes('noise_dosimeter');
+const isCameraOrMicTool = category === 'Camera / Sensor' || id.includes('cam') || id.includes('camera') || id.includes('mic') || id.includes('voice') || id.includes('eye_') || id.includes('posture');
+
 const breadcrumbs = [
   { name: category, url: `/category/${categorySlug}` },
-  { name: title, url: `/tool/${id}` },
+  { name: cleanName, url: `/tool/${id}` },
 ];
 
 const jsonLd = generateJsonLd({
   type: 'tool',
-  title,
+  title: cleanName,
   description,
   url: canonicalUrl,
   category,
@@ -71,7 +90,7 @@ const jsonLd = generateJsonLd({
   breadcrumbs: [
     { name: 'Home', url: '/' },
     { name: 'Directory', url: '/tool' },
-    { name: title, url: `/tool/${id}` },
+    { name: cleanName, url: `/tool/${id}` },
   ],
 });
 
@@ -91,16 +110,17 @@ const diagnosticTools = (related.length >= 5 ? related.slice(0, 5) : [
   ...allTools.filter((t) => t.id !== id && !related.some((r) => r.id === t.id)),
 ]).slice(0, 5);
 
-const encodedTitle = encodeURIComponent(title);
+const encodedTitle = encodeURIComponent(cleanName);
 const encodedUrl = encodeURIComponent(canonicalUrl);
 ---
 
 <BaseLayout
-  title={title}
+  title={browserTitle}
   description={description}
   canonical={canonicalUrl}
   ogType="article"
   jsonLd={jsonLd}
+  hasMath={hasMath}
 >
   <div class="max-w-5xl mx-auto space-y-10">
     <!-- a. Breadcrumb -->
@@ -135,7 +155,7 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
       <!-- c. H1, Short Description & Action Buttons -->
       <div class="space-y-4">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-          {title}
+          {cleanName}
         </h1>
         <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
           {description}
@@ -208,12 +228,33 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
 
         <a
           href="#tool-app-stage"
-          class="inline-flex items-center gap-1.5 text-xs font-bold text-[#EE6C4D] hover:underline self-start sm:self-auto"
+          class="inline-flex items-center gap-1.5 text-xs font-bold text-[#C44322] hover:underline self-start sm:self-auto"
         >
-          Scroll to App &darr;
+          <span>Scroll to App</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+          </svg>
         </a>
       </div>
     </header>
+
+    {isVisionTool && (
+      <Callout variant="warning" title="Clinical Health Notice">
+        Informational only; not a clinical diagnosis. Consult an eye care professional.
+      </Callout>
+    )}
+
+    {isHearingTool && (
+      <Callout variant="warning" title="Audiometry Notice">
+        Informational only; not a clinical diagnosis. Consult a qualified hearing care professional or audiologist.
+      </Callout>
+    )}
+
+    {isCameraOrMicTool && (
+      <Callout variant="info" title="Browser Privacy Notice">
+        Audio and video are processed locally in your browser and are not recorded or transmitted.
+      </Callout>
+    )}
 
     <!-- e. Tool interactive stage (the tool itself) -->
     <section id="tool-app-stage" class="tool-card bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-xl overflow-hidden scroll-mt-28">
@@ -223,14 +264,14 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
     <!-- f. "Read How to Use & Info" expandable article -->
     <section id="tool-documentation-section" class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm space-y-8">
       <!-- Quick Answer Summary Box -->
-      <div class="p-4 bg-slate-50 border-l-4 border-[#EE6C4D] rounded-r-xl text-slate-700 text-sm leading-relaxed font-medium">
-        <strong>Quick Summary:</strong> {quickAnswer}
-      </div>
+      <Callout variant="note" title="Quick Summary">
+        <div set:html={quickAnswer} />
+      </Callout>
 
       <!-- How to Use Steps -->
       {howTo && howTo.length > 0 && (
         <div class="space-y-4">
-          <h2 class="text-xl font-bold text-slate-900 tracking-tight">How to Use {title}</h2>
+          <h2 class="text-xl font-bold text-slate-900 tracking-tight">How to Use {cleanName}</h2>
           <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
             {howTo.map((step) => (
               <li>
@@ -246,9 +287,17 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
         <slot name="article" />
       </article>
 
+      <!-- Unified Contained Tool CTA -->
+      <ToolCTA
+        title={`Run ${cleanName}`}
+        description="Calculations execute directly in your browser with local data processing."
+        buttonText="Begin Calibration"
+        targetId="tool-app-stage"
+      />
+
       <div class="pt-4 border-t border-slate-100 text-xs text-slate-400 flex items-center justify-between">
         <span>Last updated: {new Date(dateModified).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-        <span>Standard: Client-Side Processing</span>
+        <span>Calculations execute locally in browser memory.</span>
       </div>
     </section>
 
@@ -270,7 +319,10 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
           href={`/tool/${recommendedTool.id}`}
           class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#EE6C4D] hover:bg-orange-600 text-white text-xs font-bold rounded-xl shadow-md transition-all self-start sm:self-auto shrink-0"
         >
-          Launch Utility &rarr;
+          <span>Launch Utility</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
         </a>
       </section>
     )}
@@ -296,7 +348,10 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
               </p>
             </div>
             <span class="text-xs font-bold text-[#EE6C4D] mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-              Open Tool &rarr;
+              <span>Open Tool</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+              </svg>
             </span>
           </a>
         ))}
@@ -325,84 +380,87 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
       </section>
     )}
 
-    <!-- j. "Was this documentation helpful?" (Yes/No feedback widget) -->
-    <section id="tool-help-feedback" class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 text-center space-y-3">
-      <h4 class="text-sm font-bold text-slate-900">Was this documentation helpful?</h4>
-      <div id="feedback-buttons" class="flex justify-center gap-3">
-        <button
-          type="button"
-          id="btn-feedback-yes"
-          class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-700 transition-colors shadow-2xs"
-        >
-          Yes, thanks
-        </button>
-        <button
-          type="button"
-          id="btn-feedback-no"
-          class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-700 transition-colors shadow-2xs"
-        >
-          Not really
-        </button>
-      </div>
-      <p id="feedback-confirmation" class="text-xs font-bold text-emerald-600 hidden">
-        Thank you for your feedback! It helps us refine this tool documentation.
-      </p>
-    </section>
+    <!-- Unified Utility & Feedback Panel (Consolidated Feedback, Sharing & Contact) -->
+    <div id="tool-utility-panel" class="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-2xs space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <!-- j. "Was this documentation helpful?" (Yes/No feedback widget) -->
+        <div id="tool-help-feedback" class="space-y-3">
+          <div class="space-y-1">
+            <h4 class="text-sm font-bold text-slate-900">Was this documentation helpful?</h4>
+            <p class="text-xs text-slate-500">Your feedback helps improve this tool and documentation.</p>
+          </div>
+          <div id="feedback-buttons" class="flex items-center gap-2.5">
+            <button
+              type="button"
+              id="btn-feedback-yes"
+              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-700 transition-colors shadow-2xs"
+            >
+              Yes, thanks
+            </button>
+            <button
+              type="button"
+              id="btn-feedback-no"
+              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-700 transition-colors shadow-2xs"
+            >
+              Not really
+            </button>
+          </div>
+          <p id="feedback-confirmation" class="text-xs font-bold text-emerald-600 hidden">
+            Thank you for your feedback! It helps us refine this tool documentation.
+          </p>
+        </div>
 
-    <!-- k. "Share Your Workspace" (Reddit, X, Snap for IG) -->
-    <section id="share-workspace" class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="text-center md:text-left space-y-1">
-        <h3 class="text-lg font-bold text-white">Share Your Workspace</h3>
-        <p class="text-xs text-slate-400 max-w-md leading-relaxed">
-          Share this utility with colleagues or export your current tool parameters.
-        </p>
+        <!-- k. "Share Your Workspace" (Reddit, X, Snap for IG) -->
+        <div id="share-workspace" class="space-y-3">
+          <div class="space-y-1">
+            <h4 class="text-sm font-bold text-slate-900">Share Tool</h4>
+            <p class="text-xs text-slate-500">Share this utility with colleagues or export your current tool parameters.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <a
+              href={`https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Reddit"
+              class="px-3.5 py-2 bg-white border border-slate-200 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-700 text-slate-700 rounded-xl text-xs font-bold transition-all shadow-2xs flex items-center gap-1.5"
+            >
+              Reddit
+            </a>
+            <a
+              href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on X"
+              class="px-3.5 py-2 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 rounded-xl text-xs font-bold transition-all shadow-2xs flex items-center gap-1.5"
+            >
+              Post
+            </a>
+            <button
+              type="button"
+              id="btn-snap-ig"
+              class="px-3.5 py-2 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 rounded-xl text-xs font-bold transition-all shadow-2xs flex items-center gap-1.5"
+            >
+              Snap for IG
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="flex flex-wrap justify-center gap-3 w-full md:w-auto">
-        <a
-          href={`https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Share on Reddit"
-          class="px-4 py-2 bg-[#FF4500] hover:bg-[#ff571a] text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1.5"
-        >
-          Reddit
-        </a>
-        <a
-          href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Share on X"
-          class="px-4 py-2 bg-black hover:bg-slate-800 border border-slate-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1.5"
-        >
-          Post
-        </a>
-        <button
-          type="button"
-          id="btn-snap-ig"
-          class="px-4 py-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:to-orange-600 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1.5"
-        >
-          Snap for IG
-        </button>
-      </div>
-    </section>
 
-    <!-- l. "Have a suggestion or found a bug?" Email Developer mailto link -->
-    <section id="tool-bug-feedback" class="bg-slate-50/80 rounded-2xl p-6 sm:p-8 text-center border border-slate-200/80 shadow-2xs space-y-3">
-      <div class="w-10 h-10 rounded-full bg-orange-100 text-[#EE6C4D] mx-auto flex items-center justify-center">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+      <!-- l. "Have a suggestion or found a bug?" Email Developer mailto link -->
+      <div id="tool-bug-feedback" class="pt-4 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-600">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-[#EE6C4D] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+          <span>Have a feature idea or spotted an issue in <strong>{cleanName}</strong>?</span>
+        </div>
+        <a
+          href={`mailto:toolkitgen@gmail.com?subject=Toolkit%20Gen%20Feedback:%20${encodedTitle}`}
+          class="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-[#EE6C4D] bg-white border border-slate-200 hover:border-[#EE6C4D] px-3.5 py-1.5 rounded-lg transition-colors shadow-2xs self-start sm:self-auto"
+        >
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span>Email Developer</span>
+        </a>
       </div>
-      <h3 class="text-base font-bold text-slate-900">Have a suggestion or found a bug?</h3>
-      <p class="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
-        We are constantly improving <strong>{title}</strong>. If you have ideas for new features or spotted an issue, drop us a line directly.
-      </p>
-      <a
-        href={`mailto:toolkitgen@gmail.com?subject=Toolkit%20Gen%20Feedback:%20${encodedTitle}`}
-        class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-slate-700 font-bold text-xs rounded-full border border-slate-300 hover:border-[#EE6C4D] hover:text-[#EE6C4D] shadow-2xs transition-colors"
-      >
-        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-        Email Developer
-      </a>
-    </section>
+    </div>
 
     <!-- m. Labeled AdSlot with reserved height (never above the tool) -->
     <AdSlot slotId="tool-bottom-banner" minHeight="250px" />

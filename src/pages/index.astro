@@ -19,27 +19,23 @@ const trendingIds = [
 ];
 const trendingTools = tools.filter((t) => trendingIds.includes(t.data.id));
 
-// New arrivals (sample diverse utilities)
-const newArrivalIds = [
-  'iv_drip_rate_tapper',
-  'audio_latency_loopback',
-  'mouse_polling_rate_hz',
-  'password_strength_visual_analyzer',
-];
-const newArrivalTools = tools.filter((t) => newArrivalIds.includes(t.data.id));
+// New arrivals (sorted by datePublished descending to showcase fresh additions)
+const newArrivalTools = [...tools]
+  .sort((a, b) => new Date(b.data.datePublished || '2025-01-01').getTime() - new Date(a.data.datePublished || '2025-01-01').getTime())
+  .slice(0, 4);
 
-// Popular this week sidebar tools (5 tools)
-const popularSidebarIds = [
-  { id: 'amsler_grid_macular', rank: 1, views: '14.2k runs' },
-  { id: 'docker_compose_linter', rank: 2, views: '11.8k runs' },
-  { id: 'black_scholes_heatmap', rank: 3, views: '9.4k runs' },
-  { id: 'airdrop_web_universal', rank: 4, views: '8.1k runs' },
-  { id: 'voice_pitch_monitor', rank: 5, views: '7.5k runs' },
+// Top highlighted utilities in the sidebar (5 verified utilities with category labels, no dummy counts)
+const popularSidebarItems = [
+  { id: 'amsler_grid_macular', rank: 1, focus: 'Vision & Retina' },
+  { id: 'docker_compose_linter', rank: 2, focus: 'DevOps & Containers' },
+  { id: 'black_scholes_heatmap', rank: 3, focus: 'Derivatives Pricing' },
+  { id: 'airdrop_web_universal', rank: 4, focus: 'P2P WebRTC Transfer' },
+  { id: 'voice_pitch_monitor', rank: 5, focus: 'Acoustic Frequency' },
 ];
-const popularSidebarTools = popularSidebarIds
+const popularSidebarTools = popularSidebarItems
   .map((p) => {
     const found = tools.find((t) => t.data.id === p.id);
-    return found ? { ...found, rank: p.rank, views: p.views } : null;
+    return found ? { ...found, rank: p.rank, focus: p.focus } : null;
   })
   .filter(Boolean);
 
@@ -152,7 +148,7 @@ const jsonLd = generateJsonLd({
         {trendingTools.map((tool) => (
           <ToolCard
             id={tool.data.id}
-            name={tool.data.title || tool.data.name}
+            name={tool.data.name || tool.data.title}
             description={tool.data.description}
             category={tool.data.category}
             featured={true}
@@ -177,7 +173,7 @@ const jsonLd = generateJsonLd({
         {newArrivalTools.map((tool) => (
           <ToolCard
             id={tool.data.id}
-            name={tool.data.title || tool.data.name}
+            name={tool.data.name || tool.data.title}
             description={tool.data.description}
             category={tool.data.category}
           />
@@ -194,7 +190,7 @@ const jsonLd = generateJsonLd({
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <a href="/hubs/freelancer" class="group bg-gradient-to-br from-indigo-50/70 to-purple-50/70 rounded-3xl p-6 sm:p-8 border border-indigo-100 hover:border-indigo-300 shadow-xs hover:shadow-xl transition-all duration-300">
           <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-white/80 px-2.5 py-1 rounded-md border border-indigo-100">Suite</span>
           <h3 class="text-xl font-bold text-slate-900 mt-4 group-hover:text-indigo-600 transition-colors">Freelancer &amp; Creator OS</h3>
@@ -221,6 +217,15 @@ const jsonLd = generateJsonLd({
             Open Wellness Suite &rarr;
           </span>
         </a>
+
+        <a href="/hubs/gaming" class="group bg-gradient-to-br from-violet-50/70 to-indigo-50/70 rounded-3xl p-6 sm:p-8 border border-violet-100 hover:border-violet-300 shadow-xs hover:shadow-xl transition-all duration-300">
+          <span class="text-xs font-bold uppercase tracking-wider text-violet-700 bg-white/80 px-2.5 py-1 rounded-md border border-violet-100">Suite</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-4 group-hover:text-violet-700 transition-colors">Gaming Lab Suite</h3>
+          <p class="text-sm text-slate-600 mt-2 leading-relaxed">Download bandwidth models, console storage planners, 1% low frame pacing, and controller telemetry.</p>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-violet-700 mt-5 group-hover:translate-x-1 transition-transform">
+            Open Gaming Suite &rarr;
+          </span>
+        </a>
       </div>
     </section>
 
@@ -228,7 +233,7 @@ const jsonLd = generateJsonLd({
     <AdSlot slotId="home-mid-banner" minHeight="250px" />
 
     <!-- Two-Column Section: Directory (8 cols) + Popular This Week Sidebar (4 cols) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
       <!-- Full Directory (8 cols) -->
       <section id="directory" class="lg:col-span-8 space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
@@ -297,7 +302,7 @@ const jsonLd = generateJsonLd({
           {tools.map((tool) => (
             <ToolCard
               id={tool.data.id}
-              name={tool.data.title || tool.data.name}
+              name={tool.data.name || tool.data.title}
               description={tool.data.description}
               category={tool.data.category}
               featured={tool.data.featured}
@@ -307,17 +312,17 @@ const jsonLd = generateJsonLd({
         </div>
       </section>
 
-      <!-- Sidebar: Popular This Week (4 cols) -->
-      <aside class="lg:col-span-4 space-y-8 lg:sticky lg:top-28">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6">
+      <!-- Sidebar: Popular Utilities (4 cols, sticky on scroll) -->
+      <aside class="lg:col-span-4">
+        <div class="lg:sticky lg:top-28 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6">
           <div class="flex items-center justify-between border-b border-slate-100 pb-3">
             <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#EE6C4D]" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
+              <svg class="w-4 h-4 text-[#EE6C4D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
-              Popular This Week
+              Popular Utilities
             </h3>
-            <span class="text-[11px] font-bold text-slate-400">Weekly Top 5</span>
+            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Top 5</span>
           </div>
 
           <div class="space-y-4">
@@ -326,33 +331,22 @@ const jsonLd = generateJsonLd({
                 href={`/tool/${tool.data.id}`}
                 class="group flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
               >
-                <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-black text-xs flex items-center justify-center shrink-0 group-hover:bg-[#EE6C4D] group-hover:text-white transition-colors">
+                <div class="w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center shrink-0 group-hover:bg-[#EE6C4D] group-hover:text-white transition-colors">
                   {tool.rank}
                 </div>
                 <div class="min-w-0 flex-1">
                   <h4 class="text-xs font-bold text-slate-800 group-hover:text-[#EE6C4D] transition-colors truncate">
-                    {tool.data.title || tool.data.name}
+                    {(tool.data.name || tool.data.title || tool.data.id).replace(/\s*\|\s*Toolkit Gen.*$/i, '')}
                   </h4>
-                  <div class="flex items-center gap-2 mt-1">
-                    <span class="text-[10px] text-slate-400 uppercase tracking-wider truncate">{tool.data.category}</span>
-                    <span class="text-[10px] text-emerald-600 font-semibold">• {tool.views}</span>
+                  <div class="flex items-center gap-1.5 mt-1 text-[10px] text-slate-500">
+                    <span class="uppercase font-semibold tracking-wider text-slate-600 truncate">{tool.data.category}</span>
+                    <span class="text-slate-300">/</span>
+                    <span class="text-slate-500 truncate">{tool.focus}</span>
                   </div>
                 </div>
               </a>
             ))}
           </div>
-        </div>
-
-        <!-- Privacy Status Card -->
-        <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-6 sm:p-7 shadow-xl border border-slate-700 space-y-3">
-          <div class="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-            Local Execution Standard
-          </div>
-          <h4 class="text-base font-bold text-white">Browser-Based Calculations</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Your inputs are processed directly on your device. No account is required to use any calculator or utility on Toolkit Gen.
-          </p>
         </div>
       </aside>
     </div>

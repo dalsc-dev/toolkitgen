@@ -71,7 +71,7 @@ export default function AirDropIsland() {
             className="text-[10px] text-slate-400 hover:text-slate-600 ml-1"
             title="Generate new PIN"
           >
-            ↻
+            Sync
           </button>
         </div>
       </div>

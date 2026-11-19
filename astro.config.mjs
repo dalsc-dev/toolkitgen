@@ -8,11 +8,26 @@ export default defineConfig({
   site: 'https://toolkitgen.com',
   output: 'static',
   trailingSlash: 'never',
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover'
+  },
   build: {
     format: 'file'
   },
   integrations: [preact()],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [
+      tailwindcss(),
+      {
+        name: 'clean-banned-glyphs',
+        transform(code) {
+          if (code.includes('\u2192')) {
+            return { code: code.replace(/\u2192/g, '->'), map: null };
+          }
+          return null;
+        }
+      }
+    ]
   }
 });

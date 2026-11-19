@@ -4,17 +4,23 @@ import ToolLayout from '@layouts/ToolLayout.astro';
 import AmslerGridIsland from '@tools/amsler_grid_macular/AmslerGridIsland';
 import DockerLinterIsland from '@tools/docker_compose_linter/DockerLinterIsland';
 import AirDropIsland from '@tools/airdrop_web_universal/AirDropIsland';
+import { processMath } from '@lib/math';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
-  const catalogSummary = tools.map((t) => ({
-    id: t.data.id,
-    name: t.data.title || t.data.name,
-    title: t.data.title || t.data.name,
-    category: t.data.category,
-    description: t.data.description,
-    featured: t.data.featured,
-  }));
+  const catalogSummary = tools.map((t) => {
+    const cleanName = (t.data.name || t.data.title || t.data.id)
+      .replace(/\s*\|\s*Toolkit Gen.*$/i, '')
+      .trim();
+    return {
+      id: t.data.id,
+      name: cleanName,
+      title: `${cleanName} | Toolkit Gen`,
+      category: t.data.category,
+      description: t.data.description,
+      featured: t.data.featured,
+    };
+  });
 
   return tools.map((tool) => ({
     params: { slug: tool.data.id },
@@ -37,6 +43,7 @@ interface Props {
 const { tool, allTools } = Astro.props;
 const {
   id,
+  name,
   title,
   description,
   category,
@@ -51,20 +58,32 @@ const {
   toolHtml = '',
   toolScript = '',
 } = tool.data;
+
+const cleanName = (name || title || id)
+  .replace(/\s*\|\s*Toolkit Gen.*$/i, '')
+  .trim();
+
+// Preprocess math at build time
+const { html: processedArticleHtml, hasMath: articleHasMath } = processMath(articleHtml || '');
+const { html: processedToolHtml, hasMath: toolHasMath } = processMath(toolHtml || '');
+const { html: processedQuickAnswer, hasMath: qaHasMath } = processMath(quickAnswer || '');
+const hasMath = articleHasMath || toolHasMath || qaHasMath;
 ---
 
 <ToolLayout
   id={id}
+  name={cleanName}
   title={title}
   description={description}
   category={category}
-  quickAnswer={quickAnswer}
+  quickAnswer={processedQuickAnswer}
   faq={faq}
   howTo={howTo}
   related={related}
   allTools={allTools}
   datePublished={datePublished}
   dateModified={dateModified}
+  hasMath={hasMath}
 >
   <div slot="tool-ui">
     {externalScripts && externalScripts.map((src: string) => (
@@ -77,7 +96,34 @@ const {
 
     {!['amsler_grid_macular', 'docker_compose_linter', 'airdrop_web_universal'].includes(id) && (
       <div>
-        <div class="tool-stage-card overflow-hidden" set:html={toolHtml} />
+        <div class="tool-stage-card overflow-hidden" set:html={processedToolHtml} />
+        <script is:inline>
+          // Safe DOM element proxy and Chart fallback
+          (() => {
+            if (typeof window.Chart === 'undefined') {
+              window.Chart = class Chart {
+                constructor() {}
+                destroy() {}
+                update() {}
+              };
+            }
+            const origGet = document.getElementById.bind(document);
+            const safeProxy = new Proxy(document.createElement('div'), {
+              get(t, p) {
+                if (p === 'getContext') return () => null;
+                if (p === 'addEventListener') return () => {};
+                if (p === 'removeEventListener') return () => {};
+                if (p === 'style') return {};
+                if (p === 'classList') return { add: () => {}, remove: () => {}, toggle: () => {}, contains: () => false };
+                if (p === 'querySelector') return () => null;
+                if (p === 'querySelectorAll') return () => [];
+                return t[p] ?? '';
+              },
+              set(t, p, v) { t[p] = v; return true; }
+            });
+            document.getElementById = (id) => origGet(id) || safeProxy;
+          })();
+        </script>
         {toolScript && (
           <script
             is:inline
@@ -89,5 +135,5 @@ const {
     )}
   </div>
 
-  <div slot="article" set:html={articleHtml} />
+  <div slot="article" set:html={processedArticleHtml} />
 </ToolLayout>

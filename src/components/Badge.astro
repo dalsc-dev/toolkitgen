@@ -1,0 +1,52 @@
+---
+interface Props {
+  variant?: 'featured' | 'new' | 'trending' | 'free' | 'browser' | 'category';
+  text?: string;
+  class?: string;
+}
+
+const { variant = 'free', text, class: extraClass = '' } = Astro.props;
+
+const config = {
+  featured: {
+    bg: 'bg-amber-50 text-amber-800 border-amber-200/70',
+    defaultText: 'Featured',
+    iconSvg: `<svg class="w-3.5 h-3.5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`
+  },
+  new: {
+    bg: 'bg-indigo-50 text-indigo-800 border-indigo-200/70',
+    defaultText: 'New',
+    iconSvg: `<svg class="w-3.5 h-3.5 text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`
+  },
+  trending: {
+    bg: 'bg-rose-50 text-rose-800 border-rose-200/70',
+    defaultText: 'Trending',
+    iconSvg: `<svg class="w-3.5 h-3.5 text-rose-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>`
+  },
+  free: {
+    bg: 'bg-slate-100 text-slate-700 border-slate-200/70',
+    defaultText: 'Free',
+    iconSvg: `<svg class="w-3.5 h-3.5 text-slate-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>`
+  },
+  browser: {
+    bg: 'bg-emerald-50 text-emerald-800 border-emerald-200/70',
+    defaultText: 'Runs in Your Browser',
+    iconSvg: `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true"></span>`
+  },
+  category: {
+    bg: 'bg-orange-50 text-[#EE6C4D] border-orange-200/70 hover:bg-orange-100',
+    defaultText: 'Category',
+    iconSvg: ``
+  }
+};
+
+const current = config[variant] || config.free;
+const labelText = text || current.defaultText;
+---
+
+<span
+  class={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-bold tracking-wide border shadow-2xs transition-colors ${current.bg} ${extraClass}`}
+>
+  {current.iconSvg && <Fragment set:html={current.iconSvg} />}
+  <span>{labelText}</span>
+</span>

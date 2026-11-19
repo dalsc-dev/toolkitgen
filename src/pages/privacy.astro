@@ -62,7 +62,7 @@ const jsonLd = {
     </header>
 
     <article class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm prose max-w-none space-y-8">
-      <div class="p-6 bg-slate-50 border-l-4 border-emerald-500 rounded-r-2xl not-prose space-y-2">
+      <div class="p-6 bg-slate-50 border border-emerald-200 bg-emerald-50/60 rounded-2xl not-prose space-y-2">
         <h2 class="text-base font-bold text-slate-900 uppercase tracking-wider m-0">
           The Plain Language Summary
         </h2>
@@ -71,13 +71,14 @@ const jsonLd = {
         </p>
       </div>
 
-      <h2 class="text-2xl font-bold text-slate-900">1. Client-Side Tool Processing</h2>
+      <h2 class="text-2xl font-bold text-slate-900">1. Client-Side Tool Processing &amp; Hardware Permissions</h2>
       <p class="text-slate-700 leading-relaxed">
         Toolkit Gen is built from the ground up as a static, client-side application hosted on Cloudflare Workers. Unlike traditional web converters and SaaS utilities that send your input files and parameters to backend servers for evaluation, our tools run natively within your browser using JavaScript, WebAssembly, and standard HTML5 Web APIs.
       </p>
       <ul class="list-disc pl-6 space-y-2 text-slate-700">
         <li>Your files, text snippets, and numerical inputs never reach our servers or any cloud database.</li>
         <li>Network requests are never initiated to evaluate calculations.</li>
+        <li><strong>Camera and Microphone Permissions:</strong> When you use vision, audio, or biometric tools (such as webcam eye tests, audio loopback analyzers, or heart rate monitoring), camera and microphone streams are processed exclusively in your device's memory via standard browser APIs. Audio and video are processed locally in your browser and are not recorded or transmitted.</li>
         <li>Calculations work offline when disconnected from the internet once assets are cached.</li>
       </ul>
 
@@ -86,9 +87,11 @@ const jsonLd = {
         We utilize browser <code>localStorage</code> exclusively for local user convenience. This data remains on your physical device and is never transmitted to us:
       </p>
       <ul class="list-disc pl-6 space-y-2 text-slate-700">
-        <li><strong>Tool Bookmarks &amp; Favorites:</strong> Storing the list of tools you have starred for quick access.</li>
-        <li><strong>Recent Tools History:</strong> Keeping track of recently visited utilities on your device.</li>
-        <li><strong>Consent Preferences:</strong> Remembering your Google Consent Mode choices (accept/reject advertising cookies).</li>
+        <li><strong>Tool Bookmarks &amp; Favorites:</strong> Storing the list of tools you have saved for quick access (<code>tk_bookmarks</code>).</li>
+        <li><strong>Recent Tools History:</strong> Keeping track of recently visited utilities on your device (<code>tk_recent_tools</code>).</li>
+        <li><strong>Theme Preferences:</strong> Remembering your Zen Mode dark display setting (<code>tk_zen_mode</code>).</li>
+        <li><strong>Local Scratchpad:</strong> Storing your temporary notes and clipboard calculations locally (<code>tk_scratchpad</code>).</li>
+        <li><strong>Consent Preferences:</strong> Remembering your cookie and tracking consent choices (<code>tg_cookie_consent_v2</code>).</li>
       </ul>
       <p class="text-slate-700 leading-relaxed">
         You can erase this information at any time by clearing your browser cache or site data for <code>toolkitgen.com</code>.
@@ -110,6 +113,7 @@ const jsonLd = {
       <ul class="list-disc pl-6 space-y-2 text-slate-700">
         <li>By default, advertising storage (<code>ad_storage</code>), user data collection (<code>ad_user_data</code>), and ad personalization (<code>ad_personalization</code>) are set to <code>denied</code> for visitors until affirmative consent is provided.</li>
         <li>No tracking cookies or marketing pixels are placed on your machine prior to explicit consent via our consent banner.</li>
+        <li><strong>Consent Controls:</strong> You can choose <strong>Accept All</strong>, select <strong>Essential Only</strong>, or click <strong>Manage choices</strong> to customize analytics and advertising independently. You can reopen and update these preferences at any time by clicking the <em>Cookie Preferences</em> button in the footer.</li>
         <li>You can modify or revoke your consent preferences at any time by clicking the Cookie Preferences link in the footer.</li>
       </ul>
 

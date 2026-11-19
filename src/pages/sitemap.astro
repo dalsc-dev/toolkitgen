@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
+import { HUB_TOOLS_CATALOG } from '@lib/hubToolsCatalog';
 
 const tools = await getCollection('tools');
 const hubs = await getCollection('hubs');
@@ -79,6 +80,31 @@ const canonicalUrl = 'https://toolkitgen.com/sitemap.html';
       </div>
     </section>
 
+    <!-- Embedded Hub Tools -->
+    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h2 class="text-xl font-bold text-slate-900">
+          Embedded Hub Utilities ({HUB_TOOLS_CATALOG.length} Tools)
+        </h2>
+        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+          Integrated Workspaces
+        </span>
+      </div>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+        {HUB_TOOLS_CATALOG.map((ht) => (
+          <li>
+            <a
+              href={ht.url}
+              class="text-slate-700 hover:text-[#EE6C4D] hover:underline flex items-center gap-1.5"
+            >
+              <span class="w-1.5 h-1.5 rounded-full bg-[#EE6C4D]"></span>
+              <span class="truncate">{ht.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
     <!-- Categories & Tools Grid -->
     <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-8">
       <h2 class="text-xl font-bold text-slate-900 border-b border-slate-100 pb-3">
@@ -108,7 +134,7 @@ const canonicalUrl = 'https://toolkitgen.com/sitemap.html';
                       class="text-slate-700 hover:text-[#EE6C4D] hover:underline flex items-center gap-1.5"
                     >
                       <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
-                      <span class="truncate">{t.data.title}</span>
+                      <span class="truncate">{(t.data.name || t.data.title || t.data.id).replace(/\s*\|\s*Toolkit Gen.*$/i, '')}</span>
                     </a>
                   </li>
                 ))}
@@ -117,6 +143,31 @@ const canonicalUrl = 'https://toolkitgen.com/sitemap.html';
           );
         })}
       </div>
+    </section>
+
+    <!-- Embedded Hub Tools -->
+    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h2 class="text-xl font-bold text-slate-900">
+          Embedded Hub Utilities ({HUB_TOOLS_CATALOG.length} Tools)
+        </h2>
+        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+          Integrated Workspaces
+        </span>
+      </div>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+        {HUB_TOOLS_CATALOG.map((ht) => (
+          <li>
+            <a
+              href={ht.url}
+              class="text-slate-700 hover:text-[#EE6C4D] hover:underline flex items-center gap-1.5"
+            >
+              <span class="w-1.5 h-1.5 rounded-full bg-[#EE6C4D]"></span>
+              <span class="truncate">{ht.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </section>
   </div>
 </BaseLayout>

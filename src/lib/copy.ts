@@ -52,4 +52,11 @@ export const BANNED_PATTERNS: Array<{ pattern: RegExp; description: string }> = 
   { pattern: /cloudflare secured/i, description: 'Cloudflare Secured' },
   { pattern: /verified by analytics/i, description: 'Verified by Analytics' },
   { pattern: /\b(160\+|180\+|190\+)\b/, description: 'hardcoded tool count (e.g. 160+, 180+, 190+)' },
+  { pattern: /standard:\s*client-side processing/i, description: 'Standard: Client-Side Processing' },
+  { pattern: /local-first diagnostics/i, description: 'Local-First Diagnostics' },
+  { pattern: /no latency via server proxy/i, description: 'No Latency via Server Proxy' },
+  { pattern: /zero-network interference/i, description: 'Zero-Network Interference' },
+  { pattern: /sovereign creator/i, description: 'sovereign creator' },
+  { pattern: /high-entropy thread/i, description: 'High-Entropy Thread' },
+  { pattern: /precision mode:\s*active/i, description: 'Precision Mode: Active' },
 ];

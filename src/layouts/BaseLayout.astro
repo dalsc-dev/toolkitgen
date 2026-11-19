@@ -16,6 +16,7 @@ interface Props {
   jsonLd?: Record<string, any>;
   noindex?: boolean;
   containerClass?: string;
+  hasMath?: boolean;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   jsonLd,
   noindex = false,
   containerClass = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16',
+  hasMath = false,
 } = Astro.props;
 
 const siteUrl = 'https://toolkitgen.com';
@@ -84,22 +86,75 @@ const metaDescription = formatDescription(description);
     });
   </script>
 
-  <!-- Google AdSense - Deferred once globally -->
+  <!-- Third-party scripts deferred until consent + idle/interaction -->
   {!noindex && (
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949"
-      crossorigin="anonymous"
-    ></script>
+    <script is:inline>
+      (() => {
+        let thirdPartyLoaded = false;
+        function loadThirdParty() {
+          if (thirdPartyLoaded) return;
+          thirdPartyLoaded = true;
+
+          try {
+            const raw = localStorage.getItem('tg_cookie_consent_v2');
+            if (!raw) return;
+            const consent = JSON.parse(raw);
+
+            // Google Analytics (if analytics allowed)
+            if (consent.analytics) {
+              const ga = document.createElement('script');
+              ga.async = true;
+              ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-NKR6PVM0M9';
+              document.head.appendChild(ga);
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-NKR6PVM0M9');
+            }
+
+            // Google AdSense (if ads allowed)
+            if (consent.ads) {
+              const ads = document.createElement('script');
+              ads.async = true;
+              ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949';
+              ads.crossOrigin = 'anonymous';
+              document.head.appendChild(ads);
+            }
+          } catch (e) {}
+        }
+
+        // Trigger upon first interaction or after idle
+        ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach((ev) => {
+          window.addEventListener(ev, loadThirdParty, { once: true, passive: true });
+        });
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadThirdParty, { timeout: 4000 });
+        } else {
+          setTimeout(loadThirdParty, 3000);
+        }
+      })();
+    </script>
   )}
 
-  <!-- Google Analytics 4 (deferred) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKR6PVM0M9"></script>
+  <!-- Speculation Rules API for next-page prerendering -->
+  <script type="speculationrules">
+  {
+    "prerender": [
+      {
+        "source": "list",
+        "urls": ["/tool", "/hubs/wellness", "/hubs/startup", "/hubs/freelancer"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Service Worker Registration -->
   <script is:inline>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NKR6PVM0M9');
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:' && !window.location.hostname.endsWith('.local')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
   </script>
 
   <!-- Structured Data JSON-LD -->
@@ -114,8 +169,14 @@ const metaDescription = formatDescription(description);
       document.body && document.body.classList.add('zen-mode');
     }
   </script>
+  <!-- KaTeX CSS (loaded only when math is present) -->
+  {hasMath && (
+    <link rel="stylesheet" href="/assets/katex/katex.min.css" />
+  )}
+
+  <slot name="head" />
 </head>
-<body class="flex flex-col min-h-screen bg-[#f8fafc] text-[#33333b] antialiased overflow-x-hidden">
+<body class="flex flex-col min-h-screen bg-[#f8fafc] text-[#33333b] antialiased overflow-x-clip">
   <!-- Accessibility Skip Link -->
   <a
     href="#main-content"
@@ -132,8 +193,8 @@ const metaDescription = formatDescription(description);
 
   <Footer />
   <ConsentBanner />
-  <CommandPalette />
   <FloatingDock />
+  <CommandPalette />
 
   <script is:inline>
     if (localStorage.getItem('tk_zen_mode') === 'true') {

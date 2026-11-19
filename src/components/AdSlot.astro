@@ -56,12 +56,53 @@ const effectiveMinHeight = minHeight || (isInArticle ? '250px' : '280px');
 
   <script is:inline>
     (function() {
-      try {
-        if (typeof window !== 'undefined') {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
+      function initAdSlot() {
+        var script = document.currentScript;
+        var container = script ? script.parentElement : null;
+        if (!container) return;
+        var ins = container.querySelector('ins.adsbygoogle');
+        if (!ins || ins.getAttribute('data-adsbygoogle-status')) return;
+
+        function pushAd() {
+          if (ins.getAttribute('data-adsbygoogle-status')) return true;
+          if (ins.offsetWidth > 0) {
+            try {
+              (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+              // Suppress unhandled ad-block errors
+            }
+            return true;
+          }
+          return false;
         }
-      } catch (e) {
-        // Suppress unhandled ad-block errors
+
+        // Try pushing immediately if container already has width
+        if (pushAd()) return;
+
+        // If availableWidth is 0, defer until container has positive width
+        if (typeof ResizeObserver !== 'undefined') {
+          var ro = new ResizeObserver(function(entries) {
+            for (var i = 0; i < entries.length; i++) {
+              if (entries[i].contentRect.width > 0) {
+                if (pushAd()) {
+                  ro.disconnect();
+                  break;
+                }
+              }
+            }
+          });
+          ro.observe(container);
+        } else {
+          window.addEventListener('load', function() {
+            setTimeout(pushAd, 150);
+          }, { once: true });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAdSlot, { once: true });
+      } else {
+        initAdSlot();
       }
     })();
   </script>

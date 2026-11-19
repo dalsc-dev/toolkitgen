@@ -97,12 +97,32 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
     {!['amsler_grid_macular', 'docker_compose_linter', 'airdrop_web_universal'].includes(id) && (
       <div>
         <div class="tool-stage-card overflow-hidden" set:html={processedToolHtml} />
+        <script is:inline>
+          (() => {
+            if (typeof window.Chart === 'undefined') {
+              window.Chart = class Chart { constructor() {} destroy() {} update() {} };
+            }
+            const origGet = document.getElementById.bind(document);
+            const safeProxy = new Proxy(document.createElement('div'), {
+              get(t, p) {
+                if (p === 'getContext') return () => null;
+                if (p === 'addEventListener' || p === 'removeEventListener') return () => {};
+                if (p === 'style') return {};
+                if (p === 'classList') return { add: () => {}, remove: () => {}, toggle: () => {}, contains: () => false };
+                if (p === 'querySelector') return () => null;
+                if (p === 'querySelectorAll') return () => [];
+                return t[p] ?? '';
+              },
+              set(t, p, v) { t[p] = v; return true; }
+            });
+            document.getElementById = (id) => origGet(id) || safeProxy;
+          })();
+        </script>
         {toolScript && (
           <script
             is:inline
-            defer
             type={/^\s*import\b/m.test(toolScript) ? 'module' : undefined}
-            src={`/assets/tools/${id}.js`}
+            set:html={toolScript}
           />
         )}
       </div>

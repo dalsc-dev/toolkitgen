@@ -73,87 +73,30 @@ const metaDescription = formatDescription(description);
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
   <meta name="theme-color" content="#ffffff" />
 
-  <!-- Google Consent Mode v2 Default -->
-  <script is:inline>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {
-      'ad_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied',
-      'analytics_storage': 'denied',
-      'wait_for_update': 500
-    });
-  </script>
-
-  <!-- Third-party scripts deferred until consent + idle/interaction -->
+  <!-- Google AdSense (Auto Ads & Immediate Revenue Optimization) -->
   {!noindex && (
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949"
+      crossorigin="anonymous"
+      id="adsbygoogle-script"
+    ></script>
+  )}
+
+  <!-- Google Analytics 4 -->
+  {!noindex && (
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKR6PVM0M9"></script>
     <script is:inline>
-      (() => {
-        let gaLoaded = false;
-        let adsLoaded = false;
-
-        function initThirdParty() {
-          try {
-            const raw = localStorage.getItem('tg_cookie_consent_v2');
-            if (!raw) return;
-            const consent = JSON.parse(raw);
-
-            // Google Analytics (if analytics allowed)
-            if (consent.analytics && !gaLoaded) {
-              gaLoaded = true;
-              const ga = document.createElement('script');
-              ga.async = true;
-              ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-NKR6PVM0M9';
-              document.head.appendChild(ga);
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-NKR6PVM0M9');
-            }
-
-            // Google AdSense (if ads allowed)
-            if (consent.ads && !adsLoaded) {
-              adsLoaded = true;
-              const ads = document.createElement('script');
-              ads.async = true;
-              ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949';
-              ads.crossOrigin = 'anonymous';
-              document.head.appendChild(ads);
-            }
-          } catch (e) {}
-        }
-
-        window.initThirdPartyServices = initThirdParty;
-
-        // Trigger upon first interaction or after idle
-        ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach((ev) => {
-          window.addEventListener(ev, initThirdParty, { once: true, passive: true });
-        });
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(initThirdParty, { timeout: 4000 });
-        } else {
-          setTimeout(initThirdParty, 3000);
-        }
-      })();
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NKR6PVM0M9');
     </script>
   )}
 
-  <!-- Speculation Rules API for next-page prerendering -->
-  <script type="speculationrules">
-  {
-    "prerender": [
-      {
-        "source": "list",
-        "urls": ["/tool", "/hubs/wellness", "/hubs/startup", "/hubs/freelancer"]
-      }
-    ]
-  }
-  </script>
-
   <!-- Service Worker Registration -->
   <script is:inline>
-    if ('serviceWorker' in navigator && window.location.protocol === 'https:' && !window.location.hostname.endsWith('.local')) {
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       });
@@ -165,50 +108,17 @@ const metaDescription = formatDescription(description);
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   )}
 
-  <!-- Inline Zen Mode Initialization Script -->
+  <!-- Zen Mode Initialization -->
   <script is:inline>
     if (localStorage.getItem('tk_zen_mode') === 'true') {
       document.documentElement.classList.add('zen-mode');
-      document.body && document.body.classList.add('zen-mode');
     }
   </script>
+
   <!-- KaTeX CSS (loaded only when math is present) -->
   {hasMath && (
     <link rel="stylesheet" href="/assets/katex/katex.min.css" />
   )}
-
-  <!-- Client-side Security & Production Hardening -->
-  <script is:inline>
-    (() => {
-      if (window.location.protocol === 'https:') {
-        // 1. Console Output Suppression in Production
-        const noop = () => {};
-        ['log', 'debug', 'info', 'warn', 'trace', 'table'].forEach((fn) => {
-          if (window.console && window.console[fn]) {
-            window.console[fn] = noop;
-          }
-        });
-
-        // 2. Anti-Inspection & DevTools Shortcuts Deterrent
-        document.addEventListener('contextmenu', (e) => {
-          if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
-          e.preventDefault();
-        });
-
-        document.addEventListener('keydown', (e) => {
-          if (
-            e.key === 'F12' ||
-            ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) ||
-            ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) ||
-            ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c'))
-          ) {
-            e.preventDefault();
-            e.stopPropagation();
-          }
-        });
-      }
-    })();
-  </script>
 
   <slot name="head" />
 </head>

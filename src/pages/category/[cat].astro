@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ToolCard from '@components/ToolCard.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
+import AdSlot from '@components/AdSlot.astro';
 import { generateJsonLd } from '@lib/schema';
 
 export async function getStaticPaths() {
@@ -82,4 +83,7 @@ const jsonLd = generateJsonLd({
       ))}
     </div>
   </section>
+
+  <!-- In-Article Editorial Unit (Google AdSense in-article native unit: 9490637620) -->
+  <AdSlot slotId="inArticle2" />
 </BaseLayout>

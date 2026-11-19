@@ -3,7 +3,8 @@ import { ADSENSE_CONFIG, resolveSlot } from '../lib/ads';
 
 interface Props {
   slotId?: string;
-  format?: 'auto' | 'autorelaxed' | 'rectangle' | 'horizontal';
+  format?: 'auto' | 'autorelaxed' | 'rectangle' | 'horizontal' | 'fluid';
+  layout?: string;
   minHeight?: string;
   className?: string;
 }
@@ -11,20 +12,24 @@ interface Props {
 const {
   slotId = 'toolBottomBanner',
   format,
-  minHeight = '280px',
+  layout,
+  minHeight,
   className = '',
 } = Astro.props;
 
 const resolved = resolveSlot(slotId);
 const isAdConfigured = Boolean(resolved && resolved.slotId);
 const effectiveFormat = format || resolved?.format || 'auto';
-const isFullWidthResponsive = resolved?.fullWidthResponsive ?? (effectiveFormat !== 'autorelaxed');
+const effectiveLayout = layout || resolved?.layout;
+const isInArticle = effectiveLayout === 'in-article' || effectiveFormat === 'fluid';
+const isFullWidthResponsive = resolved?.fullWidthResponsive ?? (!isInArticle && effectiveFormat !== 'autorelaxed');
+const effectiveMinHeight = minHeight || (isInArticle ? '250px' : '280px');
 ---
 
 <div
   id={`ad-slot-${slotId}`}
   class={`ad-container relative w-full my-8 bg-slate-50/70 border border-slate-200/80 rounded-2xl p-3 flex flex-col items-center justify-center overflow-hidden transition-all ${className}`}
-  style={`min-height: ${minHeight}; contain: layout style;`}
+  style={`min-height: ${effectiveMinHeight}; contain: layout style;`}
   data-ad-slot={resolved?.slotId || 'auto'}
 >
   <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 mb-2 select-none">Advertisement</span>
@@ -32,9 +37,10 @@ const isFullWidthResponsive = resolved?.fullWidthResponsive ?? (effectiveFormat 
   {isAdConfigured ? (
     <ins
       class="adsbygoogle"
-      style="display:block; width:100%; min-height: 250px;"
+      style={isInArticle ? "display:block; text-align:center;" : "display:block; width:100%; min-height: 250px;"}
       data-ad-client={ADSENSE_CONFIG.publisherId}
       data-ad-slot={resolved!.slotId}
+      data-ad-layout={effectiveLayout || undefined}
       data-ad-format={effectiveFormat}
       data-full-width-responsive={isFullWidthResponsive ? "true" : undefined}
     ></ins>

@@ -5,7 +5,8 @@
 
 export interface SlotDefinition {
   slotId: string;
-  format: 'auto' | 'autorelaxed' | 'rectangle' | 'horizontal';
+  format: 'auto' | 'autorelaxed' | 'rectangle' | 'horizontal' | 'fluid';
+  layout?: string;
   fullWidthResponsive?: boolean;
 }
 
@@ -24,7 +25,7 @@ export const ADSENSE_CONFIG = {
       format: 'auto',
       fullWidthResponsive: true,
     },
-    // 3. autorelaxed Multiplex unit (High-converting matched content at bottom of tool)
+    // 3. autorelaxed Multiplex unit (Matched content at bottom of tool)
     toolBottomBanner: {
       slotId: '4516155615',
       format: 'autorelaxed',
@@ -54,6 +55,44 @@ export const ADSENSE_CONFIG = {
       format: 'autorelaxed',
       fullWidthResponsive: false,
     },
+    // 8. toolkitgen_inarticle_AdSense1_1x1_as (In-article unit 1)
+    inArticle1: {
+      slotId: '2437137864',
+      format: 'fluid',
+      layout: 'in-article',
+      fullWidthResponsive: false,
+    },
+    toolkitgen_inarticle_AdSense1_1x1_as: {
+      slotId: '2437137864',
+      format: 'fluid',
+      layout: 'in-article',
+      fullWidthResponsive: false,
+    },
+    toolInArticle: {
+      slotId: '2437137864',
+      format: 'fluid',
+      layout: 'in-article',
+      fullWidthResponsive: false,
+    },
+    // 9. toolkitgen_in_article (In-article unit 2)
+    inArticle2: {
+      slotId: '9490637620',
+      format: 'fluid',
+      layout: 'in-article',
+      fullWidthResponsive: false,
+    },
+    toolkitgen_in_article: {
+      slotId: '9490637620',
+      format: 'fluid',
+      layout: 'in-article',
+      fullWidthResponsive: false,
+    },
+    categoryInArticle: {
+      slotId: '9490637620',
+      format: 'fluid',
+      layout: 'in-article',
+      fullWidthResponsive: false,
+    },
   } as Record<string, SlotDefinition>,
   autoAdsEnabled: true,
 };
@@ -67,16 +106,19 @@ export function resolveSlot(slotKeyOrId?: string): SlotDefinition | undefined {
     return ADSENSE_CONFIG.slots[trimmed];
   }
 
-  // 2. Kebab-case to camelCase conversion (e.g. tool-mid-banner -> toolMidBanner)
+  // 2. Kebab-case to camelCase conversion (e.g. tool-mid-banner -> toolMidBanner, tool-in-article -> toolInArticle)
   const camelKey = trimmed.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
   if (camelKey in ADSENSE_CONFIG.slots) {
     return ADSENSE_CONFIG.slots[camelKey];
   }
 
-  // 3. If passed a direct 8-12 digit slot ID
+  // 3. Direct slot ID lookup
   if (/^\d{8,12}$/.test(trimmed)) {
     if (trimmed === '4516155615' || trimmed === '3200561447') {
       return { slotId: trimmed, format: 'autorelaxed', fullWidthResponsive: false };
+    }
+    if (trimmed === '2437137864' || trimmed === '9490637620') {
+      return { slotId: trimmed, format: 'fluid', layout: 'in-article', fullWidthResponsive: false };
     }
     return { slotId: trimmed, format: 'auto', fullWidthResponsive: true };
   }

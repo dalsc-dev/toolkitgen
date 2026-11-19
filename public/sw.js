@@ -1,5 +1,5 @@
-// Toolkit Gen Service Worker (Cache-first for static assets, Stale-While-Revalidate for HTML)
-const CACHE_NAME = 'tg-cache-v2';
+// Toolkit Gen Service Worker (Cache-first for static assets, Network-First for HTML navigation)
+const CACHE_NAME = 'tg-cache-v3';
 
 const PRECACHE_URLS = [
   '/',
@@ -59,20 +59,18 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. HTML Pages -> Stale-While-Revalidate
+  // 2. HTML Pages -> Network First (Always fresh HTML; offline fallback only)
   if (request.mode === 'navigate' || request.headers.get('accept')?.includes('text/html')) {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
-        const fetchPromise = fetch(request).then((networkResponse) => {
+      fetch(request)
+        .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const responseToCache = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => cache.put(request, responseToCache));
           }
           return networkResponse;
-        }).catch(() => cachedResponse);
-
-        return cachedResponse || fetchPromise;
-      })
+        })
+        .catch(() => caches.match(request))
     );
     return;
   }

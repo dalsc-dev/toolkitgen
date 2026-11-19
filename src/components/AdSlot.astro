@@ -1,29 +1,31 @@
 ---
-import { ADSENSE_CONFIG, resolveSlotId } from '../lib/ads';
+import { ADSENSE_CONFIG, resolveSlot } from '../lib/ads';
 
 interface Props {
   slotId?: string;
-  format?: 'auto' | 'rectangle' | 'horizontal';
+  format?: 'auto' | 'autorelaxed' | 'rectangle' | 'horizontal';
   minHeight?: string;
   className?: string;
 }
 
 const {
   slotId = 'toolBottomBanner',
-  format = 'auto',
+  format,
   minHeight = '280px',
   className = '',
 } = Astro.props;
 
-const resolvedSlot = resolveSlotId(slotId);
-const isAdConfigured = Boolean(resolvedSlot);
+const resolved = resolveSlot(slotId);
+const isAdConfigured = Boolean(resolved && resolved.slotId);
+const effectiveFormat = format || resolved?.format || 'auto';
+const isFullWidthResponsive = resolved?.fullWidthResponsive ?? (effectiveFormat !== 'autorelaxed');
 ---
 
 <div
   id={`ad-slot-${slotId}`}
   class={`ad-container relative w-full my-8 bg-slate-50/70 border border-slate-200/80 rounded-2xl p-3 flex flex-col items-center justify-center overflow-hidden transition-all ${className}`}
   style={`min-height: ${minHeight}; contain: layout style;`}
-  data-ad-slot={resolvedSlot || 'pending'}
+  data-ad-slot={resolved?.slotId || 'auto'}
 >
   <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 mb-2 select-none">Advertisement</span>
   
@@ -32,31 +34,29 @@ const isAdConfigured = Boolean(resolvedSlot);
       class="adsbygoogle"
       style="display:block; width:100%; min-height: 250px;"
       data-ad-client={ADSENSE_CONFIG.publisherId}
-      data-ad-slot={resolvedSlot}
-      data-ad-format={format}
-      data-full-width-responsive="true"
+      data-ad-slot={resolved!.slotId}
+      data-ad-format={effectiveFormat}
+      data-full-width-responsive={isFullWidthResponsive ? "true" : undefined}
     ></ins>
   ) : (
-    <div class="flex flex-col items-center justify-center text-center p-4 space-y-1 text-slate-400 select-none">
-      <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-1">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-      </div>
-      <span class="text-xs font-medium text-slate-500">Sponsored Content Space</span>
-      <span class="text-[10px] text-slate-400">Contextual ads served via Google AdSense</span>
-    </div>
+    <ins
+      class="adsbygoogle"
+      style="display:block; width:100%; min-height: 250px;"
+      data-ad-client={ADSENSE_CONFIG.publisherId}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
   )}
 
-  {isAdConfigured && (
-    <script is:inline>
-      (function() {
-        try {
-          if (typeof window !== 'undefined') {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-          }
-        } catch (e) {
-          // Suppress unhandled ad-block errors
+  <script is:inline>
+    (function() {
+      try {
+        if (typeof window !== 'undefined') {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
-      })();
-    </script>
-  )}
+      } catch (e) {
+        // Suppress unhandled ad-block errors
+      }
+    })();
+  </script>
 </div>

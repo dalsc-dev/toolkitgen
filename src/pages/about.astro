@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
-import { generateJsonLd } from '@lib/schema';
 import { getCollection } from 'astro:content';
 
 const tools = await getCollection('tools');

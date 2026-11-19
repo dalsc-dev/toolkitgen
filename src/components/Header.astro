@@ -1,14 +1,13 @@
 ---
-interface Props {
-  currentPath?: string;
-}
+import { getCollection } from 'astro:content';
 
-const { currentPath = '' } = Astro.props;
+const tools = await getCollection('tools');
+const toolCount = tools.length;
 ---
 
 <header
   id="app-header"
-  class="fixed top-3 md:top-5 left-0 right-0 mx-auto w-[calc(100%-2rem)] md:w-[95%] max-w-5xl z-[100] bg-white/85 backdrop-blur-md border border-slate-200 shadow-xl shadow-slate-200/40 rounded-3xl min-w-0 animate-nav-down"
+  class="fixed top-3 md:top-4 left-0 right-0 mx-auto w-[calc(100%-2rem)] md:w-[95%] max-w-7xl z-[100] bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl shadow-slate-200/40 rounded-3xl min-w-0 animate-nav-down"
 >
   <nav
     id="main-nav-bar"
@@ -21,7 +20,7 @@ const { currentPath = '' } = Astro.props;
       <a
         href="/"
         aria-label="Toolkit Gen Home"
-        class="text-[#EE6C4D] hover:text-[#d75a3c] transition focus:outline-none rounded flex-shrink-0"
+        class="text-[#EE6C4D] hover:text-[#d75a3c] transition focus:outline-none rounded flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
           <path
@@ -37,13 +36,13 @@ const { currentPath = '' } = Astro.props;
       </a>
     </div>
 
-    <!-- Desktop Navigation Links -->
-    <div class="hidden lg:flex items-center gap-3 xl:gap-5 flex-shrink-0 relative z-10">
+    <!-- Desktop Navigation Links (Responsive collapse at 1024px) -->
+    <div class="hidden lg:flex items-center gap-2 xl:gap-4 flex-shrink-0 relative z-10">
       <!-- Trending Dropdown -->
       <div class="relative group flex-shrink-0">
         <a
-          href="/#featured"
-          class="nav-link text-sm font-bold text-gray-600 group-hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded py-2"
+          href="/#trending"
+          class="nav-link text-sm font-bold text-gray-600 group-hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded py-2 px-2.5"
         >
           Trending
         </a>
@@ -54,22 +53,22 @@ const { currentPath = '' } = Astro.props;
             class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/40 border border-slate-100 p-3 w-80 flex flex-col gap-1.5"
           >
             <h4 class="text-[10px] uppercase font-black tracking-wider text-slate-400 mb-1 px-2">Top Tools</h4>
-            <a href="/tool/sqlite_wasm_explorer" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">
+            <a href="/tool/docker_compose_linter" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">
               <div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center flex-shrink-0 text-indigo-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
               </div>
               <div>
-                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">SQLite WASM Explorer</h5>
-                <p class="text-[10px] text-slate-500 line-clamp-1">In-browser SQL database sandbox</p>
+                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Docker Compose Linter</h5>
+                <p class="text-[10px] text-slate-500 line-clamp-1">In-browser config validation</p>
               </div>
             </a>
-            <a href="/tool/prompt_template_builder" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">
-              <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 text-purple-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <a href="/tool/amsler_grid_macular" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">
+              <div class="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center flex-shrink-0 text-teal-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
               </div>
               <div>
-                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">AI Prompt Builder</h5>
-                <p class="text-[10px] text-slate-500 line-clamp-1">Design structured LLM prompts</p>
+                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Amsler Grid Online Test</h5>
+                <p class="text-[10px] text-slate-500 line-clamp-1">Macular health self-check</p>
               </div>
             </a>
             <a href="/tool/black_scholes_heatmap" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">
@@ -81,26 +80,17 @@ const { currentPath = '' } = Astro.props;
                 <p class="text-[10px] text-slate-500 line-clamp-1">Black-Scholes Greeks visualizer</p>
               </div>
             </a>
-            <a href="/tool/visual_acuity_snellen" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">
-              <div class="w-10 h-10 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 text-rose-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-              </div>
-              <div>
-                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Online Eye Chart</h5>
-                <p class="text-[10px] text-slate-500 line-clamp-1">Snellen vision check on screen</p>
-              </div>
-            </a>
           </div>
         </div>
       </div>
 
-      <!-- My Hub Dropdown -->
+      <!-- Curated Hubs Dropdown -->
       <div class="relative group flex-shrink-0">
         <a
-          href="/#my-hub"
-          class="nav-link text-sm font-bold text-gray-600 group-hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded py-2"
+          href="/#hubs"
+          class="nav-link text-sm font-bold text-gray-600 group-hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded py-2 px-2.5"
         >
-          My Hub
+          Curated Hubs
         </a>
         <div
           class="opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[9999] transition-opacity duration-200"
@@ -108,14 +98,14 @@ const { currentPath = '' } = Astro.props;
           <div
             class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/40 border border-slate-100 p-3 w-72 flex flex-col gap-1"
           >
-            <h4 class="text-[10px] uppercase font-black tracking-wider text-slate-400 mb-1 px-2">Curated Hubs</h4>
+            <h4 class="text-[10px] uppercase font-black tracking-wider text-slate-400 mb-1 px-2">Workspaces</h4>
             <a href="/hubs/startup" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
               <div class="w-9 h-9 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 text-orange-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
               </div>
               <div>
-                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Startup &amp; VC</h5>
-                <p class="text-[10px] text-slate-500">Cap tables, valuations</p>
+                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Founder's Forge</h5>
+                <p class="text-[10px] text-slate-500">Runway, cap tables, valuation</p>
               </div>
             </a>
             <a href="/hubs/freelancer" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
@@ -123,32 +113,32 @@ const { currentPath = '' } = Astro.props;
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
               </div>
               <div>
-                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Freelance &amp; Creator</h5>
-                <p class="text-[10px] text-slate-500">Invoices, royalties</p>
+                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Freelancer OS</h5>
+                <p class="text-[10px] text-slate-500">Contracts, rates, risk</p>
               </div>
             </a>
             <a href="/hubs/wellness" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
-              <div class="w-9 h-9 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 text-rose-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">
+              <div class="w-9 h-9 rounded-lg bg-teal-50 flex items-center justify-center flex-shrink-0 text-teal-600 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
               </div>
               <div>
-                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Wellness &amp; Focus</h5>
-                <p class="text-[10px] text-slate-500">Sleep debt, meditations</p>
+                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Wellness Sanctuary</h5>
+                <p class="text-[10px] text-slate-500">Focus, posture, eye care</p>
               </div>
             </a>
           </div>
         </div>
       </div>
 
-      <!-- All Tools Dropdown -->
+      <!-- Categories Dropdown -->
       <div class="relative group flex-shrink-0">
         <a
           href="/tool"
-          class="flex items-center gap-1.5 px-2 py-2 text-sm text-slate-600 group-hover:text-[#EE6C4D] font-bold transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded"
+          class="flex items-center gap-1.5 px-2.5 py-2 text-sm text-slate-600 group-hover:text-[#EE6C4D] font-bold transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded"
         >
           All Tools
           <span class="bg-orange-100 text-[#EE6C4D] text-[10px] px-1.5 py-0.5 rounded-full border border-orange-200">
-            126
+            {toolCount}
           </span>
         </a>
         <div
@@ -158,49 +148,49 @@ const { currentPath = '' } = Astro.props;
             class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/40 border border-slate-100 p-4 w-[480px]"
           >
             <div class="grid grid-cols-2 gap-2">
-              <a href="/category/developer" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
+              <a href="/tool#devops" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
                 <div class="flex items-center gap-2">
                   <div class="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                   </div>
-                  <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Developer</h5>
+                  <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">DevOps &amp; Code</h5>
                 </div>
-                <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">cURL converter, regex, SQLite</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">cURL, Docker, SQLite, regex</p>
               </a>
-              <a href="/category/finance" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
+              <a href="/tool#finance" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
                 <div class="flex items-center gap-2">
                   <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   </div>
-                  <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Finance</h5>
+                  <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Finance &amp; FIRE</h5>
                 </div>
-                <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">Black-Scholes, FIRE, pricing</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">Black-Scholes, cash flow, options</p>
               </a>
-              <a href="/category/health" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
+              <a href="/tool#health" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
                 <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-rose-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">
+                  <div class="w-8 h-8 rounded-lg bg-teal-50 flex items-center justify-center text-teal-600 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                   </div>
                   <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Health &amp; Vision</h5>
                 </div>
-                <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">Snellen charts, astigmatism, HRV</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">Amsler grid, Snellen chart, HRV</p>
               </a>
-              <a href="/category/hardware" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
+              <a href="/tool#hardware" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">
                 <div class="flex items-center gap-2">
                   <div class="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                   </div>
-                  <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Hardware &amp; Audio</h5>
+                  <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Hardware &amp; Monitors</h5>
                 </div>
-                <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">Latency loopback, mouse polling</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">Polling rate, latency, refresh rate</p>
               </a>
             </div>
             <div class="mt-3 pt-3 border-t border-slate-100">
               <a
                 href="/tool"
-                class="flex items-center justify-between w-full p-3 rounded-xl bg-slate-50 hover:bg-[#EE6C4D] hover:text-white text-slate-700 transition-colors group/btn outline-none focus:ring-2 focus:ring-[#EE6C4D] focus:ring-offset-2"
+                class="flex items-center justify-between w-full p-2.5 rounded-xl bg-slate-50 hover:bg-[#EE6C4D] hover:text-white text-slate-700 transition-colors group/btn outline-none focus:ring-2 focus:ring-[#EE6C4D]"
               >
-                <span class="text-xs font-bold">Explore Full Directory (126 Tools)</span>
+                <span class="text-xs font-bold">Explore Full Directory ({toolCount} Tools)</span>
                 <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
               </a>
             </div>
@@ -208,46 +198,50 @@ const { currentPath = '' } = Astro.props;
         </div>
       </div>
 
-      <!-- Guide / Sitemap Link -->
-      <a
-        href="/sitemap.html"
-        class="nav-link text-sm font-bold text-gray-600 hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-3 py-2"
-      >
-        Guide
-      </a>
-
       <!-- Search Trigger Button -->
-      <div class="relative ml-2 flex-shrink-0">
-        <a
-          href="/tool"
-          aria-label="Search all tools"
-          class="flex items-center justify-between w-44 lg:w-52 bg-slate-100/70 hover:bg-slate-100 border border-slate-200 rounded-full py-2 px-4 text-sm text-slate-400 transition-all outline-none focus:ring-2 focus:ring-[#EE6C4D]"
-        >
-          <span class="flex items-center gap-2">
-            <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
-            </svg>
-            Search tools...
-          </span>
-          <kbd class="font-sans text-[10px] font-bold border border-slate-300 rounded px-1.5 py-0.5 bg-white text-slate-500 shadow-sm hidden xl:block">Ctrl K</kbd>
-        </a>
-      </div>
+      <button
+        type="button"
+        data-open-cmd
+        aria-label="Search all tools"
+        class="flex items-center justify-between w-40 lg:w-48 bg-slate-100/80 hover:bg-slate-100 border border-slate-200 rounded-full py-1.5 px-3.5 text-xs text-slate-500 transition-all outline-none focus:ring-2 focus:ring-[#EE6C4D] cursor-pointer"
+      >
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-slate-400" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
+          </svg>
+          Search tools...
+        </span>
+        <kbd class="font-sans text-[10px] font-bold border border-slate-300 rounded px-1.5 py-0.5 bg-white text-slate-400 shadow-2xs">Ctrl K</kbd>
+      </button>
+
+      <!-- Theme / Zen Mode Toggle Button -->
+      <button
+        type="button"
+        id="theme-toggle-btn"
+        aria-label="Toggle Zen Mode"
+        class="p-2 text-slate-500 hover:text-[#EE6C4D] transition-colors rounded-full hover:bg-slate-100 outline-none focus:ring-2 focus:ring-[#EE6C4D] flex items-center justify-center"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+      </button>
     </div>
 
-    <!-- Mobile Navigation Actions -->
-    <div class="flex items-center gap-2 lg:hidden relative z-10 flex-shrink-0">
-      <a
-        href="/tool"
+    <!-- Mobile Navigation Actions (Tap targets >= 44x44px) -->
+    <div class="flex items-center gap-1 lg:hidden relative z-10 flex-shrink-0">
+      <button
+        type="button"
+        data-open-cmd
         aria-label="Open Search"
-        class="p-2 text-gray-600 hover:text-[#EE6C4D] outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded"
+        class="min-h-[44px] min-w-[44px] flex items-center justify-center text-gray-600 hover:text-[#EE6C4D] outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded-full"
       >
         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
         </svg>
-      </a>
+      </button>
       <button
         id="mobile-menu-btn"
-        class="p-2 text-gray-600 hover:text-[#EE6C4D] outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded"
+        class="min-h-[44px] min-w-[44px] flex items-center justify-center text-gray-600 hover:text-[#EE6C4D] outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded-full"
         aria-expanded="false"
         aria-controls="mobile-menu"
         aria-label="Open Menu"
@@ -259,32 +253,42 @@ const { currentPath = '' } = Astro.props;
     </div>
   </nav>
 
-  <!-- Mobile Menu Drawer -->
+  <!-- Mobile Menu Drawer (Smooth Toggle) -->
   <div
     id="mobile-menu"
-    class="hidden absolute top-full left-0 mt-3 w-full bg-white/95 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl p-4 z-50"
+    class="hidden absolute top-full left-0 mt-3 w-full bg-white/95 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl p-4 z-50 space-y-1"
   >
-    <a href="/#hubs" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">
-      Explore Hubs
+    <a href="/#trending" class="min-h-[44px] flex items-center px-3 py-2 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded">
+      Trending Utilities
     </a>
-    <a href="/hubs/startup" class="block py-2.5 text-sm text-gray-600 hover:text-[#EE6C4D] font-semibold pl-4">
-      Startup &amp; VC
+    <a href="/hubs/startup" class="min-h-[44px] flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#EE6C4D] font-semibold">
+      Founder's Forge Startup Suite
     </a>
-    <a href="/hubs/freelancer" class="block py-2.5 text-sm text-gray-600 hover:text-[#EE6C4D] font-semibold pl-4">
-      Freelance &amp; Creator
+    <a href="/hubs/freelancer" class="min-h-[44px] flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#EE6C4D] font-semibold">
+      Freelancer &amp; Creator OS
     </a>
-    <a href="/hubs/wellness" class="block py-2.5 text-sm text-gray-600 hover:text-[#EE6C4D] font-semibold pl-4 border-b border-gray-50">
-      Wellness &amp; Focus
+    <a href="/hubs/wellness" class="min-h-[44px] flex items-center px-4 py-2 text-sm text-gray-600 hover:text-[#EE6C4D] font-semibold border-b border-gray-50">
+      Mental Focus &amp; Wellness
     </a>
-    <a href="/tool" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">
-      Directory (126 Tools)
+    <a href="/tool" class="min-h-[44px] flex items-center px-3 py-2 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded">
+      All Utilities ({toolCount} Tools)
     </a>
-    <a href="/sitemap.html" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">
-      Guide
+    <a href="/sitemap.html" class="min-h-[44px] flex items-center px-3 py-2 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded">
+      HTML Sitemap
     </a>
-    <a href="/about" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">
-      About Us
+    <a href="/about" class="min-h-[44px] flex items-center px-3 py-2 text-gray-700 hover:text-[#EE6C4D] font-bold outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded">
+      About &amp; Principles
     </a>
+    <div class="pt-2 border-t border-gray-100 flex items-center justify-between px-3">
+      <span class="text-xs text-slate-500 font-semibold">Zen Mode Theme</span>
+      <button
+        type="button"
+        data-action="zen-mode"
+        class="min-h-[44px] px-3 py-2 text-xs font-bold bg-slate-100 rounded-lg text-slate-700 hover:bg-slate-200"
+      >
+        Toggle
+      </button>
+    </div>
   </div>
 
   <!-- Reading Progress Bar -->
@@ -328,5 +332,14 @@ const { currentPath = '' } = Astro.props;
       },
       { passive: true }
     );
+  }
+
+  // Theme Toggle Listener
+  const themeBtn = document.getElementById('theme-toggle-btn');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('zen-mode');
+      localStorage.setItem('tk_zen_mode', document.body.classList.contains('zen-mode') ? 'true' : 'false');
+    });
   }
 </script>

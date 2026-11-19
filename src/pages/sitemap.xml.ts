@@ -6,7 +6,6 @@ export const GET: APIRoute = async () => {
   const hubs = await getCollection('hubs');
 
   const site = 'https://toolkitgen.com';
-  const now = new Date().toISOString().split('T')[0];
 
   // Core pages
   const coreUrls = [

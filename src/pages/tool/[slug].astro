@@ -7,17 +7,34 @@ import AirDropIsland from '@tools/airdrop_web_universal/AirDropIsland';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
+  const catalogSummary = tools.map((t) => ({
+    id: t.data.id,
+    name: t.data.title || t.data.name,
+    title: t.data.title || t.data.name,
+    category: t.data.category,
+    description: t.data.description,
+    featured: t.data.featured,
+  }));
+
   return tools.map((tool) => ({
     params: { slug: tool.data.id },
-    props: { tool },
+    props: { tool, allTools: catalogSummary },
   }));
 }
 
 interface Props {
   tool: CollectionEntry<'tools'>;
+  allTools: Array<{
+    id: string;
+    name: string;
+    title: string;
+    category: string;
+    description: string;
+    featured?: boolean;
+  }>;
 }
 
-const { tool } = Astro.props;
+const { tool, allTools } = Astro.props;
 const {
   id,
   title,
@@ -45,6 +62,7 @@ const {
   faq={faq}
   howTo={howTo}
   related={related}
+  allTools={allTools}
   datePublished={datePublished}
   dateModified={dateModified}
 >

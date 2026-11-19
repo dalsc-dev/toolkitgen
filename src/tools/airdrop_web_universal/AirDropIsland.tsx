@@ -1,5 +1,5 @@
 import { useState, useRef } from 'preact/hooks';
-import { generateRoomPin, calculateTotalChunks, type TransferStats } from './chunker';
+import { generateRoomPin, calculateTotalChunks } from './chunker';
 
 export default function AirDropIsland() {
   const [roomPin, setRoomPin] = useState(() => generateRoomPin());
@@ -7,7 +7,6 @@ export default function AirDropIsland() {
   const [isTransferring, setIsTransferring] = useState(false);
   const [progress, setProgress] = useState(0);
   const [mode, setMode] = useState<'send' | 'receive'>('send');
-  const [peerConnected, setPeerConnected] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: any) => {

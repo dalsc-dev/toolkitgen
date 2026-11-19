@@ -2,71 +2,72 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="mt-auto bg-[#1e293b] text-slate-300 border-t border-slate-800">
-  <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-      <!-- Col 1: Brand & Privacy Promise -->
-      <div class="lg:col-span-2 space-y-4">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-[#EE6C4D] flex items-center justify-center text-white font-black text-sm">
-            TG
+<footer id="app-footer" class="bg-white border-t border-gray-200 mt-auto min-w-0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-w-0">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 min-w-0">
+      <!-- Col 1 & 2: Brand Block -->
+      <div class="col-span-1 md:col-span-2 space-y-4 min-w-0">
+        <h4 class="text-2xl font-bold text-slate-800 flex items-center gap-3 min-w-0">
+          <div class="w-8 h-8 rounded-xl bg-orange-50 border border-orange-200/90 text-[#EE6C4D] flex items-center justify-center flex-shrink-0 shadow-xs" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M11.47 3.84a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.06l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 0 0 1.061 1.06l8.69-8.69Z" />
+            </svg>
           </div>
-          <span class="text-xl font-extrabold text-white">Toolkit<span class="text-[#EE6C4D]">Gen</span></span>
-        </div>
-        <p class="text-sm text-slate-400 leading-relaxed max-w-sm">
-          A suite of 126 free online utilities, calculators, and diagnostic tools. Calculations run in your browser. Your inputs are not uploaded to our servers.
+          <span class="whitespace-nowrap flex-shrink-0">Toolkit Gen</span>
+        </h4>
+        <p class="text-slate-500 leading-relaxed max-w-sm break-words">
+          Free, browser-based tools for developers and professionals. Calculators, generators and utilities that run in your browser.
         </p>
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          Local In-Browser Processing
+        <div class="flex items-center gap-4 pt-2 flex-shrink-0">
+          <a href="https://twitter.com/toolkitgen" aria-label="Twitter Profile" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#EE6C4D] transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded p-1">
+            <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="https://github.com/dalsc-dev/toolkitgen" aria-label="GitHub Repository" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#EE6C4D] transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded p-1">
+            <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </a>
+          <a href="https://instagram.com/toolkitgen" aria-label="Instagram Profile" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#EE6C4D] transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded p-1">
+            <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
         </div>
       </div>
 
-      <!-- Col 2: Hubs & Suites -->
-      <div class="space-y-3">
-        <h4 class="text-xs font-black uppercase tracking-wider text-slate-100">Specialized Hubs</h4>
-        <ul class="space-y-2 text-sm text-slate-400">
-          <li><a href="/hubs/freelancer" class="hover:text-white transition-colors">Freelancer & Creator OS</a></li>
-          <li><a href="/hubs/startup" class="hover:text-white transition-colors">Founder's Forge Startup OS</a></li>
-          <li><a href="/hubs/wellness" class="hover:text-white transition-colors">Mental Focus & Wellness</a></li>
-          <li><a href="/tool" class="hover:text-white transition-colors">Browse All 126 Tools</a></li>
+      <!-- Col 3: Curated Hubs -->
+      <div class="min-w-0">
+        <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 truncate">Curated Hubs</h4>
+        <ul class="space-y-3 text-sm text-slate-600">
+          <li class="truncate"><a href="/#my-hub" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">My Hub (Pinned)</a></li>
+          <li class="truncate"><a href="/hubs/startup" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Founder's Forge</a></li>
+          <li class="truncate"><a href="/hubs/freelancer" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Freelancer OS</a></li>
+          <li class="truncate"><a href="/hubs/wellness" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Wellness Sanctuary</a></li>
         </ul>
       </div>
 
-      <!-- Col 3: Categories -->
-      <div class="space-y-3">
-        <h4 class="text-xs font-black uppercase tracking-wider text-slate-100">Categories</h4>
-        <ul class="space-y-2 text-sm text-slate-400">
-          <li><a href="/category/clinical-health" class="hover:text-white transition-colors">Health & Diagnostics</a></li>
-          <li><a href="/category/hardware" class="hover:text-white transition-colors">Hardware & Monitors</a></li>
-          <li><a href="/category/devops" class="hover:text-white transition-colors">DevOps & Code</a></li>
-          <li><a href="/category/audio" class="hover:text-white transition-colors">Audio & Sound</a></li>
-          <li><a href="/category/privacy" class="hover:text-white transition-colors">Security & Privacy</a></li>
-        </ul>
-      </div>
-
-      <!-- Col 4: Trust & Compliance -->
-      <div class="space-y-3">
-        <h4 class="text-xs font-black uppercase tracking-wider text-slate-100">Transparency & Legal</h4>
-        <ul class="space-y-2 text-sm text-slate-400">
-          <li><a href="/about" class="hover:text-white transition-colors">About & Team</a></li>
-          <li><a href="/contact" class="hover:text-white transition-colors">Contact Support</a></li>
-          <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
-          <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
-          <li><a href="/disclaimer" class="hover:text-white transition-colors">Medical & Financial Disclaimer</a></li>
-          <li><a href="/sitemap.html" class="hover:text-white transition-colors">HTML Sitemap</a></li>
+      <!-- Col 4: Legal & Info -->
+      <div class="min-w-0">
+        <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 truncate">Legal &amp; Info</h4>
+        <ul class="space-y-3 text-sm text-slate-600">
+          <li class="truncate"><a href="/disclaimer" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Disclaimer</a></li>
+          <li class="truncate"><a href="/privacy" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Privacy Policy</a></li>
+          <li class="truncate"><a href="/terms" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Terms of Service</a></li>
+          <li class="truncate"><a href="/about" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">About Us</a></li>
+          <li class="truncate"><a href="/contact" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Contact</a></li>
+          <li class="truncate"><a href="/sitemap.html" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Sitemap</a></li>
         </ul>
       </div>
     </div>
 
-    <!-- Bottom Bar -->
-    <div class="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-      <p>&copy; {currentYear} ToolkitGen. All rights reserved. Calculations are for educational and informational purposes only.</p>
-      <p class="flex items-center gap-4">
-        <span>Hosted on Cloudflare Workers</span>
-        <span>•</span>
-        <span>Built with Astro &amp; Tailwind CSS</span>
-      </p>
+    <!-- Copyright & Status Row -->
+    <div class="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400 min-w-0">
+      <p class="truncate">&copy; {currentYear} Toolkit Gen. All rights reserved. <a href="/disclaimer" class="hover:text-[#EE6C4D] underline ml-2">Disclaimer</a></p>
+      <div class="mt-4 md:mt-0 flex items-center gap-4 flex-shrink-0">
+        <span class="text-xs text-slate-500 font-medium">Hosted on Cloudflare</span>
+      </div>
     </div>
   </div>
 </footer>

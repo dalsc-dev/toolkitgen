@@ -6,14 +6,18 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/check-copy.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-limits.mjs",
+    "build": "node scripts/check-copy.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-limits.mjs && node scripts/check-tool-count.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
     "new:tool": "node scripts/scaffold-tool.mjs",
     "check:copy": "node scripts/check-copy.mjs",
-    "check:limits": "node scripts/check-limits.mjs"
+    "check:limits": "node scripts/check-limits.mjs",
+    "check:count": "node scripts/check-tool-count.mjs",
+    "check:audit": "node scripts/verify-all-tools.mjs",
+    "check:url": "node scripts/check-url-parity.mjs",
+    "check:similarity": "node scripts/check-duplicate-content.mjs"
   },
   "browserslist": [
     "defaults and fully supports es6-module"

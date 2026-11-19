@@ -16,6 +16,7 @@ const { id, name, description, category, featured = false, tags = [] } = Astro.p
   class="group relative flex flex-col justify-between bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#EE6C4D]/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#EE6C4D]"
   data-tool-id={id}
   data-category={category}
+  data-tags={tags.join(',')}
 >
   <div>
     <div class="flex items-center justify-between gap-2 mb-3">

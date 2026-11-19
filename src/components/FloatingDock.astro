@@ -1,0 +1,512 @@
+---
+// Floating Dock & Productivity Utilities (Zen Mode, Scratchpad, Cheat Sheets, Ambient Focus Audio, File Router)
+---
+
+<!-- Bottom-Right Floating Pill Dock -->
+<div
+  id="floating-dock-pill"
+  class="fixed bottom-5 right-5 z-[80] flex items-center gap-1.5 p-1.5 bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-xl rounded-full transition-all duration-300 hover:shadow-2xl hover:scale-105"
+  role="toolbar"
+  aria-label="Productivity Utilities Dock"
+>
+  <!-- Focus Audio Button -->
+  <button
+    type="button"
+    id="dock-audio-btn"
+    aria-label="Toggle Focus Audio"
+    title="Ambient Noise (Focus Audio)"
+    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+    </svg>
+  </button>
+
+  <!-- Scratchpad Drawer Button -->
+  <button
+    type="button"
+    id="dock-scratchpad-btn"
+    aria-label="Open Scratchpad"
+    title="Scratchpad Drawer"
+    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+    </svg>
+  </button>
+
+  <!-- Cheat Sheets Drawer Button -->
+  <button
+    type="button"
+    id="dock-cheatsheets-btn"
+    aria-label="Open Quick Cheat Sheets"
+    title="Developer Cheat Sheets"
+    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+    </svg>
+  </button>
+
+  <!-- Zen Mode Toggle Button -->
+  <button
+    type="button"
+    id="dock-zen-btn"
+    aria-label="Toggle Zen Dark Workspace"
+    title="Zen Mode"
+    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+    </svg>
+  </button>
+
+  <!-- Back to Top Progress Ring -->
+  <button
+    type="button"
+    id="dock-btt-btn"
+    aria-label="Scroll to top"
+    title="Back to top"
+    class="min-h-[44px] min-w-[44px] rounded-full text-slate-600 hover:text-[#EE6C4D] hover:bg-slate-100 flex items-center justify-center transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] relative"
+  >
+    <svg class="w-6 h-6 transform -rotate-90" viewBox="0 0 36 36">
+      <path class="text-slate-200" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+      <path id="btt-progress-svg" class="text-[#EE6C4D]" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+    </svg>
+    <svg class="w-3.5 h-3.5 absolute text-slate-600 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path>
+    </svg>
+  </button>
+</div>
+
+<!-- Ambient Focus Audio Floating Widget -->
+<div
+  id="ambient-player-widget"
+  class="fixed bottom-24 right-5 z-[85] bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-2xl p-4 hidden flex-col gap-3 w-64 animate-fade-up"
+>
+  <div class="flex items-center justify-between">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      Focus Audio
+    </span>
+    <button id="close-audio-widget" aria-label="Close Focus Audio" class="text-slate-400 hover:text-slate-600 p-1">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+  </div>
+  <div class="flex items-center gap-2">
+    <button
+      id="ambient-play-toggle"
+      class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#EE6C4D] transition-colors shadow-sm shrink-0"
+      aria-label="Play or Pause noise"
+    >
+      <svg id="audio-play-icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="audio-pause-icon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+    <select
+      id="ambient-noise-select"
+      class="flex-1 bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 rounded-xl py-2 px-3 outline-none"
+    >
+      <option value="brown">Brown Noise (Deep Focus)</option>
+      <option value="pink">Pink Noise (Reading &amp; Flow)</option>
+      <option value="white">White Noise (Mask Distractions)</option>
+    </select>
+  </div>
+  <p class="text-[11px] text-slate-400">Synthesized locally in your browser via Web Audio API.</p>
+</div>
+
+<!-- Scratchpad Drawer -->
+<div id="scratchpad-overlay" class="fixed inset-0 bg-slate-900/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<div
+  id="scratchpad-drawer"
+  class="fixed right-0 top-0 h-full w-full sm:w-96 bg-white shadow-2xl z-[95] transform translate-x-full transition-transform duration-300 border-l border-slate-200 flex flex-col"
+>
+  <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+      <h3 class="text-sm font-bold text-slate-900">Local Scratchpad</h3>
+    </div>
+    <button id="close-scratchpad-btn" class="text-slate-400 hover:text-slate-600 p-1">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+  </div>
+  <div class="p-4 flex-1 flex flex-col gap-3">
+    <textarea
+      id="scratchpad-text"
+      placeholder="Type scratch notes, clipboard text, or temporary calculations... Saved automatically to your browser."
+      class="flex-1 w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 outline-none focus:ring-2 focus:ring-[#EE6C4D] resize-none font-mono"
+    ></textarea>
+    <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+      <span id="scratchpad-count">0 words • 0 chars</span>
+      <div class="flex gap-2">
+        <button id="scratchpad-copy" class="text-slate-600 hover:text-[#EE6C4D] font-bold">Copy</button>
+        <span>•</span>
+        <button id="scratchpad-clear" class="text-slate-600 hover:text-red-500 font-bold">Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Developer Cheat Sheets Drawer -->
+<div id="cheatsheet-overlay" class="fixed inset-0 bg-slate-900/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<div
+  id="cheatsheet-drawer"
+  class="fixed right-0 top-0 h-full w-full sm:w-[480px] bg-white shadow-2xl z-[95] transform translate-x-full transition-transform duration-300 border-l border-slate-200 flex flex-col"
+>
+  <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+    <h3 class="text-sm font-bold text-slate-900">Quick Developer Cheat Sheets</h3>
+    <button id="close-cheatsheet-btn" class="text-slate-400 hover:text-slate-600 p-1">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+  </div>
+  <div class="flex border-b border-slate-100 bg-slate-50/50 px-4 gap-2 pt-2" id="cheatsheet-tabs">
+    <button class="cs-tab px-3 py-2 text-xs font-bold border-b-2 border-[#EE6C4D] text-[#EE6C4D]" data-tab="git">Git</button>
+    <button class="cs-tab px-3 py-2 text-xs font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800" data-tab="regex">Regex</button>
+    <button class="cs-tab px-3 py-2 text-xs font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800" data-tab="http">HTTP Status</button>
+    <button class="cs-tab px-3 py-2 text-xs font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800" data-tab="markdown">Markdown</button>
+  </div>
+  <div class="p-5 flex-1 overflow-y-auto" id="cheatsheet-body">
+    <!-- Git Table -->
+    <div id="cs-content-git" class="space-y-3 font-mono text-xs">
+      <table class="w-full text-left">
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git init</td><td class="py-2.5 text-slate-600">Initialize a new local repository</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git status -s</td><td class="py-2.5 text-slate-600">Short status report</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git add -A</td><td class="py-2.5 text-slate-600">Stage all tracked and untracked changes</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git commit -m "msg"</td><td class="py-2.5 text-slate-600">Commit with description</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git switch -c branch</td><td class="py-2.5 text-slate-600">Create &amp; switch to new branch</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">git log --oneline -10</td><td class="py-2.5 text-slate-600">Compact last 10 commits</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Regex Table -->
+    <div id="cs-content-regex" class="hidden space-y-3 font-mono text-xs">
+      <table class="w-full text-left">
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">^ / $</td><td class="py-2.5 text-slate-600">Start / End of string or line</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">\d / \D</td><td class="py-2.5 text-slate-600">Digit (0-9) / Non-digit</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">\w / \W</td><td class="py-2.5 text-slate-600">Word character / Non-word</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">\s / \S</td><td class="py-2.5 text-slate-600">Whitespace / Non-whitespace</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">(?:...)</td><td class="py-2.5 text-slate-600">Non-capturing group</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">(?&lt;=...)</td><td class="py-2.5 text-slate-600">Positive lookbehind</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- HTTP Table -->
+    <div id="cs-content-http" class="hidden space-y-3 font-mono text-xs">
+      <table class="w-full text-left">
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="py-2.5 font-bold text-emerald-600">200 OK</td><td class="py-2.5 text-slate-600">Request succeeded</td></tr>
+          <tr><td class="py-2.5 font-bold text-emerald-600">201 Created</td><td class="py-2.5 text-slate-600">Resource successfully created</td></tr>
+          <tr><td class="py-2.5 font-bold text-blue-600">301 Moved Permanently</td><td class="py-2.5 text-slate-600">Permanent URL redirect</td></tr>
+          <tr><td class="py-2.5 font-bold text-amber-600">400 Bad Request</td><td class="py-2.5 text-slate-600">Client-side malformed syntax</td></tr>
+          <tr><td class="py-2.5 font-bold text-amber-600">401 Unauthorized</td><td class="py-2.5 text-slate-600">Authentication required</td></tr>
+          <tr><td class="py-2.5 font-bold text-amber-600">404 Not Found</td><td class="py-2.5 text-slate-600">Resource missing</td></tr>
+          <tr><td class="py-2.5 font-bold text-rose-600">500 Server Error</td><td class="py-2.5 text-slate-600">Internal server failure</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Markdown Table -->
+    <div id="cs-content-markdown" class="hidden space-y-3 font-mono text-xs">
+      <table class="w-full text-left">
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]"># Heading 1</td><td class="py-2.5 text-slate-600">Page header H1</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">**bold**</td><td class="py-2.5 text-slate-600">Bold text emphasis</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">[text](url)</td><td class="py-2.5 text-slate-600">Hyperlink</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">`code`</td><td class="py-2.5 text-slate-600">Inline code literal</td></tr>
+          <tr><td class="py-2.5 font-bold text-[#EE6C4D]">```lang</td><td class="py-2.5 text-slate-600">Fenced code block</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    // 1. Zen Mode Toggle
+    const zenBtn = document.getElementById('dock-zen-btn');
+    if (zenBtn) {
+      zenBtn.addEventListener('click', () => {
+        document.body.classList.toggle('zen-mode');
+        localStorage.setItem('tk_zen_mode', document.body.classList.contains('zen-mode') ? 'true' : 'false');
+      });
+    }
+
+    // 2. Scratchpad Manager
+    const scratchpadBtn = document.getElementById('dock-scratchpad-btn');
+    const scratchpadDrawer = document.getElementById('scratchpad-drawer');
+    const scratchpadOverlay = document.getElementById('scratchpad-overlay');
+    const closeScratchpad = document.getElementById('close-scratchpad-btn');
+    const scratchpadText = document.getElementById('scratchpad-text');
+    const scratchpadCount = document.getElementById('scratchpad-count');
+    const scratchpadCopy = document.getElementById('scratchpad-copy');
+    const scratchpadClear = document.getElementById('scratchpad-clear');
+
+    if (scratchpadText) {
+      scratchpadText.value = localStorage.getItem('tk_scratchpad') || '';
+      updateScratchpadCount();
+
+      scratchpadText.addEventListener('input', () => {
+        localStorage.setItem('tk_scratchpad', scratchpadText.value);
+        updateScratchpadCount();
+      });
+    }
+
+    function updateScratchpadCount() {
+      if (!scratchpadText || !scratchpadCount) return;
+      const val = scratchpadText.value.trim();
+      const words = val ? val.split(/\s+/).length : 0;
+      const chars = scratchpadText.value.length;
+      scratchpadCount.textContent = `${words} words • ${chars} chars`;
+    }
+
+    function openScratchpad() {
+      scratchpadDrawer?.classList.remove('translate-x-full');
+      scratchpadOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function hideScratchpad() {
+      scratchpadDrawer?.classList.add('translate-x-full');
+      scratchpadOverlay?.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    scratchpadBtn?.addEventListener('click', openScratchpad);
+    closeScratchpad?.addEventListener('click', hideScratchpad);
+    scratchpadOverlay?.addEventListener('click', hideScratchpad);
+
+    scratchpadCopy?.addEventListener('click', () => {
+      if (scratchpadText) {
+        navigator.clipboard.writeText(scratchpadText.value);
+        scratchpadCopy.textContent = 'Copied!';
+        setTimeout(() => (scratchpadCopy.textContent = 'Copy'), 1500);
+      }
+    });
+
+    scratchpadClear?.addEventListener('click', () => {
+      if (scratchpadText && confirm('Clear scratchpad notes?')) {
+        scratchpadText.value = '';
+        localStorage.removeItem('tk_scratchpad');
+        updateScratchpadCount();
+      }
+    });
+
+    // 3. Cheat Sheets Manager
+    const csBtn = document.getElementById('dock-cheatsheets-btn');
+    const csDrawer = document.getElementById('cheatsheet-drawer');
+    const csOverlay = document.getElementById('cheatsheet-overlay');
+    const csClose = document.getElementById('close-cheatsheet-btn');
+    const csTabs = document.querySelectorAll('#cheatsheet-tabs .cs-tab');
+
+    function openCheatSheets() {
+      csDrawer?.classList.remove('translate-x-full');
+      csOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function hideCheatSheets() {
+      csDrawer?.classList.add('translate-x-full');
+      csOverlay?.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    csBtn?.addEventListener('click', openCheatSheets);
+    csClose?.addEventListener('click', hideCheatSheets);
+    csOverlay?.addEventListener('click', hideCheatSheets);
+
+    csTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-tab');
+        csTabs.forEach((t) => {
+          t.className = 'cs-tab px-3 py-2 text-xs font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800';
+        });
+        tab.className = 'cs-tab px-3 py-2 text-xs font-bold border-b-2 border-[#EE6C4D] text-[#EE6C4D]';
+
+        ['git', 'regex', 'http', 'markdown'].forEach((name) => {
+          const el = document.getElementById(`cs-content-${name}`);
+          if (el) {
+            el.className = name === target ? 'space-y-3 font-mono text-xs' : 'hidden space-y-3 font-mono text-xs';
+          }
+        });
+      });
+    });
+
+    // 4. Ambient Focus Audio Generator (Web Audio API buffer)
+    const audioBtn = document.getElementById('dock-audio-btn');
+    const audioWidget = document.getElementById('ambient-player-widget');
+    const closeAudioWidget = document.getElementById('close-audio-widget');
+    const playToggle = document.getElementById('ambient-play-toggle');
+    const playIcon = document.getElementById('audio-play-icon');
+    const pauseIcon = document.getElementById('audio-pause-icon');
+    const noiseSelect = document.getElementById('ambient-noise-select');
+
+    let audioCtx = null;
+    let noiseNode = null;
+    let gainNode = null;
+    let isPlaying = false;
+
+    audioBtn?.addEventListener('click', () => {
+      audioWidget?.classList.toggle('hidden');
+    });
+
+    closeAudioWidget?.addEventListener('click', () => {
+      audioWidget?.classList.add('hidden');
+    });
+
+    function createNoiseBuffer(type) {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window['webkitAudioContext'])();
+      }
+      const bufferSize = 2 * audioCtx.sampleRate;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = buffer.getChannelData(0);
+
+      if (type === 'white') {
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+      } else if (type === 'pink') {
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
+          b6 = white * 0.115926;
+        }
+      } else {
+        // Brown noise
+        let lastOut = 0.0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          output[i] = (lastOut + 0.02 * white) / 1.02;
+          lastOut = output[i];
+          output[i] *= 3.5;
+        }
+      }
+      return buffer;
+    }
+
+    function startNoise() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window['webkitAudioContext'])();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      if (noiseNode) {
+        noiseNode.stop();
+        noiseNode.disconnect();
+      }
+
+      const type = noiseSelect?.value || 'brown';
+      const buffer = createNoiseBuffer(type);
+      noiseNode = audioCtx.createBufferSource();
+      noiseNode.buffer = buffer;
+      noiseNode.loop = true;
+
+      if (!gainNode) {
+        gainNode = audioCtx.createGain();
+        gainNode.gain.value = 0.4;
+        gainNode.connect(audioCtx.destination);
+      }
+
+      noiseNode.connect(gainNode);
+      noiseNode.start();
+      isPlaying = true;
+      playIcon?.classList.add('hidden');
+      pauseIcon?.classList.remove('hidden');
+    }
+
+    function stopNoise() {
+      if (noiseNode) {
+        noiseNode.stop();
+        noiseNode.disconnect();
+        noiseNode = null;
+      }
+      isPlaying = false;
+      playIcon?.classList.remove('hidden');
+      pauseIcon?.classList.add('hidden');
+    }
+
+    playToggle?.addEventListener('click', () => {
+      if (isPlaying) {
+        stopNoise();
+      } else {
+        startNoise();
+      }
+    });
+
+    noiseSelect?.addEventListener('change', () => {
+      if (isPlaying) {
+        startNoise();
+      }
+    });
+
+    // 5. Back to Top Progress Ring
+    const bttBtn = document.getElementById('dock-btt-btn');
+    const bttSvg = document.getElementById('btt-progress-svg');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (scrollHeight > 0 && bttSvg) {
+        const progress = (scrollTop / scrollHeight) * 100;
+        bttSvg.style.strokeDashoffset = String(100 - progress);
+      }
+    }, { passive: true });
+
+    bttBtn?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 6. Omni Drop File Anywhere Overlay Router
+    window.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    window.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const files = e.dataTransfer?.files;
+      if (!files || files.length === 0) return;
+
+      const file = files[0];
+      const name = file.name.toLowerCase();
+      let matchedTool = null;
+
+      if (name.endsWith('.json')) {
+        matchedTool = { name: 'SQLite WASM Explorer', id: 'sqlite_wasm_explorer', action: 'Inspect JSON/DB' };
+      } else if (name.endsWith('.csv')) {
+        matchedTool = { name: 'SQLite WASM Explorer', id: 'sqlite_wasm_explorer', action: 'Load CSV Data' };
+      } else if (name.endsWith('.yml') || name.endsWith('.yaml')) {
+        matchedTool = { name: 'Docker Compose Linter', id: 'docker_compose_linter', action: 'Lint YAML File' };
+      } else if (/\.(png|jpe?g|webp|gif|svg)$/i.test(name)) {
+        matchedTool = { name: 'Color Blindness Simulator', id: 'color_blindness_sim', action: 'Simulate Vision on Image' };
+      }
+
+      if (matchedTool) {
+        showFileDropToast(file, matchedTool);
+      }
+    });
+
+    function showFileDropToast(file, tool) {
+      document.getElementById('file-router-toast')?.remove();
+      const kb = (file.size / 1024).toFixed(1);
+      const toast = document.createElement('div');
+      toast.id = 'file-router-toast';
+      toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 z-[999] bg-slate-900 p-4 rounded-2xl shadow-2xl border border-slate-700 flex flex-col sm:flex-row items-center gap-4 w-[90%] max-w-lg animate-fade-up';
+      toast.innerHTML = `
+        <div class="flex-1 min-w-0 text-center sm:text-left">
+          <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block mb-0.5">File Detected</span>
+          <h4 class="text-white font-bold text-sm truncate">${file.name} <span class="text-slate-400 font-normal">(${kb} KB)</span></h4>
+        </div>
+        <a href="/tool/${tool.id}" class="bg-[#EE6C4D] hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition-colors whitespace-nowrap shadow-sm">
+          ${tool.action} &rarr;
+        </a>
+        <button id="close-file-toast" aria-label="Dismiss notification" class="text-slate-400 hover:text-white p-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      `;
+      document.body.appendChild(toast);
+      toast.querySelector('#close-file-toast')?.addEventListener('click', () => toast.remove());
+      setTimeout(() => toast.remove(), 8000);
+    }
+  })();
+</script>

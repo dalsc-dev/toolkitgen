@@ -2,6 +2,8 @@
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import ConsentBanner from '@components/ConsentBanner.astro';
+import CommandPalette from '@components/CommandPalette.astro';
+import FloatingDock from '@components/FloatingDock.astro';
 import { formatTitle, formatDescription } from '@lib/seo';
 import '../styles/global.css';
 
@@ -24,7 +26,7 @@ const {
   ogImage = 'https://toolkitgen.com/assets/favicon/favicon-96x96.png',
   jsonLd,
   noindex = false,
-  containerClass = 'max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16',
+  containerClass = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16',
 } = Astro.props;
 
 const siteUrl = 'https://toolkitgen.com';
@@ -104,13 +106,39 @@ const metaDescription = formatDescription(description);
   {jsonLd && (
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   )}
+
+  <!-- Inline Zen Mode Initialization Script -->
+  <script is:inline>
+    if (localStorage.getItem('tk_zen_mode') === 'true') {
+      document.documentElement.classList.add('zen-mode');
+      document.body && document.body.classList.add('zen-mode');
+    }
+  </script>
 </head>
 <body class="flex flex-col min-h-screen bg-[#f8fafc] text-[#33333b] antialiased overflow-x-hidden">
+  <!-- Accessibility Skip Link -->
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#EE6C4D] text-white px-4 py-2 rounded-xl shadow-xl font-bold"
+  >
+    Skip to content
+  </a>
+
   <Header currentPath={Astro.url.pathname} />
-  <main class={`flex-grow w-full ${containerClass}`}>
+
+  <main id="main-content" class={`flex-grow w-full ${containerClass}`}>
     <slot />
   </main>
+
   <Footer />
   <ConsentBanner />
+  <CommandPalette />
+  <FloatingDock />
+
+  <script is:inline>
+    if (localStorage.getItem('tk_zen_mode') === 'true') {
+      document.body.classList.add('zen-mode');
+    }
+  </script>
 </body>
 </html>

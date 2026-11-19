@@ -28,79 +28,111 @@ const jsonLd = generateJsonLd({
   canonical="https://toolkitgen.com/tool"
   jsonLd={jsonLd}
 >
-  <Breadcrumbs items={[{ name: 'Directory', url: '/tool' }]} />
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <Breadcrumbs items={[{ name: 'Directory', url: '/tool' }]} />
 
-  <section class="py-8 space-y-4">
-    <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-      Tools &amp; Utilities Directory
-    </h1>
-    <p class="text-sm text-slate-600 max-w-2xl leading-relaxed">
-      Explore all {tools.length} active browser-based tools. Calculations run in your browser, and your inputs are not uploaded to our servers.
-    </p>
+    <section class="space-y-4">
+      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+        Tools &amp; Utilities Directory
+      </h1>
+      <p class="text-sm text-slate-600 max-w-2xl leading-relaxed">
+        Explore all {tools.length} active browser-based tools. Calculations run in your browser, and your inputs are not uploaded to our servers.
+      </p>
 
-    <!-- Category Filter Tabs -->
-    <div class="flex flex-wrap gap-2 pt-4">
-      <button
-        type="button"
-        class="category-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-900 text-white shadow-sm transition-all"
-        data-filter="all"
-      >
-        All Tools ({tools.length})
-      </button>
-      {categories.map((cat) => (
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap gap-2 pt-4" id="tool-category-tabs">
         <button
           type="button"
-          class="category-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-white border border-slate-200/80 text-slate-600 hover:bg-slate-50 transition-all"
-          data-filter={cat}
+          class="category-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-900 text-white shadow-xs transition-all"
+          data-filter="all"
         >
-          {cat}
+          All Tools ({tools.length})
         </button>
-      ))}
-    </div>
-  </section>
+        {categories.map((cat) => (
+          <button
+            type="button"
+            class="category-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-white border border-slate-200/80 text-slate-600 hover:bg-slate-50 transition-all"
+            data-filter={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </section>
 
-  <!-- Tools Grid -->
-  <section class="my-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="directory-grid">
-      {tools.map((tool) => (
-        <ToolCard
-          id={tool.data.id}
-          name={tool.data.name}
-          description={tool.data.description}
-          category={tool.data.category}
-          featured={tool.data.featured}
-          tags={tool.data.tags}
-        />
-      ))}
-    </div>
-  </section>
+    <!-- Tools Grid -->
+    <section class="my-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="directory-grid">
+        {tools.map((tool) => (
+          <ToolCard
+            id={tool.data.id}
+            name={tool.data.title || tool.data.name}
+            description={tool.data.description}
+            category={tool.data.category}
+            featured={tool.data.featured}
+            tags={tool.data.tags}
+          />
+        ))}
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <script is:inline>
-  const filterBtns = document.querySelectorAll('.category-filter-btn');
-  const directoryGrid = document.getElementById('directory-grid');
+  (() => {
+    const filterBtns = document.querySelectorAll('.category-filter-btn');
+    const directoryGrid = document.getElementById('directory-grid');
 
-  if (directoryGrid) {
-    filterBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach((b) => {
-          b.classList.remove('bg-slate-900', 'text-white', 'shadow-sm');
+    function applyFilter(cat) {
+      filterBtns.forEach((b) => {
+        const filterVal = b.getAttribute('data-filter');
+        if (filterVal === cat) {
+          b.classList.remove('bg-white', 'border', 'border-slate-200/80', 'text-slate-600');
+          b.classList.add('bg-slate-900', 'text-white', 'shadow-xs');
+        } else {
+          b.classList.remove('bg-slate-900', 'text-white', 'shadow-xs');
           b.classList.add('bg-white', 'border', 'border-slate-200/80', 'text-slate-600');
-        });
-        btn.classList.remove('bg-white', 'border', 'border-slate-200/80', 'text-slate-600');
-        btn.classList.add('bg-slate-900', 'text-white', 'shadow-sm');
+        }
+      });
 
-        const cat = btn.getAttribute('data-filter');
-        const cards = directoryGrid.querySelectorAll('[data-category]');
+      if (!directoryGrid) return;
+      const cards = directoryGrid.querySelectorAll('[data-category]');
 
-        cards.forEach((card) => {
-          if (cat === 'all' || card.getAttribute('data-category') === cat) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+      cards.forEach((card) => {
+        const itemCat = card.getAttribute('data-category') || '';
+        if (cat === 'all' || itemCat.toLowerCase().includes(cat.toLowerCase())) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    if (directoryGrid) {
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const cat = btn.getAttribute('data-filter') || 'all';
+          applyFilter(cat);
         });
       });
-    });
-  }
+    }
+
+    // Support for URL hash anchors e.g. /tool#health, /tool#devops, /tool#finance, /tool#hardware, /tool#ai
+    function checkHashAnchor() {
+      const hash = window.location.hash.toLowerCase().replace('#', '');
+      if (!hash) return;
+      const matchBtn = Array.from(filterBtns).find((btn) => {
+        const filter = (btn.getAttribute('data-filter') || '').toLowerCase();
+        return filter.includes(hash);
+      });
+      if (matchBtn) {
+        matchBtn.click();
+      }
+    }
+
+    window.addEventListener('hashchange', checkHashAnchor);
+    if (window.location.hash) {
+      setTimeout(checkHashAnchor, 100);
+    }
+  })();
 </script>

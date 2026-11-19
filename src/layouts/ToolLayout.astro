@@ -99,16 +99,18 @@ const hotTools = allTools
   .filter((t) => t.id !== id)
   .slice(0, 2);
 
-// Compute Recommended Tool (1 tool)
-const recommendedTool = related.length > 0
-  ? related[0]
+// Compute Recommended Tool (1 tool - strictly distinct from current tool)
+const validRelated = related.filter((t) => t.id !== id);
+const recommendedTool = validRelated.length > 0
+  ? validRelated[0]
   : allTools.find((t) => t.id !== id) || { id: 'sqlite_wasm_explorer', name: 'SQLite WASM Explorer', description: 'In-browser SQL sandbox and analyzer.', category: 'DevOps & Code' };
 
-// Compute Recommended Diagnostics (5 tools)
-const diagnosticTools = (related.length >= 5 ? related.slice(0, 5) : [
-  ...related,
-  ...allTools.filter((t) => t.id !== id && !related.some((r) => r.id === t.id)),
-]).slice(0, 5);
+// Compute Recommended Diagnostics (5 tools - strictly distinct from current tool and recommendedTool)
+const remainingRelated = validRelated.filter((t) => t.id !== recommendedTool.id);
+const fallbackTools = allTools.filter(
+  (t) => t.id !== id && t.id !== recommendedTool.id && !remainingRelated.some((r) => r.id === t.id)
+);
+const diagnosticTools = [...remainingRelated, ...fallbackTools].slice(0, 5);
 
 const encodedTitle = encodeURIComponent(cleanName);
 const encodedUrl = encodeURIComponent(canonicalUrl);
@@ -122,7 +124,7 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
   jsonLd={jsonLd}
   hasMath={hasMath}
 >
-  <div class="max-w-5xl mx-auto space-y-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
     <!-- a. Breadcrumb -->
     <Breadcrumbs items={breadcrumbs} />
 
@@ -238,107 +240,120 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
       </div>
     </header>
 
-    {isVisionTool && (
-      <Callout variant="warning" title="Clinical Health Notice">
-        Informational only; not a clinical diagnosis. Consult an eye care professional.
-      </Callout>
-    )}
+    <!-- Desktop 2-Column Grid: Tool & Docs (8 cols) + Sticky Sidebar (4 cols) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Main Content Column (8 cols) -->
+      <div class="lg:col-span-8 space-y-10 min-w-0">
+        {isVisionTool && (
+          <Callout variant="warning" title="Clinical Health Notice">
+            Informational only; not a clinical diagnosis. Consult an eye care professional.
+          </Callout>
+        )}
 
-    {isHearingTool && (
-      <Callout variant="warning" title="Audiometry Notice">
-        Informational only; not a clinical diagnosis. Consult a qualified hearing care professional or audiologist.
-      </Callout>
-    )}
+        {isHearingTool && (
+          <Callout variant="warning" title="Audiometry Notice">
+            Informational only; not a clinical diagnosis. Consult a qualified hearing care professional or audiologist.
+          </Callout>
+        )}
 
-    {isCameraOrMicTool && (
-      <Callout variant="info" title="Browser Privacy Notice">
-        Audio and video are processed locally in your browser and are not recorded or transmitted.
-      </Callout>
-    )}
+        {isCameraOrMicTool && (
+          <Callout variant="info" title="Browser Privacy Notice">
+            Audio and video are processed locally in your browser and are not recorded or transmitted.
+          </Callout>
+        )}
 
-    <!-- e. Tool interactive stage (the tool itself) -->
-    <section id="tool-app-stage" class="tool-card bg-white rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-xl overflow-hidden scroll-mt-28 min-w-0 max-w-full">
-      <slot name="tool-ui" />
-    </section>
+        <!-- e. Tool interactive stage (the tool itself) -->
+        <section id="tool-app-stage" class="tool-card bg-white rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-xl overflow-hidden scroll-mt-28 min-w-0 max-w-full">
+          <slot name="tool-ui" />
+        </section>
 
-    <!-- In-Content Mid-Break Banner (High Viewability, zero CLS) -->
-    <AdSlot slotId="tool-mid-banner" minHeight="280px" />
+        <!-- In-Content Mid-Break Banner (High Viewability, zero CLS) -->
+        <AdSlot slotId="tool-mid-banner" minHeight="280px" />
 
-    <!-- f. "Read How to Use & Info" expandable article -->
-    <section id="tool-documentation-section" class="bg-white rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-sm space-y-8 min-w-0 max-w-full overflow-hidden">
-      <!-- Quick Answer Summary Box -->
-      <Callout variant="note" title="Quick Summary">
-        <div set:html={quickAnswer} />
-      </Callout>
+        <!-- f. "Read How to Use & Info" expandable article -->
+        <section id="tool-documentation-section" class="bg-white rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-sm space-y-8 min-w-0 max-w-full overflow-hidden">
+          <!-- Quick Answer Summary Box -->
+          <Callout variant="note" title="Quick Summary">
+            <div set:html={quickAnswer} />
+          </Callout>
 
-      <!-- How to Use Steps -->
-      {howTo && howTo.length > 0 && (
-        <div class="space-y-4">
-          <h2 class="text-xl font-bold text-slate-900 tracking-tight">How to Use {cleanName}</h2>
-          <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-            {howTo.map((step) => (
-              <li>
-                <strong>{step.name}:</strong> {step.text}
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
+          <!-- How to Use Steps -->
+          {howTo && howTo.length > 0 && (
+            <div class="space-y-4">
+              <h2 class="text-xl font-bold text-slate-900 tracking-tight">How to Use {cleanName}</h2>
+              <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
+                {howTo.map((step) => (
+                  <li>
+                    <strong>{step.name}:</strong> {step.text}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
 
-      <!-- Full Article Markdown Documentation Slot -->
-      <article class="prose max-w-none prose-slate pt-4 border-t border-slate-100">
-        <slot name="article" />
-      </article>
+          <!-- Full Article Markdown Documentation Slot -->
+          <article class="prose max-w-none prose-slate pt-4 border-t border-slate-100">
+            <slot name="article" />
+          </article>
 
-      <!-- In-Article Editorial Unit (Google AdSense in-article native unit: 2437137864) -->
-      <AdSlot slotId="inArticle1" />
+          <!-- In-Article Editorial Unit (Google AdSense in-article native unit: 2437137864) -->
+          <AdSlot slotId="inArticle1" />
 
-      <!-- Unified Contained Tool CTA -->
-      <ToolCTA
-        title={`Run ${cleanName}`}
-        description="Calculations execute directly in your browser with local data processing."
-        buttonText="Begin Calibration"
-        targetId="tool-app-stage"
-      />
+          <!-- Unified Contained Tool CTA -->
+          <ToolCTA
+            title={`Run ${cleanName}`}
+            description="Calculations execute directly in your browser with local data processing."
+            buttonText="Begin Calibration"
+            targetId="tool-app-stage"
+          />
 
-      <div class="pt-4 border-t border-slate-100 text-xs text-slate-400 flex items-center justify-between">
-        <span>Last updated: {new Date(dateModified).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-        <span>Calculations execute locally in browser memory.</span>
+          <div class="pt-4 border-t border-slate-100 text-xs text-slate-400 flex items-center justify-between">
+            <span>Last updated: {new Date(dateModified).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <span>Calculations execute locally in browser memory.</span>
+          </div>
+        </section>
       </div>
-    </section>
 
-    <!-- g. "Recommended Tool" card -->
-    {recommendedTool && (
-      <section id="recommended-tool-card" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-        <div class="space-y-2 max-w-xl">
-          <span class="text-[10px] font-black uppercase tracking-widest text-[#EE6C4D] bg-[#EE6C4D]/10 border border-[#EE6C4D]/20 px-2.5 py-1 rounded-md">
-            Recommended Tool • {recommendedTool.category || category}
-          </span>
-          <h3 class="text-xl font-bold text-white mt-2">
-            {recommendedTool.name || recommendedTool.title}
-          </h3>
-          <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">
-            {recommendedTool.description || 'Explore this complementary browser-based utility.'}
-          </p>
-        </div>
-        <a
-          href={`/tool/${recommendedTool.id}`}
-          class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#EE6C4D] hover:bg-orange-600 text-white text-xs font-bold rounded-xl shadow-md transition-all self-start sm:self-auto shrink-0"
-        >
-          <span>Launch Utility</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-          </svg>
-        </a>
-      </section>
-    )}
+      <!-- Desktop Sidebar: Recommended Tool & Sticky Sidebar Ad (4 cols) -->
+      <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+        <!-- g. "Recommended Tool" card -->
+        {recommendedTool && (
+          <section id="recommended-tool-card" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-6 sm:p-7 shadow-xl border border-slate-700 flex flex-col justify-between gap-5">
+            <div class="space-y-2.5">
+              <span class="inline-block text-[10px] font-black uppercase tracking-widest text-[#EE6C4D] bg-[#EE6C4D]/10 border border-[#EE6C4D]/20 px-2.5 py-1 rounded-md">
+                Recommended Tool &bull; {recommendedTool.category || category}
+              </span>
+              <h3 class="text-xl font-bold text-white leading-snug">
+                {recommendedTool.name || recommendedTool.title}
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed line-clamp-3">
+                {recommendedTool.description || 'Explore this complementary browser-based utility.'}
+              </p>
+            </div>
+            <a
+              href={`/tool/${recommendedTool.id}`}
+              class="inline-flex items-center justify-center gap-2 w-full px-5 py-2.5 bg-[#EE6C4D] hover:bg-orange-600 text-white text-xs font-bold rounded-xl shadow-md transition-all shrink-0"
+            >
+              <span>Launch Utility</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+          </section>
+        )}
 
+        <!-- Sticky Sidebar Ad Slot (Google AdSense responsive sidebar: 5828686602) -->
+        <AdSlot slotId="sidebarBanner" minHeight="250px" />
+      </aside>
+    </div>
+
+    <!-- Below Grid: Full-Width Sections -->
     <!-- h. "Recommended Diagnostics" (5 related tools) -->
     <section id="recommended-diagnostics" class="space-y-4">
       <h3 class="text-lg font-bold text-slate-900 uppercase tracking-wider text-xs border-b border-slate-200/80 pb-3">
         Recommended Diagnostics &amp; Utilities
       </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {diagnosticTools.map((dt) => (
           <a
             href={`/tool/${dt.id}`}

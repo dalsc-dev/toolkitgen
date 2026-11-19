@@ -177,6 +177,39 @@ const metaDescription = formatDescription(description);
     <link rel="stylesheet" href="/assets/katex/katex.min.css" />
   )}
 
+  <!-- Client-side Security & Production Hardening -->
+  <script is:inline>
+    (() => {
+      if (window.location.protocol === 'https:') {
+        // 1. Console Output Suppression in Production
+        const noop = () => {};
+        ['log', 'debug', 'info', 'warn', 'trace', 'table'].forEach((fn) => {
+          if (window.console && window.console[fn]) {
+            window.console[fn] = noop;
+          }
+        });
+
+        // 2. Anti-Inspection & DevTools Shortcuts Deterrent
+        document.addEventListener('contextmenu', (e) => {
+          if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+          e.preventDefault();
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (
+            e.key === 'F12' ||
+            ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) ||
+            ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) ||
+            ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c'))
+          ) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        });
+      }
+    })();
+  </script>
+
   <slot name="head" />
 </head>
 <body class="flex flex-col min-h-screen bg-[#f8fafc] text-[#33333b] antialiased overflow-x-clip">

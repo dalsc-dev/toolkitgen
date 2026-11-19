@@ -10,7 +10,10 @@ dist/
 
 # Test, scratch, and temporary files
 *.csv
-tool-audit.csv
+!seo-keyword-map.csv
+!tool-perf-after.csv
+!tool-perf-before.csv
+!tool-audit.csv
 task-*.md
 temp_*
 test_*.js

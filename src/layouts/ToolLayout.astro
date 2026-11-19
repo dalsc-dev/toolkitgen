@@ -99,8 +99,23 @@ const hotTools = allTools
   .filter((t) => t.id !== id)
   .slice(0, 2);
 
+// Enrich related tools with full catalog details (category, description, title)
+const validRelated = related
+  .filter((t) => t.id !== id)
+  .map((r) => {
+    const match = allTools.find((t) => t.id === r.id);
+    return match
+      ? {
+          ...match,
+          ...r,
+          name: r.name || match.name,
+          category: r.category || match.category,
+          description: r.description || match.description,
+        }
+      : r;
+  });
+
 // Compute Recommended Tool (1 tool - strictly distinct from current tool)
-const validRelated = related.filter((t) => t.id !== id);
 const recommendedTool = validRelated.length > 0
   ? validRelated[0]
   : allTools.find((t) => t.id !== id) || { id: 'sqlite_wasm_explorer', name: 'SQLite WASM Explorer', description: 'In-browser SQL sandbox and analyzer.', category: 'DevOps & Code' };

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/check-copy.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-limits.mjs && node scripts/check-tool-count.mjs && node scripts/check-emoji.mjs && node scripts/check-raw-latex.mjs && node scripts/check-titles.mjs && node scripts/check-left-borders.mjs && node scripts/check-perf-budgets.mjs && node scripts/ping-indexnow.mjs",
+    "build": "node scripts/check-copy.mjs && node scripts/check-html-tags.mjs && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-limits.mjs && node scripts/check-tool-count.mjs && node scripts/check-emoji.mjs && node scripts/check-raw-latex.mjs && node scripts/check-titles.mjs && node scripts/check-left-borders.mjs && node scripts/check-perf-budgets.mjs && node scripts/ping-indexnow.mjs",
     "preview": "astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "test": "vitest run",

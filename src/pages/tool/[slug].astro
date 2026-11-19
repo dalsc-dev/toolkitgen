@@ -252,6 +252,24 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
             window.addEventListener('pagehide', cleanupAllResources, { passive: true });
             window.addEventListener('beforeunload', cleanupAllResources, { passive: true });
             window.resetToolEnvironment = cleanupAllResources;
+
+            // Watchdog: detect blank tool render or fatal initialization failure
+            setTimeout(() => {
+              try {
+                const stage = document.getElementById('tool-app-stage');
+                const card = stage ? stage.querySelector('.tool-stage-card') : null;
+                const fallback = document.getElementById('tool-error-fallback');
+                if (card && (!card.firstElementChild || card.offsetHeight < 20)) {
+                  if (fallback) fallback.classList.remove('hidden');
+                  if ('caches' in window) {
+                    caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+                  }
+                  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({ type: 'SW_CLEAR_CACHE' });
+                  }
+                }
+              } catch (e) {}
+            }, 6000);
           })();
         </script>
         {toolScript && (

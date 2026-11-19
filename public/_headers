@@ -4,6 +4,22 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(self), microphone=(self), geolocation=(), interest-cohort=(), unload=*
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.googlesyndication.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://cdn.webpushr.com https://*.google.com https://*.google-analytics.com blob: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self' https: wss: blob: data:; worker-src 'self' blob:; frame-src 'self' https://googleads.g.doubleclick.net https://*.googlesyndication.com; object-src 'none'; base-uri 'self';
+
+/sw.js
+  Cache-Control: public, max-age=0, no-cache, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/tool/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/hubs/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/category/*
+  Cache-Control: public, max-age=0, must-revalidate
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

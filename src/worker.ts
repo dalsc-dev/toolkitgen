@@ -60,6 +60,7 @@ const SECURITY_HEADERS: Record<string, string> = {
   'X-Frame-Options': 'SAMEORIGIN',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(self), microphone=(self), geolocation=(), interest-cohort=(), unload=*',
+  'Content-Security-Policy-Report-Only': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.googlesyndication.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://cdn.webpushr.com https://*.google.com https://*.google-analytics.com blob: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self' https: wss: blob: data:; worker-src 'self' blob:; frame-src 'self' https://googleads.g.doubleclick.net https://*.googlesyndication.com; object-src 'none'; base-uri 'self';",
 };
 
 export default {
@@ -96,7 +97,7 @@ export default {
     if (pathname.startsWith('/_astro/') || pathname.startsWith('/assets/')) {
       newHeaders.set('Cache-Control', 'public, max-age=31536000, immutable');
     } else if (response.headers.get('content-type')?.includes('text/html')) {
-      newHeaders.set('Cache-Control', 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400');
+      newHeaders.set('Cache-Control', 'public, max-age=0, must-revalidate');
     }
 
     return new Response(response.body, {

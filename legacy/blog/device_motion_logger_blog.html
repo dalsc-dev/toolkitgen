@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Gyroscope & Accelerometer Test tool. Test your device motion sensors, check sensor accuracy, and view real-time motion data on any device.">
+    <meta name="keywords" content="gyroscope test, accelerometer test, device motion, sensor test, mobile sensor, motion sensor checker">
+    <title>Gyroscope & Accelerometer Test - Device Motion Sensor Checker | toolkitgen</title>
+</head>
+<body>
+<span style="font-family: Poppins;">
+
+<h1 style="font-size: 2.5em; margin-bottom: 20px;">Gyroscope & Accelerometer Test: Check Your Device Motion Sensors</h1>
+
+<p>Your smartphone, tablet, and laptop contain sophisticated <strong>motion sensors</strong> that enable features like screen rotation, gaming controls, augmented reality, and fitness tracking. But how do you know if these sensors are working correctly? Our free <strong>Gyroscope & Accelerometer Test</strong> at toolkitgen.com lets you monitor your device's motion sensors in real-time, verify their accuracy, and diagnose potential issues.</p>
+
+<h2>Understanding Device Motion Sensors</h2>
+
+<p>Modern devices contain several <strong>motion sensors</strong> that detect movement, orientation, and environmental conditions:</p>
+
+<h3>Accelerometer</h3>
+<p>The <strong>accelerometer</strong> measures linear acceleration along three axes (X, Y, Z). It detects:</p>
+<ul>
+    <li><strong>Tilt</strong>: Tilting the device left/right and forward/backward</li>
+    <li><strong>Shake</strong>: Rapid movements and vibrations</li>
+    <li><strong>Free-fall</strong>: Detecting when the device is falling</li>
+    <li><strong>Steps</strong>: In combination with algorithms for step counting</li>
+</ul>
+
+<h3>Gyroscope</h3>
+<p>The <strong>gyroscope</strong> measures rotational velocity around three axes:</p>
+<ul>
+    <li><strong>Pitch</strong>: Rotation around the X-axis (tilting forward/back)</li>
+    <li><strong>Roll</strong>: Rotation around the Y-axis (tilting side to side)</li>
+    <li><strong>Yaw</strong>: Rotation around the Z-axis (turning left/right)</li>
+</ul>
+
+<h3>Magnetometer (Compass)</h3>
+<p>The <strong>magnetometer</strong> measures magnetic field strength, enabling:</p>
+<ul>
+    <li><strong>Digital compass</strong> functionality</li>
+    <li><strong>Heading/direction</strong> for navigation</li>
+    <li><strong>Magnetic anomaly</strong> detection</li>
+</ul>
+
+<h3>Barometer</h3>
+<p>The <strong>barometer</strong> measures atmospheric pressure, enabling:</p>
+<ul>
+    <li><strong>Altitude estimation</strong></li>
+    <li><strong>Weather prediction</strong></li>
+    <li><strong>Floor detection</strong> in buildings</li>
+</ul>
+
+<h2>The 3-Axis Coordinate System</h2>
+
+<p>Motion sensors use a <strong>3D coordinate system</strong> to describe movement:</p>
+
+<h3>X-Axis</h3>
+<p><strong>Horizontal</strong>, running left to right when the device is in portrait orientation. Positive X is to the right.</p>
+
+<h3>Y-Axis</h3>
+<p><strong>Vertical</strong>, running bottom to top when the device is in portrait orientation. Positive Y is upward.</p>
+
+<h3>Z-Axis</h3>
+<p><strong>Perpendicular</strong> to the screen, pointing outward. Positive Z is toward the viewer.</p>
+
+<h2>How to Use the Motion Sensor Test</h2>
+
+<p>Our <strong>device motion logger</strong> provides real-time visualization of all motion sensors:</p>
+
+<h3>Step 1: Allow Sensor Access</h3>
+<p>Grant permission to access device motion data when prompted. This is required for the browser to access sensor readings.</p>
+
+<h3>Step 2: View Real-Time Data</h3>
+<p>The dashboard displays live sensor readings for:</p>
+<ul>
+    <li><strong>Accelerometer</strong>: X, Y, Z acceleration values</li>
+    <li><strong>Gyroscope</strong>: Rotation rates around each axis</li>
+    <li><strong>Device orientation</strong>: Alpha, Beta, Gamma angles</li>
+</ul>
+
+<h3>Step 3: Test Sensor Functionality</h3>
+<p>Move, tilt, rotate, and shake your device to see how sensor readings respond. Test each axis individually.</p>
+
+<h3>Step 4: Analyze Results</h3>
+<p>Compare readings against expected values. Properly functioning sensors should show smooth, accurate responses to movement.</p>
+
+<h2>Understanding Accelerometer Readings</h2>
+
+<h3>Units of Measurement</h3>
+<p>Accelerometers typically measure in:</p>
+<ul>
+    <li><strong>m/s²</strong>: Meters per second squared (SI units)</li>
+    <li><strong>g</strong>: Standard gravity units (9.81 m/s² = 1g)</li>
+</ul>
+
+<h3>Expected Static Readings</h3>
+<p>When the device is <strong>stationary and level</strong>:</p>
+<ul>
+    <li><strong>X-axis</strong>: ~0 m/s²</li>
+    <li><strong>Y-axis</strong>: ~0 m/s²</li>
+    <li><strong>Z-axis</strong>: ~9.81 m/s² (or -9.81 depending on coordinate system)</li>
+</ul>
+
+<h3>Why Z-Axis Shows Gravity</h3>
+<p>The accelerometer always detects <strong>gravity</strong>. Even when perfectly still, the Z-axis points toward or away from Earth due to gravitational acceleration.</p>
+
+<h3>Reading the Gravity Vector</h3>
+<p>Which axis shows gravity depends on device orientation:</p>
+<ul>
+    <li><strong>Screen up</strong>: Z-axis = +9.81</li>
+    <li><strong>Screen down</strong>: Z-axis = -9.81</li>
+    <li><strong>Portrait, face front</strong>: Y-axis = +9.81</li>
+</ul>
+
+<h2>Understanding Gyroscope Readings</h2>
+
+<h3>Units of Measurement</h3>
+<p>Gyroscopes measure <strong>angular velocity</strong>:</p>
+<ul>
+    <li><strong>rad/s</strong>: Radians per second (SI units)</li>
+    <li><strong>°/s</strong>: Degrees per second</li>
+</ul>
+
+<h3>Converting Units</h3>
+<p>To convert rad/s to °/s: <strong>°/s = rad/s × (180/π)</strong> ≈ rad/s × 57.3</p>
+
+<h3>Expected Readings</h3>
+<ul>
+    <li><strong>Stationary device</strong>: All axes = 0 rad/s</li>
+    <li><strong>Slow rotation</strong>: Small non-zero values</li>
+    <li><strong>Fast rotation</strong>: Large values (depends on device capability)</li>
+</ul>
+
+<h3>Typical Gyroscope Ranges</h3>
+<ul>
+    <li><strong>Consumer phones</strong>: ±250 to ±2000 °/s</li>
+    <li><strong>Gaming controllers</strong>: ±2000 °/s</li>
+    <li><strong>High-precision</strong>: ±15 to ±400 °/s</li>
+</ul>
+
+<h2>Understanding Device Orientation</h2>
+
+<h3>Alpha (α) - Yaw</h3>
+<p><strong>Rotation around Z-axis</strong>: Compass direction when the device is level. 0° = North, 90° = East, 180° = South, 270° = West.</p>
+
+<h3>Beta (β) - Pitch</h3>
+<p><strong>Rotation around X-axis</strong>: Front-to-back tilt. Range: -180° to +180°. At 0°, device is level.</p>
+
+<h3>Gamma (γ) - Roll</h3>
+<p><strong>Rotation around Y-axis</strong>: Side-to-side tilt. Range: -90° to +90°. At 0°, device is level.</p>
+
+<h2>Testing Different Device Orientations</h2>
+
+<h3>Flat on Table (Screen Up)</h3>
+<p>Expected readings:</p>
+<ul>
+    <li>Alpha: Varies based on compass direction</li>
+    <li>Beta: ~0°</li>
+    <li>Gamma: ~0°</li>
+    <li>Accelerometer Z: ~9.81 m/s²</li>
+</ul>
+
+<h3>Tilted Forward 45°</h3>
+<p>Expected readings:</p>
+<ul>
+    <li>Beta: ~45°</li>
+    <li>Gamma: ~0° (if tilted straight forward)</li>
+</ul>
+
+<h3>Portrait Orientation</h3>
+<p>Expected readings:</p>
+<ul>
+    <li>Beta: ~90°</li>
+    <li>Accelerometer Y: ~9.81 m/s²</li>
+</ul>
+
+<h3>Landscape Orientation</h3>
+<p>Expected readings:</p>
+<ul>
+    <li>Gamma: ~90°</li>
+    <li>Accelerometer X: ~9.81 m/s²</li>
+</ul>
+
+<h2>Diagnosing Sensor Problems</h2>
+
+<h3>Accelerometer Issues</h3>
+
+<h4>Stuck at Zero</h4>
+<p>If the accelerometer never changes, even when moving, the sensor may be defective or disabled.</p>
+
+<h4>Noisy Readings</h3>
+<p>Excessive jitter or fluctuation in readings may indicate sensor damage or electromagnetic interference.</p>
+
+<h4>Drifting Values</h4>
+<p>If values slowly change when the device is stationary, the sensor may need calibration or be affected by temperature.</p>
+
+<h3>Gyroscope Issues</h3>
+
+<h4>No Response to Rotation</h4>
+<p>If rotation doesn't affect readings, the gyroscope may be malfunctioning.</p>
+
+<h4>Constant Offset</h4>
+<p>If stationary readings aren't near zero, there may be a calibration issue or sensor drift.</p>
+
+<h3>Magnetometer Issues</h3>
+
+<h4>Wrong Compass Direction</h4>
+<p>If the compass points the wrong way, the magnetometer may need calibration (figure-8 motion).</p>
+
+<h4>Unstable Readings</h4>
+<p>Magnetometer readings can be affected by nearby magnets, speakers, or electronic interference.</p>
+
+<h2>Sensor Calibration</h2>
+
+<h3>Automatic Calibration</h3>
+<p>Most devices <strong>self-calibrate</strong> during normal use. Extended use helps sensors learn and adapt.</p>
+
+<h3>Manual Calibration (Android)</h3>
+<ol>
+    <li>Go to Settings > System > Reset</li>
+    <li>Select "Reset Options"</li>
+    <li>Choose "Reset Wi-Fi, Mobile & Bluetooth"</li>
+    <li>Alternatively: Use manufacturer calibration app</li>
+</ol>
+
+<h3>Manual Calibration (iOS)</h3>
+<p>iOS devices typically <strong>calibrate automatically</strong>. For compass issues, follow on-screen calibration prompts or wave in a figure-8 pattern.</p>
+
+<h3>Figure-8 Calibration</h3>
+<p>For compass/magnetometer issues:</p>
+<ol>
+    <li>Open the compass app</li>
+    <li>Wave the device in a large figure-8 pattern</li>
+    <li>Continue until calibration completes</li>
+</ol>
+
+<h2>Browser API Support</h2>
+
+<h3>DeviceMotionEvent</h3>
+<p>Provides <strong>acceleration and rotation rate</strong> data. Requires user permission on iOS 13+.</p>
+
+<h3>DeviceOrientationEvent</h3>
+<p>Provides <strong>alpha, beta, gamma</strong> orientation angles. Also requires permission on iOS 13+.</p>
+
+<h3>Permission Requirements</h3>
+<p>iOS 13 and later requires explicit user permission for motion sensor access. Our tool handles this automatically.</p>
+
+<h2>Common Sensor Use Cases</h2>
+
+<h3>Gaming</h3>
+<p><strong>Motion controls</strong> in games use accelerometer and gyroscope for steering, aiming, and character movement.</p>
+
+<h3>Screen Rotation</h3>
+<p>The <strong>accelerometer</strong> detects orientation changes, triggering automatic screen rotation.</p>
+
+<h3>Augmented Reality</h3>
+<p><strong>ARKit</strong> (iOS) and <strong>ARCore</strong> (Android) use sensors for spatial tracking and environmental understanding.</p>
+
+<h3>Fitness Tracking</h3>
+<p>Step counting and activity recognition rely on <strong>accelerometer patterns</strong> to detect movement types.</h3>
+
+<h3>Photography</h3>
+<p><strong>Image stabilization</strong> uses gyroscope data to compensate for camera shake.</p>
+
+<h3>Navigation</h3>
+<p>GPS combined with <strong>accelerometer and gyroscope</strong> provides dead reckoning when GPS is unavailable.</p>
+
+<h2>Sensor Specifications by Device Type</h2>
+
+<h3>Smartphones (High-End)</h3>
+<ul>
+    <li><strong>Accelerometer</strong>: ±2g to ±16g range, low noise</li>
+    <li><strong>Gyroscope</strong>: ±250 to ±2000 °/s</li>
+    <li><strong>Magnetometer</strong>: ±4900 µT range</li>
+</ul>
+
+<h3>Gaming Controllers</h3>
+<ul>
+    <li><strong>Accelerometer</strong>: ±2g typical</li>
+    <li><strong>Gyroscope</strong>: High sensitivity, ±2000 °/s</li>
+</ul>
+
+<h3>Laptops (with Hall sensors)</h3>
+<ul>
+    <li><strong>Accelerometer</strong>: Often used for hard drive protection</li>
+    <li><strong>Limited gyroscope</strong>: Depends on model</li>
+</ul>
+
+<h2>Testing Games and AR Applications</h2>
+
+<h3>Before Playing Motion Games</h3>
+<p>Test sensors before purchasing or playing motion-controlled games to ensure proper functionality.</p>
+
+<h3>Calibrating for Games</h3>
+<p>Some games include in-game calibration. Use our tool to verify basic sensor function first.</p>
+
+<h3>Testing AR Applications</h3>
+<p>AR apps require well-functioning sensors for proper spatial tracking. Test before relying on AR features.</p>
+
+<h2>Environmental Factors Affecting Sensors</h2>
+
+<h3>Temperature</h3>
+<p>Extreme temperatures can affect sensor accuracy and cause drift. Most devices work best at room temperature.</p>
+
+<h3>Magnetic Interference</h3>
+<p>Magnets, speakers, and electronic devices can interfere with magnetometer readings.</p>
+
+<h3>Physical Damage</h3>
+<p>Dropping or impact can damage sensors, causing inaccurate readings or complete failure.</p>
+
+<h3>Electromagnetic Interference</h3>
+<p>Strong electromagnetic fields can affect sensor accuracy.</p>
+
+<h2>Frequently Asked Questions About Motion Sensors</h2>
+
+<h3>1. How do I test my gyroscope?</h3>
+<p>Use our Gyroscope & Accelerometer Test tool. Rotate your device and watch the gyroscope readings change in real-time.</p>
+
+<h3>2. Why is my screen not rotating?</h3>
+<p>Check if auto-rotation is enabled, test the accelerometer with our tool, and ensure no screen lock is active.</p>
+
+<h3>3. What units does the accelerometer use?</h3>
+<p>Accelerometers typically measure in m/s² (meters per second squared) or g (standard gravity units).</p>
+
+<h3>4. Why does the Z-axis show 9.81 when my phone is flat?</h3>
+<p>The accelerometer always detects Earth's gravity. When flat with screen up, Z-axis points toward gravity.</p>
+
+<h3>5. Can I use this on my laptop?</h3>
+<p>Only laptops with motion sensors (like some MacBooks with SSDs that have motion sensors for drop protection) will show data.</p>
+
+<h3>6. Why do I need to grant motion permission?</h3>
+<p>iOS 13+ and some browsers require explicit user permission for accessing motion sensors for privacy reasons.</p>
+
+<h3>7. What is the difference between accelerometer and gyroscope?</h3>
+<p>Accelerometer measures linear acceleration (tilting, movement). Gyroscope measures rotational velocity (spinning, turning).</p>
+
+<h3>8. Why are my readings always changing?</h3>
+<p>Some noise is normal. If readings fluctuate wildly, the sensor may have issues or there's physical interference.</p>
+
+<h3>9. Can sensors wear out?</h3>
+<p>Under normal use, sensors are very durable. However, physical damage, extreme temperatures, or aging can affect performance.</p>
+
+<h3>10. How accurate are device sensors?</h3>
+<p>Consumer device sensors are accurate enough for their intended use (gaming, AR, fitness) but not suitable for precision measurement.</p>
+
+<h3>11. What is magnetometer calibration?</h3>
+<p>Calibration teaches the device how local magnetic fields behave. Wave the device in a figure-8 pattern to calibrate.</p>
+
+<h3>12. Why does my compass point wrong?</h3>
+<p>The magnetometer may need calibration, be affected by nearby magnets/electronics, or need to compensate for magnetic declination.</p>
+
+<h3>13. Do all phones have gyroscopes?</h3>
+<p>Most modern smartphones have gyroscopes, but some budget devices may lack them. Our tool will show "not available" if missing.</p>
+
+<h3>14. What is the refresh rate of these sensors?</h3>
+<p>Consumer device sensors typically update at <strong>60-100 Hz</strong> (60-100 times per second).</p>
+
+<h3>15. Why does my fitness tracker count steps wrong?</h3>
+<p>Step counting algorithms rely on accelerometer patterns. Inconsistent counting may indicate sensor issues or algorithm limitations.</p>
+
+<h3>16. Can I use sensors for navigation without GPS?</h3>
+<p>Partial navigation is possible using <strong>dead reckoning</strong> (accelerometer + gyroscope) but accuracy degrades quickly without external references.</p>
+
+<h3>17. What causes sensor drift?</h3>
+<p>Temperature changes, mechanical stress, and electronic noise can cause gradual changes in sensor readings over time.</p>
+
+<h3>18. How do game controllers use these sensors?</h3>
+<p>Game controllers use gyroscope for precise aiming (in shooters) and accelerometer for motion-based gameplay.</p>
+
+<h3>19. Can I replace a faulty motion sensor?</h3>
+<p>Motion sensors are soldered to the device motherboard. Repair typically requires board-level service or full device replacement.</p>
+
+<h3>20. Why don't my readings match reality?</h3>
+<p>Check coordinate system orientation, verify units are understood correctly, and ensure the device is functioning normally.</p>
+
+<h3>21. What is the difference between DeviceMotion and DeviceOrientation?</h3>
+<p>DeviceMotion provides raw sensor data (acceleration, rotation rate). DeviceOrientation provides calculated angles (alpha, beta, gamma).</p>
+
+<h3>22. How does screen rotation work?</h3>
+<p>The accelerometer detects gravity direction. When gravity appears to shift beyond a threshold, the system rotates the display.</p>
+
+<h3>23. Why do some apps need motion permission?</h3>
+<p>Motion data can potentially be used for fingerprinting and tracking. Permission requirements protect user privacy.</p>
+
+<h3>24. Can motion sensors detect gestures?</h3>
+<p>Yes! Gestures like shake, tilt, and rotation are detected by analyzing motion sensor patterns over time.</p>
+
+<h3>25. What's the difference between software and hardware sensors?</h3>
+<p>Hardware sensors are physical components. Software sensors (like rotation vector) combine multiple hardware sensors for better accuracy.</p>
+
+<p><a href="https://toolkitgen.com/tool/device_motion_logger"><strong>Try our free Gyroscope & Accelerometer Test now</strong></a> and verify your device's motion sensors are working correctly. Real-time data visualization for all motion sensors.</p>
+
+</span>
+</body>
+</html>

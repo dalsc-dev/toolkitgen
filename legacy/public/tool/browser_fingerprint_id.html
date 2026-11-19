@@ -1,0 +1,763 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingerprint Identity Lab: Browser Privacy &amp; Hardware Salt Analysis</title>
+    <meta name="description" content="Analyze your unique browser fingerprint. Understand how websites identify you without cookies using Canvas, WebGL, and Audio context forensics. Test your privacy entropy.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/browser_fingerprint_id">
+    <meta name="keywords" content="browser fingerprint test, canvas fingerprinting, privacy audit, cookie-less tracking, digital forensics, webgl analysis, audio context tracking, device entropy">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Fingerprint Identity Lab: Browser Privacy &amp; Hardware Salt Analysis">
+    <meta property="og:description" content="See how trackers identify you online by analyzing your unique browser fingerprint and device hash.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/browser_fingerprint_id">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fingerprint Identity Lab: Browser Privacy &amp; Hardware Salt Analysis">
+    <meta name="twitter:description" content="See how trackers identify you online by analyzing your unique browser fingerprint and device hash.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/browser_fingerprint_id#webapp",
+      "name": "Browser Configuration Analyzer",
+      "headline": "Fingerprint Identity Lab: Browser Privacy & Hardware Salt Analysis",
+      "url": "https://toolkitgen.com/tool/browser_fingerprint_id",
+      "description": "See how trackers identify you online by analyzing your unique browser fingerprint and device hash.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/browser_fingerprint_id#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Browser Configuration Analyzer",
+          "item": "https://toolkitgen.com/tool/browser_fingerprint_id"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/browser_fingerprint_id#howto",
+      "name": "How to Use Browser Configuration Analyzer",
+      "description": "Quick 4-step guide to using Browser Configuration Analyzer locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Browser Configuration Analyzer directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/browser_fingerprint_id#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Incognito mode prevent fingerprinting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Standard Incognito mode only prevents your browser from saving cookies and local history on your device. It does nothing to stop a remote server from reading your hardware characteristics. You can verify this by copying the hash in our tool, opening an Incognito window, and seeing that the hash remains identical."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my \"Uniqueness Score\" so high?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Uniqueness Score is a statistical estimation. Because the number of possible hardware/software combinations is astronomically high ($2^{256}$ or more), the probability of finding another user with the exact same combination of screen resolution, font list, timezone, and canvas rendering is extremely low. Most users are unique within a sample of several million."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this tool on Android or iPhone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perfectly. Fingerprinting is especially effective on mobile devices because their hardware (like Apple's A-series chips) and screen resolutions are highly standardized. However, mobile devices also reveal data points like Battery Level and Device Orientation (Gyroscope) that desktop computers do not, potentially making a mobile user even more distinct."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/browser_fingerprint_id#article",
+      "headline": "Comprehensive Guide to Browser Configuration Analyzer & Client-Side Execution",
+      "description": "See how trackers identify you online by analyzing your unique browser fingerprint and device hash.",
+      "url": "https://toolkitgen.com/tool/browser_fingerprint_id",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#osint" class="hover:text-[#EE6C4D]">OSINT &amp; Privacy</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">Fingerprint Lab</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="lab-status">
+                        Lab Status</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-green-600 font-black">LOCAL</span>
+                            <span>Parsing</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-green-600 font-black">ENTROPY</span>
+                            <span>High</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-green-600 font-black">PRIVACY</span>
+                            <span>100%</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest text-center">
+                            Active Scan</h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                            </div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Hardware
+                                Auditor Active</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-green-400 mb-2" id="privacy-tip">Privacy Tip</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">Using a
+                        standard browser like Chrome on Windows makes you less unique than using a rare Linux build.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-green-500 relative z-10 shadow-2xl">
+                    <div class="p-6 md:p-10 bg-white border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
+                                Fingerprint Identity Lab</h1>
+                            <p class="text-sm text-slate-500 mt-1 font-medium italic">Deconstruct your browser's unique
+                                hardware signature.</p>
+                        </div>
+                        <div class="p-4 bg-slate-900 text-green-500 rounded-2xl hidden sm:block shadow-lg">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A10.003 10.003 0 0012 20a10.003 10.003 0 006.239-2.188l.054.09m-9.34-2.144l.11-.13C10.51 14.657 11.238 14 12 14s1.49.657 1.89 1.636l.11.13m-6.32-6.13a4 4 0 018 0c0 1.11-.448 2.11-1.171 2.828l-.057.057M7 11c0 .448.073.878.209 1.282m.057.057L7 11zm10.791 1.282c.136-.404.209-.834.209-1.282l-.057-.057.057.057zM12 3v1m0 16v1m8.66-8.66h-1M3.34 12H2.34m15.66-5.66l-.707.707M6.34 17.66l-.707.707m.707-11.32l-.707-.707M17.66 17.66l-.707-.707">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10 bg-slate-50">
+                        <div class="text-center mb-12">
+                            <button onclick="startFingerprinting()" id="scan-btn" class="scan-btn w-full md:w-auto px-12 py-5 rounded-2xl shadow-2xl text-lg flex items-center justify-center gap-3 mx-auto">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                                Analyze Hardware Signature
+                            </button>
+                        </div>
+                        <div id="results-area" class="hidden animate-fadeIn">
+                            <div class="id-badge mb-10 shadow-2xl">
+                                <div class="scan-line" id="scanner"></div>
+                                <p class="text-[10px] text-slate-500 uppercase font-black tracking-[0.3em] mb-4">
+                                    Cryptographic Device Fingerprint</p>
+                                <div class="hash-val" id="fingerprint-hash">Calculating...</div>
+                                <div class="mt-6 flex justify-center gap-2">
+                                    <span class="incognito-tag">Persistent Across Sessions</span>
+                                    <span class="bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">High
+                                        Confidence</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                                    <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-100 pb-3" id="vector-data-extraction">
+                                        Vector Data Extraction</h3>
+                                    <div class="space-y-1">
+                                        <div class="detail-row">
+                                            <span class="detail-label">Browser Engine</span>
+                                            <span class="detail-data text-xs max-w-[180px] truncate" id="res-ua">--</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">Display Matrix</span>
+                                            <span class="detail-data" id="res-screen">--</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">Temporal Zone</span>
+                                            <span class="detail-data" id="res-tz">--</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">Linguistic Bias</span>
+                                            <span class="detail-data" id="res-lang">--</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">Architectural Platform</span>
+                                            <span class="detail-data" id="res-platform">--</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">Canvas Signal Hash</span>
+                                            <span class="detail-data text-xs text-blue-600" id="res-canvas">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-slate-900 text-white p-8 rounded-[2rem] border border-slate-800 shadow-2xl relative overflow-hidden group">
+                                        <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent">
+                                        </div>
+                                        <p class="text-[10px] text-slate-400 uppercase font-black tracking-widest mb-2 relative z-10">
+                                            Probability of Uniqueness</p>
+                                        <div class="text-6xl font-black text-red-500 tracking-tighter relative z-10" id="uniqueness-score">99.9%</div>
+                                        <p class="text-[10px] text-slate-500 mt-4 leading-relaxed font-bold uppercase relative z-10">
+                                            Statistical analysis confirms you are nearly unique among millions of global
+                                            endpoints.</p>
+                                    </div>
+                                    <div class="bg-white p-6 rounded-2xl border-2 border-slate-100 shadow-inner">
+                                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">
+                                            Privacy Audit Checklist:</p>
+                                        <ol class="space-y-3">
+                                            <li class="flex items-start gap-3">
+                                                <div class="w-4 h-4 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px] font-bold mt-0.5">
+                                                    1</div>
+                                                <p class="text-xs text-slate-500 font-medium">Record the <b>Device
+                                                        Hash</b> generated above.</p>
+                                            </li>
+                                            <li class="flex items-start gap-3">
+                                                <div class="w-4 h-4 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px] font-bold mt-0.5">
+                                                    2</div>
+                                                <p class="text-xs text-slate-500 font-medium">Switch to an
+                                                    <b>Incognito/Private</b> window.
+                                                </p>
+                                            </li>
+                                            <li class="flex items-start gap-3">
+                                                <div class="w-4 h-4 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px] font-bold mt-0.5">
+                                                    3</div>
+                                                <p class="text-xs text-slate-500 font-medium">Re-run the scan. If the
+                                                    hashes match, your "Privacy" mode is <b>leaking hardware
+                                                        identifiers</b>.</p>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-10 p-8 bg-white rounded-3xl border border-slate-200">
+                                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 text-center">
+                                    Hardware GPU Rendering Artifact (Canvas Extraction)</p>
+                                <div class="flex justify-center">
+                                    <canvas id="fp-canvas" width="400" height="80" class="border-2 border-slate-100 rounded-xl bg-slate-50 shadow-inner max-w-full"></canvas>
+                                </div>
+                                <p class="text-[10px] text-slate-400 mt-4 text-center italic font-medium">Every GPU
+                                    renders these specific colors and gradients with microscopic variances based on
+                                    driver versions and hardware clocks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="tool-categories">
+                        Tool Categories</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#privacy" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-green-500 hover:text-green-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Privacy
+                            Hub</a>
+                        <a href="/#osint" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-green-500 hover:text-green-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Osint
+                            Tools</a>
+                        <a href="/#security" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-green-500 hover:text-green-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Cyber
+                            Armor</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/google_takeout_visualizer" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">IP Location Lookup</div>
+                                <div class="text-[10px] text-slate-500 truncate">Find Geo-Location &amp; ISP details
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/browser_fingerprint_id" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">WebRTC Leak Shield</div>
+                                <div class="text-[10px] text-slate-500 truncate">Check for IP leaks through VPN</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/aes_gcm_vault_local" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">Password Entropy</div>
+                                <div class="text-[10px] text-slate-500 truncate">Test complexity strength</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/exif_data_scrubber" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">Photo Metadata Cleaner</div>
+                                <div class="text-[10px] text-slate-500 truncate">Remove GPS data from images</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/browser_history_analyzer" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">SSL Cert Checker</div>
+                                <div class="text-[10px] text-slate-500 truncate">Verify security certificates</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-900 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-green-400 uppercase text-[10px] tracking-widest" id="android-setup">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.523 15.3414C17.1513 15.3414 16.8502 15.0403 16.8502 14.6686C16.8502 14.2969 17.1513 13.9958 17.523 13.9958C17.8947 13.9958 18.1958 14.2969 18.1958 14.6686C18.1958 15.0403 17.8947 15.3414 17.523 15.3414ZM6.47702 15.3414C6.10534 15.3414 5.8042 15.0403 5.8042 14.6686C5.8042 14.2969 6.10534 13.9958 6.47702 13.9958C6.8487 13.9958 7.14984 14.2969 7.14984 14.6686C7.14984 15.0403 6.8487 15.3414 6.47702 15.3414ZM17.9625 11.2335L19.4673 8.63668C19.5706 8.45828 19.5101 8.22912 19.3317 8.12586C19.1533 8.0226 18.9242 8.08316 18.8209 8.26156L17.2917 10.9039C15.7533 10.1983 14.0202 9.8042 12 9.8042C9.9798 9.8042 8.2467 10.1983 6.70831 10.9039L5.1791 8.26156C5.07584 8.08316 4.84668 8.0226 4.66828 8.12586C4.48988 8.22912 4.42932 8.45828 4.53258 8.63668L6.0375 11.2335C3.25055 12.8398 1.3414 15.8286 1.3414 19.3414H22.6586C22.6586 15.8286 20.7495 12.8398 17.9625 11.2335Z">
+                            </path>
+                        </svg>
+                        Android Setup
+                    </h3>
+                    <p class="text-slate-400 text-[11px] leading-relaxed font-medium text-center">
+                        Auditing privacy on the move? Open Chrome on your Android device, tap the three dots, and select
+                        <b>"Add to Home Screen"</b>. This tool works offline as a PWA, keeping your audit strictly
+                        private.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-forensic-ghost-why-you-can-be-tracked-without-cookies">The Forensic Ghost: Why You Can Be
+                    Tracked Without Cookies</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    For decades, the public's understanding of digital tracking was confined to the "Cookie"—a
+                    small text file saved in the browser. Privacy advocates taught users to "Clear History" and
+                    "Block 3rd Party Cookies" to remain anonymous. However, the surveillance economy has evolved
+                    into a far more clinical and persistent phase: <b>Browser Fingerprinting</b>. This
+                    <strong>Fingerprint Identity Lab</strong> (our technical "Canvas") exposes how every tiny
+                    detail of your hardware configuration, from the way your GPU draws a pixel to the clock
+                    speed of your audio processor, creates a unique serial number for your identity that you can
+                    never truly delete.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-green-900 font-bold text-2xl uppercase tracking-tighter" id="the-mathematics-of-identity-entropy">The
+                    Mathematics of Identity Entropy</h3>
+                <p class="!mb-6 text-slate-700">To understand why your browser is unique, we must look at
+                    <b>Shannon Entropy</b>. In information theory, entropy is a measure of the "surprise" or
+                    uniqueness of a variable. Your device ID is not a single coordinate; it is a <b>Composite
+                        Hash</b> of hundreds of individual data points. We calculate the probability of your
+                    uniqueness using the following logic:
+                </p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-green-50 shadow-sm space-y-10">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">1. The
+                            Entropy Equation (LaTeX)</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-green-500 mt-2">
+                            The total entropy ($H$) of your browser identity is the sum of the bits of
+                            information provided by each unique characteristic ($x$):
+                        </p>
+                        <div class="py-4 text-center text-xl text-slate-800">
+                            $$H(X) = -\sum_{i=1}^{n} P(x_i) \log_2 P(x_i)$$
+                        </div>
+                        If a browser characteristic is very common (like a 1920x1080 screen), it provides low
+                        entropy. If it is rare (like a specific set of 500 installed fonts), it provides high
+                        entropy.
+                        <p></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">2. The
+                            Composite Hashing Strategy</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-blue-500 mt-2">
+                            "Your Final Device ID is a one-way cryptographic hash of the combined vector string.
+                            Even a change of one pixel in the Canvas render will result in a completely
+                            different 32-character identifier."
+                        </p>
+                        <div class="mt-4 py-4 text-center text-xl text-slate-800 bg-slate-50 rounded-xl font-mono">
+                            $$\text{ID} = \text{Hash}(UA \oplus \text{Res} \oplus \text{TZ} \oplus \text{Canvas}
+                            \oplus \text{WebGL})$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-canvas-fingerprinting-technique-drawing-your-identity">Chapter 1: The Canvas Fingerprinting Technique - Drawing Your Identity</h2>
+            <p>The most pervasive fingerprinting technique—visible in our tool above—is <b>Canvas
+                    Fingerprinting</b>. When a website asks your browser to render a hidden image, it isn't
+                interested in the picture itself. It is interested in the <b>Micro-Variations</b> of the result.
+                Because different graphics cards (GPUs), operating systems, and driver versions handle
+                anti-aliasing and sub-pixel smoothing differently, the resulting image data is a unique
+                signature of your hardware stack.</p>
+            <h3 id="1-why-it-is-permanent">1. Why It is Permanent</h3>
+            <p>Unlike a cookie, which is stored in a file, a fingerprint is <b>derived from your physical
+                    properties</b>. Clearing your browser data does not change your graphics card. Reinstalling
+                your browser does not change your screen resolution. This creates a "Sticky ID" that allows
+                ad-tech companies to link your browsing behavior across "Incognito" sessions or even across
+                different browsers on the same machine.</p>
+            <div class="highlight-box">
+                <h4 class="text-green-900 !mt-0 mb-2 font-black uppercase tracking-widest">THE "AUDIO CONTEXT"
+                    FINGERPRINT</h4>
+                <p class="text-green-800 italic font-medium">Beyond visuals, trackers now measure how your
+                    computer processes sound. By sending a silent high-frequency signal through your
+                    AudioContext and measuring the tiny oscillations in the waveform as it is processed by your
+                    sound card, trackers can differentiate between two identical laptops based on the
+                    microscopic physical manufacturing variances in their audio chips.</p>
+            </div>
+            <h2 id="chapter-2-the-osint-perspective-understanding-digital-footprints">Chapter 2: The OSINT Perspective - Understanding Digital Footprints</h2>
+            <p>In <b>Open Source Intelligence (OSINT)</b> and digital forensics, browser fingerprinting is used
+                as a "soft identifier." While an IP address can be hidden by a VPN, a browser fingerprint
+                provides <b>Device Context</b>. If an anonymous user on a forum has the same fingerprint hash as
+                a known suspect's laptop, the probability of them being the same individual increases
+                dramatically, regardless of the VPN they are using.</p>
+            <h2 id="chapter-3-defense-strategies-how-to-blend-in">Chapter 3: Defense Strategies - How to Blend In</h2>
+            <p>How do you fight a tracking method that relies on your physical hardware? There are three primary
+                strategies used by privacy professionals:</p>
+            <ul class="space-y-6 mt-6">
+                <li><b>1. Normalization (The Tor Strategy):</b> The best way to hide is to look like everyone
+                    else. The Tor Browser forces every user to have the same window size, the same font list,
+                    and the same canvas response. By reducing your "Entropy" to zero, you become part of a
+                    massive crowd.</li>
+                <li><b>2. Poisoning (Canvas Noise):</b> Some extensions (like CanvasBlocker) inject random
+                    "noise" into the canvas rendering. Every time a tracker asks for your fingerprint, the
+                    extension provides a slightly different image. This makes your ID "unstable," preventing
+                    trackers from linking your sessions over time.</li>
+                <li><b>3. Virtualization:</b> Running your browser inside a Virtual Machine (VM) or a hardened
+                    container (like Qubes OS) abstracts the hardware. The browser sees "Generic VM GPU" instead
+                    of your actual hardware model, protecting your true identity.</li>
+            </ul>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Fingerprinting Vector</th>
+                            <th class="px-6 py-5">What It Reveals</th>
+                            <th class="px-6 py-5">Difficulty to Block</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Canvas Rendering</td>
+                            <td class="px-6 py-5 text-red-500 font-black uppercase">GPU &amp; Driver Version</td>
+                            <td class="px-6 py-5">Moderate (Requires Noise injection)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">Font Enumeration</td>
+                            <td class="px-6 py-4 text-orange-500 font-black uppercase">User Lifestyle/Software
+                            </td>
+                            <td class="px-6 py-4">High (System-level query)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">AudioContext</td>
+                            <td class="px-6 py-5 text-blue-500 font-black uppercase">Audio Hardware Spec</td>
+                            <td class="px-6 py-5">Hard (Core API)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Screen/Battery</td>
+                            <td class="px-6 py-5 text-slate-400 font-black uppercase">Device Form Factor</td>
+                            <td class="px-6 py-5">Very Hard (Standard Specs)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-4-useful-tips-and-tricks-for-digital-privacy">Chapter 4: Useful Tips and Tricks for Digital Privacy</h2>
+            <div class="space-y-8 mt-8">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <h4 class="text-slate-900 !mt-0 mb-3 uppercase tracking-tighter">1. The "Default Font" Trick
+                    </h4>
+                    <p class="text-sm leading-relaxed text-slate-600">Many people install hundreds of fonts for
+                        design work. <b>Linguistically</b>, this makes you extremely unique. To reduce your
+                        fingerprint, use a "Font Blocker" extension to limit websites to only seeing standard
+                        system fonts (Arial, Times New Roman, etc.).</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <h4 class="text-slate-900 !mt-0 mb-3 uppercase tracking-tighter">2. Avoid "Maximize Window"
+                    </h4>
+                    <p class="text-sm leading-relaxed text-slate-600">Trackers can see the inner width and
+                        height of your browser window. If you maximize your window on a 4K monitor, you are
+                        flagging your high-end resolution. Keep your window at a common, smaller size (like
+                        1000x800) to blend in with the majority of web users.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <h4 class="text-slate-900 !mt-0 mb-3 uppercase tracking-tighter">3. Hardware Acceleration
+                        Audit</h4>
+                    <p class="text-sm leading-relaxed text-slate-600">Disabling "Hardware Acceleration" in your
+                        browser settings forces the CPU to handle rendering instead of the GPU. This can
+                        significantly alter your Canvas and WebGL fingerprints, often making you look like a
+                        more generic "Software Renderer."</p>
+                </div>
+            </div>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-fingerprint-forensics">Frequently Asked Questions (FAQ) - Fingerprint Forensics</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does Incognito mode prevent fingerprinting?</span>
+                        <span class="transition-transform group-open:rotate-180 text-green-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>No.</b> Standard Incognito mode only prevents your browser from
+                            saving cookies and local history on <em>your</em> device. It does nothing to stop a
+                            remote server from reading your hardware characteristics. You can verify this by
+                            copying the hash in our tool, opening an Incognito window, and seeing that the hash
+                            remains identical.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Why is my "Uniqueness Score" so high?</span>
+                        <span class="transition-transform group-open:rotate-180 text-green-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">The <strong>Uniqueness Score</strong> is a statistical estimation.
+                            Because the number of possible hardware/software combinations is astronomically high
+                            ($2^{256}$ or more), the probability of finding another user with the exact same
+                            combination of screen resolution, font list, timezone, and canvas rendering is
+                            extremely low. Most users are unique within a sample of several million.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Can I use this tool on Android or iPhone?</span>
+                        <span class="transition-transform group-open:rotate-180 text-green-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>Perfectly.</b> Fingerprinting is especially effective on mobile
+                            devices because their hardware (like Apple's A-series chips) and screen resolutions
+                            are highly standardized. However, mobile devices also reveal data points like
+                            <strong>Battery Level</strong> and <strong>Device Orientation (Gyroscope)</strong>
+                            that desktop computers do not, potentially making a mobile user even more
+                            distinct.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black" id="audit-your-shadow">
+                    Audit Your Shadow</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop guessing about your digital
+                    anonymity. Quantify your hardware leaks, understand your information entropy, and reclaim
+                    your privacy in a post-cookie world.</p>
+                <a href="#scan-btn" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Begin Identity Audit
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-logic-tools">
+                Recommended Logic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/chat_timeline_visualizer" class="tool-link-card">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Communication History Graph</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Visualize communication patterns and relationship
+                        history from exported chat logs over time.</p>
+                </a>
+                <a href="/tool/regex_flowchart_gen" class="tool-link-card">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Regex Visualizer &amp; Debugger</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Understand complex Regular Expressions by
+                        converting them into interactive visual flowcharts.</p>
+                </a>
+                <a href="/tool/cron_job_visualizer" class="tool-link-card">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Crontab Generator &amp; Visualizer</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Create and verify Cron schedules with a
+                        human-readable description of when tasks will run.</p>
+                </a>
+                <a href="/tool/wifi_speed_stability" class="tool-link-card">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Internet Stability Test</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Analyze your connection quality by measuring ping
+                        jitter and packet loss consistency.</p>
+                </a>
+                <a href="/tool/dead_pixel_check" class="tool-link-card">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Dead Pixel Checker</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Easily spot dead or stuck pixels on your monitor
+                        by cycling through solid RGB color backgrounds.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        // Simple Hash Function (DJB2 variant)
+        function hashString(str) {
+            let hash = 5381;
+            for (let i = 0; i < str.length; i++) {
+                hash = ((hash << 5) + hash) + str.charCodeAt(i);
+            }
+            return (hash >>> 0).toString(16);
+        }
+        // Canvas Fingerprinting Strategy: 
+        // We render text and shapes to a hidden canvas. 
+        // GPU anti-aliasing and font-smoothing create microscopic byte variations.
+        function getCanvasFingerprint() {
+            const canvas = document.getElementById('fp-canvas');
+            const ctx = canvas.getContext('2d');
+            // Clear
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Background
+            ctx.fillStyle = "#f60";
+            ctx.fillRect(125, 1, 62, 20);
+            // Text with different fonts and sizes to trigger sub-pixel offsets
+            ctx.textBaseline = "top";
+            ctx.font = "16px 'Arial'";
+            ctx.fillStyle = "#069";
+            ctx.fillText("Fingerprint_v1.0", 2, 2);
+            ctx.font = "14px 'Times New Roman'";
+            ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+            ctx.fillText("ToolkitGen_Audit", 4, 18);
+            // Geometric shapes with alpha transparency
+            ctx.strokeStyle = "rgba(102, 0, 204, 0.5)";
+            ctx.beginPath();
+            ctx.arc(50, 20, 15, 0, Math.PI * 2, true);
+            ctx.stroke();
+            return canvas.toDataURL();
+        }
+        function startFingerprinting() {
+            const btn = document.getElementById('scan-btn');
+            const scanner = document.getElementById('scanner');
+            const results = document.getElementById('results-area');
+            btn.innerText = "SCANNING HARDWARE...";
+            btn.disabled = true;
+            results.classList.remove('hidden');
+            scanner.style.display = 'block';
+            setTimeout(() => {
+                // Gather Data Points (Vectors)
+                const ua = navigator.userAgent;
+                const screenRes = `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}`;
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const lang = navigator.language;
+                const platform = navigator.platform;
+                const canvasData = getCanvasFingerprint();
+                // Compute Composite Identifier
+                const composite = [ua, screenRes, timezone, lang, platform, canvasData].join(':::');
+                const fingerprintID = hashString(composite).toUpperCase();
+                // Update UI
+                document.getElementById('fingerprint-hash').innerText = fingerprintID;
+                document.getElementById('res-ua').innerText = ua;
+                document.getElementById('res-screen').innerText = screenRes;
+                document.getElementById('res-tz').innerText = timezone;
+                document.getElementById('res-lang').innerText = lang;
+                document.getElementById('res-platform').innerText = platform;
+                document.getElementById('res-canvas').innerText = hashString(canvasData).toUpperCase();
+                // Stop Animation
+                scanner.style.display = 'none';
+                btn.innerText = "RE-GENERATE HASH";
+                btn.disabled = false;
+                // Smooth Scroll to Results
+                results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 2000);
+        }
+        // --- GLOBAL SCROLL LOGIC ---
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

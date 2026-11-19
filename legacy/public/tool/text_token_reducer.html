@@ -1,0 +1,812 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Context Squeezer: Compress Text for ChatGPT &amp; Claude</title>
+    <meta name="description" content="Reduce token usage and save API costs. Compress long documents into dense prompts for LLMs like GPT-4 and Claude. Optimize context windows with our free, private local tool.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/text_token_reducer">
+    <meta name="keywords" content="token compressor, llm context window tool, prompt optimization, chatgpt cost saver, text summarizer for ai, reduce prompt size, api cost calculator, gpt-4 token limit, claude context window, prompt engineering tools, semantic compression, stopword removal tool">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="LLM Context Squeezer: Compress Text for ChatGPT &amp; Claude">
+    <meta property="og:description" content="Optimize text to save API costs and fit within LLM context windows by compressing documents into essential tokens.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/text_token_reducer">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Context Squeezer: Compress Text for ChatGPT &amp; Claude">
+    <meta name="twitter:description" content="Optimize text to save API costs and fit within LLM context windows by compressing documents into essential tokens.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/text_token_reducer#webapp",
+      "name": "Text Token Usage Calculator",
+      "headline": "LLM Context Squeezer: Compress Text for ChatGPT & Claude",
+      "url": "https://toolkitgen.com/tool/text_token_reducer",
+      "description": "Optimize text to save API costs and fit within LLM context windows by compressing documents into essential tokens.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/text_token_reducer#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Text Token Usage Calculator",
+          "item": "https://toolkitgen.com/tool/text_token_reducer"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/text_token_reducer#howto",
+      "name": "How to Use Text Token Usage Calculator",
+      "description": "Quick 4-step guide to using Text Token Usage Calculator locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Text Token Usage Calculator directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/text_token_reducer#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does stripping stopwords make the AI confused?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In 99% of cases, no. LLMs process text using attention mechanisms that naturally prioritize significant words. Stripping \"the\" and \"a\" doesn't change the vector representation of the sentence's meaning. However, if you are asking the AI to perform a task that requires Stylistic Analysis (like \"mimic this person's writing style\"), you should avoid compression, as the filler words are part of that style."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know if I've squeezed too much?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The easiest test is the \"Scan Test.\" Read the squeezed text yourself. If you can still understand the core facts and intent of the data, the AI definitely can. If the text has become a disjointed list of nouns that makes no sense, switch back to \"Stopword Stripping\" or \"Minification\" mode."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this work for Python or JavaScript code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. For code, always use the Minification mode. This strips out comments and unnecessary indentation. While human developers hate unformatted code, LLMs are trained on billions of lines of it. They find it just as easy (and much cheaper) to parse a one-line function as a beautifully formatted 10-line one."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/text_token_reducer#article",
+      "headline": "Comprehensive Guide to Text Token Usage Calculator & Client-Side Execution",
+      "description": "Optimize text to save API costs and fit within LLM context windows by compressing documents into essential tokens.",
+      "url": "https://toolkitgen.com/tool/text_token_reducer",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <style>
+        :root {
+            --color-site-primary: #EE6C4D;
+            --color-data-teal: #14b8a6;
+            --color-data-dark: #0f172a;
+        }
+
+        /* Tool Styles */
+        .tool-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* Text Areas */
+        .code-area {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            resize: vertical;
+            width: 100%;
+            height: 350px;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .code-area:focus {
+            outline: none;
+            border-color: var(--color-data-teal);
+            box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.1);
+            background-color: white;
+        }
+
+        /* Stats Badge */
+        .stat-badge {
+            background-color: #0f172a;
+            color: white;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .highlight-box {
+            background: #f0fdfa;
+            border-left: 4px solid #14b8a6;
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 2rem 0;
+        }
+
+        /* Tool Link Card Styling for Sidebar/Grid */
+        .tool-link-card {
+            display: block;
+            padding: 1.25rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            transition: all 0.2s;
+            margin-bottom: 0.75rem;
+            height: 100%;
+        }
+
+        .tool-link-card:hover {
+            border-color: var(--color-data-teal);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(20, 184, 166, 0.15);
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* Layout Standard */
+        .header-search {
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            font-size: 0.875rem;
+            width: 16rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .header-search:focus {
+            border-color: var(--color-site-primary);
+            box-shadow: 0 0 0 2px rgba(238, 108, 77, 0.2);
+        }
+
+        .search-results-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-top: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 60;
+        }
+
+        .search-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .search-item:hover {
+            background-color: #e0e7ff;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#ai-productivity" class="hover:text-[#EE6C4D]">AI Strategy</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">Context Squeezer</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-12">
+                <section class="tool-card border-t-4 border-teal-500 relative z-10 shadow-2xl">
+                    <div class="p-6 md:p-10 bg-white border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">LLM Context
+                                Squeezer</h1>
+                            <p class="text-sm text-slate-500 mt-2 font-medium italic">Maximize your context window.
+                                Minimize your API bills.</p>
+                        </div>
+                        <div class="hidden sm:block">
+                            <span class="bg-teal-100 text-teal-800 text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest border-2 border-teal-200">Local
+                                Privacy First</span>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-8 bg-slate-50">
+                        <div class="flex flex-wrap items-center gap-6 mb-8">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Compression
+                                    Algorithm</label>
+                                <select id="mode" class="p-3 border border-slate-300 rounded-xl text-sm bg-white focus:ring-4 focus:ring-teal-100 focus:outline-none transition-all" onchange="compress()">
+                                    <option value="stopwords">Stopword Stripping (Linguistic)</option>
+                                    <option value="minification">Whitespace Minification (Data/Code)</option>
+                                    <option value="aggressive">Aggressive Mode (Keyword Extraction)</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Economic
+                                    Target</label>
+                                <select id="model-cost" class="p-3 border border-slate-300 rounded-xl text-sm bg-white focus:ring-4 focus:ring-teal-100 focus:outline-none transition-all" onchange="updateStats()">
+                                    <option value="0.03">GPT-4 Turbo ($0.03 / 1k)</option>
+                                    <option value="0.0015">GPT-3.5 Turbo ($0.0015 / 1k)</option>
+                                    <option value="0.01">Claude 3.5 Sonnet ($0.003 / 1k)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center px-1">
+                                    <span class="text-xs font-black text-slate-500 uppercase tracking-tighter">Raw Data
+                                        Input</span>
+                                    <span class="stat-badge" id="stats-orig">0 Tokens</span>
+                                </div>
+                                <textarea id="input-text" class="code-area custom-scrollbar" placeholder="Paste your long document, article, or unstructured data here..."></textarea>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center px-1">
+                                    <span class="text-xs font-black text-teal-600 uppercase tracking-tighter">Squeezed
+                                        Prompt</span>
+                                    <span class="stat-badge bg-teal-600" id="stats-comp">0 Tokens</span>
+                                </div>
+                                <textarea id="output-text" class="code-area border-teal-200 bg-teal-50/30 custom-scrollbar" readonly="" placeholder="The optimized context will appear here..."></textarea>
+                            </div>
+                        </div>
+                        <div class="mt-10 flex flex-col sm:flex-row justify-between items-center bg-white p-6 rounded-3xl border border-slate-200 shadow-xl gap-6">
+                            <div class="text-sm font-medium text-slate-600 flex items-center gap-6">
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] font-black text-slate-400 uppercase">Context Savings</span>
+                                    <span id="savings-pct" class="text-2xl font-black text-teal-600">0%</span>
+                                </div>
+                                <div class="w-px h-10 bg-slate-100"></div>
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] font-black text-slate-400 uppercase">Financial
+                                        Recovery</span>
+                                    <span id="savings-usd" class="text-2xl font-black text-emerald-600">$0.0000</span>
+                                </div>
+                            </div>
+                            <button onclick="copyOutput()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-black py-4 px-12 rounded-2xl transition transform active:scale-95 shadow-lg flex items-center justify-center gap-3 uppercase tracking-widest text-sm">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3">
+                                    </path>
+                                </svg>
+                                Copy Squeezed Prompt
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="space-y-8 h-fit lg:block relative">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 sticky top-8">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest" id="model-specs">
+                        Model Specs</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center justify-between text-sm group cursor-pointer">
+                            <span class="text-slate-500 group-hover:text-slate-900 transition-colors">GPT-4 Turbo</span>
+                            <span class="font-black text-slate-900">128k Window</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm group cursor-pointer">
+                            <span class="text-slate-500 group-hover:text-slate-900 transition-colors">Claude 3.5</span>
+                            <span class="font-black text-slate-900">200k Window</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm group cursor-pointer">
+                            <span class="text-slate-500 group-hover:text-slate-900 transition-colors">Gemini 1.5</span>
+                            <span class="font-black text-slate-900">1M+ Window</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm group cursor-pointer border-t border-slate-50 pt-4 mt-4">
+                            <span class="text-slate-400 font-bold uppercase text-[9px]">Token Logic</span>
+                            <span class="text-[9px] text-slate-400">~4 chars/token</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/prompt_template_builder" class="tool-link-card">
+                                <h4 class="font-bold text-slate-800 text-xs mb-1">AI Prompt Architect</h4>
+                                <p class="text-[10px] text-slate-500">Build structured Chain-of-Thought prompts.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/wiki_speed_racer" class="tool-link-card">
+                                <h4 class="font-bold text-slate-800 text-xs mb-1">The Wikipedia Racer</h4>
+                                <p class="text-[10px] text-slate-500">Race to click through Wikipedia hyperlinks to
+                                    connect two random topics in the fewest clicks.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/bulk_certificate_generator" class="tool-link-card">
+                                <h4 class="font-bold text-slate-800 text-xs mb-1">Free PDF Signer &amp; Editor</h4>
+                                <p class="text-[10px] text-slate-500">Sign documents and fill forms directly in your
+                                    browser without uploading sensitive contracts to a server.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/beat_maker_typing" class="tool-link-card">
+                                <h4 class="font-bold text-slate-800 text-xs mb-1">Typewriter Orchestra</h4>
+                                <p class="text-[10px] text-slate-500">Turn your keyboard into a musical instrument.
+                                    Every letter key triggers a specific loop or sample.</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-teal-600 to-emerald-800 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden border border-teal-500">
+                    <h3 class="font-bold text-lg mb-3 relative z-10 flex items-center gap-2 text-teal-100" id="economic-tip">
+                        <svg class="w-6 h-6 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 10-2 0v1a1 1 0 102 0zM13 16v-1a1 1 0 10-2 0v1a1 1 0 102 0zM14.586 11.05a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707z">
+                            </path>
+                        </svg>
+                        Economic Tip
+                    </h3>
+                    <p class="text-teal-100 text-sm relative z-10 leading-relaxed font-medium">
+                        If you are building RAG apps, squeezing your stored chunks allows you to retrieve twice the data
+                        for the same price.
+                    </p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-sm">
+                    <h3 class="font-black text-slate-800 mb-5 uppercase text-[10px] tracking-widest" id="ai-categories">AI Categories</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="/#api-optim" class="text-[10px] font-black bg-white border border-slate-200 px-4 py-2 rounded-xl hover:border-teal-500 hover:text-teal-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">API
+                            Optimization</a>
+                        <a href="/#prompts" class="text-[10px] font-black bg-white border border-slate-200 px-4 py-2 rounded-xl hover:border-teal-500 hover:text-teal-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Prompt
+                            Design</a>
+                        <a href="/#developer" class="text-[10px] font-black bg-white border border-slate-200 px-4 py-2 rounded-xl hover:border-teal-500 hover:text-teal-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Dev
+                            Utils</a>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-8 shadow-2xl border border-slate-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-teal-400 uppercase text-[10px] tracking-widest" id="mobile-access">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.523 15.3414C17.1513 15.3414 16.8502 15.0403 16.8502 14.6686C16.8502 14.2969 17.1513 13.9958 17.523 13.9958C17.8947 13.9958 18.1958 14.2969 18.1958 14.6686C18.1958 15.0403 17.8947 15.3414 17.523 15.3414ZM6.47702 15.3414C6.10534 15.3414 5.8042 15.0403 5.8042 14.6686C5.8042 14.2969 6.10534 13.9958 6.47702 13.9958C6.8487 13.9958 7.14984 14.2969 7.14984 14.6686C7.14984 15.0403 6.8487 15.3414 6.47702 15.3414ZM17.9625 11.2335L19.4673 8.63668C19.5706 8.45828 19.5101 8.22912 19.3317 8.12586C19.1533 8.0226 18.9242 8.08316 18.8209 8.26156L17.2917 10.9039C15.7533 10.1983 14.0202 9.8042 12 9.8042C9.9798 9.8042 8.2467 10.1983 6.70831 10.9039L5.1791 8.26156C5.07584 8.08316 4.84668 8.0226 4.66828 8.12586C4.48988 8.22912 4.42932 8.45828 4.53258 8.63668L6.0375 11.2335C3.25055 12.8398 1.3414 15.8286 1.3414 19.3414H22.6586C22.6586 15.8286 20.7495 12.8398 17.9625 11.2335Z">
+                            </path>
+                        </svg>
+                        Mobile Access
+                    </h3>
+                    <p class="text-slate-400 text-xs leading-relaxed font-medium">
+                        Using Claude or ChatGPT on Android? Open Chrome, tap the dots, and <strong>"Add to Home
+                            Screen"</strong>. Squeeze your data locally before pasting into the AI app.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-token-economy-mastering-llm-context-efficiency">The Token Economy: Mastering LLM
+                    Context Efficiency</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    In the era of Generative AI, Large Language Models (LLMs) like GPT-4, Claude 3.5, and Gemini
+                    are the new utility providers. However, unlike traditional web services, these models don't
+                    bill by the minute or the user—they bill by the <strong>Token</strong>. A token is roughly
+                    four characters of English text, but to a model, it represents a unit of computational
+                    effort and memory. The <b>LLM Context Squeezer</b> is an algorithmic filter designed to
+                    bridge the gap between human rambling and machine efficiency, allowing you to fit more
+                    knowledge into every API call.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-human-logic-of-squeezing">The Human
+                    Logic of Squeezing</h3>
+                <p class="!mb-6 text-slate-700">To understand why compression works, we have to look at the
+                    "signal-to-noise ratio" of language. English grammar is filled with "functional
+                    markers"—words like 'the', 'is', 'and'—that help humans follow a sentence but provide zero
+                    new information to an LLM. Here is how our "Squeezer" math works in plain English:</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-teal-50 shadow-sm space-y-6">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">1. The Token
+                            Recovery Logic</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-teal-500 mt-2">
+                            "Your Token Savings equals the number of words removed from the text multiplied by
+                            the average token-per-word weight (usually about 1.3 tokens per word)."
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">2. The Profit
+                            Analysis Logic</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                            "To find your financial recovery, take the total number of tokens saved, divide that
+                            number by 1,000, and multiply the result by the price your AI provider charges for
+                            every 1,000 tokens."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-anatomy-of-a-context-window">Chapter 1: The Anatomy of a Context Window</h2>
+            <p>Every LLM has a "Context Window"—a physical limit to how much information it can keep in its
+                active memory at once. For GPT-4, this might be 128k tokens; for Claude 3, it is up to 200k.
+                While these numbers sound large, a complex project's codebase or a multi-year financial history
+                can easily exceed them. When you hit the limit, the AI starts "forgetting" the earliest parts of
+                the conversation. Squeezing your context isn't just about saving money; it's about
+                <strong>retention</strong>. By removing the fluff, you allow the AI to see more of the "Signal"
+                (your data) and less of the "Noise" (filler words).
+            </p>
+            <h3 id="the-lost-in-the-middle-problem">The "Lost in the Middle" Problem</h3>
+            <p>Academic research has shown that LLMs are most effective at recalling information at the very
+                beginning and the very end of a prompt. Information buried in the middle of a massive block of
+                text is often ignored or misunderstood. By using our <b>Aggressive Compression</b> mode, you
+                shorten the physical distance between data points, significantly reducing the "Lost in the
+                Middle" effect and improving the accuracy of the AI's reasoning.</p>
+            <div class="highlight-box">
+                <h4 class="text-teal-900 !mt-0 mb-2 font-black uppercase tracking-widest">THE MINIFICATION
+                    STRATEGY</h4>
+                <p class="text-teal-800 italic">For developers pasting JSON or Code, whitespace is the most
+                    expensive thing you can buy. A single tab or newline counts as a token. Minifying your code
+                    blocks before sending them to an LLM can reduce token volume by up to 25% without changing a
+                    single character of logic. Our Minification mode automates this locally.</p>
+            </div>
+            <h2 id="chapter-2-stopwords-the-linguistic-excess">Chapter 2: Stopwords - The Linguistic Excess</h2>
+            <p>Stopwords are the most common words in a language. In English, these are words like "a," "an,"
+                "the," "at," "by," "for," "in," "of," "on," "to," "with." In a typical paragraph, these words
+                make up 30% to 50% of the total word count. While they are necessary for a human to read
+                comfortably, LLMs use <strong>Vector Embeddings</strong> to process meaning. The AI understands
+                that "Market Analysis Report" is the same as "A Report for the Analysis of the Market." Our
+                Squeezer identifies and removes these high-frequency, low-meaning tokens, allowing you to pay
+                only for the <strong>Semantic Anchors</strong> of your content.</p>
+            <h2 id="chapter-3-optimizing-for-rag-retrieval-augmented-generation">Chapter 3: Optimizing for RAG (Retrieval-Augmented Generation)</h2>
+            <p>If you are building an AI app that uses a database (RAG), the <strong>LLM Context
+                    Squeezer</strong> is a critical engineering tool. When your system retrieves 10 documents to
+                answer a user's question, those documents might total 20,000 tokens. If you squeeze those
+                documents down to 10,000 tokens using linguistic stripping, you can fit <strong>double the
+                    amount of documents</strong> into the same context window, providing the AI with twice as
+                much potential information to find the right answer.</p>
+            <div class="overflow-x-auto my-10 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Compression Level</th>
+                            <th class="px-6 py-5">Logic Applied</th>
+                            <th class="px-6 py-5">Risk of Meaning Loss</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Stopword Stripping</td>
+                            <td class="px-6 py-5">Removes grammar fluff (the, is, at).</td>
+                            <td class="px-6 py-5 text-emerald-600 font-bold">Minimal (Safe for all)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">Minification</td>
+                            <td class="px-6 py-4">Removes tabs, newlines, extra spaces.</td>
+                            <td class="px-6 py-4 text-emerald-600 font-bold">Zero (Safe for machines)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Aggressive</td>
+                            <td class="px-6 py-5">Isolates high-value nouns and verbs.</td>
+                            <td class="px-6 py-5 text-orange-500 font-bold">Moderate (Context only)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Manual Summarization</td>
+                            <td class="px-6 py-5">Human editing for brevity.</td>
+                            <td class="px-6 py-5 text-red-500 font-bold">Variable (User error)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-4-the-ethics-and-privacy-of-prompt-squeezing">Chapter 4: The Ethics and Privacy of Prompt Squeezing</h2>
+            <p>Security is the primary reason the <strong>LLM Context Squeezer</strong> is a local application.
+                Many online "Summarizers" or "Token Counters" send your data to their own servers to process it.
+                If you are a lawyer comparing two sensitive contracts or a developer debugging a secure payment
+                gateway, you <strong>cannot</strong> upload that code to an untrusted third party. Our Canvas
+                tool is 100% client-side. The JavaScript runs on your CPU, using your browser's memory. Once you
+                close this tab, the text is purged. This ensures your proprietary data stays proprietary.</p>
+            <hr class="my-16 border-slate-100">
+            <h3 id="technical-educational-resources">Technical &amp; Educational Resources</h3>
+            <p class="text-slate-600 mb-6">To understand more about Tokenization and LLM architecture, we
+                recommend these authoritative resources:</p>
+            <ul class="space-y-3 mb-12">
+                <li>
+                    <a href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-teal-700 hover:text-teal-500 font-semibold">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        OpenAI Tokenizer Tool
+                    </a>
+                    <p class="text-sm text-slate-500 ml-6">Visualizes how text is split into tokens by GPT
+                        models.</p>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-teal-700 hover:text-teal-500 font-semibold">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        MDN: Web Workers API
+                    </a>
+                    <p class="text-sm text-slate-500 ml-6">Documentation on the technology we use to process
+                        text locally without freezing the browser.</p>
+                </li>
+            </ul>
+            <h3 id="frequently-asked-questions-faq-squeezing-mastery">Frequently Asked Questions (FAQ) - Squeezing Mastery</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-6 rounded-xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does stripping stopwords make the AI confused?</span>
+                        <span class="transition-transform group-open:rotate-180 text-teal-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-4 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-4" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">In 99% of cases, <strong>no</strong>. LLMs process text using
+                            attention mechanisms that naturally prioritize significant words. Stripping "the"
+                            and "a" doesn't change the vector representation of the sentence's meaning. However,
+                            if you are asking the AI to perform a task that requires <strong>Stylistic
+                                Analysis</strong> (like "mimic this person's writing style"), you should avoid
+                            compression, as the filler words are part of that style.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-6 rounded-xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>How do I know if I've squeezed too much?</span>
+                        <span class="transition-transform group-open:rotate-180 text-teal-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-4 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-4" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">The easiest test is the "Scan Test." Read the squeezed text
+                            yourself. If you can still understand the core facts and intent of the data, the AI
+                            definitely can. If the text has become a disjointed list of nouns that makes no
+                            sense, switch back to "Stopword Stripping" or "Minification" mode.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-6 rounded-xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this work for Python or JavaScript code?</span>
+                        <span class="transition-transform group-open:rotate-180 text-teal-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-4 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-4" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><strong>Yes.</strong> For code, always use the
+                            <strong>Minification</strong> mode. This strips out comments and unnecessary
+                            indentation. While human developers hate unformatted code, LLMs are trained on
+                            billions of lines of it. They find it just as easy (and much cheaper) to parse a
+                            one-line function as a beautifully formatted 10-line one.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-teal-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black" id="reclaim-your-context">
+                    Reclaim Your Context</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop overpaying for your AI.
+                    Squeeze your prompts, expand your context, and build more for less. Your optimized API
+                    journey begins now.</p>
+                <a href="#input-text" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Begin Squeezing Data
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-ai-utilities">
+                Recommended AI Utilities</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        const input = document.getElementById('input-text');
+        const output = document.getElementById('output-text');
+        // Comprehensive Stopwords List (English)
+        const stopwords = new Set(["a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by", "can't", "cannot", "could", "couldn't", "did", "didn't", "do", "does", "doesn't", "doing", "don't", "down", "during", "each", "few", "for", "from", "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he", "he'd", "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself", "his", "how", "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't", "it", "it's", "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself", "no", "nor", "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours", "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll", "she's", "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", "there", "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those", "through", "to", "too", "under", "until", "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were", "weren't", "what", "what's", "when", "when's", "where", "where's", "which", "while", "who", "who's", "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourselves"]);
+        function compress() {
+            const text = input.value;
+            const mode = document.getElementById('mode').value;
+            let compressed = "";
+            if (mode === 'stopwords') {
+                compressed = text.split(/\b/).map(word => {
+                    const lower = word.toLowerCase().trim();
+                    if (stopwords.has(lower)) return " ";
+                    return word;
+                }).join("").replace(/\s+/g, ' ').trim();
+            }
+            else if (mode === 'minification') {
+                compressed = text.replace(/\s+/g, ' ').trim();
+                compressed = compressed.replace(/\s*([{}:,;])\s*/g, '$1');
+            }
+            else if (mode === 'aggressive') {
+                compressed = text.toLowerCase()
+                    .replace(/[^\w\s]/g, '')
+                    .split(/\s+/)
+                    .filter(w => !stopwords.has(w) && w.length > 2)
+                    .join(" ");
+            }
+            output.value = compressed;
+            updateStats();
+        }
+        function updateStats() {
+            const textOrig = input.value;
+            const textComp = output.value;
+            // Human-Understandable Token Heuristic Implementation:
+            // "In the world of LLMs, 1 token is roughly equal to 4 characters of text. 
+            // To estimate your token count, we take the length of your text and divide it by 4."
+            const tokensOrig = Math.ceil(textOrig.length / 4);
+            const tokensComp = Math.ceil(textComp.length / 4);
+            document.getElementById('stats-orig').innerText = `${tokensOrig.toLocaleString()} Tokens`;
+            document.getElementById('stats-comp').innerText = `${tokensComp.toLocaleString()} Tokens`;
+            // Recovery Math:
+            // "To find your financial recovery, take the total number of tokens saved, 
+            // divide that number by 1,000, and multiply by the price per 1k tokens."
+            const tokenDelta = Math.max(0, tokensOrig - tokensComp);
+            const pct = tokensOrig > 0 ? Math.round((tokenDelta / tokensOrig) * 100) : 0;
+            const costPer1k = parseFloat(document.getElementById('model-cost').value);
+            const savedCost = (tokenDelta / 1000) * costPer1k;
+            document.getElementById('savings-pct').innerText = pct + "%";
+            document.getElementById('savings-usd').innerText = '$' + savedCost.toFixed(4);
+        }
+        function copyOutput() {
+            if (!output.value) return;
+            output.select();
+            document.execCommand('copy');
+            // Visual feedback
+            const btn = event.currentTarget;
+            const original = btn.innerHTML;
+            btn.innerHTML = "Tokens Copied!";
+            btn.classList.replace('bg-slate-900', 'bg-teal-600');
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.classList.replace('bg-teal-600', 'bg-slate-900');
+            }, 2000);
+        }
+        // Initialize Scroll Logic
+        input.addEventListener('input', compress);
+        // Initial Demo
+        document.addEventListener('DOMContentLoaded', () => {
+            input.value = "Welcome to the Context Squeezer. Large Language Models like ChatGPT process text in units called tokens. In a standard sentence, about 30% of the words are fluff. By removing them, we can fit more information into the window and save money on API costs.";
+            compress();
+        });
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

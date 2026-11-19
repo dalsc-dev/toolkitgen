@@ -1,0 +1,963 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relationship Timeline Gen: WhatsApp Chat Analyzer &amp; Visualizer</title>
+    <meta name="description" content="Analyze your WhatsApp chat history locally. Visualize message frequency, reply times, and relationship dynamics without uploading your data. Free relationship analytics tool.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/chat_timeline_visualizer">
+    <meta name="keywords" content="whatsapp analyzer, chat visualizer, relationship timeline, reply time calculator, text message analysis, relationship health, communication frequency, digital body language, data visualization">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Relationship Timeline Gen: WhatsApp Chat Analyzer &amp; Visualizer">
+    <meta property="og:description" content="Visualize communication patterns and relationship history from exported chat logs over time.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/chat_timeline_visualizer">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Relationship Timeline Gen: WhatsApp Chat Analyzer &amp; Visualizer">
+    <meta name="twitter:description" content="Visualize communication patterns and relationship history from exported chat logs over time.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/chat_timeline_visualizer#webapp",
+      "name": "Communication History Graph",
+      "headline": "Relationship Timeline Gen: WhatsApp Chat Analyzer & Visualizer",
+      "url": "https://toolkitgen.com/tool/chat_timeline_visualizer",
+      "description": "Visualize communication patterns and relationship history from exported chat logs over time.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/chat_timeline_visualizer#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Communication History Graph",
+          "item": "https://toolkitgen.com/tool/chat_timeline_visualizer"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/chat_timeline_visualizer#howto",
+      "name": "How to Use Communication History Graph",
+      "description": "Quick 4-step guide to using Communication History Graph locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Communication History Graph directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/chat_timeline_visualizer#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I export my WhatsApp chat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open WhatsApp on your phone. Go to the chat you want to analyze. Tap the person's name at the top. Scroll down to Export Chat. Select Without Media. Send the resulting _chat.txt file to yourself via email or save it to your local files. Drag and drop that file into the tool above."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool read my actual messages?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The tool only extracts Metadata (timestamps and sender names) to build the visualizations. It does not scan for keywords or store message text. Furthermore, because it runs locally, the text never leaves your device's memory. It is the most secure way to audit a relationship."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a \"Good\" daily text average?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no universal 'good' number. However, the Stability Index suggests that healthy established relationships average between 15 and 40 messages per day. If the number is consistently over 100, you are likely in a high-intensity phase or managing a crisis. If it is under 5, you are likely living together (physical communication) or the relationship is primarily transactional."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/chat_timeline_visualizer#article",
+      "headline": "Comprehensive Guide to Communication History Graph & Client-Side Execution",
+      "description": "Visualize communication patterns and relationship history from exported chat logs over time.",
+      "url": "https://toolkitgen.com/tool/chat_timeline_visualizer",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <style>
+        :root {
+            --color-site-primary: #EE6C4D;
+            --color-chat-rose: #e11d48;
+            /* Rose-600 */
+            --color-chat-slate: #475569;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* Dropzone */
+        .dropzone {
+            border: 3px dashed #cbd5e1;
+            border-radius: 1.25rem;
+            padding: 3rem;
+            text-align: center;
+            background-color: #f8fafc;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .dropzone:hover {
+            border-color: var(--color-chat-rose);
+            background-color: #fff1f2;
+            transform: translateY(-2px);
+        }
+
+        .dropzone.dragover {
+            background-color: #ffe4e6;
+            border-color: #be123c;
+            transform: scale(1.02);
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e293b;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 800;
+            margin-top: 0.5rem;
+        }
+
+        .content-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            shadow-sm: true;
+        }
+
+        .highlight-box {
+            background: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 2rem 0;
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* Tool Link Cards */
+        .tool-link-card {
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            transition: all 0.2s;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        .tool-link-card:hover {
+            border-color: var(--color-chat-rose);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#osint" class="hover:text-[#EE6C4D]">Digital Analytics</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">Relationship Timeline</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="engine-status">
+                        Engine Status</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-rose-600 font-black">LOCAL</span>
+                            <span>Parsing</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-rose-600 font-black">PRIVACY</span>
+                            <span>100%</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-rose-600 font-black">REGEX</span>
+                            <span>Native</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest">Active Scan
+                        </h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                            </div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Data Science
+                                Engine</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-rose-400 mb-2" id="quant-tip">Quant Tip</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">Long
+                        response times coupled with high message frequency often indicate high-anxiety dynamics.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-rose-600 relative z-10 shadow-2xl">
+                    <div class="p-6 md:p-10 bg-white border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
+                                Relationship Timeline Gen</h1>
+                            <p class="text-sm text-slate-500 mt-1 font-medium italic">Visualize communication patterns.
+                                Decrypt digital body language.</p>
+                        </div>
+                        <div class="p-4 bg-rose-50 text-rose-600 rounded-2xl hidden sm:block shadow-sm">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10 bg-slate-50">
+                        <div id="upload-section" class="mb-8 animate-fadeIn">
+                            <input type="file" id="file-input" class="hidden" accept=".txt" onchange="handleFile(this)">
+                            <div class="dropzone group" id="drop-zone" onclick="document.getElementById('file-input').click()">
+                                <svg class="w-16 h-16 text-slate-300 mx-auto mb-4 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                </svg>
+                                <p class="text-xl text-slate-600 font-black uppercase tracking-tighter">Deploy WhatsApp
+                                    "_chat.txt"</p>
+                                <p class="text-xs text-slate-400 mt-2 font-medium">Settings &gt; Chats &gt; Chat History
+                                    &gt;
+                                    Export Chat (No Media). <br><span class="text-rose-600 font-bold">Privacy
+                                        Note:</span> Processing occurs <b>entirely locally</b> in your browser RAM.</p>
+                                <div class="mt-6">
+                                    <button onclick="event.stopPropagation(); loadDemo();" class="text-[10px] font-black text-rose-600 hover:text-rose-800 uppercase tracking-widest border-b-2 border-rose-100">Load
+                                        Simulation Data</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="loading" class="hidden text-center py-20 bg-white rounded-3xl border border-slate-200 shadow-inner">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-rose-600 mx-auto mb-4">
+                            </div>
+                            <p class="text-slate-500 font-black uppercase tracking-widest text-xs">Parsing Sequential
+                                Metadata...</p>
+                        </div>
+                        <div id="dashboard" class="hidden space-y-10 animate-fadeIn">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                <div class="stat-card">
+                                    <div class="stat-value text-rose-600" id="total-msgs">0</div>
+                                    <div class="stat-label">Total Logs</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value text-slate-700" id="days-active">0</div>
+                                    <div class="stat-label">Days Traversed</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value text-blue-600" id="avg-daily">0</div>
+                                    <div class="stat-label">Daily Frequency</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value text-purple-600" id="media-count">0</div>
+                                    <div class="stat-label">Media Buffer</div>
+                                </div>
+                            </div>
+                            <div class="bg-white border-2 border-slate-100 rounded-[2rem] p-8 shadow-2xl">
+                                <div class="flex justify-between items-center mb-6 px-2">
+                                    <h3 class="text-xs font-black text-slate-800 uppercase tracking-widest" id="communication-flux-monthly">
+                                        Communication Flux (Monthly)</h3>
+                                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Temporal
+                                        Density View</span>
+                                </div>
+                                <div class="h-64">
+                                    <canvas id="timelineChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                <div class="bg-white border-2 border-slate-100 rounded-[2rem] p-8 shadow-xl">
+                                    <h3 class="text-xs font-black text-slate-800 uppercase tracking-widest mb-6" id="interaction-primacy">
+                                        Interaction Primacy</h3>
+                                    <div class="h-48 relative">
+                                        <canvas id="initiationChart"></canvas>
+                                    </div>
+                                    <p class="text-[9px] text-slate-400 text-center mt-6 font-bold uppercase tracking-tighter">
+                                        Messages sent after &gt;6 hours of system silence.</p>
+                                </div>
+                                <div class="bg-white border-2 border-slate-100 rounded-[2rem] p-8 shadow-xl">
+                                    <h3 class="text-xs font-black text-slate-800 uppercase tracking-widest mb-6" id="circadian-activity-map">
+                                        Circadian Activity Map</h3>
+                                    <div class="h-48">
+                                        <canvas id="hourlyChart"></canvas>
+                                    </div>
+                                    <p class="text-[9px] text-slate-400 text-center mt-6 font-bold uppercase tracking-tighter">
+                                        Peak communication hours mapped to a 24h clock.</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900 p-8 rounded-[2rem] border border-slate-800 shadow-2xl">
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-[10px] font-black text-rose-400 uppercase tracking-[0.3em]">System
+                                        Audit Log</span>
+                                    <button onclick="resetTool()" class="text-[10px] font-black text-slate-500 hover:text-white uppercase tracking-widest transition-colors">Emergency
+                                        Purge</button>
+                                </div>
+                                <div class="font-mono text-[11px] text-emerald-500/80 leading-relaxed custom-scrollbar h-32 overflow-y-auto bg-black/30 p-4 rounded-xl border border-emerald-900/30" id="analysis-log">
+                                    &gt; STOCHASTIC ENGINE INITIALIZED...<br>&gt; AWAITING DATA INPUT...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="tool-categories">
+                        Tool Categories</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#osint" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-rose-500 hover:text-rose-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Social
+                            Forensics</a>
+                        <a href="/#privacy" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-rose-500 hover:text-rose-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Privacy
+                            First</a>
+                        <a href="/#psych" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-rose-500 hover:text-rose-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Behavioral
+                            Math</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/google_takeout_visualizer" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">Google Takeout Mapper</div>
+                                <div class="text-[10px] text-slate-500 truncate">Visualize Location Data</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/browser_history_analyzer" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">Productivity Analyzer</div>
+                                <div class="text-[10px] text-slate-500 truncate">Audit Browsing Habits</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/exif_data_scrubber" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">Photo Metadata Scrubber
+                                </div>
+                                <div class="text-[10px] text-slate-500 truncate">Remove GPS Tags</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/browser_fingerprint_id" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">WebRTC Leak Test</div>
+                                <div class="text-[10px] text-slate-500 truncate">IP Privacy Check</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/aes_gcm_vault_local" class="block hover:bg-slate-50 p-2 rounded-lg transition">
+                                <div class="text-[11px] font-bold text-slate-900 uppercase">Password Entropy</div>
+                                <div class="text-[10px] text-slate-500 truncate">Test Key Strength</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-900 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-rose-400 uppercase text-[10px] tracking-widest" id="android-setup">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.523 15.3414C17.1513 15.3414 16.8502 15.0403 16.8502 14.6686C16.8502 14.2969 17.1513 13.9958 17.523 13.9958C17.8947 13.9958 18.1958 14.2969 18.1958 14.6686C18.1958 15.0403 17.8947 15.3414 17.523 15.3414ZM6.47702 15.3414C6.10534 15.3414 5.8042 15.0403 5.8042 14.6686C5.8042 14.2969 6.10534 13.9958 6.47702 13.9958C6.8487 13.9958 7.14984 14.2969 7.14984 14.6686C7.14984 15.0403 6.8487 15.3414 6.47702 15.3414ZM17.9625 11.2335L19.4673 8.63668C19.5706 8.45828 19.5101 8.22912 19.3317 8.12586C19.1533 8.0226 18.9242 8.08316 18.8209 8.26156L17.2917 10.9039C15.7533 10.1983 14.0202 9.8042 12 9.8042C9.9798 9.8042 8.2467 10.1983 6.70831 10.9039L5.1791 8.26156C5.07584 8.08316 4.84668 8.0226 4.66828 8.12586C4.48988 8.22912 4.42932 8.45828 4.53258 8.63668L6.0375 11.2335C3.25055 12.8398 1.3414 15.8286 1.3414 19.3414H22.6586C22.6586 15.8286 20.7495 12.8398 17.9625 11.2335Z">
+                            </path>
+                        </svg>
+                        Android Setup
+                    </h3>
+                    <p class="text-slate-400 text-[11px] leading-relaxed font-medium text-center">
+                        Auditing a chat on the move? Open Chrome on your Android device, tap the three dots, and select
+                        <b>"Add to Home Screen"</b>. This tool works offline as a PWA, keeping your social strategy
+                        private.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-digital-pulse-a-comprehensive-guide-to-chat-analytics-and-relationship-data">The Digital Pulse: A Comprehensive
+                    Guide to Chat Analytics and Relationship Data</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    Communication is the foundational currency of any human connection. In the 21st century, the
+                    vast majority of that currency is exchanged through asynchronous text platforms. Every
+                    character sent and every second of response delay creates a <b>digital footprint</b>—a rich
+                    set of metadata that reveals the underlying emotional state and dynamics of a relationship.
+                    The <b>Relationship Timeline Gen</b> on this Canvas platform is a clinical analytics tool
+                    designed to help you visualize the hidden rhythm of your connections without ever
+                    compromising your <b>data privacy</b>.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-human-readable-logic-of-metadata">The
+                    Human-Readable Logic of Metadata</h3>
+                <p class="!mb-6 text-slate-700">To maintain total sovereignty over your data, this tool performs
+                    its calculations entirely in your browser's local sandbox. We break down your chat artifacts
+                    into temporal data points and analyze them using the following plain English logic:</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-rose-50 shadow-sm space-y-6">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">1. The
+                            Initiation Rate Logic (LaTeX)</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-rose-500 mt-2">
+                            "Your Initiation Rate represents who starts the conversation after a period of
+                            dormancy. It is calculated by identifying the first message sent after a minimum of
+                            6 hours of silence."
+                            $$R_{init} = \frac{I_A}{I_{total}} \times 100$$
+                            Where $I_A$ is the number of conversations started by Person A. An imbalance here
+                            (e.g., &gt;70%) often signals a significant <b>pursuit-withdrawal dynamic</b>.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">2. The Response
+                            Latency Logic</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-blue-500 mt-2">
+                            "Response Latency is the delta between a message timestamp and the subsequent reply.
+                            Consistently short latency indicates high engagement, while increasing latency over
+                            time can signal relationship stabilization."
+                            $$T_{avg} = \frac{\sum (t_{reply} - t_{receive})}{N}$$
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-psychology-of-digital-body-language">Chapter 1: The Psychology of "Digital Body Language"</h2>
+            <p>Psychologists and sociologists increasingly point to "Digital Body Language" as a primary
+                indicator of trust. Unlike face-to-face communication, which relies on facial expressions and
+                tone of voice, digital communication relies on <b>cadence</b> and <b>consistency</b>. An
+                inverted timeline, where one person provides 80% of the volume, is a significant data point
+                regarding interest levels.</p>
+            <h3 id="1-the-good-morning-anchor">1. The "Good Morning" Anchor</h3>
+            <p>Linguistic studies of long-term successful relationships show a high frequency of "Low-Stakes
+                Checking In." These are messages sent during the early morning hours (captured in our
+                <b>Circadian Map</b>). If the 7 AM to 9 AM block shows a high initiation rate from both parties,
+                it indicates a relationship where both individuals occupy a high priority in each other's
+                routine.
+            </p>
+            <h3 id="2-the-ghosting-data-pattern">2. The "Ghosting" Data Pattern</h3>
+            <p>A disconnect rarely happens overnight. It is preceded by a gradual "Stretching" of the timeline.
+                Our <b>Communication Flux</b> chart allows you to see if the monthly volume is trending downward
+                at a rate that exceeds standard relationship stabilization. If volume drops more than 50%
+                month-over-month, the digital signal is warning of a change in dynamic.</p>
+            <div class="highlight-box">
+                <h4 class="text-rose-900 !mt-0 mb-2 font-black uppercase tracking-widest">SCIENTIFIC CONTEXT:
+                    DUNBAR'S NUMBER</h4>
+                <p class="text-rose-800 italic font-medium">According to <a href="https://en.wikipedia.org/wiki/Dunbar%27s_number" target="_blank" rel="nofollow" class="underline hover:text-rose-600">Dunbar's Number</a>, humans have a cognitive limit
+                    to the number of people with whom they can maintain stable social relationships. This tool
+                    helps you visualize who occupies your "inner circle" based on actual time investment rather
+                    than perceived closeness.</p>
+            </div>
+            <h2 id="chapter-2-deciphering-the-media-buffer">Chapter 2: Deciphering the "Media Buffer"</h2>
+            <p>The sharing of images, voice notes, and links (captured in our <b>Media Buffer</b> stat) is a
+                proxy for <b>Shared Context</b>. A relationship that relies entirely on text is transactional. A
+                relationship that includes a high volume of media is one where both parties are attempting to
+                merge their physical realities. If media sharing drops to zero while text volume remains high,
+                the relationship may be transitioning from intimate to purely utilitarian.</p>
+            <h2 id="chapter-3-strategic-tips-tricks-for-users">Chapter 3: Strategic Tips &amp; Tricks for Users</h2>
+            <p>How do you use this data to improve your life? Information without action is just trivia. Use
+                these strategies to interpret your results:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h4 class="text-rose-600 !mt-0 mb-3 font-black uppercase tracking-tighter">Tip 1: The
+                        48-Hour Audit</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">If you're in a new dating phase, look at
+                        your <b>Initiation Chart</b>. If you are starting 90% of the chats, pull back for 48
+                        hours. Let the system 'cool down' to see if the other party steps up to balance the
+                        equation. Data doesn't lie, but it can be changed through behavioral shifts.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h4 class="text-blue-600 !mt-0 mb-3 font-black uppercase tracking-tighter">Tip 2: Identify
+                        "The Lull"</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">Check your <b>Circadian Map</b> for the
+                        hours where communication is lowest. Are these hours where you are working? If so,
+                        great. If these are hours where you <em>think</em> you're talking but the data shows
+                        silence, you may have a 'Communication Blackout' that is causing subconscious friction.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h4 class="text-purple-600 !mt-0 mb-3 font-black uppercase tracking-tighter">Tip 3: The
+                        Burnout Alert</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">If your <b>Daily Frequency</b> exceeds 100
+                        texts/day, you are spending roughly 2-3 hours of your life inside a small digital box.
+                        This can lead to 'Chat Fatigue.' Use the data as a prompt to move the conversation from
+                        text to a physical phone call or meeting to preserve relationship energy.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h4 class="text-emerald-600 !mt-0 mb-3 font-black uppercase tracking-tighter">Tip 4:
+                        Sentiment Proxies</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">High message counts with low <b>Media
+                            Buffers</b> often correlate with conflict. When people argue, they use more words
+                        but share fewer 'connection artifacts' (photos/links). If your volume is spiking but the
+                        vibe feels off, the math might be documenting a season of friction.</p>
+                </div>
+            </div>
+            <h2 id="chapter-4-technical-methodology-the-regex-engine">Chapter 4: Technical Methodology - The Regex Engine</h2>
+            <p>How does the code on this page actually determine your mood? We utilize a process called
+                <b>Lexical Tokenization</b>. When you upload your chat, the JavaScript breaks your history into
+                "Messages" using a regular expression that targets the WhatsApp timestamp format. It ignores the
+                content of the messages (for privacy) and focuses purely on the <b>Metadata Signature</b>.
+            </p>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Communication Signal</th>
+                            <th class="px-6 py-5">Metadata Marker</th>
+                            <th class="px-6 py-5">Linguistic Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">High Intimacy</td>
+                            <td class="px-6 py-5 text-emerald-600 font-bold">Uniform Initiation / High Media
+                            </td>
+                            <td class="px-6 py-5 italic">A balanced, high-trust collaborative ecosystem.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">Anxious Pursuit</td>
+                            <td class="px-6 py-4 text-rose-500 font-bold">Unbalanced Initiation (&gt;80%)</td>
+                            <td class="px-6 py-4 italic">One party is driving 100% of the connection effort.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Avoidant / Distant</td>
+                            <td class="px-6 py-5 text-blue-600 font-bold">High Latency / Low Frequency</td>
+                            <td class="px-6 py-5 italic">Communication is transactional or fading.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Stabilized</td>
+                            <td class="px-6 py-5 text-slate-400 font-black">Moderate Volume / Peak Patterns</td>
+                            <td class="px-6 py-5 italic">The 'Comfortable' phase of established long-term bonds.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-5-why-local-first-privacy-is-mandatory">Chapter 5: Why Local-First Privacy is Mandatory</h2>
+            <p>Your chat history contains your bank details, your home address, and your most vulnerable
+                secrets. <b>NEVER</b> upload your chat history to a cloud-based analyzer. Toolkit Gen's
+                <b>Relationship Timeline Gen</b> is a local-first application. 100% of the parsing and charting
+                happens in <b>your browser's local RAM</b>. We have zero visibility into your files. This is
+                <b>Zero-Knowledge Analytics</b> for the privacy-conscious individual.
+            </p>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-digital-analytics">Frequently Asked Questions (FAQ) - Digital Analytics</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>How do I export my WhatsApp chat?</span>
+                        <span class="transition-transform group-open:rotate-180 text-rose-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">Open WhatsApp on your phone. Go to the chat you want to analyze.
+                            Tap the person's name at the top. Scroll down to <b>Export Chat</b>. Select
+                            <b>Without Media</b>. Send the resulting <code>_chat.txt</code> file to yourself via
+                            email or save it to your local files. Drag and drop that file into the tool
+                            above.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this tool read my actual messages?</span>
+                        <span class="transition-transform group-open:rotate-180 text-rose-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">The tool only extracts <b>Metadata</b> (timestamps and sender
+                            names) to build the visualizations. It does not scan for keywords or store message
+                            text. Furthermore, because it runs locally, the text never leaves your device's
+                            memory. It is the most secure way to audit a relationship.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>What is a "Good" daily text average?</span>
+                        <span class="transition-transform group-open:rotate-180 text-rose-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">There is no universal 'good' number. However, the <b>Stability
+                                Index</b> suggests that healthy established relationships average between 15 and
+                            40 messages per day. If the number is consistently over 100, you are likely in a
+                            high-intensity phase or managing a crisis. If it is under 5, you are likely living
+                            together (physical communication) or the relationship is primarily
+                            transactional.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-rose-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black" id="audit-your-connection">
+                    Audit Your Connection</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop guessing about the health of
+                    your connections. Use the Relationship Timeline Gen to quantify your dynamics and ensure
+                    your digital pulse is beating strong.</p>
+                <a href="#drop-zone" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Begin Forensic Audit
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-logic-tools">
+                Recommended Logic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/google_takeout_visualizer" class="tool-link-card">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Google Takeout Mapper</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Visualize your movement history on a private map
+                        by parsing your Google Takeout JSON files.</p>
+                </a>
+                <a href="/tool/browser_history_analyzer" class="tool-link-card">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Browser History Analyzer</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Analyze your browsing habits from history files to
+                        find peak productivity hours.</p>
+                </a>
+                <a href="/tool/exif_data_scrubber" class="tool-link-card">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Photo Metadata Cleaner</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Protect your privacy by stripping GPS location and
+                        device metadata from photos before sharing online.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        // --- Chat Parsing Logic ---
+        const regexPatterns = [
+            /^(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(\d{1,2}:\d{2})\s-\s(.*?):\s(.*)/,
+            /^\[(\d{1,2}\/\d{1,2}\/\d{2,4}),\s(\d{1,2}:\d{2}:\d{2})\]\s(.*?):\s(.*)/
+        ];
+        let charts = {};
+        function loadDemo() {
+            document.getElementById('upload-section').classList.add('hidden');
+            document.getElementById('loading').classList.remove('hidden');
+            setTimeout(() => {
+                const users = ["You", "Partner"];
+                const messages = [];
+                let date = new Date();
+                date.setFullYear(date.getFullYear() - 1);
+                for (let i = 0; i < 5000; i++) {
+                    date.setMinutes(date.getMinutes() + Math.floor(Math.random() * 300));
+                    messages.push({
+                        date: new Date(date),
+                        author: users[Math.floor(Math.random() * users.length)],
+                        content: "Stochastic simulation message artifact"
+                    });
+                }
+                document.getElementById('loading').classList.add('hidden');
+                renderDashboard(messages);
+            }, 1000);
+        }
+        function handleFile(input) {
+            const file = input.files[0];
+            if (!file) return;
+            document.getElementById('upload-section').classList.add('hidden');
+            document.getElementById('loading').classList.remove('hidden');
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const text = e.target.result;
+                const messages = parseChat(text);
+                document.getElementById('loading').classList.add('hidden');
+                if (messages.length > 0) {
+                    renderDashboard(messages);
+                } else {
+                    alert("Analysis Failure: Invalid Transcript Format.");
+                    resetTool();
+                }
+            };
+            reader.readAsText(file);
+        }
+        function parseChat(text) {
+            const lines = text.split('\n');
+            const messages = [];
+            lines.forEach(line => {
+                for (let regex of regexPatterns) {
+                    const match = line.match(regex);
+                    if (match) {
+                        const dateParts = match[1].split(/[\/\-]/);
+                        const timeParts = match[2].split(':');
+                        let year = parseInt(dateParts[2]);
+                        if (year < 100) year += 2000;
+                        const dateObj = new Date(year, parseInt(dateParts[1]) - 1, parseInt(dateParts[0]), parseInt(timeParts[0]), parseInt(timeParts[1]));
+                        if (!isNaN(dateObj)) {
+                            messages.push({ date: dateObj, author: match[3], content: match[4] });
+                        }
+                        break;
+                    }
+                }
+            });
+            return messages;
+        }
+        function renderDashboard(messages) {
+            document.getElementById('dashboard').classList.remove('hidden');
+            const total = messages.length;
+            const authors = {};
+            const hourly = new Array(24).fill(0);
+            const monthlyData = {};
+            let mediaCount = 0;
+            let initiations = {};
+            messages.forEach((msg, index) => {
+                authors[msg.author] = (authors[msg.author] || 0) + 1;
+                if (!initiations[msg.author]) initiations[msg.author] = 0;
+                if (msg.content.includes('<Media omitted>') || msg.content.includes('image omitted')) mediaCount++;
+                hourly[msg.date.getHours()]++;
+                const monthKey = `${msg.date.getFullYear()}-${msg.date.getMonth() + 1}`;
+                monthlyData[monthKey] = (monthlyData[monthKey] || 0) + 1;
+                if (index > 0) {
+                    const diffHrs = (msg.date - messages[index - 1].date) / (1000 * 60 * 60);
+                    if (diffHrs > 6) initiations[msg.author]++;
+                }
+            });
+            document.getElementById('total-msgs').innerText = total.toLocaleString();
+            const daysActive = Math.round((messages[messages.length - 1].date - messages[0].date) / (1000 * 60 * 60 * 24)) || 1;
+            document.getElementById('days-active').innerText = daysActive.toLocaleString();
+            document.getElementById('avg-daily').innerText = (total / daysActive).toFixed(1);
+            document.getElementById('media-count').innerText = mediaCount.toLocaleString();
+            const logEl = document.getElementById('analysis-log');
+            logEl.innerHTML = `> ANALYZED ${total} SEQUENCE LINES.<br>> IDENTIFIED: ${Object.keys(authors).join(', ')}<br>> SPAN: ${daysActive} DAYS.<br>> BINARY MATCH: SUCCESS.`;
+            renderTimeline(monthlyData);
+            renderHourly(hourly);
+            renderInitiation(initiations);
+        }
+        function renderTimeline(data) {
+            const ctx = document.getElementById('timelineChart').getContext('2d');
+            if (charts.timeline) charts.timeline.destroy();
+            const sortedKeys = Object.keys(data).sort();
+            charts.timeline = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: sortedKeys,
+                    datasets: [{
+                        data: sortedKeys.map(k => data[k]),
+                        borderColor: '#e11d48',
+                        backgroundColor: 'rgba(225, 29, 72, 0.05)',
+                        tension: 0.4,
+                        fill: true,
+                        borderWidth: 3,
+                        pointRadius: 0
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { grid: { color: '#f1f5f9' }, ticks: { font: { family: 'JetBrains Mono', size: 10 } } } } }
+            });
+        }
+        function renderHourly(data) {
+            const ctx = document.getElementById('hourlyChart').getContext('2d');
+            if (charts.hourly) charts.hourly.destroy();
+            charts.hourly = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [...Array(24).keys()].map(h => `${h}h`),
+                    datasets: [{
+                        data: data,
+                        backgroundColor: '#475569',
+                        borderRadius: 4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { font: { family: 'JetBrains Mono', size: 9 } } } } }
+            });
+        }
+        function renderInitiation(data) {
+            const ctx = document.getElementById('initiationChart').getContext('2d');
+            if (charts.init) charts.init.destroy();
+            charts.init = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        data: Object.values(data),
+                        backgroundColor: ['#e11d48', '#0f172a', '#f43f5e', '#334155'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { maintainAspectRatio: false, cutout: '70%', plugins: { legend: { position: 'bottom', labels: { font: { weight: 'bold', size: 10 } } } } }
+            });
+        }
+        function resetTool() {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('upload-section').classList.remove('hidden');
+            document.getElementById('file-input').value = '';
+            Object.values(charts).forEach(c => c.destroy());
+            charts = {};
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropZone = document.getElementById('drop-zone');
+            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+            dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                if (e.dataTransfer.files.length) {
+                    document.getElementById('file-input').files = e.dataTransfer.files;
+                    handleFile(document.getElementById('file-input'));
+                }
+            });
+        });
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

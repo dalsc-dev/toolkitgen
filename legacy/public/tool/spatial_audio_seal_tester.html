@@ -1,0 +1,818 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEM &amp; Earbud Seal Quality Tester: Spatial Audio Calibration Tool</title>
+    <meta name="description" content="Test your earbud seal and passive isolation using out-of-phase low-frequency acoustics. Fix tinny audio, improve bass response, and calibrate for Dolby Atmos.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/spatial_audio_seal_tester">
+    <meta name="keywords" content="earbud seal test, IEM isolation test, spatial audio calibration, bass phase shift test, in-ear monitor seal, fix tinny earbuds, audio engineering, Web Audio API, interaural time difference, Dolby Atmos headphone setup, airpods fit test">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IEM &amp; Earbud Seal Quality Tester: Spatial Audio Calibration Tool">
+    <meta property="og:description" content="Plays a series of out-of-phase low-frequency tones. By asking the user to identify when the sound 'centers,' it calculates the quality of your earbud seal (passive isolation), which is critical for 2026 spatial audio accuracy.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/spatial_audio_seal_tester">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IEM &amp; Earbud Seal Quality Tester: Spatial Audio Calibration Tool">
+    <meta name="twitter:description" content="Plays a series of out-of-phase low-frequency tones. By asking the user to identify when the sound 'centers,' it calculates the quality of your earbud seal (passive isolation), which is critical for 2026 spatial audio accuracy.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/spatial_audio_seal_tester#webapp",
+      "name": "IEM/Earbud 'Seal' & Isolation Quality Test",
+      "headline": "IEM & Earbud Seal Quality Tester: Spatial Audio Calibration Tool",
+      "url": "https://toolkitgen.com/tool/spatial_audio_seal_tester",
+      "description": "Plays a series of out-of-phase low-frequency tones. By asking the user to identify when the sound 'centers,' it calculates the quality of your earbud seal (passive isolation), which is critical for 2026 spatial audio accuracy.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/spatial_audio_seal_tester#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "IEM/Earbud 'Seal' & Isolation Quality Test",
+          "item": "https://toolkitgen.com/tool/spatial_audio_seal_tester"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/spatial_audio_seal_tester#howto",
+      "name": "How to Use IEM/Earbud 'Seal' & Isolation Quality Test",
+      "description": "Quick 4-step guide to using IEM/Earbud 'Seal' & Isolation Quality Test locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch IEM/Earbud 'Seal' & Isolation Quality Test directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/spatial_audio_seal_tester#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why do I feel pressure when I get a good seal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That pressure is the physical proof of a sealed acoustic chamber. Because the system is airtight, inserting the earbud slightly compresses the air against your eardrum. High-end IEMs (like 64 Audio or Empire Ears) often have microscopic \"venting\" modules (like ADEL or APEX) designed to equalize this static pressure slowly over a few seconds without compromising the dynamic acoustic seal for high-speed audio waves."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Could a bad score just mean my hearing is asymmetrical?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anatomical hearing loss is usually isolated to high frequencies (above 4kHz) due to cilia damage. Low frequency (sub-bass) hearing loss is exceedingly rare. If your center shifts wildly between 250Hz and 40Hz, it is almost entirely guaranteed to be a physical hardware/seal issue, not biological hearing damage. However, if you suspect hearing issues, consult an audiologist."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this test work for Over-Ear Headphones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, especially for closed-back headphones. Over-ear headphones often leak bass if the user wears thick-framed glasses or has long hair that breaks the seal of the ear pads against the skin. This tool will detect that leakage as a phase shift in the lower frequencies just like it does for IEMs."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/spatial_audio_seal_tester#article",
+      "headline": "Comprehensive Guide to IEM/Earbud 'Seal' & Isolation Quality Test & Client-Side Execution",
+      "description": "Plays a series of out-of-phase low-frequency tones. By asking the user to identify when the sound 'centers,' it calculates the quality of your earbud seal (passive isolation), which is critical for 2026 spatial audio accuracy.",
+      "url": "https://toolkitgen.com/tool/spatial_audio_seal_tester",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#engineering" class="hover:text-[#EE6C4D]">Audio Engineering</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">IEM Seal Tester</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="analysis-engine">
+                        Analysis Engine</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-blue-600 font-black">METHOD</span>
+                            <span>Psychoacoustic</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-blue-600 font-black">VARIABLE</span>
+                            <span>Phase (ITD)</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-blue-600 font-black">BANDS</span>
+                            <span>250Hz, 100Hz, 40Hz</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest text-center">
+                            Engine Status</h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div id="status-dot" class="w-2.5 h-2.5 bg-slate-300 rounded-full shadow-sm"></div>
+                            <span id="status-text" class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Awaiting
+                                Start</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-blue-400 mb-2" id="requirement">Requirement</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">You
+                        must wear headphones or In-Ear Monitors (IEMs) for this test. It cannot be performed on laptop
+                        speakers.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-blue-500 relative z-10 bg-white shadow-2xl">
+                    <div class="flex items-center justify-between p-6 md:p-10 border-b border-gray-100 bg-slate-50">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">IEM
+                                Seal Quality Tester</h1>
+                            <p class="text-sm text-slate-500 mt-1 font-medium italic">Diagnose bass leaks via Interaural
+                                Time Difference mapping.</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 text-blue-600 rounded-2xl hidden sm:block shadow-sm">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10 bg-white">
+                        <div id="intro-screen" class="text-center py-8 block animate-fadeIn">
+                            <svg class="w-20 h-20 text-slate-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
+                                </path>
+                            </svg>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-4" id="prepare-for-calibration">Prepare for Calibration</h3>
+                            <p class="text-slate-600 max-w-lg mx-auto mb-8">Ensure your earbuds are inserted firmly. We
+                                will play three low-frequency tones. For each tone, your goal is to move the slider
+                                until the sound feels like it is <b>perfectly centered inside the middle of your
+                                    head</b>.</p>
+                            <button onclick="startCalibration()" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-10 rounded-2xl shadow-xl transition transform active:scale-95 text-sm uppercase tracking-[0.2em] border-b-4 border-blue-800 inline-flex items-center gap-3">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Begin Test Protocol
+                            </button>
+                        </div>
+                        <div id="test-screen" class="hidden animate-fadeIn">
+                            <div class="flex justify-center gap-6 mb-8">
+                                <div id="step-1" class="step-dot active"></div>
+                                <div id="step-2" class="step-dot"></div>
+                                <div id="step-3" class="step-dot"></div>
+                            </div>
+                            <div class="readout-box mb-8">
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 block" id="test-label">Stage 1: Baseline Coherence</span>
+                                    <div class="freq-display tracking-tighter"><span id="freq-val">250</span><span class="hz-label">Hz</span></div>
+                                    <div class="center-slider-container mt-10 w-full max-w-md mx-auto">
+                                        <div class="slider-center-mark"></div>
+                                        <input type="range" id="phase-slider" min="-100" max="100" value="0" class="center-slider" oninput="updatePhase(this.value)">
+                                    </div>
+                                    <div class="flex justify-between w-full max-w-md mx-auto mt-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                        <span>Left Dominant</span>
+                                        <span>Physical Center</span>
+                                        <span>Right Dominant</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button onclick="confirmCenter()" id="confirm-btn" class="flex-grow bg-emerald-600 hover:bg-emerald-700 text-white font-black py-5 rounded-2xl shadow-xl transition transform active:scale-95 flex items-center justify-center gap-3 text-sm uppercase tracking-[0.2em] border-b-4 border-emerald-800">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Lock Center &amp; Next</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="result-screen" class="hidden animate-fadeIn">
+                            <div class="text-center bg-slate-50 p-10 rounded-3xl border border-slate-200 shadow-inner">
+                                <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4" id="acoustic-seal-diagnosis">
+                                    Acoustic Seal Diagnosis</h3>
+                                <div class="text-6xl font-black mb-2 tracking-tighter" id="score-display">--%</div>
+                                <p class="text-xl font-bold text-slate-800 mb-6" id="score-verdict">Analyzing...</p>
+                                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-left mt-8">
+                                    <h4 class="text-xs font-black text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-2 mb-4">
+                                        Phase Deviation Log</h4>
+                                    <ul class="space-y-3 font-mono text-sm text-slate-600" id="results-log">
+                                    </ul>
+                                </div>
+                                <button onclick="location.reload()" class="mt-10 bg-slate-800 hover:bg-slate-900 text-white font-black py-4 px-8 rounded-xl shadow-md transition transform active:scale-95 text-xs uppercase tracking-widest border-b-4 border-slate-950 inline-flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                        </path>
+                                    </svg>
+                                    Recalibrate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="tool-categories">
+                        Tool Categories</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#engineering" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-blue-500 hover:text-blue-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Audio
+                            suite</a>
+                        <a href="/#logic" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-blue-500 hover:text-blue-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Psychoacoustics</a>
+                        <a href="/#hardware" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-blue-500 hover:text-blue-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Hardware
+                            Lab</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-audio-tools">
+                        Recommended Audio Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                            <a href="/tool/audio_latency_loopback" class="flex items-center gap-4 w-full">
+                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tight">Audio
+                                    Latency Test</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                            <a href="/tool/hearing_audiogram_test" class="flex items-center gap-4 w-full">
+                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tight">Audiogram
+                                    Test</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                            <a href="/tool/stereo_phase_test" class="flex items-center gap-4 w-full">
+                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tight">Speaker
+                                    Phase Test</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="why-your-earbuds-sound-tinny-the-physics-of-acoustic-leaks">Why Your Earbuds Sound Tinny: The
+                    Physics of Acoustic Leaks</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    A perfect earbud seal does more than just block outside noise—it fundamentally alters the
+                    physics of how your ear interacts with sound. When an In-Ear Monitor (IEM) forms an airtight
+                    seal, it turns your ear canal into a closed pressure chamber. In this state, acoustic
+                    dynamics change drastically, especially for low frequencies. Without a seal, spatial audio
+                    algorithms fail, bass disappears, and phase coherence collapses.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-acoustic-high-pass-filter-effect">The
+                    Acoustic High-Pass Filter Effect</h3>
+                <p class="!mb-6 text-slate-700">When the silicone or foam tip of an earbud fails to make perfect
+                    360-degree contact with your ear canal, it creates an "acoustic leak." In audio engineering
+                    terms, this leak acts identically to an electronic <a href="https://en.wikipedia.org/wiki/High-pass_filter" target="_blank" rel="noopener noreferrer">High-Pass Filter (HPF)</a>.</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-blue-50 shadow-sm space-y-10">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">1.
+                            Acoustic Impedance &amp; Pressure</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-blue-500 mt-2">
+                            In a sealed system, low frequencies pressurize the ear canal directly. When a leak
+                            ($A_{leak}$) is present, the acoustic impedance ($Z_a$) drops exponentially as
+                            frequency ($f$) approaches zero:
+                        </p>
+                        <div class="py-4 text-center text-xl text-slate-800">
+                            $$Z_a \approx \frac{\rho_0 c}{S} \sqrt{1 + \left(\frac{c}{2\pi f L_{eq}}\right)^2}$$
+                        </div>
+                        Because low-frequency sound waves have high energy but move slowly, they easily escape
+                        through the path of least resistance (the leak). This results in a massive loss of
+                        sub-bass amplitude, making your music sound "tinny" or "hollow."
+                        <p></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">2. The
+                            Phase Shift Anomaly</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                            "A leak doesn't just lower the volume of the bass; it shifts its phase in time.
+                            According to the mechanics of a High-Pass Filter, frequencies near the cutoff point
+                            experience a phase lead. If your right earbud leaks but your left does not, the bass
+                            in your right ear physically arrives at your eardrum 'faster' and quieter than the
+                            left, destroying the phantom center image."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="diagnosing-the-invisible-how-the-tool-works">Diagnosing the Invisible: How the Tool Works</h2>
+            <p>Standard hearing tests measure volume sensitivity (audiograms). However, detecting a bad seal
+                requires measuring <b>phase coherence</b>. This Web Audio tool utilizes two evolutionary traits
+                humans use for sound localization: <b>Interaural Level Difference (ILD)</b> and <b>Interaural
+                    Time Difference (ITD)</b>.</p>
+            <h3 id="1-the-itd-manipulation">1. The ITD Manipulation</h3>
+            <p>When you move the slider in the tool above, you are adjusting the ITD. You are delaying the audio
+                signal to one ear by fractions of a millisecond (up to $0.8\text{ms}$). Because humans evolved
+                to track predators, our brains interpret this microscopic time delay as spatial direction. If
+                the sound arrives at the left ear $0.5\text{ms}$ before the right, your brain localizes the
+                sound to the left.</p>
+            <h3 id="2-how-variance-proves-a-leak">2. How Variance Proves a Leak</h3>
+            <p>If you have a perfect seal in both ears, the acoustic properties of both ear canals are
+                identical. Therefore, the slider position required to center a $250\text{Hz}$ tone will be
+                exactly the same position required to center a $40\text{Hz}$ tone.</p>
+            <p>However, if you have a microscopic leak in one ear, that ear acts as a High-Pass Filter. As the
+                test drops the frequency from $250\text{Hz}$ down to $40\text{Hz}$, the leaky ear begins to
+                heavily phase-shift and attenuate the audio. Suddenly, the $40\text{Hz}$ tone sounds heavily
+                pulled to one side. To "fix" it, you have to drag the slider drastically away from the baseline
+                to compensate for the leak's interference. <b>The variance between your slider positions is the
+                    direct mathematical proof of a broken seal.</b></p>
+            <div class="highlight-box">
+                <h4 class="text-blue-900 !mt-0 mb-2 font-black uppercase tracking-widest">CRITICAL FOR DOLBY
+                    ATMOS &amp; SPATIAL AUDIO</h4>
+                <p class="text-blue-800 italic font-medium">Modern spatial audio uses Head-Related Transfer
+                    Functions (HRTF) to trick your brain into hearing 3D space using only 2 channels. HRTFs rely
+                    on extremely precise phase relationships. If a leaky earbud introduces a random 45-degree
+                    phase lead at 80Hz, the spatial algorithm breaks. The bass will sound like it is "inside
+                    your head" while the treble sounds like it is "in the room," creating a disjointed listening
+                    experience.</p>
+            </div>
+            <h2 id="active-noise-cancellation-anc-vs-passive-isolation">Active Noise Cancellation (ANC) vs. Passive Isolation</h2>
+            <p>A very common misconception among headphone users is that turning on Active Noise Cancellation
+                (ANC) will fix a loose fit. This is scientifically incorrect and can actually make audio quality
+                worse.</p>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Isolation Type</th>
+                            <th class="px-6 py-5">Mechanism</th>
+                            <th class="px-6 py-5">Impact on Bass Phase</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Passive Seal (Silicone/Foam)</td>
+                            <td class="px-6 py-5 text-blue-600 font-bold">Physical Blockage</td>
+                            <td class="px-6 py-5 italic">Maintains 100% phase coherence down to 10Hz. Essential
+                                for sub-bass.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">ANC (Feed-Forward)</td>
+                            <td class="px-6 py-4 text-emerald-600 font-bold">Destructive Interference</td>
+                            <td class="px-6 py-4 italic">Introduces inherent processing phase delay. Can cause
+                                "sucking" sensation if seal is poor.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Adaptive EQ (Software)</td>
+                            <td class="px-6 py-5 text-orange-600 font-black">Digital Amplitude Boost</td>
+                            <td class="px-6 py-5 italic">Can boost volume of a leak, but cannot fix spatial
+                                timing errors.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="guide-how-to-fix-a-broken-seal">Guide: How to Fix a Broken Seal</h2>
+            <p>If the diagnostic tool reveals a low score (high variance), your hardware setup needs adjustment.
+                Before buying new headphones, try these physical modifications.</p>
+            <h3 id="1-the-ear-tip-rolling-technique">1. The "Ear Tip Rolling" Technique</h3>
+            <p>Most consumer earbuds (AirPods Pro, Samsung Galaxy Buds, Sony WF-1000XM5) come with Medium
+                silicone tips pre-installed. However, human ear canals are rarely symmetrical. It is extremely
+                common to require a <b>Large tip in the left ear and a Medium tip in the right ear</b>. Do not
+                feel compelled to match sizes. Use the largest tip that fits comfortably to ensure maximum seal.
+            </p>
+            <h3 id="2-silicone-vs-memory-foam-tips">2. Silicone vs. Memory Foam Tips</h3>
+            <p>If silicone tips constantly slide out or fail the seal test, switch to Memory Foam tips (like
+                Comply). Foam expands slowly to fill the unique, non-circular shape of your ear canal. This
+                creates a gasket-like seal that silicone cannot achieve, often improving sub-bass response by
+                +6dB to +10dB immediately.</p>
+            <h3 id="3-the-jaw-drop-test">3. The Jaw-Drop Test</h3>
+            <p>The shape of your ear canal changes when your mouth is open vs. closed. Singers often use
+                custom-molded IEMs made with an "open jaw impression" for this reason. Perform the seal test
+                above while slowly opening your mouth. If the center image shifts wildly when you yawn, your
+                tips are too small and are losing contact as the canal geometry shifts.</p>
+            <h3 id="4-insertion-depth-deep-vs-shallow">4. Insertion Depth (Deep vs Shallow)</h3>
+            <p>Etymotic and Shure IEMs are designed for "deep insertion" (past the second bend of the ear
+                canal). Standard TWS buds are "shallow insertion." If you are using deep-insertion IEMs,
+                ensuring the tip goes past the cartilaginous region is vital for the <a href="https://en.wikipedia.org/wiki/Occlusion_effect" target="_blank">Occlusion Effect</a>,
+                which traps bass energy.</p>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-acoustic-sealing">Frequently Asked Questions (FAQ) - Acoustic Sealing</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Why do I feel pressure when I get a good seal?</span>
+                        <span class="transition-transform group-open:rotate-180 text-blue-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">That pressure is the physical proof of a sealed acoustic chamber.
+                            Because the system is airtight, inserting the earbud slightly compresses the air
+                            against your eardrum. High-end IEMs (like 64 Audio or Empire Ears) often have
+                            microscopic "venting" modules (like ADEL or APEX) designed to equalize this static
+                            pressure slowly over a few seconds without compromising the dynamic acoustic seal
+                            for high-speed audio waves.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Could a bad score just mean my hearing is asymmetrical?</span>
+                        <span class="transition-transform group-open:rotate-180 text-blue-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">Anatomical hearing loss is usually isolated to high frequencies
+                            (above 4kHz) due to cilia damage. Low frequency (sub-bass) hearing loss is
+                            exceedingly rare. If your center shifts wildly between 250Hz and 40Hz, it is almost
+                            entirely guaranteed to be a physical hardware/seal issue, not biological hearing
+                            damage. However, if you suspect hearing issues, consult an audiologist.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this test work for Over-Ear Headphones?</span>
+                        <span class="transition-transform group-open:rotate-180 text-blue-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">Yes, especially for closed-back headphones. Over-ear headphones
+                            often leak bass if the user wears thick-framed glasses or has long hair that breaks
+                            the seal of the ear pads against the skin. This tool will detect that leakage as a
+                            phase shift in the lower frequencies just like it does for IEMs.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black text-2xl" id="validate-your-fit">
+                    Validate Your Fit</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop guessing if your earbuds fit
+                    correctly. Use psychoacoustic math to prove your isolation quality.</p>
+                <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Scroll to Test Engine
+                </button>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-logic-tools">
+                Recommended Logic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/audio_latency_loopback" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        🔊</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-blue-600 transition-colors">Audio
+                            Latency Test</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Measure the round-trip delay of your
+                            audio setup to check for lag in Bluetooth headphones.</p>
+                    </div>
+                </a>
+                <a href="/tool/touchpad_gesture_heatmap" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-cyan-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-cyan-600 group-hover:text-white transition-colors">
+                        👆</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-cyan-600 transition-colors">
+                            Touchpad Heatmap</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Visualize touch consistency and dead
+                            zones.</p>
+                    </div>
+                </a>
+                <a href="/tool/mic_spectrum_analyzer" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        🎤</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-emerald-600 transition-colors">Mic
+                            Analyzer</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Visualize audio frequencies from your
+                            microphone.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        // --- Audio Engine Variables ---
+        let audioCtx;
+        let oscillator;
+        let gainL, gainR;
+        let delayL, delayR;
+        let merger;
+        let isTesting = false;
+        // --- Test Configuration ---
+        const testStages = [
+            { freq: 250, label: "Stage 1: Baseline Coherence" },
+            { freq: 100, label: "Stage 2: Mid-Bass Isolation" },
+            { freq: 40, label: "Stage 3: Sub-Bass Integrity" }
+        ];
+        let currentStage = 0;
+        let userOffsets = [];
+        // --- DOM Elements ---
+        const introScreen = document.getElementById('intro-screen');
+        const testScreen = document.getElementById('test-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const freqVal = document.getElementById('freq-val');
+        const testLabel = document.getElementById('test-label');
+        const slider = document.getElementById('phase-slider');
+        const statusDot = document.getElementById('status-dot');
+        const statusText = document.getElementById('status-text');
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                // Create Nodes
+                oscillator = audioCtx.createOscillator();
+                oscillator.type = 'sine';
+                gainL = audioCtx.createGain();
+                gainR = audioCtx.createGain();
+                delayL = audioCtx.createDelay(1.0); // max 1 second delay
+                delayR = audioCtx.createDelay(1.0);
+                merger = audioCtx.createChannelMerger(2);
+                // Routing Left
+                oscillator.connect(delayL);
+                delayL.connect(gainL);
+                gainL.connect(merger, 0, 0);
+                // Routing Right
+                oscillator.connect(delayR);
+                delayR.connect(gainR);
+                gainR.connect(merger, 0, 1);
+                // Master Out
+                merger.connect(audioCtx.destination);
+                // Start Oscillator silently
+                gainL.gain.value = 0;
+                gainR.gain.value = 0;
+                oscillator.start();
+            }
+            // Resume context if suspended by browser policy
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+        function startCalibration() {
+            initAudio();
+            isTesting = true;
+            currentStage = 0;
+            userOffsets = [];
+            introScreen.classList.add('hidden');
+            testScreen.classList.remove('hidden');
+            statusDot.classList.replace('bg-slate-300', 'bg-blue-500');
+            statusDot.classList.add('animate-pulse');
+            statusText.innerText = "Transmitting Signal";
+            statusText.classList.replace('text-slate-500', 'text-blue-500');
+            loadStage(currentStage);
+        }
+        function loadStage(index) {
+            const stage = testStages[index];
+            freqVal.innerText = stage.freq;
+            testLabel.innerText = stage.label;
+            // Reset Slider to 0
+            slider.value = 0;
+            updatePhase(0);
+            // Set Oscillator Frequency
+            oscillator.frequency.setTargetAtTime(stage.freq, audioCtx.currentTime, 0.05);
+            // Ramp up volume
+            gainL.gain.setTargetAtTime(0.5, audioCtx.currentTime, 0.1);
+            gainR.gain.setTargetAtTime(0.5, audioCtx.currentTime, 0.1);
+            // Update Stepper UI
+            document.querySelectorAll('.step-dot').forEach((dot, i) => {
+                dot.className = 'step-dot'; // reset
+                if (i < index) dot.classList.add('completed');
+                else if (i === index) dot.classList.add('active');
+            });
+        }
+        function updatePhase(val) {
+            if (!audioCtx) return;
+            // Slider range is -100 to +100
+            // We map this to a max delay of 0.8ms (0.0008 seconds) which is roughly human max ITD
+            const maxDelay = 0.0008;
+            const value = parseFloat(val);
+            if (value < 0) {
+                // Pan Left: Delay Right, attenuate Right slightly
+                delayL.delayTime.value = 0;
+                delayR.delayTime.value = (Math.abs(value) / 100) * maxDelay;
+                gainL.gain.value = 0.5;
+                gainR.gain.value = 0.5 - (Math.abs(value) / 100) * 0.2; // mild amplitude panning
+            } else {
+                // Pan Right: Delay Left, attenuate Left slightly
+                delayR.delayTime.value = 0;
+                delayL.delayTime.value = (Math.abs(value) / 100) * maxDelay;
+                gainR.gain.value = 0.5;
+                gainL.gain.value = 0.5 - (Math.abs(value) / 100) * 0.2;
+            }
+        }
+        function confirmCenter() {
+            // Save current slider offset
+            userOffsets.push(parseFloat(slider.value));
+            // Ramp down volume momentarily to prevent clicking
+            gainL.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+            gainR.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+            setTimeout(() => {
+                currentStage++;
+                if (currentStage < testStages.length) {
+                    loadStage(currentStage);
+                } else {
+                    finishCalibration();
+                }
+            }, 200);
+        }
+        function finishCalibration() {
+            isTesting = false;
+            // Shut off audio
+            if (gainL && gainR) {
+                gainL.gain.value = 0;
+                gainR.gain.value = 0;
+            }
+            statusDot.classList.remove('animate-pulse');
+            statusDot.classList.replace('bg-blue-500', 'bg-emerald-500');
+            statusText.innerText = "Analysis Complete";
+            statusText.classList.replace('text-blue-500', 'text-emerald-500');
+            testScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+            calculateResults();
+        }
+        function calculateResults() {
+            // We have 3 offsets for 250Hz, 100Hz, 40Hz
+            const o250 = userOffsets[0];
+            const o100 = userOffsets[1];
+            const o40 = userOffsets[2];
+            // Baseline is what they consider "center" anatomically at 250Hz
+            // Variance is how far they had to drift to maintain center at lower frequencies
+            const drift100 = Math.abs(o100 - o250);
+            const drift40 = Math.abs(o40 - o250);
+            // Max possible drift is roughly 200 (if they went from -100 to +100)
+            // But realistically a drift > 30 is a massive seal failure
+            const maxObservedDrift = Math.max(drift100, drift40);
+            let score = 100 - (maxObservedDrift * 1.5);
+            if (score < 0) score = 0;
+            if (score > 100) score = 100;
+            score = Math.round(score);
+            // UI Updates
+            const scoreDisplay = document.getElementById('score-display');
+            const scoreVerdict = document.getElementById('score-verdict');
+            const resultsLog = document.getElementById('results-log');
+            scoreDisplay.innerText = score + "%";
+            if (score >= 90) {
+                scoreDisplay.className = "text-6xl font-black mb-2 tracking-tighter text-emerald-500";
+                scoreVerdict.innerText = "Excellent Phase Coherence (Perfect Seal)";
+            } else if (score >= 70) {
+                scoreDisplay.className = "text-6xl font-black mb-2 tracking-tighter text-amber-500";
+                scoreVerdict.innerText = "Minor Bass Leak Detected";
+            } else {
+                scoreDisplay.className = "text-6xl font-black mb-2 tracking-tighter text-red-500";
+                scoreVerdict.innerText = "Severe Leak / Isolation Asymmetry";
+            }
+            // Populate Log
+            resultsLog.innerHTML = `
+                <li class="flex justify-between border-b border-slate-100 pb-2">
+                    <span>250Hz Offset (Baseline):</span>
+                    <span class="font-bold text-slate-800">${o250 > 0 ? '+' + o250 : o250}</span>
+                </li>
+                <li class="flex justify-between border-b border-slate-100 pb-2">
+                    <span>100Hz Offset:</span>
+                    <span class="font-bold text-slate-800">${o100 > 0 ? '+' + o100 : o100} <span class="text-xs text-slate-400 font-normal">(&Delta; ${drift100})</span></span>
+                </li>
+                <li class="flex justify-between">
+                    <span>40Hz Offset:</span>
+                    <span class="font-bold text-slate-800">${o40 > 0 ? '+' + o40 : o40} <span class="text-xs text-slate-400 font-normal">(&Delta; ${drift40})</span></span>
+                </li>
+            `;
+        }
+        // --- Scroll Logic ---
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WCAG Accessibility Sim: Real-Time Color Blindness Simulator</title>
+    <meta name="description" content="Test your UI designs for accessibility. Simulate various forms of color blindness like Protanopia and Deuteranopia in real-time. A free professional tool for WCAG compliance. 100% private, local-first processing.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/color_blindness_sim">
+    <meta name="keywords" content="color blindness simulator, wcag accessibility tool, protanopia sim, deuteranopia test, inclusive design tool, web accessibility tester, color vision deficiency simulator, accessibility audit, UI/UX testing, digital inclusivity, a11y tools">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WCAG Accessibility Sim: Real-Time Color Blindness Simulator">
+    <meta property="og:description" content="Test your designs for accessibility by simulating different types of color blindness.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/color_blindness_sim">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WCAG Accessibility Sim: Real-Time Color Blindness Simulator">
+    <meta name="twitter:description" content="Test your designs for accessibility by simulating different types of color blindness.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/color_blindness_sim#webapp",
+      "name": "Color Blindness Simulator",
+      "headline": "WCAG Accessibility Sim: Real-Time Color Blindness Simulator",
+      "url": "https://toolkitgen.com/tool/color_blindness_sim",
+      "description": "Test your designs for accessibility by simulating different types of color blindness.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/color_blindness_sim#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Color Blindness Simulator",
+          "item": "https://toolkitgen.com/tool/color_blindness_sim"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/color_blindness_sim#howto",
+      "name": "How to Use Color Blindness Simulator",
+      "description": "Quick 4-step guide to using Color Blindness Simulator locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Color Blindness Simulator directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/color_blindness_sim#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does this simulator affect the actual image data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The simulation is purely visual. We apply an SVG filter overlay to the rendered image in your browser tab. Your original source file remains untouched. This allows you to rapidly toggle between different vision modes without ever corrupting your source assets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between \"Anomalous Trichromacy\" and \"Dichromacy\"?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anomalous Trichromacy means one of the three cone types is shifted in sensitivity—color perception is weakened but not gone. Dichromacy (which our tool simulates) means one cone type is completely missing. By designing for Dichromacy (the \"Worst Case Scenario\"), you automatically ensure that your designs are accessible to those with Anomalous Trichromacy as well."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I use this tool on my Android phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On Android, simply open this page in Chrome or your native browser. Tap the \"Upload Your Design\" button to select a screenshot from your gallery. You can then tap the simulation buttons at the bottom to audit your mobile UI designs on the go. For the best experience, open Chrome, tap the three dots, and select \"Add to Home Screen\" to use the Sim as an offline PWA."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/color_blindness_sim#article",
+      "headline": "Comprehensive Guide to Color Blindness Simulator & Client-Side Execution",
+      "description": "Test your designs for accessibility by simulating different types of color blindness.",
+      "url": "https://toolkitgen.com/tool/color_blindness_sim",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <style>
+        :root {
+            --color-site-primary: #EE6C4D;
+            --color-acc-indigo: #6366f1;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* Sim Viewport */
+        #sim-viewport {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+            transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            object-fit: contain;
+        }
+
+        .sim-btn {
+            @apply flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-slate-100 bg-white transition-all hover:border-indigo-300 cursor-pointer text-center;
+        }
+
+        .sim-btn.active {
+            @apply border-indigo-500 bg-indigo-50 shadow-lg scale-105;
+        }
+
+        .content-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            shadow-sm: true;
+        }
+
+        .highlight-box {
+            background: #eef2ff;
+            border-left: 4px solid var(--color-acc-indigo);
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 2rem 0;
+        }
+
+        /* Sidebar Link Styling */
+        .tool-link-card {
+            display: block;
+            padding: 1rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            transition: all 0.2s;
+            margin-bottom: 0.75rem;
+        }
+
+        .tool-link-card:hover {
+            border-color: var(--color-acc-indigo);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+        }
+
+        .tool-link-card h4 {
+            margin: 0 0 0.25rem 0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .tool-link-card p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tip-card {
+            background: #fdfcfb;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-top: 4px solid var(--color-acc-indigo);
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#creative" class="hover:text-[#EE6C4D]">Design Tools</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">WCAG Accessibility Sim</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="engine-status">
+                        Engine Status</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-indigo-600 font-black">SVG</span>
+                            <span>Filtered</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-indigo-600 font-black">LMS</span>
+                            <span>Matrix</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-indigo-600 font-black">PRIVACY</span>
+                            <span>100%</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest">Active Logic
+                        </h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                            </div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Real-Time
+                                Filtering ON</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-indigo-400 mb-2" id="a11y-axiom">A11y Axiom</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">Color
+                        should never be the only visual means of conveying information.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-indigo-600 relative z-10 shadow-2xl">
+                    <div class="p-6 md:p-10 bg-[#fdfcfb] border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">WCAG
+                                Accessibility Sim</h1>
+                            <p class="text-sm text-slate-500 mt-1 font-medium italic">Auditing visual perception through
+                                mathematical color matrices.</p>
+                        </div>
+                        <div class="p-4 bg-white text-indigo-600 rounded-2xl shadow-lg hidden sm:block border-2 border-indigo-50">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10 bg-slate-50">
+                        <div class="bg-white rounded-[2rem] p-6 min-h-[400px] flex items-center justify-center mb-10 relative shadow-inner overflow-hidden border border-slate-200">
+                            <img id="sim-viewport" src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Simulation Preview" class="max-w-full h-auto">
+                            <div id="upload-overlay" class="absolute bottom-6 right-6">
+                                <button onclick="document.getElementById('file-input').click()" class="bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl text-xs font-black uppercase tracking-widest hover:bg-black transition transform hover:-translate-y-1 active:scale-95 border-b-4 border-slate-700">
+                                    Upload Your Design
+                                </button>
+                                <input type="file" id="file-input" class="hidden" accept="image/*" onchange="loadLocalImage(this)">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="sim-btn active" onclick="applySim('none', this)">
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-widest">Normal</span>
+                                <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">Full
+                                    Spectrum</span>
+                            </div>
+                            <div class="sim-btn" onclick="applySim('protanopia', this)">
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-widest">Protanopia</span>
+                                <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">Red
+                                    Blind</span>
+                            </div>
+                            <div class="sim-btn" onclick="applySim('deuteranopia', this)">
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-widest">Deuteranopia</span>
+                                <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">Green
+                                    Blind</span>
+                            </div>
+                            <div class="sim-btn" onclick="applySim('tritanopia', this)">
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-widest">Tritanopia</span>
+                                <span class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">Blue
+                                    Blind</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-900 text-center no-print">
+                        <p class="text-[9px] text-slate-500 font-black uppercase tracking-[0.4em]">Local Image
+                            Processing Sandbox • Zero Data Leakage</p>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="tool-domains">
+                        Tool Domains</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#design" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-indigo-500 hover:text-indigo-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">UI
+                            Design</a>
+                        <a href="/#accessibility" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-indigo-500 hover:text-indigo-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">A11y
+                            Suite</a>
+                        <a href="/#frontend" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-indigo-500 hover:text-indigo-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">CSS
+                            Core</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/invisible_watermark_steno" class="tool-link-card">
+                                <h4>Invisible Image Watermarker</h4>
+                                <p>Embed invisible copyright data into your images that survives compression but remains
+                                    undetectable to the human eye.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/wiki_speed_racer" class="tool-link-card">
+                                <h4>The Wikipedia Racer</h4>
+                                <p>Race to click through Wikipedia hyperlinks to connect two random topics in the fewest
+                                    clicks.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/screen_pixel_ruler" class="tool-link-card">
+                                <h4>On-Screen Ruler</h4>
+                                <p>Measure pixel dimensions on any webpage.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/beat_maker_typing" class="tool-link-card">
+                                <h4>Typewriter Orchestra</h4>
+                                <p>Turn your keyboard into a musical instrument. Every letter key triggers a specific
+                                    loop or sample.</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-900 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-indigo-300 uppercase text-[10px] tracking-widest" id="android-setup">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.523 15.3414C17.1513 15.3414 16.8502 15.0403 16.8502 14.6686C16.8502 14.2969 17.1513 13.9958 17.523 13.9958C17.8947 13.9958 18.1958 14.2969 18.1958 14.6686C18.1958 15.0403 17.8947 15.3414 17.523 15.3414ZM6.47702 15.3414C6.10534 15.3414 5.8042 15.0403 5.8042 14.6686C5.8042 14.2969 6.10534 13.9958 6.47702 13.9958C6.8487 13.9958 7.14984 14.2969 7.14984 14.6686C7.14984 15.0403 6.8487 15.3414 6.47702 15.3414ZM17.9625 11.2335L19.4673 8.63668C19.5706 8.45828 19.5101 8.22912 19.3317 8.12586C19.1533 8.0226 18.9242 8.08316 18.8209 8.26156L17.2917 10.9039C15.7533 10.1983 14.0202 9.8042 12 9.8042C9.9798 9.8042 8.2467 10.1983 6.70831 10.9039L5.1791 8.26156C5.07584 8.08316 4.84668 8.0226 4.66828 8.12586C4.48988 8.22912 4.42932 8.45828 4.53258 8.63668L6.0375 11.2335C3.25055 12.8398 1.3414 15.8286 1.3414 19.3414H22.6586C22.6586 15.8286 20.7495 12.8398 17.9625 11.2335Z">
+                            </path>
+                        </svg>
+                        Android Setup
+                    </h3>
+                    <p class="text-slate-400 text-[11px] leading-relaxed font-medium text-center">
+                        Auditing a design on the move? Open Chrome on your Android device, tap the three dots, and
+                        select <b>"Add to Home Screen"</b>. This tool works offline as a PWA, keeping your strategy
+                        private.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="designing-for-color-vision-deficiency-reclaiming-digital-inclusivity">Designing for Color Vision Deficiency:
+                    Reclaiming Digital Inclusivity</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    Over <b>300 million people</b> globally—roughly 8% of the male population and 0.5% of the
+                    female population—navigate the digital world with some form of Color Vision Deficiency
+                    (CVD). In a UI design paradigm that often relies on color to signal critical information
+                    (red for errors, green for success), these users are frequently excluded from core
+                    functionality. The <b>WCAG Accessibility Sim</b> on this Canvas is a clinical diagnostic
+                    tool designed for designers and developers to visualize their interfaces through the
+                    mathematical lens of various CVD archetypes.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-human-logic-of-color-simulation">The Human
+                    Logic of Color Simulation</h3>
+                <p class="!mb-6 text-slate-700">To achieve high-fidelity simulation, our engine applies <b>LMS
+                        Color Space Matrices</b> directly to your images. Here is the logic of our simulator in
+                    plain English:</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-slate-50 shadow-sm space-y-10">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">1. The
+                            Contrast Ratio Logic (LaTeX)</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-indigo-500 mt-2">
+                            "The relative luminance of a color is found by weighing the RGB components based on
+                            their impact on human light perception. The contrast ratio ($CR$) is then calculated
+                            as:"
+                        </p>
+                        <div class="py-4 text-center text-xl text-slate-800">
+                            $$CR = \frac{L_1 + 0.05}{L_2 + 0.05}$$
+                        </div>
+                        Where $L_1$ is the relative luminance of the lighter color and $L_2$ is the darker. WCAG
+                        AA requires a ratio of at least $4.5:1$ for normal text.
+                        <p></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">2. The
+                            Color Matrix Logic</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                            "To simulate blindness, we 're-map' the color vector using the
+                            Machado-Oliveira-Fernandes algorithm. For Protanopia, we mathematically remove the
+                            sensitivity of the 'L' (Long-wave) cones, collapsing the 3D color space into a 2D
+                            plane."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-three-pillars-of-color-vision-deficiency">Chapter 1: The Three Pillars of Color Vision Deficiency</h2>
+            <p>Understanding the specific mechanics of CVD is essential for building <b>Universal User
+                    Interfaces</b>. Most CVD is not "seeing in black and white" (Achromatopsia), but rather a
+                reduced ability to distinguish between specific wavelengths.</p>
+            <h3 id="1-protanopia-red-blind">1. Protanopia (Red-Blind)</h3>
+            <p>Users with Protanopia lack functional L-cones. For them, red light appears as dark grays or muddy
+                browns. In your design, a <b>Protanope</b> will struggle to see red error text against a dark
+                background. Our simulator re-calculates the RGB matrix to reflect this loss of red sensitivity,
+                allowing you to see if your "Danger" signals are invisible to this cohort.</p>
+            <h3 id="2-deuteranopia-green-blind">2. Deuteranopia (Green-Blind)</h3>
+            <p>This is the most common form of color blindness, caused by the absence of M-cones. To a
+                <b>Deuteranope</b>, greens and reds look remarkably similar, often appearing as yellowish-brown.
+                This is why the classic "Stoplight" paradigm (Red vs Green) is the single biggest accessibility
+                barrier on the web. If your dashboard uses red/green indicators for "Loss/Profit" without
+                additional icons, you are losing 5% of your users.
+            </p>
+            <h3 id="3-tritanopia-blue-blind">3. Tritanopia (Blue-Blind)</h3>
+            <p>Tritanopia is a rare deficiency where the S-cones are missing. Blues appear as greens, and
+                yellows appear as light grays or violets. While less common, <b>Tritanopia</b> often impacts
+                navigation elements like blue links or brand icons. Using our simulator's Tritanopia filter
+                reveals whether your "Brand Blue" is being mistaken for a "Success Green."</p>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4 class="!mt-0 font-black text-slate-800 uppercase tracking-widest text-xs mb-3">Trick:
+                        The Grayscale Audit</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed italic">If your UI is functional in pure
+                        black and white, it is automatically accessible to every form of color blindness. Use
+                        grayscale to check your hierarchy of information before adding color.</p>
+                </div>
+                <div class="tip-card">
+                    <h4 class="!mt-0 font-black text-slate-800 uppercase tracking-widest text-xs mb-3">Trick:
+                        Double-Encoding</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed italic">Never rely on color alone. Pair a
+                        green 'Success' message with a checkmark icon ($\checkmark$) and a red 'Error' with an
+                        exclamation mark ($\triangle$).</p>
+                </div>
+            </div>
+            <h2 id="chapter-2-the-wcag-2-2-standards-for-visual-content">Chapter 2: The WCAG 2.2 Standards for Visual Content</h2>
+            <p>The <b>Web Content Accessibility Guidelines (WCAG)</b> provide a global legal and technical
+                standard for inclusivity. Compliance is generally measured across three levels: A, AA, and AAA.
+            </p>
+            <ul>
+                <li><b>Success Criterion 1.4.1 (Use of Color):</b> Color is not used as the only visual means of
+                    conveying information, indicating an action, prompting a response, or distinguishing a
+                    visual element.</li>
+                <li><b>Success Criterion 1.4.3 (Contrast):</b> The visual presentation of text and images of
+                    text has a contrast ratio of at least 4.5:1.</li>
+                <li><b>Success Criterion 1.4.11 (Non-text Contrast):</b> UI components and graphical objects
+                    must have a contrast ratio of at least 3:1 against adjacent colors.</li>
+            </ul>
+            <div class="highlight-box">
+                <h4 class="text-slate-900 !mt-0 mb-2 font-black uppercase tracking-widest">THE "BEYOND
+                    COMPLIANCE" MINDSET</h4>
+                <p class="text-slate-800 italic font-medium">Compliance isn't just about avoiding lawsuits; it's
+                    about <b>Conversion Rate Optimization (CRO)</b>. An accessible checkout button is a button
+                    that more people can see, which leads to higher revenue. Accessibility is the ultimate
+                    business multiplier.</p>
+            </div>
+            <h2 id="chapter-3-implementation-for-android-and-mobile-hardware">Chapter 3: Implementation for Android and Mobile Hardware</h2>
+            <p>Mobile screens present unique challenges for accessibility. High-pixel density and outdoor glare
+                make contrast even more critical. To ensure your design works on Android and iOS devices, follow
+                these technical guidelines:</p>
+            <h4>1. Tap Target Contrast</h4>
+            <p>Mobile users often interact with their devices in sub-optimal lighting. If your button's shadow
+                is the only thing defining its edge (like in <b>Neumorphism</b>), it may become a flat blob on
+                an Android screen in sunlight. Use the simulator to ensure the "Shape" of the button remains
+                distinct in every CVD mode.</p>
+            <h4>2. System-Level Overrides</h4>
+            <p>Both Android and iOS include system-level "Color Correction" settings. However, these settings
+                distort the entire OS. By optimizing your app's design natively using our <b>CVD Sim</b>, you
+                provide a high-quality experience that doesn't require the user to rely on clunky OS-level
+                workarounds.</p>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Sim Mode</th>
+                            <th class="px-6 py-5">Linguistic Logic</th>
+                            <th class="px-6 py-5">Actionable Design Fix</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Protanopia</td>
+                            <td class="px-6 py-5 text-rose-500 font-bold">Red = Void</td>
+                            <td class="px-6 py-5 italic">Increase brightness of reds; add underline to links.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">Deuteranopia</td>
+                            <td class="px-6 py-4 text-emerald-500 font-bold">Green = Red</td>
+                            <td class="px-6 py-4 italic">Use 'Blue-Green' instead of 'Yellow-Green'.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Tritanopia</td>
+                            <td class="px-6 py-5 text-blue-600 font-black">Blue = Gray</td>
+                            <td class="px-6 py-5 italic font-medium">Add heavy borders to blue icons.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Achromatopsia</td>
+                            <td class="px-6 py-5 text-slate-800 font-black">Luminance only</td>
+                            <td class="px-6 py-5 italic font-bold">Use heavy weight fonts for key headers.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-4-the-machine-oliveira-fernandes-matrix-calculation">Chapter 4: The Machine-Oliveira-Fernandes Matrix Calculation</h2>
+            <p>How does the code on this page actually change the image? We utilize a <b>Color Matrix
+                    Transformation</b>. Each pixel's RGB values are multiplied by a $5 \times 4$ matrix. For
+                example, the transformation for Deuteranopia is calculated as:</p>
+            <div class="py-6 px-10 bg-slate-900 text-indigo-100 rounded-2xl font-mono text-xs leading-relaxed shadow-xl border border-indigo-800">
+                R' = 0.625R + 0.375G + 0B <br>
+                G' = 0.700R + 0.300G + 0B <br>
+                B' = 0.000R + 0.300G + 0.7B
+            </div>
+            <p class="mt-6">This re-mapping effectively shifts the "Green" energy into the "Red" and "Blue"
+                channels, mimicking the way a green-blind eye composites a scene. Our <b>SVG Filter Engine</b>
+                performs this matrix math at 60 frames per second, providing the real-time feedback you see on
+                the Canvas.</p>
+            <h2 id="chapter-5-why-local-first-privacy-is-mandatory-for-designers">Chapter 5: Why Local-First Privacy is Mandatory for Designers</h2>
+            <p>Your mockups and proprietary UI designs are your intellectual property. Most "Free Accessibility
+                Checkers" online require you to upload your files to their servers. This exposes your unreleased
+                features to potential data harvesting. Toolkit Gen's <b>Accessibility Sim</b> is a local-first
+                application. 100% of the image filtering and matrix math happens in <b>your browser's local
+                    RAM</b>. We have zero visibility into your assets. This is <b>Zero-Knowledge Design
+                    Auditing</b> for the professional engineer.</p>
+            <div class="mt-16 pt-10 border-t border-slate-200">
+                <h4 class="font-bold text-slate-800 mb-4 uppercase tracking-widest text-xs">Citations &amp; Official
+                    Standards</h4>
+                <p class="text-sm text-slate-500 mb-4">To ensure your designs meet global legal standards,
+                    please refer to the official W3C documentation:</p>
+                <ul class="text-sm space-y-2">
+                    <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg> WCAG 2.1 Understanding Use of Color</a></li>
+                    <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg> WCAG 2.1 Contrast (Minimum)</a></li>
+                </ul>
+            </div>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-digital-inclusivity">Frequently Asked Questions (FAQ) - Digital Inclusivity</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this simulator affect the actual image data?</span>
+                        <span class="transition-transform group-open:rotate-180 text-indigo-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>No.</b> The simulation is purely visual. We apply an SVG filter
+                            overlay to the rendered image in your browser tab. Your original source file remains
+                            untouched. This allows you to rapidly toggle between different vision modes without
+                            ever corrupting your source assets.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>What is the difference between "Anomalous Trichromacy" and "Dichromacy"?</span>
+                        <span class="transition-transform group-open:rotate-180 text-indigo-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>Anomalous Trichromacy</b> means one of the three cone types is
+                            shifted in sensitivity—color perception is weakened but not gone. <b>Dichromacy</b>
+                            (which our tool simulates) means one cone type is completely missing. By designing
+                            for Dichromacy (the "Worst Case Scenario"), you automatically ensure that your
+                            designs are accessible to those with Anomalous Trichromacy as well.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>How do I use this tool on my Android phone?</span>
+                        <span class="transition-transform group-open:rotate-180 text-indigo-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">On Android, simply open this page in Chrome or your native
+                            browser. Tap the <b>"Upload Your Design"</b> button to select a screenshot from your
+                            gallery. You can then tap the simulation buttons at the bottom to audit your mobile
+                            UI designs on the go. For the best experience, open Chrome, tap the three dots, and
+                            select <b>"Add to Home Screen"</b> to use the Sim as an offline PWA.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black" id="see-through-different-eyes">
+                    See Through Different Eyes</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop guessing about accessibility.
+                    Audit your visual signal, identify your contrast gaps, and build an interface that welcomes
+                    everyone. Inclusion is a choice—make it today.</p>
+                <a href="#upload-overlay" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Begin Accessibility Audit
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-logic-tools">
+                Recommended Logic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/wiki_speed_racer" class="tool-link-card h-auto shadow-sm hover:shadow-lg">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">The Wikipedia Racer</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Race to click through Wikipedia hyperlinks to
+                        connect two random topics in the fewest clicks.</p>
+                </a>
+                <a href="/tool/lut_previewer_webgl" class="tool-link-card h-auto shadow-sm hover:shadow-lg">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2">Online LUT Previewer</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Apply cinematic 3D LUTs (.CUBE files) to your
+                        images in real-time to preview color grades.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+    <svg style="display:none">
+        <defs>
+            <filter id="protanopia">
+                <feColorMatrix type="matrix" values="0.567, 0.433, 0, 0, 0, 0.558, 0.442, 0, 0, 0, 0, 0.242, 0.758, 0, 0, 0, 0, 0, 1, 0">
+                </feColorMatrix>
+            </filter>
+            <filter id="deuteranopia">
+                <feColorMatrix type="matrix" values="0.625, 0.375, 0, 0, 0, 0.7, 0.3, 0, 0, 0, 0, 0.3, 0.7, 0, 0, 0, 0, 0, 1, 0"></feColorMatrix>
+            </filter>
+            <filter id="tritanopia">
+                <feColorMatrix type="matrix" values="0.95, 0.05, 0, 0, 0, 0.433, 0.567, 0, 0, 0, 0, 0.475, 0.525, 0, 0, 0, 0, 0, 1, 0">
+                </feColorMatrix>
+            </filter>
+        </defs>
+    </svg>
+    <footer id="app-footer"></footer>
+    <script>
+        // --- CALCULATION & FILTER LOGIC ---
+        function applySim(type, btn) {
+            const viewport = document.getElementById('sim-viewport');
+            // UI Switcher Logic
+            document.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // Apply Mathematical Matrix Transformation
+            if (type === 'none') {
+                viewport.style.filter = 'none';
+            } else {
+                viewport.style.filter = `url(#${type})`;
+            }
+        }
+        function loadLocalImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('sim-viewport').src = e.target.result;
+                    // Reset Sim to Normal when new image loaded
+                    applySim('none', document.querySelector('.sim-btn:first-child'));
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        // --- GLOBAL UI LOGIC ---
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

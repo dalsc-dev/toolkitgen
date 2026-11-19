@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visualize and debug regular expressions with our Regex Visualizer & Debugger. Understand regex patterns through flowcharts and step-by-step matching.">
+    <meta name="keywords" content="regex visualizer, regex debugger, regular expression tool, regex flowchart, pattern matching, regex tutorial">
+    <title>Regex Visualizer & Debugger - Visualize Regular Expressions | ToolkitGen</title>
+    <style>
+        body { font-family: Poppins; line-height: 1.8; max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1 { color: #1a1a2e; font-size: 2.2em; border-bottom: 3px solid #e17055; padding-bottom: 15px; }
+        h2 { color: #2d3436; margin-top: 40px; font-size: 1.6em; }
+        h3 { color: #3d3d5c; margin-top: 30px; font-size: 1.3em; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin: 15px 0; padding-left: 25px; }
+        li { margin-bottom: 10px; }
+        strong { color: #e17055; }
+        a { color: #e17055; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .tool-link { background: #e17055; color: white; padding: 15px 25px; border-radius: 8px; display: inline-block; margin: 20px 0; font-weight: bold; }
+        .tool-link:hover { background: #c55c3d; text-decoration: none; }
+        .faq-section { background: #f8f9fa; padding: 25px; border-radius: 10px; margin: 30px 0; }
+        .intro { background: linear-gradient(135deg, #e17055 0%, #fdcb6e 100%); color: white; padding: 30px; border-radius: 15px; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <span style="font-family: Poppins;">
+        <div class="intro">
+            <h1 style="color: white; border: none; margin: 0;">Regex Visualizer & Debugger</h1>
+            <p style="font-size: 1.1em;">Visualize regular expressions with flowcharts and step-by-step debugging. Perfect for learning regex, debugging patterns, and understanding complex expressions.</p>
+        </div>
+
+        <h2>Understanding Regular Expressions</h2>
+        <p><strong>Regular expressions</strong>, commonly abbreviated as <strong>regex</strong> or <strong>regexp</strong>, are powerful sequence of characters that define a search pattern. They are used across virtually all programming languages and many tools for pattern matching, text manipulation, and validation. From validating email addresses to parsing log files, from data extraction to search and replace operations, regex is an essential skill for developers, data scientists, system administrators, and anyone who works with text data.</p>
+
+        <p>However, regex has a reputation for being difficult to learn and debug. Complex patterns can become nearly incomprehensible strings of characters, making them challenging to write, understand, and maintain. Our <strong>regex visualizer and debugger</strong> solves this problem by converting regex patterns into intuitive visual flowcharts and providing step-by-step matching analysis.</p>
+
+        <h2>Why Regex Is Difficult to Learn</h2>
+        <p>Understanding why <strong>regex is challenging</strong> helps appreciate the value of visualization tools.</p>
+
+        <h3>Concise but Dense Syntax</h3>
+        <p>Regex achieves powerful functionality through <strong>extremely concise syntax</strong>. What might be described in paragraphs of natural language becomes a short string of cryptic characters. This density, while efficient for computers, is challenging for humans to parse mentally.</p>
+
+        <h3>Multiple Representations</h3>
+        <p>The same concept can be expressed in <strong>multiple ways</strong> in regex. For example, `[a-zA-Z0-9]`, `\w`, and `[[:alnum:]]` may all match the same character class depending on the regex flavor. This flexibility creates confusion for learners.</p>
+
+        <h3>Hidden Complexity</h3>
+        <p>Simple-looking patterns can have <strong>surprising behavior</strong>. The pattern `.*` looks simple but can match far more than expected due to greediness and backtracking behavior. Understanding these nuances requires deep knowledge.</p>
+
+        <h3>Backtracking Behavior</h3>
+        <p>Most regex engines use <strong>backtracking</strong> when matching, which can cause exponential matching time for certain patterns. This "pathological" regex behavior is nearly impossible to understand without visualization.</p>
+
+        <h2>Key Regex Concepts and Syntax</h2>
+        <p>Understanding these <strong>fundamental concepts</strong> provides the foundation for working with regex.</p>
+
+        <h3>Literals and Metacharacters</h3>
+        <p>In regex, most characters match themselves. These are called <strong>literals</strong>. However, certain characters have special meaning and are called <strong>metacharacters</strong>: `. ^ $ * + ? { } [ ] \ | ( )`</p>
+
+        <h3>Character Classes</h3>
+        <p><strong>Character classes</strong> match any one character from a set. Use square brackets to define a class:</p>
+        <ul>
+            <li><strong>[abc]</strong> matches a, b, or c</li>
+            <li><strong>[a-z]</strong> matches any lowercase letter</li>
+            <li><strong>[^abc]</strong> matches anything except a, b, or c</li>
+        </ul>
+
+        <h3>Predefined Character Classes</h3>
+        <p>Common character sets have <strong>shorthand notations</strong>:</p>
+        <ul>
+            <li><strong>\d</strong> matches any digit [0-9]</li>
+            <li><strong>\w</strong> matches any word character [a-zA-Z0-9_]</li>
+            <li><strong>\s</strong> matches any whitespace character</li>
+            <li><strong>.</strong> matches any character except newline</li>
+        </ul>
+
+        <h3>Quantifiers</h3>
+        <p><strong>Quantifiers</strong> specify how many times to match the preceding element:</p>
+        <ul>
+            <li><strong>*</strong> matches 0 or more times</li>
+            <li><strong>+</strong> matches 1 or more times</li>
+            <li><strong>?</strong> matches 0 or 1 time</li>
+            <li><strong>{n}</strong> matches exactly n times</li>
+            <li><strong>{n,m}</strong> matches between n and m times</li>
+        </ul>
+
+        <h3>Anchors</h3>
+        <p><strong>Anchors</strong> match positions rather than characters:</p>
+        <ul>
+            <li><strong>^</strong> matches start of string (or line in multiline mode)</li>
+            <li><strong>$</strong> matches end of string (or line in multiline mode)</li>
+            <li><strong>\b</strong> matches word boundary</li>
+        </ul>
+
+        <h3>Groups and Capturing</h3>
+        <p><strong>Parentheses</strong> create groups for capturing and quantification:</p>
+        <ul>
+            <li><strong>(abc)</strong> creates a capturing group</li>
+            <li><strong>(?:abc)</strong> creates a non-capturing group</li>
+            <li><strong>(a|b)</strong> matches a or b (alternation)</li>
+        </ul>
+
+        <h2>Features of Our Regex Visualizer</h2>
+        <p>Our tool provides comprehensive <strong>regex analysis and debugging</strong> capabilities.</p>
+
+        <h3>Flowchart Generation</h3>
+        <p>The visualizer converts regex patterns into <strong>intuitive flowcharts</strong> that show how the pattern matches. Each element becomes a node, with arrows showing the flow of matching. This makes complex patterns immediately understandable.</p>
+
+        <h3>Step-by-Step Debugging</h3>
+        <p><strong>Step-through debugging</strong> shows exactly how the regex engine processes your pattern against test input. See which elements match at each step, when backtracking occurs, and why certain matches succeed or fail.</p>
+
+        <h3>Match Highlighting</h3>
+        <p>When you provide <strong>test strings</strong>, the tool highlights matches in real-time. This immediate feedback helps you understand what your pattern is actually matching, which may differ from your intention.</p>
+
+        <h3>Pattern Explanation</h3>
+        <p>The tool provides <strong>plain English explanations</strong> of what each part of your regex does. This helps both learning and debugging, especially for patterns written by others or created long ago.</p>
+
+        <h3>Common Patterns Library</h3>
+        <p>Access a <strong>library of common patterns</strong> for tasks like email validation, phone numbers, URLs, dates, and more. These provide starting points and examples for building your own patterns.</p>
+
+        <h2>How to Use the Regex Visualizer</h2>
+        <p>Follow this <strong>step-by-step guide</strong> to make the most of the regex visualizer.</p>
+
+        <h3>Entering Your Pattern</h3>
+        <p>Type or paste your regex pattern into the input field. The visualizer will begin analyzing immediately. Different regex flavors may have slightly different syntax, so select the appropriate engine for your use case.</p>
+
+        <h3>Adding Test Strings</h3>
+        <p>Enter <strong>test strings</strong> that you want to test against your pattern. Include both strings that should match and strings that should not match to fully understand your pattern behavior.</p>
+
+        <h3>Exploring the Flowchart</h3>
+        <p>Study the <strong>generated flowchart</strong> to understand pattern structure. Click on nodes to see detailed explanations. Follow the paths to understand how different inputs would be processed.</p>
+
+        <h3>Stepping Through Matches</h3>
+        <p>Use the <strong>debug controls</strong> to step through matching process. Watch how the pattern consumes characters, when alternatives are tried, and how backtracking works.</p>
+
+        <h3>Iterating and Refining</h3>
+        <p>Based on the visualization and debugging, <strong>refine your pattern</strong>. The visualizer updates in real-time as you modify your regex, helping you iterate toward the correct pattern.</p>
+
+        <h2>Understanding Regex Flowcharts</h2>
+        <p>Learning to read <strong>regex flowcharts</strong> unlocks deeper understanding.</p>
+
+        <h3>Node Types</h3>
+        <p>Flowcharts use different <strong>shapes for different elements</strong>. Rectangles typically represent literal characters. Diamonds represent decisions or branches. Circles or rounded shapes often represent anchors or special states.</p>
+
+        <h3>Path Following</h3>
+        <p>Following <strong>paths through the flowchart</strong> shows how matching proceeds. Different paths may lead to different match outcomes depending on input. The flowchart reveals all possible paths.</p>
+
+        <h3>Decision Points</h3>
+        <p><strong>Decision diamonds</strong> show where the regex engine makes choices. These include alternation branches, optional elements, and quantifier decisions. Understanding decisions helps debug unexpected matches.</p>
+
+        <h3>Match vs No-Match Paths</h3>
+        <p>Paths that lead to <strong>successful matches</strong> typically end at an accepting state (often double circle). Paths that lead to failure typically show where and why matching was abandoned.</p>
+
+        <h2>Common Regex Patterns Explained</h2>
+        <p>Let us walk through <strong>common patterns</strong> and what their flowcharts reveal.</p>
+
+        <h3>Email Validation Pattern</h3>
+        <p>A typical email pattern like <strong>`[\w.-]+@[\w.-]+\.\w+`</strong> might look simple but involves multiple character classes, quantifiers, and literal characters. The flowchart reveals the sequential matching and helps identify why certain emails might not match.</p>
+
+        <h3>Phone Number Patterns</h3>
+        <p>Phone number patterns must account for <strong>various formats</strong>: (555) 123-4567, 555-123-4567, 5551234567, etc. Flowcharts help visualize how optional groups, alternations, and quantifiers work together.</p>
+
+        <h3>URL Matching</h3>
+        <p>URL patterns like <strong>`https?://[\w.-]+(?:/[\w./-]*)?`</strong> involve multiple optional components. The flowchart shows how the pattern handles URLs of varying complexity.</p>
+
+        <h3>Date Formats</h3>
+        <p>Date patterns must handle formats like MM/DD/YYYY, YYYY-MM-DD, or DD.MM.YYYY. Flowcharts reveal how different separators and component orders affect matching.</p>
+
+        <h2>Debugging Common Regex Problems</h2>
+        <p>The visualizer helps solve <strong>common regex issues</strong>.</p>
+
+        <h3>Over-Matching</h3>
+        <p>When your pattern matches <strong>more than intended</strong>, step through to see which path is consuming extra characters. Often, quantifiers like `.*` are too greedy and match beyond intended boundaries.</p>
+
+        <h3>Under-Matching</h3>
+        <p>When your pattern fails to match <strong>valid input</strong>, debugging reveals where matching stops and why. Common causes include overly restrictive character classes or incorrect anchoring.</p>
+
+        <h3>Catastrophic Backtracking</h3>
+        <p>Some patterns cause <strong>exponential matching time</strong>. The flowchart often reveals nested quantifiers with overlapping alternatives that create pathological cases. Identifying these patterns prevents performance issues.</p>
+
+        <h3>Unexpected Matches</h3>
+        <p>When matches seem <strong>mysterious</strong>, step-through debugging shows exactly what the engine is doing. The visualization reveals the matching path that produces unexpected results.</p>
+
+        <h2>Advanced Regex Features</h2>
+        <p>Beyond basics, advanced features enable <strong>powerful pattern matching</strong>.</p>
+
+        <h3>Lookahead and Lookbehind</h3>
+        <p><strong>Assertions</strong> like `(?=...)` (positive lookahead) and `(?<=...)` (positive lookbehind) match positions based on what follows or precedes, without consuming characters. These are powerful but confusing; flowcharts clarify their behavior.</p>
+
+        <h3>Non-Greedy Quantifiers</h3>
+        <p>Adding <strong>`?`</strong> after quantifiers (`*?`, `+?`, `??`) makes them non-greedy, matching as few characters as possible. The flowchart difference between greedy and non-greedy versions is illuminating.</p>
+
+        <h3>Named Groups</h3>
+        <p><strong>Named capture groups</strong> like `(?<name>pattern)` make regex more readable and extracting specific matches easier. The visualizer highlights named groups and shows their boundaries.</p>
+
+        <h3>Atomic Groups and Possessive Quantifiers</h3>
+        <p>Advanced features like <strong>`(?>...)`</strong> (atomic groups) or `*+` (possessive quantifiers) prevent backtracking. Flowcharts show how these differ from standard quantifiers.</p>
+
+        <h2>Regex in Different Programming Languages</h2>
+        <p>Regex implementations vary between <strong>languages and tools</strong>.</p>
+
+        <h3>PCRE (Perl Compatible Regular Expressions)</h3>
+        <p><strong>PCRE</strong> is used by PHP, Perl, and many other languages. It supports lookahead, lookbehind, recursion, and many advanced features.</p>
+
+        <h3>JavaScript Regex</h3>
+        <p><strong>JavaScript</strong> regex has evolved significantly. Modern JS supports named groups, lookbehind, and dotAll mode. Some features like possessive quantifiers are not supported.</p>
+
+        <h3>Python Regex</h3>
+        <p><strong>Python</strong> uses the `re` module with PCRE-like syntax. It supports named groups, lookahead, and lookbehind but not all advanced PCRE features.</p>
+
+        <h3>Java regex</h3>
+        <p><strong>Java</strong> regex has its own flavor with slightly different syntax for some features. It supports lookahead, lookbehind, and named groups.</p>
+
+        <h2>Best Practices for Writing Regex</h2>
+        <p>Follow these <strong>best practices</strong> for maintainable regex.</p>
+
+        <h3>Comment and Document</h3>
+        <p>Use <strong>verbose/extended mode</strong> (with `(?x)` flag) to write regex with whitespace and comments. This makes complex patterns readable and maintainable.</p>
+
+        <h3>Test Extensively</h3>
+        <p>Always <strong>test with comprehensive input</strong> including edge cases, boundary conditions, and invalid inputs. The visualizer helps verify behavior across diverse test cases.</p>
+
+        <h3>Be Specific When Possible</h3>
+        <p>Prefer <strong>specific character classes</strong> over `.` where possible. `[^@\s]+` is clearer and more predictable than `.+` in email local part matching.</p>
+
+        <h3>Avoid Catastrophic Patterns</h3>
+        <p>Watch for <strong>nested quantifiers</strong> with overlapping alternatives. Test patterns against potentially pathological input before deployment.</p>
+
+        <h3>Use Capturing Groups Judiciously</h3>
+        <p><strong>Non-capturing groups</strong> `(?:...)` are more efficient when you do not need to extract the matched content. Reserve capturing groups for content you actually need.</p>
+
+        <h2>Learning Resources and Next Steps</h2>
+        <p>Continue developing your <strong>regex skills</strong> with practice.</p>
+
+        <h3>Practice Regularly</h3>
+        <p>Regular practice with <strong>real-world patterns</strong> builds intuition. Use our visualizer to explore patterns you encounter and to verify your own creations.</p>
+
+        <h3>Study Others Patterns</h3>
+        <p>Analyze <strong>regex patterns</strong> you find in code, tutorials, and documentation. Use the visualizer to understand how they work and why they were written that way.</p>
+
+        <h3>Learn Your Tools</h3>
+        <p>Different <strong>programming environments</strong> have different regex capabilities. Learn the specific flavor used in your primary language.</p>
+
+        <h2>Conclusion</h2>
+        <p><strong>Regular expressions</strong> are incredibly powerful but can be difficult to master. Our <strong>regex visualizer and debugger</strong> makes regex more accessible by providing visual representations and step-by-step analysis of pattern matching.</p>
+
+        <p>Whether you are <strong>learning regex</strong> for the first time, debugging a complex pattern, or simply trying to understand what a regex does, our tool provides the insights you need. The visual flowcharts transform cryptic strings into understandable diagrams, and the debugging features reveal exactly how matching proceeds.</p>
+
+        <p>Start using the regex visualizer today and discover how visualization transforms your understanding of regular expressions. With practice and the right tools, regex becomes much more approachable and powerful.</p>
+
+        <a href="https://toolkitgen.com/tool/regex_flowchart_gen" class="tool-link">Visualize Your Regex Now</a>
+
+        <div class="faq-section">
+            <h2>Frequently Asked Questions (FAQs)</h2>
+
+            <h3>1. What is regex visualization?</h3>
+            <p>Regex visualization converts regular expression patterns into visual flowcharts or diagrams that show how the pattern matches, making complex patterns easier to understand.</p>
+
+            <h3>2. How does step-by-step debugging work?</h3>
+            <p>Step-through debugging shows how the regex engine processes your pattern character by character against test input, revealing matches, failures, and backtracking.</p>
+
+            <h3>3. What regex flavors does the tool support?</h3>
+            <p>The tool supports common regex flavors including JavaScript, Python, PCRE, Java, and .NET syntax variations.</p>
+
+            <h3>4. Can I test my regex in real-time?</h3>
+            <p>Yes, enter test strings and see matches highlighted immediately as you modify your pattern.</p>
+
+            <h3>5. What are capturing groups?</h3>
+            <p>Capturing groups (pattern in parentheses) capture matched text for extraction or backreferences. They are numbered by default or can be named.</p>
+
+            <h3>6. What is the difference between greedy and non-greedy?</h3>
+            <p>Greedy quantifiers match as much as possible, while non-greedy (adding ?) matches as little as possible. This affects what gets captured.</p>
+
+            <h3>7. What is backtracking in regex?</h3>
+            <p>Backtracking occurs when the regex engine tries different paths when initial matching fails. It can cause unexpected matches or performance issues.</p>
+
+            <h3>8. What are lookahead and lookbehind?</h3>
+            <p>Lookahead (?=...) and lookbehind (?<=...) are assertions that match based on surrounding text without consuming characters.</p>
+
+            <h3>9. How do I match special characters literally?</h3>
+            <p>Escape special characters with backslash: \. \* \+ \? etc. Or use \Q...\E to escape a sequence.</p>
+
+            <h3>10. What is catastrophic backtracking?</h3>
+            <p>Catastrophic backtracking occurs when certain pattern constructions cause exponential matching time. Nested quantifiers with overlapping alternatives are common causes.</p>
+
+            <h3>11. How do anchors work?</h3>
+            <p>Anchors like ^ and $ match positions rather than characters. ^ is start of string, $ is end, and \b is word boundary.</p>
+
+            <h3>12. What is the dot (.) metacharacter?</h3>
+            <p>The dot matches any character except newline. Use the dotAll flag to make it match newlines as well.</p>
+
+            <h3>13. Can I use regex to validate email addresses?</h3>
+            <p>Yes, but perfect email validation requires very complex patterns. Most practical patterns handle common formats but may not match all valid emails per RFC specifications.</p>
+
+            <h3>14. What are character classes?</h3>
+            <p>Character classes [abc] match any one character from the specified set. [a-z] matches any lowercase letter, for example.</p>
+
+            <h3>15. How do I make part of a pattern optional?</h3>
+            <p>Add ? after the optional element. (optional)? makes a group optional. element? makes a single element optional.</p>
+
+            <h3>16. What is alternation in regex?</h3>
+            <p>Alternation using | allows matching one of several alternatives. (cat|dog) matches either cat or dog.</p>
+
+            <h3>17. How do I match digits and non-digits?</h3>
+            <p>\d matches digits [0-9], \D matches non-digits [^0-9]. Similarly \w matches word characters, \W matches non-word.</p>
+
+            <h3>18. What is a word boundary?</h3>
+            <p>\b matches the position between a word character and a non-word character. Useful for matching whole words.</p>
+
+            <h3>19. Can I name my capture groups?</h3>
+            <p>Yes, use (?<name>pattern) for named groups in most modern regex flavors. This makes extraction clearer.</p>
+
+            <h3>20. What is non-capturing group?</h3>
+            <p>(?:pattern) creates a group that groups elements but does not capture. More efficient when you do not need the captured text.</p>
+
+            <h3>21. How does the flowchart help debugging?</h3>
+            <p>The flowchart shows all possible matching paths, decision points, and how different inputs affect the match result.</p>
+
+            <h3>22. What is the difference between + and *?</h3>
+            <p>+ matches one or more times (at least once). * matches zero or more times (optional repetition).</p>
+
+            <h3>23. Can regex match multiline strings?</h3>
+            <p>Most regex flavors have multiline mode where ^ and $ match line boundaries instead of just string boundaries.</p>
+
+            <h3>24. What are common regex mistakes?</h3>
+            <p>Common mistakes include overusing .*, not escaping special characters, confusing ^ anchor with negation, and creating patterns vulnerable to catastrophic backtracking.</p>
+
+            <h3>25. How do I learn regex effectively?</h3>
+            <p>Practice with real patterns, use visualization tools to understand behavior, study examples, and gradually tackle more complex patterns as skills develop.</p>
+        </div>
+    </span>
+</body>
+</html>

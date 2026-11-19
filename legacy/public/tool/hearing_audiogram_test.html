@@ -1,0 +1,921 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Frequency Audiogram: Online Hearing Test &amp; Hearing Age</title>
+    <meta name="description" content="Test your hearing threshold (dB) across the frequency spectrum (250Hz - 16kHz). A calibrated clinical audiogram simulator to detect early signs of presbycusis.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/hearing_audiogram_test">
+    <meta name="keywords" content="online hearing test, audiogram generator, high frequency hearing test, hearing age test, presbycusis screening, tinnitus frequency match, audio sweep test, clinical hearing map">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="High-Frequency Audiogram: Online Hearing Test &amp; Hearing Age">
+    <meta property="og:description" content="Test your ability to hear audio tones across frequencies from 20Hz to 20kHz.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/hearing_audiogram_test">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="High-Frequency Audiogram: Online Hearing Test &amp; Hearing Age">
+    <meta name="twitter:description" content="Test your ability to hear audio tones across frequencies from 20Hz to 20kHz.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/hearing_audiogram_test#webapp",
+      "name": "Audio Frequency Response Test",
+      "headline": "High-Frequency Audiogram: Online Hearing Test & Hearing Age",
+      "url": "https://toolkitgen.com/tool/hearing_audiogram_test",
+      "description": "Test your ability to hear audio tones across frequencies from 20Hz to 20kHz.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/hearing_audiogram_test#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Audio Frequency Response Test",
+          "item": "https://toolkitgen.com/tool/hearing_audiogram_test"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/hearing_audiogram_test#howto",
+      "name": "How to Use Audio Frequency Response Test",
+      "description": "Quick 4-step guide to using Audio Frequency Response Test locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Audio Frequency Response Test directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/hearing_audiogram_test#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I test my \"Hearing Age\"?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Generally, if you can hear 16kHz, you have the ears of a teenager. 14kHz is typical for those under 30. If your hearing cuts out at 10kHz, your \"Hearing Age\" is likely 50 or above. Note that individual variation is high."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does \"Ear Training\" restore hearing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Sensorineural loss (damage to hair cells) is currently irreversible. Training can help your brain *process* sound better (Auditory Processing), but it cannot fix the biological hardware of the cochlea."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/hearing_audiogram_test#article",
+      "headline": "Comprehensive Guide to Audio Frequency Response Test & Client-Side Execution",
+      "description": "Test your ability to hear audio tones across frequencies from 20Hz to 20kHz.",
+      "url": "https://toolkitgen.com/tool/hearing_audiogram_test",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <style>
+        :root {
+            --color-site-primary: #EE6C4D;
+            --color-audio-wave: #8b5cf6;
+            --color-ear-left: #3b82f6;
+            --color-ear-right: #ef4444;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .frequency-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .audiogram-wrapper {
+            position: relative;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.02);
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--color-audio-wave);
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+            }
+        }
+
+        .playing-btn {
+            animation: pulse-ring 1.5s infinite;
+            background-color: var(--color-audio-wave) !important;
+            color: white !important;
+            border-color: transparent !important;
+        }
+
+        .equation-box {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin: 3.5rem 0;
+        }
+
+        .math-variable {
+            background: #f1f5f9;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.4rem;
+            font-weight: 700;
+            color: #8b5cf6;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .content-highlight {
+            background: linear-gradient(120deg, rgba(139, 92, 246, 0.05) 0%, rgba(139, 92, 246, 0) 100%);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            border-left: 6px solid var(--color-audio-wave);
+        }
+
+        .related-tool-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        .related-tool-card:hover {
+            border-color: var(--color-audio-wave);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.15);
+        }
+
+        @media (max-width: 640px) {
+
+            .tool-card {
+                border-radius: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#health" class="hover:text-[#EE6C4D]">Health Tools</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-extrabold uppercase tracking-widest text-[10px]" aria-current="page">
+                    High-Freq Audiogram</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-2 space-y-12">
+                <div class="bg-amber-50 border-l-8 border-amber-500 p-6 rounded-xl shadow-sm flex gap-4">
+                    <svg class="h-8 w-8 text-amber-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg>
+                    <div>
+                        <p class="text-sm font-black text-amber-900 uppercase tracking-tight">Audio Safety Protocol</p>
+                        <p class="text-sm text-amber-700 mt-1 leading-relaxed">This test produces high-frequency sine
+                            waves. Start with your device volume low to prevent acoustic trauma. Headphones are
+                            mandatory for ear-specific isolation results.</p>
+                    </div>
+                </div>
+                <section class="tool-card border-t-8 border-violet-500 shadow-2xl">
+                    <div class="flex items-center justify-between p-8 md:p-10 border-b border-gray-100 bg-white">
+                        <div>
+                            <h1 class="text-4xl font-black text-slate-900 tracking-tight">High-Frequency Audiogram</h1>
+                            <p class="text-sm text-slate-500 mt-2 font-medium">Precision Pure-Tone Threshold Mapping
+                                (250Hz - 16kHz).</p>
+                        </div>
+                        <div class="hidden sm:flex gap-3">
+                            <div class="px-4 py-2 bg-blue-50 text-blue-700 text-[10px] font-black rounded-full uppercase tracking-widest border border-blue-100 shadow-sm">
+                                Left Ear</div>
+                            <div class="px-4 py-2 bg-red-50 text-red-700 text-[10px] font-black rounded-full uppercase tracking-widest border border-red-100 shadow-sm">
+                                Right Ear</div>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-12 bg-slate-50">
+                        <div id="calibration-step" class="mb-10 p-8 bg-white rounded-3xl shadow-xl border border-slate-200 text-center animate-fadeIn">
+                            <div class="w-20 h-20 bg-violet-50 text-violet-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-black text-slate-800 mb-3 tracking-tight" id="1-calibrate-reference-volume">1. Calibrate Reference
+                                Volume</h3>
+                            <p class="text-slate-500 mb-8 max-w-lg mx-auto leading-relaxed">
+                                Set your system volume to approximately <strong>50%</strong>. Play the reference noise
+                                below and adjust your volume until it sounds like a faint, distant static. This creates
+                                your "0 dBHL" baseline.
+                            </p>
+                            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                                <button onclick="playReference()" class="bg-slate-900 hover:bg-slate-800 text-white font-black py-4 px-10 rounded-2xl transition-all shadow-xl uppercase tracking-widest text-xs">
+                                    Play Reference Noise
+                                </button>
+                                <button onclick="startTest()" class="bg-violet-600 hover:bg-violet-700 text-white font-black py-4 px-10 rounded-2xl transition-all shadow-xl uppercase tracking-widest text-xs">
+                                    Continue to Test →
+                                </button>
+                            </div>
+                        </div>
+                        <div id="test-interface" class="hidden animate-fadeIn">
+                            <div class="flex flex-col lg:flex-row gap-10">
+                                <div class="w-full lg:w-1/3 space-y-6">
+                                    <div class="bg-white p-6 rounded-2xl border-2 border-slate-100 shadow-sm">
+                                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Isolation
+                                            Select</label>
+                                        <div class="flex gap-3">
+                                            <button onclick="setEar('left')" id="btn-left" class="flex-1 py-3.5 rounded-xl font-black text-xs bg-blue-600 text-white shadow-lg transition-all uppercase tracking-widest">Left
+                                                Ear</button>
+                                            <button onclick="setEar('right')" id="btn-right" class="flex-1 py-3.5 rounded-xl font-black text-xs bg-white text-slate-500 border-2 border-slate-100 hover:border-red-400 transition-all uppercase tracking-widest">Right
+                                                Ear</button>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white p-8 rounded-2xl border-2 border-slate-100 shadow-sm text-center">
+                                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Frequency
+                                            Generator</label>
+                                        <div class="mb-6">
+                                            <span id="freq-display" class="frequency-display text-5xl font-black text-slate-800 tracking-tighter">1000</span>
+                                            <span class="text-lg text-slate-400 font-black ml-1">Hz</span>
+                                        </div>
+                                        <div class="flex items-center justify-between mb-8 px-4">
+                                            <button onclick="changeFreq(-1)" class="w-12 h-12 flex items-center justify-center bg-slate-100 rounded-full hover:bg-violet-100 transition-colors shadow-inner">
+                                                <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path>
+                                                </svg>
+                                            </button>
+                                            <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest">Adjust
+                                                Pitch</span>
+                                            <button onclick="changeFreq(1)" class="w-12 h-12 flex items-center justify-center bg-slate-100 rounded-full hover:bg-violet-100 transition-colors shadow-inner">
+                                                <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <button id="play-tone-btn" onmousedown="playTone()" onmouseup="stopTone()" onmouseleave="stopTone()" ontouchstart="playTone()" ontouchend="stopTone()" class="w-full bg-slate-50 text-slate-600 font-black py-6 rounded-2xl border-2 border-dashed border-slate-200 hover:border-violet-500 hover:text-violet-600 transition-all select-none uppercase tracking-widest text-sm">
+                                            Press &amp; Hold to Play
+                                        </button>
+                                    </div>
+                                    <div class="bg-white p-8 rounded-2xl border-2 border-slate-100 shadow-sm">
+                                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Threshold
+                                            Selection (dB)</label>
+                                        <input type="range" id="vol-slider" min="0" max="80" value="0" step="5" oninput="updateVolDisplay()" class="mb-4">
+                                        <div class="flex justify-between items-center mb-8">
+                                            <span class="text-[10px] font-black text-slate-300 uppercase">Silent</span>
+                                            <span id="vol-display" class="text-2xl font-black text-violet-600 tracking-tighter">0
+                                                dBHL</span>
+                                            <span class="text-[10px] font-black text-slate-300 uppercase">Loud</span>
+                                        </div>
+                                        <button onclick="markPoint()" class="w-full bg-violet-600 hover:bg-violet-700 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-violet-100 uppercase tracking-widest text-xs">
+                                            Log Threshold Point
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-2/3">
+                                    <div class="audiogram-wrapper border-2 border-slate-100 bg-white h-[600px] shadow-2xl relative overflow-hidden">
+                                        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#8b5cf6 1px, transparent 1px); background-size: 20px 20px;">
+                                        </div>
+                                        <canvas id="audiogramChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="space-y-8 relative">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 sticky top-8">
+                    <h3 class="font-black text-slate-900 mb-6 border-b border-slate-100 pb-3 uppercase text-[10px] tracking-widest" id="clinical-stack">
+                        Clinical Stack</h3>
+                    <ul class="space-y-5" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/hearing_age_test" class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                                <div class="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tighter">Hearing
+                                    Age Test</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/tinnitus_frequency_matcher" class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                                <div class="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tighter">Tinnitus
+                                    Matcher</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/noise_dosimeter_test" class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                                <div class="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tighter">Noise
+                                    Level Meter</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/visual_acuity_snellen" class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                                <div class="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tighter">Snellen
+                                    Eye Chart</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-violet-900 to-slate-900 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden border border-violet-400/30">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-violet-500/20 rounded-full blur-3xl"></div>
+                    <h3 class="font-black text-lg mb-4 flex items-center gap-3 relative z-10" id="calibration-pro-tip">
+                        <span class="p-2 bg-violet-500/30 rounded-lg">🎧</span>
+                        Calibration Pro-Tip
+                    </h3>
+                    <p class="text-violet-100/80 text-sm leading-relaxed relative z-10">
+                        Always test in a room where you can't hear the hum of a refrigerator or traffic. Background
+                        noise "masks" low-volume tones, artificially worsening your result.
+                    </p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-slate-400 uppercase text-[10px] tracking-widest" id="android-ios-tip">
+                        Android/iOS Tip
+                    </h3>
+                    <p class="text-slate-500 text-[10px] leading-relaxed font-bold uppercase tracking-wider">
+                        Tap "Add to Home Screen" to have this diagnostic audio generator available offline for regular
+                        clinical screenings.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-16">
+                <h2 class="text-5xl font-black text-slate-900 mb-8 mt-0 tracking-tighter" id="the-complete-science-of-human-hearing-from-acoustics-to-audiometry">The Complete Science
+                    of Human Hearing: From Acoustics to Audiometry</h2>
+                <p class="text-2xl text-slate-500 leading-relaxed font-light">
+                    Hearing is one of the most sophisticated biological processes in nature. It involves the
+                    conversion of invisible air pressure waves into electrical signals interpreted by the
+                    brain's temporal lobe. This <b>High-Frequency Audiogram</b> tool utilizes high-fidelity Web
+                    Audio synthesis to help you map your personal hearing landscape across the frequency
+                    spectrum.
+                </p>
+            </header>
+            <div class="equation-box">
+                <h3 class="!mt-0 !mb-8 text-violet-800 font-black uppercase tracking-widest text-sm" id="the-mathematical-logic-of-audio-scaling">The
+                    Mathematical Logic of Audio Scaling</h3>
+                <p class="text-slate-700 mb-8">In digital audio, volume is not linear. To map the "Decibel" (a
+                    logarithmic unit) to the computer's output power, this tool uses the following
+                    human-understandable logic:</p>
+                <div class="bg-white p-10 rounded-[2rem] border-2 border-slate-100 mb-10 overflow-x-auto text-center shadow-inner">
+                    <p class="text-xl font-bold text-slate-800 mb-4 uppercase tracking-widest text-sm italic">
+                        Sound Pressure Conversion:</p>
+                    <p class="text-2xl font-black text-violet-600 leading-relaxed">
+                        Output Power = 10 raised to the power of ([Measured Decibels - Maximum Audio Capability]
+                        divided by 20)
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <p class="text-sm font-bold text-slate-500 uppercase tracking-widest underline">Variable
+                        Definitions (Legend):</p>
+                    <ul class="text-base list-none p-0 space-y-4">
+                        <li><span class="math-variable">Measured Decibels</span>: The dB level you set on the
+                            slider (your threshold).</li>
+                        <li><span class="math-variable">Maximum Audio Capability</span>: The point where your
+                            digital device distorts (standardized at 80dB for calibrated screening).</li>
+                        <li><span class="math-variable">Output Power</span>: The actual percentage of current
+                            sent to your headphones to move the speaker diaphragm.</li>
+                        <li><span class="math-variable">Logarithmic Ratio</span>: The physics principle that
+                            sounds must be ten times more powerful for us to perceive them as twice as loud.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-anatomy-of-hearing">Chapter 1: The Anatomy of Hearing</h2>
+            <p>To understand the audiogram results, one must first understand the journey of a sound wave. The
+                outer ear (pinna) collects waves and funnels them into the auditory canal. These waves strike
+                the eardrum, vibrating three tiny bones—the malleus, incus, and stapes. Finally, these
+                vibrations enter the fluid-filled <b>Cochlea</b>.</p>
+            <p>The Cochlea is "tonotopically organized," meaning different parts respond to different
+                frequencies. High-frequency sounds (12kHz - 20kHz) are processed at the very base of the
+                cochlea, while low-frequency sounds travel deeper to the apex. Because the base is the first
+                point of contact for all sound energy, it is most susceptible to damage over time.</p>
+            <div class="content-highlight my-10">
+                <h3 class="!mt-0 mb-4" id="the-speech-banana-zone">The "Speech Banana" Zone</h3>
+                <p class="mb-0">Most human vowels and consonants fall between 500Hz and 4000Hz. On your clinical
+                    chart, this area is visually represented as a curved zone. If your marked points drop below
+                    25dB in this range, you may notice significant difficulty understanding speech in crowds or
+                    restaurants.</p>
+            </div>
+            <h2 id="chapter-2-presbycusis-why-high-frequencies-fade-first">Chapter 2: Presbycusis - Why High Frequencies Fade First</h2>
+            <p>Age-related hearing loss, or <b>Presbycusis</b>, is almost always characterized by a downward
+                slope on the audiogram. High frequencies fade first because the delicate "hair cells"
+                (stereocilia) that detect them are under constant bombardment. As we age, these cells lose their
+                ability to regenerate. By age 40, many adults lose the ability to hear above 15kHz. By age 60,
+                this threshold often drops to 10kHz or lower.</p>
+            <h2 id="chapter-3-conductive-vs-sensorineural-loss">Chapter 3: Conductive vs. Sensorineural Loss</h2>
+            <h3 id="1-sensorineural-hearing-loss-snhl">1. Sensorineural Hearing Loss (SNHL)</h3>
+            <p>This is permanent damage to the hair cells or the auditory nerve. It is what our tool primarily
+                screens for. It is usually caused by aging, loud noise exposure (NIHL), or genetics.</p>
+            <h3 id="2-conductive-hearing-loss">2. Conductive Hearing Loss</h3>
+            <p>This occurs when sound cannot physically reach the inner ear. Common causes include earwax
+                buildup, fluid in the ear (from a cold), or a perforated eardrum. If your test results are poor
+                today but you have a head cold, your loss may be temporary and conductive.</p>
+            <div class="equation-box">
+                <h4 class="text-violet-800 !mt-0 mb-4 font-black uppercase tracking-widest text-xs underline">
+                    The 60/60 Rule of Prevention</h4>
+                <p class="text-slate-600 text-sm mb-6">To protect your high-frequency hearing, follow this
+                    simple human-logic protocol:</p>
+                <div class="p-6 bg-white rounded-xl border border-slate-100 space-y-4">
+                    <p class="font-bold text-slate-800">Limit headphone use to 60 minutes at a time.</p>
+                    <p class="font-bold text-slate-800">Ensure volume does not exceed 60% of maximum capacity.
+                    </p>
+                </div>
+                <p class="mt-4 text-[10px] text-slate-400 font-bold uppercase tracking-widest">Note: Every 3dB
+                    increase represents a doubling of sound energy hitting your eardrum.</p>
+            </div>
+            <h2 id="chapter-4-interpreting-your-results-professionally">Chapter 4: Interpreting Your Results Professionally</h2>
+            <p>When you finish the test, your points will be plotted on a graph from 0 to 80 dBHL. Here is the
+                clinical interpretation guide as generally accepted by audiology standards:</p>
+            <ul>
+                <li><strong>0 to 20 dB (Normal):</strong> You can hear the rustle of leaves and soft whispers.
+                </li>
+                <li><strong>25 to 40 dB (Mild Loss):</strong> You may miss soft consonants; speech sounds
+                    "muffled" in noisy environments.</li>
+                <li><strong>45 to 70 dB (Moderate Loss):</strong> You likely struggle to understand normal
+                    conversation without visual cues or hearing aids.</li>
+                <li><strong>75+ dB (Severe Loss):</strong> You only hear loud sounds like shouts or sirens.</li>
+            </ul>
+            <p class="mt-8 p-6 bg-slate-50 rounded-xl border-l-4 border-violet-500">
+                <strong>External Reference:</strong> For a deeper understanding of reading your results and
+                understanding the impact of noise, visit the <a href="https://www.nidcd.nih.gov/health/noise-induced-hearing-loss" target="_blank" rel="nofollow noopener" class="text-violet-600 underline hover:text-violet-800 font-bold">NIDCD
+                    (National Institute
+                    on Deafness and Other Communication Disorders)</a> guide on Noise-Induced Hearing Loss.
+            </p>
+            <h2 id="chapter-5-tinnitus-and-frequency-matching">Chapter 5: Tinnitus and Frequency Matching</h2>
+            <p>Many users with tinnitus (ringing in the ears) use this high-frequency generator to "match" their
+                phantom sound. Tinnitus is often the brain's way of "turning up the gain" on a frequency range
+                that has been lost. If you have a constant ringing at 8000Hz, you will likely notice a
+                significant "dip" at that same point on your audiogram. This is known as the <b>Tinnitus
+                    Notch</b>.</p>
+            <h2 id="chapter-6-technical-limitations-of-home-testing">Chapter 6: Technical Limitations of Home Testing</h2>
+            <p>This tool is a powerful screening utility, but it is limited by your hardware. Standard consumer
+                headphones often have "dips" or "peaks" in their frequency response. To improve accuracy, we
+                recommend using wired over-ear monitors rather than wireless earbuds, as Bluetooth compression
+                can sometimes introduce artifacts in the 12kHz+ range.</p>
+            <div class="mt-20 p-12 bg-slate-900 text-white rounded-[3rem] text-center relative overflow-hidden shadow-2xl">
+                <div class="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-6 font-black uppercase tracking-tighter text-4xl" id="protect-your-world-of-sound">
+                    Protect Your World of Sound</h2>
+                <p class="text-slate-400 mb-10 max-w-2xl mx-auto text-lg leading-relaxed font-light">
+                    Hearing loss is often invisible until it is profound. By mapping your audiogram every six
+                    months, you can identify early high-frequency decline and take steps to protect your
+                    auditory future.
+                </p>
+                <a href="#app-header" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-6 px-16 rounded-2xl transition transform hover:scale-105 shadow-2xl uppercase tracking-widest text-lg">
+                    Restart Diagnostic Sweep
+                </a>
+            </div>
+            <div class="mt-24">
+                <h3 class="text-3xl font-black mb-10 border-b border-slate-100 pb-6 tracking-tight" id="clinical-hearing-faq">Clinical
+                    Hearing FAQ</h3>
+                <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                    <details class="group bg-slate-50 p-8 rounded-3xl cursor-pointer border border-slate-100 transition-all open:bg-white open:shadow-xl" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                        <summary class="flex justify-between items-center font-bold text-slate-800 list-none text-xl" itemprop="name">
+                            <span itemprop="text">Can I test my "Hearing Age"?</span>
+                            <span class="text-violet-600 transition-transform group-open:rotate-180">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7" stroke-width="3"></path>
+                                </svg>
+                            </span>
+                        </summary>
+                        <div class="mt-6 text-slate-600 border-t pt-6 leading-relaxed text-lg" itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                            Yes. Generally, if you can hear 16kHz, you have the ears of a teenager. 14kHz is
+                            typical for those under 30. If your hearing cuts out at 10kHz, your "Hearing Age" is
+                            likely 50 or above. Note that individual variation is high.
+                        </div>
+                    </details>
+                    <details class="group bg-slate-50 p-8 rounded-3xl cursor-pointer border border-slate-100 transition-all open:bg-white open:shadow-xl" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                        <summary class="flex justify-between items-center font-bold text-slate-800 list-none text-xl" itemprop="name">
+                            <span itemprop="text">Does "Ear Training" restore hearing?</span>
+                            <span class="text-violet-600 transition-transform group-open:rotate-180">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7" stroke-width="3"></path>
+                                </svg>
+                            </span>
+                        </summary>
+                        <div class="mt-6 text-slate-600 border-t pt-6 leading-relaxed text-lg" itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                            No. Sensorineural loss (damage to hair cells) is currently irreversible. Training
+                            can help your brain *process* sound better (Auditory Processing), but it cannot fix
+                            the biological hardware of the cochlea.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </article>
+        <section class="mt-24">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-[10px] tracking-[0.3em]" id="related-health-systems">
+                Related Health Systems</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/binaural_beat_brainwave_gen" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Sleep Cycle Calc</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Find the best time to wake up based on
+                        90-minute REM cycles.</p>
+                </a>
+                <a href="/tool/hrv_biofeedback_trainer" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Box Breathing</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Reduce anxiety with a haptic breathing
+                        guide (4-4-4-4 technique).</p>
+                </a>
+                <a href="/tool/health_metrics_dashboard" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Body Fat Calculator (Navy Method)</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Estimate body fat percentage
+                        accurately using tape measurements and the US Navy circumference method.</p>
+                </a>
+                <a href="/tool/hrv_biofeedback_trainer" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-red-50 text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">BOLT Score Test</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Measure respiratory efficiency with
+                        CO2 tolerance.</p>
+                </a>
+                <a href="/tool/health_metrics_dashboard" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">TDEE Calculator</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Calculate your daily calorie needs and
+                        macros.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        // Web Audio Context
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+        let oscillator;
+        let gainNode;
+        const frequencies = [250, 500, 1000, 2000, 4000, 8000, 12000, 16000];
+        let currentFreqIndex = 2;
+        let currentEar = 'left';
+        const resultsLeft = {};
+        const resultsRight = {};
+        let chart;
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+                gainNode = audioCtx.createGain();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+        function playReference() {
+            initAudio();
+            const osc = audioCtx.createOscillator();
+            const gn = audioCtx.createGain();
+            osc.connect(gn);
+            gn.connect(audioCtx.destination);
+            osc.type = 'sine';
+            osc.frequency.value = 400;
+            gn.gain.value = 0.05;
+            osc.start();
+            setTimeout(() => {
+                osc.stop();
+                osc.disconnect();
+            }, 1500);
+        }
+        function startTest() {
+            document.getElementById('calibration-step').classList.add('hidden');
+            document.getElementById('test-interface').classList.remove('hidden');
+            initChart();
+            window.scrollTo({ top: document.querySelector('.tool-card').offsetTop - 20, behavior: 'smooth' });
+        }
+        function setEar(ear) {
+            currentEar = ear;
+            const btnLeft = document.getElementById('btn-left');
+            const btnRight = document.getElementById('btn-right');
+            if (ear === 'left') {
+                btnLeft.className = "flex-1 py-3.5 rounded-xl font-black text-xs bg-blue-600 text-white shadow-lg transition-all uppercase tracking-widest";
+                btnRight.className = "flex-1 py-3.5 rounded-xl font-black text-xs bg-white text-slate-500 border-2 border-slate-100 hover:border-red-400 transition-all uppercase tracking-widest";
+            } else {
+                btnRight.className = "flex-1 py-3.5 rounded-xl font-black text-xs bg-red-600 text-white shadow-lg transition-all uppercase tracking-widest";
+                btnLeft.className = "flex-1 py-3.5 rounded-xl font-black text-xs bg-white text-slate-500 border-2 border-slate-100 hover:border-blue-400 transition-all uppercase tracking-widest";
+            }
+        }
+        function changeFreq(dir) {
+            currentFreqIndex += dir;
+            if (currentFreqIndex < 0) currentFreqIndex = 0;
+            if (currentFreqIndex >= frequencies.length) currentFreqIndex = frequencies.length - 1;
+            document.getElementById('freq-display').innerText = frequencies[currentFreqIndex];
+            document.getElementById('vol-slider').value = 0;
+            updateVolDisplay();
+        }
+        function updateVolDisplay() {
+            const val = document.getElementById('vol-slider').value;
+            document.getElementById('vol-display').innerText = `${val} dBHL`;
+        }
+        function playTone() {
+            initAudio();
+            const freq = frequencies[currentFreqIndex];
+            const db = parseInt(document.getElementById('vol-slider').value);
+            // Equation logic: Human-understandable variable mapping
+            // Maximum clinical output assumed at 80dB (Digital Limit)
+            const gainVal = Math.pow(10, (db - 80) / 20) * 0.5;
+            oscillator = audioCtx.createOscillator();
+            const panner = audioCtx.createStereoPanner();
+            oscillator.type = 'sine';
+            oscillator.frequency.value = freq;
+            panner.pan.value = currentEar === 'left' ? -1 : 1;
+            oscillator.connect(gainNode);
+            gainNode.connect(panner);
+            panner.connect(audioCtx.destination);
+            gainNode.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+            oscillator.start();
+            document.getElementById('play-tone-btn').classList.add('playing-btn');
+        }
+        function stopTone() {
+            if (oscillator) {
+                oscillator.stop();
+                oscillator.disconnect();
+                oscillator = null;
+            }
+            document.getElementById('play-tone-btn').classList.remove('playing-btn');
+        }
+        function markPoint() {
+            const freq = frequencies[currentFreqIndex];
+            const db = parseInt(document.getElementById('vol-slider').value);
+            if (currentEar === 'left') resultsLeft[freq] = db;
+            else resultsRight[freq] = db;
+            updateChart();
+            if (currentFreqIndex < frequencies.length - 1) {
+                setTimeout(() => changeFreq(1), 200);
+            }
+        }
+        function initChart() {
+            const ctx = document.getElementById('audiogramChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: frequencies,
+                    datasets: [
+                        {
+                            label: 'Left Ear (X)',
+                            data: [],
+                            borderColor: '#3b82f6',
+                            pointStyle: 'crossRot',
+                            pointRadius: 8,
+                            borderWidth: 3,
+                            showLine: true,
+                            tension: 0.2
+                        },
+                        {
+                            label: 'Right Ear (O)',
+                            data: [],
+                            borderColor: '#ef4444',
+                            pointStyle: 'circle',
+                            pointRadius: 8,
+                            borderWidth: 3,
+                            showLine: true,
+                            tension: 0.2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            reverse: true,
+                            min: -10,
+                            max: 90,
+                            title: { display: true, text: 'Threshold (dB HL)', font: { weight: 'bold' } },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Pitch (Hz)', font: { weight: 'bold' } },
+                            type: 'logarithmic',
+                            grid: { color: '#f1f5f9' }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { weight: 'bold' }, padding: 20 } }
+                    }
+                }
+            });
+        }
+        function updateChart() {
+            const lData = frequencies.map(f => resultsLeft[f] !== undefined ? resultsLeft[f] : null);
+            const rData = frequencies.map(f => resultsRight[f] !== undefined ? resultsRight[f] : null);
+            chart.data.datasets[0].data = lData;
+            chart.data.datasets[1].data = rData;
+            chart.update();
+        }
+        document.addEventListener('DOMContentLoaded', updateVolDisplay);
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

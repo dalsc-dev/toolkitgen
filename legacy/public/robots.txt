@@ -1,0 +1,52 @@
+# Toolkit Gen Robots.txt - Optimized for SEO, RAO, and GAO Discovery
+
+# --------------------------------------------------------
+# GLOBAL RULES (Applies to ALL search engines and AI bots)
+# --------------------------------------------------------
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /sw.js
+Disallow: /mywot*.html
+
+# Note: /tools.json is intentionally allowed for AI ingestion (see strategy notes)
+
+# --------------------------------------------------------
+# EXPLICIT AI & BOT ACKNOWLEDGEMENT 
+# (Technically redundant due to the '*' above, but highly 
+# recommended to signal explicit opt-in for AI crawlers)
+# --------------------------------------------------------
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+User-agent: anthropic-ai
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: cohere-ai
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: diffbot
+User-agent: FacebookBot
+User-agent: Applebot
+User-agent: DuckDuckBot
+User-agent: Bingbot
+User-agent: Slurp
+User-agent: Yandex
+Allow: /
+
+# --------------------------------------------------------
+# SITEMAPS & CRAWL SETTINGS
+# --------------------------------------------------------
+Sitemap: https://toolkitgen.com/sitemap-index.xml
+Sitemap: https://toolkitgen.com/sitemap.xml
+Sitemap: https://toolkitgen.com/sitemap-index.xml.gz
+Sitemap: https://toolkitgen.com/sitemap.xml.gz
+
+# Crawl delay for smaller, aggressive bots (Google/Bing ignore this)
+Crawl-delay: 1
+
+# LLMs.txt files for AI systems
+AI-crawlers: /llms.txt
+AI-crawlers-full: /llms-full.txt

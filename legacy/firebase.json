@@ -1,0 +1,269 @@
+{
+  "hosting": {
+    "site": "toolkitgen",
+    "public": "public",
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "/assets/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|woff2|ico)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(html|json|txt|xml)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400"
+          }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/tool/compound_interest_sim",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/emergency_fund_calc",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/cagr_inflation_adjusted",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/dcf_valuation_model",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/net_worth_tracker_local",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/emi_true_cost_analyzer",
+        "destination": "/tool/finance_suite_local",
+        "type": 301
+      },
+      {
+        "source": "/tool/sleep_debt_calculator",
+        "destination": "/tool/health_metrics_dashboard",
+        "type": 301
+      },
+      {
+        "source": "/tool/blood_pressure_tracker",
+        "destination": "/tool/health_metrics_dashboard",
+        "type": 301
+      },
+      {
+        "source": "/tool/body_fat_navy_method",
+        "destination": "/tool/health_metrics_dashboard",
+        "type": 301
+      },
+      {
+        "source": "/tool/edpi_sensitivity_calc",
+        "destination": "/tool/mouse_dpi_deviation_analyzer",
+        "type": 301
+      },
+      {
+        "source": "/tool/master_health_audit",
+        "destination": "/#master-scanners-section",
+        "type": 301
+      },
+      {
+        "source": "/tool/master_hardware_diagnostic",
+        "destination": "/#master-scanners-section",
+        "type": 301
+      },
+      {
+        "source": "/tool/circadian_rhythm_optimizer",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/box_breathing_haptic",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/capillary_refill_test",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/cognitive_load_manager",
+        "destination": "/tool/flow_state_dashboard",
+        "type": 301
+      },
+      {
+        "source": "/tool/color_harmony_cvd_designer",
+        "destination": "/tool/color_blindness_sim",
+        "type": 301
+      },
+      {
+        "source": "/tool/deep_work_session_planner",
+        "destination": "/tool/flow_state_dashboard",
+        "type": 301
+      },
+      {
+        "source": "/tool/dopamine_detox_scheduler",
+        "destination": "/tool/flow_state_dashboard",
+        "type": 301
+      },
+      {
+        "source": "/tool/focus_score_benchmark",
+        "destination": "/tool/flow_state_dashboard",
+        "type": 301
+      },
+      {
+        "source": "/tool/gratitude_practice_tracker",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/hydration_calculator_plus",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/indoor_air_quality_estimator",
+        "destination": "/hubs/startup",
+        "type": 301
+      },
+      {
+        "source": "/tool/cable_management_planner",
+        "destination": "/hubs/startup",
+        "type": 301
+      },
+      {
+        "source": "/tool/inflation_purchasing_power_calc",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/meeting_fatigue_calculator",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/neural_fatigue_tracker",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/ninja_cam_freeze",
+        "destination": "/tool/motion_detector_cam",
+        "type": 301
+      },
+      {
+        "source": "/tool/optical_lens_law_depth_meter",
+        "destination": "/tool/focal_length_sim",
+        "type": 301
+      },
+      {
+        "source": "/tool/oxygen_tank_duration",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/pcb_trace_width_calc",
+        "destination": "/tool/resistor_camera_id",
+        "type": 301
+      },
+      {
+        "source": "/tool/pdf_local_signer",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/pdf_redactor_canvas",
+        "destination": "/hubs/freelancer",
+        "type": 301
+      },
+      {
+        "source": "/tool/postural_sway_analyzer",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/pupillary_light_reflex",
+        "destination": "/tool/pupillary_distance_cam",
+        "type": 301
+      },
+      {
+        "source": "/tool/pursuit_tracking_test",
+        "destination": "/tool/eye_tracking_cognitive_load",
+        "type": 301
+      },
+      {
+        "source": "/tool/reynolds_number_calc",
+        "destination": "/tool/beam_deflection_calc",
+        "type": 301
+      },
+      {
+        "source": "/tool/saliva_hydration_index",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/screen_to_eye_lux_calibrator",
+        "destination": "/tool/screen_pixel_ruler",
+        "type": 301
+      },
+      {
+        "source": "/tool/sleep_apnea_breathing_analyzer",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/sleep_quality_analyzer",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/stress_level_predictor",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/tool/tongue_coating_scanner",
+        "destination": "/hubs/wellness",
+        "type": 301
+      },
+      {
+        "source": "/blog",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/blog/**",
+        "destination": "/",
+        "type": 301
+      }
+    ]
+  }
+}

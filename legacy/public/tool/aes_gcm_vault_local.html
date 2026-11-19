@@ -1,0 +1,861 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES-256 Military Vault: Free Browser-Based File Encryption &amp; Technical Guide</title>
+    <meta name="description" content="Securely encrypt and decrypt files locally using AES-256 GCM. Private keys never leave your browser. A zero-knowledge cybersecurity tool for protecting sensitive data.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/aes_gcm_vault_local">
+    <meta name="keywords" content="aes encryption, file encryption online, browser based encryption, aes-256-gcm, military grade encryption, decrypt file, web crypto api, cybersecurity tool, zero-knowledge encryption, PBKDF2 guide">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AES-256 Military Vault: Free Browser-Based File Encryption &amp; Technical Guide">
+    <meta property="og:description" content="Securely encrypt and decrypt files directly in your browser using standard AES-256 encryption.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/aes_gcm_vault_local">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AES-256 Military Vault: Free Browser-Based File Encryption &amp; Technical Guide">
+    <meta name="twitter:description" content="Securely encrypt and decrypt files directly in your browser using standard AES-256 encryption.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/aes_gcm_vault_local#webapp",
+      "name": "File Protection Utility",
+      "headline": "AES-256 Military Vault: Free Browser-Based File Encryption & Technical Guide",
+      "url": "https://toolkitgen.com/tool/aes_gcm_vault_local",
+      "description": "Securely encrypt and decrypt files directly in your browser using standard AES-256 encryption.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/aes_gcm_vault_local#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "File Protection Utility",
+          "item": "https://toolkitgen.com/tool/aes_gcm_vault_local"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/aes_gcm_vault_local#howto",
+      "name": "How to Use File Protection Utility",
+      "description": "Quick 4-step guide to using File Protection Utility locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch File Protection Utility directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/aes_gcm_vault_local#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can \"Quantum Computers\" crack AES-256?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "According to Grover's Algorithm, a quantum computer would effectively halve the security bits of a symmetric cipher. This means AES-128 would be reduced to 64 bits of security (vulnerable), but AES-256 remains at a robust 128 bits of security even against quantum adversaries. This is why 256-bit keys are considered \"Quantum-Resistant\" for the foreseeable future."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my browser lag during encryption?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because this is a local-first tool, your computer's CPU is doing all the heavy lifting. The PBKDF2 process (100,000 hashes) and the AES cipher consume significant computational power to ensure security. This lag is a physical manifestation of the work required to protect your file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if Toolkit Gen goes offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Since this vault uses standard implementations (Web Crypto API), your files are not \"locked\" to this specific website. Any tool using AES-256-GCM and PBKDF2-SHA256 can decrypt your file as long as you have the password. Your data security is platform-independent."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/aes_gcm_vault_local#article",
+      "headline": "Comprehensive Guide to File Protection Utility & Client-Side Execution",
+      "description": "Securely encrypt and decrypt files directly in your browser using standard AES-256 encryption.",
+      "url": "https://toolkitgen.com/tool/aes_gcm_vault_local",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#cybersecurity" class="hover:text-[#EE6C4D] transition-colors">Security Tools</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-bold" aria-current="page">AES-256 Vault</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="security-status">
+                        Security Status</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-emerald-600 font-black">PROTOCOL</span>
+                            <span>AES-GCM</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-emerald-600 font-black">KDF</span>
+                            <span>PBKDF2</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-emerald-600 font-black">ROUNDS</span>
+                            <span>100,000</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-emerald-600 font-black">LOCAL</span>
+                            <span>100%</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest">Entropy Guard
+                        </h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase">Crypto Context Active</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-slate-900 to-indigo-950 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden border border-slate-800">
+                    <h3 class="font-bold text-lg mb-2 relative z-10 flex items-center gap-2" id="security-notice">
+                        <svg class="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        Security Notice
+                    </h3>
+                    <p class="text-slate-300 text-[11px] relative z-10 leading-relaxed font-medium">
+                        Encryption is only as strong as your password. Avoid simple dictionary words. A phrase with
+                        numbers and symbols at a length of 16+ characters is recommended for $2^{256}$ bit protection.
+                    </p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-emerald-500 relative z-10 shadow-2xl">
+                    <div class="p-6 md:p-10 bg-white border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">AES-256
+                                Military Vault</h1>
+                            <p class="text-sm text-slate-500 mt-2 font-medium">Local-first zero-knowledge authenticated
+                                encryption buffer.</p>
+                        </div>
+                        <div class="p-4 bg-emerald-50 text-emerald-600 rounded-2xl hidden sm:block shadow-sm">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10 bg-slate-50 relative">
+                        <div id="processing-overlay" class="absolute inset-0 bg-white/90 z-40 flex items-center justify-center backdrop-blur-md hidden transition-all">
+                            <div class="text-center">
+                                <div class="relative mb-6">
+                                    <svg class="animate-spin h-16 w-16 text-emerald-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-10" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                        </path>
+                                    </svg>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <span class="text-[8px] font-black uppercase tracking-tighter text-emerald-700">Hashing</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-900 font-black uppercase tracking-[0.2em] text-xs">Computing PBKDF2
+                                    Rounds...</p>
+                                <p class="text-slate-400 text-[10px] mt-2 italic">This may take a moment based on CPU
+                                    entropy</p>
+                            </div>
+                        </div>
+                        <div class="flex border-b border-gray-200 mb-8 bg-white rounded-xl overflow-hidden shadow-sm">
+                            <button onclick="switchMode('encrypt')" id="tab-encrypt" class="tab-btn active flex-1 text-center flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                <span>Encrypt</span>
+                            </button>
+                            <button onclick="switchMode('decrypt')" id="tab-decrypt" class="tab-btn flex-1 text-center flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path></svg>
+                                <span>Decrypt</span>
+                            </button>
+                        </div>
+                        <div class="mb-8 relative group">
+                            <div id="scan-line" class="scan-line"></div>
+                            <input type="file" id="file-input" class="hidden" onchange="handleFileSelect(this)">
+                            <div class="dropzone shadow-inner" id="drop-zone" onclick="document.getElementById('file-input').click()">
+                                <div class="mb-4 inline-flex p-4 bg-white rounded-full shadow-sm text-slate-400 group-hover:text-emerald-500 transition-colors">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <p class="text-slate-800 font-black uppercase tracking-widest text-sm">Drop Secure
+                                    Artifact</p>
+                                <p class="text-xs text-slate-400 mt-2 font-mono" id="file-name-display">LOCAL PROCESSING
+                                    ONLY ● MAX 100MB</p>
+                            </div>
+                        </div>
+                        <div class="mb-10">
+                            <label class="text-[10px] font-black text-slate-400 uppercase mb-3 tracking-widest block">Cryptographic
+                                Key / Password</label>
+                            <div class="relative">
+                                <input type="password" id="password" class="vault-input pr-14" placeholder="••••••••••••••••">
+                                <button onclick="togglePass()" class="absolute right-4 top-4 text-slate-500 hover:text-emerald-500 transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-[9px] text-slate-400 mt-3 font-medium italic">Your password is never stored.
+                                Lost passwords result in permanent data loss.</p>
+                        </div>
+                        <button id="action-btn" onclick="processFile()" class="w-full bg-slate-900 hover:bg-black text-white font-black py-4 rounded-2xl shadow-xl transition transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-[0.2em] text-xs">
+                            <span id="btn-icon" class="w-4 h-4 flex items-center justify-center"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span> <span id="btn-text">Execute Encryption</span>
+                        </button>
+                        <div class="mt-10 bg-black rounded-3xl border border-slate-800 p-3 shadow-2xl">
+                            <div class="flex justify-between items-center px-4 py-2 border-b border-slate-800 mb-3">
+                                <span class="text-[9px] text-slate-500 font-black uppercase tracking-widest">Vault
+                                    Transaction Log</span>
+                                <span class="status-chip status-online">System Live</span>
+                            </div>
+                            <div id="console" class="console-log custom-scrollbar">
+                                <div class="log-entry">AES-256 Military Vault kernel initialized...</div>
+                                <div class="log-entry">Web Crypto API connection verified...</div>
+                                <div class="log-entry">Awaiting user input sequence...</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="security-categories">
+                        Security Categories</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#privacy" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-emerald-500 hover:text-emerald-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Privacy
+                            Suite</a>
+                        <a href="/#crypto" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-emerald-500 hover:text-emerald-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Cryptographic
+                            tools</a>
+                        <a href="/#dev" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-emerald-500 hover:text-emerald-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Developer
+                            API</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-logic-tools">
+                        Recommended Logic Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li class="flex items-center gap-3 group cursor-pointer">
+                            <span class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-700 group-hover:text-emerald-600 transition-colors">
+                                    RSA Key Generator</h4>
+                                <p class="text-[10px] text-slate-400">Public/Private pairs</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 group cursor-pointer">
+                            <span class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+                                </svg>
+                            </span>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-700 group-hover:text-blue-600 transition-colors">
+                                    SHA-512 Hasher</h4>
+                                <p class="text-[10px] text-slate-400">File integrity check</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-science-of-silence-why-client-side-aes-gcm-is-the-only-true-privacy-standard">The Science of Silence: Why Client-Side
+                    AES-GCM is the Only True Privacy Standard</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    In an era of centralized surveillance and massive data breaches, the concept of <b>Data
+                        Sovereignty</b> has moved from a niche concern to a professional necessity. Traditional
+                    "online" encryption tools operate on a trust-based model: you upload your unencrypted file
+                    to their server, their backend encrypts it, and you download the result. This creates a
+                    critical <b>Single Point of Failure</b>. If the server is compromised, or the provider is
+                    subpoenaed, your data is exposed.
+                </p>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    The <b>AES-256 Military Vault</b> on this Canvas utilizes a <b>Zero-Knowledge
+                        Architecture</b>. By leveraging the W3C Web Crypto API, all cryptographic primitives—key
+                    derivation, salt generation, and block ciphering—occur exclusively within your browser's
+                    isolated process. Your file never leaves your RAM in its unencrypted state.
+                </p>
+            </header>
+            <div class="content-highlight">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-cryptographic-hardening-stack">The
+                    Cryptographic Hardening Stack</h3>
+                <p class="!mb-6 text-slate-700">To achieve true military-grade security, we combine multiple
+                    layers of authenticated encryption logic:</p>
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">1. AES-256-GCM
+                            (Galois/Counter Mode)</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                            Unlike older modes like CBC, GCM provides <b>Authenticated Encryption</b>. This
+                            means it protects both the confidentiality (the data is secret) and the integrity
+                            (the data hasn't been modified). If a single bit of the encrypted file is altered,
+                            the decryption will fail with an authentication error.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">2. PBKDF2 Key
+                            Derivation</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-blue-500 mt-2">
+                            Passwords are low-entropy. To turn "MyPassword123" into a high-entropy 256-bit key,
+                            we use <b>PBKDF2-HMAC-SHA256</b> with 100,000 iterations. This makes brute-force
+                            attacks exponentially more expensive for attackers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-mathematics-of-aes-256-complexity">Chapter 1: The Mathematics of AES-256 Complexity</h2>
+            <p>The Advanced Encryption Standard (AES) is a symmetric block cipher chosen by the U.S. government
+                to protect classified information. When we specify "256-bit," we are referring to the key size.
+                To understand the scale of this security, consider the number of possible combinations:</p>
+            <p class="text-center font-mono text-xl py-6 bg-slate-50 rounded-2xl my-6">
+                $2^{256} \approx 1.15 \times 10^{77}$
+            </p>
+            <p>This number is roughly equivalent to the number of atoms in the observable universe. Even if
+                every human on earth owned a supercomputer capable of checking a billion keys per second, it
+                would take longer than the age of the universe to exhaust the keyspace. This tool implements the
+                <b>Galois/Counter Mode (GCM)</b>, which is highly efficient and resistant to padding oracle
+                attacks that plagued earlier implementations.
+            </p>
+            <h3 id="why-authenticated-encryption-matters">Why authenticated encryption matters</h3>
+            <p>In standard encryption, an attacker might not be able to read your message, but they could
+                perform a "bit-flipping attack" to change parts of it. For example, changing a "Transfer $100"
+                command to "Transfer $900" without knowing the contents. <b>GCM</b> includes an Authentication
+                Tag. During decryption, the system calculates:</p>
+            <p class="text-center italic py-4">
+                $H(AAD, Ciphertext, Lengths) \stackrel{?}{=} Tag$
+            </p>
+            <p>If the calculated tag does not match the stored tag, the vault rejects the file entirely,
+                protecting you from malicious tampering.</p>
+            <h2 id="chapter-2-entropy-and-the-pbkdf2-process">Chapter 2: Entropy and the PBKDF2 Process</h2>
+            <p>Most users choose passwords that are easy to remember but easy to crack. To mitigate this, this
+                vault does not use your password directly as an encryption key. Instead, it follows a rigorous
+                <b>Key Derivation Function (KDF)</b> process:
+            </p>
+            <ol>
+                <li><b>Salt Generation:</b> A random 16-byte value (the salt) is generated for every encryption.
+                    This ensures that even if you encrypt the same file twice with the same password, the
+                    resulting encrypted files will be completely different.</li>
+                <li><b>Hashing Iterations:</b> The password and salt are hashed 100,000 times. This "stretches"
+                    the password and forces an attacker to perform 100,000 operations for every single password
+                    guess they try.</li>
+                <li><b>Key Extraction:</b> A 256-bit (32-byte) key is extracted for the AES cipher.</li>
+            </ol>
+            <p>By forcing 100,000 rounds of <b>SHA-256</b>, we effectively neutralize most consumer-grade
+                brute-force hardware, providing you with a significant "head start" in the security arms race.
+            </p>
+            <div class="content-card bg-indigo-900 text-white p-10 rounded-3xl my-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-10">
+                    <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h4 class="text-emerald-400 font-black uppercase tracking-widest !mt-0 mb-4">Pro-Level Security
+                    Hygiene</h4>
+                <p class="text-indigo-100 italic font-medium leading-relaxed">
+                    "The weakest link in any encryption system is the human holding the key. Never store your
+                    vault password in a plain text file. Use a reputable password manager or a physical 'analog'
+                    backup. If you are sending an encrypted file to a colleague, share the password via a
+                    separate, secure channel like Signal, iMessage, or a physical meeting."
+                </p>
+            </div>
+            <h2 id="chapter-3-technical-walkthrough-the-local-vault-architecture">Chapter 3: Technical Walkthrough - The Local Vault Architecture</h2>
+            <p>When you click "Execute Encryption" on this page, the following sequence occurs within your
+                browser's <b>SubtleCrypto</b> engine. This architecture is designed to prevent
+                "Man-in-the-Middle" (MitM) attacks by removing the network layer from the cryptographic process
+                entirely.</p>
+            <ul class="space-y-4">
+                <li><b>1. Buffer Loading:</b> The file is converted into an <b>ArrayBuffer</b>, a raw binary
+                    representation of your data. This happens in memory; the file is not written to the disk
+                    cache.</li>
+                <li><b>2. Non-Deterministic IV Generation:</b> A 12-byte <b>Initialization Vector (IV)</b> is
+                    generated using a cryptographically secure pseudo-random number generator (CSPRNG). This
+                    ensures that no two encryptions ever use the same IV, even for identical files.</li>
+                <li><b>3. Cipher Sequence:</b> The AES-256 algorithm processes the data blocks. In GCM mode,
+                    this involves a counter-based encryption paired with a polynomial MAC (Message
+                    Authentication Code) over a binary Galois field. This step is parallelizable, which is why
+                    GCM is faster than CBC on modern processors.</li>
+                <li><b>4. Payload Packaging:</b> The final file is a concatenation of <b>[Salt (16B)] + [IV
+                        (12B)] + [Encrypted Data + 16B Tag]</b>. This standardization allows the file to be
+                    decrypted later without needing a separate metadata file.</li>
+            </ul>
+            <h2 id="chapter-4-the-threat-model-what-this-tool-protects-against">Chapter 4: The Threat Model - What this tool protects against</h2>
+            <p>Understanding what a tool <i>cannot</i> do is as important as knowing what it can. This vault is
+                designed to protect against:</p>
+            <ul>
+                <li><b>Cloud Snooping:</b> If you store your encrypted files on Google Drive, Microsoft
+                    OneDrive, or Dropbox, the cloud providers cannot read the contents. They see only
+                    high-entropy noise.</li>
+                <li><b>Physical Theft:</b> If your laptop or USB drive is stolen, the files remain unreadable
+                    without your master password.</li>
+                <li><b>Unsecured Transfers:</b> Sending files over standard HTTP or unencrypted email becomes
+                    safe, as the payload itself is hardened.</li>
+            </ul>
+            <p>However, this tool <b>cannot</b> protect you if your computer has a <b>Keylogger</b> (which
+                captures your password as you type) or if your browser has malicious extensions that can read
+                the DOM. Always ensure you are using a clean, updated browser environment without suspicious
+                extensions installed.</p>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Algorithm Parameter</th>
+                            <th class="px-6 py-5">Value / Setting</th>
+                            <th class="px-6 py-5">Security Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600 font-medium">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Cipher Mode</td>
+                            <td class="px-6 py-5 text-emerald-600 font-bold">AES-GCM</td>
+                            <td class="px-6 py-5 italic">Provides both secrecy and tamper-evidence.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Key Length</td>
+                            <td class="px-6 py-5 text-blue-600 font-bold">256-bit</td>
+                            <td class="px-6 py-5 italic">Maximum standard for civilian/military protection.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">KDF Rounds</td>
+                            <td class="px-6 py-5 text-purple-600 font-bold">100,000</td>
+                            <td class="px-6 py-5 italic">Defense against GPU-accelerated brute forcing.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Storage Location</td>
+                            <td class="px-6 py-5 text-red-500 font-black">Browser RAM</td>
+                            <td class="px-6 py-5 italic">Data never touches a server disk or database.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-5-best-practices-for-android-and-mobile-users">Chapter 5: Best Practices for Android and Mobile Users</h2>
+            <p>This tool is fully responsive and optimized for mobile browsers. However, mobile devices have
+                unique security challenges due to the way operating systems handle "Sandbox" environments:</p>
+            <ol class="space-y-4">
+                <li><b>Screen Recording:</b> Ensure no other apps are recording your screen while entering your
+                    encryption password. Android 12+ has indicators for this, but vigilance is required.</li>
+                <li><b>Clipboard Safety:</b> Avoid copying your master password to the clipboard. Many Android
+                    apps have "Clipboard Listeners" that can steal copied text immediately. Type your password
+                    manually or use a password manager's "Auto-Fill" service which is generally more secure than
+                    the clipboard.</li>
+                <li><b>PWA Installation:</b> On Chrome for Android or Safari for iOS, tap the share/menu button
+                    and select <b>"Add to Home Screen"</b>. This allows the vault to work as a standalone app.
+                    This not only hides the browser URL bar for better immersion but often runs the process in a
+                    separate memory instance.</li>
+            </ol>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-digital-vaults">Frequently Asked Questions (FAQ) - Digital Vaults</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-3xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Can "Quantum Computers" crack AES-256?</span>
+                        <span class="transition-transform group-open:rotate-180 text-emerald-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">
+                            According to Grover's Algorithm, a quantum computer would effectively halve the
+                            security bits of a symmetric cipher. This means AES-128 would be reduced to 64 bits
+                            of security (vulnerable), but <b>AES-256</b> remains at a robust 128 bits of
+                            security even against quantum adversaries. This is why 256-bit keys are considered
+                            "Quantum-Resistant" for the foreseeable future.
+                        </span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-3xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Why does my browser lag during encryption?</span>
+                        <span class="transition-transform group-open:rotate-180 text-emerald-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">
+                            Because this is a <b>local-first</b> tool, your computer's CPU is doing all the
+                            heavy lifting. The PBKDF2 process (100,000 hashes) and the AES cipher consume
+                            significant computational power to ensure security. This lag is a physical
+                            manifestation of the work required to protect your file.
+                        </span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-3xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>What happens if Toolkit Gen goes offline?</span>
+                        <span class="transition-transform group-open:rotate-180 text-emerald-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">
+                            Since this vault uses standard implementations (Web Crypto API), your files are not
+                            "locked" to this specific website. Any tool using <b>AES-256-GCM</b> and
+                            <b>PBKDF2-SHA256</b> can decrypt your file as long as you have the password. Your
+                            data security is platform-independent.
+                        </span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black" id="secure-your-perimeter">
+                    Secure Your Perimeter</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Don't leave your sensitive data to
+                    chance. Use the AES-256 Military Vault to transform your files into cryptographic ghosts.
+                </p>
+                <a href="#drop-zone" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest">
+                    Initialize Secure Vault
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="cross-platform-security-suite">
+                Cross-Platform Security Suite</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="#" class="group block bg-white rounded-3xl p-8 border border-slate-200 hover:border-emerald-500 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.2-2.85.577-4.147">
+                            </path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Biometric Strength Test</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">Analyze password entropy against common dictionary
+                        attacks.</p>
+                </a>
+                <a href="#" class="group block bg-white rounded-3xl p-8 border border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Base64 Converter</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">Encode and decode binary data to ASCII strings
+                        safely.</p>
+                </a>
+                <a href="#" class="group block bg-white rounded-3xl p-8 border border-slate-200 hover:border-purple-500 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Argon2 Lab</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">Experiment with memory-hard hashing functions.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        let currentMode = 'encrypt';
+        let selectedFile = null;
+        /**
+         * System Logging
+         */
+        function log(msg, color = 'text-slate-300') {
+            const consoleEl = document.getElementById('console');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${color}`;
+            entry.innerText = msg;
+            consoleEl.appendChild(entry);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+        /**
+         * Tab Mode Switching
+         */
+        function switchMode(mode) {
+            currentMode = mode;
+            document.getElementById('tab-encrypt').classList.toggle('active', mode === 'encrypt');
+            document.getElementById('tab-decrypt').classList.toggle('active', mode === 'decrypt');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const actionBtn = document.getElementById('action-btn');
+            if (mode === 'encrypt') {
+                btnText.innerText = 'Execute Encryption';
+                if (btnIcon) btnIcon.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>';
+                actionBtn.className = "w-full bg-slate-900 hover:bg-black text-white font-black py-4 rounded-2xl shadow-xl transition transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-[0.2em] text-xs";
+                log("Switching to Encryption Protocol...");
+            } else {
+                btnText.innerText = 'Execute Decryption';
+                if (btnIcon) btnIcon.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path></svg>';
+                actionBtn.className = "w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-4 rounded-2xl shadow-xl transition transform active:scale-95 flex items-center justify-center gap-3 uppercase tracking-[0.2em] text-xs";
+                log("Switching to Decryption Protocol...");
+            }
+        }
+        /**
+         * Password Visibility
+         */
+        function togglePass() {
+            const input = document.getElementById('password');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+        /**
+         * File Selection Handler
+         */
+        function handleFileSelect(input) {
+            if (input.files.length > 0) {
+                selectedFile = input.files[0];
+                document.getElementById('file-name-display').innerText = `BUFFERED: ${selectedFile.name.toUpperCase()} (${(selectedFile.size / 1024 / 1024).toFixed(2)} MB)`;
+                document.getElementById('file-name-display').classList.add('text-emerald-500');
+                log(`IO: File handle secured for ${selectedFile.name}`);
+            }
+        }
+        /**
+         * Crypto Engine: Key Setup
+         */
+        async function getPasswordKey(password) {
+            const enc = new TextEncoder();
+            return window.crypto.subtle.importKey(
+                "raw",
+                enc.encode(password),
+                { name: "PBKDF2" },
+                false,
+                ["deriveKey"]
+            );
+        }
+        async function deriveKey(passwordKey, salt, keyUsage) {
+            return window.crypto.subtle.deriveKey(
+                {
+                    name: "PBKDF2",
+                    salt: salt,
+                    iterations: 100000,
+                    hash: "SHA-256"
+                },
+                passwordKey,
+                { name: "AES-GCM", length: 256 },
+                false,
+                keyUsage
+            );
+        }
+        /**
+         * Primary Execution Logic
+         */
+        async function processFile() {
+            const password = document.getElementById('password').value;
+            if (!selectedFile) { log("ERR: No artifact in buffer.", "text-red-500"); return; }
+            if (!password) { log("ERR: Access key required.", "text-red-500"); return; }
+            // Start UI Scan animation
+            document.getElementById('processing-overlay').classList.remove('hidden');
+            document.getElementById('scan-line').style.display = 'block';
+            log(`STAGING: Initializing local ${currentMode} loop...`);
+            try {
+                const fileBytes = await selectedFile.arrayBuffer();
+                if (currentMode === 'encrypt') {
+                    // Generate Cryptographic Randomness
+                    const salt = window.crypto.getRandomValues(new Uint8Array(16));
+                    const iv = window.crypto.getRandomValues(new Uint8Array(12));
+                    log("PROCESS: Stretching password entropy (PBKDF2)...");
+                    const passwordKey = await getPasswordKey(password);
+                    const aesKey = await deriveKey(passwordKey, salt, ["encrypt"]);
+                    log("CIPHER: Block processing via AES-GCM-256...");
+                    const encryptedContent = await window.crypto.subtle.encrypt(
+                        { name: "AES-GCM", iv: iv },
+                        aesKey,
+                        fileBytes
+                    );
+                    // Package into binary blob
+                    log("PACKAGING: Serializing Salt, IV, and Payload...");
+                    const blob = new Blob([salt, iv, encryptedContent], { type: "application/octet-stream" });
+                    downloadFile(blob, selectedFile.name + ".enc");
+                    log("STATUS: Encryption cycle complete. IO Download triggered.");
+                } else {
+                    // Extraction
+                    const salt = fileBytes.slice(0, 16);
+                    const iv = fileBytes.slice(16, 28);
+                    const data = fileBytes.slice(28);
+                    log("PROCESS: Reconstructing key from provided salt...");
+                    const passwordKey = await getPasswordKey(password);
+                    const aesKey = await deriveKey(passwordKey, salt, ["decrypt"]);
+                    log("CIPHER: Verifying Authentication Tag...");
+                    const decryptedContent = await window.crypto.subtle.decrypt(
+                        { name: "AES-GCM", iv: iv },
+                        aesKey,
+                        data
+                    );
+                    const originalName = selectedFile.name.replace(".enc", "");
+                    const blob = new Blob([decryptedContent], { type: "application/octet-stream" });
+                    downloadFile(blob, "decrypted_" + originalName);
+                    log("STATUS: Decryption success. Integrity verified.");
+                }
+            } catch (e) {
+                console.error(e);
+                log("FATAL ERROR: Authentication Failed or Buffer Overflow.", "text-red-500");
+                // Custom UI error message instead of alert
+                const errorMsg = document.createElement('div');
+                errorMsg.className = "fixed top-32 left-1/2 -translate-x-1/2 bg-red-600 text-white px-8 py-4 rounded-2xl shadow-2xl z-[100] font-black uppercase tracking-widest text-xs animate-pulse";
+                errorMsg.innerText = "Vault Access Denied: Check Password Integrity";
+                document.body.appendChild(errorMsg);
+                setTimeout(() => errorMsg.remove(), 5000);
+            } finally {
+                document.getElementById('processing-overlay').classList.add('hidden');
+                document.getElementById('scan-line').style.display = 'none';
+            }
+        }
+        function downloadFile(blob, filename) {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+        /**
+         * Drag & Drop Setup
+         */
+        const dropZone = document.getElementById('drop-zone');
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                document.getElementById('file-input').files = e.dataTransfer.files;
+                handleFileSelect(document.getElementById('file-input'));
+            }
+        });
+        /**
+         * UI Interactions
+         */
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAC Address Vendor Lookup - Complete Guide</title>
+</head>
+<body>
+<span style="font-family: Poppins;">
+<h1 style="text-align: center;"><strong>MAC Address Vendor Lookup: Complete Guide to Network Identification</strong></h1>
+
+<p style="text-align: center;">Discover how to identify network devices using MAC addresses. This comprehensive guide covers MAC address structure, vendor identification, and practical applications for network administrators.</p>
+
+<p style="text-align: center;"><em>Try the tool: <a href="https://toolkitgen.com/tool/mac_vendor_lookup">MAC Address Vendor Lookup</a></em></p>
+
+<h2><strong>Understanding MAC Addresses</strong></h2>
+
+<p>MAC (Media Access Control) address is a unique identifier assigned to network hardware. Every device with networking capability - including computers, phones, routers, and IoT devices - has a unique MAC address.</p>
+
+<p>MAC addresses serve several purposes:</p>
+
+<ul>
+<li>Device identification on local networks</li>
+<li>Network access control</li>
+<li>Device fingerprinting</li>
+<li>Security tracking</li>
+<li>Vendor identification</li>
+</ul>
+
+<h3><strong>MAC Address Format</strong></h3>
+
+<p>MAC addresses are 48-bit addresses written as 6 pairs of hexadecimal digits:</p>
+
+<pre>XX:XX:XX:XX:XX:XX
+ |  |  |  |  |  |
+ +--+--+--+--+--+-- Vendor ID (3 bytes)
+ +-------------+-- Device ID (3 bytes)</pre>
+
+<h3><strong>Common Formats</strong></h3>
+
+<p>Multiple representations are used:</p>
+
+<ul>
+<li>XX:XX:XX:XX:XX:XX (colon-separated)</li>
+<li>XX-XX-XX-XX-XX-XX (hyphen-separated)</li>
+<li>XXXX.XXXX.XXXX (dot-separated)</li>
+<li>XXXXXXXXXXXX (no separators)</li>
+</ul>
+
+<h2><strong>MAC Address Structure</strong></h2>
+
+<p>Understanding the two components:</p>
+
+<h3><strong>OUI (Organizationally Unique Identifier)</strong></h3>
+
+<p>First 3 bytes (24 bits) identify the manufacturer. Assigned by IEEE to ensure uniqueness.</p>
+
+<h3><strong>NIC (Network Interface Controller) Specific</strong></h3>
+
+<p>Last 3 bytes identify the specific device. Assigned by manufacturer.</p>
+
+<h3><strong>Address Types</strong></h3>
+
+<ul>
+<li><strong>Universal Administered</strong> - Assigned by manufacturer</li>
+<li><strong>Local Administered</strong> - Manually assigned, not unique</li>
+<li><strong>Multicast</strong> - First byte ends in odd number</li>
+<li><strong>Broadcast</strong> - All Fs: FF:FF:FF:FF:FF:FF</li>
+</ul>
+
+<h2><strong>Vendor Identification Process</strong></h2>
+
+<p>Our lookup tool identifies vendors:</p>
+
+<h3><strong>1. OUI Extraction</strong></h3>
+
+<p>Extract the first 3 bytes (first 6 characters).</p>
+
+<h3><strong>2. Database Lookup</strong></h3>
+
+<p>Search OUI database for matching vendor.</p>
+
+<h3><strong>3. Result Display</strong></h3>
+
+<p>Return vendor name and registration details.</p>
+
+<h2><strong>Common Manufacturers</strong></h2>
+
+<p>Recognize common OUI patterns:</p>
+
+<h3><strong>Apple (00:03:93, A4:B5:45...) </strong></h3>
+
+<p>All iPhones, Macs, and Apple devices.</p>
+
+<h3><strong>Intel (00:1E:67, 00:1F:3B...)</strong></h3>
+
+<p>Computers, WiFi adapters.</p>
+
+<h3><strong>Samsung (00:07:AB, 10:1D:C0...)</strong></h3>
+
+<p>Phones, tablets, TVs.</p>
+
+<h3><strong>Google (3C:5A:37, 94:EB:2C...)</strong></h3>
+
+<p>Pixels, Chromecasts.</p>
+
+<h3><strong>Amazon (00:BB:3A, 34:D2:70...)</strong></h3>
+
+<p>Kindle, Echo devices.</p>
+
+<h3><strong>Microsoft (00:50:F2, 28:18:78...) </strong></h3>
+
+<p>Surface devices, Xbox.</p>
+
+<h3><strong>Cisco (00:1B:2B, 00:17:DF...)</strong></h3>
+
+<p>Network equipment.</p>
+
+<h3><strong>TP-Link (00:1D:0F, 14:CC:20...)</strong></h3>
+
+<p>Routers, adapters.</p>
+
+<h2><strong>Network Administration Uses</strong></h2>
+
+<p>MAC addresses help in several ways:</p>
+
+<h3><strong>Device Inventory</strong></h3>
+
+<p>Track devices on your network. Know what connects.</p>
+
+<h3><strong>Access Control</strong></h3>
+
+<p>Allow/block specific devices by MAC address.</p>
+
+<h3><strong>Troubleshooting</strong></h3>
+
+<p>Identify devices causing network issues.</p>
+
+<h3><strong>Security</strong></h3>
+
+<p>Detect unauthorized devices on network.</p>
+
+<h3><strong>Device Classification</strong></h3>
+
+<p>Separate IoT, laptops, phones.</p>
+
+<h2><strong>Network Discovery</strong></h2>
+
+<p>Finding devices on your network:</p>
+
+<h3><strong>1. Router Device List</strong></h3>
+
+<p>Most routers show connected devices with MACs.</p>
+
+<h3><strong>2. ARP Table</strong></h3>
+
+<p>Command: arp -a shows cached MAC addresses.</p>
+
+<h3><strong>3. Network Scanner</strong></h3>
+
+<p>Tools like Angry IP Scanner find all devices.</p>
+
+<h3><strong>4. Router Logs</strong></h3>
+
+<p>Check router for connection history.</p>
+
+<h2><strong>Security Considerations</strong></h2>
+
+<p>Security implications exist:</p>
+
+<h3><strong>MAC Spoofing</strong></h3>
+
+<p>Attackers can forge MAC addresses. Don't rely solely on MAC for security.</p>
+
+<h3><strong>Randomized MACs</strong></h3>
+
+<p>Modern iOS/Android use random MAC for scanning. Can't always track.</p>
+
+<h3><strong>Privacy Concerns</strong></h3>
+
+<p>MAC addresses are unique identifiers. Can track users across networks.</p>
+
+<h3><strong>Best Practices</strong></h3>
+
+<ul>
+<li>Use MAC filtering but not as sole security</li>
+<li>Combine with other authentication</li>
+<li>Update vendor database regularly</li>
+<li>Monitor for unauthorized devices</li>
+</ul>
+
+<h2><strong>IoT Device Identification</strong></h2>
+
+<p>Common IoT vendor OUIs:</p>
+
+<ul>
+<li><strong>Philips Hue</strong> - 00:17:88</li>
+<li><strong>Ring</strong> - AC:63:BE</li>
+<li><strong>Nest</strong> - 64:16:66</li>
+<li><strong>August</strong> - 18:B5:91</li>
+<li><strong>Wyze</strong> - 2C:AA:9E</li>
+<li><strong>Tuya/Smart Life</strong> - AC:C2:82</li>
+</ul>
+
+<h2><strong>FAQ: MAC Address Lookup</strong></h2>
+
+<h3><strong>1. Can a device have multiple MACs?</strong></h3>
+
+<p>Yes, devices with multiple network interfaces (WiFi, Ethernet, Bluetooth) each have MACs.</p>
+
+<h3><strong>2. Are MACs unique?</strong></h3>
+
+<p>Manufacturer MACs should be unique. Manually assigned can duplicate.</p>
+
+<h3><strong>3. Can I change my MAC address?</strong></h3>
+
+<p>Yes, OS allows MAC spoofing for privacy or testing.</p>
+
+<h3><strong>4. What if vendor isn't found?</strong></h3>
+
+<p>Newer devices or unusual vendors may not be in database yet.</p>
+
+<h3><strong>5. Is MAC tracking illegal?</strong></h3>
+
+<p>Using MAC to identify devices on your own network is legal.</p>
+
+<h3><strong>6. Why are MAC addresses useful?</strong></h3>
+
+<p>Unlike IP, MAC is hardware-based and persists across sessions.</p>
+
+<h3><strong>7. What's the largest OUI database?</strong></h3>
+
+<p>IEEE assigns OUIs. Commercial databases have 8000+ entries.</p>
+
+<h3><strong>8. Can MACs be cloned?</strong></h3>
+
+<p>Yes, MAC spoofing is trivial. Not reliable for security.</p>
+
+<h3><strong>9. Do virtual machines have MACs?</strong></h3>
+
+<p>Yes, they have virtual MACs assigned by hypervisor.</p>
+
+<h3><strong>10. How find MAC on device?</strong></h3>
+
+<p>Settings > About on phones. IPCONFIG /ALL on Windows.</p>
+
+<h2><strong>Conclusion</strong></h2>
+
+<p>MAC address lookup is essential for network identification. Our tool helps identify device manufacturers quickly. Use for device inventory, troubleshooting, and security monitoring. Remember MAC addresses aren't foolproof for security.</p>
+
+<p><em>Ready to identify network devices? Try the <a href="https://toolkitgen.com/tool/mac_vendor_lookup">MAC Address Vendor Lookup</a> tool now!</em></p>
+</span>
+</body>
+</html>

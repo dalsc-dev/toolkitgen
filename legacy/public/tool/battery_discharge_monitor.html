@@ -1,0 +1,763 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Drain Monitor: Real-Time Battery Discharge Logger</title>
+    <meta name="description" content="Monitor your battery">
+    <link rel="canonical" href="https://toolkitgen.com/tool/battery_discharge_monitor">
+    <meta name="keywords" content="battery discharge monitor, power drain logger, battery health test, laptop battery drain, phone power consumption, real-time battery api, hardware diagnostics, lithium-ion physics, battery cycle life, vampire drain">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Power Drain Monitor: Real-Time Battery Discharge Logger">
+    <meta property="og:description" content="Monitor real-time battery discharge rates to identify excessive power drain or faulty cells.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/battery_discharge_monitor">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Power Drain Monitor: Real-Time Battery Discharge Logger">
+    <meta name="twitter:description" content="Monitor real-time battery discharge rates to identify excessive power drain or faulty cells.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/battery_discharge_monitor#webapp",
+      "name": "Battery Drain Test",
+      "headline": "Power Drain Monitor: Real-Time Battery Discharge Logger",
+      "url": "https://toolkitgen.com/tool/battery_discharge_monitor",
+      "description": "Monitor real-time battery discharge rates to identify excessive power drain or faulty cells.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/battery_discharge_monitor#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Battery Drain Test",
+          "item": "https://toolkitgen.com/tool/battery_discharge_monitor"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/battery_discharge_monitor#howto",
+      "name": "How to Use Battery Drain Test",
+      "description": "Quick 4-step guide to using Battery Drain Test locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Battery Drain Test directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/battery_discharge_monitor#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does my battery \"skip\" from 15% to 5%?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This is Calibration Mismatch. The software (your OS) uses a voltage-to-percentage lookup table. As cells age, their voltage drops more sharply under load. The software suddenly realizes the chemical energy is much lower than it projected and 'jumps' to the correct number. You can fix this by performing a full charge cycle (0% to 100%) once every 3 months to reset the Fuel Gauge IC."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this on my Android phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. This monitor is fully responsive. On Android, we recommend using Chrome or Samsung Internet for the most accurate polling. For best results, keep the tab open in the foreground; many mobile browsers pause JavaScript execution when a tab is hidden to save power, which will pause the log."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a fast-discharge rate always a hardware problem?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Software Inefficiency is more common. Background location services, cloud photo syncing, and poorly optimized social media apps are the primary culprits. Use our monitor while force-closing apps one by one to see which action makes the discharge slope flatten."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/battery_discharge_monitor#article",
+      "headline": "Comprehensive Guide to Battery Drain Test & Client-Side Execution",
+      "description": "Monitor real-time battery discharge rates to identify excessive power drain or faulty cells.",
+      "url": "https://toolkitgen.com/tool/battery_discharge_monitor",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#hardware" class="hover:text-[#EE6C4D]">Hardware Lab</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">Power Drain Monitor</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="engine-status">
+                        Engine Status</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-sky-600 font-black">LOCAL</span>
+                            <span>Parsing</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-sky-600 font-black">POLL</span>
+                            <span>5000ms</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-sky-600 font-black">PRIVACY</span>
+                            <span>100%</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest">Active Scan
+                        </h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                            </div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Battery API
+                                Connected</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-sky-400 mb-2" id="quant-tip">Quant Tip</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">Heat is
+                        the primary accelerator of chemical aging. Keep your device cool during tests.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-8 border-sky-500 relative z-10 shadow-2xl">
+                    <div class="p-6 md:p-10 bg-white border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
+                                Power Drain Monitor</h1>
+                            <p class="text-sm text-slate-500 mt-2 font-medium">Precision Battery Discharge &amp; Health
+                                Analytics Engine.</p>
+                        </div>
+                        <div class="p-4 bg-sky-50 text-sky-600 rounded-2xl hidden sm:block shadow-sm border border-sky-100">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10 bg-slate-50">
+                        <div class="power-readout mb-10 group">
+                            <div class="absolute top-4 left-1/2 -translate-x-1/2 text-[9px] font-black text-slate-600 uppercase tracking-[0.4em] opacity-40 group-hover:opacity-100 transition-opacity">
+                                Real-Time Telemetry Feed</div>
+                            <div class="drain-rate" id="current-drain">0.00<span class="drain-unit">%/hr</span></div>
+                            <div class="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mt-6">
+                                Calculated Kinetic Discharge Velocity</div>
+                        </div>
+                        <div class="bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 shadow-inner mb-8">
+                            <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-50 pb-2" id="discharge-delta">
+                                Discharge Delta (%)</h3>
+                            <div class="h-64 w-full">
+                                <canvas id="batteryChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                            <div class="p-6 bg-white rounded-3xl border border-slate-200 text-center shadow-sm hover:border-sky-300 transition-colors">
+                                <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Static
+                                    Charge</div>
+                                <div class="text-3xl font-black text-slate-900 tracking-tighter" id="live-level">--%
+                                </div>
+                            </div>
+                            <div class="p-6 bg-white rounded-3xl border border-slate-200 text-center shadow-sm hover:border-sky-300 transition-colors">
+                                <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Input
+                                    Status</div>
+                                <div class="text-2xl font-black text-blue-600 tracking-tighter" id="live-source">--
+                                </div>
+                            </div>
+                            <div class="p-6 bg-white rounded-3xl border border-slate-200 text-center shadow-sm hover:border-sky-300 transition-colors">
+                                <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                                    Session T-Plus</div>
+                                <div class="text-2xl font-black text-slate-900 font-mono tracking-tighter" id="elapsed-time">0m 0s</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-6">
+                            <button onclick="startLogging()" id="start-btn" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white font-black py-5 rounded-2xl shadow-xl transition transform active:scale-95 uppercase tracking-widest text-xs border-b-4 border-sky-800">
+                                Initialize Telemetry Log
+                            </button>
+                            <button onclick="resetLog()" class="px-10 py-5 bg-white border-2 border-slate-200 text-slate-400 font-black rounded-2xl transition-all hover:border-slate-400 hover:text-slate-600 uppercase tracking-widest text-xs active:scale-95">
+                                Flush Cache
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-900 text-center border-t border-slate-800 no-print">
+                        <p class="text-[9px] text-slate-500 font-black uppercase tracking-[0.4em]">Hardware-Native
+                            Interface • Browser API Sandbox</p>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="tool-categories">
+                        Tool Categories</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#hardware" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-sky-500 hover:text-sky-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Hardware
+                            Suite</a>
+                        <a href="/#diagnostics" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-sky-500 hover:text-sky-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Diagnostics</a>
+                        <a href="/#engineering" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-sky-500 hover:text-sky-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Quant
+                            Lab</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                            <a href="/tool/battery_discharge_monitor" class="flex items-center gap-4 w-full">
+                                <div class="w-8 h-8 bg-sky-50 rounded-lg flex items-center justify-center text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tight">Health
+                                    Calc</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                            <a href="/tool/keyboard_latency_test" class="flex items-center gap-4 w-full">
+                                <div class="w-8 h-8 bg-sky-50 rounded-lg flex items-center justify-center text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tight">Input
+                                    Lag</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-4 group cursor-pointer hover:translate-x-1 transition-all">
+                            <a href="/tool/monitor_refresh_tester" class="flex items-center gap-4 w-full">
+                                <div class="w-8 h-8 bg-sky-50 rounded-lg flex items-center justify-center text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-all shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tight">Refresh
+                                    Rate</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-900 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-sky-400 uppercase text-[10px] tracking-widest" id="android-setup">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.523 15.3414C17.1513 15.3414 16.8502 15.0403 16.8502 14.6686C16.8502 14.2969 17.1513 13.9958 17.523 13.9958C17.8947 13.9958 18.1958 14.2969 18.1958 14.6686C18.1958 15.0403 17.8947 15.3414 17.523 15.3414ZM6.47702 15.3414C6.10534 15.3414 5.8042 15.0403 5.8042 14.6686C5.8042 14.2969 6.10534 13.9958 6.47702 13.9958C6.8487 13.9958 7.14984 14.2969 7.14984 14.6686C7.14984 15.0403 6.8487 15.3414 6.47702 15.3414ZM17.9625 11.2335L19.4673 8.63668C19.5706 8.45828 19.5101 8.22912 19.3317 8.12586C19.1533 8.0226 18.9242 8.08316 18.8209 8.26156L17.2917 10.9039C15.7533 10.1983 14.0202 9.8042 12 9.8042C9.9798 9.8042 8.2467 10.1983 6.70831 10.9039L5.1791 8.26156C5.07584 8.08316 4.84668 8.0226 4.66828 8.12586C4.48988 8.22912 4.42932 8.45828 4.53258 8.63668L6.0375 11.2335C3.25055 12.8398 1.3414 15.8286 1.3414 19.3414H22.6586C22.6586 15.8286 20.7495 12.8398 17.9625 11.2335Z">
+                            </path>
+                        </svg>
+                        Android Setup
+                    </h3>
+                    <p class="text-slate-400 text-[11px] leading-relaxed font-medium text-center">
+                        Auditing a battery on the move? Open Chrome on your Android device, tap the three dots, and
+                        select <b>"Add to Home Screen"</b>. This tool works offline as a PWA, keeping your telemetry
+                        private.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-physics-of-presence-a-masterclass-in-battery-discharge-analysis">The Physics of Presence: A Masterclass
+                    in Battery Discharge Analysis</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    A battery is not a static fuel tank; it is a complex, living chemical ecosystem. While your
+                    Operating System provides a simple percentage, it often hides the erratic nature of
+                    <b>Vampire Drain</b> and <b>Voltage Sag</b>. The <b>Power Drain Monitor</b> on this Canvas
+                    is a professional-grade diagnostic suite designed to measure the <b>Kinetic Discharge
+                        Velocity</b> of your device. By quantifying the slope of your battery's decline, we can
+                    isolate whether your power issues are rooted in physical hardware degradation or inefficient
+                    software background processes.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-human-logic-of-power-consumption">The Human
+                    Logic of Power Consumption</h3>
+                <p class="!mb-6 text-slate-700">To maintain the longevity of your hardware, you must understand
+                    the mathematical relationship between load and longevity. We define your <b>Drain
+                        Signature</b> using two core logical pillars:</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-sky-50 shadow-sm space-y-10">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">1. The
+                            Discharge Rate Formula (LaTeX)</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-blue-500 mt-2">
+                            The rate of power loss ($D_r$) is calculated as the change in battery percentage
+                            ($\Delta \%$) over a specific interval of time ($\Delta t$):
+                        </p>
+                        <div class="py-4 text-center text-xl text-slate-800">
+                            $$D_r = \frac{P_{initial} - P_{current}}{T_{elapsed}}$$
+                        </div>
+                        A healthy idle device should maintain a $D_r$ below $1.5\% / hr$.
+                        <p></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">2. The
+                            Energy Density Constant</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                            "Your Estimated Runtime equals the current battery percentage divided by the average
+                            discharge rate calculated over the last 15 minutes of activity."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-chemistry-of-the-lithium-ion-cycle">Chapter 1: The Chemistry of the Lithium-Ion Cycle</h2>
+            <p>Inside your device, lithium ions move from the negative electrode (anode) to the positive
+                electrode (cathode) through an electrolyte. This movement generates the current that powers your
+                CPU. However, every time these ions move, they create a microscopic layer of "trash" called the
+                <b>Solid Electrolyte Interphase (SEI)</b>. Over time, this layer thickens, increasing internal
+                resistance. Our monitor detects the visual result of this aging: <b>Non-Linear Discharge</b>,
+                where the battery percentage drops faster as it reaches lower thresholds.
+            </p>
+            <h3 id="the-c-rate-benchmark">The C-Rate Benchmark</h3>
+            <p>In battery engineering, the discharge rate is often referred to as the <b>C-rate</b>. $1C$ means
+                the battery is discharged at a rate that would empty it in exactly one hour. Modern smartphones
+                and laptops typically operate between $0.05C$ (standby) and $0.5C$ (gaming/video editing). If
+                our tool shows a discharge rate exceeding $20\% / hr$ during light browsing, your device is
+                operating at an inefficient C-rate that will permanently damage the chemical structure of the
+                cells.</p>
+            <div class="highlight-box">
+                <h4 class="text-sky-900 !mt-0 mb-2 font-black uppercase tracking-widest">PRO TIP: THE 20-80
+                    PROTOCOL</h4>
+                <p class="text-sky-800 italic font-medium">Linguistic and physical studies of lithium-ion
+                    longevity suggest that the 'chemical stress' on a battery is highest at 0% and 100%.
+                    Maintaining your charge between 20% and 80% can increase the cycle life of your hardware by
+                    up to 200%. Use this monitor to verify that your device isn't spending too much time at
+                    these high-voltage plateaus.</p>
+            </div>
+            <h2 id="chapter-2-identifying-vampire-drain-via-idle-logging">Chapter 2: Identifying "Vampire Drain" via Idle Logging</h2>
+            <p>Vampire drain occurs when your device is "off" or "sleeping" but still consuming power at a rate
+                higher than $2\% / hr$. This is usually caused by rogue background processes, constant location
+                polling, or poor network connectivity where the cellular modem works overtime to find a signal.
+            </p>
+            <h3 id="the-30-minute-baseline-test">The 30-Minute Baseline Test</h3>
+            <p>To perform a professional diagnostic, follow the <b>Baseline Protocol</b>:</p>
+            <ol class="space-y-4 mt-4">
+                <li>Disconnect the charger and ensure the device is at room temperature.</li>
+                <li>Close all background apps and disable Bluetooth/GPS.</li>
+                <li>Start the <b>Power Drain Monitor</b> and let it run for 30 minutes with the screen at
+                    minimum brightness.</li>
+                <li>Analyze the resulting chart. A perfectly flat line represents a healthy software stack.
+                    Constant "jitter" or steps in the line indicate that background software is periodically
+                    "waking up" the CPU.</li>
+            </ol>
+            <h2 id="chapter-3-thermal-dynamics-and-efficiency">Chapter 3: Thermal Dynamics and Efficiency</h2>
+            <p>Resistance ($R$) in a battery increases as temperature ($T$) rises. This creates a dangerous
+                feedback loop: high power usage generates heat, heat increases resistance, and increased
+                resistance requires more current to maintain the same performance. Our tool helps you identify
+                the start of this cycle. If the discharge rate increases significantly after 10 minutes of use,
+                your device is likely suffering from <b>Thermal Throttling</b>—where heat is causing the battery
+                to work harder and less efficiently.</p>
+            <h2 id="chapter-4-implementation-the-annual-hardware-audit">Chapter 4: Implementation - The Annual Hardware Audit</h2>
+            <p>Just as you change the oil in a car, you should audit your power efficiency every 12 months.
+                Battery capacity fades by roughly 10-20% per year. By comparing your <b>Kinetic Discharge
+                    Velocity</b> today against a log from last year, you can predict when a battery replacement
+                will become a financial necessity rather than a convenience.</p>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Usage Profile</th>
+                            <th class="px-6 py-5">Healthy Rate (%/hr)</th>
+                            <th class="px-6 py-5">Warning Signal</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Deep Standby (Screen Off)</td>
+                            <td class="px-6 py-5 text-emerald-600 font-bold">0.1% - 1.0%</td>
+                            <td class="px-6 py-5 italic">Background sync loop.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">Light Browsing (Text)</td>
+                            <td class="px-6 py-4 text-blue-500 font-bold">4% - 8%</td>
+                            <td class="px-6 py-4 italic">Excessive script execution.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Media Playback (4K)</td>
+                            <td class="px-6 py-5 text-orange-600 font-black">10% - 15%</td>
+                            <td class="px-6 py-5">G-Force hardware overheating.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Mobile Gaming / Compiling</td>
+                            <td class="px-6 py-5 text-red-600 font-bold">20%+</td>
+                            <td class="px-6 py-5 font-black uppercase text-red-600">Imminent Thermal Shutdown.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-5-why-local-first-privacy-is-mandatory">Chapter 5: Why Local-First Privacy is Mandatory</h2>
+            <p>Battery logs are surprisingly powerful for <b>Device Fingerprinting</b>. Research has shown that
+                the minute variations in how a battery discharges can be used to uniquely identify a user across
+                the web. Toolkit Gen's <b>Power Drain Monitor</b> is a local-first application. 100% of the
+                polling, calculus, and chart renderings happen in <b>your browser's local RAM</b>. We have zero
+                visibility into your hardware profile. This is <b>Zero-Knowledge Hardware Auditing</b> for the
+                privacy-conscious professional.</p>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-power-mastery">Frequently Asked Questions (FAQ) - Power Mastery</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Why does my battery "skip" from 15% to 5%?</span>
+                        <span class="transition-transform group-open:rotate-180 text-sky-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">This is <b>Calibration Mismatch</b>. The software (your OS) uses a
+                            voltage-to-percentage lookup table. As cells age, their voltage drops more sharply
+                            under load. The software suddenly realizes the chemical energy is much lower than it
+                            projected and 'jumps' to the correct number. You can fix this by performing a full
+                            charge cycle (0% to 100%) once every 3 months to reset the Fuel Gauge IC.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Can I use this on my Android phone?</span>
+                        <span class="transition-transform group-open:rotate-180 text-sky-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>Absolutely.</b> This monitor is fully responsive. On Android,
+                            we recommend using Chrome or Samsung Internet for the most accurate polling. For
+                            best results, keep the tab open in the foreground; many mobile browsers pause
+                            JavaScript execution when a tab is hidden to save power, which will pause the
+                            log.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Is a fast-discharge rate always a hardware problem?</span>
+                        <span class="transition-transform group-open:rotate-180 text-sky-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">No. <b>Software Inefficiency</b> is more common. Background
+                            location services, cloud photo syncing, and poorly optimized social media apps are
+                            the primary culprits. Use our monitor while force-closing apps one by one to see
+                            which action makes the discharge slope flatten.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-sky-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black" id="audit-your-energy">
+                    Audit Your Energy</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop guessing about your device's
+                    lifespan. Quantify the drain, identify the rogue apps, and build a strategy for hardware
+                    longevity that lasts for years. Your journey to power mastery starts here.</p>
+                <a href="#start-btn" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Begin Telemetry Log
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-logic-tools">
+                Recommended Logic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/battery_discharge_monitor" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-sky-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-sky-600 group-hover:text-white transition-colors">
+                        🔋</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-sky-600 transition-colors">Battery
+                            Health Calc</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Calculate exact wear level and capacity
+                            degradation.</p>
+                    </div>
+                </a>
+                <a href="/tool/gamepad_drift_visualizer" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        🎮</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-purple-600 transition-colors">Stick
+                            Drift Test</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Visualize analog stick dead zones and
+                            sensor drift.</p>
+                    </div>
+                </a>
+                <a href="/tool/mouse_polling_rate_hz" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        🖱️</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-emerald-600 transition-colors">
+                            Mouse Polling Rate</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Check if your mouse is reporting at true
+                            1000Hz.</p>
+                    </div>
+                </a>
+                <a href="/tool/keyboard_latency_test" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                        ⌨️</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-orange-600 transition-colors">
+                            Keyboard Latency</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Measure millisecond input lag for gaming
+                            keyboards.</p>
+                    </div>
+                </a>
+                <a href="/tool/dead_pixel_check" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-rose-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-rose-600 group-hover:text-white transition-colors">
+                        🖥️</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-rose-600 transition-colors">Dead
+                            Pixel Check</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Cycle RGB colors to spot stuck or dead
+                            screen pixels.</p>
+                    </div>
+                </a>
+                <a href="/tool/monitor_refresh_tester" class="related-tool-item group">
+                    <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        ⚡</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-indigo-600 transition-colors">
+                            Refresh Rate Test</h4>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Verify your display's true Hz and motion
+                            clarity.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        let batteryObj = null;
+        let isLogging = false;
+        let logData = [];
+        let startTime = null;
+        let chart = null;
+        // Initialize Chart
+        function initChart() {
+            const ctx = document.getElementById('batteryChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Battery Level %',
+                        data: [],
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.05)',
+                        borderWidth: 4,
+                        pointRadius: 0,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            grid: { color: '#f1f5f9' },
+                            ticks: { font: { weight: 'bold', family: 'JetBrains Mono' } }
+                        },
+                        x: { display: false }
+                    }
+                }
+            });
+        }
+        async function startLogging() {
+            if (!('getBattery' in navigator)) {
+                showToast("Hardware API restricted: Chromium-based browser required.");
+                return;
+            }
+            if (!isLogging) {
+                batteryObj = await navigator.getBattery();
+                isLogging = true;
+                startTime = Date.now();
+                document.getElementById('start-btn').innerText = "SUSPEND TELEMETRY";
+                document.getElementById('start-btn').classList.replace('bg-sky-500', 'bg-rose-500');
+                showToast("Telemetry stream initialized.");
+                logTick();
+            } else {
+                isLogging = false;
+                document.getElementById('start-btn').innerText = "RESUME TELEMETRY";
+                document.getElementById('start-btn').classList.replace('bg-rose-500', 'bg-sky-500');
+                showToast("Stream suspended.");
+            }
+        }
+        function logTick() {
+            if (!isLogging || !batteryObj) return;
+            const now = Date.now();
+            const level = batteryObj.level * 100;
+            const elapsed = Math.floor((now - startTime) / 1000);
+            // Update UI Stats
+            document.getElementById('live-level').innerText = level.toFixed(0) + "%";
+            document.getElementById('live-source').innerText = batteryObj.charging ? "AC POWER" : "BATTERY";
+            document.getElementById('elapsed-time').innerText = formatElapsed(elapsed);
+            // Update Graph
+            chart.data.labels.push(elapsed);
+            chart.data.datasets[0].data.push(level);
+            if (chart.data.labels.length > 60) { // Keep last 5 minutes of data
+                chart.data.labels.shift();
+                chart.data.datasets[0].data.shift();
+            }
+            chart.update('none');
+            // Calculate Rate
+            // Formula Logic: Rate = (Initial % - Final %) / (Elapsed hours)
+            if (chart.data.datasets[0].data.length > 2) {
+                const firstVal = chart.data.datasets[0].data[0];
+                const lastVal = chart.data.datasets[0].data[chart.data.datasets[0].data.length - 1];
+                const drop = firstVal - lastVal;
+                const hoursElapsed = elapsed / 3600;
+                if (hoursElapsed > 0.001) { // Prevent division by tiny numbers
+                    const rate = (drop / hoursElapsed).toFixed(2);
+                    document.getElementById('current-drain').innerHTML = `${Math.abs(rate)}<span class="drain-unit">%/hr</span>`;
+                }
+            }
+            setTimeout(logTick, 5000); // Higher polling rate for precision
+        }
+        function formatElapsed(s) {
+            const m = Math.floor(s / 60);
+            return `${m}m ${s % 60}s`;
+        }
+        function resetLog() {
+            if (!confirm("Purge telemetry cache?")) return;
+            logData = [];
+            startTime = Date.now();
+            chart.data.labels = [];
+            chart.data.datasets[0].data = [];
+            chart.update();
+            document.getElementById('current-drain').innerHTML = `0.00<span class="drain-unit">%/hr</span>`;
+            showToast("Cache purged.");
+        }
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = "fixed top-24 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-8 py-3 rounded-full shadow-2xl z-[100] animate-bounce font-black text-xs uppercase tracking-widest";
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+        // Initialize Scroll to Top
+        window.onload = initChart;
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

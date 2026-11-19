@@ -24,10 +24,11 @@ const effectiveLayout = layout || resolved?.layout;
 const isInArticle = effectiveLayout === 'in-article' || effectiveFormat === 'fluid';
 const isFullWidthResponsive = resolved?.fullWidthResponsive ?? (!isInArticle && effectiveFormat !== 'autorelaxed');
 const effectiveMinHeight = minHeight || (isInArticle ? '250px' : '280px');
+const containerDomId = `ad-slot-${slotId}`;
 ---
 
 <div
-  id={`ad-slot-${slotId}`}
+  id={containerDomId}
   class={`ad-container relative w-full my-8 bg-slate-50/70 border border-slate-200/80 rounded-2xl p-3 flex flex-col items-center justify-center overflow-hidden transition-all ${className}`}
   style={`min-height: ${effectiveMinHeight}; contain: layout style;`}
   data-ad-slot={resolved?.slotId || 'auto'}
@@ -54,18 +55,17 @@ const effectiveMinHeight = minHeight || (isInArticle ? '250px' : '280px');
     ></ins>
   )}
 
-  <script is:inline>
+  <script is:inline define:vars={{ containerDomId }}>
     (function() {
-      function initAdSlot() {
-        var script = document.currentScript;
-        var container = script ? script.parentElement : null;
+      function setupAd() {
+        var container = document.getElementById(containerDomId);
         if (!container) return;
         var ins = container.querySelector('ins.adsbygoogle');
         if (!ins || ins.getAttribute('data-adsbygoogle-status')) return;
 
         function pushAd() {
           if (ins.getAttribute('data-adsbygoogle-status')) return true;
-          if (ins.offsetWidth > 0) {
+          if (container.offsetWidth > 0) {
             try {
               (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch (e) {
@@ -76,11 +76,18 @@ const effectiveMinHeight = minHeight || (isInArticle ? '250px' : '280px');
           return false;
         }
 
-        // Try pushing immediately if container already has width
+        // Try pushing immediately if container has width
         if (pushAd()) return;
 
-        // If availableWidth is 0, defer until container has positive width
-        if (typeof ResizeObserver !== 'undefined') {
+        // If not yet wide enough or off-screen, watch for scroll/resize
+        if (typeof IntersectionObserver !== 'undefined') {
+          var io = new IntersectionObserver(function(entries) {
+            if (entries[0] && entries[0].isIntersecting && container.offsetWidth > 0) {
+              if (pushAd()) io.disconnect();
+            }
+          }, { rootMargin: '250px 0px' });
+          io.observe(container);
+        } else if (typeof ResizeObserver !== 'undefined') {
           var ro = new ResizeObserver(function(entries) {
             for (var i = 0; i < entries.length; i++) {
               if (entries[i].contentRect.width > 0) {
@@ -94,15 +101,15 @@ const effectiveMinHeight = minHeight || (isInArticle ? '250px' : '280px');
           ro.observe(container);
         } else {
           window.addEventListener('load', function() {
-            setTimeout(pushAd, 150);
+            setTimeout(pushAd, 200);
           }, { once: true });
         }
       }
 
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAdSlot, { once: true });
+        document.addEventListener('DOMContentLoaded', setupAd, { once: true });
       } else {
-        initAdSlot();
+        setupAd();
       }
     })();
   </script>

@@ -102,18 +102,13 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
               }
             });
           }
-          // Warm on first pointerenter or focus of tool stage
+          // Warm on first pointerenter, focus, or click of tool stage
           const stage = document.getElementById('tool-app-stage');
           if (stage) {
             stage.addEventListener('pointerenter', loadExternalScripts, { once: true, passive: true });
             stage.addEventListener('focusin', loadExternalScripts, { once: true, passive: true });
             stage.addEventListener('click', loadExternalScripts, { once: true, passive: true });
-          }
-          // Defer fallback loading until after idle
-          if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(() => { setTimeout(loadExternalScripts, 2500); }, { timeout: 5000 });
-          } else {
-            setTimeout(loadExternalScripts, 3500);
+            stage.addEventListener('touchstart', loadExternalScripts, { once: true, passive: true });
           }
         })();
       </script>

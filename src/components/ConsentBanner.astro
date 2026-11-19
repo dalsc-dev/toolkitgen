@@ -180,6 +180,10 @@
         });
       }
 
+      if (typeof window.initThirdPartyServices === 'function') {
+        window.initThirdPartyServices();
+      }
+
       if (banner) banner.classList.add('hidden');
       if (modal) modal.classList.add('hidden');
       updateDockOffset(false);

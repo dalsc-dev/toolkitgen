@@ -58,13 +58,13 @@ export function generateJsonLd(options: SchemaOptions) {
 
   if (options.type === 'tool') {
     graph.push({
-      '@type': 'WebApplication',
+      '@type': ['SoftwareApplication', 'WebApplication'],
       '@id': `${options.url}#webapp`,
       name: options.title,
       url: options.url,
       description: options.description,
       applicationCategory: options.category || 'UtilitiesApplication',
-      operatingSystem: 'All (Web Browser, Windows, macOS, Linux, iOS, Android)',
+      operatingSystem: 'All',
       browserRequirements: 'Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.',
       isAccessibleForFree: true,
       offers: {

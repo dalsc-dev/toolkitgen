@@ -20,6 +20,7 @@
     "check:titles": "node scripts/check-titles.mjs",
     "check:borders": "node scripts/check-left-borders.mjs",
     "check:audit": "node scripts/verify-all-tools.mjs",
+    "check:e2e": "node scripts/test-e2e-tools.mjs",
     "check:url": "node scripts/check-url-parity.mjs",
     "check:similarity": "node scripts/check-duplicate-content.mjs"
   },

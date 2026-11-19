@@ -257,12 +257,15 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
     )}
 
     <!-- e. Tool interactive stage (the tool itself) -->
-    <section id="tool-app-stage" class="tool-card bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-xl overflow-hidden scroll-mt-28">
+    <section id="tool-app-stage" class="tool-card bg-white rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-xl overflow-hidden scroll-mt-28 min-w-0 max-w-full">
       <slot name="tool-ui" />
     </section>
 
+    <!-- In-Content Mid-Break Banner (High Viewability, zero CLS) -->
+    <AdSlot slotId="tool-mid-banner" minHeight="280px" />
+
     <!-- f. "Read How to Use & Info" expandable article -->
-    <section id="tool-documentation-section" class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm space-y-8">
+    <section id="tool-documentation-section" class="bg-white rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-sm space-y-8 min-w-0 max-w-full overflow-hidden">
       <!-- Quick Answer Summary Box -->
       <Callout variant="note" title="Quick Summary">
         <div set:html={quickAnswer} />
@@ -463,7 +466,7 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
     </div>
 
     <!-- m. Labeled AdSlot with reserved height (never above the tool) -->
-    <AdSlot slotId="tool-bottom-banner" minHeight="250px" />
+    <AdSlot slotId="tool-bottom-banner" minHeight="280px" />
   </div>
 </BaseLayout>
 

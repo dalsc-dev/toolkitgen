@@ -90,18 +90,18 @@ const metaDescription = formatDescription(description);
   {!noindex && (
     <script is:inline>
       (() => {
-        let thirdPartyLoaded = false;
-        function loadThirdParty() {
-          if (thirdPartyLoaded) return;
-          thirdPartyLoaded = true;
+        let gaLoaded = false;
+        let adsLoaded = false;
 
+        function initThirdParty() {
           try {
             const raw = localStorage.getItem('tg_cookie_consent_v2');
             if (!raw) return;
             const consent = JSON.parse(raw);
 
             // Google Analytics (if analytics allowed)
-            if (consent.analytics) {
+            if (consent.analytics && !gaLoaded) {
+              gaLoaded = true;
               const ga = document.createElement('script');
               ga.async = true;
               ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-NKR6PVM0M9';
@@ -113,7 +113,8 @@ const metaDescription = formatDescription(description);
             }
 
             // Google AdSense (if ads allowed)
-            if (consent.ads) {
+            if (consent.ads && !adsLoaded) {
+              adsLoaded = true;
               const ads = document.createElement('script');
               ads.async = true;
               ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949';
@@ -123,14 +124,16 @@ const metaDescription = formatDescription(description);
           } catch (e) {}
         }
 
+        window.initThirdPartyServices = initThirdParty;
+
         // Trigger upon first interaction or after idle
         ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach((ev) => {
-          window.addEventListener(ev, loadThirdParty, { once: true, passive: true });
+          window.addEventListener(ev, initThirdParty, { once: true, passive: true });
         });
         if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadThirdParty, { timeout: 4000 });
+          requestIdleCallback(initThirdParty, { timeout: 4000 });
         } else {
-          setTimeout(loadThirdParty, 3000);
+          setTimeout(initThirdParty, 3000);
         }
       })();
     </script>

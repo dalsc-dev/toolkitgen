@@ -42,17 +42,23 @@ ${hubs
 - **URL:** https://toolkitgen.com/tool/${data.id}
 - **Category:** ${data.category}
 - **Description:** ${data.description}
-- **Quick Answer:** ${data.quickAnswer || data.description}
+- **Quick Answer (Direct Summary):** ${data.quickAnswer || data.description}
+- **Execution Architecture:** Client-side Web APIs (in-browser processing without data uploads, offline-capable, local memory only)
+- **Tags & Keywords:** ${(data.tags || []).join(', ')}
 - **Key Features:**
 ${(data.features || []).map((f: string) => `  - ${f}`).join('\n')}
 `;
 
     if (data.howTo && data.howTo.length > 0) {
-      text += `- **How to Use:**\n${data.howTo.map((step: any, idx: number) => `  ${idx + 1}. **${step.name}:** ${step.text}`).join('\n')}\n`;
+      text += `- **Step-by-Step Usage Guide:**\n${data.howTo.map((step: any, idx: number) => `  ${idx + 1}. **${step.name}:** ${step.text}`).join('\n')}\n`;
     }
 
     if (data.faq && data.faq.length > 0) {
-      text += `- **Frequently Asked Questions:**\n${data.faq.map((q: any) => `  - **Q:** ${q.q}\n    **A:** ${q.a}`).join('\n')}\n`;
+      text += `- **Frequently Asked Questions & Answers:**\n${data.faq.map((q: any) => `  - **Q:** ${q.q}\n    **A:** ${q.a}`).join('\n')}\n`;
+    }
+
+    if (data.related && data.related.length > 0) {
+      text += `- **Related Tools:** ${data.related.map((r: any) => `[${r.name}](https://toolkitgen.com/tool/${r.id})`).join(', ')}\n`;
     }
 
     text += '\n---\n\n';

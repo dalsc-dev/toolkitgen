@@ -120,14 +120,16 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
       class="hidden p-8 text-center bg-rose-50 border border-rose-200 rounded-2xl my-4 text-slate-800"
     >
       <h3 class="text-base font-bold text-rose-900">This tool encountered an initialization error</h3>
-      <p class="text-xs text-rose-700 mt-1">Please reload the page to restart the tool session.</p>
-      <button
-        type="button"
-        onclick="window.location.reload()"
-        class="mt-4 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition shadow-xs"
-      >
-        Reload Tool
-      </button>
+      <p class="text-xs text-rose-700 mt-1">Please reload or reset the tool to restart your session.</p>
+      <div class="mt-4 flex items-center justify-center gap-3">
+        <button
+          type="button"
+          onclick="if (window.resetToolEnvironment) window.resetToolEnvironment(); window.location.reload();"
+          class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition shadow-xs"
+        >
+          Reset Tool State
+        </button>
+      </div>
     </div>
 
     {id === 'amsler_grid_macular' && <AmslerGridIsland client:visible />}
@@ -157,19 +159,99 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
             });
             document.getElementById = (id) => origGet(id) || safeProxy;
 
-            // Resource leak prevention & crash listener
-            window.addEventListener('pagehide', () => {
-              if (window.__activeMediaStreams && Array.isArray(window.__activeMediaStreams)) {
-                window.__activeMediaStreams.forEach(stream => {
-                  try { stream.getTracks().forEach(track => track.stop()); } catch (e) {}
-                });
-              }
-              if (window.__activeAudioContexts && Array.isArray(window.__activeAudioContexts)) {
-                window.__activeAudioContexts.forEach(ctx => {
-                  try { ctx.close(); } catch (e) {}
-                });
-              }
-            }, { passive: true });
+            // Mandatory Worker & Resource Tracking Watchdog
+            window.__activeWorkers = window.__activeWorkers || [];
+            window.__activeMediaStreams = window.__activeMediaStreams || [];
+            window.__activeAudioContexts = window.__activeAudioContexts || [];
+            window.__activeIntervalIds = window.__activeIntervalIds || new Set();
+            window.__activeRafIds = window.__activeRafIds || new Set();
+
+            const origWorker = window.Worker;
+            if (typeof origWorker === 'function') {
+              window.Worker = function(scriptURL, options) {
+                const w = new origWorker(scriptURL, options);
+                window.__activeWorkers.push(w);
+                return w;
+              };
+            }
+
+            const origInterval = window.setInterval;
+            window.setInterval = function(fn, ms, ...args) {
+              const id = origInterval.call(window, fn, ms, ...args);
+              window.__activeIntervalIds.add(id);
+              return id;
+            };
+            const origClearInterval = window.clearInterval;
+            window.clearInterval = function(id) {
+              window.__activeIntervalIds.delete(id);
+              origClearInterval.call(window, id);
+            };
+
+            const origRaf = window.requestAnimationFrame;
+            window.requestAnimationFrame = function(cb) {
+              let id;
+              id = origRaf.call(window, (t) => {
+                window.__activeRafIds.delete(id);
+                cb(t);
+              });
+              window.__activeRafIds.add(id);
+              return id;
+            };
+            const origCancelRaf = window.cancelAnimationFrame;
+            window.cancelAnimationFrame = function(id) {
+              window.__activeRafIds.delete(id);
+              origCancelRaf.call(window, id);
+            };
+
+            // Shared runWithTimeout helper for worker processing
+            window.runWithTimeout = function(worker, payload, timeoutMs = 5000) {
+              return new Promise((resolve, reject) => {
+                let timer = setTimeout(() => {
+                  try { worker.terminate(); } catch (e) {}
+                  reject(new Error('Operation timed out — try smaller input'));
+                }, timeoutMs);
+                worker.onmessage = (e) => {
+                  clearTimeout(timer);
+                  resolve(e.data);
+                };
+                worker.onerror = (e) => {
+                  clearTimeout(timer);
+                  reject(e);
+                };
+                worker.postMessage(payload);
+              });
+            };
+
+            function cleanupAllResources() {
+              window.__activeRafIds.forEach(id => {
+                try { origCancelRaf.call(window, id); } catch (e) {}
+              });
+              window.__activeRafIds.clear();
+
+              window.__activeIntervalIds.forEach(id => {
+                try { origClearInterval.call(window, id); } catch (e) {}
+              });
+              window.__activeIntervalIds.clear();
+
+              window.__activeWorkers.forEach(w => {
+                try { w.terminate(); } catch (e) {}
+              });
+              window.__activeWorkers = [];
+
+              window.__activeMediaStreams.forEach(stream => {
+                try { stream.getTracks().forEach(track => track.stop()); } catch (e) {}
+              });
+              window.__activeMediaStreams = [];
+
+              window.__activeAudioContexts.forEach(ctx => {
+                try { ctx.close(); } catch (e) {}
+              });
+              window.__activeAudioContexts = [];
+            }
+
+            window.addEventListener('pagehide', cleanupAllResources, { passive: true });
+            window.addEventListener('beforeunload', cleanupAllResources, { passive: true });
+            window.resetToolEnvironment = cleanupAllResources;
           })();
         </script>
         {toolScript && (

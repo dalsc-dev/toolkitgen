@@ -505,6 +505,23 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
 
 <script is:inline define:vars={{ toolId: id, canonicalUrl }}>
   (() => {
+    function safeGetItem(key) {
+      try {
+        const item = localStorage.getItem(key);
+        if (!item || item.length > 100000) return null;
+        return item;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function safeSetItem(key, val) {
+      try {
+        if (typeof val === 'string' && val.length > 100000) return;
+        localStorage.setItem(key, val);
+      } catch (e) {}
+    }
+
     // Bookmark button logic (localStorage tk_bookmarks)
     const bookmarkBtn = document.getElementById('tool-bookmark-btn');
     const bookmarkText = document.getElementById('bookmark-text');
@@ -512,8 +529,9 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
 
     function updateBookmarkState() {
       try {
-        const bookmarks = JSON.parse(localStorage.getItem('tk_bookmarks') || '[]');
-        const isBookmarked = bookmarks.includes(toolId);
+        const raw = safeGetItem('tk_bookmarks');
+        const bookmarks = raw ? JSON.parse(raw) : [];
+        const isBookmarked = Array.isArray(bookmarks) && bookmarks.includes(toolId);
         if (bookmarkText) bookmarkText.textContent = isBookmarked ? 'Bookmarked' : 'Bookmark';
         if (bookmarkIcon) {
           bookmarkIcon.setAttribute('fill', isBookmarked ? '#f59e0b' : 'none');
@@ -524,13 +542,15 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
 
     bookmarkBtn?.addEventListener('click', () => {
       try {
-        let bookmarks = JSON.parse(localStorage.getItem('tk_bookmarks') || '[]');
+        const raw = safeGetItem('tk_bookmarks');
+        let bookmarks = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(bookmarks)) bookmarks = [];
         if (bookmarks.includes(toolId)) {
           bookmarks = bookmarks.filter((b) => b !== toolId);
         } else {
           bookmarks.push(toolId);
         }
-        localStorage.setItem('tk_bookmarks', JSON.stringify(bookmarks));
+        safeSetItem('tk_bookmarks', JSON.stringify(bookmarks));
         updateBookmarkState();
       } catch (e) {}
     });
@@ -541,21 +561,24 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
 
     function updatePinState() {
       try {
-        const pinned = JSON.parse(localStorage.getItem('tk_hub_pinned') || '[]');
-        const isPinned = pinned.includes(toolId);
+        const raw = safeGetItem('tk_hub_pinned');
+        const pinned = raw ? JSON.parse(raw) : [];
+        const isPinned = Array.isArray(pinned) && pinned.includes(toolId);
         if (pinText) pinText.textContent = isPinned ? 'Pinned to Hub' : 'Pin to Hub';
       } catch (e) {}
     }
 
     pinBtn?.addEventListener('click', () => {
       try {
-        let pinned = JSON.parse(localStorage.getItem('tk_hub_pinned') || '[]');
+        const raw = safeGetItem('tk_hub_pinned');
+        let pinned = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(pinned)) pinned = [];
         if (pinned.includes(toolId)) {
           pinned = pinned.filter((p) => p !== toolId);
         } else {
           pinned.push(toolId);
         }
-        localStorage.setItem('tk_hub_pinned', JSON.stringify(pinned));
+        safeSetItem('tk_hub_pinned', JSON.stringify(pinned));
         updatePinState();
       } catch (e) {}
     });
@@ -589,13 +612,13 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
     const feedbackConfirm = document.getElementById('feedback-confirmation');
 
     const feedbackKey = `tk_feedback_${toolId}`;
-    if (localStorage.getItem(feedbackKey)) {
+    if (safeGetItem(feedbackKey)) {
       feedbackBox?.classList.add('hidden');
       feedbackConfirm?.classList.remove('hidden');
     }
 
     function recordFeedback(val) {
-      localStorage.setItem(feedbackKey, val);
+      safeSetItem(feedbackKey, val);
       feedbackBox?.classList.add('hidden');
       feedbackConfirm?.classList.remove('hidden');
     }

@@ -14,6 +14,8 @@ dist/
 !tool-perf-after.csv
 !tool-perf-before.csv
 !tool-audit.csv
+!freeze-report.csv
+!freeze-report-after.csv
 task-*.md
 temp_*
 test_*.js

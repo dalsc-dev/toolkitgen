@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token Format Viewer - Complete Guide</title>
+</head>
+<body>
+<span style="font-family: Poppins;">
+<h1 style="text-align: center;"><strong>Token Format Viewer: Complete Guide to JWT Debugging</strong></h1>
+
+<p style="text-align: center;">Master JWT decoding and debugging with our comprehensive offline tool. This guide covers token structure, common issues, and practical debugging techniques.</p>
+
+<p style="text-align: center;"><em>Try the tool: <a href="https://toolkitgen.com/tool/jwt_debugger_offline">Token Format Viewer</a></em></p>
+
+<h2><strong>Understanding JWT Structure</strong></h2>
+
+<p>JWT (JSON Web Token) is the standard for secure data transmission. Understanding its three-part structure is essential for debugging.</p>
+
+<p>A JWT has three parts separated by dots:</p>
+
+<ul>
+<li><strong>Header</strong> - Algorithm and token type</li>
+<li><strong>Payload</strong> - Claims/data</li>
+<li><strong>Signature</strong> - Verification</li>
+</ul>
+
+<h3><strong>Example Token Structure</strong></h3>
+
+<pre>XXXXX.XXXXX.XXXXX
+ |     |     |
+ |     |     +-- Signature
+ |     +-- Payload
+ +-- Header</pre>
+
+<h2><strong>JWT Header</strong></h2>
+
+<p>The header specifies the algorithm:</p>
+
+<h3><strong>Common Algorithms</strong></h3>
+
+<ul>
+<li><strong>HS256</strong> - HMAC SHA-256 (symmetric)</li>
+<li><strong>HS384</strong> - HMAC SHA-384</li>
+<li><strong>RS256</strong> - RSA SHA-256 (asymmetric)</li>
+<li><strong>ES256</strong> - ECDSA SHA-256</li>
+<li><strong>none</strong> - Unsigned (security risk!)</li>
+</ul>
+
+<h3><strong>Header Example</strong></h3>
+
+<pre>{
+  "alg": "HS256",
+  "typ": "JWT"
+}</pre>
+
+<h2><strong>JWT Payload</strong></h2>
+
+<p>The payload contains claims:</p>
+
+<h3><strong>Registered Claims</strong></h3>
+
+<ul>
+<li><strong>iss</strong> - Issuer</li>
+<li><strong>sub</strong> - Subject</li>
+<li><strong>aud</strong> - Audience</li>
+<li><strong>exp</strong> - Expiration time</li>
+<li><strong>nbf</strong> - Not before</li>
+<li><strong>iat</strong> - Issued at</li>
+<li><strong>jti</strong> - JWT ID</li>
+</ul>
+
+<h3><strong>Custom Claims</strong></h3>
+
+<p>Any custom data can be included:</p>
+
+<pre>{
+  "userId": 123,
+  "role": "admin",
+  "permissions": ["read", "write"]
+}</pre>
+
+<h2><strong>Signature Verification</strong></h2>
+
+<p>Signatures verify token integrity:</p>
+
+<h3><strong>HMAC (Symmetric)</strong></h3>
+
+<p>Same secret for signing and verifying. Simple but share secret carefully.</p>
+
+<h3><strong>RSA (Asymmetric)</strong></h3>
+
+<p>Private key signs, public key verifies. More secure for distributed systems.</p>
+
+<h3><strong>ECDSA</strong></h3>
+
+<p>Elliptic curve approach - efficient and secure.</p>
+
+<h2><strong>Common JWT Errors</strong></h2>
+
+<p>Debugging common issues:</p>
+
+<h3><strong>1. Token Expired</strong></h3>
+
+<p>"Invalid token" - Check exp claim. Token may be expired.</p>
+
+<h3><strong>2. Invalid Signature</strong></h3>
+
+<p>Secret or key doesn't match. Verify key/cert correctness.</p>
+
+<h3><strong>3. Malformed Token</strong></h3>
+
+<p>Three parts required. Check for missing or extra dots.</p>
+
+<h3><strong>4. Algorithm Mismatch</strong></h3>
+
+<p>Signing and verifying use different algorithms.</p>
+
+<h3><strong>5. Audience Mismatch</strong></h3
+
+<p>Token not intended for your application. Check aud claim.</p>
+
+<h2><strong>Practical Debugging</strong></h2>
+
+<p>Step-by-step debugging process:</p>
+
+<h3><strong>1. Decode the Token</strong></h3>
+
+<p>First step - decode without verification. Check decoded content is valid JSON.</p>
+
+<h3><strong>2. Check Claims</strong></h3>
+
+<p>Review expiration, issuer, audience claims.</p>
+
+<h3><strong>3. Verify Signature</strong></h3>
+
+<p>Confirm signature with correct key/secret.</p>
+
+<h3><strong>4. Validate Business Logic</strong></h3>
+
+<p>Beyond claims - verify user permissions, roles, etc.</p>
+
+<h2><strong>JWT in Authentication</strong></h2>
+
+<p>Common authentication flow:</p>
+
+<ol>
+<li>User logs in</li>
+<li>Server creates JWT with user info</li>
+<li>Client stores JWT</li>
+<li>Client sends JWT with requests</li>
+<li>Server verifies JWT on each request</li>
+</ol>
+
+<h3><strong>Storage Considerations</strong></h3>
+
+<ul>
+<li><strong>HttpOnly Cookie</strong> - Most secure against XSS</li>
+<li><strong>Local Storage</strong> - Convenient but XSS vulnerable</li>
+<li><strong>Memory</strong> - Most secure but requires re-authentication</li>
+</ul>
+
+<h2><strong>Security Best Practices</strong></h3>
+
+<p>Follow these security measures:</p>
+
+<ul>
+<li>Use short expiration times</li>
+<li>Store secrets securely</li>
+<li>Validate all claims</li>
+<li>Use strong algorithms</li>
+<li>Implement token refresh</li>
+<li>Use HTTPS only</li>
+</ul>
+
+<h2><strong>Token Expiration Planning</strong></h2>
+
+<p>Choosing expiration times:</p>
+
+<h3><strong>Short-Lived (15 min)</strong></h3>
+
+<p>High security applications. Requires refresh token.</p>
+
+<h3><strong>Medium (1 hour)</strong></h3>
+
+<p>Balanced approach for most applications.</p>
+
+<h3><strong>Long (24 hours+)</strong></h3>
+
+<p>Less secure but better UX. Consider tradeoffs.</p>
+
+<h2><strong>FAQ: JWT Debugging</strong></h2>
+
+<h3><strong>1. What does "invalid signature" mean?</strong></h3>
+
+<p>Token was signed with different secret/key. Can't trust the token.</p>
+
+<h3><strong>2. How do I decode without verification?</strong></h3>
+
+<p>Our tool decodes without verification - useful for debugging.</p>
+
+<h3><strong>3. Can I change data in JWT?</strong></h3>
+
+<p>Signature won't verify if data changes - must re-sign.</p>
+
+<h3><strong>4. What's the "none" algorithm?</strong></h3>
+
+<p>Unsigned tokens - never accept these in production!</p>
+
+<h3><strong>5. How long is JWT valid?</strong></h3>
+
+<p>Check exp claim. No built-in expiration.</p>
+
+<h3><strong>6. Can JWT be decoded but not verified?</strong></h3>
+
+<p>Yes - decoding doesn't verify. Only signature verification proves authenticity.</p>
+
+<h3><strong>7. Is JWT encrypted?</strong></h3>
+
+<p>No, encoded but not encrypted. Anyone can read payload.</p>
+
+<h3><strong>8. How refresh tokens work?</strong></h3>
+
+<p>Short-lived access token + long-lived refresh token. Refresh gets new access token.</p>
+
+<h3><strong>9. Can JWT be revoked?</strong></h3>
+
+<p>With stateless JWT, can't invalidate without blacklist. Consider server design.</p>
+
+<h3><strong>10. What should I store in JWT?</strong></h3>
+
+<p>Minimal user ID and role. Other data fetch from database.</p>
+
+<h2><strong>Conclusion</strong></h2>
+
+<p>JWT debugging requires understanding structure, claims, and verification. Our tool helps decode and visualize JWT data for easier debugging. Always verify signatures in production and use security best practices.</p>
+
+<p><em>Ready to debug tokens? Try the <a href="https://toolkitgen.com/tool/jwt_debugger_offline">Token Format Viewer</a> tool now!</em></p>
+</span>
+</body>
+</html>

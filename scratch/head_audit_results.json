@@ -1,0 +1,11 @@
+{
+  "total": 130,
+  "valid": 129,
+  "invalid": [
+    {
+      "file": "mywot73343469a463c45df71b.html",
+      "reason": "Missing <head> tag"
+    }
+  ],
+  "adsenseViolations": []
+}

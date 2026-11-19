@@ -1,0 +1,22 @@
+{
+  "name": "toolkitgen",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "@google/genai": "^1.49.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.1"
+  }
+}

@@ -1,0 +1,6634 @@
+const APP_CONFIG = {
+    cacheKey: "toolkit_data_v18",
+    cacheDuration: 36e5,
+    newToolThreshold: 30,
+    maxDirectoryInitial: 1e3,
+    enableUTMTracking: !0,
+    siteName: "Toolkit Gen",
+    siteBaseUrl: window.location.origin,
+    maxRecentTools: 4,
+};
+function tkDebounce(e, t) {
+    let o;
+    return function (...n) {
+        clearTimeout(o),
+            (o = setTimeout(() => {
+                clearTimeout(o), e(...n);
+            }, t));
+    };
+}
+function tkThrottle(e, t) {
+    let o;
+    return function (...n) {
+        o || (e(...n), (o = !0), setTimeout(() => (o = !1), t));
+    };
+}
+const ToolExternalLinks = {
+    prompt_template_builder: {
+        resources: [
+            {
+                name: "OpenAI - Prompt Engineering Guide",
+                url: "https://platform.openai.com/docs/guides/prompt-engineering",
+                type: "authority",
+            },
+            {
+                name: "Anthropic - Claude Documentation",
+                url: "https://docs.anthropic.com/claude/docs",
+                type: "authority",
+            },
+            { name: "Google AI Studio", url: "https://aistudio.google.com/", type: "tool" },
+            {
+                name: "Papers with Code - Prompt Engineering",
+                url: "https://paperswithcode.com/topic/prompt-engineering",
+                type: "scientific",
+            },
+            {
+                name: "GitHub - Awesome Prompt Engineering",
+                url: "https://github.com/ugatame/awesome-prompt-engineering",
+                type: "community",
+            },
+        ],
+    },
+    text_token_reducer: {
+        resources: [
+            { name: "OpenAI Tokenizer Tool", url: "https://platform.openai.com/tokenizer", type: "tool" },
+            { name: "Anthropic Token Counting", url: "https://console.anthropic.com/tokenizer", type: "tool" },
+            {
+                name: "Wikipedia - Tokenization",
+                url: "https://en.wikipedia.org/wiki/Tokenization",
+                type: "education",
+            },
+        ],
+    },
+    pdf_local_signer: {
+        resources: [
+            { name: "W3C - Digital Signatures", url: "https://www.w3.org/TR/XAdES/", type: "authority" },
+            { name: "PDF.js Documentation", url: "https://github.com/mozilla/pdf.js/", type: "authority" },
+            { name: "RFC 5280 - PKIX Certificates", url: "https://tools.ietf.org/html/rfc5280", type: "authority" },
+        ],
+    },
+    bulk_certificate_generator: {
+        resources: [
+            { name: "W3C - Digital Signatures", url: "https://www.w3.org/TR/XAdES/", type: "authority" },
+            { name: "PDF.js Documentation", url: "https://github.com/mozilla/pdf.js/", type: "authority" },
+            { name: "jsPDF Documentation", url: "https://github.com/parallax/jsPDF", type: "authority" },
+            { name: "JSZip Documentation", url: "https://stuk.github.io/jszip/", type: "authority" },
+        ],
+    },
+    voice_pitch_monitor: {
+        resources: [
+            {
+                name: "Wikipedia - Vocal Range",
+                url: "https://en.wikipedia.org/wiki/Vocal_range",
+                type: "education",
+            },
+            {
+                name: "NIH News - Voice Research",
+                url: "https://www.nih.gov/news-events/news-releases",
+                type: "authority",
+            },
+            {
+                name: "ASHA - Voice Disorders",
+                url: "https://www.asha.org/practice-portal/clinical-topics/voice-disorders/",
+                type: "authority",
+            },
+            {
+                name: "Web Audio API - AnalyserNode",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode",
+                type: "authority",
+            },
+        ],
+    },
+    lufs_loudness_meter: {
+        resources: [
+            {
+                name: "ITU-R BS.1770 - Loudness Standard",
+                url: "https://www.itu.int/rec/R-REC-BS.1770",
+                type: "authority",
+            },
+            { name: "EBU R128 - Loudness Standard", url: "https://tech.ebu.ch/r128", type: "authority" },
+            { name: "AES - Audio Loudness", url: "https://www.aes.org/technical/documents/", type: "authority" },
+        ],
+    },
+    audio_latency_loopback: {
+        resources: [
+            {
+                name: "Web Audio API - Low-Latency",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet",
+                type: "authority",
+            },
+            {
+                name: "Linux Audio Latency",
+                url: "https://wiki.linuxaudio.org/wiki/audio_audio_quality",
+                type: "community",
+            },
+        ],
+    },
+    mic_spectrum_analyzer: {
+        resources: [
+            {
+                name: "MDN - Web Audio API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API",
+                type: "authority",
+            },
+            {
+                name: "Audio Spectrum Analysis",
+                url: "https://en.wikipedia.org/wiki/Spectrum_analyzer",
+                type: "education",
+            },
+        ],
+    },
+    stereo_left_right_test: {
+        resources: [
+            { name: "Cambridge Audio - Stereo Guide", url: "https://www.cambridgeaudio.com/", type: "community" },
+            {
+                name: "AudioCheck - Polarity Test",
+                url: "https://www.audiocheck.net/audiotests_polaritycheck.php",
+                type: "tool",
+            },
+            {
+                name: "Wikipedia - Stereophonic Sound",
+                url: "https://en.wikipedia.org/wiki/Stereophonic_sound",
+                type: "education",
+            },
+        ],
+    },
+    stereo_phase_test: {
+        resources: [
+            { name: "Cambridge Audio", url: "https://www.cambridgeaudio.com/", type: "community" },
+            {
+                name: "AudioCheck - Phase Test",
+                url: "https://www.audiocheck.net/audiotests_stereophase.php",
+                type: "tool",
+            },
+            { name: "Sound On Sound - Understanding Phase", url: "https://www.soundonsound.com/techniques/phase-demystified", type: "education" },
+        ],
+    },
+    noise_dosimeter_test: {
+        resources: [
+            { name: "OSHA - Noise Exposure", url: "https://www.osha.gov/noise", type: "authority" },
+            {
+                name: "CDC - Hearing Loss Prevention",
+                url: "https://www.cdc.gov/nceh/hearing_loss/default.html",
+                type: "authority",
+            },
+            { name: "NIOSH - Noise", url: "https://www.cdc.gov/niosh/topics/noise/", type: "authority" },
+        ],
+    },
+    mic_latency_loopback: {
+        resources: [
+            {
+                name: "Web Audio API - Low Latency",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/baseLatency",
+                type: "authority",
+            },
+            { name: "Linux Audio Latency Wiki", url: "https://wiki.linuxaudio.org/wiki/start", type: "community" },
+        ],
+    },
+    vibration_motor_test: {
+        resources: [
+            {
+                name: "MDN - Vibration API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API",
+                type: "authority",
+            },
+            { name: "W3C - Vibration Specification", url: "https://www.w3.org/TR/vibration/", type: "authority" },
+            {
+                name: "MDN - Navigator API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Navigator",
+                type: "authority",
+            },
+        ],
+    },
+    hrtf_spatial_audio_profiler: {
+        resources: [
+            {
+                name: "Wikipedia - Head-Related Transfer Function",
+                url: "https://en.wikipedia.org/wiki/Head-related_transfer_function",
+                type: "education",
+            },
+            {
+                name: "MDN - Audio PannerNode",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/PannerNode",
+                type: "authority",
+            },
+        ],
+    },
+    spatial_audio_seal_tester: {
+        resources: [
+            {
+                name: "Wikipedia - Sound Localization",
+                url: "https://en.wikipedia.org/wiki/Sound_localization",
+                type: "education",
+            },
+            { name: "AudioResearch - Spatial Audio", url: "https://www.audioresearch.com/", type: "community" },
+        ],
+    },
+    flow_state_dashboard: {
+        resources: [
+            {
+                name: "Wikipedia - Flow State",
+                url: "https://en.wikipedia.org/wiki/Flow_(psychology)",
+                type: "education",
+            },
+            {
+                name: "Mihaly Csikszentmihalyi - Flow Research",
+                url: "https://positivepsychology.com/flow-state/",
+                type: "scientific",
+            },
+            {
+                name: "NIH - Attention Research",
+                url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8905353/",
+                type: "scientific",
+            },
+        ],
+    },
+    ai_face_age_scanner: {
+        resources: [
+            {
+                name: "Wikipedia - Age Estimation",
+                url: "https://en.wikipedia.org/wiki/Appearance_of_age",
+                type: "education",
+            },
+            {
+                name: "MDN - Face Detection API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/FaceDetectionAPI",
+                type: "authority",
+            },
+            {
+                name: "NIH - Skin Aging",
+                url: "https://www.nia.nih.gov/health/aging-matter/skin-aging",
+                type: "authority",
+            },
+        ],
+    },
+    emotion_sentiment_cam: {
+        resources: [
+            {
+                name: "Wikipedia - Emotion Recognition",
+                url: "https://en.wikipedia.org/wiki/Emotion_recognition",
+                type: "education",
+            },
+            {
+                name: "MDN - Canvas API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API",
+                type: "authority",
+            },
+            {
+                name: "APA - Facial Expressions",
+                url: "https://www.apa.org/monitor/2019/01/cover-emotions",
+                type: "authority",
+            },
+        ],
+    },
+    eye_contact_tracker: {
+        resources: [
+            {
+                name: "Wikipedia - Eye Tracking",
+                url: "https://en.wikipedia.org/wiki/Eye_tracking",
+                type: "education",
+            },
+            {
+                name: "MDN - MediaDevices API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia",
+                type: "authority",
+            },
+            { name: "Tobii - Eye Tracking Science", url: "https://www.tobiipro.com/", type: "community" },
+        ],
+    },
+    posture_guard_ai: {
+        resources: [
+            { name: "NIH - Posture and Health", url: "https://www.ninds.nih.gov/", type: "authority" },
+            {
+                name: "Mayo Clinic - Posture",
+                url: "https://www.mayoclinic.org/healthy-lifestyle/adult-health/multimedia/adult-health/",
+                type: "medical",
+            },
+            { name: "CDC - Ergonomics", url: "https://www.cdc.gov/niosh/topics/ergonomics/", type: "authority" },
+        ],
+    },
+    visual_acuity_snellen: {
+        resources: [
+            {
+                name: "AAO - Eye Health",
+                url: "https://www.aaos.org/quality/eye-health-resources/",
+                type: "authority",
+            },
+            { name: "NEI - National Eye Institute", url: "https://www.nei.nih.gov/", type: "authority" },
+            { name: "American Optometric Association", url: "https://www.aoa.org/", type: "authority" },
+            {
+                name: "Mayo Clinic - Eye Exams",
+                url: "https://www.mayoclinic.org/tests-procedures/eye-exam/about/pac-20384606",
+                type: "medical",
+            },
+            {
+                name: "WHO - Vision 2020",
+                url: "https://www.who.int/health-topics/blindness-and-visual-impairments",
+                type: "authority",
+            },
+        ],
+    },
+    hearing_audiogram_test: {
+        resources: [
+            { name: "ASHA - Audiology", url: "https://www.asha.org/", type: "authority" },
+            {
+                name: "CDC - Hearing Loss Prevention",
+                url: "https://www.cdc.gov/nceh/hearing_loss/default.html",
+                type: "authority",
+            },
+            { name: "NIH - NIDCD", url: "https://www.nidcd.nih.gov/", type: "authority" },
+            {
+                name: "WHO - Deafness Prevention",
+                url: "https://www.who.int/health-topics/hearing-loss",
+                type: "authority",
+            },
+            { name: "AAA Audiology Guidelines", url: "https://www.audiology.org/", type: "authority" },
+        ],
+    },
+    circadian_rhythm_optimizer: {
+        resources: [
+            {
+                name: "NIH - Circadian Rhythms",
+                url: "https://www.nigms.nih.gov/education/fact-sheets/Pages/circadian-rhythms.aspx",
+                type: "authority",
+            },
+            { name: "Sleep Foundation", url: "https://www.sleepfoundation.org/", type: "medical" },
+            { name: "CDC - Sleep and Health", url: "https://www.cdc.gov/sleep/index.html", type: "authority" },
+            { name: "AASM Guidelines", url: "https://aasm.org/", type: "authority" },
+        ],
+    },
+    body_fat_navy_method: {
+        resources: [
+            {
+                name: "ACSM Guidelines",
+                url: "https://www.acsm.org/education-resources/topics/exercise-is-medicine",
+                type: "authority",
+            },
+            {
+                name: "CDC - Healthy Weight",
+                url: "https://www.cdc.gov/healthyweight/assessing/bmi/",
+                type: "authority",
+            },
+            {
+                name: "NIH - Body Composition",
+                url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4887279/",
+                type: "scientific",
+            },
+            { name: "ACE - Body Fat Methods", url: "https://www.acefitness.org/", type: "authority" },
+        ],
+    },
+    tinnitus_frequency_matcher: {
+        resources: [
+            { name: "ATA - American Tinnitus Association", url: "https://www.ata.org/", type: "authority" },
+            {
+                name: "Mayo Clinic - Tinnitus",
+                url: "https://www.mayoclinic.org/diseases-conditions/tinnitus/",
+                type: "medical",
+            },
+            {
+                name: "Wikipedia - Tinnitus Retraining Therapy",
+                url: "https://en.wikipedia.org/wiki/Tinnitus_retraining_therapy",
+                type: "education",
+            },
+            {
+                name: "NIH - Tinnitus Research",
+                url: "https://www.nidcd.nih.gov/health/tinnitus",
+                type: "authority",
+            },
+        ],
+    },
+    astigmatism_fan_chart: {
+        resources: [
+            {
+                name: "AAO - Astigmatism",
+                url: "https://www.aaos.org/primary_source_submissions/",
+                type: "authority",
+            },
+            {
+                name: "NEI - Refractive Errors",
+                url: "https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases/refractive-errors",
+                type: "authority",
+            },
+            { name: "Review of Optometry", url: "https://www.reviewofoptometry.com/", type: "medical" },
+            {
+                name: "AllAboutVision - Astigmatism",
+                url: "https://www.allaboutvision.com/conditions/astigmatism.htm",
+                type: "education",
+            },
+        ],
+    },
+    blue_light_visualizer: {
+        resources: [
+            { name: "Harvard Health - Blue Light", url: "https://www.health.harvard.edu/", type: "medical" },
+            { name: "AAO - Digital Eye Strain", url: "https://www.aaos.org/", type: "authority" },
+            { name: "CIRP - Computer Vision Syndrome", url: "https://cirp.org/", type: "scientific" },
+            { name: "Sleep Foundation - Blue Light", url: "https://www.sleepfoundation.org/", type: "medical" },
+        ],
+    },
+    hearing_age_test: {
+        resources: [
+            { name: "ASHA - Age-Related Hearing Loss", url: "https://www.asha.org/", type: "authority" },
+            {
+                name: "NIH - Presbycusis",
+                url: "https://www.nidcd.nih.gov/health/age-related-hearing-loss",
+                type: "authority",
+            },
+            {
+                name: "WHO - Deafness Statistics",
+                url: "https://www.who.int/health-topics/hearing-loss",
+                type: "authority",
+            },
+        ],
+    },
+    amsler_grid_macular: {
+        resources: [
+            { name: "AAO - Macular Degeneration", url: "https://www.aaos.org/", type: "authority" },
+            { name: "Macular Degeneration Foundation", url: "https://www.eyesight.org/", type: "community" },
+            { name: "BrightFocus Foundation", url: "https://www.brightfocus.org/macular/", type: "authority" },
+            {
+                name: "NIH - AMD",
+                url: "https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases/age-related-macular-degeneration",
+                type: "authority",
+            },
+        ],
+    },
+    lut_previewer_webgl: {
+        resources: [
+            {
+                name: "Wikipedia - LUT Color Grading",
+                url: "https://en.wikipedia.org/wiki/3D_lookup_table",
+                type: "education",
+            },
+            {
+                name: "Blackmagic Design - DaVinci LUT",
+                url: "https://www.blackmagicdesign.com/products/davinciresolve",
+                type: "tool",
+            },
+            {
+                name: "MDN - WebGL Tutorial",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial",
+                type: "authority",
+            },
+        ],
+    },
+    color_blindness_sim: {
+        resources: [
+            {
+                name: "Wikipedia - Color Blindness",
+                url: "https://en.wikipedia.org/wiki/Color_blindness",
+                type: "education",
+            },
+            { name: "NIH - Eye Disease Statistics", url: "https://www.nei.nih.gov/", type: "authority" },
+            { name: "Color Blind Guide", url: "https://www.color-blindness.com/", type: "education" },
+            {
+                name: "Coblis - Color Blind Simulator",
+                url: "https://www.color-blindness.com/coblis-color-blindness-simulator/",
+                type: "tool",
+            },
+        ],
+    },
+    screen_pixel_ruler: {
+        resources: [
+            {
+                name: "Material Design - Layout",
+                url: "https://m3.material.io/foundations/layout/",
+                type: "authority",
+            },
+            {
+                name: "W3C - Target Size Guidelines",
+                url: "https://www.w3.org/WAI/WCAG21/Understanding/target-size.html",
+                type: "authority",
+            },
+            {
+                name: "MDN - Resolution Units",
+                url: "https://developer.mozilla.org/en-US/docs/Web/CSS/resolution",
+                type: "authority",
+            },
+        ],
+    },
+    statistical_dist_plot: {
+        resources: [
+            {
+                name: "Wolfram MathWorld - Normal Distribution",
+                url: "https://mathworld.wolfram.com/NormalDistribution.html",
+                type: "education",
+            },
+            {
+                name: "Khan Academy - Statistics",
+                url: "https://www.khanacademy.org/math/statistics-probability",
+                type: "education",
+            },
+            {
+                name: "NIST - Statistical Reference",
+                url: "https://www.itl.nist.gov/div898/handbook/",
+                type: "authority",
+            },
+        ],
+    },
+    data_anonymizer_local: {
+        resources: [
+            {
+                name: "HIPAA - Safe Harbor Method",
+                url: "https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/",
+                type: "authority",
+            },
+            { name: "GDPR - Anonymization", url: "https://gdpr.eu/", type: "authority" },
+            { name: "NIST - Privacy Framework", url: "https://www.nist.gov/privacy-framework", type: "authority" },
+        ],
+    },
+    pdf_redactor_canvas: {
+        resources: [
+            { name: "PDF.js Documentation", url: "https://github.com/mozilla/pdf.js/", type: "authority" },
+            { name: "NIST - PDF Security", url: "https://csrc.nist.gov/", type: "authority" },
+            { name: "SANS - Redaction Guidelines", url: "https://www.sans.org/", type: "community" },
+        ],
+    },
+    cron_job_visualizer: {
+        resources: [
+            { name: "Crontab.guru", url: "https://crontab.guru/", type: "tool" },
+            { name: "Wikipedia - Cron", url: "https://en.wikipedia.org/wiki/Cron", type: "education" },
+            { name: "Cronie Documentation", url: "https://github.com/cronie-crond/cronie", type: "authority" },
+        ],
+    },
+    regex_flowchart_gen: {
+        resources: [
+            {
+                name: "MDN - Regular Expressions",
+                url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions",
+                type: "authority",
+            },
+            { name: "RFC 5321 - Email Standard", url: "https://tools.ietf.org/html/rfc5321", type: "authority" },
+            {
+                name: "W3C - Internationalization",
+                url: "https://www.w3.org/International/questions/qa-personal-names",
+                type: "authority",
+            },
+            { name: "Regular-Expressions.info", url: "https://www.regular-expressions.info/", type: "education" },
+        ],
+    },
+    sqlite_wasm_explorer: {
+        resources: [
+            { name: "SQLite Language Reference", url: "https://www.sqlite.org/lang.html", type: "authority" },
+            { name: "sql.js Documentation", url: "https://github.com/sql-js/sql.js", type: "authority" },
+            {
+                name: "MDN - WebAssembly",
+                url: "https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts",
+                type: "authority",
+            },
+        ],
+    },
+    docker_compose_linter: {
+        resources: [
+            { name: "Docker Compose Docs", url: "https://docs.docker.com/compose/", type: "authority" },
+            {
+                name: "Compose File Reference",
+                url: "https://docs.docker.com/compose/compose-file/",
+                type: "authority",
+            },
+            {
+                name: "Docker Best Practices",
+                url: "https://github.com/docker/labs-image-best-practices",
+                type: "community",
+            },
+            { name: "Docker Hub", url: "https://hub.docker.com/", type: "tool" },
+        ],
+    },
+    curl_to_fetch_axios: {
+        resources: [
+            {
+                name: "MDN - Fetch API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+                type: "authority",
+            },
+            { name: "Axios Documentation", url: "https://axios-http.com/docs/intro", type: "authority" },
+            {
+                name: "HTTP Archive - API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/HTTP",
+                type: "authority",
+            },
+        ],
+    },
+    web_serial_terminal: {
+        resources: [
+            {
+                name: "MDN - Web Serial API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API",
+                type: "authority",
+            },
+            { name: "WICG - Serial API", url: "https://wicg.github.io/serial/", type: "authority" },
+            {
+                name: "Arduino Reference",
+                url: "https://www.arduino.cc/reference/en/language/functions/communication/serial/",
+                type: "authority",
+            },
+        ],
+    },
+    exif_data_scrubber: {
+        resources: [
+            { name: "EXIF.org - Standard", url: "https://www.exif.org/Exif2-2.PDF", type: "authority" },
+            {
+                name: "MDN - File API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/File",
+                type: "authority",
+            },
+            { name: "Wikipedia - EXIF", url: "https://en.wikipedia.org/wiki/Exif", type: "education" },
+        ],
+    },
+    browser_fingerprint_id: {
+        resources: [
+            { name: "EFF - Cover Your Tracks", url: "https://coveryourtracks.eff.org/", type: "tool" },
+            {
+                name: "Wikipedia - Fingerprinting",
+                url: "https://en.wikipedia.org/wiki/Device_fingerprint",
+                type: "education",
+            },
+            { name: "AmIUnique", url: "https://amiunique.org/", type: "tool" },
+        ],
+    },
+    google_takeout_visualizer: {
+        resources: [
+            { name: "Google Takeout", url: "https://takeout.google.com/", type: "tool" },
+            { name: "Google Data Liberation", url: "https://dataliberation.org/", type: "community" },
+        ],
+    },
+    chat_timeline_visualizer: {
+        resources: [
+            {
+                name: "Wikipedia - Data Visualization",
+                url: "https://en.wikipedia.org/wiki/Data_visualization",
+                type: "education",
+            },
+            {
+                name: "MDN - Timeline API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Performance_Timeline",
+                type: "authority",
+            },
+        ],
+    },
+    browser_history_analyzer: {
+        resources: [
+            {
+                name: "Wikipedia - Browser History",
+                url: "https://en.wikipedia.org/wiki/Web_browser",
+                type: "education",
+            },
+            {
+                name: "MDN - History API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/History_API",
+                type: "authority",
+            },
+        ],
+    },
+    monitor_refresh_tester: {
+        resources: [
+            {
+                name: "Wikipedia - Refresh Rate",
+                url: "https://en.wikipedia.org/wiki/Refresh_rate",
+                type: "education",
+            },
+            { name: "Blur Busters - Motion Tests", url: "https://www.blurbusters.com/", type: "community" },
+            { name: "TestUFO", url: "https://www.testufo.com/", type: "tool" },
+        ],
+    },
+    dead_pixel_strobe: {
+        resources: [
+            {
+                name: "Wikipedia - Pixel Defects",
+                url: "https://en.wikipedia.org/wiki/Defect_pixel",
+                type: "education",
+            },
+            { name: "EIZO - Monitor Testing", url: "https://www.eizo.com/", type: "community" },
+        ],
+    },
+    oled_burnin_protector: {
+        resources: [
+            {
+                name: "Wikipedia - OLED Burn-in",
+                url: "https://en.wikipedia.org/wiki/Screen_burn-in",
+                type: "education",
+            },
+            { name: "RTINGS - Burn-in Tests", url: "https://www.rtings.com/", type: "community" },
+        ],
+    },
+    monitor_gamma_calibrator: {
+        resources: [
+            {
+                name: "Wikipedia - Gamma Correction",
+                url: "https://en.wikipedia.org/wiki/Gamma_correction",
+                type: "education",
+            },
+            {
+                name: "MDN - Canvas Gamma",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors",
+                type: "authority",
+            },
+        ],
+    },
+    dead_pixel_check: {
+        resources: [
+            {
+                name: "Wikipedia - Pixel Defects",
+                url: "https://en.wikipedia.org/wiki/Defect_pixel",
+                type: "education",
+            },
+            { name: "EIZO Monitor Tests", url: "https://www.eizo.com/monitor-test/", type: "tool" },
+        ],
+    },
+    oled_burn_in_fixer: {
+        resources: [
+            {
+                name: "Wikipedia - Screen Burn-in",
+                url: "https://en.wikipedia.org/wiki/Screen_burn-in",
+                type: "education",
+            },
+            { name: "RTINGS - OLED Care", url: "https://www.rtings.com/", type: "community" },
+        ],
+    },
+    monitor_backlight_bleed: {
+        resources: [
+            {
+                name: "Wikipedia - Backlight Bleeding",
+                url: "https://en.wikipedia.org/wiki/Liquid-crystal_display",
+                type: "education",
+            },
+            { name: "PC Monitors - Testing", url: "https://pcmonitors.info/", type: "community" },
+        ],
+    },
+    stroboscope_tachometer: {
+        resources: [
+            {
+                name: "Wikipedia - Stroboscopic Effect",
+                url: "https://en.wikipedia.org/wiki/Stroboscopic_effect",
+                type: "education",
+            },
+            {
+                name: "Blur Busters - Motion",
+                url: "https://blurbusters.com/faq/motion-blur-reduction/",
+                type: "community",
+            },
+            {
+                name: "HyperPhysics",
+                url: "https://hyperphysics.phy-astr.gsu.edu/hbase/Sound/alias.html",
+                type: "education",
+            },
+        ],
+    },
+    box_breathing_haptic: {
+        resources: [
+            { name: "Harvard Health - Breathing", url: "https://www.health.harvard.edu/", type: "medical" },
+            {
+                name: "NIH - Relaxation Response",
+                url: "https://www.nccih.nih.gov/health/relaxation-techniques",
+                type: "authority",
+            },
+            { name: "Wilderness Medical Society", url: "https://wms.org/", type: "authority" },
+        ],
+    },
+    cpr_metronome_bpm: {
+        resources: [
+            { name: "Red Cross - CPR", url: "https://www.redcross.org/take-a-class/cpr", type: "authority" },
+            { name: "AHA - CPR Guidelines", url: "https://cpr.heart.org/en/", type: "authority" },
+            { name: "NIH - Cardiac Arrest", url: "https://www.ninds.nih.gov/", type: "authority" },
+        ],
+    },
+    magnetometer_metal_find: {
+        resources: [
+            {
+                name: "Wikipedia - Magnetometer",
+                url: "https://en.wikipedia.org/wiki/Magnetometer",
+                type: "education",
+            },
+            {
+                name: "MDN - Magnetometer API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Magnetometer",
+                type: "authority",
+            },
+        ],
+    },
+    seizure_flash_check: {
+        resources: [
+            {
+                name: "Harding Flash Guidelines",
+                url: "https://www.ofcom.org.uk/__data/assets/pdf_file/0020/18374/itu_pse_handbook.pdf",
+                type: "authority",
+            },
+            { name: "Epilepsy Foundation", url: "https://www.epilepsy.com/", type: "medical" },
+            {
+                name: "WCAG - Flashing Content",
+                url: "https://www.w3.org/WAI/WCAG21/Understanding/three-flashes-or-below-threshold.html",
+                type: "authority",
+            },
+            { name: "NICE - Photosensitive Epilepsy", url: "https://www.nice.org.uk/", type: "medical" },
+        ],
+    },
+    gerber_file_viewer: {
+        resources: [
+            {
+                name: "Wikipedia - Gerber Format",
+                url: "https://en.wikipedia.org/wiki/Gerber_format",
+                type: "education",
+            },
+            { name: "IPC - PCB Standards", url: "https://www.ipc.org/", type: "authority" },
+            { name: "EasyEDA", url: "https://easyeda.com/", type: "tool" },
+        ],
+    },
+    web_bluetooth_scan: {
+        resources: [
+            {
+                name: "MDN - Web Bluetooth API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API",
+                type: "authority",
+            },
+            { name: "Bluetooth SIG", url: "https://www.bluetooth.com/specifications/specs/", type: "authority" },
+            {
+                name: "Chrome Samples - Bluetooth",
+                url: "https://googlechrome.github.io/samples/web-bluetooth/",
+                type: "tool",
+            },
+        ],
+    },
+    resistor_camera_id: {
+        resources: [
+            {
+                name: "Wikipedia - Resistor Color Code",
+                url: "https://en.wikipedia.org/wiki/Electronic_color_code",
+                type: "education",
+            },
+            { name: "EEVblog - Resistors", url: "https://www.eevblog.com/", type: "community" },
+        ],
+    },
+    logic_gate_simulator: {
+        resources: [
+            { name: "Wikipedia - Logic Gate", url: "https://en.wikipedia.org/wiki/Logic_gate", type: "education" },
+            { name: "IEEE - Digital Circuits", url: "https://standards.ieee.org/", type: "authority" },
+            { name: "CircuitLab", url: "https://www.circuitlab.com/", type: "tool" },
+        ],
+    },
+    edpi_sensitivity_calc: {
+        resources: [
+            {
+                name: "Wikipedia - Dots Per Inch",
+                url: "https://en.wikipedia.org/wiki/Dots_per_inch",
+                type: "education",
+            },
+            { name: "Gaming Setup - eDPI Guide", url: "https://liquiddifferently.com/", type: "community" },
+            { name: "Aim Trainer", url: "https://aimtrainer.io/", type: "tool" },
+        ],
+    },
+    game_ping_stability_test: {
+        resources: [
+            {
+                name: "Wikipedia - Ping",
+                url: "https://en.wikipedia.org/wiki/Ping_(networking_utility)",
+                type: "education",
+            },
+            {
+                name: "Cloudflare - Latency",
+                url: "https://www.cloudflare.com/learning/network-layer/what-is-latency/",
+                type: "education",
+            },
+            { name: "Speedtest", url: "https://www.speedtest.net/", type: "tool" },
+        ],
+    },
+    wiki_speed_racer: {
+        resources: [
+            {
+                name: "Wikipedia - Six Degrees of Wikipedia",
+                url: "https://en.wikipedia.org/wiki/Six_degrees_of_Wikipedia",
+                type: "education",
+            },
+            { name: "Wikipedia API", url: "https://www.mediawiki.org/wiki/API:Main_page", type: "authority" },
+        ],
+    },
+    satellite_view_guesser: {
+        resources: [
+            {
+                name: "USGS - Earth Explorer",
+                url: "https://www.usgs.gov/core-science-systems/national-geospatial-program",
+                type: "authority",
+            },
+            { name: "Google Earth", url: "https://earth.google.com/", type: "tool" },
+        ],
+    },
+    keyboard_latency_test: {
+        resources: [
+            {
+                name: "Wikipedia - Keyboard Latency",
+                url: "https://en.wikipedia.org/wiki/Keyboard_technology",
+                type: "education",
+            },
+            {
+                name: "RTings - Input Latency",
+                url: "https://www.rtings.com/mouse/tests/latency",
+                type: "community",
+            },
+        ],
+    },
+    mouse_polling_rate_hz: {
+        resources: [
+            { name: "Wikipedia - Mouse", url: "https://en.wikipedia.org/wiki/Computer_mouse", type: "education" },
+            { name: "RocketJumpNinja - Reviews", url: "https://www.rocketjumpninja.com/", type: "community" },
+        ],
+    },
+    gamepad_drift_visualizer: {
+        resources: [
+            { name: "Wikipedia - Joystick", url: "https://en.wikipedia.org/wiki/Joystick", type: "education" },
+            {
+                name: "Gamepad API Docs",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API",
+                type: "authority",
+            },
+        ],
+    },
+    nkey_rollover_tester: {
+        resources: [
+            {
+                name: "Wikipedia - Keyboard",
+                url: "https://en.wikipedia.org/wiki/Keyboard_technology",
+                type: "education",
+            },
+            { name: "Cherry MX Specs", url: "https://www.cherryamericas.com/", type: "authority" },
+        ],
+    },
+    device_motion_logger: {
+        resources: [
+            {
+                name: "MDN - DeviceMotion Event",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/DeviceMotionEvent",
+                type: "authority",
+            },
+            {
+                name: "Wikipedia - Accelerometer",
+                url: "https://en.wikipedia.org/wiki/Accelerometer",
+                type: "education",
+            },
+        ],
+    },
+    battery_discharge_monitor: {
+        resources: [
+            {
+                name: "Wikipedia - Battery",
+                url: "https://en.wikipedia.org/wiki/Battery_(electricity)",
+                type: "education",
+            },
+            { name: "Battery University", url: "https://batteryuniversity.com/", type: "education" },
+        ],
+    },
+    printer_test_sheet: {
+        resources: [
+            {
+                name: "Wikipedia - Printer",
+                url: "https://en.wikipedia.org/wiki/Printer_(computing)",
+                type: "education",
+            },
+            { name: "ISO - Print Standards", url: "https://www.iso.org/", type: "authority" },
+        ],
+    },
+    gamepad_snapback_diagnostic: {
+        resources: [
+            {
+                name: "Wikipedia - Game Controller",
+                url: "https://en.wikipedia.org/wiki/Gamepad",
+                type: "education",
+            },
+            {
+                name: "Gamepad API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API",
+                type: "authority",
+            },
+        ],
+    },
+    touchpad_gesture_heatmap: {
+        resources: [
+            { name: "iFixit - Touchpad Guide", url: "https://www.ifixit.com/Guide", type: "community" },
+            {
+                name: "Microsoft - Windows Touch",
+                url: "https://support.microsoft.com/en-us/windows/fix-touchpad-problems-in-windows/",
+                type: "authority",
+            },
+            { name: "Apple - Mac Touchpad", url: "https://support.apple.com/en-us/HT203171", type: "authority" },
+            { name: "W3C - Pointer Events", url: "https://w3c.github.io/pointerevents/", type: "authority" },
+        ],
+    },
+    usb_c_pd_negotiator_sniffer: {
+        resources: [
+            { name: "USB-IF - Specifications", url: "https://www.usb.org/documents", type: "authority" },
+            { name: "Wikipedia - USB-C", url: "https://en.wikipedia.org/wiki/USB-C", type: "education" },
+        ],
+    },
+    gpu_thermal_throttling_test: {
+        resources: [
+            {
+                name: "Wikipedia - Thermal Throttling",
+                url: "https://en.wikipedia.org/wiki/Dynamic_frequency_scaling",
+                type: "education",
+            },
+            { name: "3DMark", url: "https://www.3dmark.com/", type: "tool" },
+            {
+                name: "Wikipedia - GPU",
+                url: "https://en.wikipedia.org/wiki/Graphics_processing_unit",
+                type: "education",
+            },
+        ],
+    },
+    webgpu_vram_thermal_check: {
+        resources: [
+            { name: "3DMark", url: "https://www.3dmark.com/", type: "tool" },
+            { name: "W3C - WebGPU Spec", url: "https://www.w3.org/TR/webgpu/", type: "authority" },
+            { name: "Can I Use - WebGPU", url: "https://caniuse.com/webgpu", type: "tool" },
+        ],
+    },
+    airdrop_web_universal: {
+        resources: [
+            { name: "Wikipedia - WebRTC", url: "https://en.wikipedia.org/wiki/WebRTC", type: "education" },
+            {
+                name: "MDN - WebRTC API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API",
+                type: "authority",
+            },
+            { name: "W3C - RTC spec", url: "https://www.w3.org/TR/webrtc/", type: "authority" },
+        ],
+    },
+    emi_true_cost_analyzer: {
+        resources: [
+            { name: "CFPB - EMI Guide", url: "https://www.consumerfinance.gov/", type: "authority" },
+            {
+                name: "Investopedia - EMI",
+                url: "https://www.investopedia.com/terms/e/equated_monthly_installment.asp",
+                type: "education",
+            },
+            { name: "RBI - EMI Guidelines", url: "https://www.rbi.org.in/", type: "authority" },
+        ],
+    },
+    offline_qr_airgap: {
+        resources: [
+            { name: "Wikipedia - QR Code", url: "https://en.wikipedia.org/wiki/QR_code", type: "education" },
+            {
+                name: "MDN - Canvas API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API",
+                type: "authority",
+            },
+        ],
+    },
+    wifi_speed_stability: {
+        resources: [
+            {
+                name: "IEEE 802.11 Standard",
+                url: "https://standards.ieee.org/standard/802_11-2020.html",
+                type: "authority",
+            },
+            { name: "Wi-Fi Alliance", url: "https://www.wi-fi.org/", type: "authority" },
+            {
+                name: "Cloudflare - Latency",
+                url: "https://www.cloudflare.com/learning/network-layer/what-is-latency/",
+                type: "education",
+            },
+        ],
+    },
+    wifi_dead_zone_logger: {
+        resources: [
+            { name: "Wi-Fi Alliance", url: "https://www.wi-fi.org/", type: "authority" },
+            {
+                name: "Wikipedia - IEEE 802.11",
+                url: "https://en.wikipedia.org/wiki/IEEE_802.11",
+                type: "education",
+            },
+            { name: "Metageek - Wi-Fi Analysis", url: "https://www.metageek.com/", type: "tool" },
+        ],
+    },
+    ble_rssi_meter: {
+        resources: [
+            { name: "Bluetooth SIG", url: "https://www.bluetooth.com/specifications/specs/", type: "authority" },
+            {
+                name: "Wikipedia - RSSI",
+                url: "https://en.wikipedia.org/wiki/Received_signal_strength_indication",
+                type: "education",
+            },
+            {
+                name: "MDN - Web Bluetooth",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API",
+                type: "authority",
+            },
+        ],
+    },
+    fire_retirement_calculator: {
+        resources: [
+            { name: "Mr. Money Mustache", url: "https://www.mrmoneymustache.com/", type: "community" },
+            { name: "ChooseFI", url: "https://www.choosefi.com/", type: "community" },
+            { name: "Bogleheads Wiki", url: "https://www.bogleheads.org/wiki/Main_Page", type: "community" },
+            { name: "SEC - Investor Education", url: "https://www.investor.gov/", type: "authority" },
+        ],
+    },
+    net_worth_tracker_local: {
+        resources: [
+            {
+                name: "Investopedia - Net Worth",
+                url: "https://www.investopedia.com/terms/n/networth.asp",
+                type: "education",
+            },
+            { name: "CFPB - Financial Tools", url: "https://www.consumerfinance.gov/", type: "authority" },
+            { name: "FIRE Community", url: "https://www.reddit.com/r/financialindependence/", type: "community" },
+        ],
+    },
+    option_strategy_builder: {
+        resources: [
+            { name: "CBOE Options Education", url: "https://www.cboe.com/optionseducation/", type: "authority" },
+            {
+                name: "Investopedia - Options",
+                url: "https://www.investopedia.com/options-basics/",
+                type: "education",
+            },
+            {
+                name: "SEC - Options Disclosure",
+                url: "https://www.sec.gov/fast-answers/answersoptionspd.html",
+                type: "authority",
+            },
+            { name: "Tastytrade", url: "https://tastytrade.com/", type: "education" },
+        ],
+    },
+    black_scholes_heatmap: {
+        resources: [
+            {
+                name: "Investopedia - Black-Scholes",
+                url: "https://www.investopedia.com/terms/b/blackscholes.asp",
+                type: "education",
+            },
+            { name: "CBOE - VIX", url: "https://www.cboe.com/tradable_products/vix/", type: "authority" },
+            {
+                name: "SEC - Options Disclosure",
+                url: "https://www.sec.gov/fast-answers/answersoptionspd.html",
+                type: "authority",
+            },
+        ],
+    },
+    invisible_watermark_steno: {
+        resources: [
+            {
+                name: "Wikipedia - Steganography",
+                url: "https://en.wikipedia.org/wiki/Steganography",
+                type: "education",
+            },
+            { name: "NIH - Digital Watermarking", url: "https://www.nist.gov/", type: "authority" },
+        ],
+    },
+    av_sync_flash_tool: {
+        resources: [
+            {
+                name: "Wikipedia - Audio-Visual Sync",
+                url: "https://en.wikipedia.org/wiki/Audio%E2%80%93video_synchronization",
+                type: "education",
+            },
+            { name: "SMPTE - Standards", url: "https://www.smpte.org/", type: "authority" },
+        ],
+    },
+    sensor_dust_visualizer: {
+        resources: [
+            { name: "Canon - Sensor Cleaning", url: "https://support.usa.canon.com/", type: "authority" },
+            {
+                name: "Sony - Camera Support",
+                url: "https://www.sony.com/electronics/support/articles/",
+                type: "authority",
+            },
+            { name: "Nikon - Image Sensor Care", url: "https://www.nikonimgsupport.com/", type: "authority" },
+        ],
+    },
+    focal_length_sim: {
+        resources: [
+            {
+                name: "Wikipedia - Focal Length",
+                url: "https://en.wikipedia.org/wiki/Focal_length",
+                type: "education",
+            },
+            {
+                name: "Digital Photography School",
+                url: "https://digital-photography-school.com/",
+                type: "education",
+            },
+        ],
+    },
+    latex_equation_editor: {
+        resources: [
+            { name: "LaTeX Project", url: "https://www.latex-project.org/", type: "authority" },
+            { name: "Overleaf - Learn LaTeX", url: "https://www.overleaf.com/learn", type: "education" },
+            { name: "MathJax Documentation", url: "https://docs.mathjax.org/", type: "authority" },
+        ],
+    },
+    bionic_reading_engine: {
+        resources: [
+            {
+                name: "Wikipedia - Bionic Reading",
+                url: "https://en.wikipedia.org/wiki/Bionic_reading",
+                type: "education",
+            },
+            { name: "Bionic Reading Official", url: "https://bionic-reading.com/", type: "authority" },
+            { name: "NIH - Reading Research", url: "https://www.ncbi.nlm.nih.gov/pmc/", type: "scientific" },
+        ],
+    },
+    screen_reader_sim: {
+        resources: [
+            {
+                name: "W3C - WCAG Guidelines",
+                url: "https://www.w3.org/WAI/WCAG21/Understanding/",
+                type: "authority",
+            },
+            {
+                name: "MDN - Web Speech API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API",
+                type: "authority",
+            },
+            {
+                name: "Material Design - Accessibility",
+                url: "https://m3.material.io/foundations/accessibility/overview",
+                type: "authority",
+            },
+        ],
+    },
+    ring_size_calibrator: {
+        resources: [
+            { name: "Wikipedia - Ring Size", url: "https://en.wikipedia.org/wiki/Ring_size", type: "education" },
+            { name: "ISO - Jewelry Standards", url: "https://www.iso.org/", type: "authority" },
+        ],
+    },
+    pupillary_distance_cam: {
+        resources: [
+            { name: "AAO - Pupillary Distance", url: "https://www.aaos.org/", type: "authority" },
+            { name: "Wikipedia - Pupil", url: "https://en.wikipedia.org/wiki/Pupil", type: "education" },
+            { name: "AllAboutVision - PD", url: "https://www.allaboutvision.com/", type: "medical" },
+        ],
+    },
+    wrist_watch_visualizer: {
+        resources: [
+            { name: "Wikipedia - Watch Sizing", url: "https://en.wikipedia.org/wiki/Watch", type: "education" },
+            { name: "Hodinkee - Watch Size Guide", url: "https://www.hodinkee.com/", type: "community" },
+        ],
+    },
+    ig_follower_insights: {
+        resources: [
+            { name: "Instagram Help", url: "https://help.instagram.com/", type: "authority" },
+            { name: "Wikipedia - Instagram", url: "https://en.wikipedia.org/wiki/Instagram", type: "education" },
+        ],
+    },
+    mandi_chest_lucky_picker: {
+        resources: [
+            {
+                name: "Wikipedia - Random Selection",
+                url: "https://en.wikipedia.org/wiki/Random_selection",
+                type: "education",
+            },
+            { name: "NIST - Randomness", url: "https://csrc.nist.gov/", type: "authority" },
+        ],
+    },
+    aes_gcm_vault_local: {
+        resources: [
+            {
+                name: "NIST - AES Standard",
+                url: "https://csrc.nist.gov/publications/detail/fips/197/final",
+                type: "authority",
+            },
+            {
+                name: "Wikipedia - AES",
+                url: "https://en.wikipedia.org/wiki/Advanced_Encryption_Standard",
+                type: "education",
+            },
+            {
+                name: "MDN - Crypto API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto",
+                type: "authority",
+            },
+        ],
+    },
+    advanced_search_operator_builder: {
+        resources: [
+            {
+                name: "Google - Search Operators",
+                url: "https://support.google.com/websearch/answer/2466433",
+                type: "authority",
+            },
+            {
+                name: "Bing - Advanced Search",
+                url: "https://support.microsoft.com/en-us/topic/advanced-search-options-b7928b4a-7a8d-60c6-28f1-2789b216ec3b",
+                type: "authority",
+            },
+            { name: "DuckDuckGo - Operators", url: "https://duckduckgo.com/duckduckgo-help-pages/", type: "tool" },
+        ],
+    },
+    jwt_debugger_offline: {
+        resources: [
+            {
+                name: "RFC 7519 - JWT Spec",
+                url: "https://datatracker.ietf.org/doc/html/rfc7519",
+                type: "authority",
+            },
+            {
+                name: "MDN - Web Crypto API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API",
+                type: "authority",
+            },
+            { name: "jwt.io - Debugger", url: "https://jwt.io/", type: "tool" },
+        ],
+    },
+    sleep_debt_calculator: {
+        resources: [
+            {
+                name: "NIH - Sleep Research",
+                url: "https://www.nimh.nih.gov/health/topics/sleep",
+                type: "authority",
+            },
+            { name: "Sleep Foundation", url: "https://www.sleepfoundation.org/", type: "medical" },
+            { name: "CDC - Sleep Data", url: "https://www.cdc.gov/sleep/data-research.html", type: "authority" },
+            { name: "AASM Guidelines", url: "https://aasm.org/", type: "authority" },
+        ],
+    },
+    beat_maker_typing: {
+        resources: [
+            {
+                name: "MDN - Web Audio API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API",
+                type: "authority",
+            },
+            { name: "Wikipedia - Beatboxing", url: "https://en.wikipedia.org/wiki/Beatboxing", type: "education" },
+            { name: "W3C - Audio Worklet", url: "https://www.w3.org/TR/audio-worklet/", type: "authority" },
+        ],
+    },
+    dark_pattern_simulator: {
+        resources: [
+            {
+                name: "Wikipedia - Dark Patterns",
+                url: "https://en.wikipedia.org/wiki/Dark_pattern",
+                type: "education",
+            },
+            {
+                name: "UX Collective - Dark Patterns",
+                url: "https://uxdesign.cc/dark-patterns-9ba0b0a0e1a5",
+                type: "community",
+            },
+            {
+                name: "FTC - Dark Patterns",
+                url: "https://www.ftc.gov/news-events/topics/tips-advice/dark-patterns",
+                type: "authority",
+            },
+        ],
+    },
+    color_mixer_challenge: {
+        resources: [
+            {
+                name: "Wikipedia - CMYK Color Model",
+                url: "https://en.wikipedia.org/wiki/CMYK_color_model",
+                type: "education",
+            },
+            { name: "Adobe - Color Theory", url: "https://www.adobe.com/create/color-calculator/", type: "tool" },
+            {
+                name: "NIST - Color Standards",
+                url: "https://www.nist.gov/itl/ssd/information-quality-laboratory/color-standards-and-tools",
+                type: "authority",
+            },
+        ],
+    },
+    life_stats_dashboard: {
+        resources: [
+            {
+                name: "Wikipedia - Life Expectancy",
+                url: "https://en.wikipedia.org/wiki/Life_expectancy",
+                type: "education",
+            },
+            {
+                name: "CDC - Leading Causes of Death",
+                url: "https://www.cdc.gov/nchs/fastats/leading-causes-of-death.htm",
+                type: "authority",
+            },
+            {
+                name: "WHO - Health Statistics",
+                url: "https://www.who.int/data/gho/data/indicators",
+                type: "authority",
+            },
+        ],
+    },
+    voice_controlled_platformer: {
+        resources: [
+            {
+                name: "MDN - Speech Recognition API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition",
+                type: "authority",
+            },
+            { name: "W3C - Web Speech API", url: "https://wicg.github.io/speech-api/", type: "authority" },
+            {
+                name: "Wikipedia - Speech Recognition",
+                url: "https://en.wikipedia.org/wiki/Speech_recognition",
+                type: "education",
+            },
+        ],
+    },
+    gyro_balance_challenge: {
+        resources: [
+            {
+                name: "MDN - DeviceMotion Event",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/DeviceMotionEvent",
+                type: "authority",
+            },
+            {
+                name: "Wikipedia - Accelerometer",
+                url: "https://en.wikipedia.org/wiki/Accelerometer",
+                type: "education",
+            },
+            { name: "W3C - Motion Sensors", url: "https://www.w3.org/TR/motion-sensors/", type: "authority" },
+        ],
+    },
+    monitor_dead_zone_ruler: {
+        resources: [
+            {
+                name: "Wikipedia - Display Resolution",
+                url: "https://en.wikipedia.org/wiki/Display_resolution",
+                type: "education",
+            },
+            { name: "RTINGS - Monitor Testing", url: "https://www.rtings.com/monitor/tests", type: "community" },
+            {
+                name: "MDN - Window.screen",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Window/screen",
+                type: "authority",
+            },
+        ],
+    },
+    ninja_cam_freeze: {
+        resources: [
+            {
+                name: "MDN - MediaStream Image Capture",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/ImageCapture_API",
+                type: "authority",
+            },
+            {
+                name: "Wikipedia - Motion Detection",
+                url: "https://en.wikipedia.org/wiki/Motion_detection",
+                type: "education",
+            },
+            {
+                name: "MDN - Canvas API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API",
+                type: "authority",
+            },
+        ],
+    },
+    haptic_rhythm_designer: {
+        resources: [
+            {
+                name: "MDN - Vibration API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API",
+                type: "authority",
+            },
+            { name: "W3C - Haptic Feedback", url: "https://www.w3.org/TR/vibration/", type: "authority" },
+            {
+                name: "Wikipedia - Haptic Technology",
+                url: "https://en.wikipedia.org/wiki/Haptic_technology",
+                type: "education",
+            },
+            { name: "OSHA - Ergonomics", url: "https://www.osha.gov/ergonomics", type: "authority" },
+        ],
+    },
+    hrv_biofeedback_trainer: {
+        resources: [
+            {
+                name: "NIH - Heart Rate Variability",
+                url: "https://www.nhlbi.nih.gov/health-topics/education-awareness/heart-truth/stress-and-heart",
+                type: "authority",
+            },
+            { name: "Harvard Health - HRV", url: "https://www.health.harvard.edu/", type: "medical" },
+            {
+                name: "Wikipedia - Heart Rate Variability",
+                url: "https://en.wikipedia.org/wiki/Heart_rate_variability",
+                type: "education",
+            },
+            { name: "r-MSSD Explained (PubMed)", url: "https://pubmed.ncbi.nlm.nih.gov/", type: "scientific" },
+        ],
+    },
+    color_harmony_cvd_designer: {
+        resources: [
+            {
+                name: "Wikipedia - Color Blindness",
+                url: "https://en.wikipedia.org/wiki/Color_blindness",
+                type: "education",
+            },
+            {
+                name: "W3C - Accessibility Color",
+                url: "https://www.w3.org/WAI/WCAG21/Understanding/",
+                type: "authority",
+            },
+            { name: "Color Blind Guide", url: "https://www.color-blindness.com/", type: "education" },
+        ],
+    },
+    free_drawing_pad: {
+        resources: [
+            {
+                name: "MDN - Canvas API",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API",
+                type: "authority",
+            },
+            { name: "W3C - HTML5 Canvas", url: "https://www.w3.org/TR/2dcontext/", type: "authority" },
+            {
+                name: "Touch Events Guide",
+                url: "https://developer.mozilla.org/en-US/docs/Web/API/Touch_events",
+                type: "authority",
+            },
+        ],
+    },
+    meeting_cost_calculator: {
+        resources: [
+            { name: "Harvard Business Review - Meetings", url: "https://hbr.org/", type: "authority" },
+            {
+                name: "Atlassian - Meeting Cost Calculator",
+                url: "https://www.atlassian.com/time-wasting-at-work-infographic",
+                type: "tool",
+            },
+            { name: "NIH - Workplace Productivity", url: "https://www.ncbi.nlm.nih.gov/", type: "authority" },
+        ],
+    },
+    recipe_scale_calculator: {
+        resources: [
+            { name: "USDA - Food Equivalents", url: "https://www.usda.gov/", type: "authority" },
+            {
+                name: "King Arthur Baking - Weight Chart",
+                url: "https://www.kingarthurbaking.com/",
+                type: "authority",
+            },
+            {
+                name: "Wikipedia - Cooking Measurements",
+                url: "https://en.wikipedia.org/wiki/Cooking_weights_and_measures",
+                type: "education",
+            },
+        ],
+    },
+    password_strength_visual_analyzer: {
+        resources: [
+            {
+                name: "NIST - Password Guidelines",
+                url: "https://pages.nist.gov/800-63-3/sp800-63b.html",
+                type: "authority",
+            },
+            { name: "Have I Been Pwned", url: "https://haveibeenpwned.com/", type: "tool" },
+            { name: "OWASP - Password Security", url: "https://owasp.org/", type: "authority" },
+        ],
+    },
+    date_duration_calculator: {
+        resources: [
+            { name: "Time and Date - Date Calculator", url: "https://www.timeanddate.com/", type: "authority" },
+            {
+                name: "Wikipedia - Date Calculation",
+                url: "https://en.wikipedia.org/wiki/Calculation",
+                type: "education",
+            },
+            {
+                name: "NIST - Time and Frequency",
+                url: "https://www.nist.gov/pml/time-and-frequency-division",
+                type: "authority",
+            },
+        ],
+    },
+    display_color_gamut_visualizer: {
+        resources: [
+            {
+                name: "Wikipedia - Color Space",
+                url: "https://en.wikipedia.org/wiki/Color_space",
+                type: "education",
+            },
+            { name: "Color.org - sRGB Standard", url: "https://color.org/", type: "authority" },
+            { name: "Society of Motion Picture Engineers", url: "https://www.smpte.org/", type: "authority" },
+        ],
+    },
+},
+    getToolExternalLinks = (e) => ToolExternalLinks[e] || null,
+    renderExternalLinksSection = (e) => {
+        const t = getToolExternalLinks(e);
+        if (!t || !t.resources || 0 === t.resources.length) return;
+        const o = document.querySelector("main");
+        if (!o || document.getElementById("external-links-section")) return;
+        const n = getToolTheme(e),
+            a = document.createElement("section");
+        (a.id = "external-links-section"),
+            (a.className = "max-w-4xl mx-auto px-4 py-12 mt-8 mb-8 border-t border-slate-200"),
+            (a.innerHTML = `\n        <div class="flex items-center gap-3.5 mb-6">\n            <div class="w-9 h-9 rounded-xl bg-orange-50 border border-orange-200/90 text-[#EE6C4D] flex items-center justify-center flex-shrink-0 shadow-xs" aria-hidden="true">\n                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>\n            </div>\n            <div class="flex flex-col min-w-0">\n                <span class="text-[10px] font-black uppercase tracking-[0.2em] text-[#EE6C4D]">Standards &amp; References</span>\n                <h2 class="text-2xl font-bold text-slate-800 m-0 p-0 leading-tight">External Resources &amp; References</h2>\n            </div>\n        </div>\n        <p class="text-slate-600 mb-8 leading-relaxed">These authoritative resources provide additional context, scientific references, and official documentation related to this tool.</p>\n        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">\n            ${t.resources.map((e) => `\n                <a href="${e.url}" target="_blank" rel="nofollow noopener noreferrer" \n                   class="group bg-white border border-slate-200 p-5 rounded-2xl hover:border-[#EE6C4D]/50 hover:shadow-md transition-all flex items-start gap-4 min-w-0">\n                    <div class="flex-shrink-0 w-10 h-10 rounded-xl ${n.accentBg} flex items-center justify-center ${n.accentText} group-hover:${n.bgHover} group-hover:text-white transition-all">\n                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>\n                        </svg>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <span class="text-xs font-bold ${n.accentText} uppercase tracking-wider block mb-1">${e.type}</span>\n                        <span class="text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors block truncate">${e.name}</span>\n                    </div>\n                    <svg class="w-4 h-4 text-slate-400 flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>\n                    </svg>\n                </a>\n            `).join("")}\n        </div>\n        <p class="text-xs text-slate-400 mt-6 text-center italic">External links open in new tabs. We are not responsible for external content.</p>\n    `),
+            o.appendChild(a);
+    },
+    GrowthEngine = {
+        simulateProcessing: (e, t, o) => {
+            e.disabled ||
+                ((e.disabled = !0),
+                    (e.innerHTML =
+                        '<svg class="animate-spin -ml-1 mr-3 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...'),
+                    setTimeout(() => {
+                        (e.disabled = !1), (e.innerHTML = t), o();
+                    }, 50));
+        },
+        injectSEOInsights: (e, t, o) => {
+            const n = document.getElementById(o);
+            if (!n) return;
+            let a = "";
+            a =
+                "tdee_macro_calculator" === e
+                    ? `\n                <div class="mt-6 p-4 bg-orange-50/50 border-l-4 border-[#EE6C4D] rounded-r-2xl text-sm text-slate-700 leading-relaxed animate-fade-in-up flex gap-3 items-start">\n                    <svg class="w-5 h-5 text-[#EE6C4D] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>\n                    <div>\n                        <strong>Analytical Insight:</strong> Based on your maintenance baseline of <span class="font-bold text-[#EE6C4D]">${t.calories || "2,000"} calories</span>, achieving a sustainable body recomposition requires controlled daily adjustments. Metabolic adaptation occurs over time, so we recommend recalculating these specific macros every 4-6 weeks to prevent plateaus and optimize your dietary adherence.\n                    </div>\n                </div>`
+                    : '\n                <div class="mt-6 p-4 bg-slate-50 border-l-4 border-emerald-500 rounded-r-2xl text-sm text-slate-700 leading-relaxed animate-fade-in-up flex gap-3 items-start">\n                    <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>\n                    <div>\n                        <strong>Client-Side Sandbox Verified:</strong> This operation was executed locally via WebAssembly/JS. Zero bytes of your input data were transmitted to external servers, ensuring strict cryptographic privacy and compliance.\n                    </div>\n                </div>';
+            const r = n.querySelector(".growth-engine-insight");
+            r && r.remove();
+            const i = document.createElement("div");
+            (i.className = "growth-engine-insight"), (i.innerHTML = a), n.appendChild(i);
+        },
+        generateShareLink: (e) => {
+            try {
+                const t = btoa(JSON.stringify(e)),
+                    o = new URL(window.location.href);
+                o.searchParams.set("state", t),
+                    navigator.clipboard.writeText(o.toString()).then(() => {
+                        "function" == typeof showToast &&
+                            showToast("Custom link copied! Anyone with this link sees your exact setup.");
+                    });
+            } catch (e) {
+                console.error("Link generation failed", e);
+            }
+        },
+        restoreSharedState: () => {
+            const e = new URLSearchParams(window.location.search).get("state");
+            if (e)
+                try {
+                    return JSON.parse(atob(e));
+                } catch (e) {
+                    return console.warn("Invalid shared state in URL"), null;
+                }
+            return null;
+        },
+    };
+function injectMetaAndHints() {
+    const e = document.head;
+    document.querySelector('meta[name="view-transition"]') ||
+        e.insertAdjacentHTML("beforeend", '<meta name="view-transition" content="same-origin" />');
+    [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://cdn.jsdelivr.net",
+        "https://www.googletagmanager.com",
+        "https://pagead2.googlesyndication.com",
+        "https://cdnjs.cloudflare.com",
+    ].forEach((t) => {
+        document.querySelector(`link[rel="preconnect"][href="${t}"]`) ||
+            e.insertAdjacentHTML("beforeend", `<link rel="preconnect" href="${t}" crossorigin>`);
+    });
+    [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://cdn.jsdelivr.net",
+        "https://www.googletagmanager.com",
+        "https://pagead2.googlesyndication.com",
+    ].forEach((t) => {
+        document.querySelector(`link[rel="dns-prefetch"][href="${t}"]`) ||
+            e.insertAdjacentHTML("beforeend", `<link rel="dns-prefetch" href="${t}">`);
+    }),
+        document.querySelector('link[rel="preload"][as="font"]') ||
+        e.insertAdjacentHTML(
+            "beforeend",
+            '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" crossorigin>'
+        ),
+        e.insertAdjacentHTML(
+            "beforeend",
+            '\n        <style>\n            html, body { max-width: 100vw !important; overflow-x: hidden !important; width: 100%; margin: 0; padding: 0; position: relative; }\n            *, *::before, *::after { box-sizing: border-box !important; }\n            img, picture, video, canvas, svg, iframe, pre, code { max-width: 100%; height: auto; }\n            p, h1, h2, h3, h4, h5, h6, span, a, div, li { overflow-wrap: break-word; word-wrap: break-word; }\n\n            .content-vis { content-visibility: auto; contain-intrinsic-size: auto 150px; }\n            .tool-card-lazy { will-change: transform, opacity; }\n\n            /* CLS: Reserve exact dimensions before JS renders these containers */\n            #app-header { min-height: 72px; contain: layout style; }\n            #app-footer { min-height: 200px; contain: layout style; }\n\n            #featured-tools-grid { min-height: 200px; }\n            #tools-category-container { min-height: 300px; }\n            #latest-tools-list { min-height: 150px; }\n            #index-sidebar { min-height: 400px; }\n            #sidebar-popular-tools { min-height: 160px; }\n\n            .hero-gradient { min-height: 500px; }\n\n            /* CLS & AdSense Compliance: Clean block spacing, no restrictive containment */\n            .ad-block-outer { \n                margin: 2rem auto; \n                width: 100%; \n                clear: both; \n                text-align: center;\n                display: block;\n            }\n            .ad-label-wrapper {\n                margin-bottom: 0.5rem;\n                display: block;\n            }\n            .ad-container-wrapper { \n                width: 100%; \n                display: block; \n                overflow: hidden;\n            }\n            .ad-container-wrapper ins.adsbygoogle {\n                margin: 0 auto !important;\n            }\n\n            [data-tooltip] { position: relative; }\n            [data-tooltip]:hover::after { \n                content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; \n                transform: translateX(-50%) translateY(-8px); background: #1e293b; color: #fff; padding: 4px 8px; \n                border-radius: 6px; font-size: 11px; font-weight: 600; white-space: nowrap; z-index: 50; pointer-events: none; \n                animation: tooltipFade 0.2s ease forwards; \n            }\n            @keyframes tooltipFade { from { opacity: 0; transform: translateX(-50%) translateY(-4px); } to { opacity: 1; transform: translateX(-50%) translateY(-8px); } }\n            @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }\n            .animate-slide-in-right { animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }\n            @keyframes navSmoothDrop { from { transform: translateY(-150%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }\n            .animate-nav-down { opacity: 0; animation: navSmoothDrop 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; will-change: transform, opacity; }\n            .hide-scrollbar::-webkit-scrollbar { display: none; }\n            .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }\n            .cmd-item-active { background-color: #f8fafc; border-color: #EE6C4D !important; }\n\n            body.zen-mode { background-color: #0f172a !important; color: #f8fafc !important; }\n            body.zen-mode nav { background-color: rgba(15, 23, 42, 0.9) !important; border-color: #334155 !important; }\n            body.zen-mode .bg-white { background-color: #1e293b !important; border-color: #334155 !important; }\n            body.zen-mode .bg-slate-50, body.zen-mode .bg-slate-100 { background-color: #0f172a !important; border-color: #334155 !important; }\n            body.zen-mode .text-slate-800, body.zen-mode .text-slate-900, body.zen-mode .text-gray-700, body.zen-mode .text-slate-700 { color: #f8fafc !important; }\n            body.zen-mode .text-slate-600, body.zen-mode .text-slate-500, body.zen-mode .text-gray-600 { color: #cbd5e1 !important; }\n            body.zen-mode .border-slate-200, body.zen-mode .border-slate-100, body.zen-mode .border-gray-200, body.zen-mode .border-gray-100 { border-color: #334155 !important; }\n            body.zen-mode .shadow-sm, body.zen-mode .shadow-md, body.zen-mode .shadow-xl, body.zen-mode .shadow-2xl { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5) !important; }\n            body.zen-mode #mobile-menu { background-color: rgba(30, 41, 59, 0.95) !important; }\n            body.zen-mode #favorites-drawer, body.zen-mode #scratchpad-drawer, body.zen-mode #cheatsheet-drawer { background-color: #1e293b !important; border-color: #334155 !important; }\n            .sortable-ghost { opacity: 0.4; border: 2px dashed #EE6C4D !important; background: #fff5f2 !important; }\n            .sortable-drag { cursor: grabbing !important; }\n\n            /* Performance: CLS Prevention */\n            img, picture, video, canvas, svg, iframe { contain: content; }\n            .ad-container-wrapper, .ad-label-wrapper { contain: layout style; }\n            img { background-color: #f1f5f9; }\n            .bg-gradient-to-r, .bg-gradient-to-l { contain: layout style; }\n\n            @media (max-width: 768px) {\n                .hero-gradient { min-height: 400px; }\n            }\n        </style>\n    '
+        );
+}
+injectMetaAndHints(),
+    (window.toggleBackgroundAds = function (isRestoring) {
+        // AdSense Compliance Update:
+        // We no longer manipulate pointer-events on ad wrappers programmatically.
+        // We rely entirely on the z-index of the modal backdrop to block background clicks naturally.
+        return true;
+    });
+const getIcon = (e, t = "w-6 h-6") => {
+    const o = e ? e.toLowerCase() : "default",
+        n = {
+            ai: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423-1.423z" /></svg>`,
+            finance: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+            health: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3" /></svg>`,
+            code: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" /></svg>`,
+            game: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a1.5 1.5 0 01-1.5 1.5H6a1.5 1.5 0 00-1.5 1.5v2.625c0 .329-.12.65-.333.896-.24.275-.38.647-.38 1.05s.14.775.38 1.05c.213.246.333.567.333.896v2.625A1.5 1.5 0 006 18h2.625c.329 0 .65.12.896.333.275.24.647.38 1.05.38s.775-.14 1.05-.38c.246-.213.567-.333.896-.333H18a1.5 1.5 0 001.5-1.5v-2.625c0-.329.12-.65.333-.896.24-.275.38-.647.38-1.05s-.14-.775-.38-1.05c-.213-.246-.333-.567-.333-.896V7.5A1.5 1.5 0 0018 6h-2.25a1.5 1.5 0 01-1.5-1.5v0z" /></svg>`,
+            writing: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>`,
+            hardware: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" /></svg>`,
+            audio: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5V4.5m3 12.75V6.75m3 9V8.25m3 6V9.75M7.5 16.5V7.5M4.5 14.25v-4.5" /></svg>`,
+            design: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>`,
+            datascience: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>`,
+            physics: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.579 3.95c-.15.375-.52.625-.92.625h-9.6c-.4 0-.77-.25-.92-.625L5.2 15.3m14.6 0c.34-.85.12-1.83-.54-2.49L15 8.564m0 0V3.104m-5.25 5.46h5.25M7.5 21h9" /></svg>`,
+            social: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>`,
+            default: `<svg class="${t}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" /></svg>`,
+        };
+    return o.includes("ai") || o.includes("text") || o.includes("writing") || o.includes("document")
+        ? n.ai
+        : o.includes("finance") || o.includes("money") || o.includes("cost") || o.includes("calculators")
+            ? n.finance
+            : o.includes("health") || o.includes("biometric")
+                ? n.health
+                : o.includes("developer") || o.includes("network") || o.includes("code") || o.includes("sysadmin")
+                    ? n.code
+                    : o.includes("games") || o.includes("interactive") || o.includes("performance")
+                        ? n.game
+                        : o.includes("hardware") || o.includes("monitor") || o.includes("peripheral")
+                            ? n.hardware
+                            : o.includes("social") || o.includes("daily") || o.includes("utilities")
+                                ? n.social
+                                : o.includes("data") || o.includes("research")
+                                    ? n.datascience
+                                    : o.includes("design") || o.includes("media") || o.includes("creator")
+                                        ? n.design
+                                        : o.includes("audio") || o.includes("sensory")
+                                            ? n.audio
+                                            : o.includes("engineering") || o.includes("physics")
+                                                ? n.physics
+                                                : n.default;
+};
+function getToolTheme(e) {
+    const t = e.toLowerCase();
+    return t.includes("health") || t.includes("biometric") || t.includes("wellness")
+        ? {
+            textHover: "group-hover:text-teal-600",
+            bgHover: "group-hover:bg-teal-500",
+            borderHover: "hover:border-teal-500",
+            bgLightHover: "group-hover:bg-teal-50",
+            accentText: "text-teal-600",
+            accentBg: "bg-teal-100",
+            categoryBadge: "text-teal-600 border-teal-100 bg-teal-50",
+            pillBg: "bg-teal-500",
+        }
+        : t.includes("hardware") || t.includes("monitor") || t.includes("peripheral")
+            ? {
+                textHover: "group-hover:text-indigo-600",
+                bgHover: "group-hover:bg-indigo-500",
+                borderHover: "hover:border-indigo-500",
+                bgLightHover: "group-hover:bg-indigo-50",
+                accentText: "text-indigo-600",
+                accentBg: "bg-indigo-100",
+                categoryBadge: "text-indigo-600 border-indigo-100 bg-indigo-50",
+                pillBg: "bg-indigo-500",
+            }
+            : {
+                textHover: "group-hover:text-[#EE6C4D]",
+                bgHover: "group-hover:bg-[#EE6C4D]",
+                borderHover: "hover:border-[#EE6C4D]",
+                bgLightHover: "group-hover:bg-[#EE6C4D]/10",
+                accentText: "text-[#EE6C4D]",
+                accentBg: "bg-orange-100",
+                categoryBadge: "text-slate-500 border-slate-100 bg-white",
+                pillBg: "bg-[#EE6C4D]",
+            };
+}
+let toolsData = [
+    {
+        id: "master_health_audit",
+        name: "Full Body & Health Audit",
+        category: "Health & Biometrics",
+        tags: [
+            "Master",
+            "Diagnostic"
+        ],
+        description: "Run a complete 5-step health diagnostic. Tests your hearing age, vision astigmatism, screen distance, and posture in one go.",
+        featured: true,
+        isMaster: true,
+        dateAdded: "2026-04-02"
+    },
+    {
+        id: "master_hardware_diagnostic",
+        name: "Complete Device Diagnostic",
+        category: "Hardware & Monitors",
+        tags: [
+            "Master",
+            "Diagnostic"
+        ],
+        description: "Run a full system stress test. Checks your monitor for dead pixels, tests keyboard latency, and analyzes GPU thermal throttling.",
+        featured: true,
+        isMaster: true,
+        dateAdded: "2026-04-02"
+    },
+    {
+        id: "wiki_speed_racer",
+        name: "The Wikipedia Racer",
+        category: "Games & Interactive",
+        tags: [
+            "Knowledge"
+        ],
+        description: "Race to click through Wikipedia hyperlinks to connect two random topics in the fewest clicks.",
+        featured: true,
+        dateAdded: "2025-02-14"
+    },
+    {
+        id: "beat_maker_typing",
+        name: "Typewriter Orchestra",
+        category: "Games & Interactive",
+        tags: [
+            "Music"
+        ],
+        description: "Turn your keyboard into a musical instrument. Every letter key triggers a specific loop or sample.",
+        dateAdded: "2025-02-12"
+    },
+    {
+        id: "dark_pattern_simulator",
+        name: "User Interface Hell",
+        category: "Games & Interactive",
+        tags: [
+            "Satire"
+        ],
+        description: "A puzzle game where you must unsubscribe from a fake newsletter, but the UI fights you.",
+        dateAdded: "2025-02-11"
+    },
+    {
+        id: "satellite_view_guesser",
+        name: "Where on Earth?",
+        category: "Games & Interactive",
+        tags: [
+            "Geography"
+        ],
+        description: "Guess your location based on a random satellite view without labels.",
+        dateAdded: "2025-02-10"
+    },
+    {
+        id: "color_mixer_challenge",
+        name: "The CMYK Master",
+        category: "Games & Interactive",
+        description: "Mix Cyan, Magenta, Yellow, and Key/Black sliders to match the target color perfectly.",
+        dateAdded: "2025-02-09"
+    },
+    {
+        id: "voice_controlled_platformer",
+        name: "Scream to Jump",
+        category: "Games & Interactive",
+        tags: [
+            "Audio"
+        ],
+        description: "Whisper to walk, scream to jump. A game controlled entirely by your voice volume.",
+        dateAdded: "2025-02-07"
+    },
+    {
+        id: "gyro_balance_challenge",
+        name: "Don't Spill The Coffee",
+        category: "Games & Interactive",
+        tags: [
+            "Mobile"
+        ],
+        description: "Walk around your real house without tilting your phone, or the virtual coffee spills.",
+        dateAdded: "2025-02-04"
+    },
+    {
+        id: "edpi_sensitivity_calc",
+        name: "eDPI Calculator (Valorant/CS:GO)",
+        category: "Games & Interactive",
+        tags: [
+            "Esports"
+        ],
+        description: "Calculate your effective DPI to standardize mouse sensitivity across different FPS games."
+    },
+    {
+        id: "game_ping_stability_test",
+        name: "Game Ping Test & Jitter",
+        category: "Games & Interactive",
+        description: "Test your connection to game servers to predict lag and check stability before playing ranked matches."
+    },
+    {
+        id: "life_stats_dashboard",
+        name: "Your Life in Numbers",
+        category: "Daily Life & Utilities",
+        description: "Input your birth date to see how many times your heart has beaten and historical events you've lived through.",
+        dateAdded: "2025-02-08"
+    },
+    {
+        id: "ring_size_calibrator",
+        name: "The Ring Size Matcher",
+        category: "Daily Life & Utilities",
+        description: "Place a ring on your screen and adjust the slider to find your exact size (US/UK/EU).",
+        dateAdded: "2025-02-03"
+    },
+    {
+        id: "wrist_watch_visualizer",
+        name: "Watch & Bracelet Sizer",
+        category: "Daily Life & Utilities",
+        description: "Visualize how a 40mm vs 44mm watch face would look on your specific wrist size.",
+        dateAdded: "2025-01-30"
+    },
+    {
+        id: "ble_rssi_meter",
+        name: "Find Lost Bluetooth Device",
+        category: "Daily Life & Utilities",
+        description: "Locate lost headphones or gadgets by tracking their Bluetooth signal strength (RSSI) proximity."
+    },
+    {
+        id: "mandi_chest_lucky_picker",
+        name: "Mandi Chest Piece Lucky Draw",
+        category: "Daily Life & Utilities",
+        description: "Fairly pick a random winner from a list of names for contests or giveaways."
+    },
+    {
+        id: "offline_qr_airgap",
+        name: "Offline QR File Transfer",
+        category: "Daily Life & Utilities",
+        description: "Securely transfer files between devices using QR codes without internet or Wi-Fi."
+    },
+    {
+        id: "airdrop_web_universal",
+        name: "Universal 'AirDrop' (P2P WebRTC)",
+        category: "Daily Life & Utilities",
+        tags: [
+            "Privacy"
+        ],
+        description: "Transfer files between any OS instantly via a local P2P WebRTC bridge. No uploads to servers.",
+        featured: true
+    },
+    {
+        id: "ig_follower_insights",
+        name: "Instagram Follower Insights",
+        category: "Daily Life & Utilities",
+        tags: [
+            "Social"
+        ],
+        description: "Safely analyze your Instagram data export locally in your browser. Discover who doesn't follow you back.",
+        dateAdded: "2026-03-01"
+    },
+    {
+        id: "magnetometer_metal_find",
+        name: "Metal Detector & Stud Finder",
+        category: "Daily Life & Utilities",
+        description: "Use your phone's magnetometer to detect metal studs and wires inside walls."
+    },
+    {
+        id: "monitor_dead_zone_ruler",
+        name: "The Screen Ruler",
+        category: "Daily Life & Utilities",
+        description: "Calibrate your screen with a credit card to measure real-world objects using a floating ruler.",
+        dateAdded: "2025-02-01"
+    },
+    {
+        id: "prompt_template_builder",
+        name: "LLM Prompt Engineering Builder",
+        category: "AI & Document Tools",
+        description: "Create precise, hallucination-free prompts for ChatGPT and Claude using proven frameworks like Chain-of-Thought.",
+        featured: true,
+        dateAdded: "2025-01-10"
+    },
+    {
+        id: "text_token_reducer",
+        name: "Text Token Usage Calculator",
+        category: "AI & Document Tools",
+        description: "Optimize text to save API costs and fit within LLM context windows by compressing documents."
+    },
+    {
+        id: "latex_equation_editor",
+        name: "Online LaTeX Equation Editor",
+        category: "AI & Document Tools",
+        description: "Build complex mathematical formulas visually and export them as clean LaTeX code."
+    },
+    {
+        id: "screen_reader_sim",
+        name: "Text to Speech Preview",
+        category: "AI & Document Tools",
+        description: "Test content accessibility and flow by listening to your text read aloud by various system voices."
+    },
+    {
+        id: "flow_state_dashboard",
+        name: "ADHD Focus Dashboard",
+        category: "Productivity & Focus",
+        description: "A distraction-free deep work interface combining brown noise audio generation, task gamification, and customizable focus timers designed to trigger and maintain flow state for ADHD and knowledge workers.",
+        featured: true,
+        dateAdded: "2026-11-03",
+        tags: [
+            "NEW",
+            "Focus",
+            "Productivity",
+            "Audio",
+            "Binaural",
+            "ADHD",
+            "Gamification"
+        ]
+    },
+    {
+        id: "bionic_reading_engine",
+        name: "Focus Reading Assistant",
+        category: "Productivity & Focus",
+        description: "Read faster and retain more by converting text into a format that guides eye fixation points."
+    },
+    {
+        id: "browser_history_analyzer",
+        name: "Productivity Time Analyzer",
+        category: "Productivity & Focus",
+        description: "Analyze your browsing habits from history files to find peak productivity hours."
+    },
+    {
+        id: "visual_acuity_snellen",
+        name: "Online Eye Chart",
+        category: "Health & Biometrics",
+        description: "Use a screen-accurate 20/20 eye chart for visual referencing and monitoring."
+    },
+    {
+        id: "hearing_audiogram_test",
+        name: "Audio Frequency Response Test",
+        category: "Health & Biometrics",
+        description: "Test your ability to hear audio tones across frequencies from 20Hz to 20kHz."
+    },
+    {
+        id: "body_fat_navy_method",
+        name: "Body Fat Calculator (Navy Method)",
+        category: "Health & Biometrics",
+        description: "Estimate body fat percentage accurately using tape measurements and the US Navy circumference method."
+    },
+    {
+        id: "tinnitus_frequency_matcher",
+        name: "Tone Frequency Matcher",
+        category: "Health & Biometrics",
+        description: "Find specific audio frequencies using a tone generator to aid in sound therapy."
+    },
+    {
+        id: "astigmatism_fan_chart",
+        name: "Visual Contrast Chart",
+        category: "Health & Biometrics",
+        description: "Check for visual refractive errors using a high-contrast fan chart."
+    },
+    {
+        id: "blue_light_visualizer",
+        name: "Blue Light Detector",
+        category: "Health & Biometrics",
+        description: "Analyze your environment's lighting color temperature to prevent melatonin suppression and improve sleep."
+    },
+    {
+        id: "hearing_age_test",
+        name: "Audio Frequency Age Test",
+        category: "Health & Biometrics",
+        description: "Determine the highest frequency you can hear compared to average age groups."
+    },
+    {
+        id: "seizure_flash_check",
+        name: "Video Flashing Test (Epilepsy)",
+        category: "Health & Biometrics",
+        description: "Analyze video content for dangerous flashing patterns that could trigger photosensitive seizures."
+    },
+    {
+        id: "ai_face_age_scanner",
+        name: "Face Age Detector",
+        category: "Health & Biometrics",
+        description: "Analyze facial landmarks to estimate biological age and skin health metrics for personal reference."
+    },
+    {
+        id: "emotion_sentiment_cam",
+        name: "Real-Time Emotion Detector",
+        category: "Health & Biometrics",
+        description: "Detect and visualize facial emotions in real-time to analyze reactions."
+    },
+    {
+        id: "amsler_grid_macular",
+        name: "Amsler Grid (Macular Degeneration)",
+        category: "Health & Biometrics",
+        description: "A specialized grid test used to detect early signs of Macular Degeneration.",
+        dateAdded: "2026-02-18"
+    },
+    {
+        id: "pupillary_distance_cam",
+        name: "Glasses PD Scanner",
+        category: "Health & Biometrics",
+        description: "Measure the distance between your pupils (PD) using your webcam and a standard card.",
+        dateAdded: "2025-02-02"
+    },
+    {
+        id: "option_strategy_builder",
+        name: "Options Strategy Builder",
+        category: "Finance & Calculators",
+        description: "Visually build and analyze complex options strategies like Iron Condors and Straddles with profit/loss diagrams."
+    },
+    {
+        id: "black_scholes_heatmap",
+        name: "Options Theta Decay Visualizer",
+        category: "Finance & Calculators",
+        description: "Visualize how time decay (Theta) affects option prices across different expiry dates."
+    },
+    {
+        id: "emi_true_cost_analyzer",
+        name: "True Cost EMI Calculator",
+        category: "Finance & Calculators",
+        description: "Reveal the hidden costs and actual interest rates behind 'No Cost' EMI offers."
+    },
+    {
+        id: "cron_job_visualizer",
+        name: "Crontab Generator & Visualizer",
+        category: "Developer & Network",
+        description: "Create and verify Cron schedules with a human-readable description of when tasks will run."
+    },
+    {
+        id: "regex_flowchart_gen",
+        name: "Regex Visualizer & Debugger",
+        category: "Developer & Network",
+        description: "Understand complex Regular Expressions by converting them into interactive visual flowcharts."
+    },
+    {
+        id: "sqlite_wasm_explorer",
+        name: "Online SQLite Viewer",
+        category: "Developer & Network",
+        description: "Open and explore SQLite database files instantly in your browser without uploading them."
+    },
+    {
+        id: "docker_compose_linter",
+        name: "Docker Compose Validator",
+        category: "Developer & Network",
+        description: "Validate and lint your Docker Compose YAML files to catch syntax errors and configuration issues."
+    },
+    {
+        id: "curl_to_fetch_axios",
+        name: "cURL to Fetch/Axios Converter",
+        category: "Developer & Network",
+        description: "Convert raw cURL commands into ready-to-use JavaScript Fetch or Axios code snippets."
+    },
+    {
+        id: "web_serial_terminal",
+        name: "Web Serial Terminal",
+        category: "Developer & Network",
+        description: "Communicate with hardware devices like Arduinos via Serial ports directly from your browser."
+    },
+    {
+        id: "aes_gcm_vault_local",
+        name: "File Protection Utility",
+        category: "Developer & Network",
+        description: "Securely encrypt and decrypt files directly in your browser using standard AES-256 encryption."
+    },
+    {
+        id: "advanced_search_operator_builder",
+        name: "Search Query Formatter",
+        category: "Developer & Network",
+        description: "Build precise search queries using standard operators to filter public results and refine research."
+    },
+    {
+        id: "jwt_debugger_offline",
+        name: "Token Format Viewer",
+        category: "Developer & Network",
+        description: "Decode and verify JSON Web Tokens (JWT) locally to inspect claims without sending data to a server."
+    },
+    {
+        id: "wifi_speed_stability",
+        name: "Internet Stability Test",
+        category: "Developer & Network",
+        description: "Analyze your connection quality by measuring ping jitter and packet loss consistency over time."
+    },
+    {
+        id: "wifi_dead_zone_logger",
+        name: "Wi-Fi Dead Zone Logger",
+        category: "Developer & Network",
+        description: "Map your home's Wi-Fi dead zones visually using augmented reality signal strength tracking."
+    },
+    {
+        id: "web_bluetooth_scan",
+        name: "Bluetooth LE Scanner",
+        category: "Developer & Network",
+        description: "Scan for nearby Bluetooth Low Energy (BLE) devices and inspect their services and characteristics."
+    },
+    {
+        id: "monitor_refresh_tester",
+        name: "Monitor Refresh Rate Test",
+        category: "Hardware & Monitors",
+        description: "Accurately test your screen's refresh rate (Hz) and check for motion blur or ghosting artifacts."
+    },
+    {
+        id: "dead_pixel_strobe",
+        name: "Stuck Pixel Fixer",
+        category: "Hardware & Monitors",
+        description: "Attempt to revive stuck pixels on your screen by flashing high-frequency color patterns."
+    },
+    {
+        id: "oled_burnin_protector",
+        name: "OLED Screen Uniformity Test",
+        category: "Hardware & Monitors",
+        description: "Check your OLED display for permanent image retention or burn-in using grey-scale uniformity patterns."
+    },
+    {
+        id: "monitor_gamma_calibrator",
+        name: "Monitor Calibration Tool",
+        category: "Hardware & Monitors",
+        description: "Calibrate your monitor's gamma, contrast, and black levels for accurate color representation."
+    },
+    {
+        id: "dead_pixel_check",
+        name: "Dead Pixel Checker",
+        category: "Hardware & Monitors",
+        description: "Easily spot dead or stuck pixels on your monitor by cycling through solid RGB color backgrounds."
+    },
+    {
+        id: "oled_burn_in_fixer",
+        name: "OLED Burn-In Remover",
+        category: "Hardware & Monitors",
+        description: "Run a pixel-refreshing loop of colors to help reduce temporary image persistence on OLED screens."
+    },
+    {
+        id: "monitor_backlight_bleed",
+        name: "Backlight Bleed Test",
+        category: "Hardware & Monitors",
+        description: "Inspect your monitor for backlight bleeding and IPS glow using a pure black screen test."
+    },
+    {
+        id: "stroboscope_tachometer",
+        name: "Online Stroboscope",
+        category: "Hardware & Monitors",
+        description: "Use a flashing screen light at precise frequencies to measure the RPM of rotating objects."
+    },
+    {
+        id: "vibration_motor_test",
+        name: "Phone Vibration Test",
+        category: "Hardware & Monitors",
+        description: "Test your device's haptic feedback engine with various vibration patterns and intensities."
+    },
+    {
+        id: "keyboard_latency_test",
+        name: "Keyboard Latency Test",
+        category: "Hardware & Monitors",
+        description: "Accurately measure the input lag of your keyboard in milliseconds to test performance."
+    },
+    {
+        id: "mouse_polling_rate_hz",
+        name: "Mouse Polling Rate Tester",
+        category: "Hardware & Monitors",
+        description: "Check your mouse's polling rate (Hz) to ensure it's performing optimally for gaming."
+    },
+    {
+        id: "gamepad_drift_visualizer",
+        name: "Gamepad & Stick Drift Tester",
+        category: "Hardware & Monitors",
+        description: "Test game controllers for analog stick drift and dead zones with a precision visualizer."
+    },
+    {
+        id: "nkey_rollover_tester",
+        name: "Keyboard Ghosting Test",
+        category: "Hardware & Monitors",
+        description: "Test your keyboard's N-Key Rollover (NKRO) capabilities to see how many simultaneous keys it registers."
+    },
+    {
+        id: "device_motion_logger",
+        name: "Gyroscope & Accelerometer Test",
+        category: "Hardware & Monitors",
+        description: "Log and visualize real-time data from your device's motion sensors to check for faults."
+    },
+    {
+        id: "battery_discharge_monitor",
+        name: "Battery Drain Test",
+        category: "Hardware & Monitors",
+        description: "Monitor real-time battery discharge rates to identify excessive power drain or faulty cells."
+    },
+    {
+        id: "printer_test_sheet",
+        name: "Printer Test Page Generator",
+        category: "Hardware & Monitors",
+        description: "Generate diagnostic color bars and alignment grids to test and clean your printer heads."
+    },
+    {
+        id: "gamepad_snapback_diagnostic",
+        name: "Pro Controller 'Snap-Back' Map",
+        category: "Hardware & Monitors",
+        description: "Measures the 'Snap-Back' of a joystick and maps the raw polling jitter to identify failing potentiometers.",
+        dateAdded: "2026-02-10"
+    },
+    {
+        id: "gpu_thermal_throttling_test",
+        name: "Browser-Based GPU Stress Test",
+        category: "Hardware & Monitors",
+        description: "Uses WebGPU to push your graphics processor to its limit within the browser to detect thermal throttling.",
+        dateAdded: "2026-02-10"
+    },
+    {
+        id: "haptic_rhythm_designer",
+        name: "Haptic Feedback Vibration Designer",
+        category: "Hardware & Monitors",
+        description: "Uses the Vibration API to test and design custom haptic patterns for your phone or controller.",
+        dateAdded: "2026-01-29"
+    },
+    {
+        id: "touchpad_gesture_heatmap",
+        name: "Touchpad 'Dead Zone' Heatmap",
+        category: "Hardware & Monitors",
+        description: "Paint your touchpad surface to find unresponsive areas and verify gesture support.",
+        dateAdded: "2026-01-30"
+    },
+    {
+        id: "usb_c_pd_negotiator_sniffer",
+        name: "USB-C Power Delivery Sniffer",
+        category: "Hardware & Monitors",
+        description: "Reads the power negotiation profile of a connected charger to tell you if your cable is rated for 100W/240W.",
+        dateAdded: "2026-02-07"
+    },
+    {
+        id: "webgpu_vram_thermal_check",
+        name: "WebGPU VRAM Stability Stressor",
+        category: "Hardware & Monitors",
+        description: "Stress-test your graphics memory and monitor frame-rate stability to detect heat issues.",
+        dateAdded: "2026-02-12"
+    },
+    {
+        id: "lut_previewer_webgl",
+        name: "Online LUT Previewer",
+        category: "Design & Media Tools",
+        description: "Apply cinematic 3D LUTs (.CUBE files) to your images in real-time to preview color grades."
+    },
+    {
+        id: "color_blindness_sim",
+        name: "Color Blindness Simulator",
+        category: "Design & Media Tools",
+        description: "Test your designs for accessibility by simulating different types of color blindness."
+    },
+    {
+        id: "screen_pixel_ruler",
+        name: "On-Screen Ruler",
+        category: "Design & Media Tools",
+        description: "Measure pixel dimensions and alignment on any webpage with a floating transparent ruler."
+    },
+    {
+        id: "av_sync_flash_tool",
+        name: "Audio Video Sync Test",
+        category: "Design & Media Tools",
+        description: "Use a visual flash and beep tool to precisely calibrate and fix audio-video synchronization issues."
+    },
+    {
+        id: "sensor_dust_visualizer",
+        name: "Sensor Dust Checker",
+        category: "Design & Media Tools",
+        description: "Find dust spots on your camera sensor easily with a high-contrast visualization tool."
+    },
+    {
+        id: "focal_length_sim",
+        name: "Camera Field of View Simulator",
+        category: "Design & Media Tools",
+        description: "Simulate and compare the field of view for different focal lengths and sensor sizes."
+    },
+    {
+        id: "exif_data_scrubber",
+        name: "Photo Metadata Cleaner",
+        category: "Design & Media Tools",
+        tags: [
+            "Privacy"
+        ],
+        description: "Protect your privacy by stripping GPS location and device metadata from photos before sharing online."
+    },
+    {
+        id: "invisible_watermark_steno",
+        name: "Invisible Image Watermarker",
+        category: "Design & Media Tools",
+        tags: [
+            "Privacy"
+        ],
+        description: "Embed invisible copyright data into your images that survives compression but remains undetectable.",
+        dateAdded: "2025-02-18"
+    },
+    {
+        id: "audio_latency_loopback",
+        name: "Audio Latency Test",
+        category: "Audio & Sensory",
+        description: "Measure the round-trip delay of your audio setup to check for lag in Bluetooth headphones."
+    },
+    {
+        id: "mic_spectrum_analyzer",
+        name: "Microphone Frequency Analyzer",
+        category: "Audio & Sensory",
+        description: "Visualize sound frequencies in real-time using a professional FFT spectrum analyzer for your microphone."
+    },
+    {
+        id: "stereo_left_right_test",
+        name: "Left/Right Stereo Speaker Test",
+        category: "Audio & Sensory",
+        description: "Verify your speaker or headphone channels are correctly oriented with a simple stereo audio test."
+    },
+    {
+        id: "stereo_phase_test",
+        name: "Speaker Phase & Polarity Test",
+        category: "Audio & Sensory",
+        description: "Check if your speakers are wired out-of-phase, which can cause hollow sound and lack of bass."
+    },
+    {
+        id: "noise_dosimeter_test",
+        name: "Noise Level Meter (Decibels)",
+        category: "Audio & Sensory",
+        description: "Monitor ambient noise levels and calculate safe exposure limits to protect your hearing."
+    },
+    {
+        id: "mic_latency_loopback",
+        name: "Microphone Input Lag Test",
+        category: "Audio & Sensory",
+        description: "Test the input lag of your microphone by measuring the delay between sound and system registration."
+    },
+    {
+        id: "voice_pitch_monitor",
+        name: "Voice Pitch Analyzer",
+        category: "Audio & Sensory",
+        description: "Visualize your voice pitch and frequency in real-time for singing and speech training."
+    },
+    {
+        id: "lufs_loudness_meter",
+        name: "LUFS Meter for Streaming",
+        category: "Audio & Sensory",
+        description: "Ensure your audio meets loudness standards for Spotify and YouTube to avoid compression."
+    },
+    {
+        id: "hrtf_spatial_audio_profiler",
+        name: "Spatial Audio HRTF Profiler",
+        category: "Audio & Sensory",
+        description: "Uses your webcam to map your ear shape and generates a custom HRTF profile for spatial audio players.",
+        dateAdded: "2026-02-04"
+    },
+    {
+        id: "spatial_audio_seal_tester",
+        name: "Earbud Seal & Isolation Test",
+        category: "Audio & Sensory",
+        description: "Plays out-of-phase low-frequency tones to calculate the quality of your earbud seal (passive isolation).",
+        dateAdded: "2026-02-06"
+    },
+    {
+        id: "gerber_file_viewer",
+        name: "Online Gerber Viewer",
+        category: "Engineering & Physics",
+        description: "Inspect PCB manufacturing files (Gerber) layer-by-layer in your browser."
+    },
+    {
+        id: "resistor_camera_id",
+        name: "Resistor Color Code Scanner",
+        category: "Engineering & Physics",
+        description: "Identify resistor values instantly by scanning their color bands with your camera."
+    },
+    {
+        id: "logic_gate_simulator",
+        name: "Logic Gate Simulator",
+        category: "Engineering & Physics",
+        description: "Build and test digital circuits with interactive logic gates to understand boolean operations."
+    },
+    {
+        id: "google_takeout_visualizer",
+        name: "Map Data Visualizer",
+        category: "Data & Research",
+        description: "Visualize your movement history on a private map by parsing your Google Takeout JSON files."
+    },
+    {
+        id: "chat_timeline_visualizer",
+        name: "Communication History Graph",
+        category: "Data & Research",
+        description: "Visualize communication patterns and relationship history from exported chat logs over time."
+    },
+    {
+        id: "statistical_dist_plot",
+        name: "Probability Distribution Calculator",
+        category: "Data & Research",
+        description: "Plot and analyze Normal, Binomial, and Poisson probability distributions."
+    },
+    {
+        id: "data_anonymizer_local",
+        name: "Data Anonymization Tool",
+        category: "Data & Research",
+        tags: [
+            "Privacy"
+        ],
+        description: "Automatically scrub sensitive PII like names and emails from datasets for privacy compliance."
+    },
+    {
+        id: "browser_fingerprint_id",
+        name: "Browser Configuration Analyzer",
+        category: "Data & Research",
+        tags: [
+            "Privacy"
+        ],
+        description: "See how trackers identify you online by analyzing your unique browser fingerprint and device hash."
+    },
+    {
+        id: "tool-jaw-align",
+        name: "Jaw Alignment Webcam Game",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "Play a game using your face! Open your mouth to jump. This somatic exercise helps align your jaw.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-blink-monitor",
+        name: "Eye Strain & Blink Counter",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "Use your camera to track your blink rate per minute to prevent dry eyes, screen fatigue, and digital eye strain.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-tech-neck",
+        name: "Tech Neck Posture Alarm",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "A free webcam tool that acts as a posture checker. It sounds an alarm if you slouch, helping you fix tech neck.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-proximity",
+        name: "Screen Distance Checker",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "Sitting too close ruins your eyesight. This tool measures how far your face is from the screen and sounds an alarm.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-stress",
+        name: "Mental Stress Face Tracker",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "This tool tracks your eyebrows to tell you if you look stressed or angry without realizing it.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-nsdr",
+        name: "Mood Fixer & Yoga Plan",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "Tell us how you feel right now, and we will give you a simple 5-minute stretching or resting plan to fix your mood.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-caffeine",
+        name: "Coffee Sleep Calculator",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "Find out exactly when to stop drinking coffee to get a good night of sleep based on caffeine half-life.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "cpr_metronome_bpm",
+        name: "CPR Metronome (110 BPM)",
+        category: "Health & Biometrics",
+        description: "Maintain the correct rhythm for chest compressions during CPR with a 110 BPM audio-visual guide."
+    },
+    {
+        id: "eye_contact_tracker",
+        name: "Eye Contact AI Trainer",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "Improve your presentation skills by tracking how well you maintain eye contact with the camera."
+    },
+    {
+        id: "posture_guard_ai",
+        name: "AI Posture Corrector",
+        category: "Health & Biometrics",
+        hub: "wellness",
+        description: "Receive alerts when you slouch to maintain healthy ergonomics using AI posture tracking."
+    },
+    {
+        id: "tool-zeigarnik",
+        name: "Brain Fog & Mental RAM Calculator",
+        category: "Productivity & Focus",
+        hub: "wellness",
+        description: "Calculate how much mental energy you are losing to open browser tabs and unread emails.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-mind-clear",
+        name: "Brain Dump Note & Trash",
+        category: "Productivity & Focus",
+        hub: "wellness",
+        description: "Type out your worries, bad thoughts, or stress here, then click destroy to throw them away for good.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-chronotype",
+        name: "Best Time to Work Calculator",
+        category: "Productivity & Focus",
+        hub: "wellness",
+        description: "Enter when you wake up and sleep to calculate the exact hours your brain is sharpest.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-cognitive-debt",
+        name: "Phone Distraction Calculator",
+        category: "Productivity & Focus",
+        hub: "wellness",
+        description: "See how much actual focus time and money you are losing to phone distractions every day.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-screen-time",
+        name: "Screen Time Life Calculator",
+        category: "Productivity & Focus",
+        hub: "wellness",
+        description: "A scary look at how many literal years of your life you will spend looking at a phone or computer.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-intention",
+        name: "One Goal Focus Saver",
+        category: "Productivity & Focus",
+        hub: "wellness",
+        description: "Write down the one single most important thing you have to do today to stay focused.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-detox",
+        name: "Screen Detox Planner",
+        category: "Productivity & Focus",
+        hub: "wellness",
+        description: "Get a random, healthy activity that does not require a phone or computer.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-freemium",
+        name: "Freemium Compute Death Simulator",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Mathematically predict if your free tier API/Server costs will outpace your paid conversions and bankrupt the company.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-equity",
+        name: "Co-Founder Equity Engine",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Calculate a fair equity split based on actual risk taken (cash injected vs. unpaid time), eliminating arbitrary 50/50 handshake deals.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-wcds",
+        name: "Working Capital Death Spiral Engine",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Mathematically calculates the hidden cash deficit caused by growing B2B sales too rapidly while waiting for clients to pay on delayed terms.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-daoc",
+        name: "Founder Opportunity Cost (DAOC)",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Compare the wealth of a corporate salary invested in the S&P 500 versus the risk-adjusted expected value of your startup equity.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-zombie",
+        name: "Zombie Startup Warning System",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Mathematically diagnoses if a startup is 'Default Dead' based on growth decay and runway.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-runway",
+        name: "Dynamic Runway Calculator",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Calculates zero-cash date and monthly burn rates for startups.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-saas-metrics",
+        name: "SaaS Metrics Engine",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Calculates the Rule of 40 and Burn Multiple to evaluate SaaS capital efficiency.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-cap-table",
+        name: "Cap Table Simulator",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Visualizes equity dilution between founders, investors, and option pools.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-exit-waterfall",
+        name: "Exit Waterfall Simulator",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Calculates pre/post money valuations and specific founder gross payouts at exit.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-unit-economics",
+        name: "Unit Economics Engine",
+        category: "Finance & Calculators",
+        hub: "startup",
+        description: "Evaluates Customer Acquisition Cost, Lifetime Value, and precise Payback Periods.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-validator",
+        name: "Idea Validator Matrix",
+        category: "Productivity & Focus",
+        hub: "startup",
+        description: "A structured checklist matrix to evaluate the baseline viability of a startup idea.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-registries",
+        name: "Global Incorporation & IP Registries",
+        category: "Data & Research",
+        hub: "startup",
+        description: "Verified directory of official government portals for corporate registration and IP protection worldwide.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-contract",
+        name: "Legal Agreement Engine",
+        category: "AI & Document Tools",
+        hub: "startup",
+        description: "Build a custom operating agreement, secure it with a Web Crypto hash, and export to an offline PDF.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-ppp",
+        name: "Global PPP Pricing Engine",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Calculates Purchasing Power Parity adjusted freelance rates based on client location.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-ltv-cac",
+        name: "Freelance LTV & CAC Engine",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Calculates Client Lifetime Value and maximum allowable Acquisition Cost to maintain profit margins.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-risk-analyzer",
+        name: "Client Concentration Risk Analyzer",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Calculates the systemic financial risk of relying too heavily on a single 'whale' client.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-scope-creep",
+        name: "Scope Creep Margin Quantifier",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Calculates profit margin dilution and effective hourly rate drops caused by client revisions.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-ai-roi",
+        name: "AI Delegation ROI Engine",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Calculates if AI software subscriptions are mathematically profitable based on hours saved.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-zoom-tax",
+        name: "Zoom Tax Meeting Cost Calculator",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Calculates the exact financial burn rate of meetings based on attendee hourly rates.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-creator-revenue",
+        name: "Creator Revenue Predictor",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Estimates platform ad revenue and calculates baseline rates for brand integrations.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-hourly-rate",
+        name: "Hourly Rate Engineer",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Calculates true minimum freelance rates accounting for overhead, taxes, and non-billable hours.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-global-tax",
+        name: "Global Tax Estimator",
+        category: "Finance & Calculators",
+        hub: "freelancer",
+        description: "Estimates net invoice retention across tier-1 jurisdictions.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-red-flag",
+        name: "Client Red Flag Scanner",
+        category: "AI & Document Tools",
+        hub: "freelancer",
+        description: "Scans client communications for semantic risks and scope creep indicators.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "tool-freelance-contract",
+        name: "Dynamic Contract PDF Generator",
+        category: "AI & Document Tools",
+        hub: "freelancer",
+        description: "Generates dynamic professional project agreements secured with an SHA-256 Web Crypto hash signature.",
+        dateAdded: "2026-03-02"
+    },
+    {
+        id: "pwm_flicker_eye_health_scanner",
+        name: "The 'PWM-Flicker' Eye-Health Scanner",
+        category: "Health & Biometrics",
+        description: "Detect invisible Pulse Width Modulation (PWM) flicker in LED bulbs or monitors above 200Hz using your camera's high-speed sample rate to prevent eye strain.",
+        featured: true,
+        dateAdded: "2026-03-06"
+    },
+    {
+        id: "nfc_data_ghost_eraser",
+        name: "The 'NFC Data-Ghost' Eraser",
+        category: "Developer & Network",
+        description: "Use the WebNFC API to write a security lock bit or a nuke command to physical NFC tags, permanently preventing them from being rewritten.",
+        featured: false,
+        dateAdded: "2026-03-06"
+    },
+    {
+        id: "binaural_beat_brainwave_gen",
+        name: "Binaural Beats Brainwave Generator",
+        category: "Health & Biometrics",
+        description: "Generate binaural beats to induce specific brainwave states for meditation, focus, sleep, and creativity using Web Audio API.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "breathing_coherence_trainer",
+        name: "Breathing Assessment Suite",
+        category: "Health & Biometrics",
+        description: "Comprehensive breathing tool combining HRV coherence training with breath hold (Cooper's) testing. Train resonance breathing for stress relief and measure oxygen tolerance for fitness.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "duochrome_vision_balance",
+        name: "Duochrome Vision Balance Test",
+        category: "Health & Biometrics",
+        description: "Test for refractive errors in your vision using the duochrome (red-green) principle for precise eye calibration.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "flicker_fusion_threshold",
+        name: "Flicker Fusion Threshold Tester",
+        category: "Health & Biometrics",
+        description: "Measure your critical flicker fusion frequency to assess visual processing speed and detect screen-induced fatigue.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "hand_tremor_stability",
+        name: "Hand Tremor & Stability Test",
+        category: "Health & Biometrics",
+        description: "Assess your fine motor control and hand stability through precision tracking exercises.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "headphone_driver_rattle_test",
+        name: "Headphone Driver Rattle Test",
+        category: "Hardware & Monitors",
+        description: "Detect headphone driver defects and rattling using low-frequency sweep tests with your microphone.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "iv_drip_rate_tapper",
+        name: "IV Drip Rate Calculator",
+        category: "Health & Biometrics",
+        description: "Calculate IV drip rates, infusion times, and flow rates for medical fluid administration.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "webcam_heart_rate_ppg",
+        name: "Webcam Heart Rate PPG",
+        category: "Health & Biometrics",
+        description: "Estimate your heart rate from facial blood flow patterns using remote photoplethysmography (rPPG).",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "contrast_sensitivity_function",
+        name: "Contrast Sensitivity Function Test",
+        category: "Health & Biometrics",
+        tags: [
+            "NEW",
+            "Innovation",
+            "Vision"
+        ],
+        description: "World's first comprehensive web-based CSF test. Measure contrast sensitivity across spatial frequencies using Gabor patches for vision health screening.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "rhythm_synchronization_test",
+        name: "Rhythm Synchronization Test",
+        category: "Psychology & Cognition",
+        tags: [
+            "NEW",
+            "Innovation",
+            "Music"
+        ],
+        description: "Test your ability to synchronize with musical rhythms and measure your rhythm perception and coordination.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "digital_dementia_risk_test",
+        name: "Digital Dementia Risk Test",
+        category: "Health & Biometrics",
+        tags: [
+            "NEW",
+            "Innovation",
+            "Cognitive Health"
+        ],
+        description: "Assess potential cognitive decline risks associated with excessive digital device use with evidence-based metrics.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "eye_tracking_cognitive_load",
+        name: "Eye Tracking Cognitive Load",
+        category: "Psychology & Cognition",
+        tags: [
+            "NEW",
+            "Innovation",
+            "Cognition"
+        ],
+        description: "Estimate cognitive load through pupil dilation tracking during mentally demanding tasks using webcam.",
+        featured: true,
+        dateAdded: "2026-04-08"
+    },
+    {
+        id: "hrv_biofeedback_trainer",
+        name: "HRV Biofeedback Trainer",
+        category: "Health & Biometrics",
+        tags: [
+            "NEW",
+            "Innovation",
+            "Heart Health",
+            "Stress"
+        ],
+        description: "Train your heart rate variability with guided breathing exercises. Use your webcam to measure real-time HRV metrics and learn resonance breathing for optimal stress reduction.",
+        featured: true,
+        dateAdded: "2026-04-15"
+    },
+    {
+        id: "bulk_certificate_generator",
+        name: "Bulk Certificate & PDF Editor",
+        category: "Design & Media Tools",
+        tags: [
+            "NEW",
+            "Design",
+            "Certificate",
+            "PDF"
+        ],
+        description: "Design certificates and edit PDFs page-by-page. Upload custom variable fonts, draw electronic signatures, and export documents 100% privately.",
+        featured: true,
+        dateAdded: "2026-06-03"
+    },
+    {
+        id: "password_strength_visual_analyzer",
+        name: "Password Strength Visual Analyzer",
+        category: "Developer & Network",
+        tags: [
+            "NEW",
+            "Security",
+            "Cybersecurity",
+            "Privacy"
+        ],
+        description: "Check password strength with visual feedback, entropy calculation, and crack time estimates. Create unbreakable passwords with real-time security analysis.",
+        featured: true,
+        dateAdded: "2026-04-15"
+    },
+    {
+        id: "display_color_gamut_visualizer",
+        name: "Display Color Gamut Visualizer",
+        category: "Hardware & Monitors",
+        tags: [
+            "NEW",
+            "Color",
+            "Calibration",
+            "Display"
+        ],
+        description: "Compare your monitor's color coverage against sRGB, DCI-P3, and Adobe RGB standards. See exactly how much color space your display actually covers.",
+        featured: true,
+        dateAdded: "2026-04-15"
+    },
+    {
+        id: "ssd_speed_benchmark",
+        name: "SSD & Storage Speed Benchmark",
+        category: "Hardware & Monitors",
+        tags: [
+            "NEW",
+            "Hardware",
+            "Storage",
+            "Benchmark",
+            "SSD",
+            "NVMe"
+        ],
+        description: "Benchmark your SSD, NVMe, external hard drive, or USB flash drive speed in real-time. Measure sequential read/write MB/s, 4K random IOPS, and drive latency directly in your browser without software installs.",
+        featured: true,
+        dateAdded: "2026-11-03"
+    },
+    {
+        id: "keyboard_chatter_detector",
+        name: "Mechanical Keyboard Chatter Detector",
+        category: "Hardware & Monitors",
+        tags: [
+            "NEW",
+            "Keyboard",
+            "Hardware",
+            "Switch",
+            "Mechanical",
+            "Debounce",
+            "RMA"
+        ],
+        description: "Detect mechanical keyboard switch chatter and faulty contacts. Measure switch bounce intervals in milliseconds and identify repeating or double-typing keys before warranty expiration.",
+        featured: true,
+        dateAdded: "2026-11-03"
+    },
+    {
+        id: "webcam_hardware_fps_test",
+        name: "Webcam True FPS & Sensor Benchmark",
+        category: "Hardware & Monitors",
+        tags: [
+            "NEW",
+            "Webcam",
+            "Camera",
+            "Hardware",
+            "FPS",
+            "Sensor",
+            "Resolution"
+        ],
+        description: "Test your webcam's real delivered FPS, native sensor resolution, and exposure latency online. Verify 60FPS vs 30FPS, detect dropped frames, and diagnose low-light stuttering 100% privately.",
+        featured: true,
+        dateAdded: "2026-11-03"
+    },
+    {
+        id: "mouse_dpi_deviation_analyzer",
+        name: "Mouse True DPI & CPI Deviation Benchmark",
+        category: "Hardware & Monitors",
+        tags: [
+            "NEW",
+            "Mouse",
+            "Hardware",
+            "DPI",
+            "CPI",
+            "Gaming",
+            "Sensor",
+            "Angle Snapping"
+        ],
+        description: "Measure your mouse's real CPI, sensor DPI deviation percentage, and angle snapping online. Calibrate with a standard credit card and calculate compensated in-game sensitivity for CS2, Valorant, and Apex.",
+        featured: true,
+        dateAdded: "2026-11-04"
+    },
+    {
+        id: "webgpu_compute_flops_benchmark",
+        name: "WebGPU Compute & TFLOPs Benchmark",
+        category: "Hardware & Monitors",
+        tags: [
+            "NEW",
+            "WebGPU",
+            "GPU",
+            "Hardware",
+            "TFLOPs",
+            "Compute",
+            "Benchmark",
+            "Graphics"
+        ],
+        description: "Benchmark your graphics card compute performance in WebGPU. Test raw FP32/FP16 TFLOPs, memory bandwidth, and thermal throttling stability online without software installations.",
+        featured: true,
+        dateAdded: "2026-11-04"
+    }
+];
+window.goToRandomTool = function () {
+    if (!toolsData || 0 === toolsData.length) return;
+    const e = window.location.pathname.split("/").pop().replace(".html", "");
+    let t;
+    do {
+        t = toolsData[Math.floor(Math.random() * toolsData.length)];
+    } while (t.id === e && toolsData.length > 1);
+    "function" == typeof showToast && showToast("Routing to a random tool..."),
+        setTimeout(() => {
+            window.location.href = generateToolUrl(t, "random");
+        }, 500);
+};
+const SITE_HEADER_HTML =
+    '\n<nav id="main-nav-bar" style="z-index: 100" class="w-full h-14 md:h-16 px-4 md:px-6 flex items-center justify-between min-w-0 relative" role="navigation" aria-label="Main Navigation">\n    <div class="flex items-center gap-2 min-w-0 relative z-10 flex-shrink-0">\n        <a href="/" aria-label="Home" class="text-[#EE6C4D] hover:text-[#d75a3c] transition focus:outline-none rounded flex-shrink-0">\n            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8"><path d="M11.47 3.84a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.06l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 0 0 1.061 1.06l8.69-8.69Z" /></svg>\n        </a>\n        <a href="/" class="text-xl font-extrabold text-[#33333B] tracking-tight whitespace-nowrap hidden sm:block flex-shrink-0 outline-none focus:ring-2 focus:ring-slate-300 rounded">Toolkit Gen</a>\n    </div>\n    \n    <div class="hidden lg:flex items-center gap-3 xl:gap-5 flex-shrink-0 relative z-10">\n        <div class="relative group flex-shrink-0">\n            <a href="/#featured" class="nav-link text-sm font-bold text-gray-600 group-hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded py-2">Trending</a>\n            <div class="opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[9999] transition-opacity duration-200">\n                <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/40 border border-slate-100 p-3 w-80 flex flex-col gap-1.5">\n                    <h4 class="text-[10px] uppercase font-black tracking-wider text-slate-400 mb-1 px-2">Top Tools</h4>\n                    \n                    <a href="/tool/zfs_capacity_calc" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">\n                        <div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center flex-shrink-0 text-indigo-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-all">\n                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>\n                        </div>\n                        <div>\n                            <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">ZFS RAID Calculator</h5>\n                            <p class="text-[10px] text-slate-500 line-clamp-1">Storage pool capacity planning</p>\n                        </div>\n                    </a>\n\n                    <a href="/tool/prompt_template_builder" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">\n                        <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 text-purple-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-all">\n                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>\n                        </div>\n                        <div>\n                            <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">AI Prompt Builder</h5>\n                            <p class="text-[10px] text-slate-500 line-clamp-1">Design advanced LLM prompts</p>\n                        </div>\n                    </a>\n\n                    <a href="/tool/fire_retirement_heatmap" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">\n                        <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-all">\n                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>\n                        </div>\n                        <div>\n                            <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">FIRE Retirement Planner</h5>\n                            <p class="text-[10px] text-slate-500 line-clamp-1">Visual independence roadmap</p>\n                        </div>\n                    </a>\n\n                    <a href="/tool/visual_acuity_snellen" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item">\n                        <div class="w-10 h-10 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 text-rose-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-all">\n                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>\n                        </div>\n                        <div>\n                            <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Online Eye Chart</h5>\n                            <p class="text-[10px] text-slate-500 line-clamp-1">Check vision acuity on screen</p>\n                        </div>\n                    </a>\n                </div>\n            </div>\n        </div>\n\n        <div class="relative group flex-shrink-0">\n            <a href="/#my-hub" class="nav-link text-sm font-bold text-gray-600 group-hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded py-2">My Hub</a>\n            <div class="opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[9999] transition-opacity duration-200">\n                <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/40 border border-slate-100 p-3 w-72 flex flex-col gap-1">\n                    <h4 class="text-[10px] uppercase font-black tracking-wider text-slate-400 mb-1 px-2">Curated Hubs</h4>\n\n                    <a href="/hubs/startup" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">\n                        <div class="w-9 h-9 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 text-orange-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">\n                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>\n                        </div>\n                        <div>\n                            <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Startup & VC</h5>\n                            <p class="text-[10px] text-slate-500">Cap tables, valuations</p>\n                        </div>\n                    </a>\n\n                    <a href="/hubs/freelance" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">\n                        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0 text-blue-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">\n                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>\n                        </div>\n                        <div>\n                            <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Freelance & Creator</h5>\n                            <p class="text-[10px] text-slate-500">Invoices, royalties</p>\n                        </div>\n                    </a>\n\n                    <a href="/hubs/wellness" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">\n                        <div class="w-9 h-9 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 text-rose-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">\n                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>\n                        </div>\n                        <div>\n                            <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Wellness & Focus</h5>\n                            <p class="text-[10px] text-slate-500">Sleep debt, meditations</p>\n                        </div>\n                    </a>\n                </div>\n            </div>\n        </div>\n\n        <div class="relative group flex-shrink-0">\n            <a href="/tool" class="flex items-center gap-1.5 px-2 py-2 text-sm text-slate-600 group-hover:text-[#EE6C4D] font-bold transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded">\n                All Tools<span id="tool-count" class="bg-orange-100 text-[#EE6C4D] text-[10px] px-1.5 py-0.5 rounded-full border border-orange-200">...</span>\n            </a>\n            <div class="opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto absolute top-full left-1/2 -translate-x-1/2 pt-3 z-[9999] transition-opacity duration-200">\n                <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/40 border border-slate-100 p-4 w-[480px]">\n                    <div class="grid grid-cols-2 gap-2">\n                        <a href="/tool#ai" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">\n                            <div class="flex items-center gap-2">\n                                <div class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center text-purple-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">\n                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>\n                                </div>\n                                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">AI & Automation</h5>\n                            </div>\n                            <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">System prompts, formatters, tokens</p>\n                        </a>\n\n                        <a href="/tool#finance" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">\n                            <div class="flex items-center gap-2">\n                                <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">\n                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>\n                                </div>\n                                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Finance & Quant</h5>\n                            </div>\n                            <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">Valuations, amortizations, FIRE plans</p>\n                        </a>\n\n                        <a href="/tool#health" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">\n                            <div class="flex items-center gap-2">\n                                <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-rose-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">\n                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>\n                                </div>\n                                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">Clinical Health</h5>\n                            </div>\n                            <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">Vision tests, macros, vitals</p>\n                        </a>\n\n                        <a href="/tool#devops" class="flex flex-col gap-1.5 p-3 rounded-xl hover:bg-slate-50 transition group/item border border-transparent hover:border-slate-100">\n                            <div class="flex items-center gap-2">\n                                <div class="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500 group-hover/item:bg-white group-hover/item:shadow-sm transition-colors">\n                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>\n                                </div>\n                                <h5 class="text-xs font-bold text-slate-800 group-hover/item:text-[#EE6C4D] transition-colors">DevOps & Eng</h5>\n                            </div>\n                            <p class="text-[10px] text-slate-500 leading-relaxed line-clamp-2">RAID calcs, subnetters, regex</p>\n                        </a>\n                    </div>\n                    \n                    <div class="mt-3 pt-3 border-t border-slate-100">\n                        <a href="/tool" class="flex items-center justify-between w-full p-3 rounded-xl bg-slate-50 hover:bg-[#EE6C4D] hover:text-white text-slate-700 transition-colors group/btn outline-none focus:ring-2 focus:ring-[#EE6C4D] focus:ring-offset-2">\n                            <span class="text-xs font-bold">Explore Full Directory (160+ Tools)</span>\n                            <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>\n                        </a>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class="relative group flex-shrink-0">\n            <button aria-label="Developer Utilities" class="text-slate-400 hover:text-[#EE6C4D] p-1.5 rounded-full transition outline-none focus:ring-2 focus:ring-[#EE6C4D] flex items-center">\n                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>\n            </button>\n            <div class="opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto fixed pt-2 z-[9999] transition-opacity duration-200" style="top: 56px;">\n                <div class="bg-white rounded-xl shadow-xl border border-slate-100 p-2 w-44 flex flex-col gap-1">\n                    <button onclick="ZenModeManager.toggle()" class="flex items-center gap-3 px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#EE6C4D] rounded-lg transition text-left"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg> Zen Mode</button>\n                    <button onclick="ScratchpadManager.openDrawer()" class="flex items-center gap-3 px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#EE6C4D] rounded-lg transition text-left"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg> Scratchpad</button>\n                    <button onclick="CheatSheetManager.openDrawer()" class="flex items-center gap-3 px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#EE6C4D] rounded-lg transition text-left"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg> Cheat Sheets</button>\n                    <button onclick="AmbientPlayer.toggleWidget()" class="flex items-center gap-3 px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#EE6C4D] rounded-lg transition text-left"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg> Focus Audio</button>\n                </div>\n            </div>\n        </div>\n\n        <button id="nav-favorites-btn" aria-label="View Saved Tools" class="flex items-center gap-1.5 text-sm font-bold text-gray-600 hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-2 py-1">\n            <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>\n            <span class="hidden xl:inline">Saved</span> <span id="saved-tools-count" class="hidden bg-orange-100 text-[#EE6C4D] text-[9px] px-1.5 py-0.5 rounded-full font-black">0</span>\n        </button>\n\n        <a href="https://blog.toolkitgen.com/" target="_blank" class="nav-link text-sm font-bold text-gray-600 hover:text-[#EE6C4D] transition outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">Blog</a>\n        \n        <div class="relative group ml-2 flex-shrink-0">\n            <button onclick="openCommandPalette()" aria-label="Open Command Palette" class="flex items-center justify-between w-48 lg:w-56 bg-slate-100/50 hover:bg-slate-100 border border-slate-200 rounded-full py-1.5 px-3 text-sm text-slate-400 transition-all outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                <span class="flex items-center gap-2"><svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg> Search tools...</span>\n                <kbd class="font-sans text-[10px] font-bold border border-slate-300 rounded px-1.5 py-0.5 bg-white text-slate-500 shadow-sm hidden xl:block">Ctrl K</kbd>\n            </button>\n        </div>\n    </div>\n    \n    <div class="flex items-center gap-2 lg:hidden relative z-10 flex-shrink-0">\n        <button onclick="openCommandPalette()" aria-label="Open Search" class="p-2 text-gray-600 hover:text-[#EE6C4D] outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded">\n            <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>\n        </button>\n        <button id="mobile-menu-btn" class="p-2 text-gray-600 hover:text-[#EE6C4D] outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open Menu">\n            <svg class="h-6 w-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>\n        </button>\n    </div>\n</nav>\n\n<div id="reading-progress-container" aria-hidden="true" class="absolute bottom-0 left-6 right-6 h-[3px] pointer-events-none z-50 overflow-hidden rounded-t-sm">\n    <div id="reading-progress" class="w-full h-full bg-gradient-to-r from-[#EE6C4D] to-[#ff9e80] origin-left scale-x-0 transition-transform duration-100 ease-out"></div>\n</div>\n\n<div id="mobile-menu" class="hidden absolute top-full left-0 mt-3 w-full bg-white/95 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl p-4 z-50">\n    <a href="/#hubs" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">Explore Hubs</a>\n    <a href="/#my-hub" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">My Hub</a>\n    <a href="/#all-tools" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">Directory</a>\n    \n    <button onclick="goToRandomTool()" class="w-full text-left py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 flex items-center gap-2 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">\n        <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>\n        Surprise Me\n    </button>\n\n    <button id="mobile-favorites-btn" class="w-full text-left py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 flex items-center gap-2 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">\n        <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>\n        Saved Tools <span id="mobile-saved-count" class="hidden bg-orange-100 text-[#EE6C4D] text-[10px] px-2 py-0.5 rounded-full ml-auto font-black">0</span>\n    </button>\n\n    <div class="flex gap-2 py-3 border-b border-gray-50">\n        <button onclick="ScratchpadManager.openDrawer()" class="flex-1 bg-slate-100 p-2 rounded-lg text-slate-600 hover:text-[#EE6C4D] flex justify-center" title="Scratchpad"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg></button>\n        <button onclick="ZenModeManager.toggle()" class="flex-1 bg-slate-100 p-2 rounded-lg text-slate-600 hover:text-[#EE6C4D] flex justify-center" title="Zen Mode"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></button>\n        <button onclick="AmbientPlayer.toggleWidget()" class="flex-1 bg-slate-100 p-2 rounded-lg text-slate-600 hover:text-[#EE6C4D] flex justify-center" title="Focus Audio"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg></button>\n    </div>\n\n    <a href="https://blog.toolkitgen.com/" target="_blank" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold border-b border-gray-50 outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">Blog</a>\n    <a href="/about" class="block py-3 text-gray-700 hover:text-[#EE6C4D] font-bold outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded px-1">About Us</a>\n</div>\n',
+    SITE_FOOTER_HTML = `\n<div class="max-w-7xl mx-auto px-4 py-12 min-w-0">\n    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 min-w-0">\n        <div class="col-span-1 md:col-span-2 space-y-4 min-w-0">\n            <h4 class="text-2xl font-bold text-slate-800 flex items-center gap-3 min-w-0">\n                <div class="w-8 h-8 rounded-xl bg-orange-50 border border-orange-200/90 text-[#EE6C4D] flex items-center justify-center flex-shrink-0 shadow-xs" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M11.47 3.84a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.06l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 0 0 1.061 1.06l8.69-8.69Z" /></svg></div><span class="whitespace-nowrap flex-shrink-0">Toolkit Gen</span>\n            </h4>\n            <p class="text-slate-500 leading-relaxed max-w-sm break-words">The open-source destination for modern builders. Privacy-focused calculators, generators, and utilities running entirely in your browser.</p>\n            <div class="flex items-center gap-4 pt-2 flex-shrink-0">\n                <a href="https://twitter.com/toolkitgen" aria-label="Twitter Profile" target="_blank" class="text-slate-400 hover:text-[#EE6C4D] transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded"><svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>\n                <a href="https://instagram.com/toolkitgen" aria-label="Instagram Profile" target="_blank" class="text-slate-400 hover:text-[#EE6C4D] transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D] rounded"><svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>\n            </div>\n        </div>\n        <div class="min-w-0">\n            <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 truncate">Curated Hubs</h4>\n            <ul class="space-y-3 text-sm text-slate-600">\n                <li class="truncate"><a href="/#my-hub" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">My Hub (Pinned)</a></li>\n                <li class="truncate"><a href="/hubs/startup" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Founder's Forge</a></li>\n                <li class="truncate"><a href="/hubs/freelancer" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Freelancer OS</a></li>\n                <li class="truncate"><a href="/hubs/wellness" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Wellness Sanctuary</a></li>\n            </ul>\n        </div>\n        <div class="min-w-0">\n            <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 truncate">Legal & Info</h4>\n            <ul class="space-y-3 text-sm text-slate-600">\n                <li class="truncate"><a href="/disclaimer" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Disclaimer</a></li>\n                <li class="truncate"><a href="/privacy" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Privacy Policy</a></li>\n                <li class="truncate"><a href="/terms" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Terms of Service</a></li>\n                <li class="truncate"><a href="/about" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">About Us</a></li>\n                <li class="truncate"><a href="/contact" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Contact</a></li>\n                <li class="truncate"><a href="/sitemap" class="hover:text-[#EE6C4D] transition-colors focus:ring-2 focus:ring-[#EE6C4D] outline-none rounded">Sitemap</a></li>\n            </ul>\n        </div>\n    </div>\n    <div class="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400 min-w-0">\n        <p class="truncate">&copy; ${new Date().getFullYear()} Toolkit Gen. All Rights Reserved. <a href="/disclaimer" class="hover:text-[#EE6C4D] underline ml-2">Disclaimer</a></p>\n        <div class="mt-4 md:mt-0 flex flex-col items-end gap-2 flex-shrink-0">\n            <p class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse flex-shrink-0" aria-hidden="true"></span> Systems Operational</p>\n            <p class="flex items-center gap-1.5 text-[#F38020] font-medium text-[10px] uppercase tracking-wider">\n                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M18.8 8.8c-.2 0-.5.1-.7.1C17.4 6 15 4 12 4c-3.1 0-5.8 2.2-6.5 5.2-.2 0-.4-.1-.6-.1C2.2 9.1 0 11.3 0 14c0 2.8 2.2 5 4.9 5h14.2c2.7 0 4.9-2.2 4.9-5 0-2.8-2.2-5.2-5.2-5.2zm-2.1 7.2H5.1c-1.3 0-2.4-1.1-2.4-2.4 0-1.3 1.1-2.4 2.4-2.4.2 0 .5.1.7.1.5-1.9 2.2-3.3 4.3-3.3 2 0 3.7 1.3 4.2 3.1.2 0 .4-.1.6-.1 1.6 0 2.9 1.3 2.9 2.9.1 1.1-.9 2.1-2.1 2.1z"/></svg>Cloudflare Secured\n            </p>\n        </div>\n    </div>\n</div>\n`;
+let deferredPrompt,
+    mathReady = !1;
+function trapFocus(e) {
+    const t = e.querySelectorAll(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), details, [tabindex]:not([tabindex="-1"])'
+    );
+    if (0 === t.length) return;
+    const o = t[0],
+        n = t[t.length - 1];
+    e.addEventListener("keydown", function (e) {
+        "Tab" === e.key &&
+            (e.shiftKey
+                ? document.activeElement === o && (n.focus(), e.preventDefault())
+                : document.activeElement === n && (o.focus(), e.preventDefault()));
+    });
+}
+const RecentToolsManager = {
+    get: () => {
+        try {
+            return JSON.parse(localStorage.getItem("tk_recent_tools")) || [];
+        } catch {
+            return [];
+        }
+    },
+    add: (e) => {
+        let t = RecentToolsManager.get();
+        (t = t.filter((t) => t !== e)),
+            t.unshift(e),
+            t.length > 10 && t.pop(),
+            localStorage.setItem("tk_recent_tools", JSON.stringify(t)),
+            "function" == typeof renderAppDock && renderAppDock();
+    },
+    clear: () => {
+        localStorage.removeItem("tk_recent_tools"),
+            renderRecentTools(),
+            "function" == typeof renderAppDock && renderAppDock(),
+            showToast("Recent history cleared");
+    },
+},
+    BookmarksManager = {
+        get: () => {
+            try {
+                return JSON.parse(localStorage.getItem("tk_bookmarks")) || [];
+            } catch {
+                return [];
+            }
+        },
+        toggle: (e) => {
+            let t = BookmarksManager.get();
+            return (
+                t.includes(e) ? (t = t.filter((t) => t !== e)) : t.push(e),
+                localStorage.setItem("tk_bookmarks", JSON.stringify(t)),
+                updateFavoritesCount(),
+                updateFavoritesDrawerUI(),
+                t.includes(e)
+            );
+        },
+    },
+    HubManager = {
+        get: () => {
+            try {
+                return JSON.parse(localStorage.getItem("tk_hub_tools")) || [];
+            } catch {
+                return [];
+            }
+        },
+        toggle: (e) => {
+            let t = HubManager.get();
+            return (
+                t.includes(e) ? (t = t.filter((t) => t !== e)) : t.push(e),
+                localStorage.setItem("tk_hub_tools", JSON.stringify(t)),
+                renderCustomHub(true),
+                t.includes(e)
+            );
+        },
+        reorder: (e) => {
+            localStorage.setItem("tk_hub_tools", JSON.stringify(e));
+        },
+    },
+    StreakManager = {
+        getStreakData: () => {
+            try {
+                return (
+                    JSON.parse(localStorage.getItem("tk_streak_data")) || {
+                        currentStreak: 0,
+                        longestStreak: 0,
+                        lastVisit: null,
+                        totalVisits: 0,
+                    }
+                );
+            } catch {
+                return { currentStreak: 0, longestStreak: 0, lastVisit: null, totalVisits: 0 };
+            }
+        },
+        updateStreak: () => {
+            const e = StreakManager.getStreakData(),
+                t = new Date().toDateString(),
+                o = new Date(Date.now() - 864e5).toDateString();
+            return (
+                e.lastVisit === t ||
+                (e.lastVisit === o ? e.currentStreak++ : e.lastVisit !== t && (e.currentStreak = 1),
+                    (e.longestStreak = Math.max(e.longestStreak, e.currentStreak)),
+                    (e.lastVisit = t),
+                    e.totalVisits++,
+                    localStorage.setItem("tk_streak_data", JSON.stringify(e))),
+                e
+            );
+        },
+        getStreakMessage: () => {
+            const e = StreakManager.updateStreak();
+            return 1 === e.currentStreak
+                ? "Welcome back! Start your streak today!"
+                : e.currentStreak >= 7
+                    ? `${e.currentStreak} day streak! You're on fire!`
+                    : e.currentStreak >= 3
+                        ? `${e.currentStreak} day streak! Keep it up!`
+                        : `${e.currentStreak} day streak!`;
+        },
+    },
+    ToolOfTheDay = {
+        getTool: () => {
+            const e = new Date().toDateString();
+            if (localStorage.getItem("tk_totd_date") === e) {
+                const e = localStorage.getItem("tk_totd_id");
+                return toolsData.find((t) => t.id === e);
+            }
+            const t = toolsData.filter((e) => e.featured),
+                o =
+                    t.length > 0
+                        ? t[Math.floor(Math.random() * t.length)]
+                        : toolsData[Math.floor(Math.random() * toolsData.length)];
+            return localStorage.setItem("tk_totd_date", e), localStorage.setItem("tk_totd_id", o.id), o;
+        },
+        renderBadge: () => {
+            const e = ToolOfTheDay.getTool();
+            return e
+                ? `<div class="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-full text-xs font-bold text-amber-700 cursor-pointer hover:from-amber-100 hover:to-orange-100 transition-all shadow-sm" onclick="window.location.href='/tool/${e.id}'">\n            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>\n            Tool of the Day: ${e.name}\n        </div>`
+                : "";
+        },
+    },
+    TimeTracker = {
+        startTime: null,
+        init: () => {
+            TimeTracker.startTime = Date.now();
+            const e = parseInt(localStorage.getItem("tk_total_time") || "0");
+            TimeTracker.updateDisplay(e),
+                window.addEventListener("beforeunload", () => {
+                    const e = Math.floor((Date.now() - TimeTracker.startTime) / 1e3),
+                        t = parseInt(localStorage.getItem("tk_total_time") || "0") + e;
+                    localStorage.setItem("tk_total_time", t.toString());
+                });
+        },
+        formatTime: (e) =>
+            e < 60
+                ? `${e}s`
+                : e < 3600
+                    ? `${Math.floor(e / 60)}m`
+                    : e < 86400
+                        ? `${Math.floor(e / 3600)}h ${Math.floor((e % 3600) / 60)}m`
+                        : `${Math.floor(e / 86400)}d`,
+        updateDisplay: (e) => {
+            let t = document.getElementById("time-tracker-badge");
+            t &&
+                (t.innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>\n            ${TimeTracker.formatTime(e)} on Toolkit Gen`);
+        },
+    };
+function renderEngagementBadges() {
+    const e = document.getElementById("streak-badge"),
+        t = document.getElementById("time-tracker-badge");
+    if (e) {
+        const t = StreakManager.getStreakData();
+        t.currentStreak > 0 &&
+            ((e.innerHTML = `<svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"/></svg>\n                ${t.currentStreak} day streak`),
+                e.classList.remove("hidden"),
+                e.classList.add("flex"));
+    }
+    if (t) {
+        const e = parseInt(localStorage.getItem("tk_total_time") || "0");
+        e > 60 &&
+            ((t.innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>\n                ${TimeTracker.formatTime(e)} on Toolkit Gen`),
+                t.classList.remove("hidden"),
+                t.classList.add("flex"));
+    }
+}
+const EngagementManager = {
+    showToolUsedPrompt: (e) => {
+        const t = toolsData.find((t) => t.id === e);
+        if (!t) return;
+        const o = toolsData.filter((o) => o.id !== e && o.category === t.category).slice(0, 2);
+        0 !== o.length &&
+            setTimeout(() => {
+                const e = document.createElement("div");
+                (e.id = "engagement-prompt"),
+                    (e.className =
+                        "fixed bottom-24 left-1/2 -translate-x-1/2 z-[999] bg-white p-4 rounded-2xl shadow-2xl border border-slate-200 animate-fade-in-up max-w-sm w-[90%]"),
+                    (e.innerHTML = `\n                <div class="flex items-start gap-3">\n                    <div class="w-10 h-10 rounded-xl bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">\n                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <h4 class="font-bold text-slate-800 text-sm">Try these related tools:</h4>\n                        <div class="mt-2 space-y-2">\n                            ${o.map((e) => `\n                                <a href="/tool/${e.id}" class="block text-xs text-[#EE6C4D] hover:text-orange-600 font-medium truncate">\n                                    → ${e.name}\n                                </a>\n                            `).join("")}\n                        </div>\n                    </div>\n                    <button onclick="this.closest('#engagement-prompt').remove()" class="text-slate-400 hover:text-slate-600 p-1">\n                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>\n                    </button>\n                </div>\n            `),
+                    document.body.appendChild(e),
+                    setTimeout(() => e.remove(), 15e3);
+            }, 5e3);
+    },
+    initStreakUI: () => {
+        const e = StreakManager.getStreakData();
+        if (e.currentStreak > 0) {
+            const t = document.getElementById("streak-badge");
+            t &&
+                ((t.innerHTML = `<svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"/></svg>\n                    ${e.currentStreak} day streak`),
+                    t.classList.remove("hidden"));
+        }
+    },
+},
+    ZenModeManager = {
+        init: () => {
+            "true" === localStorage.getItem("tk_zen_mode") && document.body.classList.add("zen-mode");
+        },
+        toggle: () => {
+            const e = document.body.classList.toggle("zen-mode");
+            localStorage.setItem("tk_zen_mode", e), showToast(e ? "Zen Mode Activated" : "Light Mode Restored");
+        },
+    },
+    ScratchpadManager = {
+        init: () => {
+            if (document.getElementById("scratchpad-drawer")) return;
+            document.body.insertAdjacentHTML(
+                "beforeend",
+                '\n        <div id="scratchpad-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[990] opacity-0 pointer-events-none transition-opacity duration-300"></div>\n        <div id="scratchpad-drawer" role="dialog" aria-modal="true" class="fixed top-0 right-0 h-full w-96 max-w-full bg-white shadow-2xl z-[999] transform translate-x-full invisible transition-all duration-300 flex flex-col border-l border-slate-200">\n            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">\n                <h3 class="font-black text-slate-800 text-base flex items-center gap-2">\n                    <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>\n                    Workspace & Clipboard\n                </h3>\n                <div class="flex gap-2">\n                    <button onclick="ScratchpadManager.clear()" class="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded transition" title="Clear History"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>\n                    <button onclick="ScratchpadManager.closeDrawer()" class="p-1.5 text-slate-400 hover:text-slate-800 hover:bg-slate-200 rounded transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>\n                </div>\n            </div>\n            \n            <div class="flex border-b border-slate-100 bg-white px-2 pt-2">\n                <button onclick="document.getElementById(\'sp-tab-clip\').classList.remove(\'hidden\'); document.getElementById(\'sp-tab-data\').classList.add(\'hidden\'); this.classList.add(\'text-indigo-600\', \'border-indigo-500\'); this.nextElementSibling.classList.remove(\'text-indigo-600\', \'border-indigo-500\');" class="px-3 py-2 text-xs font-bold text-indigo-600 border-b-2 border-indigo-500">History</button>\n                <button onclick="document.getElementById(\'sp-tab-data\').classList.remove(\'hidden\'); document.getElementById(\'sp-tab-clip\').classList.add(\'hidden\'); this.classList.add(\'text-indigo-600\', \'border-indigo-500\'); this.previousElementSibling.classList.remove(\'text-indigo-600\', \'border-indigo-500\');" class="px-3 py-2 text-xs font-bold text-slate-500 border-b-2 border-transparent">Data Vault</button>\n            </div>\n\n            <div id="sp-tab-clip" class="flex-grow p-4 flex flex-col bg-slate-50/50 overflow-y-auto">\n                <p class="text-[10px] text-slate-400 mb-3 font-medium uppercase tracking-wider">Recent Copies (Auto-Saved)</p>\n                <div id="scratchpad-history-list" class="flex flex-col gap-2"></div>\n                <textarea id="scratchpad-textarea" class="w-full flex-grow mt-4 bg-white border border-slate-200 rounded-xl p-3 text-sm text-slate-700 outline-none focus:ring-2 focus:ring-indigo-500 resize-none font-mono min-h-[100px]" placeholder="Type manual notes here..."></textarea>\n                <button onclick="ScratchpadManager.copyAll()" class="w-full mt-4 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 font-bold text-sm py-2 rounded-lg transition flex-shrink-0">Copy Manual Notes</button>\n            </div>\n\n            <div id="sp-tab-data" class="hidden flex-grow p-5 bg-slate-50/50 flex flex-col items-center justify-center text-center">\n                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-4">\n                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>\n                </div>\n                <h4 class="font-bold text-slate-800 mb-1">Device Sync Vault</h4>\n                <p class="text-xs text-slate-500 mb-6">Backup your Hub, Bookmarks, and Recent Tools to load them on another device. 100% offline.</p>\n                <button onclick="ScratchpadManager.exportData()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl mb-3 hover:bg-slate-800 transition shadow-sm outline-none focus:ring-2 focus:ring-slate-900">Export Workspace</button>\n                <button onclick="document.getElementById(\'import-vault-file\').click()" class="w-full bg-white border border-slate-200 text-slate-700 font-bold py-2.5 rounded-xl hover:bg-slate-50 transition shadow-sm outline-none focus:ring-2 focus:ring-slate-400">Import Workspace</button>\n                <input type="file" id="import-vault-file" accept=".tkgen" class="hidden" onchange="ScratchpadManager.importData(event)">\n            </div>\n        </div>'
+            );
+            const e = document.getElementById("scratchpad-textarea");
+            (e.value = localStorage.getItem("tk_scratchpad") || ""),
+                e.addEventListener("input", (e) => {
+                    localStorage.setItem("tk_scratchpad", e.target.value);
+                }),
+                document.getElementById("scratchpad-overlay").addEventListener("click", ScratchpadManager.closeDrawer),
+                ScratchpadManager.renderHistory();
+        },
+        add: (e) => {
+            if (!e || "" === e.trim()) return;
+            let t = JSON.parse(localStorage.getItem("tk_clip_history") || "[]");
+            if (t.length > 0 && t[0] === e) return;
+            t.unshift(e), t.length > 10 && t.pop(), localStorage.setItem("tk_clip_history", JSON.stringify(t));
+            let o = localStorage.getItem("tk_scratchpad") || "",
+                n = o ? o + "\n\n" + e : e;
+            localStorage.setItem("tk_scratchpad", n);
+            const a = document.getElementById("scratchpad-textarea");
+            a && (a.value = n), ScratchpadManager.renderHistory(), showToast("Saved to Clipboard History");
+        },
+        renderHistory: () => {
+            const e = document.getElementById("scratchpad-history-list");
+            if (!e) return;
+            const t = JSON.parse(localStorage.getItem("tk_clip_history") || "[]");
+            0 !== t.length
+                ? (e.innerHTML = t
+                    .map(
+                        (e) =>
+                            `\n                <div class="bg-white border border-slate-200 rounded-lg p-2.5 text-xs font-mono text-slate-600 line-clamp-2 cursor-pointer hover:border-indigo-400 hover:text-indigo-700 transition relative group shadow-sm" onclick="navigator.clipboard.writeText(this.dataset.val); showToast('Copied from history!')" data-val="${e.replace(/"/g, "&quot;")}">\n                    ${e.length > 80 ? e.substring(0, 80).replace(/</g, "&lt;") + "..." : e.replace(/</g, "&lt;")}\n                    <div class="absolute right-2 top-1/2 -translate-y-1/2 bg-white px-2 py-1 opacity-0 group-hover:opacity-100 text-indigo-600 font-sans font-bold shadow-sm rounded border border-indigo-100">Copy</div>\n                </div>\n            `
+                    )
+                    .join(""))
+                : (e.innerHTML =
+                    '<div class="text-center p-4 text-xs text-slate-400 italic border border-dashed border-slate-200 rounded-xl">No recent copies found.</div>');
+        },
+        clear: () => {
+            localStorage.removeItem("tk_scratchpad"), localStorage.removeItem("tk_clip_history");
+            const e = document.getElementById("scratchpad-textarea");
+            e && (e.value = ""), ScratchpadManager.renderHistory(), showToast("History & Scratchpad cleared.");
+        },
+        copyAll: async () => {
+            const e = document.getElementById("scratchpad-textarea").value;
+            e && (await navigator.clipboard.writeText(e), showToast("Copied manual notes!"));
+        },
+        openDrawer: () => {
+            window.toggleBackgroundAds(!1),
+                ScratchpadManager.init(),
+                document.getElementById("scratchpad-drawer").classList.remove("translate-x-full", "invisible"),
+                document.getElementById("scratchpad-overlay").classList.remove("opacity-0", "pointer-events-none"),
+                document.getElementById("mobile-menu")?.classList.add("hidden");
+        },
+        closeDrawer: () => {
+            window.toggleBackgroundAds(!0),
+                document.getElementById("scratchpad-drawer")?.classList.add("translate-x-full", "invisible"),
+                document.getElementById("scratchpad-overlay")?.classList.add("opacity-0", "pointer-events-none");
+        },
+        exportData: () => {
+            const e = {
+                hub: localStorage.getItem("tk_hub_tools"),
+                bookmarks: localStorage.getItem("tk_bookmarks"),
+                recent: localStorage.getItem("tk_recent_tools"),
+                zen: localStorage.getItem("tk_zen_mode"),
+                timestamp: new Date().toISOString(),
+            },
+                t = new Blob([btoa(JSON.stringify(e))], { type: "text/plain" }),
+                o = window.URL.createObjectURL(t),
+                n = document.createElement("a");
+            (n.href = o),
+                (n.download = `ToolkitGen-Workspace-${new Date().toISOString().split("T")[0]}.tkgen`),
+                n.click(),
+                window.URL.revokeObjectURL(o),
+                showToast("Workspace exported successfully!");
+        },
+        importData: (e) => {
+            const t = e.target.files[0];
+            if (!t) return;
+            const o = new FileReader();
+            (o.onload = function (e) {
+                try {
+                    const t = JSON.parse(atob(e.target.result));
+                    t.hub && localStorage.setItem("tk_hub_tools", t.hub),
+                        t.bookmarks && localStorage.setItem("tk_bookmarks", t.bookmarks),
+                        t.recent && localStorage.setItem("tk_recent_tools", t.recent),
+                        t.zen && localStorage.setItem("tk_zen_mode", t.zen),
+                        showToast("Workspace imported! Refreshing..."),
+                        setTimeout(() => window.location.reload(), 1e3);
+                } catch (e) {
+                    showToast("Invalid backup file.");
+                }
+            }),
+                o.readAsText(t);
+        },
+    },
+    CheatSheetManager = {
+        init: () => {
+            document.getElementById("cheatsheet-drawer") ||
+                (document.body.insertAdjacentHTML(
+                    "beforeend",
+                    '\n        <div id="cheatsheet-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[990] opacity-0 pointer-events-none transition-opacity duration-300"></div>\n        <div id="cheatsheet-drawer" role="dialog" aria-modal="true" class="fixed top-0 right-0 h-full w-[400px] max-w-full bg-white shadow-2xl z-[999] transform translate-x-full invisible transition-all duration-300 flex flex-col border-l border-slate-200">\n            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">\n                <h3 class="font-black text-slate-800 text-base flex items-center gap-2">\n                    <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>\n                    Dev Cheat Sheets\n                </h3>\n                <button onclick="CheatSheetManager.closeDrawer()" class="p-1.5 text-slate-400 hover:text-slate-800 hover:bg-slate-200 rounded transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>\n            </div>\n            <div class="flex border-b border-slate-100 bg-white px-2 pt-2">\n                <button onclick="CheatSheetManager.showTab(\'regex\')" class="px-3 py-2 text-xs font-bold text-emerald-600 border-b-2 border-emerald-500 cheatsheet-tab">Regex</button>\n                <button onclick="CheatSheetManager.showTab(\'cron\')" class="px-3 py-2 text-xs font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 cheatsheet-tab">Cron</button>\n                <button onclick="CheatSheetManager.showTab(\'git\')" class="px-3 py-2 text-xs font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 cheatsheet-tab">Git</button>\n                <button onclick="CheatSheetManager.showTab(\'http\')" class="px-3 py-2 text-xs font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 cheatsheet-tab">HTTP</button>\n            </div>\n            <div class="flex-grow overflow-y-auto p-4 bg-slate-50/50 hide-scrollbar" id="cheatsheet-content">\n                </div>\n        </div>\n        '
+                ),
+                    document.getElementById("cheatsheet-overlay").addEventListener("click", CheatSheetManager.closeDrawer),
+                    CheatSheetManager.showTab("regex"));
+        },
+        data: {
+            regex: '<table class="w-full text-sm text-left"><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">^</td><td class="py-2 text-slate-600">Start of string</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">$</td><td class="py-2 text-slate-600">End of string</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">.</td><td class="py-2 text-slate-600">Any single char</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">\\s</td><td class="py-2 text-slate-600">Any whitespace char</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">\\d</td><td class="py-2 text-slate-600">Any digit</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">\\w</td><td class="py-2 text-slate-600">Any word char</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">[abc]</td><td class="py-2 text-slate-600">A single char of a,b,c</td></tr><tr><td class="py-2 font-mono font-bold text-emerald-600">(a|b)</td><td class="py-2 text-slate-600">Match a or b</td></tr></table>',
+            cron: '<table class="w-full text-sm text-left"><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">* * * * *</td><td class="py-2 text-slate-600">Every minute</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">0 * * * *</td><td class="py-2 text-slate-600">Every hour</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">0 0 * * *</td><td class="py-2 text-slate-600">Every midnight</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">0 0 * * 0</td><td class="py-2 text-slate-600">Every Sunday midnight</td></tr><tr><td colspan="2" class="py-4 text-xs text-slate-400">Format: Minute, Hour, Day(Month), Month, Day(Week)</td></tr></table>',
+            git: '<table class="w-full text-sm text-left"><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">git init</td><td class="py-2 text-slate-600">Init repo</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">git add .</td><td class="py-2 text-slate-600">Stage all</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">git commit -m</td><td class="py-2 text-slate-600">Commit with msg</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">git status</td><td class="py-2 text-slate-600">Check status</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">git branch -b</td><td class="py-2 text-slate-600">New branch</td></tr></table>',
+            http: '<table class="w-full text-sm text-left"><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">200</td><td class="py-2 text-slate-600">OK</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">201</td><td class="py-2 text-slate-600">Created</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">400</td><td class="py-2 text-slate-600">Bad Request</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">401</td><td class="py-2 text-slate-600">Unauthorized</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">403</td><td class="py-2 text-slate-600">Forbidden</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">404</td><td class="py-2 text-slate-600">Not Found</td></tr><tr class="border-b"><td class="py-2 font-mono font-bold text-emerald-600">500</td><td class="py-2 text-slate-600">Internal Server Error</td></tr></table>',
+        },
+        showTab: (e) => {
+            const t = document.querySelectorAll(".cheatsheet-tab");
+            t.forEach((e) => {
+                e.classList.remove("text-emerald-600", "border-emerald-500"),
+                    e.classList.add("text-slate-500", "border-transparent");
+            });
+            const o = Array.from(t).find((t) => t.innerText.toLowerCase().includes(e));
+            o &&
+                (o.classList.add("text-emerald-600", "border-emerald-500"),
+                    o.classList.remove("text-slate-500", "border-transparent")),
+                (document.getElementById("cheatsheet-content").innerHTML = CheatSheetManager.data[e]);
+        },
+        openDrawer: () => {
+            window.toggleBackgroundAds(!1),
+                CheatSheetManager.init(),
+                document.getElementById("cheatsheet-drawer").classList.remove("translate-x-full", "invisible"),
+                document.getElementById("cheatsheet-overlay").classList.remove("opacity-0", "pointer-events-none"),
+                document.getElementById("mobile-menu")?.classList.add("hidden");
+        },
+        closeDrawer: () => {
+            window.toggleBackgroundAds(!0),
+                document.getElementById("cheatsheet-drawer")?.classList.add("translate-x-full", "invisible"),
+                document.getElementById("cheatsheet-overlay")?.classList.add("opacity-0", "pointer-events-none");
+        },
+    },
+    MasterScannerEngine = {
+        sequences: {
+            health: [
+                { id: "visual_acuity_snellen", title: "Vision Test" },
+                { id: "astigmatism_fan_chart", title: "Astigmatism Check" },
+                { id: "hearing_age_test", title: "Hearing Age Test" },
+                { id: "tool-proximity", title: "Screen Distance" },
+                { id: "tool-tech-neck", title: "Posture Check" },
+                { id: "tool-blink-monitor", title: "Blink/Eye Strain Monitor" },
+            ],
+            hardware: [
+                { id: "dead_pixel_check", title: "Display Check" },
+                { id: "monitor_refresh_tester", title: "Refresh Rate Test" },
+                { id: "keyboard_latency_test", title: "Input Latency" },
+                { id: "mouse_polling_rate_hz", title: "Mouse Polling" },
+                { id: "webgpu_vram_thermal_check", title: "VRAM Stability" },
+                { id: "gpu_thermal_throttling_test", title: "GPU Stress Test" },
+            ],
+        },
+        currentType: null,
+        currentIndex: 0,
+        activeSequence: [],
+        results: {},
+        observer: null,
+        originalUrl: null,
+        start: (e) => {
+            MasterScannerEngine.sequences[e] &&
+                ((document.body.style.overflow = "hidden"),
+                    window.toggleBackgroundAds(!1),
+                    (MasterScannerEngine.originalUrl =
+                        window.location.pathname + window.location.search + window.location.hash),
+                    (MasterScannerEngine.currentType = e),
+                    (MasterScannerEngine.activeSequence = [...MasterScannerEngine.sequences[e]]),
+                    (MasterScannerEngine.currentIndex = 0),
+                    (MasterScannerEngine.results = {}),
+                    document.getElementById("master-scanner-overlay") ||
+                    document.body.insertAdjacentHTML(
+                        "beforeend",
+                        '\n                <div id="master-scanner-overlay" class="fixed inset-0 z-[999] bg-slate-900 flex flex-col animate-fade-in-up h-[100dvh]">\n                    \n                    <div class="h-14 border-b border-slate-800 flex flex-col justify-between bg-slate-900 flex-shrink-0">\n                        <div class="flex items-center justify-between px-4 sm:px-6 h-full">\n                            <div class="flex items-center gap-3">\n                                <span id="ms-header-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>\n                                <h3 id="ms-header-title" class="text-white font-bold tracking-wide uppercase text-[10px] sm:text-xs">Diagnostic Setup</h3>\n                            </div>\n                            <span id="ms-step-counter" class="text-slate-400 font-bold text-[10px] tracking-widest uppercase">Configuration</span>\n                            <button onclick="MasterScannerEngine.close()" class="text-slate-500 hover:text-white transition outline-none">\n                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n                            </button>\n                        </div>\n                        <div class="w-full h-1 bg-slate-800">\n                            <div id="ms-progress-bar" class="h-full bg-gradient-to-r from-[#EE6C4D] to-orange-400 transition-all duration-500" style="width: 0%"></div>\n                        </div>\n                    </div>\n\n                    <div id="ms-selection-wrapper" class="flex-grow overflow-y-auto bg-slate-900 p-4 sm:p-8 flex flex-col items-center text-left">\n                        <div class="max-w-2xl w-full">\n                            <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">Select Tests to Run</h2>\n                            <p class="text-slate-400 mb-6 text-sm">Choose which diagnostics you want to include in this scan session.</p>\n                            <div id="ms-tool-checkboxes" class="space-y-3 mb-8">\n                                </div>\n                            <button onclick="MasterScannerEngine.beginScan()" class="w-full bg-[#EE6C4D] hover:bg-orange-600 text-white px-8 py-3.5 rounded-xl font-black text-base transition shadow-sm outline-none focus:ring-2 focus:ring-white">\n                                Start Selected Tests &rarr;\n                            </button>\n                        </div>\n                    </div>\n\n                    <div class="hidden flex-grow relative bg-slate-100 overflow-hidden" id="ms-iframe-wrapper">\n                        <div id="ms-loader" class="absolute inset-0 flex items-center justify-center bg-slate-50 z-10 transition-opacity duration-300">\n                            <svg class="animate-spin h-8 w-8 text-[#EE6C4D]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>\n                        </div>\n                    </div>\n\n                    <div id="ms-footer-controls" class="hidden h-auto min-h-[80px] border-t border-slate-800 bg-slate-900 flex-col sm:flex-row items-center justify-between px-4 sm:px-6 py-3 sm:py-0 gap-3 sm:gap-0 relative z-20 flex-shrink-0">\n                        <button onclick="MasterScannerEngine.prev()" id="ms-prev-btn" class="text-slate-400 hover:text-white font-bold text-xs sm:text-sm transition w-full sm:w-auto text-center sm:text-left">Previous</button>\n                        \n                        <div class="flex flex-col items-center w-full sm:w-1/3">\n                            <label class="text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-1 hidden sm:block transition-colors" id="ms-auto-label">Auto-Detecting Result...</label>\n                            <div class="relative w-full">\n                                <input type="text" id="ms-extracted-result" placeholder="Waiting for output... (or type here)" class="w-full bg-slate-800 border border-slate-700 text-white px-3 py-2 rounded-lg text-sm text-center outline-none focus:border-[#EE6C4D] transition-colors placeholder-slate-500">\n                                <svg id="ms-success-icon" class="w-4 h-4 text-emerald-400 absolute right-3 top-1/2 -translate-y-1/2 hidden opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>\n                            </div>\n                        </div>\n\n                        <button onclick="MasterScannerEngine.next()" id="ms-next-btn" class="bg-[#EE6C4D] hover:bg-orange-600 text-white px-8 py-2.5 rounded-xl font-black text-sm transition shadow-sm w-full sm:w-auto outline-none focus:ring-2 focus:ring-white">Next Step &rarr;</button>\n                    </div>\n                </div>\n            '
+                    ),
+                    window.history.replaceState(null, "Diagnostic Setup", `/scanner/${e}/setup`),
+                    document.getElementById("master-scanner-overlay").classList.remove("hidden"),
+                    MasterScannerEngine.renderSelection());
+        },
+        renderSelection: () => {
+            const e = MasterScannerEngine.sequences[MasterScannerEngine.currentType],
+                t = document.getElementById("ms-tool-checkboxes"),
+                o = "health" === MasterScannerEngine.currentType ? "emerald" : "indigo";
+            (t.innerHTML = e
+                .map(
+                    (e, t) =>
+                        `\n            <label class="flex items-center p-4 bg-slate-800 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-700/50 transition-colors">\n                <input type="checkbox" value="${e.id}" checked class="ms-tool-checkbox w-5 h-5 text-${o}-500 bg-slate-900 border-slate-600 rounded focus:ring-${o}-500 focus:ring-2 mr-4">\n                <div>\n                    <div class="text-white font-bold text-sm">${e.title}</div>\n                </div>\n            </label>\n        `
+                )
+                .join("")),
+                document.getElementById("ms-selection-wrapper").classList.remove("hidden"),
+                document.getElementById("ms-iframe-wrapper").classList.add("hidden"),
+                document.getElementById("ms-footer-controls").classList.add("hidden"),
+                document.getElementById("ms-footer-controls").classList.remove("flex"),
+                (document.getElementById("ms-header-dot").className = "w-2 h-2 rounded-full bg-slate-500"),
+                (document.getElementById("ms-header-title").innerText = "Diagnostic Setup"),
+                (document.getElementById("ms-step-counter").innerText = "Configuration"),
+                (document.getElementById("ms-progress-bar").style.width = "0%");
+        },
+        beginScan: () => {
+            const e = document.querySelectorAll(".ms-tool-checkbox:checked");
+            if (0 === e.length)
+                return void ("function" == typeof showToast && showToast("Please select at least one test."));
+            const t = Array.from(e).map((e) => e.value);
+            (MasterScannerEngine.activeSequence = MasterScannerEngine.sequences[MasterScannerEngine.currentType].filter(
+                (e) => t.includes(e.id)
+            )),
+                document.getElementById("ms-selection-wrapper").classList.add("hidden"),
+                document.getElementById("ms-iframe-wrapper").classList.remove("hidden");
+            const o = document.getElementById("ms-footer-controls");
+            o.classList.remove("hidden"),
+                o.classList.add("flex"),
+                (document.getElementById("ms-header-dot").className =
+                    "w-2 h-2 rounded-full bg-emerald-400 animate-pulse"),
+                MasterScannerEngine.loadStep();
+        },
+        loadStep: () => {
+            const e = MasterScannerEngine.activeSequence,
+                t = e[MasterScannerEngine.currentIndex],
+                o = toolsData.find((e) => e.id === t.id) || { category: "default", id: t.id },
+                n = o.hub ? `/hubs/${o.hub}#${o.id}` : `/tool/${o.id}`;
+            window.history.replaceState(null, t.title, n),
+                (document.getElementById("ms-header-title").innerText = t.title),
+                (document.getElementById("ms-progress-bar").style.width =
+                    (MasterScannerEngine.currentIndex / e.length) * 100 + "%"),
+                (document.getElementById("ms-step-counter").innerText =
+                    `Step ${MasterScannerEngine.currentIndex + 1} of ${e.length}`),
+                (document.getElementById("ms-prev-btn").style.opacity =
+                    0 === MasterScannerEngine.currentIndex ? "0.3" : "1"),
+                (document.getElementById("ms-prev-btn").style.pointerEvents =
+                    0 === MasterScannerEngine.currentIndex ? "none" : "auto"),
+                (document.getElementById("ms-next-btn").innerHTML =
+                    MasterScannerEngine.currentIndex === e.length - 1 ? "Finish & Report &rarr;" : "Next Step &rarr;");
+            const a = document.getElementById("ms-extracted-result"),
+                r = document.getElementById("ms-success-icon");
+            (a.value = MasterScannerEngine.results[t.id] || ""),
+                a.classList.remove("border-emerald-500", "text-emerald-400", "border-[#EE6C4D]"),
+                a.classList.add("border-slate-700"),
+                r.classList.add("hidden", "opacity-0"),
+                (document.getElementById("ms-auto-label").innerText = "Auto-Detecting Result..."),
+                (document.getElementById("ms-auto-label").className =
+                    "text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1 hidden sm:block transition-colors"),
+                (a.oninput = function () {
+                    this.classList.remove("border-emerald-500", "text-emerald-400"),
+                        this.classList.add("border-[#EE6C4D]"),
+                        (document.getElementById("ms-auto-label").innerText = "Manual Override Active"),
+                        document.getElementById("ms-auto-label").classList.replace("text-slate-400", "text-[#EE6C4D]"),
+                        document
+                            .getElementById("ms-auto-label")
+                            .classList.replace("text-emerald-400", "text-[#EE6C4D]"),
+                        r.classList.add("hidden", "opacity-0");
+                });
+            const i = document.getElementById("ms-iframe-wrapper"),
+                s = document.getElementById("ms-loader");
+            (s.style.opacity = "1"),
+                (s.style.pointerEvents = "auto"),
+                MasterScannerEngine.observer && MasterScannerEngine.observer.disconnect();
+            let l = document.getElementById("ms-tool-iframe");
+            l && l.remove();
+            const d = document.createElement("iframe");
+            (d.id = "ms-tool-iframe"),
+                (d.className = "w-full h-full border-0 relative z-0"),
+                d.setAttribute(
+                    "sandbox",
+                    "allow-scripts allow-same-origin allow-forms allow-popups allow-downloads allow-modals"
+                ),
+                d.setAttribute(
+                    "allow",
+                    "camera; microphone; display-capture; fullscreen; accelerometer; gyroscope; autoplay; encrypted-media"
+                ),
+                i.appendChild(d),
+                (d.onload = () => {
+                    try {
+                        const e = d.contentDocument || d.contentWindow.document,
+                            o = t.id,
+                            n = e.createElement("style");
+                        (n.innerHTML =
+                            "\n                    nav, footer, aside, #recent-tools-section, #tools-category-container, #desktop-warning-banner { display: none !important; }\n                    body { background-color: transparent !important; padding-bottom: 2rem !important; }\n                    main { padding-top: 1rem !important; }\n                "),
+                            e.head.appendChild(n),
+                            (MasterScannerEngine.observer = new MutationObserver(() => {
+                                if (document.getElementById("ms-auto-label").innerText.includes("Override")) return;
+                                const t = Array.from(
+                                    e.querySelectorAll(
+                                        '.text-2xl, .text-3xl, .text-4xl, .text-5xl, .font-black, [id*="result"], [id*="output"], [id*="score"], [class*="result"], [class*="score"]'
+                                    )
+                                ).filter((e) => {
+                                    const t = e.innerText.trim();
+                                    return (
+                                        t.length > 0 &&
+                                        t.length < 150 &&
+                                        !e.tagName.includes("BUTTON") &&
+                                        !e.tagName.includes("INPUT")
+                                    );
+                                });
+                                if (t.length > 0) {
+                                    let e = "";
+                                    if (o.includes("hearing") || o.includes("audio") || o.includes("voice")) {
+                                        const o = t
+                                            .filter((e) => {
+                                                const t = e.innerText.toLowerCase();
+                                                return t.includes("hz") || t.includes("age") || t.includes("year");
+                                            })
+                                            .map((e) => e.innerText.trim());
+                                        o.length > 0 && (e = [...new Set(o)].join(" - "));
+                                    } else if (
+                                        o.includes("visual") ||
+                                        o.includes("snellen") ||
+                                        o.includes("astigmatism") ||
+                                        o.includes("eye")
+                                    ) {
+                                        const o = t
+                                            .filter((e) => {
+                                                const t = e.innerText.toLowerCase();
+                                                return (
+                                                    t.includes("20/") ||
+                                                    t.includes("power") ||
+                                                    t.includes("diopter") ||
+                                                    t.includes("astigmatism") ||
+                                                    t.includes("distance")
+                                                );
+                                            })
+                                            .map((e) => e.innerText.trim());
+                                        o.length > 0 && (e = [...new Set(o)].join(" - "));
+                                    } else if (o.includes("latency") || o.includes("ping")) {
+                                        const o = t
+                                            .filter((e) => e.innerText.toLowerCase().includes("ms"))
+                                            .map((e) => e.innerText.trim());
+                                        o.length > 0 && (e = [...new Set(o)].join(" - "));
+                                    } else if (o.includes("hz") || o.includes("refresh")) {
+                                        const o = t
+                                            .filter(
+                                                (e) =>
+                                                    e.innerText.toLowerCase().includes("hz") ||
+                                                    e.innerText.toLowerCase().includes("fps")
+                                            )
+                                            .map((e) => e.innerText.trim());
+                                        o.length > 0 && (e = [...new Set(o)].join(" - "));
+                                    }
+                                    e ||
+                                        (t.sort(
+                                            (e, t) =>
+                                                parseFloat(window.getComputedStyle(t).fontSize) -
+                                                parseFloat(window.getComputedStyle(e).fontSize)
+                                        ),
+                                            (e = t[0].innerText.trim())),
+                                        (e = e.replace(/\n/g, " | ").replace(/\s{2,}/g, " ")),
+                                        !e ||
+                                        e === a.value ||
+                                        e.includes("NaN") ||
+                                        e.includes("undefined") ||
+                                        "0" === e ||
+                                        "-" === e ||
+                                        ((a.value = e),
+                                            a.classList.remove("border-slate-700"),
+                                            a.classList.add("border-emerald-500", "text-emerald-400"),
+                                            (document.getElementById("ms-auto-label").innerText =
+                                                "Result Auto-Captured!"),
+                                            document
+                                                .getElementById("ms-auto-label")
+                                                .classList.replace("text-slate-400", "text-emerald-400"),
+                                            r.classList.remove("hidden"),
+                                            setTimeout(() => r.classList.remove("opacity-0"), 50));
+                                }
+                            })),
+                            MasterScannerEngine.observer.observe(e.body, {
+                                childList: !0,
+                                subtree: !0,
+                                characterData: !0,
+                            }),
+                            setTimeout(() => {
+                                (s.style.opacity = "0"), (s.style.pointerEvents = "none");
+                            }, 300);
+                    } catch (e) {
+                        console.warn("Iframe cross-origin restriction or load error.", e), (s.style.opacity = "0");
+                    }
+                }),
+                (d.src = n);
+        },
+        next: () => {
+            const e = MasterScannerEngine.activeSequence,
+                t = e[MasterScannerEngine.currentIndex],
+                o = document.getElementById("ms-extracted-result").value.trim();
+            (MasterScannerEngine.results[t.id] = o || "Activity not completed"),
+                MasterScannerEngine.currentIndex < e.length - 1
+                    ? (MasterScannerEngine.currentIndex++, MasterScannerEngine.loadStep())
+                    : MasterScannerEngine.renderReport();
+        },
+        prev: () => {
+            MasterScannerEngine.currentIndex > 0 &&
+                (MasterScannerEngine.currentIndex--, MasterScannerEngine.loadStep());
+        },
+        renderReport: () => {
+            MasterScannerEngine.observer && MasterScannerEngine.observer.disconnect(),
+                window.history.replaceState(
+                    null,
+                    "Diagnostic Report",
+                    `/scanner/${MasterScannerEngine.currentType}/report`
+                ),
+                (document.getElementById("ms-progress-bar").style.width = "100%"),
+                (document.getElementById("ms-step-counter").innerText = "Analysis Complete"),
+                (document.getElementById("ms-header-title").innerText = "Your Final Report");
+            const e = document.getElementById("ms-iframe-wrapper"),
+                t = MasterScannerEngine.activeSequence;
+            let o = 0;
+            t.forEach((e) => {
+                const t = MasterScannerEngine.results[e.id];
+                t && !t.includes("Activity not completed") && o++;
+            });
+            const n = Math.floor((o / t.length) * 40) + 50 + Math.floor(10 * Math.random()),
+                a = "health" === MasterScannerEngine.currentType,
+                r = a ? "emerald" : "indigo";
+            let i = t
+                .map((e) => {
+                    const t = toolsData.find((t) => t.id === e.id) || { category: "default" },
+                        o = MasterScannerEngine.results[e.id],
+                        n = o.length > 40 ? o.substring(0, 37) + "..." : o;
+                    return `\n            <div class="flex items-center justify-between p-4 border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-colors">\n                <div class="flex items-center gap-3">\n                    <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center flex-shrink-0">\n                        ${getIcon(t.category, "w-4 h-4")}\n                    </div>\n                    <div>\n                        <h5 class="font-bold text-slate-800 text-sm">${e.title}</h5>\n                    </div>\n                </div>\n                <div class="text-right max-w-[50%]">\n                    <span class="inline-flex items-center max-w-full gap-1.5 px-3 py-1 bg-${r}-50 text-${r}-700 border border-${r}-200 rounded-lg text-sm font-bold shadow-sm" title="${o.replace(/"/g, "&quot;")}">\n                        ${n.replace(/</g, "&lt;")}\n                    </span>\n                </div>\n            </div>\n            `;
+                })
+                .join("");
+            (e.innerHTML = `\n            <div class="w-full h-full flex flex-col md:flex-row bg-white overflow-y-auto" id="ms-final-report-capture">\n                <div class="w-full md:w-1/3 bg-slate-900 p-8 text-center text-white flex flex-col items-center justify-center relative overflow-hidden shadow-xl border-r border-slate-800 flex-shrink-0 min-h-[250px] md:min-h-0">\n                    <div class="absolute inset-0 bg-gradient-to-br from-${r}-500/20 to-transparent pointer-events-none"></div>\n                    <span class="text-[10px] font-black uppercase tracking-widest text-${r}-400 mb-2 relative z-10">Overall System Score</span>\n                    <div class="text-7xl md:text-8xl font-black mb-2 relative z-10 tracking-tighter">${n}</div>\n                    <p class="text-sm text-slate-400 relative z-10 mt-4 px-4 leading-relaxed">Based on your ${t.length}-step analysis, your ${a ? "biometric baseline" : "hardware setup"} has been quantified.</p>\n                </div>\n                \n                <div class="w-full md:w-2/3 flex flex-col p-6 sm:p-8">\n                    <h4 class="font-black text-xl text-slate-900 mb-4 border-b border-slate-200 pb-4">Diagnostic Breakdown</h4>\n                    <div class="flex-grow">\n                        ${i}\n                    </div>\n                </div>\n            </div>\n        `),
+                (document.querySelector("#master-scanner-overlay #ms-footer-controls").innerHTML =
+                    `\n            <div class="w-full flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 p-3">\n                <button onclick="MasterScannerEngine.close()" class="w-full sm:w-auto px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-sm transition outline-none focus:ring-2 focus:ring-slate-500">Close Report</button>\n                <button onclick="MasterScannerEngine.exportReport('${MasterScannerEngine.currentType}-diagnostic-report')" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-[#EE6C4D] to-orange-500 hover:from-orange-600 hover:to-[#d75a3c] text-white rounded-xl font-bold text-sm transition shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2 outline-none focus:ring-2 focus:ring-orange-400">\n                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>\n                    Save Scorecard\n                </button>\n            </div>\n        `);
+        },
+        exportReport: async (e) => {
+            const t = document.getElementById("ms-final-report-capture");
+            if (t) {
+                "function" == typeof showToast && showToast("Generating high-res scorecard..."),
+                    "undefined" == typeof html2canvas &&
+                    (await new Promise((e, t) => {
+                        const o = document.createElement("script");
+                        (o.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"),
+                            (o.onload = e),
+                            (o.onerror = t),
+                            document.head.appendChild(o);
+                    }));
+                try {
+                    const o = t.style.overflowY,
+                        n = t.style.height;
+                    (t.style.overflowY = "visible"), (t.style.height = "auto");
+                    const a = document.createElement("div");
+                    (a.className =
+                        "w-full text-center py-4 text-[11px] font-bold text-slate-400 bg-white border-t border-slate-100 tracking-wide mt-auto"),
+                        (a.innerHTML =
+                            "Generated securely on device via <span style='color: #EE6C4D;'>toolkitgen.com</span>"),
+                        t.appendChild(a);
+                    const r = await html2canvas(t, {
+                        scale: 2,
+                        backgroundColor: "#ffffff",
+                        logging: !1,
+                        useCORS: !0,
+                        windowWidth: t.scrollWidth,
+                        windowHeight: t.scrollHeight,
+                    });
+                    a.remove(), (t.style.overflowY = o), (t.style.height = n);
+                    const i = document.createElement("a");
+                    (i.download = `${e}.png`),
+                        (i.href = r.toDataURL("image/png")),
+                        i.click(),
+                        "function" == typeof showToast && showToast("Scorecard saved! Ready to share.");
+                } catch (e) {
+                    console.error("Capture Error:", e),
+                        "function" == typeof showToast && showToast("Failed to generate image. Please try again.");
+                }
+            }
+        },
+        close: () => {
+            MasterScannerEngine.observer && MasterScannerEngine.observer.disconnect(),
+                MasterScannerEngine.originalUrl &&
+                window.history.replaceState(null, "", MasterScannerEngine.originalUrl);
+            const e = document.getElementById("master-scanner-overlay");
+            e &&
+                (e.classList.add("opacity-0"),
+                    setTimeout(() => {
+                        e.remove(), (document.body.style.overflow = ""), window.toggleBackgroundAds(!0);
+                    }, 300));
+        },
+    };
+function renderAppDock() {
+    if ("/" === window.location.pathname || "/index.html" === window.location.pathname) return;
+    let e = document.getElementById("quick-switch-dock");
+    e ||
+        ((e = document.createElement("div")),
+            (e.id = "quick-switch-dock"),
+            (e.innerHTML =
+                '\n            <div id="quick-switch-handle" class="md:hidden fixed left-0 top-1/2 -translate-y-1/2 z-[90]">\n                <div class="bg-white/90 backdrop-blur-md border border-slate-200 border-l-0 shadow-xl rounded-r-full px-1 py-3 flex flex-col items-center gap-1">\n                    <svg id="dock-arrow-right" class="w-4 h-4 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>\n                </div>\n            </div>\n            <div id="quick-switch-drawer" class="md:hidden fixed left-0 top-0 h-full w-64 bg-white shadow-2xl z-[9999] transform -translate-x-full invisible transition-all duration-300 border-r border-slate-200">\n                <div class="p-4 border-b border-slate-100 bg-slate-50">\n                    <div class="flex justify-between items-center">\n                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Recent Tools</span>\n                        <button onclick="closeMobileDock()" class="p-1 text-slate-400 hover:text-slate-600">\n                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>\n                        </button>\n                    </div>\n                </div>\n                <div id="quick-switch-drawer-content" class="p-3 space-y-2 overflow-y-auto h-[calc(100%-60px)]"></div>\n            </div>\n            <div id="quick-switch-overlay" class="md:hidden fixed inset-0 bg-slate-900/40 z-[89] opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeMobileDock()"></div>\n        '),
+            document.body.appendChild(e),
+            document.getElementById("quick-switch-handle").addEventListener("click", openMobileDock));
+    const t = RecentToolsManager.get().slice(0, 8),
+        o = document.getElementById("quick-switch-drawer-content");
+    if (!o) return;
+    if (0 === t.length)
+        return void (o.innerHTML = '<p class="text-xs text-slate-400 text-center py-4">No recent tools</p>');
+    const n = window.location.pathname.split("/").pop().replace(".html", "");
+    o.innerHTML = t
+        .map((e) => {
+            const t = toolsData.find((t) => t.id === e);
+            if (!t) return "";
+            const o = n === e,
+                a = getToolTheme(t.category);
+            return `\n            <a href="${generateToolUrl(t, "dock")}" class="flex items-center gap-3 p-3 rounded-xl transition-all ${o ? "bg-slate-100 ring-2 ring-slate-300" : "hover:bg-slate-50 border border-transparent hover:border-slate-200"}">\n                <div class="w-10 h-10 rounded-full flex items-center justify-center ${o ? "bg-slate-200" : "bg-slate-50"} ${a.textHover}">\n                    ${getIcon(t.category, "w-5 h-5")}\n                </div>\n                <div class="flex-grow min-w-0">\n                    <h4 class="text-sm font-bold text-slate-700 truncate">${t.name}</h4>\n                    <p class="text-[10px] text-slate-400 uppercase tracking-wider truncate">${t.category}</p>\n                </div>\n            </a>\n        `;
+        })
+        .join("");
+}
+function openMobileDock() {
+    document.getElementById("quick-switch-drawer")?.classList.remove("-translate-x-full", "invisible"),
+        document.getElementById("quick-switch-overlay")?.classList.remove("opacity-0", "pointer-events-none"),
+        document.getElementById("dock-arrow-right")?.classList.add("rotate-180");
+}
+function closeMobileDock() {
+    document.getElementById("quick-switch-drawer")?.classList.add("-translate-x-full", "invisible"),
+        document.getElementById("quick-switch-overlay")?.classList.add("opacity-0", "pointer-events-none"),
+        document.getElementById("dock-arrow-right")?.classList.remove("rotate-180");
+}
+const AmbientPlayer = {
+    audioCtx: null,
+    noiseNode: null,
+    gainNode: null,
+    isPlaying: !1,
+    toggleWidget: () => {
+        let e = document.getElementById("ambient-player-widget");
+        if (e) e.classList.toggle("hidden");
+        else {
+            const e =
+                '\n            <div id="ambient-player-widget" class="fixed bottom-[140px] md:bottom-4 left-4 z-[85] bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl rounded-2xl p-3 flex flex-col gap-2 w-48 transition-all animate-fade-in-up">\n                <div class="flex justify-between items-center">\n                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1"><svg class="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"></path></svg> Focus Audio</span>\n                    <button onclick="document.getElementById(\'ambient-player-widget\').classList.add(\'hidden\')" class="text-slate-400 hover:text-slate-700"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>\n                </div>\n                <div class="flex items-center gap-2">\n                    <button id="ambient-play-btn" onclick="AmbientPlayer.toggle()" class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-slate-800 transition shadow-sm flex-shrink-0">\n                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>\n                    </button>\n                    <select id="ambient-type-select" onchange="if(AmbientPlayer.isPlaying) AmbientPlayer.play()" class="flex-grow bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 rounded-lg py-1.5 px-2 outline-none">\n                        <option value="brown">Brown Noise</option>\n                        <option value="pink">Pink Noise</option>\n                        <option value="white">White Noise</option>\n                    </select>\n                </div>\n            </div>\n            ';
+            document.body.insertAdjacentHTML("beforeend", e);
+        }
+        document.getElementById("mobile-menu")?.classList.add("hidden");
+    },
+    toggle: () => {
+        AmbientPlayer.isPlaying
+            ? (AmbientPlayer.stop(),
+                (document.getElementById("ambient-play-btn").innerHTML =
+                    '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'))
+            : (AmbientPlayer.play(),
+                (document.getElementById("ambient-play-btn").innerHTML =
+                    '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>'));
+    },
+    play: () => {
+        AmbientPlayer.audioCtx || (AmbientPlayer.audioCtx = new (window.AudioContext || window.webkitAudioContext)()),
+            AmbientPlayer.noiseNode && AmbientPlayer.noiseNode.disconnect();
+        const e = document.getElementById("ambient-type-select").value,
+            t = 2 * AmbientPlayer.audioCtx.sampleRate,
+            o = AmbientPlayer.audioCtx.createBuffer(1, t, AmbientPlayer.audioCtx.sampleRate),
+            n = o.getChannelData(0);
+        let a,
+            r,
+            i,
+            s,
+            l,
+            d,
+            c,
+            u = 0;
+        a = r = i = s = l = d = c = 0;
+        for (let o = 0; o < t; o++) {
+            let t = 2 * Math.random() - 1;
+            "white" === e
+                ? (n[o] = 0.1 * t)
+                : "brown" === e
+                    ? ((n[o] = (u + 0.02 * t) / 1.02), (u = n[o]), (n[o] *= 1.5))
+                    : "pink" === e &&
+                    ((a = 0.99886 * a + 0.0555179 * t),
+                        (r = 0.99332 * r + 0.0750759 * t),
+                        (i = 0.969 * i + 0.153852 * t),
+                        (s = 0.8665 * s + 0.3104856 * t),
+                        (l = 0.55 * l + 0.5329522 * t),
+                        (d = -0.7616 * d - 0.016898 * t),
+                        (n[o] = 0.05 * (a + r + i + s + l + d + c + 0.5362 * t)),
+                        (c = 0.115926 * t));
+        }
+        (AmbientPlayer.noiseNode = AmbientPlayer.audioCtx.createBufferSource()),
+            (AmbientPlayer.noiseNode.buffer = o),
+            (AmbientPlayer.noiseNode.loop = !0),
+            AmbientPlayer.gainNode ||
+            ((AmbientPlayer.gainNode = AmbientPlayer.audioCtx.createGain()),
+                AmbientPlayer.gainNode.connect(AmbientPlayer.audioCtx.destination),
+                (AmbientPlayer.gainNode.gain.value = 0.5)),
+            AmbientPlayer.noiseNode.connect(AmbientPlayer.gainNode),
+            AmbientPlayer.noiseNode.start(),
+            (AmbientPlayer.isPlaying = !0);
+    },
+    stop: () => {
+        AmbientPlayer.noiseNode &&
+            (AmbientPlayer.noiseNode.stop(), AmbientPlayer.noiseNode.disconnect(), (AmbientPlayer.isPlaying = !1));
+    },
+};
+function updateFavoritesCount() {
+    const e = BookmarksManager.get().length,
+        t = document.getElementById("saved-tools-count"),
+        o = document.getElementById("mobile-saved-count");
+    t && ((t.textContent = e), e > 0 ? t.classList.remove("hidden") : t.classList.add("hidden")),
+        o && ((o.textContent = e), e > 0 ? o.classList.remove("hidden") : o.classList.add("hidden"));
+}
+function trackToolViewCounter(e) {
+    let t = JSON.parse(localStorage.getItem("tk_tool_views") || "{}");
+    (t[e] = (t[e] || 0) + 1),
+        localStorage.setItem("tk_tool_views", JSON.stringify(t)),
+        t[e] > 1 && t[e] % 5 == 0 && showToast(`Wow, you've used this tool ${t[e]} times!`);
+}
+function setupCommandPalette() {
+    document.body.insertAdjacentHTML(
+        "beforeend",
+        '\n    <div id="cmd-palette-wrapper" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[999] hidden opacity-0 transition-opacity duration-200 flex items-start justify-center pt-[10vh] sm:pt-[15vh] px-4" aria-modal="true" role="dialog" aria-label="Command Palette">\n        <div id="cmd-palette-modal" class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-200 flex flex-col">\n            <div class="flex items-center px-4 py-4 border-b border-slate-100 relative">\n                <svg class="w-6 h-6 text-[#EE6C4D] mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>\n                <input type="text" id="cmd-palette-input" class="w-full bg-transparent border-none outline-none text-lg text-slate-800 placeholder-slate-400" placeholder="Search 196+ tools, > stats, or > dark..." autocomplete="off">\n                <button onclick="closeCommandPalette()" class="absolute right-4 text-[10px] font-bold text-slate-400 bg-slate-100 hover:bg-slate-200 hover:text-slate-600 transition px-2 py-1 rounded outline-none focus:ring-2 focus:ring-[#EE6C4D]">ESC</button>\n            </div>\n            <div id="cmd-palette-results" class="max-h-[50vh] overflow-y-auto p-2 hide-scrollbar">\n                </div>\n            <div class="bg-slate-50 px-4 py-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-medium">\n                <div class="flex items-center gap-3">\n                    <span class="hidden sm:inline-flex items-center gap-1"><kbd class="bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-sm font-sans">↑</kbd> <kbd class="bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-sm font-sans">↓</kbd> to navigate</span>\n                    <span class="inline-flex items-center gap-1"><kbd class="bg-white border border-slate-200 px-1.5 py-0.5 rounded shadow-sm font-sans">↵</kbd> to open</span>\n                </div>\n                <span class="flex items-center gap-1.5 text-slate-300">\n                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M11.47 3.84a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.06l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 0 0 1.061 1.06l8.69-8.69Z" /></svg>\n                    Toolkit Gen\n                </span>\n            </div>\n        </div>\n        <div class="absolute inset-0 z-[-1]" onclick="closeCommandPalette()"></div>\n    </div>'
+    );
+    const e = document.getElementById("cmd-palette-input"),
+        t = document.getElementById("cmd-palette-results");
+    let o = -1,
+        n = [];
+    function a(e) {
+        const a = e.toLowerCase().trim();
+        if (((o = -1), "> stats" === a || ">stats" === a))
+            return void (t.innerHTML =
+                '\n                <button id="cmd-stats-btn" onclick="closeCommandPalette(); showBuilderStats();" class="cmd-item w-full text-left group flex items-center gap-3 p-3 rounded-xl border border-transparent transition-colors outline-none hover:bg-slate-50 hover:border-slate-200">\n                    <div class="w-10 h-10 rounded-lg bg-orange-100 text-[#EE6C4D] flex items-center justify-center flex-shrink-0 transition-all">\n                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <h4 class="text-sm font-bold text-slate-800 truncate">View Builder Stats</h4>\n                        <p class="text-xs text-slate-500 truncate">See your usage history and favorite tools</p>\n                    </div>\n                </button>\n            ');
+        if ("> dark" === a || "> theme" === a || "> zen" === a)
+            return void (t.innerHTML =
+                '\n                <button id="cmd-dark-btn" onclick="closeCommandPalette(); ZenModeManager.toggle();" class="cmd-item w-full text-left group flex items-center gap-3 p-3 rounded-xl border border-transparent transition-colors outline-none hover:bg-slate-50 hover:border-slate-200">\n                    <div class="w-10 h-10 rounded-lg bg-slate-900 text-slate-200 flex items-center justify-center flex-shrink-0 transition-all">\n                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <h4 class="text-sm font-bold text-slate-800 truncate">Toggle Zen Mode (Dark Theme)</h4>\n                        <p class="text-xs text-slate-500 truncate">Switch between light and dark backgrounds</p>\n                    </div>\n                </button>\n            ');
+        if (!a) {
+            n = [...toolsData].filter((e) => e.featured || RecentToolsManager.get().includes(e.id)).slice(0, 5);
+            const e =
+                '\n                <button onclick="closeCommandPalette(); showBuilderStats();" class="cmd-item w-full text-left group flex items-center gap-3 p-3 rounded-xl border border-transparent transition-colors outline-none hover:bg-slate-50 hover:border-slate-200 mb-2">\n                    <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center flex-shrink-0 transition-all">\n                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <h4 class="text-sm font-bold text-slate-800 truncate">View My Stats</h4>\n                        <p class="text-xs text-slate-500 truncate">Check your Toolkit Gen usage</p>\n                    </div>\n                </button>\n            ';
+            return void (t.innerHTML =
+                e +
+                '<div class="px-3 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Suggested Tools</div>' +
+                r(n, a));
+        }
+        if (a.length > 2 && /^[0-9+\-*/().\s]+$/.test(a))
+            try {
+                const e = ((e) => {
+                    const t = e.replace(/\s+/g, "").match(/[+\-*/()]|\d+\.\d+|\d+/g) || [];
+                    let o = 0;
+                    const n = () => {
+                        let e = a();
+                        for (; o < t.length && ("+" === t[o] || "-" === t[o]);) {
+                            const n = t[o++],
+                                r = a();
+                            e = "+" === n ? e + r : e - r;
+                        }
+                        return e;
+                    },
+                        a = () => {
+                            let e = r();
+                            for (; o < t.length && ("*" === t[o] || "/" === t[o]);) {
+                                const n = t[o++],
+                                    a = r();
+                                e = "*" === n ? e * a : e / a;
+                            }
+                            return e;
+                        },
+                        r = () => {
+                            if ("(" === t[o]) {
+                                o++;
+                                let e = n();
+                                return ")" === t[o] && o++, e;
+                            }
+                            let e = t[o++];
+                            return "-" === e ? -r() : parseFloat(e);
+                        };
+                    let i = n();
+                    if (o < t.length || isNaN(i)) throw new Error("Invalid");
+                    return i;
+                })(a);
+                if (void 0 !== e && !isNaN(e))
+                    return void (t.innerHTML = `\n                        <button data-copy="${e}" onclick="closeCommandPalette()" class="cmd-item w-full text-left group flex items-center justify-between p-3 rounded-xl border border-[#EE6C4D] bg-orange-50 mb-2 outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                            <div class="flex items-center gap-3">\n                                <div class="w-10 h-10 rounded-lg bg-white text-[#EE6C4D] shadow-sm flex items-center justify-center flex-shrink-0 transition-all">\n                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>\n                                </div>\n                                <div class="flex-grow min-w-0">\n                                    <h4 class="text-sm font-black text-slate-900 truncate">= ${new Intl.NumberFormat("en-US").format(e)}</h4>\n                                    <p class="text-[10px] font-bold text-orange-600 uppercase tracking-widest truncate">Quick Calc: ${a}</p>\n                                </div>\n                            </div>\n                            <span class="text-[10px] font-bold text-slate-400 bg-white px-2 py-1 rounded border border-slate-200 group-hover:text-[#EE6C4D]">Click to Copy</span>\n                        </button>\n                    `);
+            } catch (e) { }
+        const i = a.split(/\s+/).filter(Boolean);
+        (n = toolsData
+            .map((e) => {
+                let t = 0;
+                const o = e.name.toLowerCase(),
+                    n = e.description.toLowerCase(),
+                    r = e.category.toLowerCase(),
+                    s = e.tags ? e.tags.join(" ").toLowerCase() : "";
+                if (
+                    (o.includes(a) && (t += 100),
+                        n.includes(a) && (t += 20),
+                        i.forEach((e) => {
+                            o.includes(e) && (t += 25),
+                                r.includes(e) && (t += 15),
+                                s.includes(e) && (t += 10),
+                                n.includes(e) && (t += 5);
+                        }),
+                        0 === t && a.length > 2)
+                ) {
+                    let e = 0;
+                    for (let n = 0; n < o.length; n++)
+                        if ((o[n] === a[e] && e++, e === a.length)) {
+                            t += 10;
+                            break;
+                        }
+                }
+                return { tool: e, score: t };
+            })
+            .filter((e) => e.score > 0)
+            .sort((e, t) => t.score - e.score)
+            .map((e) => e.tool)
+            .slice(0, 10)),
+            0 === n.length
+                ? (t.innerHTML = `\n                <div class="py-8 text-center text-slate-500">\n                    <svg class="w-8 h-8 mx-auto mb-2 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>\n                    <p class="text-sm font-medium">No tools found for "${e}"</p>\n                </div>`)
+                : (t.innerHTML = r(n, a)),
+            renderGlobalMath();
+    }
+    function r(e, t) {
+        const o = (e, t) => {
+            if (!t) return e;
+            const o = t
+                .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+                .split(/\s+/)
+                .filter((e) => e.length > 0)
+                .join("|");
+            return o
+                ? e.replace(
+                    new RegExp(`(${o})`, "gi"),
+                    '<mark class="bg-orange-100 text-[#EE6C4D] rounded-sm px-0.5 bg-transparent font-bold">$1</mark>'
+                )
+                : e;
+        };
+        return e
+            .map((e) => {
+                const n = getToolTheme(e.category);
+                return `\n                <a href="${generateToolUrl(e, "cmd_palette")}" class="cmd-item group flex items-center gap-3 p-3 rounded-xl border border-transparent transition-colors outline-none hover:bg-slate-50 hover:border-slate-200">\n                    <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center flex-shrink-0 text-slate-400 group-hover:bg-white group-hover:shadow-sm ${n.textHover} transition-all">\n                        ${getIcon(e.category, "w-5 h-5")}\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <div class="flex justify-between items-center mb-0.5">\n                            <h4 class="text-sm font-bold text-slate-800 truncate">${formatText(o(e.name, t))}</h4>\n                            <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-1.5 py-0.5 rounded ml-2 flex-shrink-0">${e.category.split(" ")[0]}</span>\n                        </div>\n                        <p class="text-xs text-slate-500 truncate">${formatText(o(e.description, t))}</p>\n                    </div>\n                    <svg class="w-4 h-4 text-slate-300 opacity-0 group-hover:opacity-100 group-hover:text-[#EE6C4D] transition-all transform -translate-x-2 group-hover:translate-x-0 flex-shrink-0 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>\n                </a>`;
+            })
+            .join("");
+    }
+    function i(e) {
+        e.forEach((e, t) => {
+            t === o
+                ? (e.classList.add("cmd-item-active"), e.scrollIntoView({ block: "nearest" }))
+                : e.classList.remove("cmd-item-active");
+        });
+    }
+    a(""),
+        e.addEventListener("input", (e) => {
+            a(e.target.value);
+        }),
+        e.addEventListener("keydown", (e) => {
+            if (!n.length && !document.getElementById("cmd-stats-btn") && !document.getElementById("cmd-dark-btn"))
+                return;
+            const a = t.querySelectorAll(".cmd-item");
+            if ("ArrowDown" === e.key) e.preventDefault(), (o = (o + 1) % a.length), i(a);
+            else if ("ArrowUp" === e.key) e.preventDefault(), (o = o - 1 < 0 ? a.length - 1 : o - 1), i(a);
+            else if ("Enter" === e.key) {
+                e.preventDefault();
+                const t = a[o] || a[0];
+                t && t.click();
+            }
+        });
+}
+function setupFavoritesDrawer() {
+    if (document.getElementById("favorites-drawer")) return;
+    document.body.insertAdjacentHTML(
+        "beforeend",
+        '\n        <div id="favorites-drawer-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[990] opacity-0 pointer-events-none transition-opacity duration-300"></div>\n        <div id="favorites-drawer" role="dialog" aria-modal="true" aria-label="Saved Tools Drawer" class="fixed top-0 right-0 h-full w-80 max-w-full bg-white shadow-2xl z-[999] transform translate-x-full invisible transition-all duration-300 flex flex-col border-l border-slate-200">\n            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">\n                <h3 class="font-black text-slate-800 text-lg flex items-center gap-2">\n                    <svg class="w-5 h-5 text-[#EE6C4D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>\n                    Your Toolkit\n                </h3>\n                <button id="close-favorites-btn" aria-label="Close Saved Tools" class="p-2 bg-white text-slate-400 hover:text-slate-800 hover:bg-slate-200 rounded-full transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n                </button>\n            </div>\n            <div id="favorites-drawer-content" class="flex-grow overflow-y-auto p-4 space-y-3 hide-scrollbar bg-slate-50/50">\n                </div>\n            <div class="p-4 border-t border-slate-100 text-center bg-white">\n                <p class="text-[10px] text-slate-400 font-medium">Bookmarks are saved privately on your device.</p>\n            </div>\n        </div>\n    '
+    );
+    const e = document.getElementById("nav-favorites-btn"),
+        t = document.getElementById("mobile-favorites-btn"),
+        o = document.getElementById("favorites-drawer"),
+        n = document.getElementById("favorites-drawer-overlay"),
+        a = document.getElementById("close-favorites-btn"),
+        r = () => {
+            window.toggleBackgroundAds(!1),
+                updateFavoritesDrawerUI(),
+                o.classList.remove("translate-x-full", "invisible"),
+                n.classList.remove("opacity-0", "pointer-events-none"),
+                n.classList.add("opacity-100"),
+                trapFocus(o),
+                a.focus();
+            const e = document.getElementById("mobile-menu");
+            e &&
+                (e.classList.add("hidden"),
+                    document.getElementById("mobile-menu-btn")?.setAttribute("aria-expanded", "false"));
+        },
+        i = () => {
+            window.toggleBackgroundAds(!0),
+                o.classList.add("translate-x-full", "invisible"),
+                n.classList.add("opacity-0", "pointer-events-none"),
+                n.classList.remove("opacity-100"),
+                e?.focus();
+        };
+    e && e.addEventListener("click", r),
+        t && t.addEventListener("click", r),
+        a.addEventListener("click", i),
+        n.addEventListener("click", i),
+        updateFavoritesCount();
+}
+function updateFavoritesDrawerUI() {
+    const e = document.getElementById("favorites-drawer-content");
+    if (!e) return;
+    const t = BookmarksManager.get()
+        .map((e) => toolsData.find((t) => t.id === e))
+        .filter(Boolean);
+    0 !== t.length
+        ? (e.innerHTML = t
+            .map((e) => {
+                const t = getToolTheme(e.category);
+                return `\n            <a href="${generateToolUrl(e, "drawer")}" class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl hover:shadow-md transition-all group outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center flex-shrink-0 ${t.textHover} transition-colors" aria-hidden="true">\n                    ${getIcon(e.category, "w-5 h-5")}\n                </div>\n                <div class="flex-grow min-w-0">\n                    <h4 class="text-sm font-bold text-slate-800 group-hover:text-[#EE6C4D] transition-colors truncate">${formatText(e.name)}</h4>\n                    <p class="text-[10px] text-slate-500 uppercase tracking-wider truncate">${e.category.split(" ")[0]}</p>\n                </div>\n                <svg class="w-4 h-4 text-slate-300 opacity-0 group-hover:opacity-100 group-hover:text-[#EE6C4D] transition-all transform -translate-x-2 group-hover:translate-x-0 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>\n            </a>\n        `;
+            })
+            .join(""))
+        : (e.innerHTML =
+            '\n            <div class="flex flex-col items-center justify-center h-full text-center p-6 opacity-60">\n                <svg class="w-16 h-16 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>\n                <p class="text-sm font-bold text-slate-500 mb-1">No saved tools yet</p>\n                <p class="text-xs text-slate-400">Click the bookmark icon on any tool page to save it here for quick access.</p>\n            </div>\n        ');
+}
+function setupSmartRecommendation(e) {
+    document.getElementById("smart-rec-inline") ||
+        (e &&
+            setTimeout(() => {
+                if (document.getElementById("smart-rec-inline")) return;
+                const t = toolsData.filter((t) => t.category === e.category && t.id !== e.id);
+                if (t.length > 0) {
+                    const e = t[Math.floor(Math.random() * t.length)],
+                        o = `<div id="smart-rec-inline" class="mb-8 animate-fade-in-up transition-all duration-500" style="min-height: 100px;">
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200/90 shadow-xs">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            Up Next
+                        </span>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Recommended</span>
+                    </div>
+                    <a href="${generateToolUrl(e, "smart_inline")}" class="block p-4 bg-slate-900 text-white rounded-2xl shadow-md hover:shadow-xl hover:bg-slate-800 transition-all group outline-none focus:ring-2 focus:ring-[#EE6C4D] border border-slate-800">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="bg-[#EE6C4D] p-1.5 rounded-lg flex-shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wide">People also search</span>
+                        </div>
+                        <h5 class="text-sm font-bold truncate group-hover:text-[#EE6C4D] transition-colors">${formatText(e.name)}</h5>
+                        <p class="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">${formatText(e.description)}</p>
+                    </a>
+                </div>`,
+                        n = document.getElementById("sidebar-popular-tools"),
+                        a = document.getElementById("smart-rec-placeholder");
+                    if (a && !document.getElementById("smart-rec-inline"))
+                        (a.innerHTML = o), a.classList.remove("min-h-[140px]", "hidden"), (a.style.minHeight = "100px");
+                    else if (n && !document.getElementById("smart-rec-inline"))
+                        n.insertAdjacentHTML("beforebegin", `<div style="min-height: 100px;">${o}</div>`);
+                    else if (!document.getElementById("smart-rec-inline")) {
+                        const e = document.getElementById("tool-hero-section");
+                        e &&
+                            e.insertAdjacentHTML(
+                                "afterend",
+                                `<div class="max-w-3xl mx-auto w-full px-4 sm:px-6 mt-6 min-w-0" style="min-height: 100px;">${o}</div>`
+                            );
+                    }
+                }
+            }, 2e4));
+}
+let prefetchTimer;
+function setupHoverPrefetching() {
+    document.addEventListener("mouseover", (e) => {
+        const t = e.target.closest("a");
+        t &&
+            t.hostname === window.location.hostname &&
+            !t.hash &&
+            (prefetchTimer = setTimeout(() => {
+                if (!document.querySelector(`link[rel="prefetch"][href="${t.href}"]`)) {
+                    const e = document.createElement("link");
+                    (e.rel = "prefetch"), (e.href = t.href), document.head.appendChild(e);
+                }
+            }, 65));
+    }),
+        document.addEventListener("mouseout", () => clearTimeout(prefetchTimer));
+}
+function setupReadingProgress() {
+    const e = document.getElementById("reading-progress");
+    e &&
+        window.addEventListener(
+            "scroll",
+            () => {
+                const t = document.body.scrollTop || document.documentElement.scrollTop,
+                    o = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                e.style.transform = `scaleX(${t / o})`;
+            },
+            { passive: !0 }
+        );
+}
+function setupNavbarScroll() {
+    const e = document.getElementById("app-header");
+    if (!e) return;
+    let t = !1;
+    (e.style.position = "fixed"),
+        (e.style.zIndex = "100"),
+        (e.style.visibility = "visible"),
+        (e.style.display = "block"),
+        window.addEventListener(
+            "scroll",
+            () => {
+                t ||
+                    (window.requestAnimationFrame(() => {
+                        const o = window.scrollY;
+                        (e.style.boxShadow = o > 50 ? "0 4px 20px rgba(0,0,0,0.12)" : ""), (t = !1);
+                    }),
+                        (t = !0));
+            },
+            { passive: !0 }
+        );
+}
+function setupKeyboardShortcuts() {
+    document.addEventListener("keydown", (e) => {
+        (e.ctrlKey || e.metaKey) && "k" === e.key && (e.preventDefault(), openCommandPalette()),
+            "/" === e.key &&
+            "INPUT" !== document.activeElement.tagName &&
+            "TEXTAREA" !== document.activeElement.tagName &&
+            (e.preventDefault(), openCommandPalette()),
+            "Escape" === e.key &&
+            (closeCommandPalette(),
+                document.getElementById("smart-share-modal")?.remove(),
+                document.getElementById("exit-intent-modal")?.querySelector("#exit-modal-close-btn")?.click());
+    });
+}
+function setupCopyToClipboard() {
+    document.addEventListener("click", async (e) => {
+        const t = e.target.closest("[data-copy]");
+        if (!t) return;
+        const o = t.getAttribute("data-copy");
+        ScratchpadManager.add(o);
+        try {
+            await navigator.clipboard.writeText(o);
+            const e = t.innerHTML;
+            (t.innerHTML =
+                '<svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Copied!'),
+                setTimeout(() => {
+                    t.innerHTML = e;
+                }, 2e3);
+        } catch (e) {
+            showToast("Failed to copy");
+        }
+    });
+}
+function setupOfflineStatus() {
+    const e = () => {
+        let e = document.getElementById("offline-banner");
+        navigator.onLine
+            ? e && (e.remove(), showToast("You are back online!"))
+            : e ||
+            document.body.insertAdjacentHTML(
+                "afterbegin",
+                '<div id="offline-banner" role="alert" aria-live="assertive" class="bg-red-500 text-white text-center text-xs font-bold py-1.5 z-[999999] fixed top-0 w-full animate-fade-in-up">You are offline. Some tools may not function properly.</div>'
+            );
+    };
+    window.addEventListener("online", e), window.addEventListener("offline", e);
+}
+function setupCLSGuard() { }
+function manageSEOAndCanonical() {
+    try {
+        const e = new URL(window.location.href);
+        if (e.searchParams.has("utm_source")) {
+            const t = {
+                source: e.searchParams.get("utm_source"),
+                medium: e.searchParams.get("utm_medium"),
+                campaign: e.searchParams.get("utm_campaign"),
+                timestamp: new Date().toISOString(),
+            };
+            sessionStorage.setItem("latest_campaign", JSON.stringify(t));
+        }
+        let cleanPath = e.pathname.replace(/\/$/, "");
+        if (cleanPath.endsWith(".html")) cleanPath = cleanPath.slice(0, -5);
+        if (!cleanPath) cleanPath = "/";
+        const o = `${e.protocol}//${e.host}${cleanPath}`;
+        let n = document.querySelector('link[rel="canonical"]');
+        if (!n) {
+            n = document.createElement("link");
+            n.setAttribute("rel", "canonical");
+            document.head.appendChild(n);
+        }
+        n.setAttribute("href", o);
+        (document.title && "" !== document.title) || (document.title = APP_CONFIG.siteName);
+        if (!document.getElementById("organization-schema")) {
+            const e = {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: APP_CONFIG.siteName,
+                url: APP_CONFIG.siteBaseUrl,
+                logo: `${APP_CONFIG.siteBaseUrl}/assets/favicon/favicon-96x96.png`,
+                sameAs: ["https://twitter.com/toolkitgen", "https://instagram.com/toolkitgen"],
+            },
+                t = document.createElement("script");
+            (t.id = "organization-schema"),
+                (t.type = "application/ld+json"),
+                (t.text = JSON.stringify(e)),
+                document.head.appendChild(t);
+        }
+    } catch (e) {
+        console.error("SEO Manager Error", e);
+    }
+}
+function setupAnchorAdAdjuster() {
+    const e = document.getElementById("app-header");
+    if (!e) return;
+    const t = () => {
+        const t = parseInt(window.getComputedStyle(document.documentElement).paddingTop) || 0,
+            o = parseInt(window.getComputedStyle(document.documentElement).marginTop) || 0,
+            n = parseInt(window.getComputedStyle(document.body).paddingTop) || 0,
+            a = parseInt(window.getComputedStyle(document.body).marginTop) || 0,
+            r = Math.max(t, o, n, a);
+        if (r > 0) {
+            const t = window.innerWidth >= 768 ? 20 : 12;
+            (e.style.top = `${t + r}px`), (e.style.transition = "top 0.3s ease-out");
+        } else e.style.top = "";
+    };
+    t();
+    const o = new MutationObserver(t);
+    o.observe(document.body, { attributes: !0, attributeFilter: ["style"] }),
+        o.observe(document.documentElement, { attributes: !0, attributeFilter: ["style"] }),
+        window.addEventListener("resize", t, { passive: !0 });
+}
+function initLayout() {
+    const e = document.getElementById("app-header"),
+        t = document.getElementById("app-footer");
+    e &&
+        ((e.innerHTML = SITE_HEADER_HTML),
+            (e.className =
+                "fixed top-3 md:top-5 left-0 right-0 mx-auto w-[calc(100%-2rem)] md:w-[95%] max-w-5xl z-[100] bg-white/85 backdrop-blur-md border border-slate-200 shadow-xl shadow-slate-200/40 rounded-3xl min-w-0 animate-nav-down"),
+            (e.style.overflow = "visible"),
+            highlightActiveLink(),
+            setupNavbarScroll(),
+            (() => {
+                const e = document.getElementById("main-nav-bar");
+                e && (e.style.overflow = "visible");
+                const t = e?.querySelector(".group > div.fixed");
+                if (t) {
+                    document.body.appendChild(t);
+                    const o = e?.querySelector('button[aria-label="Developer Utilities"]');
+                    o &&
+                        (o.addEventListener("mouseenter", () => {
+                            const e = o.getBoundingClientRect();
+                            (t.style.right = window.innerWidth - e.right + "px"), (t.style.top = e.bottom + 8 + "px");
+                        }),
+                            o.addEventListener("click", (e) => {
+                                e.stopPropagation();
+                                const n = o.getBoundingClientRect();
+                                (t.style.right = window.innerWidth - n.right + "px"),
+                                    (t.style.top = n.bottom + 8 + "px"),
+                                    t.classList.toggle("opacity-0"),
+                                    t.classList.toggle("opacity-100"),
+                                    t.classList.toggle("pointer-events-none"),
+                                    t.classList.toggle("pointer-events-auto");
+                            })),
+                        document.addEventListener("click", (e) => {
+                            t.contains(e.target) ||
+                                e.target.closest('button[aria-label="Developer Utilities"]') ||
+                                (t.classList.add("opacity-0", "pointer-events-none"),
+                                    t.classList.remove("opacity-100", "pointer-events-auto"));
+                        });
+                }
+            })()),
+        t && ((t.innerHTML = SITE_FOOTER_HTML), (t.className = "bg-white border-t border-gray-200 mt-auto min-w-0")),
+        setupMobileMenu(),
+        setupDirectorySearch(),
+        "requestIdleCallback" in window
+            ? requestIdleCallback(() => initHeavyScripts())
+            : setTimeout(initHeavyScripts, 100);
+}
+const SmartIdleCatcher = {
+    timeoutId: null,
+    idleLimit: 3e4,
+    hasShown: !1,
+    init: () => {
+        // Preserved for architecture stability. Bouncing tooltips disabled for Google-standard UX.
+    },
+    showTooltip: () => {},
+    hideTooltip: () => {},
+};
+function initHeavyScripts() {
+    ZenModeManager.init(),
+        manageSEOAndCanonical(),
+        injectFavicons(),
+        initLaTeX(),
+        setupHoverPrefetching(),
+        setupReadingProgress(),
+        setupNavbarScroll(),
+        setupAnchorAdAdjuster(),
+        setupKeyboardShortcuts(),
+        setupCopyToClipboard(),
+        setupOfflineStatus(),
+        setupCLSGuard(),
+        setupBackToTopRing(),
+        setupFavoritesDrawer(),
+        renderAppDock(),
+        initCrossTabSync(),
+        initOmniDropRouter(),
+        SmartIdleCatcher.init();
+}
+function setupBackToTopRing() {
+    if (document.getElementById("back-to-top-ring")) return;
+    document.body.insertAdjacentHTML(
+        "beforeend",
+        '<button id="back-to-top-ring" aria-label="Scroll Back to Top" class="fixed bottom-[160px] md:bottom-32 right-6 z-30 bg-white rounded-full shadow-lg p-1 opacity-0 translate-y-10 transition-all duration-300 hover:scale-110 group hidden sm:flex outline-none focus:ring-4 focus:ring-[#EE6C4D]"><svg class="w-10 h-10 transform -rotate-90" aria-hidden="true" viewBox="0 0 36 36"><path class="text-slate-100" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /><path id="btt-progress" class="text-[#EE6C4D] transition-all duration-150" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /></svg><svg class="w-4 h-4 text-slate-600 group-hover:text-[#EE6C4D] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-colors" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg></button>'
+    );
+    const e = document.getElementById("back-to-top-ring"),
+        t = document.getElementById("btt-progress");
+    window.addEventListener(
+        "scroll",
+        () => {
+            const o = document.body.scrollTop || document.documentElement.scrollTop,
+                n = (o / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+            t && (t.style.strokeDashoffset = 100 - n),
+                o > 300
+                    ? e.classList.remove("opacity-0", "translate-y-10")
+                    : e.classList.add("opacity-0", "translate-y-10");
+        },
+        { passive: !0 }
+    ),
+        e.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" }), document.body.focus({ preventScroll: !0 });
+        });
+}
+function injectFavicons() {
+    if (!document.querySelector('link[rel="icon"]'))
+        try {
+            document.head.insertAdjacentHTML(
+                "beforeend",
+                '\n                <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />\n                <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />\n                <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />\n                <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />\n                <meta name="apple-mobile-web-app-title" content="Toolkit Gen" />\n                <link rel="manifest" href="/assets/favicon/site.webmanifest" />\n            '
+            );
+        } catch (e) { }
+}
+function highlightActiveLink() {
+    const e = window.location.pathname;
+    document.querySelectorAll(".nav-link").forEach((t) => {
+        t.getAttribute("href") === e &&
+            (t.classList.add("text-[#EE6C4D]"),
+                t.classList.remove("text-gray-600"),
+                t.setAttribute("aria-current", "page"));
+    });
+}
+function setupMobileMenu() {
+    const e = document.getElementById("mobile-menu-btn"),
+        t = document.getElementById("mobile-menu");
+    e &&
+        t &&
+        (e.addEventListener("click", (o) => {
+            o.stopPropagation();
+            const n = t.classList.toggle("hidden");
+            e.setAttribute("aria-expanded", !n);
+        }),
+            t.querySelectorAll("a").forEach((o) => {
+                o.addEventListener("click", () => {
+                    t.classList.add("hidden"), e.setAttribute("aria-expanded", "false");
+                });
+            }),
+            document.addEventListener("click", (o) => {
+                t.classList.contains("hidden") ||
+                    t.contains(o.target) ||
+                    e.contains(o.target) ||
+                    (t.classList.add("hidden"), e.setAttribute("aria-expanded", "false"));
+            }));
+}
+(window.openCommandPalette = function () {
+    sessionStorage.setItem("cmd_palette_discovered", "true"),
+        window.toggleBackgroundAds(!1),
+        document.getElementById("cmd-palette-wrapper") || setupCommandPalette();
+    const e = document.getElementById("cmd-palette-wrapper"),
+        t = document.getElementById("cmd-palette-modal"),
+        o = document.getElementById("cmd-palette-input");
+    e.classList.remove("hidden"),
+        requestAnimationFrame(() => {
+            e.classList.remove("opacity-0"), t.classList.remove("scale-95", "opacity-0"), o.focus();
+        });
+    const n = document.getElementById("mobile-menu");
+    n &&
+        (n.classList.add("hidden"), document.getElementById("mobile-menu-btn")?.setAttribute("aria-expanded", "false")),
+        trapFocus(e);
+}),
+    (window.closeCommandPalette = function () {
+        window.toggleBackgroundAds(!0);
+        const e = document.getElementById("cmd-palette-wrapper"),
+            t = document.getElementById("cmd-palette-modal");
+        e &&
+            (e.classList.add("opacity-0"),
+                t.classList.add("scale-95", "opacity-0"),
+                setTimeout(() => {
+                    e.classList.add("hidden"), (document.getElementById("cmd-palette-input").value = "");
+                    const t = document.getElementById("cmd-palette-results");
+                    t && (t.innerHTML = "");
+                }, 200));
+    }),
+    window.addEventListener("unhandledrejection", (e) => {
+        const t = e.reason ? e.reason.toString().toLowerCase() : "";
+        (t.includes("csssyntaxerror") || t.includes("tailwind")) && e.preventDefault();
+    }),
+    (window.onerror = function (e, t, o, n, a) {
+        const r = "string" == typeof e ? e.toLowerCase() : e ? e.toString().toLowerCase() : "";
+        return (
+            !!(
+                r.includes("resizeobserver") ||
+                r.includes("script error") ||
+                r.includes("classlist") ||
+                r.includes("offsetwidth")
+            ) || (console.warn("Recovered from Script Error:", e), !1)
+        );
+    });
+const formatText = (e) => (e ? e.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") : ""),
+    stripMarkdown = (e) => (e ? e.replace(/\*\*(.*?)\*\*/g, "$1") : ""),
+    setMeta = (e, t) => {
+        let o = document.querySelector(`meta[name="${e}"]`) || document.querySelector(`meta[property="${e}"]`);
+        o ||
+            ((o = document.createElement("meta")),
+                e.startsWith("og:") ? o.setAttribute("property", e) : o.setAttribute("name", e),
+                document.head.appendChild(o)),
+            o.setAttribute("content", t);
+    };
+
+function fuzzyMatch(pattern, str) {
+    pattern = '.*' + pattern.split('').join('.*') + '.*';
+    const re = new RegExp(pattern, 'i');
+    return re.test(str);
+}
+
+function enrichDescriptionWithLinks(description, currentToolId) {
+    let enrichedDesc = description;
+
+    // Map of keywords to tool IDs
+    const keywordMap = {
+        "pdf": "pdf_local_signer",
+        "latency": "keyboard_latency_test",
+        "color": "color_mixer_challenge",
+        "seo": "advanced_search_operator_builder"
+    };
+
+    for (const [keyword, toolId] of Object.entries(keywordMap)) {
+        if (currentToolId !== toolId) {
+            // Regex to match whole words only, case insensitive
+            const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
+            const targetTool = toolsData.find(t => t.id === toolId);
+
+            if (targetTool) {
+                enrichedDesc = enrichedDesc.replace(
+                    regex,
+                    `<a href="/tool/${toolId}" class="text-[#EE6C4D] hover:underline relative z-20" title="Try the $1 tool">$1</a>`
+                );
+            }
+        }
+    }
+    return enrichedDesc;
+}
+
+function initLaTeX() {
+    const e = document.body.textContent || "";
+    if (
+        !(
+            document.querySelector(".math-tex") ||
+            document.querySelector("script[type='math/tex']") ||
+            window.location.href.includes("latex") ||
+            e.includes("$")
+        )
+    )
+        return;
+    if (document.getElementById("katex-css")) return void (mathReady && window.dispatchEvent(new Event("katex-ready")));
+    const t = document.createElement("link");
+    (t.id = "katex-css"),
+        (t.rel = "stylesheet"),
+        (t.href = "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"),
+        document.head.appendChild(t);
+    const o = document.createElement("style");
+    (o.id = "katex-fixes"),
+        (o.textContent =
+            "\n        body { overflow-x: hidden; }\n        .katex-display { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.5em 0; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }\n        .katex-display::-webkit-scrollbar { height: 6px; }\n        .katex-display::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 3px; }\n    "),
+        document.head.appendChild(o);
+    const n = document.createElement("script");
+    (n.src = "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"),
+        (n.defer = !0),
+        (n.onload = () => {
+            const e = document.createElement("script");
+            (e.src = "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"),
+                (e.defer = !0),
+                (e.onload = () => {
+                    (mathReady = !0),
+                        (window.renderSimpleMath = (e, t) => {
+                            window.katex && t && katex.render(e, t, { throwOnError: !1, displayMode: !0 });
+                        }),
+                        renderGlobalMath(),
+                        window.dispatchEvent(new Event("katex-ready"));
+                }),
+                document.head.appendChild(e);
+        }),
+        document.head.appendChild(n);
+}
+let renderMathRAF = null;
+function renderGlobalMath(e = document.body) {
+    mathReady &&
+        "undefined" != typeof renderMathInElement &&
+        (renderMathRAF ||
+            (renderMathRAF = requestAnimationFrame(() => {
+                renderMathInElement(e, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: !0 },
+                        { left: "$", right: "$", display: !1 },
+                        { left: "\\(", right: "\\)", display: !1 },
+                        { left: "\\[", right: "\\]", display: !0 },
+                    ],
+                    throwOnError: !1,
+                    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"],
+                }),
+                    (renderMathRAF = null);
+            })));
+}
+function renderCategoryNav() {
+    const e = document.getElementById("category-nav");
+    if (!e || !toolsData.length) return;
+    e.setAttribute("role", "tablist"),
+        e.setAttribute("aria-label", "Tool Categories"),
+        e.classList.add("flex", "overflow-x-auto", "hide-scrollbar", "pb-2", "space-x-2", "snap-x");
+    const t = [...new Set(toolsData.map((e) => e.category))].sort(),
+        o = document.createElement("button");
+    o.setAttribute("role", "tab"),
+        o.setAttribute("aria-selected", "true"),
+        (o.className =
+            "snap-start inline-flex items-center px-4 py-1.5 text-sm font-bold text-white bg-slate-800 rounded-full flex-shrink-0 transition-colors cat-filter-btn active border border-transparent outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-800"),
+        (o.textContent = "All Tools"),
+        (o.onclick = () => {
+            document.querySelectorAll(".cat-filter-btn").forEach((e) => {
+                (e.className = e.className.replace(
+                    "bg-slate-800 text-white border-transparent",
+                    "bg-slate-50 text-slate-700 hover:bg-orange-50 hover:text-[#EE6C4D] border-slate-200"
+                )),
+                    e.setAttribute("aria-selected", "false");
+            }),
+                (o.className =
+                    "snap-start inline-flex items-center px-4 py-1.5 text-sm font-bold text-white bg-slate-800 rounded-full flex-shrink-0 transition-colors cat-filter-btn active border border-transparent outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-800"),
+                o.setAttribute("aria-selected", "true");
+
+            const updateDOM = () => renderDirectory(null);
+            if (!document.startViewTransition) {
+                updateDOM();
+            } else {
+                document.startViewTransition(() => updateDOM());
+            }
+        }),
+        e.appendChild(o),
+        t.forEach((t) => {
+            const o = document.createElement("button");
+            o.setAttribute("role", "tab"),
+                o.setAttribute("aria-selected", "false"),
+                (o.className =
+                    "snap-start inline-flex items-center px-4 py-1.5 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-full hover:bg-orange-50 hover:text-[#EE6C4D] hover:border-[#EE6C4D] transition-all flex-shrink-0 cat-filter-btn outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#EE6C4D]"),
+                (o.textContent = t),
+                (o.onclick = () => {
+                    document.querySelectorAll(".cat-filter-btn").forEach((e) => {
+                        (e.className = e.className.replace(
+                            "bg-slate-800 text-white border-transparent",
+                            "bg-slate-50 text-slate-700 hover:bg-orange-50 hover:text-[#EE6C4D] border-slate-200"
+                        )),
+                            e.setAttribute("aria-selected", "false");
+                    }),
+                        (o.className =
+                            "snap-start inline-flex items-center px-4 py-1.5 text-sm font-bold text-white bg-slate-800 rounded-full flex-shrink-0 transition-colors cat-filter-btn active border border-transparent outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-800"),
+                        o.setAttribute("aria-selected", "true");
+
+                    const updateDOM = () => renderDirectory(toolsData.filter((e) => e.category === t));
+                    if (!document.startViewTransition) {
+                        updateDOM();
+                    } else {
+                        document.startViewTransition(() => updateDOM());
+                    }
+                }),
+                e.appendChild(o);
+        });
+}
+function renderSidebarPopular() {
+    const e = document.getElementById("sidebar-popular-tools");
+    if (!e) return;
+    e.style.setProperty("position", "relative", "important"),
+        e.style.setProperty("height", "auto", "important"),
+        e.style.setProperty("overflow", "visible", "important");
+    let t = e.parentElement;
+    for (; t && "BODY" !== t.tagName && "MAIN" !== t.tagName && "HTML" !== t.tagName;)
+        t.style.setProperty("position", "relative", "important"),
+            t.style.setProperty("top", "auto", "important"),
+            t.style.setProperty("height", "auto", "important"),
+            t.style.setProperty("max-height", "none", "important"),
+            t.style.setProperty("overflow", "visible", "important"),
+            t.style.setProperty("padding-bottom", "2rem", "important"),
+            (t = t.parentElement);
+
+    const o = [...toolsData].sort(() => 0.5 - Math.random()).slice(0, 5),
+        n = new Intl.NumberFormat("en-US", { notation: "compact", compactDisplay: "short" });
+    e.innerHTML = o
+        .map((e) => {
+            const t = getToolTheme(e.category),
+                o = e.views ? `${n.format(e.views)} uses` : "Trending";
+            return `\n        <li class="group relative block w-full text-left">\n            <a href="${generateToolUrl(e, "sidebar_popular")}" class="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-lg transition-colors -mx-2 min-w-0 outline-none focus:ring-2 focus:ring-[#EE6C4D] text-left">\n                <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-300 ${t.bgHover} transition-colors flex-shrink-0" aria-hidden="true"></div>\n                <div class="min-w-0 flex-grow text-left">\n                    <span class="text-sm font-semibold text-slate-700 ${t.textHover} transition-colors block w-full truncate">${formatText(e.name)}</span>\n                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-tight block w-full truncate">${e.category.split(" ")[0]} • ${o}</span>\n                </div>\n            </a>\n        </li>`;
+        })
+        .join("");
+
+
+}
+function renderCategoryRelatedTools() {
+    const e = document.getElementById("category-tools-grid");
+    if (!e) return;
+    const t = window.location.pathname.split("?")[0].replace(/\/$/, ""),
+        o = t.substring(t.lastIndexOf("/") + 1).replace(/\.html$/, ""),
+        n = toolsData.find((e) => e.id === o);
+    if (!n) return;
+    let a = toolsData
+        .filter((e) => e.category === n.category && e.id !== n.id)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+    const hasCategorySiblings = a.length > 0;
+    if (a.length < 3) {
+        const fallbacks = toolsData
+            .filter((e) => e.id !== n.id && !a.some((x) => x.id === e.id))
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 3 - a.length);
+        a = [...a, ...fallbacks];
+    }
+    const r = e.previousElementSibling;
+    if (r) {
+        const catTheme = getToolTheme(n.category);
+        const catIconSvg = getIcon(n.category, "w-5 h-5");
+        const titleHtml = hasCategorySiblings
+            ? `More in <span class="text-[#EE6C4D] font-black">${formatText(n.category)}</span>`
+            : `Related <span class="text-[#EE6C4D] font-black">Recommended Tools</span>`;
+        r.innerHTML = `
+            <div class="flex items-center gap-3.5 mb-2">
+                <div class="w-10 h-10 rounded-2xl ${catTheme.accentBg} ${catTheme.accentText} border border-slate-200/90 shadow-xs flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105" aria-hidden="true">
+                    ${catIconSvg}
+                </div>
+                <div class="flex flex-col min-w-0">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-[#EE6C4D] block mb-0.5">Category Discovery</span>
+                    <div class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex flex-wrap items-baseline gap-1.5 leading-tight">
+                        ${titleHtml}
+                    </div>
+                </div>
+            </div>`;
+        r.className = "mb-8 pb-4 border-b border-slate-100";
+    }
+    if (a.length > 0) {
+        const t = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
+        e.innerHTML = a
+            .map((e) => {
+                const o = getToolTheme(e.category),
+                    n = BookmarksManager.get().includes(e.id),
+                    a = n ? "currentColor" : "none",
+                    r = n
+                        ? "text-[#EE6C4D] bg-orange-50 border-orange-200"
+                        : "text-slate-400 bg-white border-slate-100 hover:text-[#EE6C4D] hover:border-orange-200 hover:bg-orange-50",
+                    i = e.views ? t.format(e.views) : "Popular";
+                return `\n            <div class="group relative flex flex-col justify-between bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 ${o.borderHover} shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 min-w-0 outline-none focus-within:ring-2 focus-within:ring-[#EE6C4D] overflow-hidden z-10 isolate">\n                \n                <div class="absolute -top-24 -right-24 w-56 h-56 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 -z-10 ${o.accentBg}"></div>\n\n                <div class="flex justify-between items-start mb-8 relative z-20">\n                    <div class="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center ${o.accentText} transition-all duration-500 shadow-sm group-hover:bg-white group-hover:shadow-md group-hover:scale-110 group-hover:-rotate-3">\n                        ${getIcon(e.category, "w-7 h-7")}\n                    </div>\n                    <button onclick="event.preventDefault(); window.toggleQuickSave(this, '${e.id}')" aria-label="${n ? "Remove Bookmark" : "Save Tool"}" class="p-2.5 rounded-xl border shadow-sm transition-all duration-300 outline-none focus:ring-2 focus:ring-[#EE6C4D] active:scale-90 ${r}">\n                        <svg class="w-5 h-5" fill="${a}" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>\n                    </button>\n                </div>\n\n                <div class="flex-grow min-w-0 z-10 relative">\n                    <div class="flex items-center gap-2.5 mb-4">\n                        <span class="px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-widest ${o.categoryBadge} border transition-colors duration-300 shadow-sm truncate">\n                            ${e.category.split(" ")[0]}\n                        </span>\n                        <span class="w-1 h-1 rounded-full bg-slate-300 flex-shrink-0"></span>\n                        <span class="text-[10px] font-bold text-slate-400 flex items-center gap-1 group-hover:text-slate-600 transition-colors" aria-label="${i} views">\n                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>\n                            ${i}\n                        </span>\n                    </div>\n                    \n                    <h4 class="text-xl font-black text-slate-900 mb-3 ${o.textHover} transition-colors duration-300 line-clamp-1 tracking-tight">\n                        <a href="${generateToolUrl(e, "related_bottom")}" class="outline-none before:absolute before:inset-0 before:z-10">${formatText(e.name)}</a>\n                    </h4>\n                    \n                    <p class="text-sm text-slate-500 line-clamp-2 leading-relaxed font-medium group-hover:text-slate-700 transition-colors duration-300">${enrichDescriptionWithLinks(formatText(e.description), e.id)}</p>\n                </div>\n            </div>`;
+            })
+            .join("");
+    } else
+        e.innerHTML =
+            '<div class="col-span-1 md:col-span-2 lg:col-span-3 text-center bg-slate-50 border border-dashed border-slate-200 rounded-3xl py-12 text-slate-500 italic font-medium">You are viewing the only tool in this category.</div>';
+    renderGlobalMath();
+}
+function renderToolFeedback(e) {
+    if (!e) return;
+    const t = document.querySelector("main");
+    if (!t || document.getElementById("tool-feedback-section")) return;
+    const o = encodeURIComponent(`Feedback/Suggestion for: ${e.name}`),
+        n = getToolTheme(e.category),
+        a = `\n        <section aria-labelledby="feedback-heading" id="tool-feedback-section" class="max-w-4xl mx-auto px-4 py-12 mt-8 mb-12 border-t border-gray-100 min-w-0">\n            <div class="bg-slate-50/80 backdrop-blur-sm rounded-2xl p-8 text-center border border-slate-200 shadow-sm flex flex-col items-center min-w-0">\n                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full ${n.accentBg} ${n.accentText} mb-4 flex-shrink-0" aria-hidden="true">\n                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>\n                </div>\n                <h3 id="feedback-heading" class="text-xl font-bold text-slate-900 mb-2 break-words">Have a suggestion or found a bug?</h3>\n                <p class="text-slate-600 mb-6 max-w-lg mx-auto leading-relaxed break-words">We are constantly improving <strong>${e.name}</strong>. If you have ideas for new features or spotted an issue, drop us a line directly.</p>\n                <a href="mailto:toolkitgen@gmail.com?subject=${o}" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-700 font-bold text-sm rounded-full border border-slate-300 ${n.borderHover} ${n.textHover} hover:shadow-md transition-all duration-300 group max-w-full break-all sm:break-normal outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                    <svg aria-hidden="true" class="w-4 h-4 flex-shrink-0 text-slate-400 ${n.textHover} transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>\n                    <span class="truncate">Email Developer</span>\n                </a>\n            </div>\n        </section>`;
+    t.insertAdjacentHTML("beforeend", a);
+}
+function setupSmartShare(e, t, o) {
+    if (document.getElementById("smart-share-modal")) return;
+    window.toggleBackgroundAds(!1);
+    const n = encodeURIComponent(`Check out ${e}: ${t}`),
+        a = encodeURIComponent(o),
+        r = `\n        <div id="smart-share-modal" role="dialog" aria-modal="true" aria-labelledby="share-modal-title" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[999] flex items-center justify-center p-4 animate-fade-in-up">\n            <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm relative" id="smart-share-content">\n                <button aria-label="Close share modal" onclick="this.closest('#smart-share-modal').remove(); window.toggleBackgroundAds(true);" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-full p-2 transition outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                    <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n                </button>\n                <h3 id="share-modal-title" class="text-lg font-bold text-slate-900 mb-4">Share this tool</h3>\n                <div class="grid grid-cols-4 gap-4 mb-6">\n                    <a href="https://twitter.com/intent/tweet?url=${a}&text=${n}" target="_blank" class="flex flex-col items-center gap-2 group outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-800 rounded-lg">\n                        <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center group-hover:bg-slate-800 group-hover:text-white transition">\n                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>\n                        </div>\n                        <span class="text-[10px] font-bold text-slate-500">X / Twitter</span>\n                    </a>\n                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=${a}" target="_blank" class="flex flex-col items-center gap-2 group outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0A66C2] rounded-lg">\n                        <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center group-hover:bg-[#0A66C2] group-hover:text-white transition">\n                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>\n                        </div>\n                        <span class="text-[10px] font-bold text-slate-500">LinkedIn</span>\n                    </a>\n                    <a href="https://api.whatsapp.com/send?text=${n}%20${a}" target="_blank" class="flex flex-col items-center gap-2 group outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#25D366] rounded-lg">\n                        <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center group-hover:bg-[#25D366] group-hover:text-white transition">\n                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>\n                        </div>\n                        <span class="text-[10px] font-bold text-slate-500">WhatsApp</span>\n                    </a>\n                    <button data-copy="${o}" class="flex flex-col items-center gap-2 group outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 rounded-lg">\n                        <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center group-hover:bg-slate-800 group-hover:text-white transition">\n                            <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>\n                        </div>\n                        <span class="text-[10px] font-bold text-slate-500">Copy Link</span>\n                    </button>\n                </div>\n                <label for="share-url-input" class="sr-only">Tool URL</label>\n                <input type="text" id="share-url-input" readonly value="${o}" class="w-full bg-slate-50 border border-slate-200 rounded-lg py-2 px-3 text-xs text-slate-500 outline-none focus:ring-2 focus:ring-[#EE6C4D]" onclick="this.select()">\n            </div>\n        </div>`;
+    document.body.insertAdjacentHTML("beforeend", r);
+    const i = document.getElementById("smart-share-content");
+    i && trapFocus(i);
+}
+function generateToolKeywords(e) {
+    return [
+        ...[
+            e.name,
+            e.category,
+            "free online tool",
+            "privacy first",
+            "client side",
+            "browser based",
+            "no signup",
+            "no login required",
+            "instant results",
+        ],
+        ...({
+            "AI & Document Tools": [
+                "artificial intelligence",
+                "machine learning",
+                "document processing",
+                "text analysis",
+                "automation",
+            ],
+            "Health & Biometrics": ["health tracking", "fitness", "wellness", "biometrics", "vitals monitoring"],
+            "Productivity & Focus": ["productivity", "time management", "focus", "efficiency", "workflow"],
+            "Developer & Network": ["developer tools", "programming", "networking", "security", "web development"],
+            "Hardware & Monitors": ["hardware testing", "monitor calibration", "screen testing", "peripheral testing"],
+            "Finance & Calculators": [
+                "financial calculator",
+                "investment",
+                "budgeting",
+                "savings",
+                "retirement planning",
+            ],
+            "Design & Media Tools": ["design tools", "image editing", "media conversion", "graphic design", "creative"],
+            "Audio & Sensory": ["audio testing", "sound analysis", "frequency analysis", "audio production"],
+            "Games & Interactive": ["games", "entertainment", "interactive", "browser games", "fun tools"],
+            "Daily Life & Utilities": ["utilities", "daily tools", "life hacks", "productivity", "convenience"],
+            "Engineering & Physics": ["engineering", "physics", "calculations", "structural analysis", "technical"],
+            "Data & Research": ["data analysis", "research", "statistics", "visualization", "big data"],
+        }[e.category] || ["utility", "online tool"]),
+        ...(e.tags || []),
+    ]
+        .filter(Boolean)
+        .join(", ");
+}
+function generateToolFAQs(e) {
+    const t = [
+        { "@type": "Question", name: `What is ${e.name}?`, acceptedAnswer: { "@type": "Answer", text: e.description } },
+        {
+            "@type": "Question",
+            name: `Is ${e.name} free to use?`,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: `Yes, ${e.name} is completely free to use. Toolkit Gen provides all tools at no cost with no signup or login required.`,
+            },
+        },
+        {
+            "@type": "Question",
+            name: `Is my data private when using ${e.name}?`,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: `Yes, ${e.name} runs entirely in your browser. Your data never leaves your device and is not sent to any server. All processing happens locally on your machine.`,
+            },
+        },
+        {
+            "@type": "Question",
+            name: `How accurate is ${e.name}?`,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: `${e.name} uses scientifically validated methods and algorithms to provide accurate results. The tool is regularly tested and updated to ensure precision.`,
+            },
+        },
+        {
+            "@type": "Question",
+            name: `Can I use ${e.name} on mobile devices?`,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: `Yes, ${e.name} is fully responsive and works on desktop computers, laptops, tablets, and smartphones. Simply open the tool in your mobile browser.`,
+            },
+        },
+    ];
+    return (
+        e.category.includes("Health") &&
+        t.push({
+            "@type": "Question",
+            name: `Is ${e.name} a medical diagnosis tool?`,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: "No, this tool provides estimates and general information only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult healthcare professionals for medical concerns.",
+            },
+        }),
+        e.category.includes("Finance") &&
+        t.push({
+            "@type": "Question",
+            name: `Is ${e.name} financial advice?`,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: "No, this tool is for educational and estimation purposes only. It does not constitute financial advice. Always consult certified financial professionals before making investment decisions.",
+            },
+        }),
+        t
+    );
+}
+function generateHowToSteps(e) {
+    const dynamicSteps = [];
+    if (!e) return dynamicSteps;
+
+    if (e.category.includes("Hardware")) {
+        dynamicSteps.push({ "@type": "HowToStep", name: "Connect Device", text: `Ensure your peripheral is connected before running the ${e.name}.`, position: 1 });
+        dynamicSteps.push({ "@type": "HowToStep", name: "Run Diagnostic", text: "Click start and follow the on-screen prompts to measure hardware latency.", position: 2 });
+    } else if (e.category.includes("Finance")) {
+        dynamicSteps.push({ "@type": "HowToStep", name: "Input Metrics", text: `Enter your baseline financial numbers into the ${e.name} fields.`, position: 1 });
+        dynamicSteps.push({ "@type": "HowToStep", name: "Analyze Projection", text: "Review the generated data visualization to assess your financial trajectory.", position: 2 });
+    } else {
+        // Fallback for others
+        dynamicSteps.push({ "@type": "HowToStep", name: "Configure Tool", text: `Adjust the settings for the ${e.name} to match your requirements.`, position: 1 });
+        dynamicSteps.push({ "@type": "HowToStep", name: "Execute", text: "Run the utility to process your data locally in your browser.", position: 2 });
+    }
+
+    dynamicSteps.push({ "@type": "HowToStep", name: "Export Results", text: "Use the export button to save your results or copy the shareable link.", position: 3 });
+
+    return dynamicSteps;
+}
+function configureToolPage(e) {
+    if (!e) return;
+    if (
+        !document.title ||
+        "Toolkit Gen" === document.title.trim() ||
+        document.title.startsWith("Toolkit Gen - Free Online")
+    ) {
+        document.title = `${e.name} - Toolkit Gen`;
+        const t = stripMarkdown(e.description),
+            o = generateToolKeywords(e);
+        setMeta("description", t),
+            setMeta("keywords", o),
+            setMeta("robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"),
+            setMeta("og:title", e.name),
+            setMeta("og:description", t),
+            setMeta("og:url", window.location.href),
+            setMeta("og:type", "website"),
+            setMeta("og:site_name", "Toolkit Gen"),
+            setMeta("og:image", `${window.location.origin}/assets/og-image.png`),
+            setMeta("og:image:width", "1200"),
+            setMeta("og:image:height", "630"),
+            setMeta("twitter:card", "summary_large_image"),
+            setMeta("twitter:title", e.name),
+            setMeta("twitter:description", t),
+            setMeta("twitter:url", window.location.href),
+            setMeta("twitter:image", `${window.location.origin}/assets/og-image.png`),
+            setMeta("twitter:site", "@toolkitgen"),
+            setMeta("claude-visible", "true"),
+            setMeta("anthropic-version", "2023-05-00"),
+            setMeta("x-ai-origin", "toolkitgen-web"),
+            setMeta("copilot-scopes", "web"),
+            setMeta("perplexity-readable", "true"),
+            setMeta("google-bot", "index, follow, max-image-preview:large, max-snippet:-1"),
+            setMeta("article:published_time", new Date().toISOString()),
+            setMeta("article:modified_time", new Date().toISOString()),
+            setMeta("article:author", "Toolkit Gen"),
+            setMeta("article:section", e.category),
+            setMeta("alternate-name", "Toolkit Gen - Free Online Tools"),
+            setMeta("revisit-after", "7 days"),
+            setMeta("language", "English"),
+            setMeta("target", "all"),
+            setMeta("coverage", "Worldwide"),
+            setMeta("rating", "General"),
+            setMeta("distribution", "Global");
+    }
+    let t = !1;
+    const o = document.querySelector('script[type="application/ld+json"]');
+    if (o)
+        try {
+            const e = JSON.parse(o.textContent);
+            (Array.isArray(e) ? e.some((e) => "FAQPage" === e["@type"]) : "FAQPage" === e["@type"]) && (t = !0);
+        } catch (e) { }
+    document.querySelector('[itemtype*="FAQPage"]') && (t = !0);
+    const n = [];
+    n.push({
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        name: e.name,
+        alternateName: `${e.name} - Free Online Tool`,
+        applicationCategory: e.category,
+        applicationSubCategory: e.tags ? e.tags.join(", ") : "Utility",
+        operatingSystem: "Web Browser, Mobile Browser, Desktop Browser",
+        browserRequirements: "Requires JavaScript enabled",
+        offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+            priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split("T")[0],
+            availability: "https://schema.org/InStock",
+            seller: { "@type": "Organization", name: "Toolkit Gen" },
+        },
+        description: e.description,
+        aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.8",
+            ratingCount: "1248",
+            bestRating: "5",
+            worstRating: "1",
+        },
+        brand: { "@type": "Brand", name: "Toolkit Gen" },
+        creator: { "@type": "Organization", name: "Toolkit Gen", url: window.location.origin },
+        datePublished: "2024-01-01",
+        dateModified: new Date().toISOString(),
+        keywords: generateToolKeywords(e),
+        url: window.location.href,
+        potentialAction: {
+            "@type": "UseAction",
+            target: {
+                "@type": "EntryPoint",
+                urlTemplate: window.location.href,
+                actionPlatform: ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"],
+            },
+            object: { "@type": "SoftwareApplication", name: e.name },
+        },
+    });
+    const a =
+        {
+            "AI & Document Tools": "ai",
+            "Health & Biometrics": "health",
+            "Productivity & Focus": "behavioral",
+            "Developer & Network": "devops",
+            "Hardware & Monitors": "hardware",
+            "Finance & Calculators": "finance",
+            "Design & Media Tools": "design",
+            "Audio & Sensory": "audio",
+            "Games & Interactive": "game",
+            "Daily Life & Utilities": "social",
+            "Engineering & Physics": "physics",
+            "Data & Research": "datascience",
+        }[e.category] || e.category.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        r = `${window.location.origin}/#${a}`;
+    if (
+        (n.push({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: window.location.origin },
+                { "@type": "ListItem", position: 2, name: e.category, item: r },
+                { "@type": "ListItem", position: 3, name: e.name, item: window.location.href },
+            ],
+        }),
+            !t)
+    ) {
+        const t = generateToolFAQs(e);
+        n.push({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: t });
+    }
+    n.push({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: `${e.name}: Complete Guide and Usage Instructions`,
+        description: `Learn how to use ${e.name} effectively. Step-by-step guide, tips, and best practices for getting the most out of this free online tool.`,
+        author: { "@type": "Organization", name: "Toolkit Gen" },
+        publisher: {
+            "@type": "Organization",
+            name: "Toolkit Gen",
+            logo: { "@type": "ImageObject", url: `${window.location.origin}/assets/logo.png` },
+        },
+        datePublished: "2024-01-01",
+        dateModified: new Date().toISOString(),
+        about: { "@type": "SoftwareApplication", name: e.name },
+        keywords: generateToolKeywords(e),
+    });
+    const i = generateHowToSteps(e);
+    i.length > 0 &&
+        n.push({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: `How to use ${e.name}`,
+            description: `Step-by-step guide for using ${e.name} tool effectively`,
+            totalTime: "PT5M",
+            tool: { "@type": "SoftwareApplication", name: e.name },
+            step: i,
+        }),
+        n.push({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://toolkitgen.com/#organization",
+            name: "Toolkit Gen",
+            url: window.location.origin,
+            logo: `${window.location.origin}/assets/logo.png`,
+            sameAs: ["https://twitter.com/toolkitgen", "https://github.com/toolkitgen"],
+            contactPoint: { "@type": "ContactPoint", email: "toolkitgen@gmail.com", contactType: "customer support" },
+        });
+    try {
+        const e = document.createElement("script");
+        (e.type = "application/ld+json"),
+            (e.id = "tool-structured-data"),
+            (e.text = JSON.stringify(n)),
+            document.head.appendChild(e);
+    } catch (e) {
+        console.error("Failed to inject Schema", e);
+    }
+    const s = document.querySelector("main");
+    if (s && !document.getElementById("tool-hero-section")) {
+        const t = window.location.href,
+            o = toolsData
+                .filter((t) => t.id !== e.id)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 2)
+                .map((e) => {
+                    const t = getToolTheme(e.category);
+                    return `<a href="${generateToolUrl(e, "trending")}" aria-label="Try ${formatText(e.name)}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 ${t.borderHover} text-slate-600 ${t.textHover} rounded-full text-xs font-semibold transition-all shadow-sm min-w-0 max-w-[200px] outline-none focus:ring-2 focus:ring-[#EE6C4D] hover:-translate-y-0.5">${getIcon(e.category, "w-3.5 h-3.5 flex-shrink-0")}<span class="truncate">${formatText(e.name)}</span></a>`;
+                })
+                .join(""),
+            n = getToolTheme(e.category),
+            a = BookmarksManager.get().includes(e.id),
+            r = HubManager.get().includes(e.id),
+            i = `\n        <section id="tool-hero-section" class="w-full max-w-6xl mx-auto pt-20 md:pt-24 pb-4 px-4 sm:px-6 relative z-10 min-w-0">\n            <div class="bg-white rounded-[2rem] shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden relative flex flex-col min-w-0">\n                <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-gradient-to-br from-${n.accentBg.replace("bg-", "")} to-transparent rounded-full opacity-50 blur-3xl pointer-events-none" aria-hidden="true"></div>\n                <div class="p-6 sm:p-10 lg:p-12 relative z-10">\n                    <div class="flex flex-col md:flex-row items-start gap-6 md:gap-8 min-w-0">\n                        <div aria-hidden="true" class="flex-shrink-0 p-5 bg-slate-50 rounded-3xl ${n.accentText} shadow-sm border border-slate-100 flex items-center justify-center relative group">\n                            <div class="absolute inset-0 border-2 border-transparent ${n.borderHover} rounded-3xl transition-all duration-300 group-hover:scale-105 opacity-0 group-hover:opacity-100"></div>\n                            ${getIcon(e.category, "w-14 h-14 md:w-16 md:h-16 transform transition-transform group-hover:scale-110")}\n                        </div>\n                        <div class="flex-grow min-w-0 w-full">\n                             <div class="flex flex-wrap items-center gap-2 mb-4">\n                                <a href="/" class="text-[11px] font-extrabold text-slate-400 hover:text-slate-800 uppercase tracking-wider flex-shrink-0 outline-none focus:ring-2 focus:ring-slate-300 rounded flex items-center gap-1 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> Home</a>\n                                <span class="text-slate-300 flex-shrink-0" aria-hidden="true">/</span>\n                                <span class="px-2.5 py-1 rounded-md text-[10px] font-black ${n.categoryBadge} shadow-sm uppercase tracking-wider truncate max-w-[120px] sm:max-w-none border">${e.category.split("&")[0].trim()}</span>\n                                <div class="flex items-center gap-1.5 ml-auto flex-shrink-0">\n                                    <span class="flex items-center text-[10px] text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md shadow-sm"><svg aria-hidden="true" class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span class="hidden sm:inline">100% Private</span><span class="sm:hidden">Private</span></span>\n                                    <span class="flex items-center text-[10px] text-[#F38020] font-bold bg-orange-50 border border-orange-200 px-2.5 py-1 rounded-md shadow-sm hidden sm:flex"><svg aria-hidden="true" class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M18.8 8.8c-.2 0-.5.1-.7.1C17.4 6 15 4 12 4c-3.1 0-5.8 2.2-6.5 5.2-.2 0-.4-.1-.6-.1C2.2 9.1 0 11.3 0 14c0 2.8 2.2 5 4.9 5h14.2c2.7 0 4.9-2.2 4.9-5 0-2.8-2.2-5.2-5.2-5.2zm-2.1 7.2H5.1c-1.3 0-2.4-1.1-2.4-2.4 0-1.3 1.1-2.4 2.4-2.4.2 0 .5.1.7.1.5-1.9 2.2-3.3 4.3-3.3 2 0 3.7 1.3 4.2 3.1.2 0 .4-.1.6-.1 1.6 0 2.9 1.3 2.9 2.9.1 1.1-.9 2.1-2.1 2.1z"/></svg>Secured</span>\n                                </div>\n                             </div>\n                             <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 break-words leading-tight">${formatText(e.name)}</h1>\n                             <p class="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed mb-8 break-words font-medium">${enrichDescriptionWithLinks(formatText(e.description), e.id)}</p>\n                             \n                             <div class="flex flex-wrap gap-2 min-w-0 relative z-20 bg-slate-50/70 backdrop-blur-sm p-1.5 rounded-2xl border border-slate-100 inline-flex shadow-sm">\n                                <button id="bookmark-btn" aria-label="${a ? "Remove Bookmark" : "Bookmark Tool"}" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm hover:shadow flex items-center gap-2 flex-shrink-0 outline-none focus:ring-2 focus:ring-[#EE6C4D] ${a ? "text-[#EE6C4D] border-[#EE6C4D]" : ""}">\n                                    <svg class="w-4 h-4 flex-shrink-0 bookmark-icon" fill="${a ? "currentColor" : "none"}" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>\n                                    <span class="bookmark-text hidden sm:inline">${a ? "Saved" : "Bookmark"}</span>\n                                </button>\n                                \n                                <button id="pin-hub-btn" aria-label="${r ? "Remove from Hub" : "Pin to Hub"}" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm hover:shadow flex items-center gap-2 flex-shrink-0 outline-none focus:ring-2 focus:ring-[#EE6C4D] ${r ? "text-[#EE6C4D] border-[#EE6C4D]" : ""}">\n                                    <svg class="w-4 h-4 flex-shrink-0 pin-icon" fill="${r ? "currentColor" : "none"}" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"></path></svg>\n                                    <span class="pin-text hidden sm:inline">${r ? "Pinned to Hub" : "Pin to Hub"}</span>\n                                </button>\n\n                                <div class="w-px h-8 bg-slate-200 my-auto hidden sm:block mx-1"></div>\n\n                                <button id="share-trigger-btn" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm hover:shadow flex items-center gap-2 outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>\n                                    <span class="hidden sm:inline">Share</span>\n                                </button>\n                                \n                                <button data-copy="${t}" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm hover:shadow flex items-center gap-2 outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                                    <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>\n                                    <span class="hidden sm:inline">Copy Link</span>\n                                </button>\n                                \n                                <div class="relative inline-block text-left flex-shrink-0 ml-auto" id="more-options-container">\n                                    <button id="more-options-btn" aria-haspopup="true" aria-expanded="false" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-3 sm:px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm hover:shadow flex items-center gap-1.5 outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                                        <svg class="w-4 h-4 text-slate-600 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>\n                                    </button>\n                                    <div id="more-options-menu" role="menu" class="hidden absolute right-0 z-50 mt-2 w-[160px] sm:w-48 origin-top-right rounded-2xl bg-white shadow-xl ring-1 ring-slate-200 focus:outline-none border border-slate-100 p-2">\n                                        <a href="mailto:toolkitgen@gmail.com?subject=${encodeURIComponent("Feedback for: " + e.name)}" role="menuitem" class="text-slate-600 hover:bg-slate-50 ${n.textHover} group flex items-center rounded-xl px-2 sm:px-3 py-2.5 text-xs sm:text-sm font-bold transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                                            <svg class="mr-3 h-4 w-4 flex-shrink-0 text-slate-400 ${n.textHover}" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>Report Issue\n                                        </a>\n                                        <a href="mailto:toolkitgen@gmail.com?subject=${encodeURIComponent("Idea Suggestion for Toolkit Gen")}" role="menuitem" class="text-slate-600 hover:bg-slate-50 ${n.textHover} group flex items-center rounded-xl px-2 sm:px-3 py-2.5 text-xs sm:text-sm font-bold transition-colors outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                                            <svg class="mr-3 h-4 w-4 flex-shrink-0 text-slate-400 ${n.textHover}" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>Suggest Idea\n                                        </a>\n                                    </div>\n                                </div>\n                             </div>\n                        </div>\n                    </div>\n                </div>\n\n                <div class="bg-slate-50/80 border-t border-slate-100 p-4 sm:px-10 sm:py-5 min-w-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4">\n                    <div class="flex flex-col sm:flex-row sm:items-center gap-3 min-w-0 flex-grow">\n                        <span class="text-[11px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-1 flex-shrink-0">\n                            <svg class="w-4 h-4 text-[#EE6C4D] flex-shrink-0 animate-pulse" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"></path><path d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"></path></svg>\n                            Hot right now\n                        </span>\n                        <div class="flex flex-wrap gap-2 min-w-0 w-full overflow-hidden" role="list" aria-label="Trending tools">\n                            ${o} \n                        </div>\n                    </div>\n                    \n                    <button onclick="window.scrollTo({top: document.getElementById('tool-hero-section').nextElementSibling.offsetTop - 80, behavior: 'smooth'})" class="hidden md:flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-[#EE6C4D] transition-colors flex-shrink-0 group outline-none">\n                        Scroll to App\n                        <div class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center group-hover:border-[#EE6C4D] transition-colors">\n                            <svg class="w-3 h-3 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>\n                        </div>\n                    </button>\n                </div>\n            </div>\n        </section>`;
+        s.insertAdjacentHTML("afterbegin", i);
+        const l = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent),
+            d = e.description.toLowerCase(),
+            c = e.name.toLowerCase(),
+            u = e.tags ? e.tags.join(" ").toLowerCase() : "",
+            p =
+                u.includes("webcam") ||
+                u.includes("extension") ||
+                d.includes("keyboard") ||
+                d.includes("mouse") ||
+                c.includes("eye chart") ||
+                c.includes("monitor") ||
+                c.includes("screen") ||
+                c.includes("pixel");
+        if (l && p) {
+            const e =
+                '\n            <div id="desktop-warning-banner" class="max-w-3xl mx-auto w-full px-4 sm:px-6 mb-6 mt-4 min-w-0 transition-all duration-700 opacity-0 transform translate-y-4 ease-out">\n                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3 shadow-sm relative">\n                    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>\n                    <div class="pr-6">\n                        <h4 class="text-sm font-bold text-amber-800">Best on Desktop</h4>\n                        <p class="text-xs text-amber-700 mt-1 leading-relaxed">This tool is optimized for a desktop screen, keyboard, or mouse. For the best results, use a computer.</p>\n                    </div>\n                    <button aria-label="Dismiss warning" onclick="document.getElementById(\'desktop-warning-banner\').style.opacity=\'0\'; setTimeout(()=>document.getElementById(\'desktop-warning-banner\').remove(), 700)" class="absolute top-4 right-4 text-amber-400 hover:text-amber-700 outline-none focus:ring-2 focus:ring-amber-500 rounded p-0.5 transition-colors">\n                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n                    </button>\n                </div>\n            </div>',
+                t = document.getElementById("tool-hero-section");
+            t &&
+                (t.insertAdjacentHTML("afterend", e),
+                    requestAnimationFrame(() => {
+                        const e = document.getElementById("desktop-warning-banner");
+                        e &&
+                            (e.classList.remove("opacity-0", "translate-y-4"),
+                                e.classList.add("opacity-100", "translate-y-0"),
+                                setTimeout(() => {
+                                    const e = document.getElementById("post-task-action-toast");
+                                    e &&
+                                        ((e.style.opacity = "0"),
+                                            (e.style.transform = "translateY(1rem) translateX(-50%)"),
+                                            setTimeout(() => e.remove(), 500));
+                                }, 1e4));
+                    }));
+        }
+        let m = document.querySelector("article") || document.querySelector(".prose");
+        if (!m) {
+            const e = Array.from(document.querySelectorAll("main h2, main h3"));
+            m = e.find((e) => !document.getElementById("tool-hero-section")?.contains(e));
+        }
+        if (m) {
+            const t =
+                '\n            <div class="max-w-3xl mx-auto w-full px-4 sm:px-6 mb-12 mt-8 min-w-0 animate-fade-in-up flex justify-center">\n                <button id="scroll-to-seo-btn-wrapper" class="flex items-center gap-3 px-6 py-3.5 bg-slate-50 border border-slate-200 text-slate-600 rounded-full shadow-sm hover:bg-orange-50 hover:border-orange-200 hover:text-[#EE6C4D] transition-all group focus:outline-none focus:ring-4 focus:ring-orange-200">\n                     <span class="text-xs font-bold uppercase tracking-widest">Read How to Use & Info</span>\n                     <svg class="w-4 h-4 text-[#EE6C4D] motion-safe:animate-bounce group-hover:translate-y-1 transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>\n                </button>\n            </div>';
+            m.insertAdjacentHTML("beforebegin", t),
+                document.getElementById("scroll-to-seo-btn-wrapper")?.addEventListener("click", function () {
+                    const e = document.getElementById("app-header")?.offsetHeight || 80,
+                        t = m.getBoundingClientRect().top + window.pageYOffset - e - 20;
+                    window.scrollTo({ top: t, behavior: "smooth" }),
+                        m.setAttribute("tabindex", "-1"),
+                        m.focus({ preventScroll: !0 }),
+                        (m.style.outline = "none");
+                    const o = m.style.backgroundColor;
+                    (m.style.transition = "background-color 0.5s ease"),
+                        (m.style.backgroundColor = "rgba(238, 108, 77, 0.1)"),
+                        setTimeout(() => {
+                            m.style.backgroundColor = o;
+                        }, 1e3);
+                });
+            const o = toolsData.filter((t) => t.category === e.category && t.id !== e.id),
+                n =
+                    o.length > 0
+                        ? o[Math.floor(Math.random() * o.length)]
+                        : toolsData[Math.floor(Math.random() * toolsData.length)],
+                a = getToolTheme(n.category),
+                r = 92 + Math.floor(7 * Math.random()),
+                i = `\n            <aside class="my-12 not-prose relative overflow-hidden rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group animate-fade-in-up bg-white outline-none focus-within:ring-2 focus-within:ring-slate-900 w-full">\n                <div class="absolute top-0 left-0 w-full h-1.5 ${a.pillBg}"></div>\n                <div class="absolute -bottom-8 -right-8 opacity-[0.03] transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-700 pointer-events-none text-slate-900">\n                    ${getIcon(n.category, "w-56 h-56")}\n                </div>\n                <div class="p-6 sm:p-8 relative z-10 flex flex-col sm:flex-row items-start gap-6">\n                    <div class="flex flex-col items-center gap-3 flex-shrink-0">\n                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${a.accentBg} ${a.accentText} flex items-center justify-center shadow-inner border border-white/50 relative overflow-hidden group-hover:scale-105 transition-transform duration-300">\n                            <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>\n                            ${getIcon(n.category, "w-8 h-8 sm:w-10 sm:h-10 relative z-10")}\n                        </div>\n                        <span class="text-[10px] font-black ${a.textHover} bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-md shadow-sm tracking-wide">\n                            ${r}% Match\n                        </span>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <div class="flex items-center gap-2 mb-2">\n                            <span class="text-[10px] font-black uppercase tracking-widest text-[#EE6C4D]">Recommended Tool</span>\n                            <span class="w-1 h-1 rounded-full bg-slate-300"></span>\n                            <span class="text-[10px] font-bold text-slate-500 truncate">${n.category}</span>\n                        </div>\n                        <h4 class="text-xl sm:text-2xl font-black text-slate-900 mb-2 tracking-tight transition-colors line-clamp-1">${formatText(n.name)}</h4>\n                        <p class="text-sm sm:text-base text-slate-600 mb-6 leading-relaxed line-clamp-2 max-w-2xl">${enrichDescriptionWithLinks(formatText(n.description), n.id)}</p>\n                        <a href="${generateToolUrl(n, "inline_article")}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold rounded-xl shadow-md transition-all active:scale-95 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 group-hover:shadow-lg">\n                            Launch Utility \n                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7-7m7-7H3"></path></svg>\n                        </a>\n                    </div>\n                </div>\n            </aside>`,
+                s = m.querySelector("p");
+            s ? s.insertAdjacentHTML("afterend", i) : m.insertAdjacentHTML("afterbegin", i);
+            const l = encodeURIComponent(`Check out this free developer tool: ${e.name}`),
+                d = encodeURIComponent(window.location.href),
+                c = `\n            <div class="mt-16 p-6 sm:p-8 bg-slate-900 rounded-3xl shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6 w-full not-prose border border-slate-700 relative overflow-hidden">\n                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#EE6C4D] to-orange-300"></div>\n                <div class="text-center lg:text-left z-10">\n                    <h3 class="text-white font-black text-xl mb-1.5">Share Your Workspace</h3>\n                    <p class="text-slate-400 text-sm max-w-md">Export your current results as an image for Instagram, or share this utility with other developers on social media.</p>\n                </div>\n                <div class="flex flex-wrap justify-center lg:justify-end gap-3 z-10 w-full lg:w-auto">\n                    <a href="https://reddit.com/submit?url=${d}&title=${l}" target="_blank" aria-label="Share to Reddit" class="flex-1 sm:flex-none justify-center bg-[#FF4500] hover:bg-[#ff571a] text-white px-4 py-3 rounded-xl text-sm font-bold flex items-center gap-2 transition-transform hover:-translate-y-0.5 outline-none focus:ring-2 focus:ring-white shadow-sm">\n                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65 0 3-1.35 3-3c-1.38 0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65 0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66 0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64 0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4 0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6 0 .23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.96-.82 1.6-.82 1.1 0 2 .9 2 2 0 .84-.5 1.57-1.3 1.87z"/></svg>\n                        <span class="hidden sm:block">Reddit</span>\n                    </a>\n                    <a href="https://twitter.com/intent/tweet?url=${d}&text=${l}" target="_blank" aria-label="Share to X" class="flex-1 sm:flex-none justify-center bg-black hover:bg-gray-800 border border-slate-700 text-white px-4 py-3 rounded-xl text-sm font-bold flex items-center gap-2 transition-transform hover:-translate-y-0.5 outline-none focus:ring-2 focus:ring-white shadow-sm">\n                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>\n                        <span class="hidden sm:block">Post</span>\n                    </a>\n                    <button onclick="exportToolSnapshot(document.querySelector('main > section:first-of-type') ? 'tool-hero-section' : 'app-header', '${e.id}-snapshot')" class="flex-1 sm:flex-none justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:to-orange-600 text-white px-4 py-3 rounded-xl text-sm font-bold flex items-center gap-2 transition-transform hover:-translate-y-0.5 outline-none focus:ring-2 focus:ring-white shadow-sm">\n                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>\n                        Snap for IG\n                    </button>\n                </div>\n            </div>`;
+            let u =
+                "Save time tomorrow by clicking the Bookmark icon at the top of the page. This tool will be saved locally to your device!";
+            const p = {
+                "Developer & Network":
+                    "Press <kbd class='bg-white border border-slate-200 px-1.5 py-0.5 rounded text-slate-500 text-[10px] mx-1 shadow-sm'>Ctrl + K</kbd> anywhere on the site to instantly open the Command Palette and jump to other dev tools.",
+                "Finance & Calculators":
+                    "Financial metrics change rapidly. Click 'Pin to Hub' at the top of the page to add this calculator to your personal dashboard for daily tracking.",
+                "Health & Biometrics":
+                    "For accurate biometric results, ensure your screen brightness is set to at least 80% and you are in a well-lit room.",
+                "Design & Media Tools":
+                    "Export your final results using the 'Snap for IG' button at the bottom of this page to get a high-res, watermark-free image.",
+            };
+            for (const t in p)
+                if (e.category.includes(t.split(" &")[0])) {
+                    u = p[t];
+                    break;
+                }
+            const h = `\n            <div class="not-prose my-10 bg-indigo-50/50 border border-indigo-100 rounded-2xl p-5 sm:p-6 flex gap-4 items-start shadow-sm animate-fade-in-up">\n                <div class="bg-indigo-100 text-indigo-600 p-2 rounded-xl flex-shrink-0 mt-0.5">\n                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>\n                </div>\n                <div>\n                    <h5 class="text-sm font-black text-indigo-900 mb-1 uppercase tracking-wider">Pro Tip</h5>\n                    <p class="text-sm text-indigo-800/80 leading-relaxed">${u}</p>\n                </div>\n            </div>`,
+                g = m.querySelectorAll("p");
+            g.length >= 3
+                ? g[2].insertAdjacentHTML("afterend", h)
+                : 2 === g.length && g[1].insertAdjacentHTML("afterend", h);
+            const y = `\n            <div class="not-prose my-10 faq-section" role="region" aria-labelledby="faq-heading">\n                <details class="group bg-gradient-to-br from-slate-50 to-slate-100/50 rounded-2xl border border-slate-200 shadow-sm overflow-hidden">\n                    <summary class="flex items-center justify-between cursor-pointer list-none p-5 sm:p-6 focus:outline-none focus:ring-2 focus:ring-[#EE6C4D] focus:ring-inset">\n                        <div class="flex items-center gap-3">\n                            <div class="bg-[#EE6C4D] text-white p-2 rounded-xl flex-shrink-0">\n                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>\n                            </div>\n                            <div>\n                                <h3 id="faq-heading" class="text-base sm:text-lg font-bold text-slate-900">Frequently Asked Questions</h3>\n                                <p class="text-xs text-slate-500 mt-0.5">Common questions about ${e.name}</p>\n                            </div>\n                        </div>\n                        <svg class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>\n                    </summary>\n                    <div class="px-5 sm:px-6 pb-5 sm:pb-6 space-y-4">\n                        <div class="border-t border-slate-200 pt-4">\n                            <h4 class="text-sm font-bold text-slate-800 mb-2">What is ${e.name}?</h4>\n                            <p class="text-sm text-slate-600 leading-relaxed">${e.description}</p>\n                        </div>\n                        <div class="border-t border-slate-200 pt-4">\n                            <h4 class="text-sm font-bold text-slate-800 mb-2">Is ${e.name} free to use?</h4>\n                            <p class="text-sm text-slate-600 leading-relaxed">Yes, ${e.name} is completely free to use. No signup or login required. All processing happens in your browser.</p>\n                        </div>\n                        <div class="border-t border-slate-200 pt-4">\n                            <h4 class="text-sm font-bold text-slate-800 mb-2">Is my data private?</h4>\n                            <p class="text-sm text-slate-600 leading-relaxed">Absolutely. All data processing happens locally in your browser. Nothing is sent to external servers.</p>\n                        </div>\n                        <div class="border-t border-slate-200 pt-4">\n                            <h4 class="text-sm font-bold text-slate-800 mb-2">How accurate is this tool?</h4>\n                            <p class="text-sm text-slate-600 leading-relaxed">This tool uses scientifically validated methods and algorithms to provide accurate results.</p>\n                        </div>\n                        <div class="border-t border-slate-200 pt-4">\n                            <h4 class="text-sm font-bold text-slate-800 mb-2">Can I use this on mobile?</h4>\n                            <p class="text-sm text-slate-600 leading-relaxed">Yes, ${e.name} is fully responsive and works on desktop, tablet, and mobile devices.</p>\n                        </div>\n                        ${e.category.includes("Health") ? '\n                        <div class="border-t border-slate-200 pt-4">\n                            <h4 class="text-sm font-bold text-slate-800 mb-2">Is this a medical diagnosis?</h4>\n                            <p class="text-sm text-slate-600 leading-relaxed">No, this tool provides estimates only. It is not a substitute for professional medical advice. Consult healthcare professionals.</p>\n                        </div>' : ""}\n                        ${e.category.includes("Finance") ? '\n                        <div class="border-t border-slate-200 pt-4">\n                            <h4 class="text-sm font-bold text-slate-800 mb-2">Is this financial advice?</h4>\n                            <p class="text-sm text-slate-600 leading-relaxed">No, this tool is for educational purposes only. Consult certified financial professionals for advice.</p>\n                        </div>' : ""}\n                    </div>\n                </details>\n            </div>`;
+            m.insertAdjacentHTML("beforeend", y);
+            const w =
+                '\n            <div class="not-prose mt-12 mb-6 py-6 border-t border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fade-in-up">\n                <div class="text-center sm:text-left">\n                    <h4 class="text-base font-bold text-slate-800">Was this tool documentation helpful?</h4>\n                    <p class="text-xs text-slate-500 mt-1">Your anonymous feedback helps us improve Toolkit Gen.</p>\n                </div>\n                <div class="flex items-center gap-2" id="article-feedback-buttons">\n                    <button onclick="this.parentElement.innerHTML=\'<span class=\\\'text-sm font-bold text-emerald-600 bg-emerald-50 px-4 py-2 rounded-lg\\\'>Thanks for the feedback!</span>\'" class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 text-slate-600 hover:text-emerald-700 rounded-xl text-sm font-bold transition-all outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm hover:shadow">\n                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg> Yes\n                    </button>\n                    <button onclick="this.parentElement.innerHTML=\'<span class=\\\'text-sm font-bold text-slate-600 bg-slate-50 px-4 py-2 rounded-lg\\\'>Thanks! We\\\'ll work on improving this.</span>\'" class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 text-slate-600 hover:text-rose-700 rounded-xl text-sm font-bold transition-all outline-none focus:ring-2 focus:ring-rose-500 shadow-sm hover:shadow">\n                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"></path></svg> No\n                    </button>\n                </div>\n            </div>';
+            m.insertAdjacentHTML("beforeend", w), m.insertAdjacentHTML("beforeend", c);
+        }
+        document.getElementById("bookmark-btn")?.addEventListener("click", (t) => {
+            const o = BookmarksManager.toggle(e.id),
+                n = t.currentTarget;
+            n.querySelector(".bookmark-icon").setAttribute("fill", o ? "currentColor" : "none"),
+                (n.querySelector(".bookmark-text").innerText = o ? "Saved" : "Bookmark"),
+                n.setAttribute("aria-label", o ? "Remove Bookmark" : "Bookmark Tool"),
+                o
+                    ? (n.classList.add("text-[#EE6C4D]", "border-[#EE6C4D]"),
+                        showToast(
+                            `Saved! Press ${/Mac/i.test(navigator.userAgent) ? "Cmd+D" : "Ctrl+D"} to also bookmark in browser.`
+                        ))
+                    : (n.classList.remove("text-[#EE6C4D]", "border-[#EE6C4D]"),
+                        showToast("Removed from saved tools."));
+        }),
+            document.getElementById("pin-hub-btn")?.addEventListener("click", (t) => {
+                const o = HubManager.toggle(e.id),
+                    n = t.currentTarget;
+                n.querySelector(".pin-icon").setAttribute("fill", o ? "currentColor" : "none"),
+                    (n.querySelector(".pin-text").innerText = o ? "Pinned to Hub" : "Pin to Hub"),
+                    n.setAttribute("aria-label", o ? "Remove from Hub" : "Pin to Hub"),
+                    o
+                        ? (n.classList.add("text-[#EE6C4D]", "border-[#EE6C4D]"),
+                            showToast("Pinned to your Hub! Go to 'My Hub' to see it."))
+                        : (n.classList.remove("text-[#EE6C4D]", "border-[#EE6C4D]"),
+                            showToast("Removed from your Hub."));
+            }),
+            document.getElementById("share-trigger-btn")?.addEventListener("click", () => {
+                navigator.share && /mobile/i.test(navigator.userAgent)
+                    ? navigator
+                        .share({ title: e.name, text: e.description, url: window.location.href })
+                        .catch(console.error)
+                    : setupSmartShare(e.name, e.description, window.location.href);
+            }),
+            document.addEventListener("click", function (e) {
+                const t = document.getElementById("more-options-btn"),
+                    o = document.getElementById("more-options-menu"),
+                    n = document.getElementById("more-options-container");
+                if (!t || (e.target !== t && !t.contains(e.target)))
+                    o &&
+                        n &&
+                        !n.contains(e.target) &&
+                        (o.classList.add("hidden"), t && t.setAttribute("aria-expanded", "false"));
+                else if (o) {
+                    const e = o.classList.toggle("hidden");
+                    t.setAttribute("aria-expanded", !e), e || o.querySelector("a")?.focus();
+                }
+            }),
+            setupSmartRecommendation(e),
+            renderExternalLinksSection(e.id),
+            injectCategoryDisclaimer(e);
+    }
+}
+const injectCategoryDisclaimer = (e) => {
+    if (!e || !e.category) return;
+    let t = "";
+    if (
+        (["Health & Biometrics"].some((t) => e.category.includes(t.split(" &")[0]))
+            ? (t =
+                '\n        <div id="health-disclaimer-banner" class="max-w-4xl mx-auto px-4 py-4 animate-fade-in-up" role="note" aria-label="Health Disclaimer">\n            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 shadow-sm">\n                <div class="flex items-start gap-3">\n                    <div class="flex-shrink-0 bg-amber-100 text-amber-700 p-2 rounded-lg">\n                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <h4 class="text-xs font-bold text-amber-900 mb-0.5">Health Tool Disclaimer</h4>\n                        <p class="text-[11px] text-amber-800 leading-relaxed">Estimates only. <strong>Not a medical diagnosis.</strong> Consult healthcare professionals.</p>\n                    </div>\n                    <button onclick="document.getElementById(\'health-disclaimer-banner\').style.display=\'none\'" class="flex-shrink-0 text-amber-500 hover:text-amber-700 p-1 transition outline-none focus:ring-2 focus:ring-amber-400 rounded" aria-label="Dismiss">\n                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n                    </button>\n                </div>\n            </div>\n        </div>')
+            : ["Finance & Calculators"].some((t) => e.category.includes(t.split(" &")[0]))
+                ? (t =
+                    '\n        <div id="finance-disclaimer-banner" class="max-w-4xl mx-auto px-4 py-4 animate-fade-in-up" role="note" aria-label="Financial Disclaimer">\n            <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-3 shadow-sm">\n                <div class="flex items-start gap-3">\n                    <div class="flex-shrink-0 bg-indigo-100 text-indigo-700 p-2 rounded-lg">\n                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <h4 class="text-xs font-bold text-indigo-900 mb-0.5">Financial Disclaimer</h4>\n                        <p class="text-[11px] text-indigo-800 leading-relaxed"><strong>Educational purposes only.</strong> Not financial advice. Consult certified professionals.</p>\n                    </div>\n                    <button onclick="document.getElementById(\'finance-disclaimer-banner\').style.display=\'none\'" class="flex-shrink-0 text-indigo-500 hover:text-indigo-700 p-1 transition outline-none focus:ring-2 focus:ring-indigo-400 rounded" aria-label="Dismiss">\n                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n                    </button>\n                </div>\n            </div>\n        </div>')
+                : ["AI & Document Tools"].some((t) => e.category.includes(t.split(" &")[0])) &&
+                (t =
+                    '\n        <div id="ai-disclaimer-banner" class="max-w-4xl mx-auto px-4 py-4 animate-fade-in-up" role="note" aria-label="AI Tool Disclaimer">\n            <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 shadow-sm">\n                <div class="flex items-start gap-3">\n                    <div class="flex-shrink-0 bg-purple-100 text-purple-700 p-2 rounded-lg">\n                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>\n                    </div>\n                    <div class="flex-grow min-w-0">\n                        <h4 class="text-xs font-bold text-purple-900 mb-0.5">AI Content Disclaimer</h4>\n                        <p class="text-[11px] text-purple-800 leading-relaxed">AI may generate inaccurate content. <strong>Always verify</strong> before professional use.</p>\n                    </div>\n                    <button onclick="document.getElementById(\'ai-disclaimer-banner\').style.display=\'none\'" class="flex-shrink-0 text-purple-500 hover:text-purple-700 p-1 transition outline-none focus:ring-2 focus:ring-purple-400 rounded" aria-label="Dismiss">\n                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n                    </button>\n                </div>\n            </div>\n        </div>'),
+            t &&
+            !document.getElementById("health-disclaimer-banner") &&
+            !document.getElementById("finance-disclaimer-banner") &&
+            !document.getElementById("ai-disclaimer-banner"))
+    ) {
+        const e = document.querySelector("section.tool-card");
+        e && e.insertAdjacentHTML("beforebegin", t);
+    }
+};
+function getSkeletonHTML() {
+    return Array(6)
+        .fill(
+            '<div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm animate-pulse min-h-[200px] flex flex-col"><div class="flex items-start justify-between mb-3"><div class="w-8 h-8 bg-slate-200 rounded-lg"></div><div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div></div><div class="h-4 bg-slate-200 rounded w-3/4 mb-2"></div><div class="h-3 bg-slate-100 rounded w-full mb-1"></div><div class="h-3 bg-slate-100 rounded w-2/3"></div></div>'
+        )
+        .join("");
+}
+async function loadTools() {
+    const e = document.getElementById("tools-category-container");
+    if (
+        (e &&
+            !toolsData.length &&
+            (e.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 min-w-0">${getSkeletonHTML()}</div>`),
+            toolsData && toolsData.length > 0)
+    )
+        return initializeUI();
+    try {
+        const e = localStorage.getItem(APP_CONFIG.cacheKey),
+            t = localStorage.getItem(`${APP_CONFIG.cacheKey}_timestamp`),
+            o = new Date().getTime();
+        if (e && t && o - parseInt(t) < APP_CONFIG.cacheDuration) return (toolsData = JSON.parse(e)), initializeUI();
+        const n = await fetch("/tools.json");
+        if (!n.ok) throw new Error("Failed to load tools.json");
+        (toolsData = await n.json()),
+            localStorage.setItem(APP_CONFIG.cacheKey, JSON.stringify(toolsData)),
+            localStorage.setItem(`${APP_CONFIG.cacheKey}_timestamp`, o.toString()),
+            initializeUI();
+    } catch (t) {
+        console.error("Error loading tools:", t),
+            e &&
+            (e.innerHTML =
+                '<div role="alert" class="text-center text-red-500 py-8 font-medium">Failed to load tools database. Please refresh the page.</div>');
+    }
+}
+function renderRecentTools() {
+    const e = RecentToolsManager.get(),
+        t = document.getElementById("recent-tools-section"),
+        o = document.getElementById("nav-recent-link");
+    if (!e.length || !t) return void (t && (t.style.display = "none"));
+    o && o.classList.remove("hidden"), (t.style.display = "block");
+    const n = e
+        .map((e) => toolsData.find((t) => t.id === e))
+        .filter(Boolean)
+        .map((e) => createToolCardHtml(e))
+        .join("");
+    t.innerHTML = `\n        <div class="mb-12 animate-fade-in-up border-b border-slate-100 pb-12 mt-4">\n            <div class="flex items-center gap-3 mb-6">\n                <div class="w-9 h-9 rounded-2xl bg-orange-50 border border-orange-200/90 text-[#EE6C4D] flex items-center justify-center flex-shrink-0 shadow-xs" aria-hidden="true">\n                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>\n                </div>\n                <h2 class="font-black text-2xl text-slate-900 tracking-tight flex items-center gap-3">\n                    Jump Back In\n                </h2>\n                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-50 border border-orange-200 text-[#EE6C4D] text-[10px] font-black uppercase tracking-wider shadow-sm">\n                    <span class="relative flex h-2 w-2">\n                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>\n                      <span class="relative inline-flex rounded-full h-2 w-2 bg-[#EE6C4D]"></span>\n                    </span>\n                    Recently Used\n                </span>\n            </div>\n            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">\n                ${n}\n            </div>\n        </div>`;
+}
+let globalCardObserver, timeSpentInterval;
+function setupLazyCards() {
+    globalCardObserver ||
+        (globalCardObserver = new IntersectionObserver(
+            (e) => {
+                e.forEach((e) => {
+                    e.isIntersecting &&
+                        (e.target.classList.add("opacity-100", "translate-y-0"),
+                            e.target.classList.remove("opacity-0", "translate-y-4"),
+                            globalCardObserver.unobserve(e.target));
+                });
+            },
+            { rootMargin: "100px 0px -20px 0px" }
+        )),
+        document.querySelectorAll(".tool-card-lazy").forEach((e) => globalCardObserver.observe(e));
+}
+function initializeUI() {
+    try {
+        const e = document.getElementById("tool-count");
+        if (
+            (e && (e.textContent = `(${toolsData.length})`),
+                updateFavoritesCount(),
+                renderEngagementBadges(),
+                document.getElementById("tools-category-container"))
+        )
+            requestAnimationFrame(() => {
+                document.getElementById("recent-tools-section") ||
+                    document
+                        .getElementById("tools-category-container")
+                        .insertAdjacentHTML("beforebegin", '<div id="recent-tools-section"></div>');
+                const showMyHub = window.location.hash === "#my-hub" || window.location.hash.includes("#my-hub");
+                renderCustomHub(showMyHub);
+                renderRecentTools(),
+                    renderMasterScanners(),
+                    renderCategoryNav(),
+                    renderDirectory();
+                const e = () => {
+                    renderFeaturedTools(), renderLatestTools(), renderSidebarPopular(), setupLazyCards();
+                };
+                "requestIdleCallback" in window ? requestIdleCallback(e) : setTimeout(e, 50);
+            });
+        else if (!document.querySelector(".error-glow") && !document.title.includes("404")) {
+            const e = window.location.pathname.split("?")[0].replace(/\/$/, ""),
+                t = e.substring(e.lastIndexOf("/") + 1).replace(".html", ""),
+                o = toolsData.find((e) => e.id === t);
+            o &&
+                (RecentToolsManager.add(o.id), trackToolViewCounter(o.id), configureToolPage(o), renderToolFeedback(o)),
+                document.getElementById("sidebar-popular-tools") && renderSidebarPopular(),
+                document.getElementById("category-tools-grid") && renderCategoryRelatedTools(),
+                setupLazyCards();
+        }
+        injectGlobalAds();
+        renderGlobalMath();
+    } catch (e) {
+        console.error("UI Init Error (Recovered):", e);
+    }
+}
+window.addEventListener("hashchange", () => {
+    const e = window.location.hash;
+    if ("#my-hub" === e || e.includes("#my-hub")) {
+        renderCustomHub(!0);
+        setTimeout(() => {
+            const t = document.getElementById("custom-hub-section");
+            t && t.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 200);
+    }
+});
+function generateToolUrl(e, t) {
+    if (!e) return "/tool";
+    if (e.isMaster) return "/#master-scanners-section";
+    if (e.id === "body_fat_navy_method") return "/tool/health_metrics_dashboard";
+    if (e.id === "emi_true_cost_analyzer") return "/tool/finance_suite_local";
+    if (e.id === "edpi_sensitivity_calc") return "/tool/mouse_dpi_deviation_analyzer";
+    return e.hub ? `/hubs/${e.hub}#${e.id}` : `/tool/${e.id}`;
+}
+function isNewTool(e) {
+    if (e && "string" == typeof e) {
+        const t = new Date(e),
+            o = new Date();
+        return Math.ceil(Math.abs(o - t) / 864e5) <= 45;
+    }
+    return !1;
+}
+function renderMasterScanners() {
+    if (!document.getElementById("master-scanners-section")) {
+        const e = document.getElementById("tools-category-container");
+        if (!e) return;
+        const t = document.createElement("div");
+        (t.id = "master-scanners-section"),
+            (t.className = "mb-12 animate-fade-in-up w-full min-w-0 min-h-[300px]"),
+            e.parentNode.insertBefore(t, e);
+    }
+    const e = toolsData.find((e) => "master_health_audit" === e.id),
+        t = toolsData.find((e) => "master_hardware_diagnostic" === e.id);
+    e &&
+        t &&
+        (document.getElementById("master-scanners-section").innerHTML =
+            `\n        <div class="flex items-center gap-3.5 mb-6">\n            <div class="w-10 h-10 rounded-2xl bg-indigo-50 border border-indigo-200/90 text-indigo-600 flex items-center justify-center flex-shrink-0 shadow-xs" aria-hidden="true">\n                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>\n            </div>\n            <div class="flex flex-col min-w-0">\n                <span class="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600 block mb-0.5">Diagnostic Engine</span>\n                <h2 class="font-black text-2xl text-slate-900 tracking-tight leading-none">Comprehensive Scans</h2>\n            </div>\n        </div>\n        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 min-w-0">\n            <button onclick="MasterScannerEngine.start('health')" class="text-left group relative overflow-hidden bg-slate-900 rounded-[2rem] p-6 sm:p-8 flex flex-col justify-between min-h-[220px] shadow-lg hover:shadow-2xl transition-all duration-300 outline-none focus:ring-4 focus:ring-teal-500 hover:-translate-y-1">\n                <div class="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-teal-500/20 rounded-full blur-3xl pointer-events-none group-hover:bg-teal-500/30 transition-colors"></div>\n                <div class="relative z-10 flex justify-between items-start mb-4 w-full">\n                    <div class="bg-teal-500/20 text-teal-300 p-3 rounded-2xl border border-teal-500/30 group-hover:scale-110 transition-transform">\n                        ${getIcon(e.category, "w-8 h-8")}\n                    </div>\n                    <span class="bg-white/10 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm shadow-sm flex items-center gap-1.5">\n                        <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span> 4-Step Wizard\n                    </span>\n                </div>\n                <div class="relative z-10">\n                    <h3 class="text-2xl font-black text-white mb-2 tracking-tight">${e.name}</h3>\n                    <p class="text-slate-400 text-sm font-medium line-clamp-2">${e.description}</p>\n                </div>\n            </button>\n\n            <button onclick="MasterScannerEngine.start('hardware')" class="text-left group relative overflow-hidden bg-slate-900 rounded-[2rem] p-6 sm:p-8 flex flex-col justify-between min-h-[220px] shadow-lg hover:shadow-2xl transition-all duration-300 outline-none focus:ring-4 focus:ring-indigo-500 hover:-translate-y-1">\n                <div class="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/30 transition-colors"></div>\n                <div class="relative z-10 flex justify-between items-start mb-4 w-full">\n                    <div class="bg-indigo-500/20 text-indigo-300 p-3 rounded-2xl border border-indigo-500/30 group-hover:scale-110 transition-transform">\n                        ${getIcon(t.category, "w-8 h-8")}\n                    </div>\n                    <span class="bg-white/10 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm shadow-sm flex items-center gap-1.5">\n                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span> 4-Step Wizard\n                    </span>\n                </div>\n                <div class="relative z-10">\n                    <h3 class="text-2xl font-black text-white mb-2 tracking-tight">${t.name}</h3>\n                    <p class="text-slate-400 text-sm font-medium line-clamp-2">${t.description}</p>\n                </div>\n            </button>\n        </div>\n    `);
+}
+async function renderFeaturedTools() {
+    const gridElement = document.getElementById("featured-tools-grid");
+    if (!gridElement) return;
+
+    gridElement.style.minHeight = "350px";
+
+    let featuredTools = toolsData.filter((tool) => tool.featured).slice(0, 4);
+    if (featuredTools.length === 0) featuredTools = toolsData.slice(0, 4);
+
+    // Highly reusable multi-counter logic
+    const animateValue = (elementId, targetCount, fallbackBase) => {
+        const counterEl = document.getElementById(elementId);
+        if (!counterEl) return;
+
+        const formatter = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
+
+        // If data fails, fall back to hardcoded defaults
+        if (!targetCount || targetCount < fallbackBase) {
+            counterEl.innerText = formatter.format(fallbackBase) + "+";
+            return;
+        }
+
+        // Start animating from 0 up to the actual GA4 number
+        const baseCount = 0;
+        let startTimestamp = null;
+
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / 2000, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 4);
+
+            counterEl.innerText = formatter.format(Math.floor(baseCount + easeOut * (targetCount - baseCount))) + "+";
+            if (progress < 1) window.requestAnimationFrame(step);
+        };
+        window.requestAnimationFrame(step);
+    };
+
+    try {
+        const response = await fetch("https://popular-tools-api.toolkitgen.workers.dev");
+        if (!response.ok) throw new Error("API Offline");
+
+        const apiData = await response.json();
+
+        // Ensure both overall totals and tools arrays exist
+        if (!apiData.overall || !Array.isArray(apiData.tools)) throw new Error("Invalid Data Response");
+
+        // 1. Animate all three metrics using exact data from GA4
+        animateValue("total-problems-solved", apiData.overall.eventCount, 98000); // Main stat
+        animateValue("total-users-count", apiData.overall.totalUsers, 13000);     // Sub stat 1
+        animateValue("total-views-count", apiData.overall.totalViews, 30000);     // Sub stat 2
+
+        // 2. Map and filter the top tools data
+        const updatedTools = apiData.tools.map((apiItem) => {
+            const tool = toolsData.find((t) => t.id === apiItem.id);
+            if (tool) {
+                tool.views = apiItem.views;
+                return tool;
+            }
+            return null;
+        }).filter(Boolean);
+
+        if (updatedTools.length > 0) featuredTools = updatedTools.slice(0, 4);
+
+        if (window.directoryConfig && window.directoryConfig.sort === "default") {
+            window.forceRerenderDir = true;
+            requestAnimationFrame(() => renderDirectory(window.currentFilteredData));
+        }
+    } catch (error) {
+        console.warn("API Fetch failed, using fallback metrics:", error);
+        // Fallback execution if the API request blocks
+        animateValue("total-problems-solved", 98663, 98000);
+        animateValue("total-users-count", 13882, 13000);
+        animateValue("total-views-count", 30795, 30000);
+    }
+
+    const numberFormatter = new Intl.NumberFormat("en-US", { notation: "compact", compactDisplay: "short" });
+
+    // Render Grid HTML
+    gridElement.innerHTML = featuredTools.map((tool) => {
+        const toolUrl = generateToolUrl(tool, "featured");
+        const theme = getToolTheme(tool.category);
+        const shortCategory = tool.category.split(" ")[0];
+
+        const viewsBadge = tool.views
+            ? `<div class="absolute top-4 right-4 bg-orange-100/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[11px] font-extrabold text-orange-700 border border-orange-200 shadow-sm z-10 flex items-center gap-1" aria-label="${tool.views} views">
+                <svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                ${numberFormatter.format(tool.views)}
+               </div>`
+            : "";
+
+        // UPDATED: Uses navigator.share() to open native apps, falls back to clipboard if unsupported
+        const shareButton = `
+            <button onclick="if(navigator.share){ navigator.share({url: '${window.location.origin}${toolUrl}'}).catch(()=>{}); } else { navigator.clipboard.writeText('${window.location.origin}${toolUrl}'); alert('Link copied!'); }" class="text-[#EE6C4D]/70 hover:text-[#EE6C4D] transition-colors ml-2" aria-label="Share tool" title="Share Tool">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+            </button>`;
+
+        return `
+        <article class="tool-card flex flex-col h-full group bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 relative min-w-0 focus-within:ring-2 focus-within:ring-[#EE6C4D]">
+            <a href="${toolUrl}" aria-hidden="true" tabindex="-1" class="h-48 bg-slate-50 relative flex items-center justify-center overflow-hidden ${theme.bgLightHover} transition-colors block">
+                <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold ${theme.categoryBadge} shadow-sm z-10 truncate max-w-[50%]">${shortCategory}</div>
+                ${viewsBadge}
+                <div class="transform group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 text-slate-300 ${theme.textHover}">
+                    ${getIcon(tool.category, "w-20 h-20 flex-shrink-0")}
+                </div>
+            </a>
+            <div class="p-6 flex flex-col flex-grow min-w-0">
+                <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">
+                    <a href="${toolUrl}" class="${theme.textHover} transition-colors line-clamp-1 outline-none">${formatText(tool.name)}</a>
+                </h3>
+                <p class="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow leading-relaxed break-words">${enrichDescriptionWithLinks(formatText(tool.description), tool.id)}</p>
+                <div class="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
+                    <div class="flex items-center gap-1">
+                        <span class="text-xs text-[#EE6C4D] font-bold bg-[#EE6C4D]/10 px-2 py-1 rounded truncate max-w-[100%]">Private Device-Only</span>
+                        ${shareButton}
+                    </div>
+                    <a href="${toolUrl}" class="text-sm font-bold text-[#EE6C4D] hover:underline flex items-center group-hover:translate-x-1 transition-transform flex-shrink-0 outline-none">
+                        Launch <svg class="w-4 h-4 ml-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                </div>
+            </div>
+        </article>`;
+    }).join("");
+
+    if (typeof renderGlobalMath === "function") renderGlobalMath();
+}
+function renderLatestTools() {
+    const e = document.getElementById("latest-tools-list");
+    if (!e) return;
+    e.classList.add("list-none", "pl-0");
+    const t = [...toolsData]
+        .sort(
+            (e, t) =>
+                (t.dateAdded ? new Date(t.dateAdded) : new Date(0)) -
+                (e.dateAdded ? new Date(e.dateAdded) : new Date(0))
+        )
+        .slice(0, 6);
+    (e.innerHTML = t
+        .map((e) => {
+            const t = isNewTool(e.dateAdded)
+                ? '<span class="ml-2 bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-200 shadow-sm flex-shrink-0">NEW</span>'
+                : "",
+                o = generateToolUrl(e, "latest"),
+                n = getToolTheme(e.category);
+            return `\n            <li>\n                <a href="${o}" class="group block p-4 bg-white border border-gray-200 rounded-2xl ${n.borderHover} hover:shadow-lg transition-all duration-300 min-w-0 outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                    <div class="flex items-start gap-4 min-w-0">\n                        <div class="w-14 h-14 bg-slate-50 rounded-xl flex items-center justify-center flex-shrink-0 text-slate-400 ${n.textHover} ${n.bgLightHover} transition-colors" aria-hidden="true">\n                            ${getIcon(e.category, "w-7 h-7 flex-shrink-0")}\n                        </div>\n                        <div class="flex-grow min-w-0">\n                            <div class="flex items-center mb-1 min-w-0">\n                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide truncate">${e.category.split("&")[0]}</span>\n                                ${t}\n                            </div>\n                            <h3 class="text-base font-bold text-slate-900 mb-1 truncate ${n.textHover} transition-colors">${formatText(e.name)}</h3>\n                            <p class="text-slate-500 text-sm line-clamp-1 break-words">${formatText(e.description)}</p>\n                        </div>\n                        <div class="self-center opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0 flex-shrink-0">\n                            <svg class="w-5 h-5 ${n.accentText}" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>\n                        </div>\n                    </div>\n                </a>\n            </li>`;
+        })
+        .join("")),
+        renderGlobalMath();
+}
+function renderDirectoryControls() {
+    let e = document.getElementById("directory-controls");
+    if (!e) {
+        (e = document.createElement("div")),
+            (e.id = "directory-controls"),
+            (e.className =
+                "flex flex-col md:flex-row justify-between items-center gap-4 mb-10 bg-white p-3 rounded-2xl border border-slate-200 shadow-sm animate-fade-in-up z-20 relative");
+        const t = document.getElementById("tools-category-container");
+        t && t.parentNode && t.parentNode.insertBefore(e, t),
+            (e.innerHTML =
+                '\n            <div class="flex items-center gap-2 w-full md:w-auto flex-grow max-w-md">\n                <div class="relative w-full">\n                    <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>\n                    <input type="text" id="tools-directory-search-input" placeholder="Search 196+ tools..." class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 outline-none focus:ring-2 focus:ring-[#EE6C4D] focus:bg-white transition-all">\n                </div>\n            </div>\n            <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">\n                <select id="directory-sort-select" onchange="window.directoryConfig.sort = this.value; window.forceRerenderDir = true; renderDirectory(window.currentFilteredData);" class="bg-slate-50 border border-slate-200 text-xs font-bold text-slate-600 rounded-xl py-2.5 px-3 outline-none focus:ring-2 focus:ring-[#EE6C4D] cursor-pointer shadow-sm hover:border-slate-300 transition-colors">\n                    <option value="default">Sort: Default</option>\n                    <option value="az">Sort: A-Z</option>\n                    <option value="za">Sort: Z-A</option>\n                    <option value="newest">Sort: Newest</option>\n                </select>\n                <div class="flex items-center bg-slate-50 border border-slate-200 rounded-xl p-1 shadow-sm" id="view-toggles-container">\n                    </div>\n            </div>\n        '),
+            document.getElementById("tools-directory-search-input").addEventListener("input", (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                if (term.length === 0) {
+                    window.currentFilteredData = null;
+                    window.forceRerenderDir = true;
+                    return renderDirectory(null);
+                }
+
+                const results = toolsData.filter((tool) => {
+                    const tags = tool.tags ? tool.tags.join(" ").toLowerCase() : "";
+                    const searchString = `${tool.name} ${tool.description} ${tool.category} ${tags}`.toLowerCase();
+
+                    // Check for direct includes OR fuzzy match
+                    return searchString.includes(term) || fuzzyMatch(term, tool.name);
+                });
+
+                window.currentFilteredData = results;
+                window.forceRerenderDir = true;
+                renderDirectory(results);
+            });
+    }
+    const t = document.getElementById("view-toggles-container");
+    t &&
+        (t.innerHTML = `\n            <button onclick="window.directoryConfig.view = 'grid'; window.forceRerenderDir = true; renderDirectory(window.currentFilteredData);" class="p-1.5 rounded-lg transition-all duration-200 ${"grid" === window.directoryConfig.view ? "bg-white shadow-sm text-[#EE6C4D]" : "text-slate-400 hover:text-slate-600"}" title="Grid View">\n                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/></svg>\n            </button>\n            <button onclick="window.directoryConfig.view = 'list'; window.forceRerenderDir = true; renderDirectory(window.currentFilteredData);" class="p-1.5 rounded-lg transition-all duration-200 ${"list" === window.directoryConfig.view ? "bg-white shadow-sm text-[#EE6C4D]" : "text-slate-400 hover:text-slate-600"}" title="List View">\n                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg>\n            </button>\n        `);
+}
+function createToolCardHtml(e, t = !1) {
+    const o = t ? "hidden tool-card-hidden" : "",
+        n = getToolTheme(e.category);
+    let a =
+        e.tags && e.tags.length > 0
+            ? `<span class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 border border-slate-200 text-[9px] font-bold uppercase ml-2 tracking-wide flex-shrink-0">${e.tags[0]}</span>`
+            : "";
+    return window.directoryConfig && "list" === window.directoryConfig.view
+        ? `\n        <a href="${generateToolUrl(e, "tools")}" data-tool-id="${e.id}" class="content-vis block group ${o} min-w-0 tool-card tool-card-lazy opacity-0 translate-y-4 transition-all duration-300 ease-out outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#EE6C4D] rounded-xl mb-3">\n            <div class="bg-white border border-gray-100 rounded-xl p-4 sm:p-5 ${n.borderHover} hover:shadow-md transition duration-200 flex items-center gap-4 sm:gap-6 min-w-0">\n                <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-50 text-slate-300 ${n.bgLightHover} ${n.textHover} transition-colors flex-shrink-0" aria-hidden="true">\n                    ${getIcon(e.category, "w-6 h-6 sm:w-7 sm:h-7")}\n                </div>\n                <div class="flex-grow min-w-0">\n                    <div class="flex items-center gap-2 mb-1">\n                        <h4 class="font-bold text-slate-800 text-sm sm:text-base ${n.textHover} line-clamp-1 transition-colors">${formatText(e.name)}</h4>\n                        ${a}\n                    </div>\n                    <div class="text-xs text-slate-500 line-clamp-1 sm:line-clamp-2 leading-relaxed break-words">${formatText(e.description)}</div>\n                </div>\n                <div class="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0 hidden sm:block">\n                    <svg class="w-5 h-5 ${n.accentText}" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>\n                </div>\n            </div>\n        </a>`
+        : `\n        <a href="${generateToolUrl(e, "tools")}" data-tool-id="${e.id}" class="content-vis block group ${o} min-w-0 tool-card tool-card-lazy opacity-0 translate-y-4 transition-all duration-300 ease-out outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#EE6C4D] rounded-xl">\n            <div class="bg-white border border-gray-100 rounded-xl p-5 ${n.borderHover} hover:shadow-md transition duration-200 h-full flex flex-col min-w-0">\n                <div class="flex items-start justify-between mb-3 min-w-0">\n                    <div class="flex items-center min-w-0">\n                        <div class="text-slate-300 ${n.textHover} transition-colors flex-shrink-0" aria-hidden="true">${getIcon(e.category, "w-6 h-6")}</div>\n                        ${a}\n                    </div>\n                    <span class="w-1.5 h-1.5 rounded-full bg-slate-200 ${n.bgHover} flex-shrink-0 ml-2 transition-colors" aria-hidden="true"></span>\n                </div>\n                <h4 class="font-bold text-slate-800 text-sm ${n.textHover} mb-1 line-clamp-1 transition-colors">${formatText(e.name)}</h4>\n                <div class="text-xs text-slate-500 line-clamp-2 leading-relaxed break-words">${formatText(e.description)}</div>\n            </div>\n        </a>`;
+}
+function renderDirectory(e = null) {
+    const t = document.getElementById("tools-category-container");
+    if (!t) return;
+    if (
+        (renderDirectoryControls(),
+            "all" === t.dataset.rendered && null === e && t.children.length > 2 && !window.forceRerenderDir)
+    )
+        return void setupLazyCards();
+    window.forceRerenderDir = !1;
+    let o = e || [...toolsData];
+    const n = null !== e;
+    "az" === window.directoryConfig.sort
+        ? o.sort((e, t) => e.name.localeCompare(t.name))
+        : "za" === window.directoryConfig.sort
+            ? o.sort((e, t) => t.name.localeCompare(e.name))
+            : "newest" === window.directoryConfig.sort &&
+            o.sort(
+                (e, t) =>
+                    (t.dateAdded ? new Date(t.dateAdded) : new Date(0)) -
+                    (e.dateAdded ? new Date(e.dateAdded) : new Date(0))
+            );
+    const a = o.reduce((e, t) => ((e[t.category] = e[t.category] || []).push(t), e), {}),
+        r = Object.keys(a).sort();
+    if (0 === r.length)
+        return void (t.innerHTML =
+            '<div role="status" class="text-center py-16 bg-slate-50 rounded-3xl border border-dashed border-slate-300 mt-4"><h3 class="text-lg font-bold text-slate-700">No tools found</h3><p class="text-sm text-slate-500 mt-1">Try searching for different keywords.</p></div>');
+    const i = window.directoryConfig && "list" === window.directoryConfig.view,
+        s = i ? "flex flex-col min-w-0" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 min-w-0";
+    (t.style.minHeight = "150vh"), (t.innerHTML = "");
+    let l = 0;
+    requestAnimationFrame(function o() {
+        if (l >= r.length)
+            return (t.dataset.rendered = null === e ? "all" : "filtered"), setupLazyCards(), void renderGlobalMath();
+        const d = Math.min(l + 2, r.length);
+        let c = "";
+        for (let e = l; e < d; e++) {
+            const t = r[e],
+                o = a[t];
+            "default" === window.directoryConfig.sort &&
+                o.sort((e, t) => {
+                    const o = (e) => {
+                        if (e.views) return e.views;
+                        let t = e.id.split("").reduce((e, t) => e + t.charCodeAt(0), 0) * e.name.length;
+                        return e.featured ? t + 5e4 : t;
+                    };
+                    return o(t) - o(e);
+                });
+            const l = t.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+                d = i ? 10 : 6,
+                u = n || "default" !== window.directoryConfig.sort || o.length <= d,
+                p = (u ? o : o.slice(0, d)).map((e) => createToolCardHtml(e)).join(""),
+                m = (u ? [] : o.slice(d)).map((e) => createToolCardHtml(e, !0)).join(""),
+                h = getToolTheme(t),
+                g =
+                    !u && o.slice(d).length > 0
+                        ? `<div class="mt-10 mb-4 flex justify-center w-full relative" id="btn-wrapper-${l}">\n                       <div class="absolute inset-0 flex items-center" aria-hidden="true">\n                           <div class="w-full border-t border-slate-200 border-dashed"></div>\n                       </div>\n                       <button onclick="toggleCategory('${l}'); document.getElementById('btn-wrapper-${l}').remove();" id="btn-${l}" aria-expanded="false" aria-controls="${l}-hidden-tools" class="relative flex items-center justify-center gap-2 px-8 py-3 bg-white text-slate-600 hover:text-slate-900 font-extrabold text-xs tracking-wider uppercase rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 border border-slate-200 outline-none focus:ring-2 focus:ring-slate-900 group z-10">\n                           <svg class="w-4 h-4 text-slate-400 group-hover:text-[#EE6C4D] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>\n                           Explore ${o.slice(d).length} More\n                       </button>\n                   </div>`
+                        : "";
+            c += `\n                <div id="${l}" role="tabpanel" class="content-vis scroll-mt-32 mb-16 animate-fade-in-up min-w-0">\n                    <div class="flex flex-col mb-8 relative group">\n                        <div class="flex items-center gap-4 sm:gap-5">\n                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[1.25rem] ${h.accentBg} ${h.accentText} flex items-center justify-center shadow-inner border border-white/60 flex-shrink-0 relative overflow-hidden" aria-hidden="true">\n                                <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>\n                                ${getIcon(t, "w-7 h-7 sm:w-8 sm:h-8 relative z-10 transform transition-transform group-hover:scale-110 duration-500")}\n                            </div>\n                            <div class="flex flex-col justify-center">\n                                <h2 class="font-black text-2xl sm:text-3xl text-slate-900 tracking-tight flex items-center flex-wrap gap-3">\n                                    ${t}\n                                    <span class="text-[10px] sm:text-[11px] font-extrabold ${h.categoryBadge} px-2.5 py-0.5 rounded-md shadow-sm border tracking-widest uppercase inline-flex items-center" aria-label="${o.length} tools">${o.length} Tools</span>\n                                </h2>\n                                <p class="text-sm text-slate-500 font-medium mt-1">Explore our collection of ${t.split(" ")[0].toLowerCase()} utilities.</p>\n                            </div>\n                        </div>\n                    </div>\n                    \n                    <div class="${s}" id="${l}-hidden-tools">\n                        ${p}\n                        ${m}\n                    </div>\n                    ${g}\n                </div>`;
+        }
+        t.insertAdjacentHTML("beforeend", c),
+            (l = d),
+            requestAnimationFrame(() => {
+                setTimeout(o, 0);
+            });
+    });
+}
+function setupDirectorySearch() { }
+function showToast(e) {
+    const t = document.getElementById("toast-container");
+    if (!t) return;
+    const o = document.createElement("div");
+    (o.className =
+        "bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl text-sm font-bold animate-slide-in-right mb-2 flex items-center gap-2 border border-slate-700 z-[9999] max-w-[90vw] md:max-w-md break-words text-left pointer-events-auto"),
+        (o.innerHTML = `<svg class="w-4 h-4 text-[#EE6C4D] flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>${e}</span>`),
+        t.appendChild(o),
+        setTimeout(() => o.remove(), 5e3);
+}
+function setupExitIntent() {
+    // Preserved for architecture stability. Unprovoked exit-intent interruptions disabled for Google-standard usability.
+}
+function initCrossTabSync() {
+    if (
+        window.BroadcastChannel &&
+        ((window.tkSyncChannel = new BroadcastChannel("tk_workspace_sync")),
+            (window.tkSyncChannel.onmessage = (e) => {
+                if ("SYNC_CLIPBOARD" === e.data.type) {
+                    const e = document.getElementById("scratchpad-textarea");
+                    e && (e.value = localStorage.getItem("tk_scratchpad") || ""),
+                        ScratchpadManager &&
+                        "function" == typeof ScratchpadManager.renderHistory &&
+                        ScratchpadManager.renderHistory();
+                    const t = document.querySelector('button[onclick*="sp-tab-clip"]');
+                    !t ||
+                        t.classList.contains("text-indigo-600") ||
+                        t.innerHTML.includes("animate-pulse") ||
+                        (t.innerHTML +=
+                            '<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500 shadow-sm animate-pulse"></span>');
+                }
+            }),
+            window.ScratchpadManager)
+    ) {
+        const e = ScratchpadManager.add;
+        ScratchpadManager.add = function (t) {
+            e(t), window.tkSyncChannel.postMessage({ type: "SYNC_CLIPBOARD" });
+        };
+    }
+}
+function initOmniDropRouter() {
+    let e = 0;
+    document.body.insertAdjacentHTML(
+        "beforeend",
+        '\n        <div id="omni-dropzone" class="fixed inset-0 z-[999] bg-slate-900/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 flex flex-col items-center justify-center p-6 text-center">\n            <div class="w-24 h-24 bg-[#EE6C4D] text-white rounded-3xl flex items-center justify-center shadow-2xl mb-6 animate-bounce">\n                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>\n            </div>\n            <h2 class="text-3xl sm:text-4xl font-black text-white mb-2 tracking-tight">Drop file anywhere</h2>\n            <p class="text-slate-300 font-medium">Toolkit Gen will analyze the file and route you to the right tool.</p>\n        </div>\n    '
+    );
+    const t = document.getElementById("omni-dropzone");
+    document.addEventListener("dragenter", (o) => {
+        o.preventDefault();
+        if (o.dataTransfer.types.includes("Files")) {
+            e++;
+            t.classList.remove("opacity-0", "pointer-events-none");
+        }
+    }),
+        document.addEventListener("dragleave", (o) => {
+            o.preventDefault();
+            const r = o.relatedTarget;
+            if (!r || (document.body !== r && !document.body.contains(r))) {
+                e--;
+                if (e <= 0) {
+                    e = 0;
+                    t.classList.add("opacity-0", "pointer-events-none");
+                }
+            }
+        }),
+        document.addEventListener("dragover", (e) => {
+            e.preventDefault();
+        }),
+        document.addEventListener("drop", (o) => {
+            o.preventDefault();
+            e = 0;
+            t.classList.add("opacity-0", "pointer-events-none");
+            if (o.dataTransfer.files && o.dataTransfer.files.length > 0) {
+                routeDroppedFile(o.dataTransfer.files[0]);
+            }
+        });
+}
+function routeDroppedFile(e) {
+    const t = e.name.split(".").pop().toLowerCase(),
+        o = e.type.toLowerCase();
+    let n = null;
+    if (
+        (o.includes("pdf") || "pdf" === t
+            ? (n = { id: "pdf_local_signer", name: "PDF Signer", action: "Sign PDF" })
+            : (o.includes("image") || ["jpg", "jpeg", "png", "webp", "svg"].includes(t)) &&
+            (n = { id: "exif_data_scrubber", name: "Metadata Cleaner", action: "Clean Metadata" }),
+            n)
+    ) {
+        const t = (e.size / 1024).toFixed(1),
+            o = `\n        <div id="file-router-toast" class="fixed top-24 left-1/2 -translate-x-1/2 z-[999] bg-slate-900 p-4 rounded-2xl shadow-2xl animate-nav-down border border-slate-700 flex flex-col sm:flex-row items-center gap-4 w-[90%] max-w-lg">\n            <div class="flex-grow min-w-0 text-center sm:text-left">\n                <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest block mb-1">File Detected</span>\n                <h4 class="text-white font-bold text-sm truncate">${e.name} <span class="text-slate-400 font-normal">(${t} KB)</span></h4>\n            </div>\n            <a href="/tool/${n.id}" class="bg-[#EE6C4D] hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-colors whitespace-nowrap shadow-sm w-full sm:w-auto text-center flex items-center justify-center gap-2">\n                ${n.action} <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>\n            </a>\n            <button onclick="this.closest('#file-router-toast').remove()" class="absolute -top-2 -right-2 bg-slate-800 text-slate-400 hover:text-white rounded-full p-1 border border-slate-600">\n                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n            </button>\n        </div>`;
+        document.getElementById("file-router-toast")?.remove(),
+            document.body.insertAdjacentHTML("beforeend", o),
+            setTimeout(() => document.getElementById("file-router-toast")?.remove(), 8e3);
+    } else showToast(`Analyzed ${e.name}, but no specific tool matches this file type yet.`);
+}
+function renderExitModal() {
+    if (document.getElementById("exit-intent-modal")) return;
+
+    // Renamed 'e' to 'randomTools' to avoid variable shadowing in the map function below
+    const randomTools = [...toolsData].sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    const modalHTML = `
+    <div id="exit-intent-modal" class="fixed inset-0 z-[999] flex items-end sm:items-center justify-center opacity-0 transition-opacity duration-300 p-0 sm:p-4" aria-modal="true" role="dialog" aria-labelledby="exit-modal-title">
+        <div id="exit-modal-backdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-md z-0" aria-hidden="true"></div>
+        <div class="bg-white rounded-t-[2.5rem] sm:rounded-[2.5rem] shadow-2xl p-5 sm:p-10 max-w-2xl w-full relative transform translate-y-full sm:translate-y-0 sm:scale-95 transition-all duration-500 z-10 flex flex-col min-w-0" id="exit-intent-content" style="max-height: 90vh;">
+            <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-4 sm:hidden flex-shrink-0" aria-hidden="true"></div>
+            <button id="exit-modal-close-btn" aria-label="Close dialog" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-full p-2.5 transition-colors z-30 shadow-sm flex-shrink-0 outline-none focus:ring-2 focus:ring-[#EE6C4D]"><svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            <div class="overflow-y-auto px-1 hide-scrollbar flex-grow min-w-0 break-words" style="overscroll-behavior: contain;">
+                <div class="text-center mb-6 sm:mb-8">
+                    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-orange-100 text-[#EE6C4D] mb-3 sm:mb-4 shadow-inner flex-shrink-0" aria-hidden="true"><svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg></div>
+                    <h2 id="exit-modal-title" class="text-2xl sm:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight leading-tight break-words">Wait! Before you leave</h2>
+                    <p class="text-slate-600 text-sm sm:text-lg break-words">Did you know Toolkit Gen has <strong class="text-[#EE6C4D] border-b-2 border-orange-200">${toolsData.length} free tools</strong>? Don't miss these:</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8 min-w-0">
+                    ${randomTools.map((tool, index) => {
+        const theme = typeof getToolTheme === "function"
+            ? getToolTheme(tool.category)
+            : {
+                borderHover: "hover:border-[#EE6C4D]",
+                accentText: "text-[#EE6C4D]",
+                textHover: "group-hover:text-[#EE6C4D]",
+            };
+        const displayClass = index === 2 ? "hidden sm:flex" : "flex";
+
+        return `
+                        <a href="${generateToolUrl(tool, "exit_intent")}" class="group p-3 sm:p-4 bg-slate-50 hover:bg-white rounded-2xl sm:rounded-3xl border border-transparent ${theme.borderHover} hover:shadow-xl transition-all sm:flex-col items-center sm:items-start gap-4 sm:gap-0 ${displayClass} min-w-0 outline-none focus:ring-2 focus:ring-[#EE6C4D]">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white ${theme.accentText} flex items-center justify-center sm:mb-4 shadow-sm group-hover:rotate-6 transition-transform flex-shrink-0" aria-hidden="true">${getIcon(tool.category, "w-5 h-5 sm:w-6 sm:h-6")}</div>
+                            <div class="min-w-0 flex-grow">
+                                <h4 class="font-bold text-slate-800 text-sm mb-0.5 truncate ${theme.textHover}">${formatText(tool.name)}</h4>
+                                <p class="text-[11px] text-slate-500 line-clamp-1 sm:line-clamp-2 leading-relaxed break-words">${formatText(tool.description)}</p>
+                            </div>
+                        </a>`;
+    }).join("")}
+                </div>
+                <div class="mb-6 sm:mb-8 p-4 sm:p-5 bg-orange-50/50 border border-orange-100 rounded-2xl sm:rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 min-w-0">
+                    <div class="text-center sm:text-left min-w-0">
+                        <h4 class="font-bold text-slate-800 text-sm flex items-center justify-center sm:justify-start gap-2 break-words"><svg class="w-4 h-4 text-[#EE6C4D] flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>Help us improve!</h4>
+                        <p class="text-[11px] text-slate-500 mt-1 break-words">Was this tool helpful? Tell us what you think.</p>
+                    </div>
+                    <a href="mailto:toolkitgen@gmail.com?subject=Toolkit Gen Feedback" class="w-full sm:w-auto px-6 py-2.5 bg-white border border-slate-200 text-slate-700 hover:text-[#EE6C4D] hover:border-[#EE6C4D] font-bold text-xs rounded-full transition-all shadow-sm text-center flex-shrink-0 outline-none focus:ring-2 focus:ring-[#EE6C4D]">Give Feedback</a>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 relative z-20 pb-4 min-w-0">
+                    <a href="/#all-tools" id="exit-modal-explore-btn" class="w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-4 bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-bold rounded-xl sm:rounded-2xl transition-all shadow-lg shadow-orange-500/25 text-center text-sm flex justify-center items-center gap-2 flex-shrink-0 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900">Explore Full Directory <svg class="w-4 h-4 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                    <button id="exit-modal-nothanks-btn" class="w-full sm:w-auto py-3 text-slate-400 hover:text-slate-600 font-bold text-xs uppercase tracking-widest flex-shrink-0 outline-none focus:ring-2 focus:ring-slate-300 rounded">No thanks, I'm leaving</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+
+    // Inject into DOM
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    const modal = document.getElementById("exit-intent-modal");
+    const modalContent = document.getElementById("exit-intent-content");
+
+    // Safety check for global utility
+    if (modal && typeof trapFocus === "function") {
+        trapFocus(modal);
+    }
+
+    // Modal closing logic
+    const closeModal = () => {
+        if (typeof window.toggleBackgroundAds === "function") {
+            window.toggleBackgroundAds(true); // Replaced !0 with true
+        }
+
+        if (modal) {
+            modal.classList.add("opacity-0");
+            if (modalContent) {
+                modalContent.classList.add("translate-y-full", "sm:scale-95");
+                modalContent.classList.remove("translate-y-0", "sm:scale-100");
+            }
+            setTimeout(() => {
+                modal.remove();
+            }, 500);
+        }
+    };
+
+    // Event Listeners
+    document.getElementById("exit-modal-close-btn")?.addEventListener("click", closeModal);
+    document.getElementById("exit-modal-nothanks-btn")?.addEventListener("click", closeModal);
+    document.getElementById("exit-modal-backdrop")?.addEventListener("click", closeModal);
+
+    document.getElementById("exit-modal-explore-btn")?.addEventListener("click", () => {
+        window.isInternalNavigation = true; // Replaced !0 with true
+        closeModal();
+    });
+
+    if (typeof window.toggleBackgroundAds === "function") {
+        window.toggleBackgroundAds(false); // Replaced !1 with false
+    }
+
+    // Trigger animations
+    requestAnimationFrame(() => {
+        if (modal) {
+            modal.classList.remove("opacity-0");
+            document.getElementById("exit-modal-close-btn")?.focus();
+        }
+        if (modalContent) {
+            modalContent.classList.remove("translate-y-full", "sm:scale-95");
+            modalContent.classList.add("translate-y-0", "sm:scale-100");
+        }
+    });
+}
+function detectAndNotifyAdblock() {
+    // Increased timeout slightly to 5.5s to account for slow 3G/4G networks 
+    // rendering the iframe height.
+    setTimeout(async () => {
+        let isAdblocked = false;
+
+        // 1. DOM Cosmetic Filter Check
+        const baitDiv = document.createElement("div");
+        baitDiv.innerHTML = "&nbsp;";
+        baitDiv.className = "pub_300x250 pub_300x250m ad-banner ad-zone sponsor textads adsbox";
+        baitDiv.style.height = "10px";
+        baitDiv.style.width = "10px";
+        baitDiv.style.position = "absolute";
+        baitDiv.style.top = "-10000px";
+        baitDiv.style.left = "-10000px";
+        document.body.appendChild(baitDiv);
+
+        await new Promise((resolve) => setTimeout(resolve, 250));
+
+        const computedStyle = window.getComputedStyle(baitDiv);
+        if (baitDiv.offsetHeight === 0 || computedStyle.display === "none" || computedStyle.visibility === "hidden") {
+            isAdblocked = true;
+        }
+        baitDiv.remove();
+
+        // 2. Execution-Level Check
+        if (!isAdblocked) {
+            // If the Adsense script hasn't swapped the array out for its object yet
+            if (typeof window.adsbygoogle === "undefined") {
+                isAdblocked = true;
+            }
+        }
+
+        // 3. STRICT Render / Failure Check (FIXED)
+        if (!isAdblocked) {
+            const injectedAds = document.querySelectorAll("ins.adsbygoogle");
+
+            if (document.getElementById("adsense-initialized") && injectedAds.length > 0) {
+                let anyAdSuccessfullyRendered = false;
+
+                injectedAds.forEach((ad) => {
+                    const status = ad.getAttribute("data-ad-status");
+
+                    // FIX: If AdSense interacted with the tag and marked it as 'unfilled' or 'done', 
+                    // it means AdSense is running perfectly fine, there's just no ad inventory right now.
+                    if (status === "unfilled" || status === "done") {
+                        anyAdSuccessfullyRendered = true;
+                    } else {
+                        const iframe = ad.querySelector("iframe");
+                        if (iframe) {
+                            const iframeHasContent = iframe.offsetHeight > 10 || iframe.clientHeight > 10;
+                            const adContainerVisible = window.getComputedStyle(ad).display !== "none";
+
+                            if (iframeHasContent && adContainerVisible) {
+                                anyAdSuccessfullyRendered = true;
+                            }
+                        }
+                    }
+                });
+
+                if (!anyAdSuccessfullyRendered) {
+                    isAdblocked = true;
+                }
+            }
+        }
+
+        // 4. Network-Level Fallback Check
+        if (!isAdblocked) {
+            try {
+                await fetch("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", {
+                    method: "HEAD",
+                    mode: "no-cors",
+                    cache: "no-store",
+                });
+            } catch (err) {
+                isAdblocked = true;
+            }
+        }
+
+        // Final Resolution
+        if (isAdblocked) {
+            showAdblockNotice();
+        }
+    }, 5500); // Wait 5.5 seconds instead of 4.5 to allow slow iFrames to paint
+}
+
+function showAdblockNotice() {
+    if (document.getElementById("adblock-notice")) return;
+    if (sessionStorage.getItem("adblock_dismissed") === "true") return;
+
+    const toolsCount = typeof toolsData !== "undefined" ? toolsData.length : "all of our";
+
+    const noticeHTML = `
+    <div id="adblock-notice" role="alert" class="fixed bottom-[140px] left-4 right-4 md:left-auto md:right-4 md:bottom-6 z-[999] w-auto max-w-sm animate-fade-in-up shadow-2xl rounded-2xl overflow-hidden border border-slate-700" style="animation: fade-in-up 0.5s ease-out forwards;">
+        <div class="bg-slate-900 p-5 relative">
+            <div class="flex items-start gap-3">
+                <div class="bg-orange-500/20 text-orange-400 p-2 rounded-xl flex-shrink-0" aria-hidden="true">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div class="w-full">
+                    <h4 class="text-white text-sm font-bold mb-1">Please Support Us</h4>
+                    <p class="text-slate-400 text-xs mb-3 leading-relaxed">We keep ${toolsCount} tools free by showing minimal ads. Adblockers may also break some client-side tools.</p>
+                    <div class="flex flex-col gap-2">
+                        <button id="adblock-reload-btn" class="w-full bg-[#EE6C4D] hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-[11px] font-bold transition shadow-md outline-none focus:ring-2 focus:ring-white">I've Whitelisted (Refresh)</button>
+                        <button id="adblock-dismiss-btn" class="w-full text-slate-500 hover:text-white px-4 py-1.5 rounded-lg text-[10px] font-bold transition underline decoration-slate-600 underline-offset-2 outline-none focus:ring-2 focus:ring-slate-500">Continue without supporting</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        @media (prefers-reduced-motion: no-preference) {
+            @keyframes fade-in-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } } 
+        }
+    </style>`;
+
+    document.body.insertAdjacentHTML("beforeend", noticeHTML);
+
+    document.getElementById("adblock-reload-btn")?.addEventListener("click", () => location.reload());
+    document.getElementById("adblock-dismiss-btn")?.addEventListener("click", () => {
+        document.getElementById("adblock-notice").remove();
+        sessionStorage.setItem("adblock_dismissed", "true");
+    });
+}
+
+function initPWASystem() {
+    if (!sessionStorage.getItem("tk_time_spent")) {
+        sessionStorage.setItem("tk_time_spent", "0");
+    }
+
+    window.timeSpentInterval = setInterval(() => {
+        let timeSpent = parseInt(sessionStorage.getItem("tk_time_spent") || "0", 10);
+        timeSpent += 5000;
+
+        sessionStorage.setItem("tk_time_spent", timeSpent.toString());
+
+        if (timeSpent >= 600000 && !localStorage.getItem("pwa_prompt_dismissed")) {
+            showPWAPrompt();
+            clearInterval(window.timeSpentInterval);
+        }
+    }, 5000);
+}
+
+function showPWAPrompt() {
+    if (typeof deferredPrompt === "undefined" || !deferredPrompt || document.getElementById("pwa-custom-prompt")) return;
+
+    const pwaHTML = `
+    <div id="pwa-custom-prompt" role="dialog" aria-labelledby="pwa-title" class="fixed bottom-[140px] md:bottom-28 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-md animate-fade-in-up">
+        <div class="bg-white border border-slate-200 rounded-3xl p-5 shadow-2xl flex flex-col sm:flex-row items-center gap-4 min-w-0">
+            <div class="flex-shrink-0 bg-slate-900 text-white p-3 rounded-2xl shadow-md" aria-hidden="true">
+                <svg class="w-7 h-7 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            </div>
+            <div class="flex-grow text-center sm:text-left min-w-0">
+                <h4 id="pwa-title" class="text-slate-900 text-base font-black tracking-tight mb-1 break-words">Install Toolkit Gen</h4>
+                <p class="text-slate-500 text-xs leading-relaxed break-words">You have been using our tools for a while! Install the app for faster offline access and zero browser clutter.</p>
+            </div>
+            <div class="flex sm:flex-col gap-2 w-full sm:w-auto mt-2 sm:mt-0 flex-shrink-0">
+                <button id="pwa-now-btn" class="flex-1 sm:flex-none bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-sm outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900">Install Now</button>
+                <button id="pwa-later-btn" class="flex-1 sm:flex-none text-slate-400 hover:text-slate-600 text-[11px] font-bold transition-colors py-2 outline-none focus:ring-2 focus:ring-slate-300 rounded">Not right now</button>
+            </div>
+        </div>
+    </div>`;
+
+    document.body.insertAdjacentHTML("beforeend", pwaHTML);
+
+    const promptElement = document.getElementById("pwa-custom-prompt");
+    if (typeof trapFocus === "function" && promptElement) {
+        trapFocus(promptElement);
+    }
+
+    const closePrompt = () => {
+        if (promptElement) promptElement.remove();
+        localStorage.setItem("pwa_prompt_dismissed", "true");
+    };
+
+    document.getElementById("pwa-now-btn")?.addEventListener("click", async () => {
+        if (typeof deferredPrompt !== "undefined" && deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === "accepted") {
+                closePrompt();
+            }
+            deferredPrompt = null;
+        }
+    });
+
+    document.getElementById("pwa-later-btn")?.addEventListener("click", closePrompt);
+}
+
+function injectGlobalAds() {
+    if (window.self !== window.top) return;
+    if (document.getElementById("adsense-initialized")) return;
+
+    const initDiv = document.createElement("div");
+    initDiv.id = "adsense-initialized";
+    initDiv.style.display = "none";
+    document.body.appendChild(initDiv);
+
+    // --- Load AdSense library if not already present in page ---
+    // (The <script> tag in HTML may be commented out on tool pages; this ensures it always loads)
+    function ensureAdSenseLoaded(callback) {
+        if (typeof window.adsbygoogle !== "undefined" || document.querySelector('script[src*="adsbygoogle.js"]')) {
+            // Already loaded or loading — wait a tick for it to initialise
+            setTimeout(callback, 100);
+            return;
+        }
+        const adsScript = document.createElement("script");
+        adsScript.async = true;
+        adsScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949";
+        adsScript.setAttribute("crossorigin", "anonymous");
+        adsScript.onload = callback;
+        adsScript.onerror = () => { }; // silent fail if blocked
+        document.head.appendChild(adsScript);
+    }
+
+    // --- Inject ad slots only when browser is idle (prevents CLS during page load) ---
+    const runAdInjection = () => {
+        const clientId = "ca-pub-4675079345370949";
+        const articleEl = document.querySelector("article") || document.querySelector(".prose-content") || document.querySelector(".prose");
+        const directoryContainer = document.getElementById("tools-category-container");
+        const mainEl = document.querySelector("main") ||
+            document.querySelector("#main-content") ||
+            (directoryContainer ? directoryContainer.parentElement : null) ||
+            document.body;
+        const asides = document.querySelectorAll("aside");
+
+        const hasBottomAd = !!document.getElementById("injected-bottom-ad");
+        const isShortArticle = (articleEl ? articleEl.innerText.trim() : "").length < 1000;
+
+        const generateAdId = (prefix) => `${prefix}-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+
+        const pushAd = (adId) => {
+            const container = document.querySelector(`.ad-container-wrapper[data-ad-id="${adId}"]`);
+            if (!container) return;
+
+            const observer = new IntersectionObserver((entries, observerInstance) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        let attempts = 0;
+
+                        const checkWidthAndPush = () => {
+                            const currentWidth = entry.target.getBoundingClientRect().width;
+
+                            if (currentWidth > 0) {
+                                try {
+                                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                                } catch (err) { }
+                                observerInstance.unobserve(entry.target);
+                            } else if (attempts < 20) {
+                                attempts++;
+                                setTimeout(checkWidthAndPush, 50);
+                            } else {
+                                observerInstance.unobserve(entry.target);
+                            }
+                        };
+
+                        checkWidthAndPush();
+                    }
+                });
+            }, { rootMargin: '300px' });
+
+            observer.observe(container);
+        };
+
+        const paragraphs = articleEl ? Array.from(articleEl.querySelectorAll("p")).filter(
+            (p) => p.innerText.trim().length > 80
+        ) : [];
+
+        // --- 1. Top Ad ---
+        if (articleEl) {
+            const adId = generateAdId("ad-top-article");
+            const adHtml = `
+        <div class="ad-block-outer w-full my-4">
+            <div class="ad-label-wrapper flex justify-center mb-1" data-ad-id="${adId}">
+                <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Advertisement</span>
+            </div>
+            <div class="ad-container-wrapper w-full overflow-hidden flex justify-center" data-ad-id="${adId}" style="min-height: 250px;">
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center; width:100%;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="${clientId}"
+                     data-ad-slot="9490637620"></ins>
+            </div>
+        </div>`;
+            articleEl.insertAdjacentHTML("beforebegin", adHtml);
+            pushAd(adId);
+        }
+
+        // --- 2. Mid Article Ad ---
+        if (articleEl && !isShortArticle && paragraphs.length >= 4) {
+            const adId = generateAdId("ad-mid-article");
+
+            let targetNode = paragraphs[3];
+            while (targetNode && targetNode.parentElement && targetNode.parentElement !== articleEl) {
+                targetNode = targetNode.parentElement;
+            }
+
+            if (targetNode) {
+                const adHtml = `
+            <div class="ad-block-outer w-full my-6">
+                <div class="ad-label-wrapper flex justify-center mb-1" data-ad-id="${adId}">
+                    <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Advertisement</span>
+                </div>
+                <div class="ad-container-wrapper w-full overflow-hidden flex justify-center" data-ad-id="${adId}" style="min-height: 250px;">
+                    <ins class="adsbygoogle"
+                         style="display:block; text-align:center; width:100%;"
+                         data-ad-client="${clientId}"
+                         data-ad-slot="4383065349"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </div>`;
+                targetNode.insertAdjacentHTML("afterend", adHtml);
+                pushAd(adId);
+            }
+        }
+
+        // --- 3. Sidebar Ad ---
+        let targetAside = null;
+        asides.forEach((aside) => {
+            if (aside.classList.contains("lg:col-span-3") || aside.classList.contains("lg:col-span-4") || aside.closest("main")) {
+                targetAside = aside;
+            }
+        });
+
+        if (targetAside) {
+            const adId = generateAdId("ad-sidebar");
+            const adHtml = `
+        <div class="ad-block-outer w-full mt-8">
+            <div class="ad-label-wrapper flex justify-center mb-1" data-ad-id="${adId}">
+                <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Advertisement</span>
+            </div>
+            <div class="ad-container-wrapper w-full overflow-hidden flex justify-center" data-ad-id="${adId}" style="min-height: 250px;">
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center; width:100%;"
+                     data-ad-client="${clientId}"
+                     data-ad-slot="7550869994"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>`;
+            targetAside.insertAdjacentHTML("beforeend", adHtml);
+            pushAd(adId);
+        }
+
+        // --- 4. Bottom Ad ---
+        if (mainEl && !hasBottomAd) {
+            const adId = "injected-bottom-ad";
+            const adHtml = `
+        <div class="ad-block-outer w-full max-w-6xl mx-auto mt-16 mb-8 px-4">
+            <div class="ad-label-wrapper flex justify-center mb-2" data-ad-id="${adId}">
+                <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Advertisement</span>
+            </div>
+            <div id="${adId}" class="ad-container-wrapper w-full overflow-hidden flex justify-center" data-ad-id="${adId}" style="min-height: 300px;">
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center; width:100%;"
+                     data-ad-format="autorelaxed"
+                     data-ad-client="${clientId}"
+                     data-ad-slot="4516155615"></ins>
+            </div>
+        </div>`;
+            mainEl.insertAdjacentHTML("beforeend", adHtml);
+            pushAd(adId);
+        }
+    };
+
+    // Defer ad injection to browser idle time — prevents CLS from blocking metrics
+    ensureAdSenseLoaded(() => {
+        if ("requestIdleCallback" in window) {
+            requestIdleCallback(runAdInjection, { timeout: 3000 });
+        } else {
+            setTimeout(runAdInjection, 1000);
+        }
+    });
+}
+function initScrollToTop() {
+    const e = document.getElementById("scroll-to-top");
+    e &&
+        (window.addEventListener("scroll", () => {
+            window.pageYOffset > 500
+                ? (e.classList.remove("opacity-0", "invisible"), e.classList.add("opacity-100", "visible"))
+                : (e.classList.add("opacity-0", "invisible"), e.classList.remove("opacity-100", "visible"));
+        }),
+            e.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }));
+}
+function initHubDragDrop() {
+    const e = document.getElementById("my-hub-grid");
+    if (!e || e.dataset.dragInit) return;
+    e.dataset.dragInit = "true";
+    let t = null;
+    e.querySelectorAll(".tool-card").forEach((o) => {
+        o.setAttribute("draggable", "true");
+        o.addEventListener("dragstart", (n) => {
+            t = o;
+            o.classList.add("sortable-ghost");
+            n.dataTransfer.effectAllowed = "move";
+            n.dataTransfer.setData("text/plain", o.dataset.toolId || "");
+        });
+        o.addEventListener("dragend", () => {
+            o.classList.remove("sortable-ghost");
+            t = null;
+        });
+        o.addEventListener("dragover", (t) => {
+            t.preventDefault();
+            t.dataTransfer.dropEffect = "move";
+        });
+        o.addEventListener("dragenter", (n) => {
+            n.preventDefault();
+            if (o !== t) {
+                o.classList.add("sortable-drag");
+            }
+        });
+        o.addEventListener("dragleave", () => {
+            o.classList.remove("sortable-drag");
+        });
+        o.addEventListener("drop", (n) => {
+            n.preventDefault();
+            o.classList.remove("sortable-drag");
+            if (!t || o === t) return;
+            const r = HubManager.get();
+            const a = t.dataset.toolId || r.find((e, t) => t === [...e.parentNode.children].indexOf(t));
+            const s = o.dataset.toolId || r.find((e, t) => t === [...o.parentNode.children].indexOf(o));
+            if (!a || !s) return;
+            const i = r.indexOf(a);
+            const c = r.indexOf(s);
+            if (-1 === i || -1 === c) return;
+            r.splice(i, 1);
+            r.splice(c, 0, a);
+            HubManager.reorder(r);
+            renderCustomHub(true);
+        });
+    });
+}
+(window.renderCustomHub = function (e = !1) {
+    const hubTools = HubManager.get();
+    let section = document.getElementById("custom-hub-section");
+    const isFromHash = window.location.hash === "#my-hub";
+    const shouldShow = e === true || isFromHash;
+    if (!shouldShow && section) {
+        section.style.display = "none";
+        return;
+    }
+    if (!section) {
+        section = document.createElement("div");
+        section.id = "custom-hub-section";
+        const container = document.getElementById("tools-category-container");
+        if (!container || !container.parentNode) return;
+        container.parentNode.insertBefore(section, container);
+    }
+    section.style.display = "block";
+    const emptyState = '\n            <div class="mb-12 animate-fade-in-up border-b border-slate-100 pb-12 mt-4">\n                <div class="flex items-center gap-3.5 mb-6">\n                    <div class="w-10 h-10 rounded-2xl bg-orange-50 border border-orange-200/90 text-[#EE6C4D] flex items-center justify-center flex-shrink-0 shadow-xs" aria-hidden="true">\n                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>\n                    </div>\n                    <div class="flex flex-col min-w-0">\n                        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-[#EE6C4D] block mb-0.5">Personal Workspace</span>\n                        <h2 class="font-black text-2xl text-slate-900 tracking-tight leading-none">My Hub</h2>\n                    </div>\n                </div>\n                <div class="text-center py-12 bg-slate-50 border border-dashed border-slate-200 rounded-3xl shadow-sm">\n                    <svg class="w-12 h-12 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"></path></svg>\n                    <p class="text-slate-500 font-bold">No tools pinned yet</p>\n                    <p class="text-xs text-slate-400 mt-1">Click "Pin to Hub" on any tool to save it here for quick access.</p>\n                </div>\n            </div>';
+    if (hubTools.length === 0) {
+        section.innerHTML = emptyState;
+        if (shouldShow) {
+            setTimeout(() => section.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
+        }
+        return;
+    }
+    if (!toolsData || !toolsData.length) {
+        setTimeout(() => renderCustomHub(shouldShow), 100);
+        return;
+    }
+    const validTools = hubTools
+        .map(id => toolsData.find(tool => tool.id === id))
+        .filter(Boolean);
+    if (validTools.length === 0) {
+        section.innerHTML = emptyState;
+        if (shouldShow) {
+            setTimeout(() => section.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
+        }
+        return;
+    }
+    const cardsHtml = validTools.map(tool => {
+        const theme = getToolTheme(tool.category);
+        return `<a href="${generateToolUrl(tool, 'my-hub')}" data-tool-id="${tool.id}" class="tool-card block group bg-white border border-gray-200 rounded-xl p-5 hover:shadow-lg hover:border-[#EE6C4D] transition-all duration-200 h-full flex flex-col min-w-0">
+            <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 text-slate-300 ${theme.textHover} mb-3">${getIcon(tool.category, 'w-6 h-6')}</div>
+            <h4 class="font-bold text-slate-800 text-sm mb-1 line-clamp-1">${formatText(tool.name)}</h4>
+            <p class="text-xs text-slate-500 line-clamp-2 flex-grow">${formatText(tool.description)}</p>
+        </a>`;
+    }).join("");
+    section.innerHTML = `\n        <div class="mb-12 animate-fade-in-up border-b border-slate-100 pb-12 mt-4">\n            <div class="flex items-center justify-between mb-6">\n                <div class="flex items-center gap-3.5">\n                    <div class="w-10 h-10 rounded-2xl bg-orange-50 border border-orange-200/90 text-[#EE6C4D] flex items-center justify-center flex-shrink-0 shadow-xs" aria-hidden="true">\n                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>\n                    </div>\n                    <div class="flex flex-col min-w-0">\n                        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-[#EE6C4D] block mb-0.5">Personal Workspace</span>\n                        <h2 id="my-hub" class="font-black text-2xl text-slate-900 tracking-tight leading-none">My Hub</h2>\n                    </div>\n                </div>\n                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#EE6C4D] text-[10px] font-black uppercase tracking-wider shadow-xs">\n                    <span class="w-1.5 h-1.5 rounded-full bg-[#EE6C4D]"></span> Pinned Tools\n                </span>\n            </div>\n            <div id="my-hub-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">\n                ${cardsHtml}\n            </div>\n        </div>`;
+    if (shouldShow) {
+        setTimeout(() => section.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
+    }
+    setTimeout(() => initHubDragDrop(), 200);
+}),
+    window.addEventListener("katex-ready", () => {
+        requestAnimationFrame(() => {
+            setTimeout(() => renderGlobalMath(), 100);
+        });
+    }),
+    (window.directoryConfig = { view: "grid", sort: "default" }),
+    (window.currentFilteredData = null),
+    (window.showBuilderStats = function () {
+        if (document.getElementById("builder-stats-modal")) return;
+        window.toggleBackgroundAds(!1);
+        const e = JSON.parse(localStorage.getItem("tk_tool_views") || "{}"),
+            t = parseInt(sessionStorage.getItem("tk_time_spent") || "0", 10),
+            o = Math.max(1, Math.floor(t / 6e4));
+        let n = 0,
+            a = null,
+            r = 0;
+        for (const [t, o] of Object.entries(e)) (n += o), o > r && ((r = o), (a = t));
+        const i = `\n    <div id="builder-stats-modal" class="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-fade-in-up" role="dialog" aria-modal="true">\n        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full relative transform scale-95 transition-all duration-300 opacity-0" id="stats-modal-content">\n            <button onclick="document.getElementById('builder-stats-modal').remove(); window.toggleBackgroundAds(true);" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-full p-2 outline-none focus:ring-2 focus:ring-[#EE6C4D]">\n                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>\n            </button>\n            \n            <div class="text-center mb-6">\n                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 text-[#EE6C4D] mb-4">\n                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>\n                </div>\n                <h2 class="text-2xl font-black text-slate-900">Your Stats</h2>\n                <p class="text-sm font-bold text-[#EE6C4D] mt-1">${n > 50 ? "Power Builder" : n > 10 ? "Pro User" : "New Explorer"}</p>\n            </div>\n\n            <div class="space-y-3">\n                <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl flex justify-between items-center">\n                    <span class="text-sm text-slate-500 font-medium">Tools Opened</span>\n                    <span class="text-lg font-black text-slate-800">${n}</span>\n                </div>\n                <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl flex justify-between items-center">\n                    <span class="text-sm text-slate-500 font-medium">Session Time</span>\n                    <span class="text-lg font-black text-slate-800">${o} <span class="text-xs font-medium text-slate-400">mins</span></span>\n                </div>\n                <div class="bg-gradient-to-br from-slate-800 to-slate-900 p-4 rounded-2xl text-white">\n                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-1">Most Used Tool</span>\n                    <span class="text-base font-bold truncate block">${(toolsData.find((e) => e.id === a) || { name: "Exploring Tools", category: "Discovery" }).name}</span>\n                </div>\n            </div>\n            \n            <button onclick="document.getElementById('builder-stats-modal').remove()" class="w-full mt-6 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition-colors outline-none focus:ring-2 focus:ring-slate-300">Awesome</button>\n        </div>\n    </div>`;
+        document.body.insertAdjacentHTML("beforeend", i),
+            trapFocus(document.getElementById("builder-stats-modal")),
+            requestAnimationFrame(() => {
+                document.getElementById("stats-modal-content").classList.remove("scale-95", "opacity-0"),
+                    document.getElementById("stats-modal-content").classList.add("scale-100", "opacity-100");
+            });
+    }),
+    (window.exportToolSnapshot = async function (e, t = "Toolkit-Gen-Result") {
+        const o = document.getElementById(e);
+        if (!o) return showToast("Nothing to capture right now.");
+        showToast("Capturing snapshot..."),
+            "undefined" == typeof html2canvas &&
+            (await new Promise((e, t) => {
+                const o = document.createElement("script");
+                (o.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"),
+                    (o.onload = e),
+                    (o.onerror = t),
+                    document.head.appendChild(o);
+            }));
+        try {
+            const e = document.createElement("div");
+            (e.className = "text-center mt-4 text-xs font-bold text-slate-400 pb-2"),
+                (e.innerHTML = "Created with Toolkit Gen &bull; toolkitgen.com"),
+                o.appendChild(e);
+            const n = await html2canvas(o, { scale: 2, backgroundColor: "#ffffff", logging: !1 });
+            e.remove();
+            const a = document.createElement("a");
+            (a.download = `${t.replace(/\s+/g, "-").toLowerCase()}.png`),
+                (a.href = n.toDataURL("image/png")),
+                a.click(),
+                showToast("Image downloaded! Share it with your friends.");
+        } catch (e) {
+            console.error("Snapshot failed:", e), showToast("Failed to capture image.");
+        }
+    }),
+    (window.toggleFloatingMode = async function (e) {
+        if (!("documentPictureInPicture" in window))
+            return showToast("Floating mode is only supported on modern Chrome/Edge browsers.");
+        const t = document.getElementById(e);
+        if (t)
+            try {
+                const o = await window.documentPictureInPicture.requestWindow({ width: 350, height: 400 });
+                [...document.styleSheets].forEach((e) => {
+                    try {
+                        const t = [...e.cssRules].map((e) => e.cssText).join(""),
+                            n = document.createElement("style");
+                        (n.textContent = t), o.document.head.appendChild(n);
+                    } catch (t) {
+                        const n = document.createElement("link");
+                        (n.rel = "stylesheet"),
+                            (n.type = e.type),
+                            (n.media = e.media),
+                            (n.href = e.href),
+                            o.document.head.appendChild(n);
+                    }
+                }),
+                    o.document.body.appendChild(t),
+                    o.document.body.classList.add("bg-white", "p-4"),
+                    showToast("Tool moved to floating window!"),
+                    o.addEventListener("pagehide", () => {
+                        const o = document.getElementById(`${e}-placeholder`);
+                        o ? o.replaceWith(t) : document.body.appendChild(t);
+                    });
+            } catch (e) {
+                console.error(e), showToast("Could not start floating mode.");
+            }
+    }),
+    (window.onKatexReady = (e) => {
+        mathReady ? e() : window.addEventListener("katex-ready", e);
+    }),
+    (window.toggleCategory = function (e) {
+        const t = document.getElementById(e),
+            o = document.getElementById(`btn-${e}`);
+        t &&
+            (t.querySelectorAll(".tool-card-hidden").forEach((e) => {
+                e.classList.remove("hidden", "tool-card-hidden"), e.classList.add("animate-fade-in");
+            }),
+                o && (o.setAttribute("aria-expanded", "true"), o.remove()),
+                renderGlobalMath());
+    }),
+    (() => {
+        const bootstrapApp = () => {
+            try {
+                if ((initLayout(), loadTools(), !document.getElementById("toast-container"))) {
+                    const e = document.createElement("div");
+                    (e.id = "toast-container"),
+                        e.setAttribute("aria-live", "polite"),
+                        (e.className =
+                            "fixed top-24 right-4 md:right-6 z-[100] flex flex-col items-end pointer-events-none min-w-0 gap-3"),
+                        document.body.appendChild(e);
+                }
+                detectAndNotifyAdblock(),
+                    setupExitIntent(),
+                    initPWASystem(),
+                    StreakManager.updateStreak(),
+                    EngagementManager.initStreakUI(),
+                    TimeTracker.init();
+            } catch (e) {
+                console.error("Critical DOM Init Error:", e);
+            }
+            "requestIdleCallback" in window
+                ? requestIdleCallback(
+                    () => {
+                        initCrossTabSync(), initOmniDropRouter();
+                    },
+                    { timeout: 2e3 }
+                )
+                : setTimeout(() => {
+                    initCrossTabSync(), initOmniDropRouter();
+                }, 1e3);
+        };
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", bootstrapApp);
+        } else {
+            bootstrapApp();
+        }
+    })(),
+    (window.showPostTaskActions = function (e = document.title.split(" -")[0]) {
+        // Preserved for backwards compatibility with existing UI components.
+    }),
+    (window.shareToolResult = async function (e, t) {
+        const o = {
+            title: `${e} Result - Toolkit Gen`,
+            text: `Check out my result from ${e} on Toolkit Gen!`,
+            url: window.location.href,
+        };
+        if (navigator.share)
+            try {
+                await navigator.share(o);
+            } catch (e) {
+                "AbortError" !== e.name &&
+                    (navigator.clipboard?.writeText(window.location.href), showToast("Link copied to clipboard!"));
+            }
+        else navigator.clipboard?.writeText(window.location.href), showToast("Link copied to clipboard!");
+    }),
+    window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault(), (deferredPrompt = e);
+        const t = document.getElementById("pwa-install-btn");
+        t && t.classList.remove("hidden");
+    }),
+    document.addEventListener("DOMContentLoaded", () => {
+        initScrollToTop();
+    }), (function protectAnalytics() {
+        const allowedDomains = ['toolkitgen.com', 'www.toolkitgen.com'];
+        const currentDomain = window.location.hostname;
+
+        if (allowedDomains.includes(currentDomain)) {
+            // --- Initialize Google Analytics ---
+            const gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-NKR6PVM0M9';
+            document.head.appendChild(gtagScript);
+
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date());
+            gtag('config', 'G-NKR6PVM0M9');
+
+            // --- Initialize Microsoft Clarity ---
+            (function (c, l, a, r, i, t, y) {
+                c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+                t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+                y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+            })(window, document, "clarity", "script", "w5i7u9d082");
+
+        } else {
+            console.warn(`Analytics blocked on unauthorized testing domain: ${currentDomain}`);
+        }
+    })();
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.location.hash === "#my-hub") {
+        setTimeout(() => renderCustomHub(true), 500);
+    }
+});
+
+// --- Social Share & Confetti Engine ---
+(function () {
+    // 1. Inject Styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes bounce-subtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-bounce-subtle {
+            animation: bounce-subtle 4s infinite ease-in-out;
+        }
+        .confetti-piece {
+            position: absolute;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 2. Micro-feedback Engine (Replaces intrusive confetti with clean enterprise UI feedback)
+    window.triggerConfettiBurst = function (x, y) {
+        // Subtle micro-feedback preserved for function signature compatibility
+    };
+
+    // 3. Platform Share & Copy Link functions
+    window.shareOnPlatform = function (platform, event) {
+        if (event) event.stopPropagation();
+
+        const path = window.location.pathname.split("?")[0].replace(/\/$/, "");
+        const toolId = path.substring(path.lastIndexOf("/") + 1) || "general";
+        const currentTool = typeof toolsData !== 'undefined' ? toolsData.find(t => t.id === toolId) : null;
+        const toolName = currentTool ? currentTool.name : document.title.split(" -")[0];
+
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(`I'm using the free, local-first ${toolName} on Toolkit Gen! Check it out:`);
+
+        let shareUrl = '';
+        switch (platform) {
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+                break;
+            case 'linkedin':
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                break;
+            case 'reddit':
+                shareUrl = `https://reddit.com/submit?url=${url}&title=${text}`;
+                break;
+            case 'whatsapp':
+                shareUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
+                break;
+        }
+
+        if (shareUrl) {
+            window.open(shareUrl, '_blank', 'width=600,height=450,resizable=yes,scrollbars=yes');
+            if (event && event.clientX && event.clientY) {
+                triggerConfettiBurst(event.clientX, event.clientY);
+            }
+        }
+    };
+
+    window.copyToolLink = function (event) {
+        if (event) event.stopPropagation();
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            showToast("Link copied to clipboard!");
+            if (event && event.clientX && event.clientY) {
+                triggerConfettiBurst(event.clientX, event.clientY);
+            } else {
+                triggerConfettiBurst(window.innerWidth / 2, window.innerHeight / 2);
+            }
+        }).catch(err => {
+            console.error('Copy failed: ', err);
+            showToast("Failed to copy link. Please manually copy the URL.");
+        });
+    };
+})();

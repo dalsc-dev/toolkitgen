@@ -1,0 +1,112 @@
+<USER_REQUEST>
+now add new tool at /tool bust with same theme of my web 
+
+tools "<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Studio - Image & Text Editor</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- jsPDF for PDF export and password protection -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- JSZip for Bulk ZIP downloads -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Checkerboard pattern to show canvas transparency */
+        .checkerboard {
+            background-color: #1e293b;
+            /* Slate 800 */
+            background-image:
+                linear-gradient(45deg, #0f172a 25%, transparent 25%),
+                linear-gradient(-45deg, #0f172a 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #0f172a 75%),
+                linear-gradient(-45deg, transparent 75%, #0f172a 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        /* Custom scrollbar for sidebar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* Hide arrows on number inputs */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+  
+<truncated 45215 bytes>
+edId);
+            if (el) { el.fontFamily = e.target.value; render(); }
+        });
+
+        uiElements.isDynamic.addEventListener('change', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) {
+                // Ensure only one text field can be the dynamic placeholder at a time
+                elements.forEach(layer => { if (layer.type === 'text') layer.isDynamic = false; });
+                el.isDynamic = e.target.checked;
+                updateUI();
+            }
+        });
+
+        // --- Sliders Listeners ---
+        uiElements.fontWeight.addEventListener('input', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) {
+                el.fontWeight = parseInt(e.target.value);
+                uiElements.fontWeightNum.value = el.fontWeight;
+                render();
+            }
+        });
+
+        uiElements.fontGrade.addEventListener('input', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) {
+                el.fontGrade = parseInt(e.target.value);
+                uiElements.fontGradeNum.value = el.fontGrade;
+                render();
+            }
+        });
+
+        uiElements.letterSpacing.addEventListener('input', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) {
+                el.letterSpacing = parseInt(e.target.value);
+                uiElements.letterSpacingNum.value = el.letterSpacing;
+                render();
+            }
+        });
+
+        uiElements.scale.addEventListener('input', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el && el.type === 'image') {
+                el.scale = parseFloat(e.target.value);
+                el.width = el.baseWidth * el.scale;
+                el.height = el.baseHeight * el.scale
+<truncated 25649 bytes>
+
+NOTE: The output was truncated because it was too long. Use a more targeted query or a smaller range to get the information you need.

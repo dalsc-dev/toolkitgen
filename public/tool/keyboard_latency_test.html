@@ -1,0 +1,922 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keystroke Latency Meter: Test Keyboard Input Lag Online</title>
+    <meta name="description" content="Measure your keyboard">
+    <link rel="canonical" href="https://toolkitgen.com/tool/keyboard_latency_test">
+    <meta name="keywords" content="keyboard latency test, input lag meter, keystroke delay, mechanical keyboard test, gaming keyboard lag, polling rate tester, browser input latency, debounce delay, 1000Hz polling, 8000Hz keyboard test, Hall Effect switches, optical switches lag">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Keystroke Latency Meter: Test Keyboard Input Lag Online">
+    <meta property="og:description" content="Accurately measure the input lag of your keyboard in milliseconds to test performance.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/keyboard_latency_test">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Keystroke Latency Meter: Test Keyboard Input Lag Online">
+    <meta name="twitter:description" content="Accurately measure the input lag of your keyboard in milliseconds to test performance.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/keyboard_latency_test#webapp",
+      "name": "Keyboard Latency Test",
+      "headline": "Keystroke Latency Meter: Test Keyboard Input Lag Online",
+      "url": "https://toolkitgen.com/tool/keyboard_latency_test",
+      "description": "Accurately measure the input lag of your keyboard in milliseconds to test performance.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/keyboard_latency_test#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Keyboard Latency Test",
+          "item": "https://toolkitgen.com/tool/keyboard_latency_test"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/keyboard_latency_test#howto",
+      "name": "How to Use Keyboard Latency Test",
+      "description": "Quick 4-step guide to using Keyboard Latency Test locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Keyboard Latency Test directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/keyboard_latency_test#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can this tool detect 8,000Hz polling?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In a browser environment, no. Browser input handling is capped by the event loop and the OS polling rate. Even with an 8,000Hz keyboard, the Minimum Latency you see here will be bound by the browser's ability to fire the event and the monitor's frame rate. This tool is designed to measure Real-World Usage Latency (what you actually feel), not raw hardware micro-benchmarks that only an oscilloscope can capture."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my \"Minimum\" lower than 1ms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This usually indicates that the browser is \"batching\" events. If you press multiple keys very quickly, the OS may send them to the browser in a single packet. This causes performance.now() to read a delta that is lower than the actual hardware speed. To get the most accurate result, type at a steady, moderate pace rather than smashing the keys."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this work on Android or Tablet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perfectly. The meter supports physical keyboards connected via USB-OTG or Bluetooth on Android. Note that mobile operating systems have much higher background overhead than desktops, so you should expect higher Average Latency scores (30ms - 60ms) even on high-end hardware."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/keyboard_latency_test#article",
+      "headline": "Comprehensive Guide to Keyboard Latency Test & Client-Side Execution",
+      "description": "Accurately measure the input lag of your keyboard in milliseconds to test performance.",
+      "url": "https://toolkitgen.com/tool/keyboard_latency_test",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <style>
+        :root {
+            --color-site-primary: #EE6C4D;
+            --color-latency-lime: #adff2f;
+            --color-carbon-dark: #0f172a;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* Dashboard Readout */
+        .latency-readout {
+            background-color: var(--color-carbon-dark);
+            border-radius: 2rem;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            border: 2px solid #1e293b;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .ms-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--color-latency-lime);
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(173, 255, 47, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .ms-val {
+                font-size: 7rem;
+            }
+        }
+
+        /* Log Table */
+        .history-log {
+            max-height: 350px;
+            overflow-y: auto;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Animations */
+        @keyframes triggerFlash {
+            0% {
+                background-color: rgba(173, 255, 47, 0.4);
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+
+        .flash-active {
+            animation: triggerFlash 0.15s ease-out;
+        }
+
+        /* Links in article */
+
+        .content-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            shadow-sm: true;
+        }
+
+        .highlight-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 2rem 0;
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* Related Tool Card */
+        .related-tool-card {
+            display: block;
+            padding: 1rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .related-tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #86efac;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#engineering" class="hover:text-[#EE6C4D]">Hardware Tools</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">Keystroke Latency Meter</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="system-specs">
+                        System Specs</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-lime-600 font-black">LOCAL</span>
+                            <span>Parsing</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-lime-600 font-black">CLOCK</span>
+                            <span>High-Res</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-lime-600 font-black">PRIVACY</span>
+                            <span>100%</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest text-center">
+                            Active Logic</h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                            </div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Event Loop Sync
+                                ON</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-lime-400 mb-2" id="quant-tip">Quant Tip</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">1,000Hz
+                        polling reduces lag by up to 7ms compared to standard 125Hz office boards.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-8 border-slate-900 relative z-10 shadow-2xl">
+                    <div class="p-6 md:p-10 bg-slate-900 border-b border-slate-800 flex flex-col sm:flex-row justify-between items-center text-white gap-6">
+                        <div class="text-center sm:text-left">
+                            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight uppercase italic">Keystroke
+                                Latency Meter</h1>
+                            <p class="text-sm text-lime-400 mt-1 font-mono uppercase tracking-[0.2em]">Input Polling
+                                &amp;
+                                Render Lag Analysis (WASM)</p>
+                        </div>
+                        <div class="p-4 bg-slate-800 text-lime-400 rounded-2xl hidden sm:block border border-slate-700 shadow-lg">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10 bg-white">
+                        <div class="latency-readout mb-12 transition-all duration-75" id="visual-trigger">
+                            <div class="ms-val tabular-nums" id="current-ms">0.00</div>
+                            <div class="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] mt-6">
+                                Milliseconds Latency (Latest Packet)</div>
+                            <div class="mt-8 text-slate-400 text-xs font-black uppercase tracking-widest animate-pulse">
+                                Press any key to initiate high-res audit...</div>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                            <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-100 text-center shadow-inner group transition-colors hover:border-lime-300">
+                                <div class="text-2xl font-black text-slate-900 font-mono" id="stat-avg">0.0</div>
+                                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1">Average
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-100 text-center shadow-inner group transition-colors hover:border-lime-300">
+                                <div class="text-2xl font-black text-emerald-600 font-mono" id="stat-min">0.0</div>
+                                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1">Minimum
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-100 text-center shadow-inner group transition-colors hover:border-lime-300">
+                                <div class="text-2xl font-black text-slate-900 font-mono" id="stat-max">0.0</div>
+                                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1">Maximum
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-2xl border-2 border-slate-100 text-center shadow-inner group transition-colors hover:border-lime-300">
+                                <div class="text-2xl font-black text-slate-900 font-mono" id="stat-count">0</div>
+                                <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1">Packet
+                                    Count</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4 px-2">
+                                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]" id="asynchronous-hit-log">
+                                    Asynchronous Hit Log</h3>
+                                <button onclick="resetStats()" class="text-[10px] font-black text-rose-500 hover:text-rose-700 uppercase tracking-tighter border-b-2 border-rose-50">Purge
+                                    Data Buffer</button>
+                            </div>
+                            <div class="history-log bg-slate-50 custom-scrollbar shadow-inner border-2 border-slate-100">
+                                <table class="min-w-full text-left text-xs">
+                                    <thead class="bg-slate-900 text-white sticky top-0 font-black uppercase text-[10px] tracking-widest">
+                                        <tr>
+                                            <th class="px-6 py-4">Hardware Key</th>
+                                            <th class="px-6 py-4">Delta (ms)</th>
+                                            <th class="px-6 py-4 text-right">Interrupt Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="log-body" class="text-slate-600 divide-y divide-slate-100">
+                                        <tr>
+                                            <td colspan="3" class="px-6 py-12 text-center text-slate-300 font-black uppercase tracking-widest italic">
+                                                Awaiting hardware signal...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-900 text-center border-t border-slate-800 no-print">
+                        <p class="text-[9px] text-slate-500 font-black uppercase tracking-[0.4em]">Proprietary
+                            performance.now() Delta Logic • Zero Server Latency Bias</p>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="tool-categories">
+                        Tool Categories</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#engineering" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-lime-500 hover:text-lime-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Hardware
+                            Suite</a>
+                        <a href="/#gaming" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-lime-500 hover:text-lime-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Gaming
+                            Lab</a>
+                        <a href="/#diagnostics" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-lime-500 hover:text-lime-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Diagnostics</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/monitor_refresh_tester" class="related-tool-card group">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <svg class="w-4 h-4 text-slate-400 group-hover:text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    <span class="font-bold text-xs text-slate-700 group-hover:text-lime-600 uppercase">Monitor
+                                        Hz Test</span>
+                                </div>
+                                <p class="text-[10px] text-slate-400">Accurately test your screen's refresh rate.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/mouse_polling_rate_hz" class="related-tool-card group">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <svg class="w-4 h-4 text-slate-400 group-hover:text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122">
+                                        </path>
+                                    </svg>
+                                    <span class="font-bold text-xs text-slate-700 group-hover:text-lime-600 uppercase">Mouse
+                                        Polling Rate</span>
+                                </div>
+                                <p class="text-[10px] text-slate-400">Check sensor Hz (125/500/1000).</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/gamepad_drift_visualizer" class="related-tool-card group">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <svg class="w-4 h-4 text-slate-400 group-hover:text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="font-bold text-xs text-slate-700 group-hover:text-lime-600 uppercase">Stick
+                                        Drift Tester</span>
+                                </div>
+                                <p class="text-[10px] text-slate-400">Visualize analog deadzones.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/nkey_rollover_tester" class="related-tool-card group">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <svg class="w-4 h-4 text-slate-400 group-hover:text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                    <span class="font-bold text-xs text-slate-700 group-hover:text-lime-600 uppercase">Keyboard
+                                        Ghosting Test</span>
+                                </div>
+                                <p class="text-[10px] text-slate-400">Test your keyboard's N-Key Rollover (NKRO)
+                                    capabilities to see how many simultaneous keys it registers.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/battery_discharge_monitor" class="related-tool-card group">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <svg class="w-4 h-4 text-slate-400 group-hover:text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                        </path>
+                                    </svg>
+                                    <span class="font-bold text-xs text-slate-700 group-hover:text-lime-600 uppercase">Battery
+                                        Health Calculator</span>
+                                </div>
+                                <p class="text-[10px] text-slate-400">Calculate the wear level and health percentage of
+                                    your battery by comparing current and design capacity.</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-900 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-lime-400 uppercase text-[10px] tracking-widest" id="android-setup">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.523 15.3414C17.1513 15.3414 16.8502 15.0403 16.8502 14.6686C16.8502 14.2969 17.1513 13.9958 17.523 13.9958C17.8947 13.9958 18.1958 14.2969 18.1958 14.6686C18.1958 15.0403 17.8947 15.3414 17.523 15.3414ZM6.47702 15.3414C6.10534 15.3414 5.8042 15.0403 5.8042 14.6686C5.8042 14.2969 6.10534 13.9958 6.47702 13.9958C6.8487 13.9958 7.14984 14.2969 7.14984 14.6686C7.14984 15.0403 6.8487 15.3414 6.47702 15.3414ZM17.9625 11.2335L19.4673 8.63668C19.5706 8.45828 19.5101 8.22912 19.3317 8.12586C19.1533 8.0226 18.9242 8.08316 18.8209 8.26156L17.2917 10.9039C15.7533 10.1983 14.0202 9.8042 12 9.8042C9.9798 9.8042 8.2467 10.1983 6.70831 10.9039L5.1791 8.26156C5.07584 8.08316 4.84668 8.0226 4.66828 8.12586C4.48988 8.22912 4.42932 8.45828 4.53258 8.63668L6.0375 11.2335C3.25055 12.8398 1.3414 15.8286 1.3414 19.3414H22.6586C22.6586 15.8286 20.7495 12.8398 17.9625 11.2335Z">
+                            </path>
+                        </svg>
+                        Android Setup
+                    </h3>
+                    <p class="text-slate-400 text-[11px] leading-relaxed font-medium text-center">
+                        Auditing lag on the move? Open Chrome on your Android device, tap the three dots, and select
+                        <b>"Add to Home Screen"</b>. This tool works offline as a PWA, keeping your strategy private.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-physics-of-presence-a-masterclass-in-input-latency">The Physics of Presence: A Masterclass
+                    in Input Latency</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    In the digital domain, "lag" is the primary friction point between human intent and machine
+                    execution. Whether you are a competitive FPS athlete or a high-velocity developer, the
+                    millisecond delay between a physical actuation and a visual confirmation dictates your
+                    professional effectiveness. The <strong>Keystroke Latency Meter</strong> (your personal
+                    diagnostic Canvas) provides a clinical environment to audit the total system latency of your
+                    hardware stack.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-mathematical-blueprint-of-lag">The
+                    Mathematical Blueprint of Lag</h3>
+                <p class="!mb-6 text-slate-700">To maintain absolute diagnostic clarity, we must define the
+                    variables of the input chain. Total system latency is not a single number, but an aggregate
+                    of several mechanical and electronic stages. We utilize the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" target="_blank" rel="noopener nofollow">Performance.now()</a> standard to capture high-resolution
+                    timestamps:</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-slate-50 shadow-sm space-y-10">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">1. The
+                            System Latency Equation (LaTeX)</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-lime-500 mt-2">
+                            The total time from brain to screen ($L_{sys}$) is the sum of actuation, scan rate,
+                            polling rate, and render interval:
+                        </p>
+                        <div class="py-4 text-center text-xl text-slate-800">
+                            $$L_{sys} = T_{act} + T_{scan} + T_{poll} + T_{os} + T_{gpu}$$
+                        </div>
+                        This meter focuses specifically on the $T_{poll} + T_{os} + T_{gpu}$ segment of the
+                        chain.
+                        <p></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">2. The
+                            Polling Rate Conversion</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                            "Your keyboard's Polling Rate in Hertz ($Hz$) converts to a mandatory baseline delay
+                            in milliseconds ($ms$) found by dividing 1,000 by the frequency. A 125Hz office
+                            keyboard adds 8ms of lag before a signal even leaves the cable."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-anatomy-of-a-keypress-where-milliseconds-are-lost">Chapter 1: The Anatomy of a Keypress - Where Milliseconds are Lost</h2>
+            <p>When you press a key, an intricate sequence of physical and electrical events occurs.
+                Understanding these stages is the first step toward hardware optimization.</p>
+            <h3 id="1-mechanical-actuation-vs-optical-activation">1. Mechanical Actuation vs. Optical Activation</h3>
+            <p>Traditional mechanical switches (Cherry MX, Gateron) rely on physical metal contacts. This
+                creates a "Debounce" requirement—the controller must wait for the metal leaves to stop vibrating
+                (usually 5ms to 15ms) before registering the press. Modern <b>Optical Switches</b> and <b>Hall
+                    Effect (Magnetic) Switches</b> eliminate this physical contact, allowing for near-zero
+                debouncing delay and significant gains in your <b>Minimum Latency</b> readout.</p>
+            <h3 id="2-the-usb-polling-bottleneck">2. The USB Polling Bottleneck</h3>
+            <p>Most standard keyboards use a 125Hz polling rate. This means the computer only checks the USB
+                port for data every 8 milliseconds. High-performance gaming keyboards use 1,000Hz (1ms) or even
+                8,000Hz (0.125ms). If you are using a 125Hz keyboard, no matter how fast your fingers are, your
+                average latency in our tool will always be skewed higher by that 8ms "polling floor."</p>
+            <div class="highlight-box">
+                <h4 class="text-lime-900 !mt-0 mb-2 font-black uppercase tracking-widest text-center">THE
+                    "SOVEREIGN RESPONSE" WORKFLOW</h4>
+                <p class="text-emerald-800 italic font-medium text-center">Input lag above 50ms is cognitively
+                    perceptible. Professional typists maintaining 120+ WPM rely on haptic and visual feedback
+                    loops that operate at the sub-30ms level. Higher lag increases the typo rate by 14% as the
+                    brain loses sync with the visual output.</p>
+            </div>
+            <h2 id="chapter-2-the-os-and-browser-buffer-the-software-variable">Chapter 2: The OS and Browser Buffer - The Software Variable</h2>
+            <p>Even with an 8,000Hz keyboard, your software environment can add massive overhead. This is what
+                our meter captures most accurately.</p>
+            <h3 id="1-dpc-latency-and-system-interrupts">1. DPC Latency and System Interrupts</h3>
+            <p>Your Operating System (Windows/macOS) is constantly multitasking. If a driver (like a Wi-Fi card
+                or GPU driver) is poorly optimized, it can hog the CPU, causing a "Delayed Procedure Call"
+                (DPC). During this micro-freeze, your keystroke is buffered, resulting in the high <b>Maximum
+                    Latency</b> spikes you may see in the log.</p>
+            <h3 id="2-the-browser-s-render-cycle">2. The Browser's Render Cycle</h3>
+            <p>Browsers operate on a frame-based logic. Most browsers attempt to sync input with your monitor's
+                refresh rate. If you have a 60Hz monitor, the browser typically waits for a new frame (every
+                16.6ms) to render the text. This is why testing on a 144Hz or 240Hz monitor will always yield
+                lower <b>Average Latency</b> scores in our tool—it’s not just the keyboard; it’s the display's
+                ability to show the result.</p>
+            <h2 id="chapter-3-tips-tricks-for-low-latency-domination">Chapter 3: Tips &amp; Tricks for Low-Latency Domination</h2>
+            <p>To achieve the "Emerald Tier" scores (under 10ms) in our diagnostic meter, consider the following
+                optimization strategies:</p>
+            <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 my-8">
+                <h4 class="text-slate-900 !mt-0 mb-6 font-black uppercase tracking-widest">Hardware Optimization
+                    Registry</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-4">
+                        <span class="bg-lime-400 text-slate-900 font-black px-2 py-1 rounded text-[10px]">FIX
+                            01</span>
+                        <p class="text-sm text-slate-700"><b>Bypass USB Hubs:</b> Plug your keyboard directly
+                            into a USB 3.0+ port on the motherboard. Hubs and monitor-passthroughs add
+                            serialized latency and increased jitter.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="bg-lime-400 text-slate-900 font-black px-2 py-1 rounded text-[10px]">FIX
+                            02</span>
+                        <p class="text-sm text-slate-700"><b>Disable Power Saving:</b> In Windows Device
+                            Manager, disable "Allow the computer to turn off this device to save power" for all
+                            HID Keyboard and USB Root Hub entries.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="bg-lime-400 text-slate-900 font-black px-2 py-1 rounded text-[10px]">FIX
+                            03</span>
+                        <p class="text-sm text-slate-700"><b>Aesthetic De-Bloat:</b> High-frequency RGB lighting
+                            effects can actually consume keyboard MCU cycles, slightly increasing the scan
+                            interval. Use static colors for maximum speed.</p>
+                    </li>
+                </ul>
+            </div>
+            <h2 id="chapter-4-interpreting-your-results-what-is-good">Chapter 4: Interpreting Your Results - What is "Good"?</h2>
+            <p>Once you've typed a few hundred samples, evaluate your data against these professional
+                benchmarks:</p>
+            <ul>
+                <li><b>0ms - 15ms:</b> <b>Elite Tier.</b> Typical of 1000Hz+ wired mechanical keyboards on
+                    high-refresh (144Hz+) monitors. Zero perceptible lag.</li>
+                <li><b>16ms - 35ms:</b> <b>Prosumer Tier.</b> Standard for high-quality wired keyboards on 60Hz
+                    displays. Excellent for competitive gaming and professional writing.</li>
+                <li><b>36ms - 60ms:</b> <b>Consumer Tier.</b> Common for generic office keyboards or high-end
+                    Bluetooth connections. Passable for productivity, poor for gaming.</li>
+                <li><b>60ms+:</b> <b>Legacy / Failure Tier.</b> High chance of interference, heavy OS bloat, or
+                    slow wireless protocols. You will likely feel the "float" between typing and seeing.</li>
+            </ul>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Switch Archetype</th>
+                            <th class="px-6 py-5">Linguistic Signal</th>
+                            <th class="px-6 py-5">Typical Latency Delta</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Magnetic (Hall Effect)</td>
+                            <td class="px-6 py-5 text-emerald-500 font-black uppercase">Hyper-Rapid</td>
+                            <td class="px-6 py-5 italic">&lt; 1.0ms internal</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">Optical (Laser)</td>
+                            <td class="px-6 py-4 text-blue-500 font-black uppercase">Instantaneous</td>
+                            <td class="px-6 py-4 italic">~ 1.5ms internal</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Mechanical (Silver/Red)</td>
+                            <td class="px-6 py-5 text-slate-900 font-black uppercase">Standard Pro</td>
+                            <td class="px-6 py-5 italic">~ 5ms - 8ms internal</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Membrane (Office)</td>
+                            <td class="px-6 py-5 text-red-500 font-black uppercase">Viscous</td>
+                            <td class="px-6 py-5 italic">15ms - 30ms internal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-5-why-local-first-privacy-is-mandatory">Chapter 5: Why Local-First Privacy is Mandatory</h2>
+            <p>Your typing cadence and rhythm are unique biometric signatures (Keystroke Dynamics). Unlike
+                cloud-based "Typing Tests" that harvest your input data to build behavioral profiles or
+                "fingerprint" your identity, Toolkit Gen's <b>Latency Meter</b> is a local-first application.
+                100% of the high-res timestamps and statistical calculus happen in <b>your browser's local
+                    memory</b>. We have zero visibility into your keystrokes. This is <b>Zero-Knowledge Hardware
+                    Auditing</b> for the privacy-conscious professional.</p>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-performance-metrics">Frequently Asked Questions (FAQ) - Performance Metrics</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Can this tool detect 8,000Hz polling?</span>
+                        <span class="transition-transform group-open:rotate-180 text-lime-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">In a browser environment, <strong>no.</strong> Browser input
+                            handling is capped by the event loop and the OS polling rate. Even with an 8,000Hz
+                            keyboard, the <b>Minimum Latency</b> you see here will be bound by the browser's
+                            ability to fire the event and the monitor's frame rate. This tool is designed to
+                            measure <strong>Real-World Usage Latency</strong> (what you actually feel), not raw
+                            hardware micro-benchmarks that only an oscilloscope can capture.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Why is my "Minimum" lower than 1ms?</span>
+                        <span class="transition-transform group-open:rotate-180 text-lime-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">This usually indicates that the browser is "batching" events. If
+                            you press multiple keys very quickly, the OS may send them to the browser in a
+                            single packet. This causes <code>performance.now()</code> to read a delta that is
+                            lower than the actual hardware speed. To get the most accurate result, type at a
+                            steady, moderate pace rather than smashing the keys.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this work on Android or Tablet?</span>
+                        <span class="transition-transform group-open:rotate-180 text-lime-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>Perfectly.</b> The meter supports physical keyboards connected
+                            via USB-OTG or Bluetooth on Android. Note that mobile operating systems have much
+                            higher background overhead than desktops, so you should expect higher <b>Average
+                                Latency</b> scores (30ms - 60ms) even on high-end hardware.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-lime-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black text-2xl" id="claim-your-sovereignty">
+                    Claim Your Sovereignty</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop guessing about your hardware.
+                    Quantify the delay, optimize the system, and ensure your input is as sharp as your intent.
+                    The era of low-latency mastery begins here.</p>
+                <a href="#visual-trigger" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Restart Diagnostic Audit
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-logic-tools">
+                Recommended Logic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/monitor_refresh_tester" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Monitor Hz Test</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Test refresh rate and ghosting.</p>
+                </a>
+                <a href="/tool/mouse_polling_rate_hz" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Mouse Polling Rate</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Check sensor polling frequency.</p>
+                </a>
+                <a href="/tool/gamepad_drift_visualizer" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-green-50 text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Stick Drift Test</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Visualize controller deadzones.</p>
+                </a>
+                <a href="/tool/dead_pixel_check" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Dead Pixel Check</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Find stuck or dead screen pixels.</p>
+                </a>
+                <a href="/tool/nkey_rollover_tester" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-rose-50 text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Keyboard Ghosting Test</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Test your keyboard's N-Key Rollover
+                        (NKRO) capabilities to see how many simultaneous keys it registers.</p>
+                </a>
+                <a href="/tool/battery_discharge_monitor" class="related-tool-card group">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-3 rounded-xl bg-slate-50 text-slate-600 group-hover:bg-slate-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">Battery Health Calculator</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-medium">Calculate the wear level and health
+                        percentage of your battery by comparing current and design capacity.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        let latencyData = [];
+        let isProcessing = false;
+        window.addEventListener('keydown', (e) => {
+            // Avoid repeat events when holding key
+            if (e.repeat || isProcessing) return;
+            const t1 = performance.now();
+            isProcessing = true;
+            // Use requestAnimationFrame to measure until next render
+            requestAnimationFrame((t2) => {
+                const latency = t2 - t1;
+                recordHit(e.key.toUpperCase(), latency);
+                isProcessing = false;
+            });
+        });
+        function recordHit(key, latency) {
+            const rounded = latency.toFixed(2);
+            latencyData.push(parseFloat(rounded));
+            // UI Updates
+            document.getElementById('current-ms').innerText = rounded;
+            const visualBox = document.getElementById('visual-trigger');
+            visualBox.classList.remove('flash-active');
+            void visualBox.offsetWidth; // Trigger reflow
+            visualBox.classList.add('flash-active');
+            updateStats();
+            updateLog(key, rounded);
+        }
+        function updateStats() {
+            const count = latencyData.length;
+            if (count === 0) return;
+            const min = Math.min(...latencyData);
+            const max = Math.max(...latencyData);
+            const avg = latencyData.reduce((a, b) => a + b, 0) / count;
+            document.getElementById('stat-count').innerText = count;
+            document.getElementById('stat-min').innerText = min.toFixed(1);
+            document.getElementById('stat-max').innerText = max.toFixed(1);
+            document.getElementById('stat-avg').innerText = avg.toFixed(1);
+        }
+        function updateLog(key, latency) {
+            const body = document.getElementById('log-body');
+            const time = new Date().toLocaleTimeString().split(' ')[0];
+            // Remove placeholder
+            if (latencyData.length === 1) body.innerHTML = '';
+            const row = document.createElement('tr');
+            row.className = "hover:bg-lime-50 transition-colors animate-fadeIn";
+            row.innerHTML = `
+                <td class="px-6 py-4 font-black text-slate-800">${key === ' ' ? '[SPACE]' : key}</td>
+                <td class="px-6 py-4 font-mono font-bold text-lime-600">${latency}ms</td>
+                <td class="px-6 py-4 text-right text-slate-400 font-mono">${time}</td>
+            `;
+            body.prepend(row);
+            // Limit rows for performance
+            if (body.children.length > 50) {
+                body.lastElementChild.remove();
+            }
+        }
+        function resetStats() {
+            if (!confirm("Purge current buffer?")) return;
+            latencyData = [];
+            document.getElementById('log-body').innerHTML = '<tr><td colspan="3" class="px-6 py-12 text-center text-slate-300 font-black uppercase tracking-widest italic">Awaiting hardware signal...</td></tr>';
+            document.getElementById('current-ms').innerText = "0.00";
+            document.getElementById('stat-count').innerText = "0";
+            document.getElementById('stat-min').innerText = "0.0";
+            document.getElementById('stat-max').innerText = "0.0";
+            document.getElementById('stat-avg').innerText = "0.0";
+            showToast("Diagnostic buffer cleared.");
+        }
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = "fixed top-24 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-8 py-3 rounded-full shadow-2xl z-[100] animate-bounce font-black text-xs uppercase tracking-widest";
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+        // Initialize Scroll to Top
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

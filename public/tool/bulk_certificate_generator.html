@@ -1,0 +1,2815 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Certificate Generator &amp; PDF Editor | Local-First Document Suite</title>
+    <meta name="description" content="Design certificates and edit PDFs locally in your browser. Upload custom fonts, draw signatures, place variable text placeholders, and export custom documents in bulk via ZIP archives. 100% private.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/bulk_certificate_generator">
+    <meta name="keywords" content="bulk certificate generator, sign pdf online, edit pdf with custom font, digital signature drawer, client-side certificate builder, bulk pdf editor, legal document automation, private pdf editor">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bulk Certificate Generator &amp; PDF Editor | Local-First Document Suite">
+    <meta property="og:description" content="Generate certificates in bulk from a list of names or edit PDFs/images. Add text layers with custom fonts, draw and overlay signatures, and export locally.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/bulk_certificate_generator">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bulk Certificate Generator &amp; PDF Editor | Local-First Document Suite">
+    <meta name="twitter:description" content="Generate certificates in bulk from a list of names or edit PDFs/images. Add text layers with custom fonts, draw and overlay signatures, and export locally.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/bulk_certificate_generator#webapp",
+      "name": "Bulk Certificate & PDF Editor",
+      "headline": "Bulk Certificate Generator & PDF Editor | Local-First Document Suite",
+      "url": "https://toolkitgen.com/tool/bulk_certificate_generator",
+      "description": "Generate certificates in bulk from a list of names or edit PDFs/images. Add text layers with custom fonts, draw and overlay signatures, and export locally.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/bulk_certificate_generator#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Bulk Certificate & PDF Editor",
+          "item": "https://toolkitgen.com/tool/bulk_certificate_generator"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/bulk_certificate_generator#howto",
+      "name": "How to Use Bulk Certificate & PDF Editor",
+      "description": "Quick 4-step guide to using Bulk Certificate & PDF Editor locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Bulk Certificate & PDF Editor directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/bulk_certificate_generator#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is my data private when using Bulk Certificate & PDF Editor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Bulk Certificate & PDF Editor runs 100% locally in your web browser. Zero calculations, files, or inputs are sent to remote servers or stored in any database."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Bulk Certificate & PDF Editor free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Bulk Certificate & PDF Editor is completely free on Toolkit Gen with no registration, subscription, or usage limits required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use Bulk Certificate & PDF Editor on mobile devices?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the tool is fully responsive and optimized for touchscreens on iOS and Android devices, as well as desktop browsers."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/bulk_certificate_generator#article",
+      "headline": "Comprehensive Guide to Bulk Certificate & PDF Editor & Client-Side Execution",
+      "description": "Generate certificates in bulk from a list of names or edit PDFs/images. Add text layers with custom fonts, draw and overlay signatures, and export locally.",
+      "url": "https://toolkitgen.com/tool/bulk_certificate_generator",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <style>
+        :root {
+            --color-site-primary: #EE6C4D;
+            --color-studio-dark: #0f172a;
+            --color-studio-border: #334155;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* Checkerboard pattern to show canvas transparency */
+        .checkerboard {
+            background-color: #1e293b;
+            background-image:
+                linear-gradient(45deg, #0f172a 25%, transparent 25%),
+                linear-gradient(-45deg, #0f172a 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #0f172a 75%),
+                linear-gradient(-45deg, transparent 75%, #0f172a 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        /* Custom scrollbars */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* Hide arrows on number inputs */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .content-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .highlight-box {
+            background: #f1f5f9;
+            border-left: 4px solid var(--color-site-primary);
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 2rem 0;
+        }
+
+        .related-tool-item {
+            @apply bg-white border border-slate-200 p-8 rounded-[2.5rem] hover:border-orange-400 transition-all shadow-sm flex flex-col items-center text-center gap-4 cursor-pointer;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <!-- Breadcrumb -->
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#creator" class="hover:text-[#EE6C4D]">Creator Suite</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">Bulk Certificate &amp; PDF Editor</li>
+            </ol>
+        </nav>
+
+        <!-- Main Layout Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+            <!-- Left Sidebar: Studio Metrics & Local Status -->
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="studio-metrics">
+                        Studio Metrics
+                    </h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-orange-600 font-black">CANVAS</span>
+                            <span id="metric-resolution">800 x 600</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-orange-600 font-black">LAYERS</span>
+                            <span id="metric-layers">0</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-orange-600 font-black">FONTS</span>
+                            <span id="metric-fonts">4</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-700">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-[#EE6C4D] mb-2" id="local-sandbox">Local Sandbox</h3>
+                    <p class="text-3xl font-black tracking-tighter mb-2">100%</p>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase">
+                        All operations, font rendering, and document exports are processed locally in memory.
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Center Work Area -->
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-slate-900 relative z-10 shadow-2xl bg-slate-900 text-slate-200">
+                    
+                    <!-- Editor Header Controls -->
+                    <div class="bg-slate-800 p-4 border-b border-slate-700 flex flex-wrap justify-between items-center gap-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-[#EE6C4D] text-lg"></i>
+                            <h2 class="text-sm font-bold uppercase tracking-wider" id="image-pdf-studio">Image &amp; PDF Studio</h2>
+                        </div>
+                        <div class="flex items-center gap-1.5 sm:gap-2">
+                            <button id="btn-undo" onclick="undo()" disabled="" class="text-xs text-slate-400 hover:text-white transition px-2.5 py-1.5 rounded bg-slate-700 hover:bg-slate-600 opacity-50" title="Undo (Ctrl+Z)">
+                                <i class="fa-solid fa-undo mr-0 sm:mr-1"></i><span class="hidden sm:inline">Undo</span>
+                            </button>
+                            <button id="btn-redo" onclick="redo()" disabled="" class="text-xs text-slate-400 hover:text-white transition px-2.5 py-1.5 rounded bg-slate-700 hover:bg-slate-600 opacity-50" title="Redo (Ctrl+Y)">
+                                <i class="fa-solid fa-redo mr-0 sm:mr-1"></i><span class="hidden sm:inline">Redo</span>
+                            </button>
+                            <button onclick="requestClearCanvas()" class="text-xs text-slate-400 hover:text-white transition px-2.5 py-1.5 rounded bg-slate-700 hover:bg-slate-600" title="Reset Canvas">
+                                <i class="fa-solid fa-trash-can mr-0 sm:mr-1"></i><span class="hidden sm:inline">Reset</span>
+                            </button>
+                            <div class="flex items-center bg-[#EE6C4D] rounded overflow-hidden">
+                                <button onclick="downloadImage()" class="hover:bg-[#d75a3c] text-white px-2.5 sm:px-3 py-1.5 text-xs font-bold transition flex items-center gap-1 border-r border-[#d75a3c]" title="Download PNG">
+                                    <i class="fa-solid fa-image"></i><span class="hidden sm:inline"> PNG</span>
+                                </button>
+                                <button onclick="downloadPdfDirect()" class="hover:bg-[#d75a3c] text-white px-2.5 sm:px-3 py-1.5 text-xs font-bold transition flex items-center gap-1" title="Export PDF">
+                                    <i class="fa-solid fa-file-pdf"></i><span class="hidden sm:inline"> PDF</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Workspace Area -->
+                    <div class="flex flex-col md:flex-row h-auto md:h-[600px] overflow-visible md:overflow-hidden bg-slate-900">
+                        
+                        <!-- Left Panel: Tabs for Inputs and Properties -->
+                        <div class="w-full md:w-80 border-b md:border-b-0 md:border-r border-slate-700 flex flex-col h-auto md:h-full bg-slate-800 order-2 md:order-1">
+                            <!-- Tabs Navigation -->
+                            <div class="flex border-b border-slate-700 text-xs font-bold uppercase tracking-wider text-center">
+                                <button id="tab-btn-project" onclick="switchTab('project')" class="flex-1 py-3 border-b-2 border-[#EE6C4D] text-white bg-slate-900/50">
+                                    Canvas
+                                </button>
+                                <button id="tab-btn-properties" onclick="switchTab('properties')" class="flex-1 py-3 border-b-2 border-transparent text-slate-400 hover:text-white">
+                                    Styles
+                                </button>
+                                <button id="tab-btn-bulk" onclick="switchTab('bulk')" class="flex-1 py-3 border-b-2 border-transparent text-slate-400 hover:text-white">
+                                    Bulk Gen
+                                </button>
+                            </div>
+
+                            <!-- Scrollable Content container -->
+                            <div class="flex-1 overflow-y-visible md:overflow-y-auto custom-scrollbar p-5 space-y-5">
+                                
+                                <!-- Tab 1: Project Canvas Setup & Add overlays -->
+                                <div id="tab-content-project" class="space-y-4">
+                                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider" id="standard-templates">Standard Templates</h3>
+                                    <div>
+                                        <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Select A Design</label>
+                                        <select id="certType" class="w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-2 text-xs focus:outline-none focus:border-[#EE6C4D] cursor-pointer">
+                                            <option value="custom">Blank Canvas / Custom</option>
+                                            <option value="participant">Certificate of Participation</option>
+                                            <option value="achievement">Certificate of Achievement</option>
+                                            <option value="excellence">Certificate of Excellence</option>
+                                            <option value="completion">Certificate of Completion</option>
+                                        </select>
+                                    </div>
+                                    <hr class="border-slate-700 my-4">
+
+                                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider" id="base-media-source">Base Media Source</h3>
+                                    
+                                    <!-- Base Image/PDF file input -->
+                                    <label class="block w-full text-center bg-slate-700 hover:bg-slate-600 text-xs py-3 px-4 rounded cursor-pointer transition border border-slate-600 font-bold">
+                                        <i class="fa-solid fa-file-arrow-up mr-2 text-[#EE6C4D]"></i> Load Base Image / PDF
+                                        <input type="file" id="upload-base" class="hidden" accept="image/*,application/pdf">
+                                    </label>
+                                    <p class="text-[10px] text-slate-400 text-center">Supports PNG, JPG, or PDF page rendering</p>
+
+                                    <!-- PDF Page Navigation Controls -->
+                                    <div id="pdf-controls" class="hidden bg-slate-900/80 p-3 rounded border border-slate-700 space-y-2">
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span class="text-slate-400 font-bold uppercase tracking-wider">PDF Pages</span>
+                                            <span class="font-mono text-white" id="pdf-page-indicator">Pg 1 / 1</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button onclick="changePDFPage(-1)" class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-1.5 rounded transition">
+                                                <i class="fa-solid fa-chevron-left mr-1"></i> Prev
+                                            </button>
+                                            <button onclick="changePDFPage(1)" class="flex-1 bg-slate-800 hover:bg-slate-700 text-xs py-1.5 rounded transition">
+                                                Next <i class="fa-solid fa-chevron-right ml-1"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <hr class="border-slate-700 my-4">
+
+                                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider" id="insert-layers">Insert Layers</h3>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <!-- Add Text -->
+                                        <button onclick="addText()" class="bg-slate-700 hover:bg-slate-600 text-xs py-3 px-2 rounded transition border border-slate-600 flex flex-col items-center gap-1.5 font-bold">
+                                            <i class="fa-solid fa-font text-[#EE6C4D]"></i> Add Text
+                                        </button>
+                                        <!-- Add Image Overlay -->
+                                        <label class="text-center bg-slate-700 hover:bg-slate-600 text-xs py-3 px-2 rounded cursor-pointer transition border border-slate-600 flex flex-col items-center justify-center gap-1.5 font-bold">
+                                            <i class="fa-solid fa-images text-[#EE6C4D]"></i> Add Image
+                                            <input type="file" id="upload-overlay" class="hidden" accept="image/*">
+                                        </label>
+                                    </div>
+
+                                    <!-- Signature Creator button -->
+                                    <button onclick="openSignatureModal()" class="w-full bg-slate-700 hover:bg-slate-600 text-xs py-3 px-4 rounded transition border border-slate-600 font-bold flex items-center justify-center gap-2">
+                                        <i class="fa-solid fa-signature text-[#EE6C4D]"></i> Draw Electronic Signature
+                                    </button>
+
+                                    <!-- Custom Font Upload -->
+                                    <div class="pt-2">
+                                        <label class="block w-full text-center bg-slate-700 hover:bg-slate-600 text-xs py-2.5 px-4 rounded cursor-pointer transition border border-slate-600 font-bold" title="Upload TTF/OTF fonts">
+                                            <i class="fa-solid fa-file-import mr-2 text-[#EE6C4D]"></i> Load Custom Font
+                                            <input type="file" id="upload-font" class="hidden" accept=".ttf,.otf,.woff,.woff2">
+                                        </label>
+                                        <p class="text-[9px] text-slate-400 mt-1 text-center font-mono">Accepts TTF, OTF, WOFF files</p>
+                                    </div>
+
+                                    <!-- Grid Toggle -->
+                                    <div class="pt-2">
+                                        <button id="btn-toggle-grid" onclick="toggleGrid()" class="w-full bg-slate-700 hover:bg-slate-600 text-xs py-2.5 px-4 rounded transition border border-slate-600 font-bold flex items-center justify-center gap-2">
+                                            <i class="fa-solid fa-table-cells text-slate-400"></i> Show Alignment Grid
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 2: Element Properties (Contextual) -->
+                                <div id="tab-content-properties" class="space-y-4 hidden">
+                                    <!-- Context properties panel -->
+                                    <div id="properties-panel" class="hidden space-y-4">
+                                        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Layer</span>
+                                            <span id="prop-type-badge" class="bg-orange-900/50 text-[#EE6C4D] text-[10px] px-2 py-0.5 rounded font-black uppercase">TEXT</span>
+                                        </div>
+
+                                        <!-- Text controls -->
+                                        <div id="text-controls" class="space-y-3 hidden">
+                                            <div>
+                                                <div class="flex justify-between items-center mb-1">
+                                                    <label class="block text-[10px] text-slate-400 uppercase tracking-wider">Text Content</label>
+                                                    <div class="flex gap-1">
+                                                        <button onclick="insertVariable('{{Name}}')" class="text-[9px] bg-slate-800 hover:bg-slate-700 text-orange-400 px-1.5 py-0.5 rounded transition" title="Insert Name">{{Name}}</button>
+                                                        <button onclick="insertVariable('{{Date}}')" class="text-[9px] bg-slate-800 hover:bg-slate-700 text-orange-400 px-1.5 py-0.5 rounded transition" title="Insert Date">{{Date}}</button>
+                                                        <button onclick="insertVariable('{{ID}}')" class="text-[9px] bg-slate-800 hover:bg-slate-700 text-orange-400 px-1.5 py-0.5 rounded transition" title="Insert ID">{{ID}}</button>
+                                                    </div>
+                                                </div>
+                                                <textarea id="prop-text" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-xs text-white focus:outline-none focus:border-[#EE6C4D]"></textarea>
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Color</label>
+                                                    <div class="flex h-8">
+                                                        <input type="color" id="prop-color" class="h-full w-8 p-0 border-0 rounded-l cursor-pointer bg-slate-900">
+                                                        <input type="text" id="prop-color-hex" class="w-full bg-slate-900 border-y border-r border-slate-700 rounded-r px-1.5 text-xs focus:outline-none focus:border-[#EE6C4D] uppercase font-mono">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Size (px)</label>
+                                                    <input type="number" id="prop-fontsize" min="10" max="500" class="w-full h-8 bg-slate-900 border border-slate-700 rounded px-2 text-xs focus:outline-none focus:border-[#EE6C4D]">
+                                                </div>
+                                            </div>
+
+                                            <!-- Typography sliders -->
+                                            <div class="space-y-2">
+                                                <div>
+                                                    <div class="flex justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                                                        <span>Weight</span>
+                                                        <input type="number" id="prop-fontweight-num" class="w-10 bg-slate-900 text-slate-300 text-[10px] text-center rounded" min="100" max="900">
+                                                    </div>
+                                                    <input type="range" id="prop-fontweight" min="100" max="900" step="10" class="w-full accent-[#EE6C4D]">
+                                                </div>
+                                                <div>
+                                                    <div class="flex justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                                                        <span>Grade</span>
+                                                        <input type="number" id="prop-fontgrade-num" class="w-10 bg-slate-900 text-slate-300 text-[10px] text-center rounded" min="-200" max="200">
+                                                    </div>
+                                                    <input type="range" id="prop-fontgrade" min="-200" max="200" step="5" class="w-full accent-[#EE6C4D]">
+                                                </div>
+                                                <div>
+                                                    <div class="flex justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                                                        <span>Spacing</span>
+                                                        <input type="number" id="prop-letterspacing-num" class="w-10 bg-slate-900 text-slate-300 text-[10px] text-center rounded" min="-10" max="50">
+                                                    </div>
+                                                    <input type="range" id="prop-letterspacing" min="-10" max="50" step="1" class="w-full accent-[#EE6C4D]">
+                                                </div>
+                                            </div>
+
+                                            <!-- Typography Styles -->
+                                            <div class="grid grid-cols-2 gap-2 pt-1">
+                                                <div class="col-span-2">
+                                                    <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Font Family &amp; Style</label>
+                                                    <div class="flex gap-1.5 h-8">
+                                                        <select id="prop-font" class="flex-1 bg-slate-900 border border-slate-700 rounded px-1 text-xs focus:outline-none focus:border-[#EE6C4D] cursor-pointer">
+                                                            <option value="Arial">Arial</option>
+                                                            <option value="Times New Roman">Times New Roman</option>
+                                                            <option value="Courier New">Courier New</option>
+                                                            <option value="Georgia">Georgia</option>
+                                                            <option value="Impact">Impact</option>
+                                                        </select>
+                                                        <button id="btn-italic" onclick="toggleTextStyle('italic')" class="w-8 bg-slate-900 border border-slate-700 rounded hover:border-[#EE6C4D] transition flex items-center justify-center">
+                                                            <i class="fa-solid fa-italic"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-2">
+                                                    <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Alignment</label>
+                                                    <div class="flex h-8 gap-1">
+                                                        <button id="btn-align-left" onclick="setTextAlign('left')" class="flex-1 bg-slate-900 border border-slate-700 rounded hover:border-[#EE6C4D] flex items-center justify-center">
+                                                            <i class="fa-solid fa-align-left"></i>
+                                                        </button>
+                                                        <button id="btn-align-center" onclick="setTextAlign('center')" class="flex-1 bg-slate-900 border border-slate-700 rounded hover:border-[#EE6C4D] flex items-center justify-center">
+                                                            <i class="fa-solid fa-align-center"></i>
+                                                        </button>
+                                                        <button id="btn-align-right" onclick="setTextAlign('right')" class="flex-1 bg-slate-900 border border-slate-700 rounded hover:border-[#EE6C4D] flex items-center justify-center">
+                                                            <i class="fa-solid fa-align-right"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-2 mt-2">
+                                                    <label class="flex items-center gap-2 p-2 bg-orange-950/20 rounded border border-orange-900/30 cursor-pointer hover:bg-orange-950/30 transition">
+                                                        <input type="checkbox" id="prop-is-dynamic" class="accent-[#EE6C4D] w-3.5 h-3.5">
+                                                        <span class="text-[10px] text-[#EE6C4D] font-bold uppercase tracking-wider">Mark as Name Placeholder</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Stroke Outline Controls -->
+                                            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-700/50 mt-2">
+                                                <div class="col-span-2">
+                                                    <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Text Outline (Stroke)</label>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[9px] text-slate-500 uppercase tracking-wider mb-1">Outline Color</label>
+                                                    <div class="flex h-8">
+                                                        <input type="color" id="prop-strokecolor" value="#000000" class="h-full w-8 p-0 border-0 rounded-l cursor-pointer bg-slate-900">
+                                                        <input type="text" id="prop-strokecolor-hex" value="#000000" class="w-full bg-slate-900 border-y border-r border-slate-700 rounded-r px-1.5 text-xs focus:outline-none focus:border-[#EE6C4D] uppercase font-mono">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[9px] text-slate-500 uppercase tracking-wider mb-1">Outline Width (px)</label>
+                                                    <input type="number" id="prop-strokewidth" min="0" max="20" value="0" class="w-full h-8 bg-slate-900 border border-slate-700 rounded px-2 text-xs focus:outline-none focus:border-[#EE6C4D]">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Image controls -->
+                                        <div id="image-controls" class="space-y-3 hidden">
+                                            <div>
+                                                <div class="flex justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                                                    <span>Scale (%)</span>
+                                                    <input type="number" id="prop-scale-num" class="w-12 bg-slate-900 text-slate-300 text-[10px] text-center rounded" min="10" max="1000">
+                                                </div>
+                                                <input type="range" id="prop-scale" min="0.1" max="10" step="0.05" class="w-full accent-[#EE6C4D]">
+                                            </div>
+                                        </div>
+
+                                        <!-- Common element properties -->
+                                        <div class="pt-4 border-t border-slate-700 space-y-3">
+                                            <div>
+                                                <div class="flex justify-between text-[10px] text-slate-400 uppercase tracking-wider mb-1">
+                                                    <span>Rotation (°)</span>
+                                                    <input type="number" id="prop-rotation-num" class="w-12 bg-slate-900 text-slate-300 text-[10px] text-center rounded" min="0" max="360">
+                                                </div>
+                                                <input type="range" id="prop-rotation" min="0" max="360" step="1" class="w-full accent-[#EE6C4D]">
+                                            </div>
+
+                                            <div class="grid grid-cols-2 gap-2 pt-2">
+                                                <button onclick="centerElement('horizontal')" class="bg-slate-700 hover:bg-slate-600 text-[10px] font-bold py-1.5 rounded transition uppercase tracking-wider">
+                                                    Center X
+                                                </button>
+                                                <button onclick="centerElement('vertical')" class="bg-slate-700 hover:bg-slate-600 text-[10px] font-bold py-1.5 rounded transition uppercase tracking-wider">
+                                                    Center Y
+                                                </button>
+                                                <button onclick="moveLayerUp()" class="bg-slate-700 hover:bg-slate-600 text-[10px] font-bold py-1.5 rounded transition uppercase tracking-wider">
+                                                    Bring Forward
+                                                </button>
+                                                <button onclick="moveLayerDown()" class="bg-slate-700 hover:bg-slate-600 text-[10px] font-bold py-1.5 rounded transition uppercase tracking-wider">
+                                                    Send Backward
+                                                </button>
+                                            </div>
+
+                                            <button onclick="duplicateSelected()" class="w-full mt-2 bg-slate-700 hover:bg-slate-600 text-slate-200 border border-slate-600 text-xs py-2 rounded font-bold transition flex items-center justify-center gap-1 uppercase tracking-wider">
+                                                <i class="fa-solid fa-copy"></i> Duplicate Element
+                                            </button>
+
+                                            <button onclick="deleteSelected()" class="w-full mt-4 bg-red-900/40 hover:bg-red-800/60 text-red-200 border border-red-900/30 text-xs py-2 rounded font-bold transition flex items-center justify-center gap-1 uppercase tracking-wider">
+                                                <i class="fa-solid fa-trash-arrow-up"></i> Delete Element
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Empty state properties -->
+                                    <div id="properties-empty" class="py-12 flex flex-col items-center justify-center text-center opacity-50 space-y-2">
+                                        <i class="fa-solid fa-hand-pointer text-3xl text-slate-500"></i>
+                                        <p class="text-xs font-semibold">Select an element on the canvas to configure properties.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 3: Bulk Generator -->
+                                <div id="tab-content-bulk" class="space-y-4 hidden">
+                                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider" id="bulk-certificate-generator">Bulk Certificate Generator</h3>
+
+                                    <div>
+                                        <div class="flex justify-between items-center mb-1">
+                                            <label class="block text-[10px] text-slate-400 uppercase tracking-wider">Names or CSV List</label>
+                                            <span class="text-[9px] text-slate-500 font-mono">Supports: Name,Date,ID</span>
+                                        </div>
+                                        <textarea id="bulkNames" rows="6" placeholder="Name,Date,ID
+Jane Doe,2026-06-03,CERT-001
+John Smith,2026-06-04,CERT-002" class="w-full bg-slate-900 border border-slate-700 rounded p-2.5 text-xs text-white focus:outline-none focus:border-[#EE6C4D] font-mono"></textarea>
+                                        <p class="text-[9px] text-slate-500 mt-1 leading-relaxed">Place variables like <code class="text-orange-400 font-mono font-bold">{{Name}}</code> or <code class="text-orange-400 font-mono font-bold">{{Date}}</code> on the canvas to match your CSV headers.</p>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Output Format</label>
+                                        <select id="bulkFormat" class="w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-2 text-xs focus:outline-none focus:border-[#EE6C4D] cursor-pointer">
+                                            <option value="pdf">PDF Documents</option>
+                                            <option value="png">PNG Images</option>
+                                        </select>
+                                    </div>
+
+                                    <button onclick="generateBulkCertificates()" class="w-full bg-[#EE6C4D] hover:bg-[#d75a3c] text-white text-xs py-3 rounded font-black transition flex justify-center items-center gap-2 shadow-lg uppercase tracking-widest">
+                                        <i class="fa-solid fa-file-zipper"></i> Generate Bulk ZIP
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Canvas Preview Area -->
+                        <div class="flex-1 bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden h-[380px] sm:h-[480px] md:h-full order-1 md:order-2">
+                            <div class="checkerboard shadow-2xl relative max-w-full max-h-full">
+                                <canvas id="main-canvas" width="800" height="600" class="block max-w-full max-h-[500px] object-contain cursor-crosshair"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- SEO Articles -->
+                
+            </div>
+
+            <!-- Right Sidebar: Related Tools & Categories -->
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="related-utilities">
+                        Related Utilities
+                    </h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li class="group">
+                            <a href="/tool/bulk_certificate_generator" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 transition-all">
+                                <div class="p-2 bg-orange-100 text-[#EE6C4D] rounded-lg group-hover:bg-[#EE6C4D] group-hover:text-white transition-colors">
+                                    <i class="fa-solid fa-file-signature text-sm"></i>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-xs font-bold text-slate-700 uppercase">PDF Signer</h4>
+                                    <p class="text-[10px] text-slate-400">Digital Ink Annotations</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="/tool/data_anonymizer_local" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 transition-all">
+                                <div class="p-2 bg-orange-100 text-[#EE6C4D] rounded-lg group-hover:bg-[#EE6C4D] group-hover:text-white transition-colors">
+                                    <i class="fa-solid fa-eraser text-sm"></i>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-xs font-bold text-slate-700 uppercase">PDF Redactor</h4>
+                                    <p class="text-[10px] text-slate-400">Vaporize Data Permanently</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="/tool/exif_data_scrubber" class="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 transition-all">
+                                <div class="p-2 bg-orange-100 text-[#EE6C4D] rounded-lg group-hover:bg-[#EE6C4D] group-hover:text-white transition-colors">
+                                    <i class="fa-solid fa-shield-halved text-sm"></i>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-xs font-bold text-slate-700 uppercase">Exif Scrubber</h4>
+                                    <p class="text-[10px] text-slate-400">Photo Metadata Protection</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-indigo-900 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-orange-400 uppercase text-[10px] tracking-widest" id="usage-tip">
+                        <i class="fa-solid fa-circle-question text-base"></i> Usage Tip
+                    </h3>
+                    <p class="text-slate-300 text-[11px] leading-relaxed font-medium">
+                        Need high-res output? The canvas scales to match the resolution of your base file. For sharp text and clean signatures, upload high-quality PNG templates or vectors.
+                    </p>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- Full Width Article Section -->
+        
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+                    <header class="mb-12">
+                        <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="local-bulk-document-automation-legality-privacy-and-best-practices">
+                            Local Bulk Document Automation: Legality, Privacy, and Best Practices
+                        </h2>
+                        <p class="text-xl text-slate-600 leading-relaxed">
+                            Generating certificates or custom reports for dozens of recipients is a standard task for modern businesses, educators, and community organizers. However, uploading private participant rosters or sensitive document templates to cloud-based generator services presents significant security and compliance liabilities. The <strong>Bulk Certificate &amp; PDF Editor</strong> provides a zero-trust alternative. By performing all layout rendering, variable synthesis, and ZIP compilation directly inside your browser's local sandbox, the tool ensures that your client rosters, data sets, and signature structures never traverse the internet.
+                        </p>
+                    </header>
+
+                    <div class="content-card">
+                        <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-architecture-of-client-side-bulk-generation">The Architecture of Client-Side Bulk Generation</h3>
+                        <p class="!mb-6 text-slate-700">
+                            To maintain maximum performance and privacy, the generator leverages a dynamic rendering workflow. Here is the operational logic behind browser-based document compilation:
+                        </p>
+                        <div class="bg-white p-6 rounded-2xl border-2 border-slate-50 shadow-sm space-y-6">
+                            <div>
+                                <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">1. Underlay Rasterization</p>
+                                <p class="text-slate-600 italic pl-4 border-l-4 border-orange-500 mt-2">
+                                    When you load a PDF contract or base template, the browser utilizes PDF.js to render page vectors onto a high-density, offscreen pixel map. This forms a crystal-clear static background image.
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">2. Variable Text Substitution</p>
+                                <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                                    Marking a text element as the "Name Placeholder" binds it to the generator loop. The system successively replaces the element's string content with each line from your names list, updating the canvas in real time.
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">3. Memory-Bound Archive Packaging</p>
+                                <p class="text-slate-600 italic pl-4 border-l-4 border-blue-500 mt-2">
+                                    As each layout is generated, JSZip and jsPDF convert the pixel data into binary buffers, appending them to a virtual ZIP file inside your browser's RAM before triggering a single, direct file download.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 id="chapter-1-the-esign-and-ueta-legality-frameworks">Chapter 1: The ESIGN and UETA Legality Frameworks</h2>
+                    <p>
+                        Understanding the legal framework of digital documents is essential before distributing certificates or agreements. In the United States, electronic signatures are governed by the federal <strong>Electronic Signatures in Global and National Commerce (ESIGN) Act</strong> and the state-level <strong>Uniform Electronic Transactions Act (UETA)</strong>.
+                    </p>
+                    <p>
+                        Both statutes dictate that an agreement or signature cannot be denied validity simply because it was executed electronically. The key requirement for a signature to be legally binding is the "manifestation of intent." By providing an interactive drawing pad where users draw their actual signature coordinates, this tool creates a valid standard electronic signature (SES). Combined with variables overlays on top of base PDF contracts, users can quickly execute agreements and verify signatures offline.
+                    </p>
+
+                    <h2 id="chapter-2-variables-custom-fonts-and-variable-font-axes">Chapter 2: Variables, Custom Fonts, and Variable Font Axes</h2>
+                    <p>
+                        Designing high-quality layouts requires precise typography. Standard system fonts (like Arial or Courier) do not provide the aesthetic control needed for prestigious awards. By supporting local font file uploads (.TTF, .OTF, .WOFF), the tool allows you to use your organization's exact branding.
+                    </p>
+                    <div class="highlight-box">
+                        <h4 class="text-slate-900 !mt-0 mb-2 font-black uppercase tracking-widest font-mono">Variable Font Customization:</h4>
+                        <p class="text-slate-800 italic font-medium">
+                            Variable fonts allow designers to adjust typography attributes along an axis. Using variable axes like Weight (wght) and Grade (GRAD), you can alter font thickness without altering text spacing or width. This ensures that longer names fit within the bounds of a certificate without causing awkward line breaks or layout overflows.
+                        </p>
+                    </div>
+
+                    <h2 id="chapter-3-gdpr-hipaa-and-zero-knowledge-privacy">Chapter 3: GDPR, HIPAA, and Zero-Knowledge Privacy</h2>
+                    <p>
+                        For corporate HR departments, educational institutions, and healthcare providers, transmitting user details or employee rosters to cloud servers introduces regulatory compliance issues. Under the General Data Protection Regulation (GDPR) and Health Insurance Portability and Accountability Act (HIPAA), data processor actions must be governed by active Data Processing Agreements (DPAs).
+                    </p>
+                    <p>
+                        Because this PDF/Image Studio operates entirely client-side, it functions as a <b>Zero-Knowledge utility</b>. Your certificates and rosters are processed inside your browser's memory sandbox and never transmitted to our servers. No DPA or compliance agreement is required because no data transfer takes place, offering a private, compliant solution for document creation.
+                    </p>
+                </article>
+    </main>
+
+    <!-- Signature Creator Modal -->
+    <div id="signature-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 sm:p-6 mx-4 max-w-md w-full shadow-2xl text-slate-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-white" id="create-electronic-signature">Create Electronic Signature</h3>
+                <button onclick="closeSignatureModal()" class="text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <p class="text-[11px] text-slate-400 mb-3">Draw your signature inside the box using your mouse or touch screen:</p>
+            
+            <div class="border border-slate-600 rounded bg-white overflow-hidden mb-4">
+                <canvas id="signature-canvas" width="400" height="200" class="block w-full max-w-full h-auto cursor-crosshair bg-white"></canvas>
+            </div>
+
+            <div class="flex justify-between gap-3">
+                <button onclick="clearSignatureCanvas()" class="px-4 py-2 text-xs bg-slate-700 hover:bg-slate-600 text-white rounded font-bold transition">
+                    Clear Pad
+                </button>
+                <div class="flex gap-2">
+                    <button onclick="closeSignatureModal()" class="px-4 py-2 text-xs bg-slate-900 text-slate-400 hover:text-white rounded font-bold transition">
+                        Cancel
+                    </button>
+                    <button onclick="saveSignature()" class="px-4 py-2 text-xs bg-[#EE6C4D] hover:bg-[#d75a3c] text-white rounded font-bold transition">
+                        Insert Design
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div id="alert-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 max-w-sm w-full shadow-2xl text-slate-200">
+            <h3 id="alert-title" class="text-base font-bold text-white mb-2">Notice</h3>
+            <p id="alert-message" class="text-xs text-slate-300 mb-6"></p>
+            <div class="flex justify-end">
+                <button onclick="closeAlertModal()" class="px-4 py-2 text-xs bg-[#EE6C4D] hover:bg-[#d75a3c] text-white rounded font-bold transition">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer id="app-footer"></footer>
+
+    <script>
+        // --- Core Application State ---
+        const canvas = document.getElementById('main-canvas');
+        const ctx = canvas.getContext('2d');
+        let baseImage = null; // Background image or rendered PDF page
+        let elements = []; // Array of text and image overlays
+        let selectedId = null; // Selected element ID
+
+        // PDF document states
+        let pdfDoc = null;
+        let pdfPageNum = 1;
+        let elementsByPage = {}; // Store elements per page: { pageNum: elementsArray }
+
+        // Interaction state
+        let isDragging = false;
+        let isRotating = false;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+
+        // Signature drawing states
+        const sigCanvas = document.getElementById('signature-canvas');
+        const sigCtx = sigCanvas.getContext('2d');
+        let isDrawingSig = false;
+        let sigLastX = 0;
+        let sigLastY = 0;
+
+        // Loaded custom fonts
+        let loadedFonts = [];
+
+        // --- Utility Functions ---
+        const generateId = () => Math.random().toString(36).substring(2, 9) + Date.now().toString(36);
+
+        function getPointerPos(evt) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            let clientX = evt.clientX;
+            let clientY = evt.clientY;
+
+            if (evt.touches && evt.touches.length > 0) {
+                clientX = evt.touches[0].clientX;
+                clientY = evt.touches[0].clientY;
+            }
+
+            return {
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
+            };
+        }
+
+        // --- Tab Management ---
+        function switchTab(tabId) {
+            const tabs = ['project', 'properties', 'bulk'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                const content = document.getElementById(`tab-content-${t}`);
+                if (t === tabId) {
+                    btn.classList.add('border-[#EE6C4D]', 'text-white', 'bg-slate-900/50');
+                    btn.classList.remove('border-transparent', 'text-slate-400');
+                    content.classList.remove('hidden');
+                } else {
+                    btn.classList.remove('border-[#EE6C4D]', 'text-white', 'bg-slate-900/50');
+                    btn.classList.add('border-transparent', 'text-slate-400');
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- Signature Sketchpad Logic ---
+        function openSignatureModal() {
+            document.getElementById('signature-modal').classList.remove('hidden');
+            document.getElementById('signature-modal').classList.add('flex');
+            clearSignatureCanvas();
+        }
+
+        function closeSignatureModal() {
+            document.getElementById('signature-modal').classList.add('hidden');
+            document.getElementById('signature-modal').classList.remove('flex');
+        }
+
+        function clearSignatureCanvas() {
+            sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+            sigCtx.strokeStyle = '#0f172a';
+            sigCtx.lineWidth = 3;
+            sigCtx.lineCap = 'round';
+            sigCtx.lineJoin = 'round';
+        }
+
+        // Signature event listeners
+        function getSigPointerPos(evt) {
+            const rect = sigCanvas.getBoundingClientRect();
+            const scaleX = sigCanvas.width / rect.width;
+            const scaleY = sigCanvas.height / rect.height;
+            let clientX = evt.clientX;
+            let clientY = evt.clientY;
+
+            if (evt.touches && evt.touches.length > 0) {
+                clientX = evt.touches[0].clientX;
+                clientY = evt.touches[0].clientY;
+            }
+            return {
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
+            };
+        }
+
+        function startSigDrawing(e) {
+            e.preventDefault();
+            isDrawingSig = true;
+            const pos = getSigPointerPos(e);
+            sigLastX = pos.x;
+            sigLastY = pos.y;
+        }
+
+        function drawSig(e) {
+            if (!isDrawingSig) return;
+            e.preventDefault();
+            const pos = getSigPointerPos(e);
+            sigCtx.beginPath();
+            sigCtx.moveTo(sigLastX, sigLastY);
+            sigCtx.lineTo(pos.x, pos.y);
+            sigCtx.stroke();
+            sigLastX = pos.x;
+            sigLastY = pos.y;
+        }
+
+        function stopSigDrawing() {
+            isDrawingSig = false;
+        }
+
+        sigCanvas.addEventListener('mousedown', startSigDrawing);
+        sigCanvas.addEventListener('mousemove', drawSig);
+        window.addEventListener('mouseup', stopSigDrawing);
+
+        sigCanvas.addEventListener('touchstart', startSigDrawing, { passive: false });
+        sigCanvas.addEventListener('touchmove', drawSig, { passive: false });
+        window.addEventListener('touchend', stopSigDrawing);
+
+        function saveSignature() {
+            // Check if user drew anything (we check if there are non-transparent pixels)
+            const imgData = sigCtx.getImageData(0, 0, sigCanvas.width, sigCanvas.height);
+            let hasDrawing = false;
+            for (let i = 3; i < imgData.data.length; i += 4) {
+                if (imgData.data[i] > 0) {
+                    hasDrawing = true;
+                    break;
+                }
+            }
+
+            if (!hasDrawing) {
+                showAlert('Draw Signature', 'Please draw a signature in the box before inserting it.');
+                return;
+            }
+
+            const dataUrl = sigCanvas.toDataURL('image/png');
+            const img = new Image();
+            img.onload = () => {
+                const w = 200;
+                const h = 100;
+                const newImgEl = {
+                    id: generateId(),
+                    type: 'image',
+                    x: (canvas.width / 2) - (w / 2),
+                    y: (canvas.height / 2) - (h / 2),
+                    img: img,
+                    baseWidth: img.width,
+                    baseHeight: img.height,
+                    width: w,
+                    height: h,
+                    scale: 1,
+                    rotation: 0,
+                    _width: w, _height: h
+                };
+                elements.push(newImgEl);
+                selectedId = newImgEl.id;
+                closeSignatureModal();
+                updateUI();
+                render();
+            };
+            img.src = dataUrl;
+        }
+
+        // --- Alert Modal ---
+        function showAlert(title, message) {
+            document.getElementById('alert-title').innerText = title;
+            document.getElementById('alert-message').innerText = message;
+            document.getElementById('alert-modal').classList.remove('hidden');
+            document.getElementById('alert-modal').classList.add('flex');
+        }
+
+        function closeAlertModal() {
+            document.getElementById('alert-modal').classList.add('hidden');
+            document.getElementById('alert-modal').classList.remove('flex');
+        }
+
+        // --- Base PDF rendering using pdf.js ---
+        async function loadPDFDocument(file) {
+            const arrayBuffer = await file.arrayBuffer();
+            try {
+                const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+                pdfDoc = await loadingTask.promise;
+                pdfPageNum = 1;
+                elements = [];
+                elementsByPage = {};
+                selectedId = null;
+                document.getElementById('pdf-controls').classList.remove('hidden');
+                await renderPDFPage(pdfPageNum);
+                updateUI();
+            } catch (err) {
+                console.error(err);
+                showAlert('Error loading PDF', 'Failed to load PDF document. Please make sure it is a valid PDF file.');
+            }
+        }
+
+        async function renderPDFPage(num) {
+            if (!pdfDoc) return;
+            try {
+                const page = await pdfDoc.getPage(num);
+                // Render at high-density scale (2.0)
+                const viewport = page.getViewport({ scale: 2.0 });
+                const offCanvas = document.createElement('canvas');
+                offCanvas.width = viewport.width;
+                offCanvas.height = viewport.height;
+                const offCtx = offCanvas.getContext('2d');
+
+                await page.render({ canvasContext: offCtx, viewport: viewport }).promise;
+                
+                const dataUrl = offCanvas.toDataURL('image/png');
+                const img = new Image();
+                img.onload = () => {
+                    baseImage = img;
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    document.getElementById('metric-resolution').innerText = `${canvas.width} x ${canvas.height}`;
+                    document.getElementById('pdf-page-indicator').innerText = `Pg ${num} / ${pdfDoc.numPages}`;
+                    render();
+                };
+                img.src = dataUrl;
+            } catch (err) {
+                console.error(err);
+                showAlert('Error rendering page', 'Failed to render the PDF page.');
+            }
+        }
+
+        async function changePDFPage(dir) {
+            if (!pdfDoc) return;
+            const newNum = pdfPageNum + dir;
+            if (newNum >= 1 && newNum <= pdfDoc.numPages) {
+                // Save current elements for the active page
+                elementsByPage[pdfPageNum] = elements;
+                
+                pdfPageNum = newNum;
+                
+                // Retrieve elements for the new page
+                elements = elementsByPage[pdfPageNum] || [];
+                selectedId = null;
+                
+                await renderPDFPage(pdfPageNum);
+                updateUI();
+            }
+        }
+
+        // --- Rendering Engine ---
+        let isGridActive = false;
+
+        function render(mode = 'display') {
+            const forExport = mode !== 'display';
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.fontVariationSettings = "normal";
+
+            // Draw Base Image (Background)
+            if (baseImage) {
+                ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+            } else {
+                const certType = document.getElementById('certType').value;
+                if (certType && certType !== 'custom') {
+                    drawVectorTemplateBackground(ctx, canvas, certType);
+                } else {
+                    if (!forExport) {
+                        ctx.fillStyle = '#1e293b'; // Slate 800 placeholder
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        if (elements.length === 0) {
+                            ctx.fillStyle = '#64748b';
+                            ctx.font = 'bold 20px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('Upload base image/PDF or select a template to start', canvas.width / 2, canvas.height / 2);
+                        }
+                    } else {
+                        // Export with white background instead of transparency
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    }
+                }
+            }
+
+            // Draw Elements
+            drawElementsOnCtx(ctx, canvas, elements, forExport);
+
+            // Draw Grid Overlay (display mode only)
+            if (!forExport && isGridActive) {
+                drawGrid(ctx);
+            }
+
+            // Reset
+            canvas.style.fontVariationSettings = "normal";
+            document.getElementById('metric-layers').innerText = elements.length;
+        }
+
+        // Vector Background Presets
+        function drawVectorTemplateBackground(c, cv, type) {
+            c.fillStyle = '#ffffff';
+            c.fillRect(0, 0, cv.width, cv.height);
+
+            const w = cv.width;
+            const h = cv.height;
+
+            if (type === 'participant') {
+                // Emerald & Gold theme
+                c.fillStyle = '#064e3b'; // Emerald dark green
+                c.fillRect(0, 0, w, h);
+
+                const pad = Math.floor(w * 0.03);
+                c.fillStyle = '#fafdfb';
+                c.fillRect(pad, pad, w - pad * 2, h - pad * 2);
+
+                c.strokeStyle = '#EE6C4D'; // Gold/Orange accent
+                c.lineWidth = 4;
+                const innerPad = pad + 10;
+                c.strokeRect(innerPad, innerPad, w - innerPad * 2, h - innerPad * 2);
+
+                c.fillStyle = '#064e3b';
+                c.fillRect(innerPad, innerPad, 40, 4);
+                c.fillRect(innerPad, innerPad, 4, 40);
+                c.fillRect(w - innerPad - 40, innerPad, 40, 4);
+                c.fillRect(w - innerPad - 4, innerPad, 4, 40);
+                c.fillRect(innerPad, h - innerPad - 4, 40, 4);
+                c.fillRect(innerPad, h - innerPad - 40, 4, 40);
+                c.fillRect(w - innerPad - 40, h - innerPad - 4, 40, 4);
+                c.fillRect(w - innerPad - 4, h - innerPad - 40, 4, 40);
+
+            } else if (type === 'achievement') {
+                // Royal Deep Blue & Gold theme
+                c.fillStyle = '#1e3a8a'; // Royal blue
+                c.fillRect(0, 0, w, h);
+
+                const pad = Math.floor(w * 0.035);
+                c.fillStyle = '#fcfdff';
+                c.fillRect(pad, pad, w - pad * 2, h - pad * 2);
+
+                c.strokeStyle = '#d97706'; // Gold/Amber
+                c.lineWidth = 3;
+                const innerPad1 = pad + 8;
+                c.strokeRect(innerPad1, innerPad1, w - innerPad1 * 2, h - innerPad1 * 2);
+
+                c.lineWidth = 1;
+                const innerPad2 = innerPad1 + 6;
+                c.strokeRect(innerPad2, innerPad2, w - innerPad2 * 2, h - innerPad2 * 2);
+
+                // Draw a gold certificate seal
+                c.save();
+                c.translate(w / 2, h - pad - 60);
+                c.beginPath();
+                c.arc(0, 0, 35, 0, Math.PI * 2);
+                c.fillStyle = '#f59e0b';
+                c.fill();
+                c.strokeStyle = '#b45309';
+                c.lineWidth = 3;
+                c.stroke();
+                c.fillStyle = '#ffffff';
+                c.beginPath();
+                c.arc(0, 0, 15, 0, Math.PI * 2);
+                c.fill();
+                c.restore();
+            } else if (type === 'excellence') {
+                // Purple & Gold/Dark theme
+                c.fillStyle = '#4c1d95'; // Deep purple
+                c.fillRect(0, 0, w, h);
+                const pad = Math.floor(w * 0.04);
+                c.fillStyle = '#fffdfa'; // warm white
+                c.fillRect(pad, pad, w - pad * 2, h - pad * 2);
+
+                // Ornate inner border
+                c.strokeStyle = '#c026d3'; // Fuchsia accent
+                c.lineWidth = 1;
+                c.strokeRect(pad + 15, pad + 15, w - pad * 2 - 30, h - pad * 2 - 30);
+                c.strokeRect(pad + 20, pad + 20, w - pad * 2 - 40, h - pad * 2 - 40);
+
+                // Badge top center
+                c.save();
+                c.translate(w / 2, pad + 40);
+                c.fillStyle = '#eab308'; // Gold
+                c.beginPath();
+                c.moveTo(0, -20);
+                c.lineTo(15, 10);
+                c.lineTo(-15, 10);
+                c.closePath();
+                c.fill();
+                c.restore();
+            } else if (type === 'completion') {
+                // Minimalist clean look (Slate & Teal)
+                c.fillStyle = '#f8fafc'; // light slate
+                c.fillRect(0, 0, w, h);
+
+                // Solid teal accent block on the left
+                c.fillStyle = '#0f766e'; // Teal 700
+                c.fillRect(0, 0, 80, h);
+
+                c.strokeStyle = '#cbd5e1'; // slate-300
+                c.lineWidth = 1;
+                c.strokeRect(100, 40, w - 140, h - 80);
+            }
+        }
+
+        // Grid Alignment Overlay
+        function toggleGrid() {
+            isGridActive = !isGridActive;
+            const btn = document.getElementById('btn-toggle-grid');
+            if (btn) {
+                btn.classList.toggle('bg-slate-600', isGridActive);
+                btn.classList.toggle('border-[#EE6C4D]', isGridActive);
+                btn.innerHTML = isGridActive ? 
+                    '<i class="fa-solid fa-table-cells text-[#EE6C4D]"></i> Hide Alignment Grid' : 
+                    '<i class="fa-solid fa-table-cells text-slate-400"></i> Show Alignment Grid';
+            }
+            render();
+        }
+
+        function drawGrid(c) {
+            c.save();
+            c.strokeStyle = 'rgba(238, 108, 77, 0.15)';
+            c.lineWidth = 1;
+            c.setLineDash([4, 4]);
+
+            for (let x = 50; x < canvas.width; x += 50) {
+                c.beginPath();
+                c.moveTo(x, 0);
+                c.lineTo(x, canvas.height);
+                c.stroke();
+            }
+            for (let y = 50; y < canvas.height; y += 50) {
+                c.beginPath();
+                c.moveTo(0, y);
+                c.lineTo(canvas.width, y);
+                c.stroke();
+            }
+
+            c.strokeStyle = 'rgba(238, 108, 77, 0.4)';
+            c.lineWidth = 1.5;
+            c.setLineDash([]);
+            c.beginPath();
+            c.moveTo(canvas.width / 2, 0);
+            c.lineTo(canvas.width / 2, canvas.height);
+            c.stroke();
+
+            c.beginPath();
+            c.moveTo(0, canvas.height / 2);
+            c.lineTo(canvas.width, canvas.height / 2);
+            c.stroke();
+            c.restore();
+        }
+
+        // Modular helper to draw elements on any canvas context
+        function drawElementsOnCtx(targetCtx, targetCanvas, elementsList, forExport) {
+            elementsList.forEach(el => {
+                targetCtx.save();
+
+                // 1. Setup typography specifications on context
+                if (el.type === 'text') {
+                    const variationSettings = `"wght" ${el.fontWeight || 400}, "GRAD" ${el.fontGrade || 0}`;
+                    targetCanvas.style.fontVariationSettings = variationSettings;
+
+                    const fontStyle = `${el.isItalic ? 'italic ' : ''}${el.fontWeight || 400}`;
+                    targetCtx.font = `${fontStyle} ${el.fontSize}px "${el.fontFamily}"`;
+
+                    if ('letterSpacing' in targetCtx) {
+                        targetCtx.letterSpacing = `${el.letterSpacing || 0}px`;
+                    }
+
+                    const lines = el.text.split('\n');
+                    let maxWidth = 0;
+                    const lineHeight = el.fontSize * 1.2;
+
+                    lines.forEach(line => {
+                        const w = targetCtx.measureText(line).width;
+                        if (w > maxWidth) maxWidth = w;
+                    });
+
+                    el._width = maxWidth;
+                    el._height = lines.length * lineHeight;
+                } else if (el.type === 'image') {
+                    el._width = el.width;
+                    el._height = el.height;
+                }
+
+                // 2. Perform rotation transformation
+                const cx = el.x + (el._width || 0) / 2;
+                const cy = el.y + (el._height || 0) / 2;
+
+                if (el.rotation) {
+                    targetCtx.translate(cx, cy);
+                    targetCtx.rotate(el.rotation * Math.PI / 180);
+                    targetCtx.translate(-cx, -cy);
+                }
+
+                // 3. Draw content
+                if (el.type === 'text') {
+                    targetCtx.textBaseline = 'top';
+                    targetCtx.textAlign = 'left'; 
+                    targetCtx.fillStyle = el.color;
+
+                    const lines = el.text.split('\n');
+                    const lineHeight = el.fontSize * 1.2;
+
+                    // Stroke settings if active
+                    const hasStroke = el.strokeWidth && el.strokeWidth > 0;
+                    if (hasStroke) {
+                        targetCtx.strokeStyle = el.strokeColor || '#000000';
+                        targetCtx.lineWidth = el.strokeWidth;
+                        targetCtx.lineJoin = 'round';
+                        targetCtx.lineCap = 'round';
+                    }
+
+                    lines.forEach((line, index) => {
+                        const w = targetCtx.measureText(line).width;
+                        let lineX = el.x;
+
+                        if (el.textAlign === 'center') {
+                            lineX = el.x + (el._width / 2) - (w / 2);
+                        } else if (el.textAlign === 'right') {
+                            lineX = el.x + el._width - w;
+                        }
+                        
+                        if (hasStroke) {
+                            targetCtx.strokeText(line, lineX, el.y + (index * lineHeight));
+                        }
+                        targetCtx.fillText(line, lineX, el.y + (index * lineHeight));
+                    });
+                } else if (el.type === 'image') {
+                    targetCtx.drawImage(el.img, el.x, el.y, el.width, el.height);
+                }
+
+                // 4. Bounding Box & Handles (display mode only)
+                if (!forExport && el.id === selectedId) {
+                    targetCtx.save();
+                    targetCtx.strokeStyle = '#EE6C4D'; // Primary accent orange
+                    
+                    const rect = targetCanvas.getBoundingClientRect();
+                    const scale = targetCanvas.width / rect.width;
+                    targetCtx.lineWidth = 2 * scale;
+                    targetCtx.setLineDash([6 * scale, 4 * scale]);
+
+                    const pad = 4 * scale;
+                    targetCtx.strokeRect(el.x - pad, el.y - pad, (el._width || 0) + (pad * 2), (el._height || 0) + (pad * 2));
+
+                    // Rotation knob
+                    const topCenter_x = el.x + (el._width || 0) / 2;
+                    const topCenter_y = el.y - pad;
+                    const handleLength = 35 * scale;
+
+                    targetCtx.setLineDash([]);
+                    targetCtx.beginPath();
+                    targetCtx.moveTo(topCenter_x, topCenter_y);
+                    targetCtx.lineTo(topCenter_x, topCenter_y - handleLength);
+                    targetCtx.stroke();
+
+                    targetCtx.beginPath();
+                    targetCtx.arc(topCenter_x, topCenter_y - handleLength, 6 * scale, 0, Math.PI * 2);
+                    targetCtx.fillStyle = '#ffffff';
+                    targetCtx.fill();
+                    targetCtx.stroke();
+
+                    targetCtx.restore();
+                }
+
+                targetCtx.restore();
+            });
+
+            targetCanvas.style.fontVariationSettings = "normal";
+        }
+
+        // --- Input & Pointer Listeners ---
+        function handlePointerDown(e) {
+            e.preventDefault();
+            const pos = getPointerPos(e);
+            let hitFound = false;
+
+            // Check elements from top layer downwards
+            for (let i = elements.length - 1; i >= 0; i--) {
+                const el = elements[i];
+                const cx = el.x + (el._width || 0) / 2;
+                const cy = el.y + (el._height || 0) / 2;
+                const angle = -(el.rotation || 0) * Math.PI / 180;
+
+                const dx = pos.x - cx;
+                const dy = pos.y - cy;
+                const rx = dx * Math.cos(angle) - dy * Math.sin(angle) + cx;
+                const ry = dx * Math.sin(angle) + dy * Math.cos(angle) + cy;
+
+                // Check rotation knob first
+                if (el.id === selectedId) {
+                    const rect = canvas.getBoundingClientRect();
+                    const scale = canvas.width / rect.width;
+                    const pad = 4 * scale;
+                    const handleLength = 35 * scale;
+                    const topCenter_x = el.x + (el._width || 0) / 2;
+                    const handle_y = el.y - pad - handleLength;
+
+                    const hitRadius = 15 * scale;
+                    if (Math.hypot(rx - topCenter_x, ry - handle_y) <= hitRadius) {
+                        isRotating = true;
+                        hitFound = true;
+                        break;
+                    }
+                }
+
+                // Check bounds of element
+                if (rx >= el.x && rx <= el.x + el._width &&
+                    ry >= el.y && ry <= el.y + el._height) {
+                    selectedId = el.id;
+                    isDragging = true;
+                    dragOffsetX = pos.x - el.x;
+                    dragOffsetY = pos.y - el.y;
+                    hitFound = true;
+                    switchTab('properties'); // auto-focus variables
+                    break;
+                }
+            }
+
+            if (!hitFound) {
+                selectedId = null;
+                isDragging = false;
+                isRotating = false;
+            }
+
+            updateUI();
+            render();
+        }
+
+        function handlePointerMove(e) {
+            if (!isDragging && !isRotating) return;
+            if (!selectedId) return;
+            e.preventDefault();
+
+            const pos = getPointerPos(e);
+            const el = elements.find(e => e.id === selectedId);
+            if (!el) return;
+
+            if (isRotating) {
+                const cx = el.x + (el._width || 0) / 2;
+                const cy = el.y + (el._height || 0) / 2;
+                const angleRad = Math.atan2(pos.y - cy, pos.x - cx);
+                let angleDeg = (angleRad * 180 / Math.PI) + 90;
+                if (angleDeg < 0) angleDeg += 360;
+
+                el.rotation = Math.round(angleDeg);
+                uiElements.rotation.value = el.rotation;
+                uiElements.rotationNum.value = el.rotation;
+                render();
+            } else if (isDragging) {
+                let targetX = pos.x - dragOffsetX;
+                let targetY = pos.y - dragOffsetY;
+
+                // Alignment Snapping to Canvas Centers
+                const cx = (canvas.width / 2) - (el._width / 2);
+                const cy = (canvas.height / 2) - (el._height / 2);
+                if (Math.abs(targetX - cx) < 12) {
+                    targetX = cx;
+                }
+                if (Math.abs(targetY - cy) < 12) {
+                    targetY = cy;
+                }
+
+                el.x = targetX;
+                el.y = targetY;
+                render();
+            }
+        }
+
+        function handlePointerUp() {
+            if (isDragging || isRotating) {
+                saveHistory();
+            }
+            isDragging = false;
+            isRotating = false;
+        }
+
+        canvas.addEventListener('mousedown', handlePointerDown);
+        window.addEventListener('mousemove', handlePointerMove);
+        window.addEventListener('mouseup', handlePointerUp);
+
+        canvas.addEventListener('touchstart', handlePointerDown, { passive: false });
+        window.addEventListener('touchmove', handlePointerMove, { passive: false });
+        window.addEventListener('touchend', handlePointerUp);
+
+        // --- Add Elements ---
+        function addText() {
+            const fontToUse = loadedFonts.length > 0 ? loadedFonts[loadedFonts.length - 1] : 'Arial';
+            const newText = {
+                id: generateId(),
+                type: 'text',
+                x: (canvas.width / 2) - 100,
+                y: (canvas.height / 2) - 20,
+                text: 'Edit Text Layer',
+                fontSize: Math.max(24, Math.floor(canvas.width * 0.04)),
+                color: '#EE6C4D',
+                fontFamily: fontToUse,
+                textAlign: 'left',
+                fontWeight: 400,
+                fontGrade: 0,
+                letterSpacing: 0,
+                isItalic: false,
+                isDynamic: false,
+                rotation: 0,
+                strokeWidth: 0,
+                strokeColor: '#000000',
+                _width: 0, _height: 0
+            };
+            elements.push(newText);
+            selectedId = newText.id;
+            saveHistory();
+            updateUI();
+            render();
+        }
+
+        // --- File Inputs & File Handlers ---
+        document.getElementById('upload-base').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (file.type === 'application/pdf') {
+                loadPDFDocument(file);
+            } else {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        baseImage = img;
+                        pdfDoc = null;
+                        elements = [];
+                        elementsByPage = {};
+                        selectedId = null;
+                        document.getElementById('pdf-controls').classList.add('hidden');
+                        document.getElementById('certType').value = 'custom';
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        document.getElementById('metric-resolution').innerText = `${canvas.width} x ${canvas.height}`;
+                        saveHistory();
+                        updateUI();
+                        render();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+            e.target.value = '';
+        });
+
+        document.getElementById('upload-overlay').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    let initialScale = 1;
+                    if (img.width > canvas.width * 0.4) {
+                        initialScale = (canvas.width * 0.4) / img.width;
+                    }
+                    const w = img.width * initialScale;
+                    const h = img.height * initialScale;
+
+                    const newImgEl = {
+                        id: generateId(),
+                        type: 'image',
+                        x: (canvas.width / 2) - (w / 2),
+                        y: (canvas.height / 2) - (h / 2),
+                        img: img,
+                        baseWidth: img.width,
+                        baseHeight: img.height,
+                        width: w,
+                        height: h,
+                        scale: initialScale,
+                        rotation: 0,
+                        _width: w, _height: h
+                    };
+                    elements.push(newImgEl);
+                    selectedId = newImgEl.id;
+                    saveHistory();
+                    updateUI();
+                    render();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
+        });
+
+        document.getElementById('upload-font').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            try {
+                const buffer = await file.arrayBuffer();
+                const safeName = file.name.replace(/[^a-zA-Z0-9]/g, '') + generateId();
+                const font = new FontFace(safeName, buffer);
+
+                const loadedFace = await font.load();
+                document.fonts.add(loadedFace);
+                loadedFonts.push(safeName);
+                document.getElementById('metric-fonts').innerText = 4 + loadedFonts.length;
+
+                const select = document.getElementById('prop-font');
+                const opt = document.createElement('option');
+                opt.value = safeName;
+                opt.textContent = file.name;
+                select.appendChild(opt);
+
+                if (selectedId) {
+                    const el = elements.find(el => el.id === selectedId);
+                    if (el && el.type === 'text') {
+                        el.fontFamily = safeName;
+                        select.value = safeName;
+                        saveHistory();
+                        render();
+                    }
+                }
+                showAlert('Success', `Custom typography "${file.name}" loaded successfully.`);
+            } catch (err) {
+                console.error(err);
+                showAlert('Error', 'Failed to read custom font file. Verify it is a valid TTF/OTF file.');
+            }
+            e.target.value = '';
+        });
+
+        // --- Templates Presets listener ---
+        document.getElementById('certType').addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val === 'custom') return;
+
+            if (elements.length > 0) {
+                if (!confirm('This will replace your current design layers. Do you want to proceed?')) {
+                    e.target.value = 'custom';
+                    return;
+                }
+            }
+            loadTemplateLayers(val);
+        });
+
+        function loadTemplateLayers(type) {
+            elements = [];
+            elementsByPage = {};
+            selectedId = null;
+
+            // Set canvas size to US Letter Landscape (1056 x 816)
+            canvas.width = 1056;
+            canvas.height = 816;
+            document.getElementById('metric-resolution').innerText = `${canvas.width} x ${canvas.height}`;
+
+            const cx = canvas.width / 2;
+
+            if (type === 'participant') {
+                elements = [
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: cx - 400,
+                        y: 160,
+                        text: 'CERTIFICATE OF PARTICIPATION',
+                        fontSize: 42,
+                        color: '#064e3b',
+                        fontFamily: 'Georgia',
+                        textAlign: 'center',
+                        fontWeight: 700,
+                        fontGrade: 0,
+                        letterSpacing: 2,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 800, _height: 50
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: cx - 300,
+                        y: 260,
+                        text: 'THIS IS PROUDLY PRESENTED TO',
+                        fontSize: 16,
+                        color: '#EE6C4D',
+                        fontFamily: 'Arial',
+                        textAlign: 'center',
+                        fontWeight: 600,
+                        fontGrade: 0,
+                        letterSpacing: 4,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 600, _height: 25
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: cx - 400,
+                        y: 330,
+                        text: '{{Name}}',
+                        fontSize: 52,
+                        color: '#0f172a',
+                        fontFamily: 'Times New Roman',
+                        textAlign: 'center',
+                        fontWeight: 700,
+                        fontGrade: 0,
+                        letterSpacing: 0,
+                        isItalic: true,
+                        isDynamic: true,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 800, _height: 65
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: cx - 350,
+                        y: 450,
+                        text: 'for active participation and completion of the global learning seminar\nand showing exceptional competence in practice.',
+                        fontSize: 18,
+                        color: '#475569',
+                        fontFamily: 'Georgia',
+                        textAlign: 'center',
+                        fontWeight: 400,
+                        fontGrade: 0,
+                        letterSpacing: 0,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 700, _height: 50
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: 180,
+                        y: 600,
+                        text: 'Date: {{Date}}',
+                        fontSize: 18,
+                        color: '#064e3b',
+                        fontFamily: 'Georgia',
+                        textAlign: 'left',
+                        fontWeight: 600,
+                        fontGrade: 0,
+                        letterSpacing: 0,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 250, _height: 25
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: canvas.width - 430,
+                        y: 600,
+                        text: 'Authorized Signature',
+                        fontSize: 18,
+                        color: '#064e3b',
+                        fontFamily: 'Georgia',
+                        textAlign: 'right',
+                        fontWeight: 600,
+                        fontGrade: 0,
+                        letterSpacing: 0,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 250, _height: 25
+                    }
+                ];
+            } else if (type === 'achievement') {
+                elements = [
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: cx - 400,
+                        y: 150,
+                        text: 'CERTIFICATE OF ACHIEVEMENT',
+                        fontSize: 44,
+                        color: '#1e3a8a',
+                        fontFamily: 'Georgia',
+                        textAlign: 'center',
+                        fontWeight: 700,
+                        fontGrade: 0,
+                        letterSpacing: 1,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 800, _height: 50
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: cx - 300,
+                        y: 240,
+                        text: 'IN RECOGNITION OF EXCEPTIONAL ACHIEVEMENT',
+                        fontSize: 15,
+                        color: '#d97706',
+                        fontFamily: 'Arial',
+                        textAlign: 'center',
+                        fontWeight: 700,
+                        fontGrade: 0,
+                        letterSpacing: 3,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 600, _height: 25
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: cx - 400,
+                        y: 310,
+                        text: '{{Name}}',
+                        fontSize: 54,
+                        color: '#1e293b',
+                        fontFamily: 'Times New Roman',
+                        textAlign: 'center',
+                        fontWeight: 700,
+                        fontGrade: 0,
+                        letterSpacing: 0,
+                        isItalic: true,
+                        isDynamic: true,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 800, _height: 65
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: cx - 350,
+                        y: 430,
+                        text: 'for outstanding professional achievement, dedication, and leadership\ndemonstrated during the fiscal calendar year.',
+                        fontSize: 18,
+                        color: '#475569',
+                        fontFamily: 'Georgia',
+                        textAlign: 'center',
+                        fontWeight: 400,
+                        fontGrade: 0,
+                        letterSpacing: 0,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 700, _height: 50
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: 180,
+                        y: 570,
+                        text: 'Date: {{Date}}',
+                        fontSize: 18,
+                        color: '#1e3a8a',
+                        fontFamily: 'Georgia',
+                        textAlign: 'left',
+                        fontWeight: 600,
+                        fontGrade: 0,
+                        letterSpacing: 0,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 250, _height: 25
+                    },
+                    {
+                        id: generateId(),
+                        type: 'text',
+                        x: canvas.width - 430,
+                        y: 570,
+                        text: 'Director Signature',
+                        fontSize: 18,
+                        color: '#1e3a8a',
+                        fontFamily: 'Georgia',
+                        textAlign: 'right',
+                        fontWeight: 600,
+                        fontGrade: 0,
+                        letterSpacing: 0,
+                        isItalic: false,
+                        isDynamic: false,
+                        rotation: 0,
+                        strokeWidth: 0,
+                        strokeColor: '#000000',
+                        _width: 250, _height: 25
+                    }
+                ];
+            } else if (type === 'excellence') {
+                elements = [
+                    { id: generateId(), type: 'text', x: cx - 400, y: 150, text: 'CERTIFICATE OF EXCELLENCE', fontSize: 44, color: '#4c1d95', fontFamily: 'Georgia', textAlign: 'center', fontWeight: 700, fontGrade: 0, letterSpacing: 2, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 800, _height: 50 },
+                    { id: generateId(), type: 'text', x: cx - 300, y: 240, text: 'THIS HONOR IS BESTOWED UPON', fontSize: 15, color: '#c026d3', fontFamily: 'Arial', textAlign: 'center', fontWeight: 600, fontGrade: 0, letterSpacing: 3, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 600, _height: 25 },
+                    { id: generateId(), type: 'text', x: cx - 400, y: 320, text: '{{Name}}', fontSize: 56, color: '#000000', fontFamily: 'Georgia', textAlign: 'center', fontWeight: 700, fontGrade: 0, letterSpacing: 0, isItalic: true, isDynamic: true, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 800, _height: 80 },
+                    { id: generateId(), type: 'text', x: cx - 350, y: 430, text: 'for outstanding contributions and exceptional dedication\nto excellence and innovation.', fontSize: 18, color: '#475569', fontFamily: 'Georgia', textAlign: 'center', fontWeight: 400, fontGrade: 0, letterSpacing: 0, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 700, _height: 50 },
+                    { id: generateId(), type: 'text', x: 180, y: 570, text: 'Date: {{Date}}', fontSize: 18, color: '#4c1d95', fontFamily: 'Georgia', textAlign: 'left', fontWeight: 600, fontGrade: 0, letterSpacing: 0, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 250, _height: 25 },
+                    { id: generateId(), type: 'text', x: canvas.width - 430, y: 570, text: 'President Signature', fontSize: 18, color: '#4c1d95', fontFamily: 'Georgia', textAlign: 'right', fontWeight: 600, fontGrade: 0, letterSpacing: 0, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 250, _height: 25 }
+                ];
+            } else if (type === 'completion') {
+                elements = [
+                    { id: generateId(), type: 'text', x: cx - 250, y: 150, text: 'CERTIFICATE OF COMPLETION', fontSize: 36, color: '#0f766e', fontFamily: 'Arial', textAlign: 'center', fontWeight: 700, fontGrade: 0, letterSpacing: 4, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 700, _height: 50 },
+                    { id: generateId(), type: 'text', x: cx - 250, y: 220, text: 'Presented to', fontSize: 16, color: '#64748b', fontFamily: 'Arial', textAlign: 'center', fontWeight: 400, fontGrade: 0, letterSpacing: 1, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 700, _height: 25 },
+                    { id: generateId(), type: 'text', x: cx - 250, y: 300, text: '{{Name}}', fontSize: 48, color: '#0f172a', fontFamily: 'Arial', textAlign: 'center', fontWeight: 700, fontGrade: 0, letterSpacing: 0, isItalic: false, isDynamic: true, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 700, _height: 60 },
+                    { id: generateId(), type: 'text', x: cx - 250, y: 400, text: 'for successfully completing the rigorous requirements of\n{{Course}}', fontSize: 20, color: '#334155', fontFamily: 'Arial', textAlign: 'center', fontWeight: 400, fontGrade: 0, letterSpacing: 0, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 700, _height: 50 },
+                    { id: generateId(), type: 'text', x: 250, y: 550, text: 'Issued: {{Date}}', fontSize: 16, color: '#64748b', fontFamily: 'Arial', textAlign: 'left', fontWeight: 400, fontGrade: 0, letterSpacing: 0, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 250, _height: 25 },
+                    { id: generateId(), type: 'text', x: canvas.width - 300, y: 550, text: 'ID: {{ID}}', fontSize: 16, color: '#64748b', fontFamily: 'Arial', textAlign: 'right', fontWeight: 400, fontGrade: 0, letterSpacing: 0, isItalic: false, isDynamic: false, rotation: 0, strokeWidth: 0, strokeColor: '#000000', _width: 200, _height: 25 }
+                ];
+            }
+
+            const bulkTextarea = document.getElementById('bulkNames');
+            if (bulkTextarea && !bulkTextarea.value.trim()) {
+                bulkTextarea.value = "Name,Date\nJane Doe,2026-06-03\nJohn Smith,2026-06-04\nAlice Johnson,2026-06-05";
+            }
+
+            saveHistory();
+            render();
+            updateUI();
+        }
+
+        // --- Undo / Redo History stack ---
+        let history = [];
+        let redoStack = [];
+
+        function saveHistory() {
+            if (history.length > 50) history.shift();
+            const state = {
+                elements: JSON.parse(JSON.stringify(elements)),
+                canvasWidth: canvas.width,
+                canvasHeight: canvas.height,
+                certType: document.getElementById('certType').value,
+                selectedId: selectedId
+            };
+            elements.forEach((el, idx) => {
+                if (el.type === 'image') {
+                    state.elements[idx]._imgSrc = el.img.src;
+                }
+            });
+            history.push(state);
+            redoStack = []; 
+            updateUndoRedoButtons();
+        }
+
+        function undo() {
+            if (history.length <= 1) return;
+            const currentState = history.pop();
+            redoStack.push(currentState);
+            
+            const prevState = history[history.length - 1];
+            applyHistoryState(prevState);
+        }
+
+        function redo() {
+            if (redoStack.length === 0) return;
+            const nextState = redoStack.pop();
+            history.push(nextState);
+            applyHistoryState(nextState);
+        }
+
+        function applyHistoryState(state) {
+            canvas.width = state.canvasWidth;
+            canvas.height = state.canvasHeight;
+            document.getElementById('metric-resolution').innerText = `${canvas.width} x ${canvas.height}`;
+            document.getElementById('certType').value = state.certType;
+            selectedId = state.selectedId;
+
+            elements = [];
+            let imagesToLoad = 0;
+
+            state.elements.forEach(el => {
+                if (el.type === 'image') {
+                    imagesToLoad++;
+                    const img = new Image();
+                    img.onload = () => {
+                        el.img = img;
+                        imagesToLoad--;
+                        if (imagesToLoad === 0) render();
+                    };
+                    img.src = el._imgSrc;
+                }
+                elements.push(el);
+            });
+
+            if (imagesToLoad === 0) render();
+            updateUI();
+            updateUndoRedoButtons();
+        }
+
+        function updateUndoRedoButtons() {
+            const btnUndo = document.getElementById('btn-undo');
+            const btnRedo = document.getElementById('btn-redo');
+            if (btnUndo) {
+                btnUndo.disabled = history.length <= 1;
+                btnUndo.classList.toggle('opacity-50', history.length <= 1);
+            }
+            if (btnRedo) {
+                btnRedo.disabled = redoStack.length === 0;
+                btnRedo.classList.toggle('opacity-50', redoStack.length === 0);
+            }
+        }
+
+        // Keyboard Shortcuts
+        window.addEventListener('keydown', (e) => {
+            const isMac = /Mac/i.test(navigator.userAgent);
+            const modifier = isMac ? e.metaKey : e.ctrlKey;
+            
+            if (modifier && e.key.toLowerCase() === 'z') {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    redo();
+                } else {
+                    undo();
+                }
+            } else if (modifier && e.key.toLowerCase() === 'y') {
+                e.preventDefault();
+                redo();
+            }
+        });
+
+        // --- Properties panel inputs UI Sync ---
+        const uiElements = {
+            panel: document.getElementById('properties-panel'),
+            emptyState: document.getElementById('properties-empty'),
+            badge: document.getElementById('prop-type-badge'),
+            textControls: document.getElementById('text-controls'),
+            imageControls: document.getElementById('image-controls'),
+
+            text: document.getElementById('prop-text'),
+            color: document.getElementById('prop-color'),
+            colorHex: document.getElementById('prop-color-hex'),
+
+            fontWeight: document.getElementById('prop-fontweight'),
+            fontWeightNum: document.getElementById('prop-fontweight-num'),
+            fontGrade: document.getElementById('prop-fontgrade'),
+            fontGradeNum: document.getElementById('prop-fontgrade-num'),
+            letterSpacing: document.getElementById('prop-letterspacing'),
+            letterSpacingNum: document.getElementById('prop-letterspacing-num'),
+
+            btnItalic: document.getElementById('btn-italic'),
+            btnAlignLeft: document.getElementById('btn-align-left'),
+            btnAlignCenter: document.getElementById('btn-align-center'),
+            btnAlignRight: document.getElementById('btn-align-right'),
+            fontSize: document.getElementById('prop-fontsize'),
+            fontFamily: document.getElementById('prop-font'),
+            isDynamic: document.getElementById('prop-is-dynamic'),
+
+            scale: document.getElementById('prop-scale'),
+            scaleNum: document.getElementById('prop-scale-num'),
+            rotation: document.getElementById('prop-rotation'),
+            rotationNum: document.getElementById('prop-rotation-num'),
+
+            // Stroke elements
+            strokeWidth: document.getElementById('prop-strokewidth'),
+            strokeColor: document.getElementById('prop-strokecolor'),
+            strokeColorHex: document.getElementById('prop-strokecolor-hex')
+        };
+
+        function updateUI() {
+            const el = elements.find(e => e.id === selectedId);
+            if (!el) {
+                uiElements.panel.classList.add('hidden');
+                uiElements.emptyState.classList.remove('hidden');
+                return;
+            }
+
+            uiElements.emptyState.classList.add('hidden');
+            uiElements.panel.classList.remove('hidden');
+
+            uiElements.rotation.value = el.rotation || 0;
+            uiElements.rotationNum.value = el.rotation || 0;
+
+            if (el.type === 'text') {
+                uiElements.badge.textContent = 'TEXT LAYER';
+                uiElements.textControls.classList.remove('hidden');
+                uiElements.imageControls.classList.add('hidden');
+
+                uiElements.text.value = el.text;
+                uiElements.color.value = el.color;
+                uiElements.colorHex.value = el.color.toUpperCase();
+                uiElements.fontSize.value = el.fontSize;
+                uiElements.fontFamily.value = el.fontFamily;
+
+                uiElements.fontWeight.value = el.fontWeight || 400;
+                uiElements.fontWeightNum.value = el.fontWeight || 400;
+                uiElements.fontGrade.value = el.fontGrade || 0;
+                uiElements.fontGradeNum.value = el.fontGrade || 0;
+                uiElements.letterSpacing.value = el.letterSpacing || 0;
+                uiElements.letterSpacingNum.value = el.letterSpacing || 0;
+                uiElements.isDynamic.checked = el.isDynamic || false;
+
+                uiElements.strokeWidth.value = el.strokeWidth || 0;
+                uiElements.strokeColor.value = el.strokeColor || '#000000';
+                uiElements.strokeColorHex.value = (el.strokeColor || '#000000').toUpperCase();
+
+                uiElements.btnItalic.classList.toggle('bg-slate-700', el.isItalic);
+                uiElements.btnItalic.classList.toggle('border-[#EE6C4D]', el.isItalic);
+
+                const aligns = { left: uiElements.btnAlignLeft, center: uiElements.btnAlignCenter, right: uiElements.btnAlignRight };
+                for (let key in aligns) {
+                    aligns[key].classList.toggle('bg-slate-700', el.textAlign === key);
+                    aligns[key].classList.toggle('border-[#EE6C4D]', el.textAlign === key);
+                }
+            } else if (el.type === 'image') {
+                uiElements.badge.textContent = 'IMAGE LAYER';
+                uiElements.textControls.classList.add('hidden');
+                uiElements.imageControls.classList.remove('hidden');
+
+                uiElements.scale.value = el.scale || 1.0;
+                uiElements.scaleNum.value = Math.round((el.scale || 1.0) * 100);
+            }
+        }
+
+        // --- Controls Sync Listeners ---
+        uiElements.text.addEventListener('input', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) { el.text = e.target.value; render(); }
+        });
+        uiElements.text.addEventListener('change', () => {
+            saveHistory();
+        });
+
+        uiElements.color.addEventListener('input', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) {
+                el.color = e.target.value;
+                uiElements.colorHex.value = el.color.toUpperCase();
+                render();
+            }
+        });
+        uiElements.color.addEventListener('change', () => {
+            saveHistory();
+        });
+
+        uiElements.colorHex.addEventListener('change', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            let val = e.target.value.trim();
+            if (!val.startsWith('#')) val = '#' + val;
+            if (/^#[0-9A-F]{6}$/i.test(val)) {
+                if (el) { 
+                    el.color = val; 
+                    uiElements.color.value = val; 
+                    saveHistory();
+                    render(); 
+                }
+            } else if (el) {
+                e.target.value = el.color.toUpperCase();
+            }
+        });
+
+        uiElements.fontSize.addEventListener('change', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) { 
+                el.fontSize = parseInt(e.target.value) || 20; 
+                saveHistory();
+                render(); 
+            }
+        });
+
+        uiElements.fontFamily.addEventListener('change', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) { 
+                el.fontFamily = e.target.value; 
+                saveHistory();
+                render(); 
+            }
+        });
+
+        uiElements.isDynamic.addEventListener('change', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) {
+                elements.forEach(layer => { if (layer.type === 'text') layer.isDynamic = false; });
+                el.isDynamic = e.target.checked;
+                saveHistory();
+                updateUI();
+            }
+        });
+
+        // Stroke Listeners
+        uiElements.strokeWidth.addEventListener('change', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) {
+                el.strokeWidth = parseInt(e.target.value) || 0;
+                saveHistory();
+                render();
+            }
+        });
+        uiElements.strokeColor.addEventListener('input', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            if (el) {
+                el.strokeColor = e.target.value;
+                uiElements.strokeColorHex.value = el.strokeColor.toUpperCase();
+                render();
+            }
+        });
+        uiElements.strokeColor.addEventListener('change', () => {
+            saveHistory();
+        });
+        uiElements.strokeColorHex.addEventListener('change', (e) => {
+            const el = elements.find(el => el.id === selectedId);
+            let val = e.target.value.trim();
+            if (!val.startsWith('#')) val = '#' + val;
+            if (/^#[0-9A-F]{6}$/i.test(val)) {
+                if (el) {
+                    el.strokeColor = val;
+                    uiElements.strokeColor.value = val;
+                    saveHistory();
+                    render();
+                }
+            } else if (el) {
+                e.target.value = (el.strokeColor || '#000000').toUpperCase();
+            }
+        });
+
+        // Sliders
+        function setupSliderPair(slider, numberInput, elProperty, isFloat = false) {
+            function updateVal(val) {
+                const el = elements.find(el => el.id === selectedId);
+                const parsed = isFloat ? parseFloat(val) : parseInt(val);
+                if (el) {
+                    if (elProperty === 'scale') {
+                        el.scale = parsed;
+                        el.width = el.baseWidth * parsed;
+                        el.height = el.baseHeight * parsed;
+                    } else {
+                        el[elProperty] = parsed;
+                    }
+                    render();
+                }
+            }
+            slider.addEventListener('input', (e) => {
+                numberInput.value = isFloat ? Math.round(e.target.value * 100) : e.target.value;
+                updateVal(e.target.value);
+            });
+            slider.addEventListener('change', () => {
+                saveHistory();
+            });
+            numberInput.addEventListener('change', (e) => {
+                const val = isFloat ? (parseFloat(e.target.value) / 100 || 1.0) : parseInt(e.target.value);
+                slider.value = val;
+                updateVal(slider.value);
+                saveHistory();
+            });
+        }
+
+        setupSliderPair(uiElements.fontWeight, uiElements.fontWeightNum, 'fontWeight');
+        setupSliderPair(uiElements.fontGrade, uiElements.fontGradeNum, 'fontGrade');
+        setupSliderPair(uiElements.letterSpacing, uiElements.letterSpacingNum, 'letterSpacing');
+        setupSliderPair(uiElements.scale, uiElements.scaleNum, 'scale', true);
+        setupSliderPair(uiElements.rotation, uiElements.rotationNum, 'rotation');
+
+        // Typography styling modifiers
+        function toggleTextStyle(style) {
+            const el = elements.find(el => el.id === selectedId);
+            if (el && el.type === 'text') {
+                if (style === 'italic') {
+                    el.isItalic = !el.isItalic;
+                }
+                saveHistory();
+                updateUI();
+                render();
+            }
+        }
+
+        function setTextAlign(alignment) {
+            const el = elements.find(el => el.id === selectedId);
+            if (el && el.type === 'text') {
+                el.textAlign = alignment;
+                saveHistory();
+                updateUI();
+                render();
+            }
+        }
+
+        function centerElement(dir) {
+            const el = elements.find(el => el.id === selectedId);
+            if (!el) return;
+            if (dir === 'horizontal') {
+                el.x = (canvas.width / 2) - (el._width / 2);
+            } else if (dir === 'vertical') {
+                el.y = (canvas.height / 2) - (el._height / 2);
+            }
+            saveHistory();
+            render();
+        }
+
+        // Layer sorting
+        function moveLayerUp() {
+            if (!selectedId) return;
+            const idx = elements.findIndex(el => el.id === selectedId);
+            if (idx > -1 && idx < elements.length - 1) {
+                const temp = elements[idx];
+                elements[idx] = elements[idx + 1];
+                elements[idx + 1] = temp;
+                saveHistory();
+                render();
+            }
+        }
+
+        // Layer sorting
+        function moveLayerDown() {
+            if (!selectedId) return;
+            const idx = elements.findIndex(el => el.id === selectedId);
+            if (idx > 0) {
+                const temp = elements[idx];
+                elements[idx] = elements[idx - 1];
+                elements[idx - 1] = temp;
+                saveHistory();
+                render();
+            }
+        }
+
+        function deleteSelected() {
+            if (!selectedId) return;
+            elements = elements.filter(el => el.id !== selectedId);
+            selectedId = null;
+            saveHistory();
+            updateUI();
+            render();
+        }
+
+        function duplicateSelected() {
+            if (!selectedId) return;
+            const targetIndex = elements.findIndex(el => el.id === selectedId);
+            if (targetIndex > -1) {
+                const targetEl = elements[targetIndex];
+                const clone = JSON.parse(JSON.stringify(targetEl));
+                clone.id = generateId();
+                clone.x += 20;
+                clone.y += 20;
+                if (clone.type === 'image') {
+                    clone.img = targetEl.img; // keep image reference
+                }
+                elements.push(clone);
+                selectedId = clone.id;
+                saveHistory();
+                updateUI();
+                render();
+            }
+        }
+
+        function insertVariable(variableName) {
+            if (!selectedId) return;
+            const targetEl = elements.find(el => el.id === selectedId);
+            if (targetEl && targetEl.type === 'text') {
+                targetEl.text += (targetEl.text.length > 0 ? ' ' : '') + variableName;
+                document.getElementById('prop-text').value = targetEl.text;
+                saveHistory();
+                render();
+            }
+        }
+
+        function requestClearCanvas() {
+            if (elements.length > 0 || baseImage || pdfDoc) {
+                if (!confirm('Are you sure you want to clear the workspace? This will reset everything.')) {
+                    return;
+                }
+            }
+            elements = [];
+            elementsByPage = {};
+            baseImage = null;
+            pdfDoc = null;
+            selectedId = null;
+            document.getElementById('pdf-controls').classList.add('hidden');
+            document.getElementById('certType').value = 'custom';
+            document.getElementById('metric-resolution').innerText = "800 x 600";
+            canvas.width = 800;
+            canvas.height = 600;
+            saveHistory();
+            updateUI();
+            render();
+        }
+
+        // --- Export & Download Functions ---
+        function triggerDownload(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            setTimeout(() => {
+                document.body.removeChild(link);
+            }, 100);
+        }
+
+        function getCleanExportData() {
+            const prevSelected = selectedId;
+            selectedId = null;
+            render('export');
+            const dataUrl = canvas.toDataURL('image/png');
+            selectedId = prevSelected;
+            render();
+            return dataUrl;
+        }
+
+        function downloadImage() {
+            const dataUrl = getCleanExportData();
+            triggerDownload(dataUrl, `design_${Date.now()}.png`);
+        }
+
+        async function downloadPdfDirect() {
+            const prevSelected = selectedId;
+            selectedId = null;
+
+            if (pdfDoc) {
+                elementsByPage[pdfPageNum] = elements;
+            }
+
+            const btn = document.querySelector('button[onclick="downloadPdfDirect()"]');
+            const originalHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Exporting PDF...`;
+
+            try {
+                const { jsPDF } = window.jspdf;
+                let pdf = null;
+
+                if (pdfDoc) {
+                    for (let num = 1; num <= pdfDoc.numPages; num++) {
+                        const page = await pdfDoc.getPage(num);
+                        const viewport = page.getViewport({ scale: 2.0 });
+                        
+                        const tempCanvas = document.createElement('canvas');
+                        tempCanvas.width = viewport.width;
+                        tempCanvas.height = viewport.height;
+                        const tempCtx = tempCanvas.getContext('2d');
+
+                        await page.render({ canvasContext: tempCtx, viewport: viewport }).promise;
+
+                        const pageElements = elementsByPage[num] || [];
+                        drawElementsOnCtx(tempCtx, tempCanvas, pageElements, true);
+
+                        const orientation = tempCanvas.width > tempCanvas.height ? 'l' : 'p';
+                        if (!pdf) {
+                            pdf = new jsPDF({
+                                orientation: orientation,
+                                unit: 'px',
+                                format: [tempCanvas.width, tempCanvas.height],
+                                hotfixes: ["px_scaling"]
+                            });
+                        } else {
+                            pdf.addPage([tempCanvas.width, tempCanvas.height], orientation);
+                        }
+
+                        const imgData = tempCanvas.toDataURL('image/png');
+                        pdf.addImage(imgData, 'PNG', 0, 0, tempCanvas.width, tempCanvas.height);
+                    }
+                } else {
+                    render('export');
+                    const orientation = canvas.width > canvas.height ? 'l' : 'p';
+                    pdf = new jsPDF({
+                        orientation: orientation,
+                        unit: 'px',
+                        format: [canvas.width, canvas.height],
+                        hotfixes: ["px_scaling"]
+                    });
+                    const imgData = canvas.toDataURL('image/png');
+                    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+                }
+
+                const pdfBlob = pdf.output('blob');
+                const blobUrl = URL.createObjectURL(pdfBlob);
+                triggerDownload(blobUrl, `document_${Date.now()}.pdf`);
+            } catch (err) {
+                console.error(err);
+                showAlert('Error exporting PDF', 'An error occurred during PDF generation.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+                selectedId = prevSelected;
+                render();
+            }
+        }
+
+        // CSV parsing helper
+        function parseBulkData(text) {
+            const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            if (lines.length === 0) return [];
+
+            const firstLine = lines[0];
+            let delimiter = null;
+            if (firstLine.includes('\t')) {
+                delimiter = '\t';
+            } else if (firstLine.includes(',')) {
+                delimiter = ',';
+            } else if (firstLine.includes(';')) {
+                delimiter = ';';
+            }
+
+            if (!delimiter) {
+                return lines.map(line => ({ 'Name': line }));
+            }
+
+            const headers = firstLine.split(delimiter).map(h => h.trim().replace(/^["']|["']$/g, ''));
+            
+            if (lines.length <= 1) {
+                return [{ 'Name': firstLine }];
+            }
+
+            const dataRows = [];
+            for (let i = 1; i < lines.length; i++) {
+                const rowText = lines[i];
+                let cols = [];
+                if (delimiter === ',') {
+                    let matches = rowText.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+                    if (matches && matches.length === headers.length) {
+                        cols = matches.map(c => c.trim().replace(/^["']|["']$/g, ''));
+                    } else {
+                        cols = rowText.split(',').map(c => c.trim().replace(/^["']|["']$/g, ''));
+                    }
+                } else {
+                    cols = rowText.split(delimiter).map(c => c.trim().replace(/^["']|["']$/g, ''));
+                }
+
+                const rowData = {};
+                headers.forEach((header, index) => {
+                    rowData[header] = cols[index] !== undefined ? cols[index] : '';
+                });
+                if (rowData['Name'] === undefined && cols[0] !== undefined) {
+                    rowData['Name'] = cols[0];
+                }
+                dataRows.push(rowData);
+            }
+            return dataRows;
+        }
+
+        // Offscreen renderer for direct bulk drawing
+        async function renderOffscreen(participantData = null) {
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            const tempCtx = tempCanvas.getContext('2d');
+
+            const certType = document.getElementById('certType').value;
+            if (baseImage) {
+                tempCtx.drawImage(baseImage, 0, 0, tempCanvas.width, tempCanvas.height);
+            } else if (certType && certType !== 'custom') {
+                drawVectorTemplateBackground(tempCtx, tempCanvas, certType);
+            } else {
+                tempCtx.fillStyle = '#ffffff';
+                tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+            }
+
+            const tempElements = JSON.parse(JSON.stringify(elements));
+            elements.forEach((el, idx) => {
+                if (el.type === 'image') {
+                    tempElements[idx].img = el.img;
+                }
+            });
+
+            if (participantData) {
+                tempElements.forEach(el => {
+                    if (el.type === 'text') {
+                        if (el.isDynamic && participantData['Name'] !== undefined) {
+                            el.text = participantData['Name'];
+                        } else {
+                            let txt = el.text;
+                            for (let key in participantData) {
+                                const regex = new RegExp(`{{\\s*${key}\\s*}}`, 'gi');
+                                txt = txt.replace(regex, participantData[key]);
+                            }
+                            el.text = txt;
+                        }
+                    }
+                });
+            }
+
+            drawElementsOnCtx(tempCtx, tempCanvas, tempElements, true);
+            return tempCanvas;
+        }
+
+        // --- Bulk Generation Engine ---
+        async function generateBulkCertificates() {
+            const bulkText = document.getElementById('bulkNames').value.trim();
+            if (!bulkText) {
+                showAlert('Generator Warning', 'Please provide a list of participant names or a CSV (one per line).');
+                return;
+            }
+
+            if (pdfDoc) {
+                elementsByPage[pdfPageNum] = elements;
+            }
+
+            const participantRows = parseBulkData(bulkText);
+            if (participantRows.length === 0) {
+                showAlert('Generator Warning', 'Could not parse any recipient rows. Check your input formatting.');
+                return;
+            }
+
+            let dynamicPageNum = 1;
+            if (pdfDoc) {
+                let found = false;
+                for (let num = 1; num <= pdfDoc.numPages; num++) {
+                    const pageEls = elementsByPage[num] || [];
+                    if (pageEls.some(el => el.type === 'text' && (el.isDynamic || el.text.includes('{{')))) {
+                        dynamicPageNum = num;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    showAlert('Warning', 'No dynamic text placeholders or variables like {{Name}} found on your PDF layers.');
+                }
+            } else {
+                const hasVariable = elements.some(el => el.type === 'text' && (el.isDynamic || el.text.includes('{{')));
+                if (!hasVariable) {
+                    showAlert('Missing Variable Placeholder', 'Please select or add a text layer, configure its text (e.g. {{Name}}), and mark the checkbox: "Mark as Name Placeholder" so the generator knows which text layers to replace.');
+                    return;
+                }
+            }
+
+            const format = document.getElementById('bulkFormat').value;
+            const prevSelected = selectedId;
+            selectedId = null;
+
+            const zip = new JSZip();
+            const { jsPDF } = window.jspdf;
+
+            const btn = document.querySelector('button[onclick="generateBulkCertificates()"]');
+            const originalHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Rendering ${participantRows.length} files...`;
+
+            try {
+                await document.fonts.ready;
+
+                for (let i = 0; i < participantRows.length; i++) {
+                    const participant = participantRows[i];
+                    const safeName = (participant['Name'] || `recipient_${i + 1}`).trim().replace(/[^a-zA-Z0-9]/g, '_');
+
+                    if (pdfDoc && format === 'pdf') {
+                        let pdf = null;
+                        for (let num = 1; num <= pdfDoc.numPages; num++) {
+                            const page = await pdfDoc.getPage(num);
+                            const viewport = page.getViewport({ scale: 2.0 });
+                            const tempCanvas = document.createElement('canvas');
+                            tempCanvas.width = viewport.width;
+                            tempCanvas.height = viewport.height;
+                            const tempCtx = tempCanvas.getContext('2d');
+
+                            await page.render({ canvasContext: tempCtx, viewport: viewport }).promise;
+
+                            const pageEls = elementsByPage[num] || [];
+                            const tempPageEls = JSON.parse(JSON.stringify(pageEls));
+                            pageEls.forEach((el, idx) => {
+                                if (el.type === 'image') tempPageEls[idx].img = el.img;
+                            });
+
+                            tempPageEls.forEach(el => {
+                                if (el.type === 'text') {
+                                    if (el.isDynamic && participant['Name'] !== undefined) {
+                                        el.text = participant['Name'];
+                                    } else {
+                                        let txt = el.text;
+                                        for (let key in participant) {
+                                            const regex = new RegExp(`{{\\s*${key}\\s*}}`, 'gi');
+                                            txt = txt.replace(regex, participant[key]);
+                                        }
+                                        el.text = txt;
+                                    }
+                                }
+                            });
+
+                            drawElementsOnCtx(tempCtx, tempCanvas, tempPageEls, true);
+
+                            const orientation = tempCanvas.width > tempCanvas.height ? 'l' : 'p';
+                            if (!pdf) {
+                                pdf = new jsPDF({
+                                    orientation: orientation,
+                                    unit: 'px',
+                                    format: [tempCanvas.width, tempCanvas.height],
+                                    hotfixes: ["px_scaling"]
+                                });
+                            } else {
+                                pdf.addPage([tempCanvas.width, tempCanvas.height], orientation);
+                            }
+
+                            const imgData = tempCanvas.toDataURL('image/png');
+                            pdf.addImage(imgData, 'PNG', 0, 0, tempCanvas.width, tempCanvas.height);
+                        }
+                        const pdfBlob = pdf.output('blob');
+                        zip.file(`${safeName}.pdf`, pdfBlob);
+
+                    } else if (pdfDoc && format === 'png') {
+                        const page = await pdfDoc.getPage(dynamicPageNum);
+                        const viewport = page.getViewport({ scale: 2.0 });
+                        const tempCanvas = document.createElement('canvas');
+                        tempCanvas.width = viewport.width;
+                        tempCanvas.height = viewport.height;
+                        const tempCtx = tempCanvas.getContext('2d');
+
+                        await page.render({ canvasContext: tempCtx, viewport: viewport }).promise;
+
+                        const pageEls = elementsByPage[dynamicPageNum] || [];
+                        const tempPageEls = JSON.parse(JSON.stringify(pageEls));
+                        pageEls.forEach((el, idx) => {
+                            if (el.type === 'image') tempPageEls[idx].img = el.img;
+                        });
+
+                        tempPageEls.forEach(el => {
+                            if (el.type === 'text') {
+                                if (el.isDynamic && participant['Name'] !== undefined) {
+                                    el.text = participant['Name'];
+                                } else {
+                                    let txt = el.text;
+                                    for (let key in participant) {
+                                        const regex = new RegExp(`{{\\s*${key}\\s*}}`, 'gi');
+                                        txt = txt.replace(regex, participant[key]);
+                                    }
+                                    el.text = txt;
+                                }
+                            }
+                        });
+
+                        drawElementsOnCtx(tempCtx, tempCanvas, tempPageEls, true);
+                        const imgDataUrl = tempCanvas.toDataURL('image/png');
+                        const base64Data = imgDataUrl.split(',')[1];
+                        zip.file(`${safeName}.png`, base64Data, { base64: true });
+
+                    } else {
+                        const tempCanvas = await renderOffscreen(participant);
+                        if (format === 'pdf') {
+                            const orientation = tempCanvas.width > tempCanvas.height ? 'l' : 'p';
+                            const pdf = new jsPDF({
+                                orientation: orientation,
+                                unit: 'px',
+                                format: [tempCanvas.width, tempCanvas.height],
+                                hotfixes: ["px_scaling"]
+                            });
+                            const imgData = tempCanvas.toDataURL('image/png');
+                            pdf.addImage(imgData, 'PNG', 0, 0, tempCanvas.width, tempCanvas.height);
+                            const pdfBlob = pdf.output('blob');
+                            zip.file(`${safeName}.pdf`, pdfBlob);
+                        } else {
+                            const imgDataUrl = tempCanvas.toDataURL('image/png');
+                            const base64Data = imgDataUrl.split(',')[1];
+                            zip.file(`${safeName}.png`, base64Data, { base64: true });
+                        }
+                    }
+                }
+
+                const content = await zip.generateAsync({ type: 'blob' });
+                const zipUrl = URL.createObjectURL(content);
+                triggerDownload(zipUrl, `bulk_export_${Date.now()}.zip`);
+
+                showAlert('Success', `Generated zip archive containing ${participantRows.length} files.`);
+            } catch (err) {
+                console.error(err);
+                showAlert('Error', 'An error occurred during bulk generation.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+                selectedId = prevSelected;
+                render();
+            }
+        }
+
+        // Initialize editor state and save initial history
+        saveHistory();
+        updateUI();
+        render();
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

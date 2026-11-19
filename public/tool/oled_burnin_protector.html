@@ -1,0 +1,918 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLED Uniformity Check Pro: Burn-In &amp; Banding Test</title>
+    <meta name="description" content="Test your OLED screen for burn-in, vertical banding, and uniformity issues. Features Auto-Scan, custom IRE tuning, and smooth gradient tests.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/oled_burnin_protector">
+    <meta name="keywords" content="oled burn in test, 5% grey test, screen uniformity test, dirty screen effect test, oled banding test, monitor calibration tool, tv burn in checker, display physics, subpixel wear, display diagnostics, IRE tuner">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="OLED Uniformity Check Pro: Burn-In &amp; Banding Test">
+    <meta property="og:description" content="Check your OLED display for permanent image retention or burn-in using grey-scale uniformity patterns.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/oled_burnin_protector">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OLED Uniformity Check Pro: Burn-In &amp; Banding Test">
+    <meta name="twitter:description" content="Check your OLED display for permanent image retention or burn-in using grey-scale uniformity patterns.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/oled_burnin_protector#webapp",
+      "name": "OLED Screen Uniformity Test",
+      "headline": "OLED Uniformity Check Pro: Burn-In & Banding Test",
+      "url": "https://toolkitgen.com/tool/oled_burnin_protector",
+      "description": "Check your OLED display for permanent image retention or burn-in using grey-scale uniformity patterns.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/oled_burnin_protector#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "OLED Screen Uniformity Test",
+          "item": "https://toolkitgen.com/tool/oled_burnin_protector"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/oled_burnin_protector#howto",
+      "name": "How to Use OLED Screen Uniformity Test",
+      "description": "Quick 4-step guide to using OLED Screen Uniformity Test locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch OLED Screen Uniformity Test directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/oled_burnin_protector#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "I see a faint line on 5% Grey. Is my TV broken?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Almost certainly not. 95% of OLED panels have some level of vertical banding on the 5% grey slide. The \"Normal Content Rule\" applies: if you cannot see the line while watching a dark movie scene (like a night sky or shadow), then your panel is within spec. Only return a TV if the banding is visible during actual movie/game usage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does burn-in take to appear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Modern OLED panels are highly resistant. It typically requires thousands of hours of static content at 100% brightness for permanent burn-in to occur. For normal usage (movies, varied gaming), your panel will likely last 7-10 years before any noticeable degradation occurs. Pro Tip: Use the 0% Black slide periodically; if you see any silhouettes there, it's just temporary retention (which goes away), not permanent burn-in."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool work on Android or iPhone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perfectly. Most modern flagship phones (iPhone, Samsung Galaxy, Pixel) use OLED screens. Use this tool in your mobile browser to check for \"Status Bar Burn-in\" (where the battery and clock icons live) or to inspect a refurbished phone purchase for defects. Tap any color to enter the full-screen mode."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/oled_burnin_protector#article",
+      "headline": "Comprehensive Guide to OLED Screen Uniformity Test & Client-Side Execution",
+      "description": "Check your OLED display for permanent image retention or burn-in using grey-scale uniformity patterns.",
+      "url": "https://toolkitgen.com/tool/oled_burnin_protector",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --color-site-primary: #EE6C4D;
+            --color-oled-purple: #a855f7;
+            --color-oled-black: #000000;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        #test-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background-color: #000;
+            cursor: none;
+            display: none;
+        }
+
+        #overlay-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            border-radius: 99px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            pointer-events: none;
+            transition: opacity 0.5s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Swatch Buttons */
+        .swatch-btn {
+            height: 5rem;
+            border-radius: 1rem;
+            border: 2px solid #e2e8f0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .swatch-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--color-oled-purple);
+        }
+
+        /* Custom Range Slider for IRE */
+        input[type=range].custom-range {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range].custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid #a855f7;
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s;
+        }
+
+        input[type=range].custom-range::-webkit-slider-thumb:active {
+            transform: scale(1.1);
+        }
+
+        input[type=range].custom-range::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* Sidebar link styling */
+        .sidebar-tool-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .sidebar-tool-link:hover {
+            background-color: #f8fafc;
+            border-color: #e2e8f0;
+        }
+
+        /* Typography */
+
+        .content-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            shadow-sm: true;
+        }
+
+        .highlight-box {
+            background: #f5f3ff;
+            border-left: 4px solid #a855f7;
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 2rem 0;
+        }
+
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background: #a855f7;
+            color: white;
+            border-radius: 9999px;
+            font-weight: bold;
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-purple-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#hardware" class="hover:text-purple-600 transition-colors">Display Tools</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">OLED Check Pro</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="panel-specs">
+                        Panel Specs</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-purple-600 font-black">BLACK</span>
+                            <span>0.000 nits</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-purple-600 font-black">CONTRAST</span>
+                            <span>∞ : 1</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-purple-600 font-black">RESPONSE</span>
+                            <span>&lt;0.1ms</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest text-center">
+                            Active Logic</h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                            </div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">Signal Monitor
+                                Active</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-purple-400 mb-2" id="display-tip">Display Tip</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">Turn
+                        off all room lights. Uniformity issues are completely invisible in bright environments.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-purple-600 relative z-10 shadow-2xl bg-slate-950">
+                    <div class="p-6 md:p-10 bg-slate-900 border-b border-slate-800 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight uppercase">OLED
+                                Check Pro</h1>
+                            <p class="text-sm text-purple-400 mt-1 font-medium uppercase tracking-widest">Panel Quality
+                                &amp; Burn-In Diagnostic Suite</p>
+                        </div>
+                        <div class="p-4 bg-slate-800 text-purple-500 rounded-2xl hidden sm:block border border-purple-900 shadow-lg">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10">
+                        <div class="mb-10 bg-slate-800 border border-slate-700 rounded-2xl p-5 sm:p-6 shadow-lg w-full flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-transparent pointer-events-none">
+                            </div>
+                            <div class="relative z-10 w-full sm:w-auto text-center sm:text-left">
+                                <h4 class="text-white font-black text-lg flex items-center gap-2 justify-center sm:justify-start">
+                                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Auto-Run Diagnostic
+                                </h4>
+                                <p class="text-slate-400 text-[10px] mt-1 uppercase tracking-widest font-bold">Cycles
+                                    key stress tests (5 sec per slide)</p>
+                            </div>
+                            <button id="btn-autorun" onclick="startAutoTest()" class="relative z-10 w-full sm:w-auto bg-purple-600 hover:bg-purple-500 text-white font-black py-3 px-8 rounded-xl transition transform active:scale-95 shadow-[0_0_15px_rgba(168,85,247,0.3)] uppercase tracking-widest text-xs select-none">
+                                Start Sequence
+                            </button>
+                        </div>
+                        <div class="space-y-10">
+                            <div>
+                                <h3 class="text-xs font-black text-slate-500 uppercase mb-4 tracking-[0.2em] flex items-center gap-3" id="dynamic-ire-tuning-near-black">
+                                    <span class="w-2 h-2 rounded-full bg-slate-400"></span> Dynamic IRE Tuning
+                                    (Near-Black)
+                                </h3>
+                                <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 sm:p-6 shadow-sm w-full flex flex-col sm:flex-row items-center gap-4">
+                                    <input type="range" id="ire-slider" min="1" max="25" step="1" value="5" oninput="updateIreValue()" class="w-full custom-range">
+                                    <button onclick="launchIreTest()" class="w-full sm:w-auto shrink-0 bg-white text-slate-900 font-bold px-6 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-slate-200 transition-colors">Test
+                                        <span id="ire-display" class="text-purple-600 font-black">5%</span></button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-black text-slate-500 uppercase mb-4 tracking-[0.2em] flex items-center gap-3" id="standard-uniformity-banding">
+                                    <span class="w-2 h-2 rounded-full bg-slate-400"></span> Standard Uniformity &amp;
+                                    Banding
+                                </h3>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <button onclick="startTest('#0d0d0d')" class="swatch-btn bg-[#0d0d0d] text-slate-500 border-slate-800">5% Grey</button>
+                                    <button onclick="startTest('#1a1a1a')" class="swatch-btn bg-[#1a1a1a] text-slate-500 border-slate-800">10%
+                                        Grey</button>
+                                    <button onclick="startTest('#333333')" class="swatch-btn bg-[#333333] text-slate-500 border-slate-800">20%
+                                        Grey</button>
+                                    <button onclick="startGradientTest()" class="swatch-btn text-white border-slate-600" style="background: linear-gradient(to right, #000000, #333333); text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Gradient</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-black text-slate-500 uppercase mb-4 tracking-[0.2em] flex items-center gap-3" id="burn-in-stress-test-primary">
+                                    <span class="w-2 h-2 rounded-full bg-red-500"></span> Burn-In Stress Test (Primary)
+                                </h3>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <button onclick="startTest('#ff0000')" class="swatch-btn bg-[#ff0000] text-white border-red-900">Pure Red</button>
+                                    <button onclick="startTest('#00ff00')" class="swatch-btn bg-[#00ff00] text-white border-green-900">Pure Green</button>
+                                    <button onclick="startTest('#0000ff')" class="swatch-btn bg-[#0000ff] text-white border-blue-900">Pure Blue</button>
+                                    <button onclick="startTest('#000000')" class="swatch-btn bg-[#000000] text-slate-700 border-slate-800">0%
+                                        Black</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-black text-slate-500 uppercase mb-4 tracking-[0.2em] flex items-center gap-3" id="peak-brightness-tinting">
+                                    <span class="w-2 h-2 rounded-full bg-yellow-400"></span> Peak Brightness &amp;
+                                    Tinting
+                                </h3>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <button onclick="startTest('#ffffff')" class="swatch-btn bg-[#ffffff] text-slate-900 border-slate-200">100%
+                                        White</button>
+                                    <button onclick="startTest('#ffff00')" class="swatch-btn bg-[#ffff00] text-slate-900 border-yellow-200">Yellow</button>
+                                    <button onclick="startTest('#ff00ff')" class="swatch-btn bg-[#ff00ff] text-white border-pink-900">Magenta</button>
+                                    <button onclick="startTest('#00ffff')" class="swatch-btn bg-[#00ffff] text-slate-900 border-cyan-200">Cyan</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-12 p-6 bg-purple-950/40 border border-purple-500/30 rounded-3xl">
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 bg-purple-500/20 rounded-xl shrink-0">
+                                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-black uppercase text-xs tracking-widest mb-2">The 5% Grey
+                                        Revelation</h4>
+                                    <p class="text-purple-200 text-sm leading-relaxed mb-0">
+                                        The <b>5% Grey</b> slide is the definitive benchmark for OLED health. It reveals
+                                        <b>Vertical Banding</b> (jail-bars) and <b>Vignetting</b> (dark edges) that are
+                                        completely hidden by the infinite contrast of pure black scenes.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="tool-domains">
+                        Tool Domains</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#hardware" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-purple-500 hover:text-purple-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Hardware
+                            Lab</a>
+                        <a href="/#display" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-purple-500 hover:text-purple-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Display
+                            EQ</a>
+                        <a href="/#diagnostics" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-purple-500 hover:text-purple-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Diagnostics</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/dead_pixel_check" class="sidebar-tool-link group">
+                                <div class="w-8 h-8 rounded bg-red-50 flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-[10px] font-black text-slate-700 uppercase tracking-tighter">Dead
+                                        Pixel Check</h4>
+                                    <p class="text-[9px] text-slate-400">Spot stuck pixels instantly</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/dead_pixel_strobe" class="sidebar-tool-link group">
+                                <div class="w-8 h-8 rounded bg-red-50 flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-[10px] font-black text-slate-700 uppercase tracking-tighter">Pixel
+                                        Strobe Fixer</h4>
+                                    <p class="text-[9px] text-slate-400">Revive stuck LCD pixels</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/monitor_backlight_bleed" class="sidebar-tool-link group">
+                                <div class="w-8 h-8 rounded bg-slate-50 flex items-center justify-center text-slate-500 group-hover:bg-slate-800 group-hover:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-[10px] font-black text-slate-700 uppercase tracking-tighter">
+                                        Backlight Bleed</h4>
+                                    <p class="text-[9px] text-slate-400">Check for IPS glow</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-panel-lottery-a-scientific-guide-to-oled-diagnostics">The Panel Lottery: A Scientific Guide
+                    to OLED Diagnostics</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    OLED (Organic Light Emitting Diode) technology represents the current pinnacle of consumer
+                    display science. Unlike traditional LCDs which require a backlight, every pixel in an OLED
+                    array is a self-emissive light source. This allows for the "Infinite Contrast" ratio—the
+                    mathematical reality that when a pixel is off, it emits <b>0.000 nits</b> of light.
+                </p>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    However, this granular control introduces a set of unique hardware risks: <b>Vertical
+                        Banding</b>, <b>Differential Aging (Burn-in)</b>, and <b>Near-Black Quantization
+                        noise</b>. The <strong>OLED Uniformity Check Pro</strong> provides a professional
+                    clinical toolkit to audit these defects.
+                </p>
+            </header>
+            <h2 id="how-to-use-the-oled-uniformity-check">How to Use the OLED Uniformity Check</h2>
+            <p>To accurately assess your panel without false positives, you must prepare your physical testing
+                environment.</p>
+            <ol class="space-y-4">
+                <li><b>Room Lighting is Critical:</b> Turn off every light in the room and close the blinds. It
+                    must be pitch black. Ambient light reflection will hide uniformity issues.</li>
+                <li><b>Monitor Warm-up:</b> Turn on the TV/Monitor and let it run for at least 10 minutes. OLED
+                    panels shift slightly in luminance as the organic materials reach operating temperature.
+                </li>
+                <li><b>Auto-Run vs Manual:</b> Click the <b>Start Sequence</b> button for a hands-free audit, or
+                    click individual swatches. Look carefully at the screen from your normal viewing distance.
+                </li>
+                <li><b>What to look for:</b>
+                    <ul class="mt-2 text-sm">
+                        <li><i>On Red/Green/Blue:</i> Look for faint shadows or outlines of UI elements
+                            (Burn-in).</li>
+                        <li><i>On 5% Grey:</i> Look for vertical stripes (Banding) or dark corners (Vignetting).
+                        </li>
+                        <li><i>On Gradient:</i> Look for harsh steps between colors instead of a smooth blend
+                            (Color Banding).</li>
+                    </ul>
+                </li>
+            </ol>
+            <div class="content-card mt-12">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-physics-of-oled-degradation">The Physics
+                    of OLED Degradation</h3>
+                <p class="!mb-6 text-slate-700">To understand why your screen might look "dirty" or "streaky,"
+                    we have to examine the electrochemical behavior of organic diodes. The lifespan of an OLED
+                    pixel follows an exponential decay curve governed by the following logic:</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-purple-50 shadow-sm space-y-10">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">1.
+                            Luminous Decay Equation</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-purple-500 mt-2">
+                            The brightness of a pixel over time ($L(t)$) is a function of its initial luminance
+                            ($L_0$) and a degradation constant ($\lambda$) related to temperature and current
+                            density:
+                        </p>
+                        <div class="py-4 text-center text-xl text-slate-800">
+                            $$L(t) = L_0 \cdot e^{-\lambda t}$$
+                        </div>
+                        Burn-in occurs when a specific cluster of pixels has a higher $\lambda t$ value than the
+                        surrounding array, causing a permanent "ghost" image.
+                        <p></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">2.
+                            What is "IRE"?</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-purple-500 mt-2">
+                            IRE is a unit used in video signals to measure luminance. 0 IRE represents absolute
+                            black, and 100 IRE is peak white. Testing at exactly 5 IRE (5% Grey) forces the
+                            panel's voltage regulators to operate at their absolute minimum threshold, which
+                            immediately exposes any manufacturing variances.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="vertical-banding-the-near-black-nightmare">Vertical Banding: The Near-Black Nightmare</h2>
+            <p>Vertical banding is the most common uniformity defect in modern WOLED (LG) and QD-OLED (Samsung)
+                panels. Visually, it appears as faint, vertical gray stripes (jail-bars). This is not burn-in;
+                it is a <b>manufacturing variance</b> in the Thin Film Transistor (TFT) backplane.</p>
+            <h3 id="why-banding-occurs">Why Banding Occurs</h3>
+            <p>Each pixel is driven by a transistor that must precisely regulate tiny amounts of current. At low
+                luminance levels (like 5% Grey), even a microscopic difference in transistor resistance across
+                the panel results in visible streaks. Using our <b>Dynamic IRE Tuning Slider</b>, you can sweep
+                from 1% to 25% to find exactly where your panel struggles. Small amounts of banding are
+                considered normal, but thick, prominent bars visible in normal movie content are grounds for a
+                warranty claim.</p>
+            <div class="highlight-box">
+                <h4 class="text-purple-900 !mt-0 mb-2 font-black uppercase tracking-widest">THE "BREAK-IN"
+                    PERIOD</h4>
+                <p class="text-purple-800 italic font-medium !mb-0">Do not return a TV on day one! Technical
+                    analysis of panel longevity shows that brand new OLEDs have high initial banding. Use the
+                    screen for at least 100 hours before performing a final audit. Most modern panels improve
+                    drastically after the first few 'compensation cycles' (pixel refreshers) are performed
+                    automatically by the TV during standby.</p>
+            </div>
+            <h2 id="permanent-image-retention-burn-in">Permanent Image Retention (Burn-In)</h2>
+            <p>Burn-in is the uneven wear of sub-pixels. If you watch a news channel with a static red logo for
+                10 hours a day, the red sub-pixels in that area will reach their $L_{50}$ (half-life) faster
+                than the rest of the screen. When you switch to our <b>Pure Red</b> slide, you will see a
+                ghostly silhouette of the logo because those pixels are no longer capable of the same peak
+                brightness as their neighbors.</p>
+            <h3 id="identifying-sub-pixel-failure">Identifying Sub-Pixel Failure</h3>
+            <ul>
+                <li><b>Red Slide:</b> Most sensitive to "Red Burn-in," common from news tickers, YouTube logos,
+                    and gaming HUDs.</li>
+                <li><b>White Slide:</b> Reveals <b>Tinting</b> issues. If the left side of the screen looks
+                    "warmer" (pinkish) than the right, your panel has a non-uniform color filter application.
+                </li>
+                <li><b>Gradient Test:</b> Reveals <b>Macroblocking</b>. A high-quality panel will show a
+                    perfectly smooth ramp from black to grey. A poor panel will show distinct, harsh steps.</li>
+            </ul>
+            <h2 id="mitigation-and-maintenance-protocols">Mitigation and Maintenance Protocols</h2>
+            <p>If our <b>OLED Check</b> reveals issues, don't panic. Modern displays have built-in
+                "Self-Healing" logic:</p>
+            <ol class="space-y-4 mt-6">
+                <li><b>Short Compensation Cycle:</b> Usually runs every 4 hours of cumulative usage once the TV
+                    is turned off. It takes 5-10 minutes and fixes minor TFT voltage irregularities (clearing up
+                    banding).</li>
+                <li><b>Pixel Refresher (Long Cycle):</b> A 1-hour deep scan that recalibrates every pixel.
+                    <b>Caution:</b> Do not run this manually more than once per year, as it puts significant
+                    wear on the organic material to "even out" the burn-in.
+                </li>
+                <li><b>Logo Brightness Control:</b> Ensure this setting is "High" in your TV menu. It
+                    dynamically identifies static logos and dims them to prevent localized heating.</li>
+            </ol>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>I see a faint line on 5% Grey. Is my TV broken?</span>
+                        <span class="transition-transform group-open:rotate-180 text-purple-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">Almost certainly not. 95% of OLED panels have some level of
+                            vertical banding on the 5% grey slide. The "Normal Content Rule" applies: if you
+                            cannot see the line while watching a dark movie scene (like a night sky or shadow),
+                            then your panel is within spec. Only return a TV if the banding is visible during
+                            actual movie/game usage.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>How long does burn-in take to appear?</span>
+                        <span class="transition-transform group-open:rotate-180 text-purple-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">Modern OLED panels are highly resistant. It typically requires
+                            thousands of hours of static content at 100% brightness for permanent burn-in to
+                            occur. For normal usage (movies, varied gaming), your panel will likely last 7-10
+                            years before any noticeable degradation occurs. <b>Pro Tip:</b> Use the 0% Black
+                            slide periodically; if you see any silhouettes there, it's just temporary retention
+                            (which goes away), not permanent burn-in.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this tool work on Android or iPhone?</span>
+                        <span class="transition-transform group-open:rotate-180 text-purple-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>Perfectly.</b> Most modern flagship phones (iPhone, Samsung
+                            Galaxy, Pixel) use OLED screens. Use this tool in your mobile browser to check for
+                            "Status Bar Burn-in" (where the battery and clock icons live) or to inspect a
+                            refurbished phone purchase for defects. Tap any color to enter the full-screen
+                            mode.</span>
+                    </div>
+                </details>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-diagnostic-tools">
+                Recommended Diagnostic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/monitor_backlight_bleed" class="tool-link-card group block bg-white p-6 rounded-2xl border border-slate-200 hover:border-blue-500 transition shadow-sm">
+                    <h4 class="font-bold text-slate-800 group-hover:text-blue-600 mb-2">Backlight Bleed Test</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Inspect your monitor for backlight bleeding and
+                        IPS glow using a pure black screen test.</p>
+                </a>
+                <a href="/tool/dead_pixel_strobe" class="tool-link-card group block bg-white p-6 rounded-2xl border border-slate-200 hover:border-blue-500 transition shadow-sm">
+                    <h4 class="font-bold text-slate-800 group-hover:text-blue-600 mb-2">Stuck Pixel Fixer</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Attempt to revive stuck pixels on your screen by
+                        flashing high-frequency color patterns.</p>
+                </a>
+                <a href="/tool/monitor_gamma_calibrator" class="tool-link-card group block bg-white p-6 rounded-2xl border border-slate-200 hover:border-blue-500 transition shadow-sm">
+                    <h4 class="font-bold text-slate-800 group-hover:text-blue-600 mb-2">Monitor Calibration Tool</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Calibrate your monitor's gamma, contrast, and
+                        black levels for accurate color representation.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+    <div id="test-overlay" onclick="handleOverlayClick()">
+        <div id="overlay-hint">Tap to Cycle • ESC to Exit</div>
+    </div>
+    <footer id="app-footer"></footer>
+    <script>
+        const sequence = [
+            '#0d0d0d', // 5% Grey
+            '#1a1a1a', // 10% Grey
+            '#333333', // 20% Grey
+            '#808080', // 50% Grey
+            '#ffffff', // 100% White
+            '#ff0000', // Pure Red
+            '#00ff00', // Pure Green
+            '#0000ff', // Pure Blue
+            '#00ffff', // Cyan
+            '#ff00ff', // Magenta
+            '#ffff00', // Yellow
+            '#000000'  // 0% Black
+        ];
+        let currentIndex = 0;
+        let autoTestInterval = null;
+        function startTest(startColor) {
+            clearAutoTest(); // Halt auto-test if user takes manual control
+            const overlay = document.getElementById('test-overlay');
+            if (startColor) {
+                currentIndex = sequence.indexOf(startColor);
+                if (currentIndex === -1) {
+                    currentIndex = 0;
+                }
+                overlay.style.background = startColor;
+            }
+            openOverlay(overlay);
+        }
+        // --- NEW: Dynamic IRE Tuner ---
+        function updateIreValue() {
+            const ire = document.getElementById('ire-slider').value;
+            document.getElementById('ire-display').innerText = ire + '%';
+        }
+        function launchIreTest() {
+            clearAutoTest();
+            const ire = document.getElementById('ire-slider').value;
+            // Calculate 8-bit RGB value based on percentage
+            const rgbVal = Math.round((ire / 100) * 255);
+            // Convert to Hex
+            const hex = "#" + (rgbVal).toString(16).padStart(2, '0').repeat(3);
+            const overlay = document.getElementById('test-overlay');
+            overlay.style.background = hex;
+            openOverlay(overlay);
+        }
+        // --- NEW: Gradient Test ---
+        function startGradientTest() {
+            clearAutoTest();
+            const overlay = document.getElementById('test-overlay');
+            overlay.style.background = 'linear-gradient(to right, #000000, #404040)';
+            openOverlay(overlay);
+        }
+        // --- NEW: Auto-Run Diagnostic ---
+        function startAutoTest() {
+            const overlay = document.getElementById('test-overlay');
+            // Critical diagnostic sequence
+            const autoSequence = ['#0d0d0d', '#ffffff', '#ff0000', '#00ff00', '#0000ff', '#000000'];
+            let autoIndex = 0;
+            overlay.style.background = autoSequence[autoIndex];
+            openOverlay(overlay);
+            const hint = document.getElementById('overlay-hint');
+            hint.innerText = "Auto-Scan Active • Tap or ESC to Exit";
+            hint.style.opacity = '1';
+            autoTestInterval = setInterval(() => {
+                autoIndex++;
+                if (autoIndex >= autoSequence.length) {
+                    stopTest();
+                    return;
+                }
+                overlay.style.background = autoSequence[autoIndex];
+            }, 5000); // 5 seconds per slide
+        }
+        function clearAutoTest() {
+            if (autoTestInterval) {
+                clearInterval(autoTestInterval);
+                autoTestInterval = null;
+                document.getElementById('overlay-hint').innerText = "Tap to Cycle • ESC to Exit";
+            }
+        }
+        // Core Overlay Logic
+        function openOverlay(overlay) {
+            overlay.style.display = 'block';
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+            const hint = document.getElementById('overlay-hint');
+            hint.style.opacity = '1';
+            clearTimeout(window.hintTimeout);
+            window.hintTimeout = setTimeout(() => {
+                hint.style.opacity = '0';
+            }, 3000);
+        }
+        function cycleColor() {
+            const overlay = document.getElementById('test-overlay');
+            currentIndex = (currentIndex + 1) % sequence.length;
+            overlay.style.background = sequence[currentIndex];
+            const hint = document.getElementById('overlay-hint');
+            hint.style.opacity = '1';
+            clearTimeout(window.hintTimeout);
+            window.hintTimeout = setTimeout(() => {
+                hint.style.opacity = '0';
+            }, 1500);
+        }
+        function handleOverlayClick() {
+            if (autoTestInterval) {
+                // If auto-test is running, user clicking means they want out
+                stopTest();
+            } else {
+                cycleColor();
+            }
+        }
+        function stopTest() {
+            clearAutoTest();
+            document.getElementById('test-overlay').style.display = 'none';
+            if (document.fullscreenElement && document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') stopTest();
+            if (document.getElementById('test-overlay').style.display === 'block' && !autoTestInterval) {
+                if (e.key === 'ArrowRight' || e.key === ' ') cycleColor();
+                if (e.key === 'ArrowLeft') {
+                    const overlay = document.getElementById('test-overlay');
+                    currentIndex = (currentIndex - 1 + sequence.length) % sequence.length;
+                    overlay.style.background = sequence[currentIndex];
+                }
+            }
+        });
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

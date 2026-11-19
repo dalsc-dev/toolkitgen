@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://toolkitgen.com/sitemap-core.xml.gz</loc>
+    <lastmod>2026-11-04T05:51:34.359Z</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://toolkitgen.com/sitemap-tools.xml.gz</loc>
+    <lastmod>2026-11-04T05:51:34.359Z</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://toolkitgen.com/sitemap-hubs.xml.gz</loc>
+    <lastmod>2026-11-04T05:51:34.359Z</lastmod>
+  </sitemap>
+</sitemapindex>

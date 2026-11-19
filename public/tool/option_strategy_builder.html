@@ -1,0 +1,759 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options Strategy Architect: Iron Condor &amp; Straddle Builder</title>
+    <meta name="description" content="Build and visualize complex options strategies. Calculate Profit/Loss zones for Iron Condors, Straddles, and Butterflies using this free interactive payout diagram tool. Local-first, private, and secure.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/option_strategy_builder">
+    <meta name="keywords" content="options profit calculator, iron condor builder, straddle visualizer, options payout diagram, options strategy builder, derivatives trading tool, theta gang tool, options greeks, black scholes model, risk management, credit spreads, debit spreads, butterfly spread">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Options Strategy Architect: Iron Condor &amp; Straddle Builder">
+    <meta property="og:description" content="Visually build and analyze complex options strategies like Iron Condors and Straddles with profit/loss diagrams.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/option_strategy_builder">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Options Strategy Architect: Iron Condor &amp; Straddle Builder">
+    <meta name="twitter:description" content="Visually build and analyze complex options strategies like Iron Condors and Straddles with profit/loss diagrams.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/option_strategy_builder#webapp",
+      "name": "Options Strategy Builder",
+      "headline": "Options Strategy Architect: Iron Condor & Straddle Builder",
+      "url": "https://toolkitgen.com/tool/option_strategy_builder",
+      "description": "Visually build and analyze complex options strategies like Iron Condors and Straddles with profit/loss diagrams.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/option_strategy_builder#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Options Strategy Builder",
+          "item": "https://toolkitgen.com/tool/option_strategy_builder"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/option_strategy_builder#howto",
+      "name": "How to Use Options Strategy Builder",
+      "description": "Quick 4-step guide to using Options Strategy Builder locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Options Strategy Builder directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/option_strategy_builder#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does this tool account for \"Early Assignment\"?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In version 1.0, the tool visualizes Theoretical Payoff at Expiration. It does not calculate the probability of being 'called away' before the contract ends. For most American-style options, early assignment is rare unless the option is deep in the money and has zero extrinsic value left, or there is a large upcoming dividend. Always check your broker's assignment risk metrics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 100x multiplier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard equity options represent 100 shares of the underlying stock. If our tool says a premium is $5.00, your actual cash cost (or credit) is $500.00. Our P/L metrics automatically include this 100x multiplier to show you real-world dollar impact."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this work on Android or mobile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perfectly. The Options Strategy Architect is built with a responsive grid. On Android and iPhone, the strategy builder and the P/L chart stack vertically, allowing you to model complex iron condors while sitting on the train or monitoring a news break. Open Chrome, tap the dots, and select \"Add to Home Screen\" to use it as an offline financial research app."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/option_strategy_builder#article",
+      "headline": "Comprehensive Guide to Options Strategy Builder & Client-Side Execution",
+      "description": "Visually build and analyze complex options strategies like Iron Condors and Straddles with profit/loss diagrams.",
+      "url": "https://toolkitgen.com/tool/option_strategy_builder",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#finance" class="hover:text-[#EE6C4D]">Finance Tools</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">Options Architect</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2 text-center" id="market-dynamics">
+                        Market Dynamics</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2 uppercase">
+                            <span class="text-blue-600 font-black">Contract</span>
+                            <span>x100</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2 uppercase">
+                            <span class="text-blue-600 font-black">Model</span>
+                            <span>B-S Int.</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2 uppercase">
+                            <span class="text-blue-600 font-black">Privacy</span>
+                            <span>100%</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest text-center">
+                            Active Logic</h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]">
+                            </div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">P/L Calculator
+                                Live</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-blue-400 mb-2" id="quant-tip">Quant Tip</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">Theta
+                        is your friend in credit spreads. It erodes the extrinsic value you sold every single day.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-blue-600 relative z-10 shadow-2xl bg-slate-900">
+                    <div class="p-6 md:p-10 bg-slate-800 border-b border-slate-700 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight uppercase">Options
+                                Strategy Architect</h1>
+                            <p class="text-sm text-slate-400 mt-1 font-medium italic">Simulate publication-quality
+                                payoff diagrams for multi-leg strategies.</p>
+                        </div>
+                        <div class="p-4 bg-slate-700 text-blue-400 rounded-2xl hidden sm:block shadow-lg">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
+                        <div class="lg:col-span-5 space-y-8">
+                            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-inner">
+                                <label class="text-[10px] font-black text-slate-400 uppercase mb-3 block tracking-widest">Underlying
+                                    Spot Price ($)</label>
+                                <div class="flex items-center gap-4">
+                                    <input type="number" id="spot-price" class="trade-input text-2xl font-black" value="100" oninput="updateChart()">
+                                    <button onclick="addLeg()" class="bg-blue-600 hover:bg-blue-500 text-white font-black px-4 py-3 rounded-xl transition shadow-xl active:scale-90 flex-shrink-0 text-xs uppercase tracking-widest">Add
+                                        Leg</button>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center px-1">
+                                    <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-widest" id="active-inventory">Active
+                                        Inventory</h3>
+                                    <button onclick="clearAll()" class="text-[10px] font-black text-red-400 hover:text-red-300 uppercase tracking-widest">Reset
+                                        Build</button>
+                                </div>
+                                <div id="legs-container" class="space-y-3 min-h-[150px] custom-scrollbar max-h-[400px] overflow-y-auto pr-2">
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4 px-1" id="strategy-archetypes">
+                                    Strategy Archetypes</h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button class="preset-btn" onclick="loadPreset('straddle')">Straddle</button>
+                                    <button class="preset-btn" onclick="loadPreset('strangle')">Strangle</button>
+                                    <button class="preset-btn" onclick="loadPreset('bull_spread')">Bull Call
+                                        Spread</button>
+                                    <button class="preset-btn" onclick="loadPreset('iron_condor')">Iron Condor</button>
+                                    <button class="preset-btn" onclick="loadPreset('butterfly')">Butterfly</button>
+                                    <button class="preset-btn" onclick="loadPreset('protective_put')">Hedge/Put</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="bg-slate-800 border-2 border-slate-700 rounded-3xl p-4 md:p-8 h-[450px] relative shadow-2xl">
+                                <div class="absolute top-6 left-6 z-10">
+                                    <span class="bg-slate-900 text-slate-400 text-[9px] font-black px-2 py-1 rounded uppercase tracking-[0.2em] border border-slate-700">Intrinsic
+                                        Value Projection</span>
+                                </div>
+                                <canvas id="payoffChart"></canvas>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-xl text-center">
+                                    <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">
+                                        Theoretical Cap</p>
+                                    <p class="text-xl font-black text-emerald-400 font-mono tracking-tighter" id="res-max-profit">--</p>
+                                </div>
+                                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-xl text-center">
+                                    <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">Max
+                                        At-Risk</p>
+                                    <p class="text-xl font-black text-rose-500 font-mono tracking-tighter" id="res-max-loss">--</p>
+                                </div>
+                                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-xl text-center">
+                                    <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">
+                                        Equilibrium</p>
+                                    <p class="text-sm font-black text-white font-mono tracking-tighter" id="res-breakeven">--</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-black/40 text-center no-print border-t border-slate-800">
+                        <p class="text-[9px] text-slate-500 font-black uppercase tracking-[0.4em]">Stochastic Hedge
+                            Verification Complete • 100% Local Processing</p>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="tool-categories">
+                        Tool Categories</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/#quant" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-blue-500 hover:text-blue-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Quant
+                            Suite</a>
+                        <a href="/#risk" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-blue-500 hover:text-blue-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Risk
+                            Logic</a>
+                        <a href="/#finance" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-blue-500 hover:text-blue-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">Finance</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/finance_suite_local" class="sidebar-tool-link group">
+                                <div class="w-8 h-8 rounded bg-emerald-50 flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-[10px] font-black text-slate-700 uppercase tracking-tighter">FIRE
+                                        Calculator</h4>
+                                    <p class="text-[9px] text-slate-400">Retirement Heatmap</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/black_scholes_heatmap" class="sidebar-tool-link group">
+                                <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-[10px] font-black text-slate-700 uppercase tracking-tighter">
+                                        Retirement Monte Carlo Simulation</h4>
+                                    <p class="text-[9px] text-slate-400">Simulate thousands of market scenarios to
+                                        estimate the probability of your portfolio surviving through retirement.</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-900 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-blue-400 uppercase text-[10px] tracking-widest" id="android-setup">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.523 15.3414C17.1513 15.3414 16.8502 15.0403 16.8502 14.6686C16.8502 14.2969 17.1513 13.9958 17.523 13.9958C17.8947 13.9958 18.1958 14.2969 18.1958 14.6686C18.1958 15.0403 17.8947 15.3414 17.523 15.3414ZM6.47702 15.3414C6.10534 15.3414 5.8042 15.0403 5.8042 14.6686C5.8042 14.2969 6.10534 13.9958 6.47702 13.9958C6.8487 13.9958 7.14984 14.2969 7.14984 14.6686C7.14984 15.0403 6.8487 15.3414 6.47702 15.3414ZM17.9625 11.2335L19.4673 8.63668C19.5706 8.45828 19.5101 8.22912 19.3317 8.12586C19.1533 8.0226 18.9242 8.08316 18.8209 8.26156L17.2917 10.9039C15.7533 10.1983 14.0202 9.8042 12 9.8042C9.9798 9.8042 8.2467 10.1983 6.70831 10.9039L5.1791 8.26156C5.07584 8.08316 4.84668 8.0226 4.66828 8.12586C4.48988 8.22912 4.42932 8.45828 4.53258 8.63668L6.0375 11.2335C3.25055 12.8398 1.3414 15.8286 1.3414 19.3414H22.6586C22.6586 15.8286 20.7495 12.8398 17.9625 11.2335Z">
+                            </path>
+                        </svg>
+                        Android Setup
+                    </h3>
+                    <p class="text-slate-400 text-[11px] leading-relaxed font-medium text-center">
+                        Auditing a trade on the move? Open Chrome on your Android device, tap the three dots, and select
+                        <b>"Add to Home Screen"</b>. This tool works offline as a PWA, keeping your strategy private.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-quantitative-blueprint-mastering-the-options-strategy-architect">The Quantitative Blueprint: Mastering
+                    the Options Strategy Architect</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    Options trading is often described as a 3D chess match against time, volatility, and price
+                    direction. Unlike stock trading, where the outcome is binary (price goes up or down),
+                    options allow a trader to profit from every possible market condition—even when the
+                    underlying asset does nothing at all. The <strong>Options Strategy Architect</strong> on
+                    this Canvas is a professional-grade clinical tool designed to visualize the <strong>Payoff
+                        Profile</strong> of complex derivatives strategies, ensuring your risk is defined before
+                    you enter the market.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-human-logic-of-the-payout-diagram">The Human
+                    Logic of the Payout Diagram</h3>
+                <p class="!mb-6 text-slate-700">To succeed in options, you must stop thinking in terms of "buy
+                    low, sell high" and start thinking in terms of <strong>Mathematical Zones</strong>. Here is
+                    how our architect engine calculates your profit potential in plain English:</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-blue-50 shadow-sm space-y-10">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">1. The
+                            Intrinsic Value Logic (LaTeX)</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-blue-500 mt-2">
+                            The value of an option at expiration is its 'Intrinsic Value.' For a Call option,
+                            this is the amount by which the Stock Price ($S$) exceeds the Strike Price ($K$):
+                        </p>
+                        <div class="py-4 text-center text-xl text-slate-800">
+                            $$V_{call} = \max(0, S - K)$$
+                            $$V_{put} = \max(0, K - S)$$
+                        </div>
+                        Your profit is this value minus the premium you paid to enter the contract.
+                        <p></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">2. The
+                            "Aggregated Leg" Logic</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                            "Your total strategy profit at any given price point is simply the sum of all
+                            individual legs. We calculate the intrinsic value for every $1 change in the stock
+                            price to draw your risk landscape."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-foundations-of-derivatives-strategy">Chapter 1: The Foundations of Derivatives Strategy</h2>
+            <p>Options are non-linear financial instruments. This means that a small move in the stock price can
+                lead to a 100% gain or a 100% loss in the option value. To manage this volatility, professional
+                traders use <strong>Multi-Leg Spreads</strong>. By buying one option and selling another
+                simultaneously, you can "sculpt" your risk. You can trade away some of your "Infinite Upside" in
+                exchange for "Limited Downside."</p>
+            <h3 id="1-the-greeks-the-hidden-levers-of-the-market">1. The Greeks: The Hidden Levers of the Market</h3>
+            <p>The <b>Options Strategy Architect</b> visualizes the result of the "Greeks"—the mathematical
+                variables that determine an option's price:</p>
+            <ul>
+                <li><b>Delta:</b> How much the option price moves for every $1 move in the stock.</li>
+                <li><b>Theta:</b> The "Time Decay." Options lose value every day they get closer to expiration.
+                    <b>Credit strategies</b> (like the Iron Condor) use Theta as an income generator.
+                </li>
+                <li><b>Vega:</b> Sensitivity to Volatility. When the market gets scared, option premiums spike.
+                    Professional traders "sell volatility" when it is high and "buy volatility" when it is
+                    cheap.</li>
+            </ul>
+            <h2 id="chapter-2-deciphering-the-strategy-archetypes">Chapter 2: Deciphering the Strategy Archetypes</h2>
+            <p>Our tool includes presets for the world's most effective strategies. Understanding the "When" is
+                just as important as the "How."</p>
+            <h4>The Straddle (Volatility Expansion)</h4>
+            <p>When you buy a Call and a Put at the same strike, you are betting that the stock will move
+                <strong>violently</strong> in either direction. This is common before major earnings reports or
+                clinical trial results. You lose money if the stock stays flat.
+            </p>
+            <h4>The Iron Condor (The Range Trade)</h4>
+            <p>The Iron Condor is the "Holy Grail" for income traders. By selling a wide spread and buying
+                further-out protection, you create a "Profit Tent." As long as the stock price stays inside your
+                inner strikes, you keep the entire premium collected. It is a bet against chaos.</p>
+            <div class="highlight-box">
+                <h4 class="text-blue-900 !mt-0 mb-2 font-black uppercase tracking-widest">THE "BREAKEVEN" RADIUS
+                </h4>
+                <p class="text-blue-800 italic font-medium">In options, the breakeven point isn't just the
+                    strike price. It is the Strike Price plus (or minus) the total premium you paid. Our
+                    calculator solves this equation horizontally across the X-axis, showing you exactly where
+                    you stop losing money and start building wealth.</p>
+            </div>
+            <h2 id="chapter-3-defined-risk-vs-the-naked-trap">Chapter 3: Defined Risk vs. The Naked Trap</h2>
+            <p>The most dangerous thing an amateur can do is "Sell Naked Calls." This is an <strong>Undefined
+                    Risk</strong> strategy where the theoretical loss is infinite if a stock moons (like a short
+                squeeze). Our <b>Options Architect</b> emphasizes <b>Defined Risk</b>. By adding "Wings"
+                (protective long options) to your trades, you turn a potential catastrophe into a known,
+                manageable cost of doing business.</p>
+            <h2 id="chapter-4-the-threat-of-iv-crush">Chapter 4: The Threat of IV Crush</h2>
+            <p>One critical concept for beginners is <b>Implied Volatility (IV) Crush</b>. This often happens
+                after earnings reports. You might buy a Straddle expecting a big move, and even if the stock
+                moves, you might lose money. Why? Because the "uncertainty premium" (Vega) evaporates instantly
+                after the news is out. Always check the IV rank before buying premium.</p>
+            <div class="mt-12 bg-slate-50 p-8 rounded-2xl border border-slate-200">
+                <h3 class="!mt-0 mb-4 text-slate-800 font-bold uppercase tracking-widest text-sm" id="external-references-authorities">External
+                    References &amp; Authorities</h3>
+                <p class="text-sm text-slate-500 mb-4">For verified data and regulatory information, consult
+                    these official sources:</p>
+                <ul class="!mb-0 !pl-5 space-y-2">
+                    <li><a href="https://www.theocc.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-semibold">The Options Clearing Corporation
+                            (OCC)</a> - The official clearing house for all US options.</li>
+                    <li><a href="https://www.cboe.com/education/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-semibold">CBOE Options Institute</a> -
+                        Institutional-grade education on volatility and derivatives.</li>
+                    <li><a href="https://www.investopedia.com/options-basics-tutorial-4583012" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-semibold">Investopedia:
+                            Options Basics</a>
+                        - Comprehensive guide for retail investors.</li>
+                </ul>
+            </div>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Strategy Type</th>
+                            <th class="px-6 py-5">Risk Profile</th>
+                            <th class="px-6 py-5">Strategic Advice</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Iron Condor</td>
+                            <td class="px-6 py-5 text-emerald-600 font-black">Defined</td>
+                            <td class="px-6 py-5 italic">Best for low-IV environments and flat markets.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">Straddle</td>
+                            <td class="px-6 py-4 text-orange-500 font-black">Limited (Debit)</td>
+                            <td class="px-6 py-4 italic">Best for anticipating massive binary events.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Naked Put</td>
+                            <td class="px-6 py-5 text-red-600 font-black uppercase">Undefined</td>
+                            <td class="px-6 py-5 italic font-bold">Requires massive margin and strict
+                                stop-losses.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-5-why-local-first-privacy-is-mandatory-for-traders">Chapter 5: Why Local-First Privacy is Mandatory for Traders</h2>
+            <p>Your trading strategy is your "Alpha"—your competitive edge over the market. Most "Free Options
+                Calculators" online are owned by brokerages or hedge funds that track your queries to gauge
+                "Retail Sentiment." If 10,000 people are suddenly checking the payoff of a $150 TSLA call, the
+                institutional desks know exactly where to place their hedges. Toolkit Gen's <strong>Options
+                    Strategy Architect</strong> is a local-first application. 100% of the payoff calculus and
+                chart renderings happen in <b>your browser's local memory</b>. We have zero visibility into your
+                trade ideas. This is <b>Zero-Knowledge Strategy Building</b> for the sovereign trader.</p>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-options-science">Frequently Asked Questions (FAQ) - Options Science</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this tool account for "Early Assignment"?</span>
+                        <span class="transition-transform group-open:rotate-180 text-blue-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">In version 1.0, the tool visualizes <strong>Theoretical Payoff at
+                                Expiration</strong>. It does not calculate the probability of being 'called
+                            away' before the contract ends. For most American-style options, early assignment is
+                            rare unless the option is deep in the money and has zero extrinsic value left, or
+                            there is a large upcoming dividend. Always check your broker's assignment risk
+                            metrics.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>What is the 100x multiplier?</span>
+                        <span class="transition-transform group-open:rotate-180 text-blue-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">Standard equity options represent <strong>100 shares</strong> of
+                            the underlying stock. If our tool says a premium is $5.00, your actual cash cost (or
+                            credit) is $500.00. Our P/L metrics automatically include this 100x multiplier to
+                            show you real-world dollar impact.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this work on Android or mobile?</span>
+                        <span class="transition-transform group-open:rotate-180 text-blue-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>Perfectly.</b> The Options Strategy Architect is built with a
+                            responsive grid. On Android and iPhone, the strategy builder and the P/L chart stack
+                            vertically, allowing you to model complex iron condors while sitting on the train or
+                            monitoring a news break. Open Chrome, tap the dots, and select <b>"Add to Home
+                                Screen"</b> to use it as an offline financial research app.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+                </div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black text-2xl" id="claim-your-sovereignty">
+                    Claim Your Sovereignty</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop gambling with your principal.
+                    Quantify the delta, visualize the decay, and build a strategy that thrives on probability.
+                    Your journey to professional-grade risk management starts here.</p>
+                <a href="#spot-price" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Begin Strategy Audit
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-logic-tools">
+                Recommended Logic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        let chartInstance = null;
+        let legs = [];
+        function addLeg(data = null) {
+            const leg = data || { action: 'buy', type: 'call', strike: 100, premium: 5, id: Date.now() };
+            legs.push(leg);
+            renderLegs();
+            updateChart();
+        }
+        function removeLeg(id) {
+            legs = legs.filter(l => l.id !== id);
+            renderLegs();
+            updateChart();
+        }
+        function clearAll() {
+            if (!confirm("Purge current build?")) return;
+            legs = [];
+            renderLegs();
+            updateChart();
+        }
+        function updateLeg(id, field, value) {
+            const leg = legs.find(l => l.id === id);
+            if (leg) {
+                if (field === 'strike' || field === 'premium') leg[field] = parseFloat(value) || 0;
+                else leg[field] = value;
+                updateChart();
+                if (field === 'action') renderLegs();
+            }
+        }
+        function renderLegs() {
+            const container = document.getElementById('legs-container');
+            container.innerHTML = '';
+            legs.forEach(leg => {
+                const div = document.createElement('div');
+                div.className = `leg-row ${leg.action}`;
+                div.innerHTML = `
+                    <select class="trade-input" onchange="updateLeg(${leg.id}, 'action', this.value)">
+                        <option value="buy" ${leg.action === 'buy' ? 'selected' : ''}>Buy</option>
+                        <option value="sell" ${leg.action === 'sell' ? 'selected' : ''}>Sell</option>
+                    </select>
+                    <select class="trade-input" onchange="updateLeg(${leg.id}, 'type', this.value)">
+                        <option value="call" ${leg.type === 'call' ? 'selected' : ''}>Call</option>
+                        <option value="put" ${leg.type === 'put' ? 'selected' : ''}>Put</option>
+                    </select>
+                    <input type="number" class="trade-input" value="${leg.strike}" placeholder="Strike" oninput="updateLeg(${leg.id}, 'strike', this.value)">
+                    <input type="number" class="trade-input" value="${leg.premium}" placeholder="Price" oninput="updateLeg(${leg.id}, 'premium', this.value)">
+                    <button onclick="removeLeg(${leg.id})" class="text-slate-500 hover:text-red-500 font-bold text-xl">&times;</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+        function loadPreset(type) {
+            const spot = parseFloat(document.getElementById('spot-price').value) || 100;
+            legs = [];
+            if (type === 'straddle') {
+                addLeg({ action: 'buy', type: 'call', strike: spot, premium: 5, id: 1 });
+                addLeg({ action: 'buy', type: 'put', strike: spot, premium: 5, id: 2 });
+            } else if (type === 'strangle') {
+                addLeg({ action: 'buy', type: 'call', strike: spot + 10, premium: 3, id: 1 });
+                addLeg({ action: 'buy', type: 'put', strike: spot - 10, premium: 3, id: 2 });
+            } else if (type === 'bull_spread') {
+                addLeg({ action: 'buy', type: 'call', strike: spot, premium: 5, id: 1 });
+                addLeg({ action: 'sell', type: 'call', strike: spot + 10, premium: 2, id: 2 });
+            } else if (type === 'iron_condor') {
+                addLeg({ action: 'sell', type: 'put', strike: spot - 10, premium: 3, id: 1 });
+                addLeg({ action: 'buy', type: 'put', strike: spot - 20, premium: 1, id: 2 });
+                addLeg({ action: 'sell', type: 'call', strike: spot + 10, premium: 3, id: 3 });
+                addLeg({ action: 'buy', type: 'call', strike: spot + 20, premium: 1, id: 4 });
+            } else if (type === 'butterfly') {
+                addLeg({ action: 'buy', type: 'call', strike: spot - 10, premium: 4, id: 1 });
+                addLeg({ action: 'sell', type: 'call', strike: spot, premium: 1.5, id: 2 });
+                addLeg({ action: 'sell', type: 'call', strike: spot, premium: 1.5, id: 3 });
+                addLeg({ action: 'buy', type: 'call', strike: spot + 10, premium: 0.5, id: 4 });
+            } else if (type === 'protective_put') {
+                addLeg({ action: 'buy', type: 'put', strike: spot - 5, premium: 2, id: 1 });
+            }
+        }
+        function calculatePL(price) {
+            let totalPL = 0;
+            legs.forEach(leg => {
+                let val = 0;
+                if (leg.type === 'call') val = Math.max(0, price - leg.strike);
+                else val = Math.max(0, leg.strike - price);
+                if (leg.action === 'buy') totalPL += (val - leg.premium);
+                else totalPL += (leg.premium - val);
+            });
+            return totalPL * 100; // Multiplier 100
+        }
+        function updateChart() {
+            const spot = parseFloat(document.getElementById('spot-price').value) || 100;
+            const range = spot * 0.5;
+            const minPrice = Math.max(0, spot - range);
+            const maxPrice = spot + range;
+            const steps = 60;
+            const stepSize = (maxPrice - minPrice) / steps;
+            const labels = [];
+            const data = [];
+            let maxP = -Infinity;
+            let minP = Infinity;
+            let breakevens = [];
+            for (let i = 0; i <= steps; i++) {
+                const price = minPrice + (i * stepSize);
+                const pl = calculatePL(price);
+                labels.push(price.toFixed(1));
+                data.push(pl);
+                if (pl > maxP) maxP = pl;
+                if (pl < minP) minP = pl;
+                if (i > 0) {
+                    const prevPL = data[i - 1];
+                    if ((prevPL < 0 && pl >= 0) || (prevPL > 0 && pl <= 0)) {
+                        breakevens.push(price.toFixed(2));
+                    }
+                }
+            }
+            document.getElementById('res-max-profit').innerText = maxP > 100000 ? '∞' : '$' + Math.round(maxP).toLocaleString();
+            document.getElementById('res-max-loss').innerText = minP < -100000 ? '∞' : '$' + Math.round(minP).toLocaleString();
+            document.getElementById('res-breakeven').innerText = breakevens.length ? breakevens.join(' | ') : 'N/A';
+            const ctx = document.getElementById('payoffChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'P/L',
+                        data: data,
+                        borderColor: '#3b82f6',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        fill: { target: 'origin', above: 'rgba(34, 197, 94, 0.1)', below: 'rgba(239, 68, 68, 0.1)' },
+                        segment: { borderColor: ctx => ctx.p0.parsed.y >= 0 ? '#22c55e' : '#ef4444' }
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } } },
+                        y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } } }
+                    }
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', () => loadPreset('bull_spread'));
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

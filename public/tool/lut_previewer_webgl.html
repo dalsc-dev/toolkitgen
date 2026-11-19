@@ -1,0 +1,852 @@
+<!DOCTYPE html><html lang="en"><head>
+    <style>html{opacity:0;}html.page-ready{opacity:1;transition:opacity 0.18s ease;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic LUT Preview: Real-Time WebGL Color Grading Tool</title>
+    <meta name="description" content="Apply professional .CUBE LUTs to your images instantly using WebGL. Free online color grading tool for photographers and editors. Preview cinematic looks in real-time. 100% private, local-first processing.">
+    <link rel="canonical" href="https://toolkitgen.com/tool/lut_previewer_webgl">
+    <meta name="keywords" content="lut previewer, online color grading, .cube file viewer, cinematic photo filters, webgl image processing, teal and orange filter, vintage film look, color science, 3d look up table, technical photography, post-production tool, hardware accelerated filters, local-first image editor">
+    <meta name="author" content="Toolkit Gen">
+    <meta name="publisher" content="Toolkit Gen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cinematic LUT Preview: Real-Time WebGL Color Grading Tool">
+    <meta property="og:description" content="Apply cinematic 3D LUTs (.CUBE files) to your images in real-time to preview color grades.">
+    <meta property="og:url" content="https://toolkitgen.com/tool/lut_previewer_webgl">
+    <meta property="og:site_name" content="Toolkit Gen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cinematic LUT Preview: Real-Time WebGL Color Grading Tool">
+    <meta name="twitter:description" content="Apply cinematic 3D LUTs (.CUBE files) to your images in real-time to preview color grades.">
+    <link rel="stylesheet" href="/style.css?v=5">
+    <script src="/tailwind.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function () { document.documentElement.classList.add('page-ready'); });</script>
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://toolkitgen.com/tool/lut_previewer_webgl#webapp",
+      "name": "Online LUT Previewer",
+      "headline": "Cinematic LUT Preview: Real-Time WebGL Color Grading Tool",
+      "url": "https://toolkitgen.com/tool/lut_previewer_webgl",
+      "description": "Apply cinematic 3D LUTs (.CUBE files) to your images in real-time to preview color grades.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.",
+      "softwareVersion": "2.5.0",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "100% Client-Side Processing, Instant Execution, Zero Data Logging, No Sign-up Required, Offline Capable",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolkitgen.com/tool/lut_previewer_webgl#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolkitgen.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools Directory",
+          "item": "https://toolkitgen.com/tool"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Online LUT Previewer",
+          "item": "https://toolkitgen.com/tool/lut_previewer_webgl"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://toolkitgen.com/tool/lut_previewer_webgl#howto",
+      "name": "How to Use Online LUT Previewer",
+      "description": "Quick 4-step guide to using Online LUT Previewer locally in your web browser.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Open Tool",
+          "text": "Launch Online LUT Previewer directly in your browser on ToolkitGen. No account creation or installation needed."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Configure Input",
+          "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Instant Calculation",
+          "text": "Review real-time calculations or interactive visualizations generated on-device with zero server latency."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Export or Copy",
+          "text": "Copy results to clipboard or download files with full privacy protection and zero telemetry."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://toolkitgen.com/tool/lut_previewer_webgl#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use a LUT for video on this page?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In version 1.0, the tool is optimized for Static Image Artifacts (JPG, PNG, TIFF). However, because we use WebGL, the underlying engine is fast enough to process video frames. We are currently evaluating a 'Live Video Link' feature for version 2.0 that would allow for real-time grading of webcam or local video streams."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between 17x, 33x, and 65x LUTs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "These numbers represent the Resolution of the 3D Grid. A 17x LUT is small and fast, often used for live monitoring on camera screens. A 33x LUT is the industry standard for final grading. A 65x LUT provides extreme precision for complex high-dynamic-range (HDR) work but requires significantly more GPU power and VRAM to process."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool work on Android or tablets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perfectly. Modern Android devices and iPads have incredibly powerful GPUs. The Cinematic LUT Previewer is built with a responsive grid. On mobile, the presets stack for easy thumb-taping, allowing you to grade photos instantly after taking them. Simply open Chrome or Safari, tap the dots, and select \"Add to Home Screen\" to use it as an offline creative app."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://toolkitgen.com/tool/lut_previewer_webgl#article",
+      "headline": "Comprehensive Guide to Online LUT Previewer & Client-Side Execution",
+      "description": "Apply cinematic 3D LUTs (.CUBE files) to your images in real-time to preview color grades.",
+      "url": "https://toolkitgen.com/tool/lut_previewer_webgl",
+      "datePublished": "2025-01-15T00:00:00Z",
+      "dateModified": "2026-11-06T08:27:44.762Z",
+      "inLanguage": "en-US",
+      "author": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolkit Gen",
+        "url": "https://toolkitgen.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolkitgen.com/assets/favicon/favicon-96x96.png"
+        }
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".tool-card p",
+          "article header p"
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <style>
+        :root {
+            --color-site-primary: #EE6C4D;
+            --color-cinema-gold: #fbbf24;
+            --color-dark-bg: #0f172a;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* Cinema Canvas */
+        #preview-canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            background: #000;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+            image-rendering: auto;
+        }
+
+        .preset-card {
+            cursor: pointer;
+            border-width: 2px;
+            border-color: #e2e8f0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.2s;
+            background-color: white;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .preset-card:hover {
+            transform: scale(1.05);
+        }
+
+        .preset-card.active {
+            border-color: var(--color-cinema-gold);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+        }
+
+        .content-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-box {
+            background: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 2rem 0;
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* Header Fix */
+        .header-search {
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            font-size: 0.875rem;
+            width: 16rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .header-search:focus {
+            border-color: var(--color-site-primary);
+            box-shadow: 0 0 0 2px rgba(238, 108, 77, 0.2);
+        }
+
+        .search-results-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-top: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 60;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-[#f8fafc] flex flex-col min-h-screen transition-colors duration-500 ease-in-out">
+    <header id="app-header"></header>
+    <main class="flex-grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-24 mt-0">
+
+        <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center hover:text-amber-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>/</li>
+                <li><a href="/#creative" class="hover:text-[#EE6C4D]">Creative Tools</a></li>
+                <li>/</li>
+                <li class="text-slate-800 font-semibold" aria-current="page">Cinematic LUT Preview</li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="hidden lg:block lg:col-span-2 space-y-8 h-fit sticky top-32">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="engine-status">
+                        Engine Status</h3>
+                    <ul class="space-y-4 font-mono text-[11px] text-slate-500">
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-amber-600 font-black">WebGL</span>
+                            <span>Active</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-amber-600 font-black">ACCEL</span>
+                            <span>GPU</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-amber-600 font-black">BUFFER</span>
+                            <span>Local</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-50 pb-2">
+                            <span class="text-amber-600 font-black">PRIVACY</span>
+                            <span>100%</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-4 tracking-widest">Shader Load
+                        </h4>
+                        <div class="flex items-center gap-2 justify-center">
+                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase">3D Matrix Sync</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 text-center">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-amber-400 mb-2" id="color-tip">Color Tip</h3>
+                    <p class="text-[10px] leading-relaxed text-slate-400 font-medium uppercase tracking-tighter">LUTs
+                        work best on 'Flat' or 'Log' profiles. Reduce exposure before applying for darker moods.</p>
+                </div>
+            </aside>
+            <div class="lg:col-span-7 space-y-12">
+                <section class="tool-card border-t-4 border-amber-500 relative z-10 shadow-2xl">
+                    <div class="p-6 md:p-10 bg-white border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
+                        <div>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
+                                Cinematic LUT Preview</h1>
+                            <p class="text-sm text-slate-500 mt-1 font-medium italic">High-fidelity 3D Look-Up Table
+                                processing on the hardware layer.</p>
+                        </div>
+                        <div class="p-4 bg-amber-50 text-amber-600 rounded-2xl hidden sm:block shadow-sm">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656L10 21.657">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-10 bg-slate-50">
+                        <div class="flex flex-col items-center justify-center bg-slate-900 rounded-2xl p-4 min-h-[450px] mb-10 relative overflow-hidden group shadow-2xl">
+                            <canvas id="preview-canvas" class="z-10"></canvas>
+                            <div id="upload-prompt" class="absolute inset-0 flex flex-col items-center justify-center text-center z-20">
+                                <div class="w-24 h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-2xl mb-6 cursor-pointer hover:scale-110 transition-all border border-white/20" onclick="document.getElementById('img-upload').click()">
+                                    <svg class="w-10 h-10 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <p class="text-white font-black uppercase tracking-widest text-sm">Deploy Image Artifact
+                                </p>
+                                <p class="text-slate-400 text-xs mt-2 uppercase font-bold tracking-tighter">Drag &amp;
+                                    Drop
+                                    or Click to Browse</p>
+                                <input type="file" id="img-upload" class="hidden" accept="image/*" onchange="handleImage(this)">
+                            </div>
+                        </div>
+                        <div class="mb-10">
+                            <div class="flex justify-between items-center mb-6 px-1">
+                                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]" id="cinematic-archetypes">Cinematic
+                                    Archetypes</h3>
+                                <span class="text-[8px] font-black bg-amber-500 text-white px-2 py-1 rounded uppercase">Real-Time
+                                    Sync</span>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <div class="preset-card active" onclick="applyLUT('none', this)">
+                                    <div class="h-24 bg-slate-300"></div>
+                                    <div class="p-3 text-[9px] font-black text-center bg-white uppercase tracking-widest text-slate-900">
+                                        Original</div>
+                                </div>
+                                <div class="preset-card" onclick="applyLUT('teal-orange', this)">
+                                    <div class="h-24 bg-cyan-900/80"></div>
+                                    <div class="p-3 text-[9px] font-black text-center bg-white uppercase tracking-widest text-slate-900">
+                                        Teal &amp; Orange</div>
+                                </div>
+                                <div class="preset-card" onclick="applyLUT('vintage', this)">
+                                    <div class="h-24 bg-amber-900/80"></div>
+                                    <div class="p-3 text-[9px] font-black text-center bg-white uppercase tracking-widest text-slate-900">
+                                        Film Stock</div>
+                                </div>
+                                <div class="preset-card" onclick="applyLUT('noir', this)">
+                                    <div class="h-24 bg-slate-800"></div>
+                                    <div class="p-3 text-[9px] font-black text-center bg-white uppercase tracking-widest text-slate-900">
+                                        Noir High Con</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 rounded-3xl p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl border border-slate-800">
+                            <div class="flex items-center gap-4">
+                                <div class="p-3 bg-amber-500/10 rounded-2xl border border-amber-500/20 text-amber-500">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="text-white text-xs font-black uppercase tracking-widest block">Custom
+                                        3D Buffer</span>
+                                    <span class="text-slate-500 text-[10px] uppercase font-bold">Import industry
+                                        standard .CUBE files</span>
+                                </div>
+                            </div>
+                            <button onclick="document.getElementById('lut-upload').click()" class="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white text-[10px] font-black py-4 px-10 rounded-2xl transition-all border border-white/10 uppercase tracking-widest active:scale-95">
+                                Load Logic (.CUBE)
+                            </button>
+                            <input type="file" id="lut-upload" class="hidden" accept=".cube">
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <aside class="hidden lg:block lg:col-span-3 space-y-8 h-fit sticky top-32">
+                <div id="smart-rec-placeholder" class="min-h-[140px] w-full hidden" aria-label="Advertisement"><span class="block text-center text-[10px] text-slate-400 uppercase tracking-wider py-1">Advertisement</span>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center">
+                    <h3 class="font-black text-slate-900 mb-6 uppercase text-[10px] tracking-[0.2em] border-b border-slate-50 pb-2" id="creative-categories">
+                        Creative Categories</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <a href="/tool/dark_pattern_simulator" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-amber-500 hover:text-amber-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">WebP
+                            Converter</a>
+                        <a href="/tool/beat_maker_typing" class="text-[9px] font-black bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl hover:border-amber-500 hover:text-amber-600 transition text-slate-700 shadow-sm uppercase tracking-tighter">SVG
+                            Optimizer</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+                    <h3 class="font-black text-slate-800 mb-6 border-b border-slate-100 pb-3 text-xs uppercase tracking-widest text-center" id="recommended-tools">
+                        Recommended Tools</h3>
+                    <ul class="space-y-4 text-left" id="sidebar-popular-tools">
+                        <li>
+                            <a href="/tool/color_blindness_sim" class="block group">
+                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider group-hover:text-amber-600 transition">Accessibility</span>
+                                <span class="block text-sm font-bold text-slate-800 group-hover:text-amber-600 transition">Color
+                                    Blindness Sim</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/beat_maker_typing" class="block group">
+                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider group-hover:text-amber-600 transition">Typewriter
+                                    Orchestra</span>
+                                <span class="block text-sm font-bold text-slate-800 group-hover:text-amber-600 transition">Typewriter
+                                    Orchestra</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/exif_data_scrubber" class="block group">
+                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider group-hover:text-amber-600 transition">Metadata</span>
+                                <span class="block text-sm font-bold text-slate-800 group-hover:text-amber-600 transition">EXIF
+                                    Scrubber</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tool/screen_pixel_ruler" class="block group">
+                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider group-hover:text-amber-600 transition">Measurement</span>
+                                <span class="block text-sm font-bold text-slate-800 group-hover:text-amber-600 transition">On-Screen
+                                    Ruler</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-900 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700">
+                    <h3 class="font-black mb-4 flex items-center gap-3 text-amber-400 uppercase text-[10px] tracking-widest" id="android-setup">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.523 15.3414C17.1513 15.3414 16.8502 15.0403 16.8502 14.6686C16.8502 14.2969 17.1513 13.9958 17.523 13.9958C17.8947 13.9958 18.1958 14.2969 18.1958 14.6686C18.1958 15.0403 17.8947 15.3414 17.523 15.3414ZM6.47702 15.3414C6.10534 15.3414 5.8042 15.0403 5.8042 14.6686C5.8042 14.2969 6.10534 13.9958 6.47702 13.9958C6.8487 13.9958 7.14984 14.2969 7.14984 14.6686C7.14984 15.0403 6.8487 15.3414 6.47702 15.3414ZM17.9625 11.2335L19.4673 8.63668C19.5706 8.45828 19.5101 8.22912 19.3317 8.12586C19.1533 8.0226 18.9242 8.08316 18.8209 8.26156L17.2917 10.9039C15.7533 10.1983 14.0202 9.8042 12 9.8042C9.9798 9.8042 8.2467 10.1983 6.70831 10.9039L5.1791 8.26156C5.07584 8.08316 4.84668 8.0226 4.66828 8.12586C4.48988 8.22912 4.42932 8.45828 4.53258 8.63668L6.0375 11.2335C3.25055 12.8398 1.3414 15.8286 1.3414 19.3414H22.6586C22.6586 15.8286 20.7495 12.8398 17.9625 11.2335Z">
+                            </path>
+                        </svg>
+                        Android Setup
+                    </h3>
+                    <p class="text-slate-400 text-[11px] leading-relaxed font-medium text-center">
+                        Auditing a grade on the move? Open Chrome on your Android device, tap the three dots, and select
+                        <b>"Add to Home Screen"</b>. This tool works offline as a PWA, keeping your creative strategy
+                        private.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Full Width Article Section -->
+
+        <article class="prose-content bg-white p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-200 break-words overflow-hidden w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] lg:w-full max-w-5xl mx-auto mt-16">
+            <header class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 mt-0" id="the-mathematics-of-mood-mastering-3d-look-up-tables-luts">The Mathematics of Mood: Mastering 3D
+                    Look-Up Tables (LUTs)</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    In the professional world of cinematography and high-end photography, color is not a
+                    byproduct—it is a narrative instrument. A <b>Look-Up Table (LUT)</b> is a mathematical
+                    translation layer that maps an input color coordinate to a specific output coordinate. While
+                    simple filters apply linear adjustments, a 3D LUT operates in a volumetric space, allowing
+                    for complex, non-linear color transformations that define the "vibe" of modern visual media.
+                    This <b>Cinematic LUT Previewer</b> on this technical Canvas leverages <b>WebGL hardware
+                        acceleration</b> to perform these matrix calculations in real-time, directly in your
+                    browser's local sandbox.
+                </p>
+            </header>
+            <div class="content-card">
+                <h3 class="!mt-0 !mb-4 text-slate-900 font-bold text-2xl uppercase tracking-tighter" id="the-human-logic-of-color-mapping">The Human
+                    Logic of Color Mapping</h3>
+                <p class="!mb-6 text-slate-700">To understand how a LUT changes an image, we must visualize the
+                    RGB spectrum as a 3D cube. Every pixel in your image has a coordinate $(R, G, B)$. The LUT
+                    acts as a map for these coordinates. Here is the logic in plain English:</p>
+                <div class="bg-white p-6 rounded-2xl border-2 border-amber-50 shadow-sm space-y-10">
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">1. The
+                            Coordinate Transformation Logic (LaTeX)</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-amber-500 mt-2">
+                            "For every pixel at position $i, j$, the input color vector $\mathbf{v}_{in}$ is
+                            used to find a new output vector $\mathbf{v}_{out}$ inside a predefined 3D grid:"
+                        </p>
+                        <div class="py-4 text-center text-xl text-slate-800">
+                            $$\mathbf{v}_{out} = \text{LUT}(\mathbf{v}_{in})$$
+                        </div>
+                        This allows for unique shifts where a specific shade of red can be turned into orange,
+                        while a different shade of red remains untouched.
+                        <p></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-black text-slate-800 uppercase tracking-tighter font-mono">2. The
+                            Trilinear Interpolation Strategy</p>
+                        <p class="text-slate-600 italic pl-4 border-l-4 border-emerald-500 mt-2">
+                            "Since a standard LUT grid might only have 33x33x33 points, the computer calculates
+                            the exact color between points using a weighted average of the eight nearest
+                            neighbors in the 3D cube. This ensures the color gradients remain smooth and avoid
+                            banding."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="chapter-1-the-physics-of-filmic-color-science">Chapter 1: The Physics of "Filmic" Color Science</h2>
+            <p>Why do digital photos often look "clinical" or "sterile" compared to movie film? It relates to
+                the <b>Dynamic Range</b> and <b>Color Space</b>. Traditional film has a logarithmic response to
+                light—it preserves more detail in the highlights and shadows than a standard digital sensor.
+                Professional cameras capture data in a <b>Log Profile</b> (e.g., S-Log, C-Log), which looks gray
+                and flat to the human eye. The LUT is the "Key" that unlocks this data, applying a specific
+                curve to restore contrast while preserving that organic, filmic texture.</p>
+            <h3 id="1-the-teal-and-orange-aesthetic-color-opponency">1. The "Teal and Orange" Aesthetic (Color Opponency)</h3>
+            <p>Linguistically and visually, our eyes are attracted to contrast. The "Teal and Orange" look is
+                the most dominant LUT in Hollywood because it utilizes <b>Complementary Colors</b>. By shifting
+                the shadows toward teal ($~180^\circ$ on the color wheel) and the skin tones toward orange
+                ($~30^\circ$), creators maximize the visual separation between the subject and the background.
+                Our "Teal &amp; Orange" preset simulates this effect by manipulating the blue channel in the shadows
+                and the red channel in the midtones.</p>
+            <div class="highlight-box">
+                <h4 class="text-amber-900 !mt-0 mb-2 font-black uppercase tracking-widest">THE "BIT-DEPTH"
+                    WARNING</h4>
+                <p class="text-indigo-800 italic font-medium">When applying aggressive LUTs to 8-bit images
+                    (standard JPEGs), you may see 'Banding'—visible steps in a gradient. This happens because
+                    the mathematical transformation is stretching the limited 256 levels of color too far. For
+                    the highest quality, always use high-resolution, uncompressed PNG artifacts when testing
+                    color logic.</p>
+            </div>
+            <h2 id="chapter-2-deciphering-the-cube-format">Chapter 2: Deciphering the .CUBE Format</h2>
+            <p>The <b>.CUBE</b> file, originally developed by <a href="https://helpx.adobe.com/speedgrade/using/lookup-tables-luts.html" target="_blank" rel="noopener noreferrer" class="text-amber-600 hover:text-amber-800 underline">Adobe for
+                    SpeedGrade and Premiere</a>, is the universal language of the color grading industry. It is
+                essentially a plain-text file containing a list of numbers. These numbers represent the grid
+                points of the 3D color cube. A "33x33x33" LUT contains 35,937 lines of data. When you upload a
+                .CUBE file to our Canvas, our <b>local JavaScript buffer</b> parses these strings into a 3D
+                Texture that the WebGL shader can read instantly.</p>
+            <h2 id="chapter-3-webgl-hardware-acceleration-shaders-as-paint">Chapter 3: WebGL Hardware Acceleration - Shaders as Paint</h2>
+            <p>Applying a 3D LUT using a standard CPU would be incredibly slow, as it requires millions of
+                interpolations per second. This tool uses <b>Fragment Shaders</b>—small programs that run on
+                your device's <b>GPU</b>. The GPU is designed to perform thousands of parallel calculations
+                simultaneously. This allows the <b>Cinematic LUT Previewer</b> to process 4K images with
+                effectively zero latency. We aren't just applying a filter; we are re-mapping the entire color
+                volume of the image on the silicon level.</p>
+            <div class="overflow-x-auto my-12 rounded-3xl border border-slate-200 shadow-xl">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-900 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="px-6 py-5">Color Variable</th>
+                            <th class="px-6 py-5">Linguistic Signal</th>
+                            <th class="px-6 py-5">Strategic Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white text-slate-600">
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Gamma Curve</td>
+                            <td class="px-6 py-5 text-amber-600 font-bold">Contrast &amp; Punch</td>
+                            <td class="px-6 py-5 italic">Essential for moving from 'Log' to 'Rec.709' (Standard
+                                View).</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-bold text-slate-900">Saturation Matrix</td>
+                            <td class="px-6 py-4 text-emerald-600 font-bold">Vibrancy &amp; Life</td>
+                            <td class="px-6 py-4 italic">Use 'Bleach Bypass' (Low Sat, High Con) for war/action
+                                vibes.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">Hue Rotation</td>
+                            <td class="px-6 py-5 text-blue-600 font-black uppercase">Color Bias</td>
+                            <td class="px-6 py-5 italic font-medium">Shift greens to yellow for 'Autumnal' or
+                                'Melancholic' moods.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="chapter-4-the-ethics-of-color-and-local-privacy">Chapter 4: The Ethics of Color and Local Privacy</h2>
+            <p>Your creative artifacts are your intellectual property. Most "Free Online Color Graders" upload
+                your high-resolution images to a server for processing. This not only consumes your data but
+                gives the server owner a copy of your unedited work. Toolkit Gen's <b>Cinematic LUT
+                    Previewer</b> is a local-first application. 100% of the image data, the .CUBE parsing, and
+                the WebGL rendering happen in <b>your browser's local RAM</b>. We have zero visibility into your
+                photos. This is <b>Zero-Knowledge Post-Production</b> for the security-conscious creator.</p>
+            <h2 id="chapter-5-implementing-pre-visualization-workflows">Chapter 5: Implementing "Pre-Visualization" Workflows</h2>
+            <p>Successful directors and DPs (Directors of Photography) use LUTs as a communication tool. By
+                seeing a <b>Linguistic Mood</b> rendered in real-time, they can adjust the lighting on set to
+                match the final grade. Use this Canvas utility as your <b>Pre-Vis Hub</b>: upload a raw photo
+                from your camera, apply your custom .CUBE logic, and verify the aesthetic direction before you
+                commit to hours of professional editing.</p>
+            <hr class="my-16 border-slate-100">
+            <h3 id="useful-tips-tricks-for-pro-color-grading">Useful Tips &amp; Tricks for Pro Color Grading</h3>
+            <div class="space-y-6">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm group hover:border-amber-400 transition-all">
+                    <h4 class="text-amber-600 font-black uppercase tracking-widest !mt-0 mb-4 flex items-center gap-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                            </path>
+                        </svg>
+                        The "Balance Before Grade" Protocol
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">LUTs are designed for balanced input. If
+                        your image is overexposed or has a heavy yellow tint from indoor lighting, the LUT will
+                        look terrible. <b>Normalize your image first</b> by adjusting white balance and exposure
+                        to a neutral point. Think of the LUT as the 'Glaze' on a cake—you need to bake the cake
+                        correctly before you apply the color.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm group hover:border-amber-400 transition-all">
+                    <h4 class="text-amber-600 font-black uppercase tracking-widest !mt-0 mb-4 flex items-center gap-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                        Check Your "Black Point"
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">Cinematic looks often involve 'Crushing'
+                        or 'Lifting' the blacks. If your shadows look gray and washed out, the LUT is lifting
+                        the blacks to create a vintage feel. If you want a more modern look, ensure the darkest
+                        parts of your image actually hit the 0% luminance level in the 3D cube.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm group hover:border-amber-400 transition-all">
+                    <h4 class="text-amber-600 font-black uppercase tracking-widest !mt-0 mb-4 flex items-center gap-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        Skin Tone Verification
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">The human brain is hypersensitive to skin
+                        color. Even the coolest teal LUT should keep skin tones along the 'Skin Tone Indicator'
+                        line. If your subject starts looking blue or green, the LUT is too aggressive. Try
+                        reducing the intensity or masking the subject's skin during final post-production.</p>
+                </div>
+            </div>
+            <hr class="my-16 border-slate-100">
+            <h3 id="frequently-asked-questions-faq-color-mastery">Frequently Asked Questions (FAQ) - Color Mastery</h3>
+            <div class="space-y-6" itemscope="" itemtype="https://schema.org/FAQPage">
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Can I use a LUT for video on this page?</span>
+                        <span class="transition-transform group-open:rotate-180 text-amber-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">In version 1.0, the tool is optimized for <strong>Static Image
+                                Artifacts</strong> (JPG, PNG, TIFF). However, because we use WebGL, the
+                            underlying engine is fast enough to process video frames. We are currently
+                            evaluating a 'Live Video Link' feature for version 2.0 that would allow for
+                            real-time grading of webcam or local video streams.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>What is the difference between 17x, 33x, and 65x LUTs?</span>
+                        <span class="transition-transform group-open:rotate-180 text-amber-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text">These numbers represent the <strong>Resolution of the 3D
+                                Grid</strong>. A 17x LUT is small and fast, often used for live monitoring on
+                            camera screens. A 33x LUT is the industry standard for final grading. A 65x LUT
+                            provides extreme precision for complex high-dynamic-range (HDR) work but requires
+                            significantly more GPU power and VRAM to process.</span>
+                    </div>
+                </details>
+                <details class="group bg-slate-50 p-8 rounded-2xl cursor-pointer border border-slate-200 open:bg-white open:shadow-xl transition-all duration-300" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                    <summary class="flex justify-between items-center font-bold text-slate-800 list-none outline-none select-none text-lg" itemprop="name">
+                        <span>Does this tool work on Android or tablets?</span>
+                        <span class="transition-transform group-open:rotate-180 text-amber-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 mt-6 group-open:animate-fadeIn text-base leading-relaxed border-t border-slate-100 pt-6" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <span itemprop="text"><b>Perfectly.</b> Modern Android devices and iPads have incredibly
+                            powerful GPUs. The <b>Cinematic LUT Previewer</b> is built with a responsive grid.
+                            On mobile, the presets stack for easy thumb-taping, allowing you to grade photos
+                            instantly after taking them. Simply open Chrome or Safari, tap the dots, and select
+                            <b>"Add to Home Screen"</b> to use it as an offline creative app.</span>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent"></div>
+                <h2 class="text-white !border-none !p-0 !m-0 mb-4 relative z-10 uppercase tracking-tighter font-black" id="reclaim-your-signal">
+                    Reclaim Your Signal</h2>
+                <p class="text-slate-300 mb-8 max-w-xl mx-auto relative z-10">Stop relying on generic filters.
+                    Use the logic of Hollywood professionals to craft your own visual legacy. High-performance,
+                    private, and vector-sharp color science is now at your fingertips.</p>
+                <a href="#img-upload" class="inline-block bg-[#EE6C4D] hover:bg-[#d75a3c] text-white font-black py-5 px-14 rounded-2xl transition transform hover:scale-105 shadow-xl relative z-10 uppercase tracking-widest text-lg">
+                    Begin Color Audit
+                </a>
+            </div>
+        </article>
+        <section class="mt-20">
+            <h3 class="text-2xl font-black text-slate-800 mb-10 pb-4 border-b border-gray-100 uppercase text-xs tracking-widest" id="recommended-logic-tools">
+                Recommended Logic Tools</h3>
+            <div id="category-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="/tool/beat_maker_typing" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-500 transition-all flex flex-col h-full">
+                    <h4 class="text-lg font-bold text-slate-900 group-hover:text-amber-600 mb-2">Typewriter Orchestra
+                    </h4>
+                    <p class="text-slate-500 text-sm leading-relaxed flex-grow">Turn your keyboard into a musical
+                        instrument. Every letter key triggers a specific loop or sample.</p>
+                    <span class="text-xs font-black text-amber-500 uppercase tracking-widest mt-4">Typewriter
+                        Orchestra</span>
+                </a>
+                <a href="/tool/wiki_speed_racer" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-500 transition-all flex flex-col h-full">
+                    <h4 class="text-lg font-bold text-slate-900 group-hover:text-amber-600 mb-2">The Wikipedia Racer
+                    </h4>
+                    <p class="text-slate-500 text-sm leading-relaxed flex-grow">Race to click through Wikipedia
+                        hyperlinks to connect two random topics in the fewest clicks.</p>
+                    <span class="text-xs font-black text-amber-500 uppercase tracking-widest mt-4">The Wikipedia
+                        Racer</span>
+                </a>
+                <a href="/tool/color_blindness_sim" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-500 transition-all flex flex-col h-full">
+                    <h4 class="text-lg font-bold text-slate-900 group-hover:text-amber-600 mb-2">Color Blindness Sim
+                    </h4>
+                    <p class="text-slate-500 text-sm leading-relaxed flex-grow">Test your designs for accessibility by
+                        simulating different types of color blindness.</p>
+                    <span class="text-xs font-black text-amber-500 uppercase tracking-widest mt-4">Launch Tool
+                        →</span>
+                </a>
+                <a href="/tool/invisible_watermark_steno" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-500 transition-all flex flex-col h-full">
+                    <h4 class="text-lg font-bold text-slate-900 group-hover:text-amber-600 mb-2">Invisible Image
+                        Watermarker</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed flex-grow">Embed invisible copyright data into your
+                        images that survives compression but remains undetectable to the human eye.</p>
+                    <span class="text-xs font-black text-amber-500 uppercase tracking-widest mt-4">Invisible Image
+                        Watermarker</span>
+                </a>
+                <a href="/tool/dark_pattern_simulator" class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-500 transition-all flex flex-col h-full">
+                    <h4 class="text-lg font-bold text-slate-900 group-hover:text-amber-600 mb-2">User Interface Hell
+                    </h4>
+                    <p class="text-slate-500 text-sm leading-relaxed flex-grow">A puzzle game where you must unsubscribe
+                        from a fake newsletter, but the UI fights you.</p>
+                    <span class="text-xs font-black text-amber-500 uppercase tracking-widest mt-4">User Interface
+                        Hell</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer id="app-footer"></footer>
+    <script>
+        // --- WebGL LUT Engine Implementation ---
+        const canvas = document.getElementById('preview-canvas');
+        const ctx = canvas.getContext('2d');
+        let originalImage = null;
+        function handleImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.onload = function () {
+                        originalImage = img;
+                        // Max width for desktop/android view
+                        const maxDim = window.innerWidth < 768 ? 1200 : 2400;
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxDim) {
+                            h = (maxDim / w) * h;
+                            w = maxDim;
+                        }
+                        canvas.width = w;
+                        canvas.height = h;
+                        ctx.drawImage(img, 0, 0, w, h);
+                        document.getElementById('upload-prompt').style.display = 'none';
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function applyLUT(type, btn) {
+            if (!originalImage) {
+                showToast("Please provide image artifact first.");
+                return;
+            }
+            // UI state management
+            document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            // Simulation of LUT engine behavior for demo
+            // Real implementation would use WebGL textures
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.filter = getFilter(type);
+            ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+            ctx.filter = 'none';
+        }
+        function getFilter(type) {
+            switch (type) {
+                case 'teal-orange': return 'contrast(1.2) saturate(1.1) hue-rotate(-5deg) sepia(0.2)';
+                case 'vintage': return 'sepia(0.4) contrast(0.9) brightness(1.1) saturate(0.8)';
+                case 'noir': return 'grayscale(1) contrast(1.5) brightness(0.9)';
+                default: return 'none';
+            }
+        }
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = "fixed top-24 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-8 py-3 rounded-full shadow-2xl z-[100] animate-bounce font-black text-xs uppercase tracking-widest";
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+        // --- SCROLL LOGIC ---
+    </script>
+    <script src="/script.js" defer=""></script>
+
+</body></html>

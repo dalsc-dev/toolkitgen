@@ -131,3 +131,16 @@ slug,tbt_ms,longest_task_ms,long_tasks_count,first_click_response_ms,inp_ms,js_h
 "wifi_speed_stability",0,0,0,0,0,"9.54",1,0,0,0,0,0,0,0,6,0
 "wiki_speed_racer",0,0,0,0,0,"9.54",1,0,0,0,0,0,0,0,5,0
 "wrist_watch_visualizer",0,0,0,0,0,"9.54",0,0,0,0,0,0,0,0,5,0
+"pdf_merge_reorder",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"pdf_split_pages",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"pdf_compressor",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"pdf_metadata_remover",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"image_compressor_converter",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"ocr_image_to_text",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"background_remover_ai",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"whisper_audio_transcriber",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"frametime_csv_analyzer",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"screen_gpu_capability_report",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"mouse_touch_tester",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"har_sanitizer_viewer",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0
+"zfs_raid_calculator",0,0,0,0,0,"9.50",0,0,0,0,0,0,0,0,0,0

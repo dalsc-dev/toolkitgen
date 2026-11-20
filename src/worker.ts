@@ -52,6 +52,8 @@ const REDIRECTS: Record<string, string> = {
   '/tool/tongue_coating_scanner': '/hubs/wellness',
   '/blog': '/',
   '/sitemap.html': '/sitemap',
+  '/tool/zfs_capacity_calc': '/tool/zfs_raid_calculator',
+  '/tool/console_storage_calculator': '/tool/console_storage_planner',
 };
 
 const GONE_ROUTES = new Set([

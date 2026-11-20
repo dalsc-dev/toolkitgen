@@ -46,11 +46,3 @@
 /sitemap.html /sitemap 301
 /tool/zfs_capacity_calc /tool/zfs_raid_calculator 301
 /tool/console_storage_calculator /tool/console_storage_planner 301
-/tool/background_remover_ai 410
-/tool/image_compressor_converter 410
-/tool/ocr_image_to_text 410
-/tool/pdf_compressor 410
-/tool/pdf_merge_reorder 410
-/tool/pdf_metadata_remover 410
-/tool/pdf_split_pages 410
-/tool/whisper_audio_transcriber 410

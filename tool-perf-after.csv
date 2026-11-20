@@ -152,3 +152,5 @@ slug,tbt_ms,longest_task_ms,long_tasks_count,first_click_response_ms,inp_ms,js_h
 "screenshot_secret_scanner",0,0,0,0,0,"9.54",0,0,0,0,0,0,0,0,5,0
 "c2pa_metadata_viewer",0,0,0,0,0,"9.54",0,0,0,0,0,0,0,0,5,0
 "x509_certificate_decoder",0,0,0,0,0,"9.54",0,0,0,0,0,0,0,0,5,0
+"compute_pressure_monitor",0,0,0,0,0,"9.54",0,0,0,0,0,0,0,0,5,0
+"duckdb_wasm_analytics",0,0,0,0,0,"9.54",0,0,0,0,0,0,0,0,5,0

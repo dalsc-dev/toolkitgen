@@ -4,8 +4,8 @@
   "version": "2.0.0",
   "description": "Structured index of client-side web utilities, calculators, and hardware diagnostics designed for autonomous LLM agents and human developers.",
   "homepage": "https://toolkitgen.com",
-  "totalTools": 153,
-  "generatedAt": "2026-11-20T07:52:16.058Z",
+  "totalTools": 155,
+  "generatedAt": "2026-11-20T08:06:34.392Z",
   "tools": [
     {
       "id": "advanced_search_operator_builder",
@@ -1468,6 +1468,69 @@
       "noServerUploads": true
     },
     {
+      "id": "compute_pressure_monitor",
+      "name": "Compute Pressure CPU Monitor",
+      "title": "Compute Pressure CPU Monitor & Thermal State Benchmark | Toolkit Gen",
+      "description": "Monitor real-time CPU compute pressure states (nominal, fair, serious, critical) via the W3C Compute Pressure API. Audit thermal throttling risk in browser memory.",
+      "category": "Hardware / Diagnostics",
+      "url": "https://toolkitgen.com/tool/compute_pressure_monitor",
+      "tags": [
+        "hardware",
+        "cpu",
+        "compute pressure",
+        "thermal",
+        "benchmark",
+        "throttling",
+        "performance",
+        "diagnostics"
+      ],
+      "features": [
+        "Native W3C PressureObserver API Integration for Real-Time CPU Metrics",
+        "Four-Stage Thermal Pressure Classification (Nominal, Fair, Serious, Critical)",
+        "Real-Time Historical Pressure Timeline Chart Rendered via HTML5 Canvas",
+        "Optional Controlled Multi-Core Diagnostic Workload Generator",
+        "Complete Local Browser Execution with Zero Hardware Telemetry Uploads"
+      ],
+      "howTo": [
+        {
+          "name": "Check Hardware Support",
+          "text": "The tool automatically detects whether your browser exposes the native W3C PressureObserver interface (supported in modern Chromium desktop browsers)."
+        },
+        {
+          "name": "Observe Baseline Pressure",
+          "text": "View your system idle pressure state on the radial status gauge and real-time canvas timeline."
+        },
+        {
+          "name": "Run Diagnostic Workload",
+          "text": "Optionally click 'Run Diagnostic Workload' to spawn a background web worker and evaluate how your system transitions across pressure states."
+        },
+        {
+          "name": "Audit Thermal Recommendations",
+          "text": "Inspect actionable advice regarding thermal dissipation, ventilation, and background process management."
+        }
+      ],
+      "faq": [
+        {
+          "q": "What is the W3C Compute Pressure API?",
+          "a": "The Compute Pressure API is an open W3C web standard that exposes high-level CPU pressure states (nominal, fair, serious, critical) to web applications. It allows web applications to dynamically balance compute workloads (such as video rendering, 3D graphics, or gaming) before thermal throttling causes frame stutter [Confirmed: W3C Compute Pressure Specification]."
+        },
+        {
+          "q": "Which browsers support the Compute Pressure API?",
+          "a": "The API is supported natively in Chromium desktop browsers including Google Chrome and Microsoft Edge version 115 and newer. In browsers without native support (such as Safari and Firefox), ToolkitGen provides simulated hardware workload profiles."
+        },
+        {
+          "q": "Does this tool upload my system performance data to external servers?",
+          "a": "No. All telemetry readings, PressureObserver events, and diagnostic workload calculations execute entirely in client-side RAM inside your browser. Tool inputs are processed locally on your device."
+        },
+        {
+          "q": "What is the difference between CPU utilization and compute pressure?",
+          "a": "CPU utilization measures the percentage of clock cycles spent executing instructions. Compute pressure measures whether the current workload is causing thermal junction limits or power delivery thresholds to be exceeded, which determines whether the hardware can sustain performance or must down-clock."
+        }
+      ],
+      "clientSideOnly": true,
+      "noServerUploads": true
+    },
+    {
       "id": "console_storage_planner",
       "name": "Console Storage Planner",
       "title": "Console Storage Planner and Free Space Checker | Toolkit Gen",
@@ -2256,6 +2319,70 @@
         {
           "q": "Does this tool work on mobile devices and tablets?",
           "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
+        }
+      ],
+      "clientSideOnly": true,
+      "noServerUploads": true
+    },
+    {
+      "id": "duckdb_wasm_analytics",
+      "name": "DuckDB-WASM Parquet & CSV SQL Explorer",
+      "title": "DuckDB-WASM Parquet & CSV SQL Explorer | Toolkit Gen",
+      "description": "Query local Parquet and CSV files using client-side SQL in browser memory. Fast columnar analytics, zero data uploads, and exportable result sets.",
+      "category": "Developer / Data",
+      "url": "https://toolkitgen.com/tool/duckdb_wasm_analytics",
+      "tags": [
+        "sql",
+        "parquet",
+        "duckdb",
+        "csv",
+        "analytics",
+        "wasm",
+        "developer",
+        "database",
+        "arrow"
+      ],
+      "features": [
+        "Client-Side SQL Query Execution Engine for CSV and Parquet Datasets",
+        "Support for Filter (WHERE), Sorting (ORDER BY), Pagination (LIMIT), and Aggregates (COUNT, SUM)",
+        "Strict Click-to-Load Architecture Preserving Zero Initial Page Load Overhead",
+        "Interactive Result Grid with Instant CSV and JSON File Export",
+        "Complete Local Execution with Zero Data Telemetry or Remote Logging"
+      ],
+      "howTo": [
+        {
+          "name": "Load Dataset",
+          "text": "Drag and drop any local CSV or Parquet file into the upload zone, or click 'Load Sample Dataset' to explore preloaded hardware data."
+        },
+        {
+          "name": "Write SQL Query",
+          "text": "Enter standard SQL statements (e.g., SELECT * FROM data WHERE price > 50 ORDER BY price DESC)."
+        },
+        {
+          "name": "Execute Query",
+          "text": "Click 'Run Query' or press Ctrl+Enter to execute the query against the in-memory tabular data frame."
+        },
+        {
+          "name": "Export Results",
+          "text": "Download the filtered and aggregated result set as a clean CSV file or formatted JSON document."
+        }
+      ],
+      "faq": [
+        {
+          "q": "What is Apache Parquet and why is it faster than CSV?",
+          "a": "Apache Parquet is an open-source columnar storage file format. Unlike CSV, which stores data row-by-row as plain text, Parquet stores values column-by-column with dictionary encoding and Snappy/ZSTD compression. This allows SQL query engines to read only the specific columns needed for a query, drastically reducing memory bandwidth [Confirmed: Apache Parquet Specification]."
+        },
+        {
+          "q": "Are my confidential spreadsheets or databases uploaded to any cloud server?",
+          "a": "No. The entire file reading, schema inference, and SQL execution cycle runs locally in browser RAM using an ArrayBuffer and client-side processing pipeline. Tool inputs are processed locally on your device."
+        },
+        {
+          "q": "What SQL commands are supported in this browser explorer?",
+          "a": "The workbench supports SELECT column projections, conditional filtering (WHERE =, !=, >, <, >=, <=), sorting (ORDER BY col ASC/DESC), row limiting (LIMIT n), and common aggregation metrics (COUNT(*), SUM(col))."
+        },
+        {
+          "q": "What is the recommended file size limit for browser SQL queries?",
+          "a": "While modern desktop browsers can easily process files up to 50 MB in memory, keeping datasets under 25 MB ensures smooth 60 FPS UI responsiveness and prevents browser tab memory limits."
         }
       ],
       "clientSideOnly": true,

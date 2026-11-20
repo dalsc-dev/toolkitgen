@@ -10,6 +10,7 @@
 ## Developer / Data
 - [Crontab Generator & Visualizer](https://toolkitgen.com/tool/cron_job_visualizer): The Logic of Cron: Mastering the Pulse of Unix Automation In the intricate infrastructure of Unix-based systems, Cron is the heartbeat of the machine.
 - [cURL to Fetch, Axios, Node & Python Converter](https://toolkitgen.com/tool/curl_to_fetch_axios): Convert cURL commands to modern JavaScript Fetch API, Axios, Node.js, and Python Requests. Parses methods, headers, and payloads with local browser parsing.
+- [DuckDB-WASM Parquet & CSV SQL Explorer](https://toolkitgen.com/tool/duckdb_wasm_analytics): Query local Parquet and CSV files using client-side SQL in browser memory. Fast columnar analytics, zero data uploads, and exportable result sets.
 - [HAR File Sanitizer and Filter](https://toolkitgen.com/tool/har_sanitizer_viewer): Sanitize HTTP Archive HAR files by removing cookies, authorization tokens, and API keys locally in your browser before sharing support bundles.
 - [Local LLM VRAM Calculator](https://toolkitgen.com/tool/llm_vram_calculator): Calculate exact VRAM memory requirements for running local LLMs: analyze model weights, quantization formats (Q4_K_M, Q8, FP16), and KV cache context length.
 - [Online LaTeX Equation Editor](https://toolkitgen.com/tool/latex_equation_editor): Typesetting: Why LaTeX Defines Modern Science In the high-stakes world of academic publishing and scientific research, clarity is the primary currency.
@@ -97,6 +98,7 @@
 - [Bluetooth LE Device Scanner & GATT Explorer](https://toolkitgen.com/tool/web_bluetooth_scan): Discover nearby Bluetooth Low Energy peripherals and explore available GATT services and characteristics using Web Bluetooth in supported Chromium browsers.
 - [Bluetooth RSSI Signal Strength & Beacon Tracker](https://toolkitgen.com/tool/ble_rssi_meter): Track relative signal strength (RSSI) from advertising Bluetooth LE beacons in supported Chromium browsers to estimate proximity and locate nearby devices.
 - [Browser-Based GPU Stress & Thermal Test](https://toolkitgen.com/tool/gpu_thermal_throttling_test): Down It is a common scenario for gamers and creative professionals: you launch a demanding application, and for the first 15 minutes, performance is flawless.
+- [Compute Pressure CPU Monitor](https://toolkitgen.com/tool/compute_pressure_monitor): Monitor real-time CPU compute pressure states (nominal, fair, serious, critical) via the W3C Compute Pressure API. Audit thermal throttling risk in browser memory.
 - [Gyroscope & Accelerometer Test](https://toolkitgen.com/tool/device_motion_logger): The Definitive Guide to Inertial Measurement Units (IMUs): Physics, Fusion, and Applications We live in an era defined by spatial awareness.
 - [Logic Gate Simulator](https://toolkitgen.com/tool/logic_gate_simulator): Logic Gate Simulator: Validate, format, and debug configuration syntax, tokens, and data formats directly in your browser.
 - [Online Gerber Viewer](https://toolkitgen.com/tool/gerber_file_viewer): Before a circuit board is etched, drilled, and populated with high-performance silicon, it exists in a purely mathematical state known as the Gerber format .

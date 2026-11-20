@@ -6,7 +6,7 @@
 - Homepage: https://toolkitgen.com
 - Framework: Static Astro Architecture
 - Execution Boundary: Client-side JavaScript / WebAssembly / Web APIs (WebHID, WebCodecs, WebGPU, WebCrypto)
-- Total Active Tools: 153
+- Total Active Tools: 155
 
 ## Category: Developer / Data
 
@@ -53,6 +53,29 @@
     A: No. Unlike Axios, native fetch() resolves successfully on HTTP 4xx and 5xx status codes. You must explicitly check if (!response.ok) to handle API errors.
   * Q: Why shouldn't I set Content-Type manually when sending FormData?
     A: Manually setting Content-Type: multipart/form-data prevents the browser from generating the unique multipart boundary delimiter string (e.g. boundary=----WebKitFormBoundary...), causing the receiving server to reject the upload.
+
+### DuckDB-WASM Parquet & CSV SQL Explorer
+- URL: https://toolkitgen.com/tool/duckdb_wasm_analytics
+- Summary: Query local Parquet and CSV files using client-side SQL in browser memory. Fast columnar analytics, zero data uploads, and exportable result sets.
+- Overview: The DuckDB-WASM Parquet & CSV SQL Explorer provides a fast, browser-based SQL analytics workbench for querying local CSV and Apache Parquet data files. All parsing, columnar scanning, and relational filtering execute entirely in your browser memory without transmitting tabular data across the network. Tool inputs are processed locally on your device with no server uploads.
+- Key Capabilities:
+  * Client-Side SQL Query Execution Engine for CSV and Parquet Datasets
+  * Support for Filter (WHERE), Sorting (ORDER BY), Pagination (LIMIT), and Aggregates (COUNT, SUM)
+  * Strict Click-to-Load Architecture Preserving Zero Initial Page Load Overhead
+  * Interactive Result Grid with Instant CSV and JSON File Export
+  * Complete Local Execution with Zero Data Telemetry or Remote Logging
+- Procedure Steps:
+  * Load Dataset: Drag and drop any local CSV or Parquet file into the upload zone, or click 'Load Sample Dataset' to explore preloaded hardware data.
+  * Write SQL Query: Enter standard SQL statements (e.g., SELECT * FROM data WHERE price > 50 ORDER BY price DESC).
+  * Execute Query: Click 'Run Query' or press Ctrl+Enter to execute the query against the in-memory tabular data frame.
+  * Export Results: Download the filtered and aggregated result set as a clean CSV file or formatted JSON document.
+- Frequent Questions:
+  * Q: What is Apache Parquet and why is it faster than CSV?
+    A: Apache Parquet is an open-source columnar storage file format. Unlike CSV, which stores data row-by-row as plain text, Parquet stores values column-by-column with dictionary encoding and Snappy/ZSTD compression. This allows SQL query engines to read only the specific columns needed for a query, drastically reducing memory bandwidth [Confirmed: Apache Parquet Specification].
+  * Q: Are my confidential spreadsheets or databases uploaded to any cloud server?
+    A: No. The entire file reading, schema inference, and SQL execution cycle runs locally in browser RAM using an ArrayBuffer and client-side processing pipeline. Tool inputs are processed locally on your device.
+  * Q: What SQL commands are supported in this browser explorer?
+    A: The workbench supports SELECT column projections, conditional filtering (WHERE =, !=, >, <, >=, <=), sorting (ORDER BY col ASC/DESC), row limiting (LIMIT n), and common aggregation metrics (COUNT(*), SUM(col)).
 
 ### HAR File Sanitizer and Filter
 - URL: https://toolkitgen.com/tool/har_sanitizer_viewer
@@ -1667,6 +1690,29 @@
     A: This is V-Sync (Vertical Synchronization). Browsers are typically hard-coded to limit WebGL rendering to your monitor's refresh rate to save power. If you have a 60Hz screen, the test cannot exceed 60 FPS. To test for throttling, increase the "Shader Complexity" slider until your FPS drops below your maximum refresh rate, then monitor it for further drops.
   * Q: Does this work on mobile phones?
     A: Yes. This test uses standard WebGL 1.0/2.0 which is supported by iOS (iPhone) and Android. In fact, mobile phones throttle much faster than PCs because they rely on passive cooling (transferring heat to the glass/metal body) rather than fans. You will often see significant performance drops on phones within 60 seconds of running this test at high intensity.
+
+### Compute Pressure CPU Monitor
+- URL: https://toolkitgen.com/tool/compute_pressure_monitor
+- Summary: Monitor real-time CPU compute pressure states (nominal, fair, serious, critical) via the W3C Compute Pressure API. Audit thermal throttling risk in browser memory.
+- Overview: The Compute Pressure CPU Monitor leverages the W3C Compute Pressure API to report real-time CPU utilization pressure states: nominal, fair, serious, and critical. It enables developers and power users to inspect whether system hardware is operating within safe thermal parameters or approaching dynamic thermal frequency throttling. Tool inputs are processed locally on your device with no server uploads.
+- Key Capabilities:
+  * Native W3C PressureObserver API Integration for Real-Time CPU Metrics
+  * Four-Stage Thermal Pressure Classification (Nominal, Fair, Serious, Critical)
+  * Real-Time Historical Pressure Timeline Chart Rendered via HTML5 Canvas
+  * Optional Controlled Multi-Core Diagnostic Workload Generator
+  * Complete Local Browser Execution with Zero Hardware Telemetry Uploads
+- Procedure Steps:
+  * Check Hardware Support: The tool automatically detects whether your browser exposes the native W3C PressureObserver interface (supported in modern Chromium desktop browsers).
+  * Observe Baseline Pressure: View your system idle pressure state on the radial status gauge and real-time canvas timeline.
+  * Run Diagnostic Workload: Optionally click 'Run Diagnostic Workload' to spawn a background web worker and evaluate how your system transitions across pressure states.
+  * Audit Thermal Recommendations: Inspect actionable advice regarding thermal dissipation, ventilation, and background process management.
+- Frequent Questions:
+  * Q: What is the W3C Compute Pressure API?
+    A: The Compute Pressure API is an open W3C web standard that exposes high-level CPU pressure states (nominal, fair, serious, critical) to web applications. It allows web applications to dynamically balance compute workloads (such as video rendering, 3D graphics, or gaming) before thermal throttling causes frame stutter [Confirmed: W3C Compute Pressure Specification].
+  * Q: Which browsers support the Compute Pressure API?
+    A: The API is supported natively in Chromium desktop browsers including Google Chrome and Microsoft Edge version 115 and newer. In browsers without native support (such as Safari and Firefox), ToolkitGen provides simulated hardware workload profiles.
+  * Q: Does this tool upload my system performance data to external servers?
+    A: No. All telemetry readings, PressureObserver events, and diagnostic workload calculations execute entirely in client-side RAM inside your browser. Tool inputs are processed locally on your device.
 
 ### Gyroscope & Accelerometer Test
 - URL: https://toolkitgen.com/tool/device_motion_logger

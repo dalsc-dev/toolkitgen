@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { PAYPAL_SUPPORT_URL, SUPPORT_CONFIG, isSupportCalloutAllowed } from './support';
+import { PAYPAL_SUPPORT_URL, SUPPORT_CONFIG, isSupportCalloutAllowed, getPayPalSupportUrl } from './support';
 
 describe('Voluntary Support Configuration', () => {
   it('defines a valid outbound PayPal URL without raw email exposure', () => {
@@ -10,10 +10,19 @@ describe('Voluntary Support Configuration', () => {
     expect(PAYPAL_SUPPORT_URL).not.toContain('@');
   });
 
-  it('defines structured voluntary tiers with explicit pricing', () => {
+  it('generates direct amount links with custom currencies', () => {
+    expect(getPayPalSupportUrl()).toBe('https://paypal.me/dalscx');
+    expect(getPayPalSupportUrl(25, 'USD')).toBe('https://www.paypal.com/paypalme/dalscx/25USD');
+    expect(getPayPalSupportUrl(25, 'INR')).toBe('https://www.paypal.com/paypalme/dalscx/25INR');
+    expect(getPayPalSupportUrl(250, 'inr')).toBe('https://www.paypal.com/paypalme/dalscx/250INR');
+    expect(getPayPalSupportUrl('10.50', 'USD')).toBe('https://www.paypal.com/paypalme/dalscx/10.50USD');
+  });
+
+  it('defines structured voluntary tiers with explicit pricing and links', () => {
     expect(SUPPORT_CONFIG.tiers.length).toBeGreaterThanOrEqual(3);
     SUPPORT_CONFIG.tiers.forEach((tier) => {
-      expect(tier.amount).toMatch(/^\$\d+$/);
+      expect(tier.amount).toBeTruthy();
+      expect(tier.url).toMatch(/^https:\/\/www\.paypal\.com\/paypalme\/dalscx\//);
       expect(tier.name).toBeTruthy();
       expect(tier.description).toBeTruthy();
     });

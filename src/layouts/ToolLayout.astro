@@ -5,6 +5,7 @@ import AdSlot from '@components/AdSlot.astro';
 import ToolCTA from '@components/ToolCTA.astro';
 import Callout from '@components/Callout.astro';
 import SupportCallout from '@components/SupportCallout.astro';
+import { isSupportCalloutAllowed } from '../config/support';
 import { generateJsonLd } from '@lib/schema';
 
 interface FAQItem {
@@ -560,13 +561,25 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
           <svg class="w-4 h-4 text-[#EE6C4D] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
           <span>Have a feature idea or spotted an issue in <strong>{cleanName}</strong>?</span>
         </div>
-        <a
-          href={`mailto:toolkitgen@gmail.com?subject=Toolkit%20Gen%20Feedback:%20${encodedTitle}`}
-          class="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-[#EE6C4D] bg-white border border-slate-200 hover:border-[#EE6C4D] px-3.5 py-1.5 rounded-lg transition-colors shadow-2xs self-start sm:self-auto"
-        >
-          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          <span>Email Developer</span>
-        </a>
+        <div class="flex items-center gap-2 self-start sm:self-auto flex-wrap">
+          {isSupportCalloutAllowed(id) && (
+            <a
+              href="/support"
+              class="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-[#EE6C4D] bg-white border border-slate-200 hover:border-[#EE6C4D] px-3.5 py-1.5 rounded-lg transition-colors shadow-2xs"
+              title="Voluntary platform support"
+            >
+              <svg class="w-3.5 h-3.5 text-rose-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Support / Donate</span>
+            </a>
+          )}
+          <a
+            href={`mailto:toolkitgen@gmail.com?subject=Toolkit%20Gen%20Feedback:%20${encodedTitle}`}
+            class="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-[#EE6C4D] bg-white border border-slate-200 hover:border-[#EE6C4D] px-3.5 py-1.5 rounded-lg transition-colors shadow-2xs"
+          >
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Email Developer</span>
+          </a>
+        </div>
       </div>
     </div>
 

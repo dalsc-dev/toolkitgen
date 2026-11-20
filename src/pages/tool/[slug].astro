@@ -131,6 +131,11 @@ const { html: processedArticleHtml, hasMath: articleHasMath } = processMath(arti
 const { html: processedToolHtml, hasMath: toolHasMath } = processMath(toolHtml || '');
 const { html: processedQuickAnswer, hasMath: qaHasMath } = processMath(quickAnswer || '');
 const hasMath = articleHasMath || toolHasMath || qaHasMath;
+
+// Ensure single H1 per page for strict SEO / AEO compliance
+// Demote any nested <h1> tags inside the tool widget or article to <h2>
+const sanitizedToolHtml = processedToolHtml.replace(/<h1(\s|>)/gi, '<h2$1').replace(/<\/h1>/gi, '</h2>');
+const sanitizedArticleHtml = processedArticleHtml.replace(/<h1(\s|>)/gi, '<h2$1').replace(/<\/h1>/gi, '</h2>');
 ---
 
 <ToolLayout
@@ -204,7 +209,7 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
 
     {!['amsler_grid_macular', 'docker_compose_linter', 'airdrop_web_universal'].includes(id) && (
       <div>
-        <div class="tool-stage-card overflow-hidden" set:html={processedToolHtml} />
+        <div class="tool-stage-card overflow-hidden" set:html={sanitizedToolHtml} />
         <script is:inline>
           (() => {
             if (typeof window.Chart === 'undefined') {
@@ -329,5 +334,5 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
     )}
   </div>
 
-  <div slot="article" set:html={processedArticleHtml} />
+  <div slot="article" set:html={sanitizedArticleHtml} />
 </ToolLayout>

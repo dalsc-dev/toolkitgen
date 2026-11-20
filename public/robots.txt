@@ -8,6 +8,7 @@ Allow: /
 Disallow: /404.html
 Disallow: /sw.js
 Disallow: /mywot*.html
+Disallow: /thanks
 
 # --------------------------------------------------------
 # EXPLICIT SEARCH & AI DISCOVERY BOT ALLOWLIST

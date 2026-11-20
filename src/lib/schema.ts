@@ -22,7 +22,10 @@ export function generateJsonLd(options: SchemaOptions) {
       '@type': 'ImageObject',
       url: `${baseUrl}/assets/favicon/favicon-96x96.png`,
     },
-    sameAs: [],
+    sameAs: [
+      'https://twitter.com/toolkitgen',
+      'https://instagram.com/toolkitgen',
+    ],
   };
 
   const graph: any[] = [orgSchema];
@@ -56,6 +59,55 @@ export function generateJsonLd(options: SchemaOptions) {
     });
   }
 
+  if (options.type === 'hub') {
+    graph.push({
+      '@type': 'CollectionPage',
+      '@id': `${options.url}#collection`,
+      name: options.title,
+      description: options.description,
+      url: options.url,
+      isPartOf: { '@id': `${baseUrl}/#website` },
+    });
+  }
+
+  if (options.type === 'article') {
+    graph.push({
+      '@type': 'TechArticle',
+      '@id': `${options.url}#article`,
+      headline: options.title,
+      description: options.description,
+      url: options.url,
+      datePublished: options.datePublished || '2026-11-20T00:00:00Z',
+      dateModified: options.dateModified || '2026-11-20T00:00:00Z',
+      inLanguage: 'en-US',
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': options.url,
+      },
+      author: {
+        '@type': 'Organization',
+        name: 'Toolkit Gen Editorial Team',
+        url: baseUrl,
+      },
+      publisher: { '@id': `${baseUrl}/#organization` },
+    });
+
+    if (options.faq && options.faq.length > 0) {
+      graph.push({
+        '@type': 'FAQPage',
+        '@id': `${options.url}#faq`,
+        mainEntity: options.faq.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.a,
+          },
+        })),
+      });
+    }
+  }
+
   if (options.type === 'tool') {
     graph.push({
       '@type': ['SoftwareApplication', 'WebApplication'],
@@ -64,7 +116,7 @@ export function generateJsonLd(options: SchemaOptions) {
       url: options.url,
       description: options.description,
       applicationCategory: options.category || 'UtilitiesApplication',
-      operatingSystem: 'All',
+      operatingSystem: 'Any',
       browserRequirements: 'Requires JavaScript. Compatible with Chrome, Safari, Firefox, Edge.',
       isAccessibleForFree: true,
       offers: {
@@ -112,7 +164,7 @@ export function generateJsonLd(options: SchemaOptions) {
       description: options.description,
       url: options.url,
       datePublished: options.datePublished || '2025-01-15T00:00:00Z',
-      dateModified: options.dateModified || new Date().toISOString(),
+      dateModified: options.dateModified || '2026-11-20T00:00:00Z',
       author: {
         '@type': 'Organization',
         name: 'Toolkit Gen Editorial Team',

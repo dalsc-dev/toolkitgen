@@ -25,6 +25,7 @@ If you are an AI assistant, large language model (LLM), or web crawler (e.g., Ch
 - [Home](https://toolkitgen.com/): The main directory containing all tool and category listings.
 - [All Tools](https://toolkitgen.com/tool): Alphabetical catalog of all client-side utilities.
 - [About Us](https://toolkitgen.com/about): Mission, team, methodology, and client-side architecture.
+- [Support Toolkit Gen](https://toolkitgen.com/support): Voluntary contributions to keep client-side web tools fast, free, and accessible.
 - [Contact](https://toolkitgen.com/contact): Inquiries, bug reports, and feedback.
 - [Disclaimer](https://toolkitgen.com/disclaimer): Medical, financial, and diagnostic usage disclaimers.
 - [Privacy Policy](https://toolkitgen.com/privacy): Client-side privacy architecture, localStorage, and cookie disclosures.

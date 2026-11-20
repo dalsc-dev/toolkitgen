@@ -4,7 +4,22 @@
  * Zero external scripts or tracking SDKs are loaded.
  */
 
+export const PAYPAL_BASE_HANDLE = 'dalscx';
 export const PAYPAL_SUPPORT_URL = 'https://paypal.me/dalscx';
+
+/**
+ * Generate a direct PayPal.me link with preset amount and currency code.
+ * Example formats:
+ * - https://www.paypal.com/paypalme/dalscx/25USD
+ * - https://www.paypal.com/paypalme/dalscx/25INR
+ */
+export function getPayPalSupportUrl(amount?: number | string, currency: string = 'USD'): string {
+  if (!amount) return PAYPAL_SUPPORT_URL;
+  const cleanAmount = String(amount).replace(/[^0-9.]/g, '');
+  if (!cleanAmount) return PAYPAL_SUPPORT_URL;
+  const cleanCurrency = String(currency || 'USD').toUpperCase().replace(/[^A-Z]/g, '');
+  return `https://www.paypal.com/paypalme/${PAYPAL_BASE_HANDLE}/${cleanAmount}${cleanCurrency}`;
+}
 
 export const SUPPORT_CONFIG = {
   paypalUrl: PAYPAL_SUPPORT_URL,
@@ -14,18 +29,43 @@ export const SUPPORT_CONFIG = {
   tiers: [
     {
       amount: '$3',
+      amountNumber: 3,
+      currency: 'USD',
+      url: getPayPalSupportUrl(3, 'USD'),
       name: 'Coffee Contribution',
       description: 'Covers edge worker invocations and static asset delivery for hundreds of visitors.',
     },
     {
       amount: '$10',
+      amountNumber: 10,
+      currency: 'USD',
+      url: getPayPalSupportUrl(10, 'USD'),
       name: 'Serverless Hosting Tier',
       description: 'Helps cover annual domain registrations, SSL renewals, and edge routing.',
     },
     {
       amount: '$25',
+      amountNumber: 25,
+      currency: 'USD',
+      url: getPayPalSupportUrl(25, 'USD'),
       name: 'Testing & Calibration',
       description: 'Supports testing hardware (gamepads, displays, sensors) for accurate browser calibrations.',
+    },
+    {
+      amount: '₹250',
+      amountNumber: 250,
+      currency: 'INR',
+      url: getPayPalSupportUrl(250, 'INR'),
+      name: 'Community Fuel (INR)',
+      description: 'Supports high-availability DNS, CDN caching, and continuous regression testing.',
+    },
+    {
+      amount: '₹500',
+      amountNumber: 500,
+      currency: 'INR',
+      url: getPayPalSupportUrl(500, 'INR'),
+      name: 'Infrastructure Booster (INR)',
+      description: 'Helps cover automated performance audits and multi-browser device lab runs.',
     },
   ],
   disclaimers: [

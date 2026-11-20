@@ -28,7 +28,8 @@
     "check:similarity": "node scripts/check-duplicate-content.mjs",
     "check:hang": "node scripts/hang-guard.mjs",
     "check:soak": "node scripts/soak-test.mjs",
-    "ping:indexnow": "node scripts/ping-indexnow.mjs"
+    "ping:indexnow": "node scripts/ping-indexnow.mjs",
+    "audit:seo": "node scripts/audit-seo-aeo.mjs"
   },
   "browserslist": [
     "defaults and fully supports es6-module"

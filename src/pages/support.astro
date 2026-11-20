@@ -77,7 +77,7 @@ const jsonLd = {
             Edge Compute &amp; Asset Hosting
           </h3>
           <p class="text-xs text-slate-600 leading-relaxed">
-            Covers global edge routing, SSL certification, DNS availability, and static asset distribution across Cloudflare serverless edge nodes.
+            Covers global edge routing, SSL certification, DNS availability, and static asset distribution across Cloudflare edge nodes.
           </p>
         </div>
 
@@ -117,45 +117,97 @@ const jsonLd = {
           Voluntary Contribution Options
         </h2>
         <p class="text-sm text-slate-500">
-          Choose a suggested amount or enter any custom contribution directly on PayPal.
+          Choose a suggested amount preset or enter your custom amount below to open a direct PayPal link.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {SUPPORT_CONFIG.tiers.map((tier) => (
-          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-4 text-center">
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-4 text-center hover:border-slate-300 transition-colors">
             <div class="space-y-2">
               <span class="text-3xl font-black text-slate-900 font-mono">{tier.amount}</span>
+              <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-wider">{tier.currency}</span>
               <h3 class="text-sm font-bold text-slate-800">{tier.name}</h3>
               <p class="text-xs text-slate-500 leading-relaxed">{tier.description}</p>
             </div>
             <a
-              href={PAYPAL_SUPPORT_URL}
+              href={tier.url}
               target="_blank"
               rel="noopener noreferrer"
               class="w-full inline-block py-2.5 px-4 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 font-bold text-xs hover:bg-slate-100 transition-colors shadow-2xs"
             >
-              Contribute {tier.amount}
+              Support {tier.amount}
             </a>
           </div>
         ))}
       </div>
 
-      <!-- Main Action Callout -->
-      <div class="pt-4 text-center space-y-4">
+      <!-- Interactive Custom Amount Generator -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-orange-50/50 border border-orange-200/80 space-y-5">
+        <div class="text-center space-y-1">
+          <h3 class="text-base font-bold text-slate-900">Custom Amount (USD or INR)</h3>
+          <p class="text-xs text-slate-600">Enter any desired contribution amount to generate your direct PayPal link.</p>
+        </div>
+
+        <div class="max-w-md mx-auto flex flex-col sm:flex-row items-center gap-3">
+          <div class="relative w-full sm:w-2/3">
+            <label for="custom-support-amount" class="sr-only">Support Amount</label>
+            <input
+              type="number"
+              id="custom-support-amount"
+              min="1"
+              max="5000"
+              step="1"
+              value="25"
+              placeholder="Amount"
+              class="w-full py-3 px-4 rounded-xl border border-slate-300 bg-white text-slate-900 font-mono font-bold text-lg focus:outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+            />
+          </div>
+          <div class="w-full sm:w-1/3">
+            <label for="custom-support-currency" class="sr-only">Currency</label>
+            <select
+              id="custom-support-currency"
+              class="w-full py-3 px-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#EE6C4D]"
+            >
+              <option value="USD">USD ($)</option>
+              <option value="INR">INR (₹)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="text-center pt-2 space-y-3">
+          <a
+            id="custom-support-btn"
+            href="https://www.paypal.com/paypalme/dalscx/25USD"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-[#EE6C4D] text-white font-black text-sm hover:bg-[#d95a3b] transition-all shadow-sm hover:shadow-md cursor-pointer"
+          >
+            <span id="custom-support-btn-text">Support $25 USD via PayPal</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+          <p id="custom-support-link-preview" class="text-[11px] font-mono text-slate-500 break-all">
+            Link: https://www.paypal.com/paypalme/dalscx/25USD
+          </p>
+        </div>
+      </div>
+
+      <!-- General Fallback Action -->
+      <div class="pt-2 text-center space-y-3 border-t border-slate-100">
         <a
           href={PAYPAL_SUPPORT_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-[#EE6C4D] text-white font-black text-base hover:bg-[#d95a3b] transition-all shadow-sm hover:shadow-md cursor-pointer"
+          class="text-xs text-slate-600 hover:text-[#EE6C4D] font-bold underline underline-offset-2 transition-colors"
         >
-          <span>Support via PayPal</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-          </svg>
+          Or open default PayPal.me profile ({PAYPAL_SUPPORT_URL})
         </a>
         <p class="text-xs text-slate-400">
-          Opens PayPal in a new secure browser tab. No card data touches Toolkit Gen.
+          Opens PayPal in a new secure browser tab. No card details or personal financial data touch Toolkit Gen.
         </p>
       </div>
     </section>
@@ -210,4 +262,41 @@ const jsonLd = {
       </div>
     </section>
   </div>
+
+  <script is:inline>
+    (function() {
+      var amountInput = document.getElementById('custom-support-amount');
+      var currencySelect = document.getElementById('custom-support-currency');
+      var customBtn = document.getElementById('custom-support-btn');
+      var btnText = document.getElementById('custom-support-btn-text');
+      var linkPreview = document.getElementById('custom-support-link-preview');
+
+      function updateCustomUrl() {
+        if (!amountInput || !currencySelect || !customBtn) return;
+        var rawAmount = amountInput.value ? amountInput.value.trim() : '25';
+        var amount = parseFloat(rawAmount);
+        if (isNaN(amount) || amount <= 0) {
+          amount = 25;
+        }
+        var currency = currencySelect.value || 'USD';
+        var targetUrl = 'https://www.paypal.com/paypalme/dalscx/' + amount + currency;
+
+        customBtn.setAttribute('href', targetUrl);
+        var symbol = currency === 'INR' ? '₹' : (currency === 'EUR' ? '€' : (currency === 'GBP' ? '£' : '$'));
+        if (btnText) {
+          btnText.textContent = 'Support ' + symbol + amount + ' ' + currency + ' via PayPal';
+        }
+        if (linkPreview) {
+          linkPreview.textContent = 'Link: ' + targetUrl;
+        }
+      }
+
+      if (amountInput) {
+        amountInput.addEventListener('input', updateCustomUrl);
+      }
+      if (currencySelect) {
+        currencySelect.addEventListener('change', updateCustomUrl);
+      }
+    })();
+  </script>
 </BaseLayout>

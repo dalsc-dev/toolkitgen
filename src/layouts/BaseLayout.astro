@@ -1,40 +1,60 @@
 ---
-import Header from '@components/Header.astro';
-import Footer from '@components/Footer.astro';
-import ConsentBanner from '@components/ConsentBanner.astro';
-import CommandPalette from '@components/CommandPalette.astro';
-import FloatingDock from '@components/FloatingDock.astro';
-import { formatTitle, formatDescription } from '@lib/seo';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import FloatingDock from '../components/FloatingDock.astro';
+import CommandPalette from '../components/CommandPalette.astro';
 import '../styles/global.css';
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   canonical?: string;
-  ogType?: 'website' | 'article';
   ogImage?: string;
+  ogType?: 'website' | 'article';
+  containerClass?: string;
   jsonLd?: Record<string, any>;
   noindex?: boolean;
-  containerClass?: string;
   hasMath?: boolean;
 }
 
 const {
-  title,
-  description,
+  title = 'Toolkit Gen | Professional Online Tools and Calculators',
+  description = 'Fast, free, and accessible in-browser utilities for developers, finance, health, and everyday calculations. Calculations run in your browser; your inputs are never uploaded to our servers.',
   canonical,
-  ogType = 'website',
   ogImage = 'https://toolkitgen.com/assets/favicon/favicon-96x96.png',
+  ogType = 'website',
+  containerClass = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16',
   jsonLd,
   noindex = false,
-  containerClass = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16',
   hasMath = false,
 } = Astro.props;
+
+import { formatTitle, formatDescription } from '../lib/seo';
 
 const siteUrl = 'https://toolkitgen.com';
 const canonicalUrl = canonical || (Astro.url.pathname === '/' ? siteUrl : `${siteUrl}${Astro.url.pathname.replace(/\/$/, '')}`);
 const metaTitle = formatTitle(title);
 const metaDescription = formatDescription(description);
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const EXCLUDED_AD_PATHS = new Set([
+  '/404',
+  '/404.html',
+  '/privacy',
+  '/terms',
+  '/disclaimer',
+  '/about',
+  '/contact',
+  '/tool/stroboscope_tachometer',
+  '/tool/seizure_flash_check',
+  '/tool/flicker_fusion_threshold',
+  '/tool/oled_burn_in_fixer',
+  '/tool/oled_burnin_protector',
+  '/tool/monitor_refresh_tester',
+  '/tool/pwm_flicker_eye_health_scanner',
+]);
+const isAdExcluded = Boolean(noindex || EXCLUDED_AD_PATHS.has(currentPath));
 ---
 
 <!DOCTYPE html>
@@ -78,17 +98,7 @@ const metaDescription = formatDescription(description);
   <meta name="msvalidate.01" content="4675079345370949" />
   <link rel="alternate" type="application/rss+xml" title="Toolkit Gen RSS Feed" href="/rss.xml" />
 
-  <!-- Google AdSense (Auto Ads & Immediate Revenue Optimization) -->
-  {!noindex && (
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949"
-      crossorigin="anonymous"
-      id="adsbygoogle-script"
-    ></script>
-  )}
-
-  <!-- Google Analytics 4 -->
+  <!-- Google Analytics 4 (Deferred after interactive) -->
   {!noindex && (
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKR6PVM0M9"></script>
     <script is:inline>
@@ -115,7 +125,7 @@ const metaDescription = formatDescription(description);
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   )}
 
-  <!-- Zen Mode Initialization -->
+  <!-- Zen Mode Initialization (Single Entry Point) -->
   <script is:inline>
     try {
       if (localStorage.getItem('tk_zen_mode') === 'true') {
@@ -124,53 +134,8 @@ const metaDescription = formatDescription(description);
     } catch (e) {}
   </script>
 
-  <!-- Shared AdSlot & Vignette Anti-Trap Watchdog -->
+  <!-- Google AdSense Vignette Anti-Trap Watchdog -->
   <script is:inline>
-    window.__initAdSlot = function(containerDomId) {
-      function initSlot() {
-        var container = document.getElementById(containerDomId);
-        if (!container) return;
-        var ins = container.querySelector('ins.adsbygoogle');
-        if (!ins || ins.getAttribute('data-adsbygoogle-status')) return;
-
-        function pushSlot() {
-          if (ins.getAttribute('data-adsbygoogle-status')) return true;
-          try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-            return true;
-          } catch (e) {
-            return false;
-          }
-        }
-
-        if (typeof IntersectionObserver !== 'undefined') {
-          var io = new IntersectionObserver(function(entries) {
-            for (var i = 0; i < entries.length; i++) {
-              var entry = entries[i];
-              if (entry.isIntersecting && entry.boundingClientRect.width > 0) {
-                if (pushSlot()) {
-                  io.disconnect();
-                  break;
-                }
-              }
-            }
-          }, { rootMargin: '300px 0px' });
-          io.observe(container);
-        } else {
-          var defer = window.requestIdleCallback || function(cb) { setTimeout(cb, 1000); };
-          defer(function() { pushSlot(); });
-        }
-      }
-
-      var schedule = window.requestIdleCallback || function(cb) { setTimeout(cb, 500); };
-      if (document.readyState === 'complete') {
-        schedule(initSlot);
-      } else {
-        window.addEventListener('load', function() { schedule(initSlot); }, { once: true, passive: true });
-      }
-    };
-
-    // Google AdSense Vignette Anti-Trap Watchdog
     (() => {
       function dismissStuckVignette() {
         if (window.location.hash.includes('google_vignette')) {
@@ -193,12 +158,12 @@ const metaDescription = formatDescription(description);
 
       window.addEventListener('hashchange', () => {
         if (window.location.hash.includes('google_vignette')) {
-          setTimeout(dismissStuckVignette, 2000);
+          setTimeout(dismissStuckVignette, 1500);
         }
       }, { passive: true });
 
       if (window.location.hash.includes('google_vignette')) {
-        setTimeout(dismissStuckVignette, 2000);
+        setTimeout(dismissStuckVignette, 1500);
       }
 
       document.addEventListener('click', (e) => {
@@ -210,18 +175,17 @@ const metaDescription = formatDescription(description);
     })();
   </script>
 
-  <!-- KaTeX CSS (loaded only when math is present) -->
+  <!-- KaTeX CSS for Pre-rendered Formulas -->
   {hasMath && (
     <link rel="stylesheet" href="/assets/katex/katex.min.css" />
   )}
-
-  <slot name="head" />
 </head>
+
 <body class="flex flex-col min-h-screen bg-[#f8fafc] text-[#33333b] antialiased overflow-x-clip">
   <!-- Accessibility Skip Link -->
   <a
     href="#main-content"
-    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#EE6C4D] text-white px-4 py-2 rounded-xl shadow-xl font-bold"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] px-4 py-2 bg-slate-900 text-white font-bold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-[#EE6C4D]"
   >
     Skip to content
   </a>
@@ -237,12 +201,43 @@ const metaDescription = formatDescription(description);
   <FloatingDock />
   <CommandPalette />
 
-  <script is:inline>
-    try {
-      if (localStorage.getItem('tk_zen_mode') === 'true') {
-        document.body.classList.add('zen-mode');
-      }
-    } catch (e) {}
-  </script>
+  <!-- Primary Google AdSense Auto Ads (Deferred after consent & idle/interaction) -->
+  {!isAdExcluded && (
+    <script is:inline>
+      (function() {
+        if (window.__autoAdsLoaded) return;
+        function loadAutoAds() {
+          if (window.__autoAdsLoaded) return;
+          if (localStorage.getItem('tk_cookie_consent') === 'denied') return;
+          window.__autoAdsLoaded = true;
+
+          window.removeEventListener('pointerdown', loadAutoAds);
+          window.removeEventListener('keydown', loadAutoAds);
+          window.removeEventListener('touchstart', loadAutoAds);
+          window.removeEventListener('scroll', loadAutoAds);
+
+          var s = document.createElement('script');
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4675079345370949';
+          s.async = true;
+          s.crossOrigin = 'anonymous';
+          s.id = 'adsbygoogle-script';
+          document.head.appendChild(s);
+        }
+
+        window.addEventListener('pointerdown', loadAutoAds, { once: true, passive: true });
+        window.addEventListener('keydown', loadAutoAds, { once: true, passive: true });
+        window.addEventListener('touchstart', loadAutoAds, { once: true, passive: true });
+        window.addEventListener('scroll', loadAutoAds, { once: true, passive: true });
+
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(function() {
+            setTimeout(loadAutoAds, 2500);
+          });
+        } else {
+          setTimeout(loadAutoAds, 3500);
+        }
+      })();
+    </script>
+  )}
 </body>
 </html>

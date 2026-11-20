@@ -267,6 +267,9 @@
 
 <script is:inline>
   (() => {
+    if (window.__dockInitDone) return;
+    window.__dockInitDone = true;
+
     const dockRoot = document.getElementById('floating-dock-root');
     const triggerBtn = document.getElementById('dock-trigger-btn');
     const floatingMenu = document.getElementById('dock-floating-menu');

@@ -228,8 +228,8 @@ const jsonLd = generateJsonLd({
       </div>
     </section>
 
-    <!-- Mid-Page Ad Slot (Zero CLS with reserved min-height) -->
-    <AdSlot slotId="home-mid-banner" minHeight="280px" />
+    <!-- Mid-Page Manual Ad Unit -->
+    <AdSlot slotId="homeMidBanner" />
 
     <!-- Two-Column Section: Directory (8 cols) + Popular This Week Sidebar (4 cols) -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -346,9 +346,6 @@ const jsonLd = generateJsonLd({
               </a>
             ))}
           </div>
-
-          <!-- Sticky Sidebar Ad Slot (Google AdSense responsive sidebar: 5828686602) -->
-          <AdSlot slotId="sidebarBanner" minHeight="250px" />
         </div>
       </aside>
     </div>

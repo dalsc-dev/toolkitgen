@@ -1,6 +1,6 @@
-// Toolkit Gen Service Worker (v4-astro)
-// Safe network-first HTML with offline fallback, hashed asset caching, and kill-switch
-const BUILD_VERSION = 'v4-astro';
+// Toolkit Gen Service Worker (v5-clean)
+// Robust network-first navigation with offline cache fallback, asset caching, and zero-hang guarantees
+const BUILD_VERSION = 'v5-clean';
 const CACHE_NAME = `tg-cache-${BUILD_VERSION}`;
 
 const PRECACHE_SHELL = [
@@ -28,30 +28,8 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Kill-switch: check if remote flag requests cache purge & unregister
-async function checkKillSwitch() {
-  try {
-    const res = await fetch('/sw-reset.json?t=' + Date.now());
-    if (res.ok) {
-      const data = await res.json();
-      if (data && data.reset === true) {
-        const keys = await caches.keys();
-        await Promise.all(keys.map((k) => caches.delete(k)));
-        await self.registration.unregister();
-        const clients = await self.clients.matchAll();
-        clients.forEach((c) => c.navigate(c.url));
-        return true;
-      }
-    }
-  } catch (e) {}
-  return false;
-}
-
 self.addEventListener('message', (event) => {
-  if (event.data === 'SW_CHECK_RESET') {
-    checkKillSwitch();
-  }
-  if (event.data === 'SW_CLEAR_CACHE') {
+  if (event.data === 'SW_CLEAR_CACHE' || event.data === 'SW_CHECK_RESET') {
     caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k))));
   }
 });
@@ -65,12 +43,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Bypass service worker for sw-reset.json
-  if (url.pathname === '/sw-reset.json') {
-    return;
-  }
-
-  // 1. Static Immutable Hashed Assets (/_astro/*, /assets/*) -> Cache First with runtime update
+  // 1. Static Immutable Hashed Assets (/_astro/*, /assets/*) -> Cache First with network fallback
   if (
     url.pathname.startsWith('/_astro/') ||
     url.pathname.startsWith('/assets/') ||
@@ -82,44 +55,32 @@ self.addEventListener('fetch', (event) => {
         return fetch(request).then((res) => {
           if (res && res.status === 200) {
             const clone = res.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
           }
           return res;
-        });
+        }).catch(() => cached);
       })
     );
     return;
   }
 
-  // 2. HTML Page Navigation -> Network First with 3-second timeout & safe cache fallback
+  // 2. HTML Page Navigation -> Transparent Network First with Offline Fallback (ZERO HANGS)
   if (request.mode === 'navigate' || request.headers.get('accept')?.includes('text/html')) {
     event.respondWith(
-      new Promise((resolve) => {
-        let didTimeout = false;
-        const timer = setTimeout(() => {
-          didTimeout = true;
-          caches.match(request).then((cached) => {
-            if (cached) resolve(cached);
+      fetch(request)
+        .then((networkRes) => {
+          if (networkRes && networkRes.status === 200) {
+            const clone = networkRes.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+          }
+          return networkRes;
+        })
+        .catch(() => {
+          return caches.match(request).then((cached) => {
+            if (cached) return cached;
+            return caches.match('/') || new Response('Offline - Toolkit Gen', { status: 503, headers: { 'Content-Type': 'text/plain' } });
           });
-        }, 3000);
-
-        fetch(request)
-          .then((networkRes) => {
-            clearTimeout(timer);
-            if (networkRes && networkRes.status === 200) {
-              const clone = networkRes.clone();
-              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-            }
-            if (!didTimeout) resolve(networkRes);
-          })
-          .catch(() => {
-            clearTimeout(timer);
-            caches.match(request).then((cached) => {
-              if (cached) resolve(cached);
-              else resolve(new Response('Offline - Page not in cache', { status: 503, headers: { 'Content-Type': 'text/plain' } }));
-            });
-          });
-      })
+        })
     );
     return;
   }

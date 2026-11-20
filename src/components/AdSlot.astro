@@ -3,61 +3,79 @@ import { ADSENSE_CONFIG, resolveSlot } from '../lib/ads';
 
 interface Props {
   slotId?: string;
-  format?: 'auto' | 'autorelaxed' | 'rectangle' | 'horizontal' | 'fluid';
-  layout?: string;
-  minHeight?: string;
   className?: string;
 }
 
 const {
   slotId = 'toolBottomBanner',
-  format,
-  layout,
-  minHeight,
   className = '',
 } = Astro.props;
 
 const resolved = resolveSlot(slotId);
-const isAdConfigured = Boolean(resolved && resolved.slotId);
-const effectiveFormat = format || resolved?.format || 'auto';
-const effectiveLayout = layout || resolved?.layout;
-const isInArticle = effectiveLayout === 'in-article' || effectiveFormat === 'fluid';
-const isFullWidthResponsive = resolved?.fullWidthResponsive ?? (!isInArticle && effectiveFormat !== 'autorelaxed');
-const effectiveMinHeight = minHeight || (isInArticle ? '250px' : '280px');
-const containerDomId = `ad-slot-${slotId}`;
+// Only render if a real numeric slot ID is configured
+const hasNumericId = Boolean(resolved && resolved.slotId && /^\d+$/.test(resolved.slotId));
 ---
 
-<div
-  id={containerDomId}
-  class={`ad-container relative w-full my-8 bg-slate-50/70 border border-slate-200/80 rounded-2xl p-3 flex flex-col items-center justify-center overflow-hidden transition-all ${className}`}
-  style={`min-height: ${effectiveMinHeight}; contain: layout style;`}
-  data-ad-slot={resolved?.slotId || 'auto'}
->
-  <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 mb-2 select-none">Advertisement</span>
-  
-  {isAdConfigured ? (
+{hasNumericId && (
+  <div class={`manual-ad-wrapper my-8 ${className}`}>
+    <p class="ad-label" style="display:none; font-size:11px; color:#94a3b8; text-align:center; margin:0 0 6px 0; font-family:sans-serif; text-transform:uppercase; letter-spacing:0.05em;">Advertisement</p>
     <ins
       class="adsbygoogle"
-      style={isInArticle ? "display:block; text-align:center;" : "display:block; width:100%; min-height: 250px;"}
+      style="display:block"
       data-ad-client={ADSENSE_CONFIG.publisherId}
       data-ad-slot={resolved!.slotId}
-      data-ad-layout={effectiveLayout || undefined}
-      data-ad-format={effectiveFormat}
-      data-full-width-responsive={isFullWidthResponsive ? "true" : undefined}
-    ></ins>
-  ) : (
-    <ins
-      class="adsbygoogle"
-      style="display:block; width:100%; min-height: 250px;"
-      data-ad-client={ADSENSE_CONFIG.publisherId}
       data-ad-format="auto"
       data-full-width-responsive="true"
     ></ins>
-  )}
+    <script is:inline>
+      (function() {
+        var currentScript = document.currentScript;
+        if (!currentScript) return;
+        var parent = currentScript.parentElement;
+        if (!parent) return;
+        var ins = parent.querySelector('ins.adsbygoogle');
+        var label = parent.querySelector('.ad-label');
+        if (!ins) return;
 
-  <script is:inline define:vars={{ containerDomId }}>
-    if (typeof window.__initAdSlot === 'function') {
-      window.__initAdSlot(containerDomId);
-    }
-  </script>
-</div>
+        // Never push on non-production hosts
+        var isProd = window.location.hostname === 'toolkitgen.com' || window.location.hostname.endsWith('.toolkitgen.com');
+        if (!isProd) return;
+
+        function checkStatus() {
+          if (ins.getAttribute('data-ad-status') === 'filled') {
+            if (label) label.style.display = 'block';
+          } else {
+            if (label) label.style.display = 'none';
+          }
+        }
+
+        if (typeof MutationObserver !== 'undefined') {
+          var mo = new MutationObserver(checkStatus);
+          mo.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
+        }
+
+        function pushAd() {
+          if (ins.getAttribute('data-adsbygoogle-status')) return;
+          try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+          } catch (e) {}
+        }
+
+        if (typeof IntersectionObserver !== 'undefined') {
+          var io = new IntersectionObserver(function(entries) {
+            for (var i = 0; i < entries.length; i++) {
+              if (entries[i].isIntersecting) {
+                pushAd();
+                io.disconnect();
+                break;
+              }
+            }
+          }, { rootMargin: '200px 0px' });
+          io.observe(ins);
+        } else {
+          pushAd();
+        }
+      })();
+    </script>
+  </div>
+)}

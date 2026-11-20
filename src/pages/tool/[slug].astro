@@ -170,15 +170,15 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
       id="tool-error-fallback"
       class="hidden p-8 text-center bg-rose-50 border border-rose-200 rounded-2xl my-4 text-slate-800"
     >
-      <h3 class="text-base font-bold text-rose-900">This tool encountered an initialization error</h3>
-      <p class="text-xs text-rose-700 mt-1">Please reload or reset the tool to restart your session.</p>
+      <h3 class="text-base font-bold text-rose-900">This tool could not start</h3>
+      <p class="text-xs text-rose-700 mt-1">Calculations run locally in your browser. Please reload to restart your session.</p>
       <div class="mt-4 flex items-center justify-center gap-3">
         <button
           type="button"
           onclick="if (window.resetToolEnvironment) window.resetToolEnvironment(); window.location.reload();"
-          class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition shadow-xs"
+          class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition shadow-xs"
         >
-          Reset Tool State
+          Reload Tool
         </button>
       </div>
     </div>
@@ -195,20 +195,6 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
             if (typeof window.Chart === 'undefined') {
               window.Chart = class Chart { constructor() {} destroy() {} update() {} };
             }
-            const origGet = document.getElementById.bind(document);
-            const safeProxy = new Proxy(document.createElement('div'), {
-              get(t, p) {
-                if (p === 'getContext') return () => null;
-                if (p === 'addEventListener' || p === 'removeEventListener') return () => {};
-                if (p === 'style') return {};
-                if (p === 'classList') return { add: () => {}, remove: () => {}, toggle: () => {}, contains: () => false };
-                if (p === 'querySelector') return () => null;
-                if (p === 'querySelectorAll') return () => [];
-                return t[p] ?? '';
-              },
-              set(t, p, v) { t[p] = v; return true; }
-            });
-            document.getElementById = (id) => origGet(id) || safeProxy;
 
             // Mandatory Worker & Resource Tracking Watchdog
             window.__activeWorkers = window.__activeWorkers || [];
@@ -304,7 +290,7 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
             window.addEventListener('beforeunload', cleanupAllResources, { passive: true });
             window.resetToolEnvironment = cleanupAllResources;
 
-            // Watchdog: detect blank tool render or fatal initialization failure
+            // Watchdog: detect blank tool render or fatal initialization failure within 5s
             setTimeout(() => {
               try {
                 const stage = document.getElementById('tool-app-stage');
@@ -312,15 +298,9 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
                 const fallback = document.getElementById('tool-error-fallback');
                 if (card && (!card.firstElementChild || card.offsetHeight < 20)) {
                   if (fallback) fallback.classList.remove('hidden');
-                  if ('caches' in window) {
-                    caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
-                  }
-                  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-                    navigator.serviceWorker.controller.postMessage({ type: 'SW_CLEAR_CACHE' });
-                  }
                 }
               } catch (e) {}
-            }, 6000);
+            }, 5000);
           })();
         </script>
         {toolScript && (

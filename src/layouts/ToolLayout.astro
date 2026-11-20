@@ -51,7 +51,7 @@ const {
   quickAnswer,
   faq = [],
   howTo = [],
-  related = [],
+  related: _related = [],
   hotTools = [],
   recommendedTool,
   diagnosticTools = [],
@@ -253,9 +253,6 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
           <slot name="tool-ui" />
         </section>
 
-        <!-- In-Content Mid-Break Banner (High Viewability, zero CLS) -->
-        <AdSlot slotId="tool-mid-banner" minHeight="280px" />
-
         <!-- f. "Read How to Use & Info" expandable article -->
         <section id="tool-documentation-section" class="bg-white rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-sm space-y-8 min-w-0 max-w-full overflow-hidden">
           <!-- Quick Answer Summary Box -->
@@ -327,9 +324,6 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
             </a>
           </section>
         )}
-
-        <!-- Sticky Sidebar Ad Slot (Google AdSense responsive sidebar: 5828686602) -->
-        <AdSlot slotId="sidebarBanner" minHeight="250px" />
       </aside>
     </div>
 
@@ -469,12 +463,11 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
       </div>
     </div>
 
-    <!-- m. Labeled AdSlot with reserved height (never above the tool) -->
-    <AdSlot slotId="tool-bottom-banner" minHeight="280px" />
+    <!-- Optional bottom manual ad unit (never above the tool) -->
+    <AdSlot slotId="toolBottomBanner" />
   </div>
-</BaseLayout>
 
-<script is:inline define:vars={{ toolId: id, canonicalUrl }}>
+  <script is:inline define:vars={{ toolId: id, canonicalUrl }}>
   (() => {
     function safeGetItem(key) {
       try {
@@ -608,3 +601,4 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
     updatePinState();
   })();
 </script>
+</BaseLayout>

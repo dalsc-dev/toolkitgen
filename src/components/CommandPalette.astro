@@ -105,6 +105,9 @@
 
 <script is:inline>
   (() => {
+    if (window.__cmdPaletteInitDone) return;
+    window.__cmdPaletteInitDone = true;
+
     let searchIndex = null;
     let isLoading = false;
     let activeResultIndex = -1;

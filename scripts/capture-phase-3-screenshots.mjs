@@ -5,20 +5,43 @@ import fs from 'fs';
 const artifactDir = '/Users/dalsc2/.gemini/antigravity/brain/a7e662bd-249d-4d30-bd04-328d25225fda';
 const distDir = path.resolve('dist');
 
-const tools = [
-  'llm_vram_calculator',
-  'screenshot_secret_scanner',
-  'c2pa_metadata_viewer',
-  'x509_certificate_decoder'
-];
-
 async function capture() {
   const browser = await chromium.launch({ headless: true });
 
-  for (const slug of tools) {
-    const htmlPath = path.join(distDir, 'tool', `${slug}.html`);
-    if (!fs.existsSync(htmlPath)) {
-      console.error(`Missing HTML for ${slug}`);
+  const targets = [
+    {
+      htmlPath: path.join(distDir, 'tool', 'framerate_judder_pacing_test.html'),
+      file: 'phase_3_framerate_judder_test_desktop.png',
+      action: async (page) => {
+        await page.waitForTimeout(1000);
+      }
+    },
+    {
+      htmlPath: path.join(distDir, 'hubs', 'gaming.html'),
+      file: 'phase_3_gaming_hub_desktop.png',
+      action: async (page) => {
+        await page.waitForTimeout(500);
+      }
+    },
+    {
+      htmlPath: path.join(distDir, 'guide', '30fps-vs-40fps-oled-judder-guide.html'),
+      file: 'phase_3_oled_judder_guide_desktop.png',
+      action: async (page) => {
+        await page.waitForTimeout(500);
+      }
+    },
+    {
+      htmlPath: path.join(distDir, 'guide', 'console-storage-planning-preload-guide.html'),
+      file: 'phase_3_console_storage_guide_desktop.png',
+      action: async (page) => {
+        await page.waitForTimeout(500);
+      }
+    }
+  ];
+
+  for (const t of targets) {
+    if (!fs.existsSync(t.htmlPath)) {
+      console.error(`Missing HTML for ${t.htmlPath}`);
       continue;
     }
 
@@ -28,7 +51,7 @@ async function capture() {
 
     const page = await context.newPage();
 
-    // Route assets
+    // Route assets locally
     await page.route('**/*', route => {
       const u = route.request().url();
       if (u.includes('/_astro/')) {
@@ -45,27 +68,22 @@ async function capture() {
       return route.continue();
     });
 
-    await page.goto(`file://${htmlPath}`, { waitUntil: 'load' });
+    await page.goto(`file://${t.htmlPath}`, { waitUntil: 'load' });
     await page.waitForTimeout(600);
-
-    // If x509, click the "Load Sample" button to show the full parsed UI in the screenshot!
-    if (slug === 'x509_certificate_decoder') {
-      const sampleBtn = await page.$('#x509-sample-btn');
-      if (sampleBtn) {
-        await sampleBtn.click();
-        await page.waitForTimeout(300);
-      }
+    if (t.action) {
+      await t.action(page);
     }
 
-    const outPath = path.join(artifactDir, `${slug}_desktop.png`);
+    const outPath = path.join(artifactDir, t.file);
     await page.screenshot({ path: outPath, fullPage: false });
     console.log(`Saved screenshot to ${outPath}`);
-
     await context.close();
   }
 
   await browser.close();
-  console.log('All Phase 3 screenshots captured successfully.');
 }
 
-capture();
+capture().catch(err => {
+  console.error('Phase 3 screenshot capture failed:', err);
+  process.exit(1);
+});

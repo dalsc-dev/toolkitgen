@@ -6,7 +6,7 @@
 - Homepage: https://toolkitgen.com
 - Framework: Static Astro Architecture
 - Execution Boundary: Client-side JavaScript / WebAssembly / Web APIs (WebHID, WebCodecs, WebGPU, WebCrypto)
-- Total Active Tools: 147
+- Total Active Tools: 148
 
 ## Category: Developer / Data
 
@@ -2416,6 +2416,31 @@
     A: The original PlayStation 5 (825 GB SSD) provides approximately 667.2 GB of usable storage [Confirmed: Sony Interactive Entertainment, Nov 2020]. The PS5 Slim (1 TB SSD) offers approximately 848 GB [Confirmed: Sony Interactive Entertainment, Nov 2023]. The PS5 Pro (2 TB SSD) provides approximately 1.89 TB of usable space [Confirmed: Sony Interactive Entertainment, Nov 2024].
   * Q: What is the usable capacity on Xbox Series X and Series S?
     A: The Xbox Series X (1 TB internal drive) offers approximately 802 GB of usable space [Confirmed: Microsoft Xbox Wire, Nov 2020]. The Xbox Series S 512 GB model provides approximately 364 GB usable space, while the 1 TB Series S provides approximately 802 GB usable space [Confirmed: Microsoft Xbox Wire, Sep 2023].
+
+### Frame Rate Judder & Pacing Test
+- URL: https://toolkitgen.com/tool/framerate_judder_pacing_test
+- Summary: Benchmark display motion judder and frame pacing: test 30 FPS vs 40 FPS vs 60 FPS raster sweeps, detect 120Hz refresh rates, calculate cadence dividers, and diagnose OLED stutter.
+- Overview: The Frame Rate Judder & Pacing Test benchmarks your monitor or television for motion smoothness, display cadence dividers, and sample-and-hold OLED stutter. It features an interactive quad-cadence raster motion sweep comparing 30 FPS, 40 FPS, 60 FPS, and native display refresh rates in real time, a high-precision browser refresh rate detector, and a display cadence calculator illustrating why 40 FPS modes require a 120Hz container ($120 / 40 = 3$). All telemetry executes locally in browser memory.
+- Key Capabilities:
+  * Real-Time Quad-Cadence Motion Sweep (30 FPS, 40 FPS, 60 FPS, and Native Refresh)
+  * Sub-Millisecond Browser Refresh Rate and Frame Delta Jitter Telemetry
+  * Display Cadence Divider Calculator (Integer Ratios vs 3:2 Pulldown Judder)
+  * HDMI 2.1 VRR 48Hz Hardware Floor and LFC (Low Framerate Compensation) Evaluator
+  * OLED Sample-and-Hold Retinal Stutter versus Motion Blur Visualizer
+  * Console and Television Display Calibration Troubleshooting Checklist
+- Procedure Steps:
+  * Connect Your Gaming Display: Open this diagnostic on your PC, laptop, or console browser connected to your gaming monitor or television.
+  * Observe Quad-Cadence Motion Bars: Track the moving raster bars with your eyes. Compare the perceived stepping and jitter between 30 FPS, 40 FPS, 60 FPS, and native display refresh.
+  * Check Hardware Telemetry: Inspect the live FPS and frame-time delta metrics to verify whether your operating system and browser deliver true 60Hz or 120Hz pacing.
+  * Calculate Display Cadence Dividers: Select your game target frame rate and display refresh rate in the cadence calculator to see if the frame times divide evenly or induce pulldown judder.
+  * Evaluate VRR and LFC Boundaries: Toggle the VRR option to inspect whether your target framerate falls inside the native 48Hz-120Hz window or triggers Low Framerate Compensation.
+- Frequent Questions:
+  * Q: Why does 30 FPS look choppy on OLED televisions compared to older LCDs?
+    A: OLED pixels possess near-instantaneous response times (under 0.1 ms GtG), whereas older LCD panels exhibited 5 to 15 ms of liquid crystal transition blur. On sample-and-hold OLED displays, each 30 FPS frame remains completely static for 33.3 milliseconds before instantly stepping to the next position. Because your retina tracks continuous motion across the screen, this instant stepping creates high-contrast retinal judder. The older LCD panel's slow response time created natural motion blur that masked this stepping [Confirmed: Blur Busters, DisplayMate].
+  * Q: Why do 40 FPS console modes require a 120Hz display?
+    A: On a standard 60Hz display, 40 FPS does not divide evenly: 60 divided by 40 equals 1.5 display refreshes per frame. The television must alternate between holding a frame for 1 refresh (16.67 ms) and 2 refreshes (33.33 ms), creating severe rhythmic 3:2 judder. On a 120Hz display, 120 divided by 40 equals exactly 3.0 refreshes per frame. Every frame is displayed for precisely 25.0 milliseconds in an even 1:1:1 integer cadence, eliminating judder while saving ~33% GPU render budget compared to 60 FPS [Confirmed: Sony Interactive Entertainment, Digital Foundry].
+  * Q: What is the HDMI 2.1 VRR 48Hz floor and what is LFC?
+    A: Standard HDMI 2.1 Variable Refresh Rate (VRR) modules operate within a hardware frequency window of 48 Hz to 120 Hz. When a game's frame rate drops below 48 FPS (such as a 30 FPS title), the display cannot match the frame rate 1:1. The console and display engage Low Framerate Compensation (LFC), which multiplies frames (e.g. duplicating 30 FPS frames twice to refresh at 60 Hz). On OLED televisions, rapid transitions across the 48Hz boundary can cause slight gamma luminance shifts perceived as near-black flicker.
 
 ### Frame Time Calculator
 - URL: https://toolkitgen.com/tool/frame_time_calculator

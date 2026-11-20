@@ -140,6 +140,7 @@
 
 ## Games & Interactive
 - [Console Storage Planner](https://toolkitgen.com/tool/console_storage_planner): Plan console SSD capacity, calculate available internal storage, and verify game installation fit across PlayStation and Xbox systems.
+- [Frame Rate Judder & Pacing Test](https://toolkitgen.com/tool/framerate_judder_pacing_test): Benchmark display motion judder and frame pacing: test 30 FPS vs 40 FPS vs 60 FPS raster sweeps, detect 120Hz refresh rates, calculate cadence dividers, and diagnose OLED stutter.
 - [Frame Time Calculator](https://toolkitgen.com/tool/frame_time_calculator): Convert frame rates to frame times, calculate frame budget tolerances, and evaluate 1% low and 0.1% low pacing stability.
 - [Game Download Time Calculator](https://toolkitgen.com/tool/game_download_time_calculator): Calculate download duration, transfer rates, and ISP data allowance impact for console and PC games based on bandwidth and network overhead.
 - [Gamepad Button & Input Tester](https://toolkitgen.com/tool/gamepad_button_input_tester): Test gamepad buttons, analog stick deadzones, trigger travel, and polling rate in your browser with the Gamepad API.

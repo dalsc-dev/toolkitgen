@@ -4,8 +4,8 @@
   "version": "2.0.0",
   "description": "Structured index of client-side web utilities, calculators, and hardware diagnostics designed for autonomous LLM agents and human developers.",
   "homepage": "https://toolkitgen.com",
-  "totalTools": 147,
-  "generatedAt": "2026-11-20T10:19:49.930Z",
+  "totalTools": 148,
+  "generatedAt": "2026-11-20T10:37:44.115Z",
   "tools": [
     {
       "id": "advanced_search_operator_builder",
@@ -2946,6 +2946,77 @@
         {
           "q": "What causes uneven frame pacing on consoles or PCs?",
           "a": "Uneven frame pacing occurs when frames are rendered at alternating durations (such as 16.6ms followed by 33.3ms), or when the game's internal frame limiter does not align with the display's vertical refresh interval. Proper frame-rate caps or Variable Refresh Rate (VRR) stabilize delivery intervals."
+        }
+      ],
+      "clientSideOnly": true,
+      "noServerUploads": true
+    },
+    {
+      "id": "framerate_judder_pacing_test",
+      "name": "Frame Rate Judder & Pacing Test",
+      "title": "Frame Rate Judder, 40 FPS Pacing & Display Refresh Test | Toolkit Gen",
+      "description": "Benchmark display motion judder and frame pacing: test 30 FPS vs 40 FPS vs 60 FPS raster sweeps, detect 120Hz refresh rates, calculate cadence dividers, and diagnose OLED stutter.",
+      "category": "Games & Interactive",
+      "url": "https://toolkitgen.com/tool/framerate_judder_pacing_test",
+      "tags": [
+        "framerate judder test",
+        "40 fps 120hz test",
+        "oled stutter test",
+        "vrr lfc test",
+        "frame pacing benchmark",
+        "display refresh rate test",
+        "motion judder test"
+      ],
+      "features": [
+        "Real-Time Quad-Cadence Motion Sweep (30 FPS, 40 FPS, 60 FPS, and Native Refresh)",
+        "Sub-Millisecond Browser Refresh Rate and Frame Delta Jitter Telemetry",
+        "Display Cadence Divider Calculator (Integer Ratios vs 3:2 Pulldown Judder)",
+        "HDMI 2.1 VRR 48Hz Hardware Floor and LFC (Low Framerate Compensation) Evaluator",
+        "OLED Sample-and-Hold Retinal Stutter versus Motion Blur Visualizer",
+        "Console and Television Display Calibration Troubleshooting Checklist"
+      ],
+      "howTo": [
+        {
+          "name": "Connect Your Gaming Display",
+          "text": "Open this diagnostic on your PC, laptop, or console browser connected to your gaming monitor or television."
+        },
+        {
+          "name": "Observe Quad-Cadence Motion Bars",
+          "text": "Track the moving raster bars with your eyes. Compare the perceived stepping and jitter between 30 FPS, 40 FPS, 60 FPS, and native display refresh."
+        },
+        {
+          "name": "Check Hardware Telemetry",
+          "text": "Inspect the live FPS and frame-time delta metrics to verify whether your operating system and browser deliver true 60Hz or 120Hz pacing."
+        },
+        {
+          "name": "Calculate Display Cadence Dividers",
+          "text": "Select your game target frame rate and display refresh rate in the cadence calculator to see if the frame times divide evenly or induce pulldown judder."
+        },
+        {
+          "name": "Evaluate VRR and LFC Boundaries",
+          "text": "Toggle the VRR option to inspect whether your target framerate falls inside the native 48Hz-120Hz window or triggers Low Framerate Compensation."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Why does 30 FPS look choppy on OLED televisions compared to older LCDs?",
+          "a": "OLED pixels possess near-instantaneous response times (under 0.1 ms GtG), whereas older LCD panels exhibited 5 to 15 ms of liquid crystal transition blur. On sample-and-hold OLED displays, each 30 FPS frame remains completely static for 33.3 milliseconds before instantly stepping to the next position. Because your retina tracks continuous motion across the screen, this instant stepping creates high-contrast retinal judder. The older LCD panel's slow response time created natural motion blur that masked this stepping [Confirmed: Blur Busters, DisplayMate]."
+        },
+        {
+          "q": "Why do 40 FPS console modes require a 120Hz display?",
+          "a": "On a standard 60Hz display, 40 FPS does not divide evenly: 60 divided by 40 equals 1.5 display refreshes per frame. The television must alternate between holding a frame for 1 refresh (16.67 ms) and 2 refreshes (33.33 ms), creating severe rhythmic 3:2 judder. On a 120Hz display, 120 divided by 40 equals exactly 3.0 refreshes per frame. Every frame is displayed for precisely 25.0 milliseconds in an even 1:1:1 integer cadence, eliminating judder while saving ~33% GPU render budget compared to 60 FPS [Confirmed: Sony Interactive Entertainment, Digital Foundry]."
+        },
+        {
+          "q": "What is the HDMI 2.1 VRR 48Hz floor and what is LFC?",
+          "a": "Standard HDMI 2.1 Variable Refresh Rate (VRR) modules operate within a hardware frequency window of 48 Hz to 120 Hz. When a game's frame rate drops below 48 FPS (such as a 30 FPS title), the display cannot match the frame rate 1:1. The console and display engage Low Framerate Compensation (LFC), which multiplies frames (e.g. duplicating 30 FPS frames twice to refresh at 60 Hz). On OLED televisions, rapid transitions across the 48Hz boundary can cause slight gamma luminance shifts perceived as near-black flicker."
+        },
+        {
+          "q": "Can a web browser diagnose what a PS5 or Xbox outputs directly over HDMI?",
+          "a": "No. A web browser running on a PC, Mac, or smartphone cannot intercept raw HDMI video signals output from an external console. This diagnostic benchmarks the physical panel's local motion cadence, display refresh synchronization, and browser rendering pipeline to verify your screen's motion reproduction characteristics."
+        },
+        {
+          "q": "Why does my 120Hz or 144Hz screen report 60Hz in this browser test?",
+          "a": "Common causes include: (1) Operating system display settings defaulted to 60Hz; (2) The connected HDMI or DisplayPort cable does not meet High Speed or Ultra High Speed bandwidth specifications; (3) Browser hardware acceleration is disabled; (4) On Apple Safari for iOS, the 'Prefer Page Rendering Updates near 60fps' feature flag is active by default in Settings."
         }
       ],
       "clientSideOnly": true,

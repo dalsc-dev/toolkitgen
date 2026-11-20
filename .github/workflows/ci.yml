@@ -39,6 +39,11 @@ jobs:
       - name: Check Corporate Copy Standards
         run: pnpm run check:copy
 
+      - name: Sync Astro Types
+        run: pnpm exec astro sync
+        env:
+          ASTRO_TELEMETRY_DISABLED: 1
+
       - name: Typecheck TypeScript (Strict)
         run: pnpm exec tsc --noEmit
 

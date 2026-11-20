@@ -19,8 +19,8 @@ export const GET: APIRoute = async () => {
   ];
 
   // Categories
-  const categories = Array.from(new Set(tools.map((t) => t.data.category)));
-  const categoryUrls = categories.map((cat) => ({
+  const categories: string[] = Array.from(new Set(tools.map((t) => t.data.category)));
+  const categoryUrls = categories.map((cat: string) => ({
     loc: `${site}/category/${cat.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
     lastmod,
     priority: '0.7',

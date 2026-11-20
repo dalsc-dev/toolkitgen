@@ -54,6 +54,17 @@ const REDIRECTS: Record<string, string> = {
   '/sitemap.html': '/sitemap',
 };
 
+const GONE_ROUTES = new Set([
+  '/tool/background_remover_ai',
+  '/tool/image_compressor_converter',
+  '/tool/ocr_image_to_text',
+  '/tool/pdf_compressor',
+  '/tool/pdf_merge_reorder',
+  '/tool/pdf_metadata_remover',
+  '/tool/pdf_split_pages',
+  '/tool/whisper_audio_transcriber',
+]);
+
 const SECURITY_HEADERS: Record<string, string> = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
   'X-Content-Type-Options': 'nosniff',
@@ -74,6 +85,18 @@ export default {
       return Response.redirect(`${url.origin}${cleanPath}${url.search}`, 301);
     }
 
+    // 410 Gone for permanently removed commodity tools
+    if (GONE_ROUTES.has(pathname)) {
+      return new Response('410 Gone - This utility has been permanently removed.', {
+        status: 410,
+        statusText: 'Gone',
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+          'X-Robots-Tag': 'noindex, nofollow',
+        },
+      });
+    }
+
     // Direct 301 redirects
     if (REDIRECTS[pathname]) {
       return Response.redirect(`${url.origin}${REDIRECTS[pathname]}`, 301);
@@ -85,25 +108,29 @@ export default {
     }
 
     // Fetch static asset
-    const response = await env.ASSETS.fetch(request);
+    try {
+      const response = await env.ASSETS.fetch(request);
 
-    // Clone response and attach corporate-grade security headers
-    const newHeaders = new Headers(response.headers);
-    for (const [key, val] of Object.entries(SECURITY_HEADERS)) {
-      newHeaders.set(key, val);
+      // Clone response and attach corporate-grade security headers
+      const newHeaders = new Headers(response.headers);
+      for (const [key, val] of Object.entries(SECURITY_HEADERS)) {
+        newHeaders.set(key, val);
+      }
+
+      // Immutable caching for hashed assets
+      if (pathname.startsWith('/_astro/') || pathname.startsWith('/assets/')) {
+        newHeaders.set('Cache-Control', 'public, max-age=31536000, immutable');
+      } else if (response.headers.get('content-type')?.includes('text/html')) {
+        newHeaders.set('Cache-Control', 'public, max-age=0, must-revalidate');
+      }
+
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: newHeaders,
+      });
+    } catch {
+      return new Response('404 Not Found', { status: 404, statusText: 'Not Found' });
     }
-
-    // Immutable caching for hashed assets
-    if (pathname.startsWith('/_astro/') || pathname.startsWith('/assets/')) {
-      newHeaders.set('Cache-Control', 'public, max-age=31536000, immutable');
-    } else if (response.headers.get('content-type')?.includes('text/html')) {
-      newHeaders.set('Cache-Control', 'public, max-age=0, must-revalidate');
-    }
-
-    return new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: newHeaders,
-    });
   },
 };

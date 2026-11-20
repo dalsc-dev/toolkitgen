@@ -353,7 +353,11 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
           <ToolCTA
             title={`Run ${cleanName}`}
             description="Calculations execute directly in your browser with local data processing."
-            buttonText="Begin Calibration"
+            buttonText={
+              category.toLowerCase().includes('calibration') || cleanName.toLowerCase().includes('calibration')
+                ? 'Begin Calibration'
+                : 'Launch Tool'
+            }
             targetId="tool-app-stage"
           />
 

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 async function runHangGuard() {
-  console.log('Running Hang-Guard CI Verification across all 132 tools...');
+  console.log('Running Hang-Guard CI Verification across all tools...');
 
   const toolFiles = fs.readdirSync('dist/tool').filter(f => f.endsWith('.html'));
   console.log(`Discovered ${toolFiles.length} built tool pages in dist/tool/`);

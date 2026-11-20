@@ -63,4 +63,4 @@ if (violations.length > 0) {
   process.exit(1);
 }
 
-console.log('Performance Budget Gate: 100% PASSED (All 132 tools within budget)');
+console.log(`Performance Budget Gate: 100% PASSED (All ${totalChecked} tools within budget)`);

@@ -127,7 +127,17 @@ const jsonLd = {
         If you voluntarily opt in to browser push notifications through Webpushr, a unique browser push token is registered to deliver utility updates. Push notification scripts are loaded only after your explicit confirmation. You can unsubscribe at any time via your browser settings.
       </p>
 
-      <h2 class="text-2xl font-bold text-slate-900">7. Your Privacy Rights (GDPR &amp; CCPA/CPRA)</h2>
+      <h2 class="text-2xl font-bold text-slate-900">7. Content Delivery Networks &amp; Client-Side Model Hosts</h2>
+      <p class="text-slate-700 leading-relaxed">
+        For select complex utilities requiring specialized binary parsers or optical character recognition (such as PDF manipulation via pdf-lib or on-device OCR via Tesseract), open-source libraries and model weights are retrieved on demand from public Content Delivery Networks (including <code>cdn.jsdelivr.net</code> and <code>cdnjs.cloudflare.com</code>).
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li><strong>On-Demand Loading:</strong> Model assets and helper scripts are downloaded only upon explicit user action (such as clicking Start Recognition), never on initial page load.</li>
+        <li><strong>Local Device Processing:</strong> Downloaded model weights are executed locally in your browser memory or Web Worker. Your files are processed on your device. The model is downloaded once from cdn.jsdelivr.net and cached locally using the browser Cache API.</li>
+        <li><strong>Browser Cache API:</strong> Downloaded model files are stored locally in your browser so subsequent executions require zero network bandwidth and operate completely offline.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">8. Your Privacy Rights (GDPR &amp; CCPA/CPRA)</h2>
       <p class="text-slate-700 leading-relaxed">
         Under the California Consumer Privacy Act (CCPA) and the EU General Data Protection Regulation (GDPR):
       </p>
@@ -137,7 +147,7 @@ const jsonLd = {
         <li><strong>We Do Not Sell Personal Information:</strong> Toolkit Gen never sells, rents, or monetizes user personal data or tool inputs.</li>
       </ul>
 
-      <h2 class="text-2xl font-bold text-slate-900">8. Contact Us Regarding Privacy</h2>
+      <h2 class="text-2xl font-bold text-slate-900">9. Contact Us Regarding Privacy</h2>
       <p class="text-slate-700 leading-relaxed">
         If you have questions, comments, or data rights requests concerning this Privacy Policy, contact our Data Privacy officer directly at:
       </p>

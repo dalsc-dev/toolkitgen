@@ -45,3 +45,4 @@
 /blog/* / 301
 /sitemap.html /sitemap 301
 /tool/zfs_capacity_calc /tool/zfs_raid_calculator 301
+/tool/console_storage_calculator /tool/console_storage_planner 301

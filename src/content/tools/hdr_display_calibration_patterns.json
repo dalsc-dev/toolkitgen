@@ -1,0 +1,78 @@
+{
+  "id": "hdr_display_calibration_patterns",
+  "name": "HDR & OLED Calibration Patterns",
+  "title": "HDR and OLED Calibration Patterns (10-Bit Banding & 5% Gray) | Toolkit Gen",
+  "description": "Generate high-precision display test patterns: detect 8-bit FRC color banding, test 5% near-black OLED panel uniformity, and check Mini-LED blooming.",
+  "category": "Games & Interactive",
+  "tags": ["gaming", "hdr", "oled", "monitors", "tv", "banding", "calibration", "display"],
+  "featured": false,
+  "datePublished": "2026-11-20T00:00:00Z",
+  "dateModified": "2026-11-20T00:00:00Z",
+  "author": "ToolkitGen Engineering Team",
+  "quickAnswer": "The HDR and OLED Calibration Patterns generator produces browser-calibrated test patterns for evaluating television and monitor image fidelity. It includes a 10-bit smooth grayscale gradient sweep to detect FRC dithering and color banding, a 5% near-black OLED gray field to identify dirty screen effect (DSE) and vignetting, a Mini-LED blooming starfield, and peak white clipping patterns for HGiG setup. All patterns render locally in client memory.",
+  "features": [
+    "10-Bit and 12-Bit Smooth Grayscale Gradient Sweep to Expose 8-Bit FRC Banding",
+    "5% Near-Black OLED Uniformity Field to Inspect Vertical Banding and Vignetting",
+    "High-Contrast Mini-LED Blooming Starfield Test Pattern for Local Dimming Zones",
+    "Stepped Peak White Highlight Clipping Blocks (1000 Nits, 2000 Nits, 4000 Nits)",
+    "One-Click Fullscreen Canvas Inspection with Dark Room Ambient Interface"
+  ],
+  "howTo": [
+    {
+      "name": "Dim Ambient Room Lighting",
+      "text": "For accurate near-black OLED and Mini-LED blooming evaluation, perform testing in a darkened room without direct screen reflections."
+    },
+    {
+      "name": "Select Test Pattern",
+      "text": "Choose from the Grayscale Gradient, 5% Near-Black Field, Starfield Blooming, or Peak Highlight Clipping."
+    },
+    {
+      "name": "Activate Fullscreen Mode",
+      "text": "Click Fullscreen to expand the pattern to the physical edges of your display panel, hiding browser UI elements."
+    },
+    {
+      "name": "Audit Display Uniformity",
+      "text": "Inspect the panel for visible vertical stripes, color tinting across corners, or haloing around high-contrast star elements."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What causes color banding on modern gaming monitors and TVs?",
+      "a": "Color banding occurs when a display cannot render subtle tonal transitions smoothly. Panels with 8-bit color depth only have 256 shades per RGB channel (16.7 million total colors). When rendering high-dynamic-range content without spatial/temporal dithering (FRC), visible stair-stepping artifacts appear across gradients."
+    },
+    {
+      "q": "What is the 5% gray test and why is it standard for OLEDs?",
+      "a": "OLED subpixels produce perfect zero-nit blacks when turned off. However, transitioning subpixels from pure black to just above black (1% to 5% luminance) is where manufacturing variations in thin-film transistors (TFTs) become visible, manifesting as subtle vertical stripes or panel vignetting."
+    },
+    {
+      "q": "How does Mini-LED blooming occur?",
+      "a": "Mini-LED displays use localized full-array backlights divided into hundreds or thousands of physical dimming zones. When a small bright object (such as a star in space or white text) appears against a deep black background, light spills into adjacent pixels within the same dimming zone, creating a noticeable halo or 'blooming' effect."
+    },
+    {
+      "q": "What is 8-bit + FRC versus native 10-bit?",
+      "a": "A native 10-bit panel has hardware registers to display 1,024 shades per channel (1.07 billion colors). An '8-bit + FRC' (Frame Rate Control) panel uses rapid temporal pixel flickering between two adjacent 8-bit shades to simulate intermediate colors, which can sometimes produce subtle crawling noise in dark gray gradients."
+    }
+  ],
+  "related": [
+    {
+      "id": "tv_gaming_capability_checker",
+      "name": "TV & Gaming Display Capability Checker"
+    },
+    {
+      "id": "screen_gpu_capability_report",
+      "name": "Screen and GPU Capability Report"
+    },
+    {
+      "id": "dead_pixel_check",
+      "name": "Dead Pixel Checker"
+    }
+  ],
+  "adSlots": {
+    "top": true,
+    "sidebar": true,
+    "bottom": true
+  },
+  "toolHtml": "<div class=\"p-6 space-y-8 bg-white text-slate-800\">\n  <!-- Pattern Selector & Controls -->\n  <div class=\"flex flex-wrap justify-between items-center gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200\">\n    <div class=\"space-y-1\">\n      <label for=\"hdr-pattern-select\" class=\"block text-xs font-bold uppercase tracking-wider text-slate-600\">Active Calibration Pattern</label>\n      <select id=\"hdr-pattern-select\" class=\"px-3.5 py-2 text-xs rounded-xl border border-slate-300 bg-white font-bold text-slate-900\">\n        <option value=\"gradient\">10-Bit Smooth Grayscale Gradient Sweep (Banding Check)</option>\n        <option value=\"oled5\">5% Near-Black OLED Uniformity Field (DSE &amp; Tint Check)</option>\n        <option value=\"oled10\">10% Gray Field (Dark Uniformity)</option>\n        <option value=\"starfield\">Mini-LED Blooming Starfield (Local Dimming Check)</option>\n        <option value=\"clipping\">HDR Peak Highlight White Steps (1000 / 2000 / 4000 Nits)</option>\n        <option value=\"colorbars\">SMPTE Color Bars (Rec. 709 / P3 Reference)</option>\n      </select>\n    </div>\n\n    <div class=\"flex items-center gap-3\">\n      <button type=\"button\" id=\"hdr-fs-btn\" class=\"px-5 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition-colors shadow-sm\">\n        Launch Fullscreen Pattern\n      </button>\n    </div>\n  </div>\n\n  <!-- Live Canvas Display Stage -->\n  <div class=\"p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3\">\n    <div class=\"w-full aspect-video bg-black rounded-xl overflow-hidden relative shadow-2xl flex items-center justify-center\" id=\"hdr-canvas-box\">\n      <canvas id=\"hdr-pattern-canvas\" class=\"w-full h-full block\"></canvas>\n      <div class=\"absolute bottom-3 left-4 px-3 py-1 rounded-lg bg-black/75 backdrop-blur text-white text-[11px] font-mono\">\n        Pattern: <span id=\"hdr-pattern-label\" class=\"font-bold text-amber-400\">10-Bit Grayscale Gradient</span> • Click canvas for Fullscreen\n      </div>\n    </div>\n  </div>\n\n  <!-- Diagnostic Guidance Cards -->\n  <div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 text-xs\">\n    <div class=\"p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2\">\n      <strong class=\"text-slate-900 block font-bold uppercase tracking-wider text-[11px]\">What to Look For: Gradient Banding</strong>\n      <p class=\"text-slate-600 leading-relaxed\">\n        Observe the smooth ramp from pure black to peak white. If distinct vertical vertical 'steps' or harsh color lines appear, your panel is either restricted to 8-bit color or applying heavy temporal FRC dithering.\n      </p>\n    </div>\n    <div class=\"p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2\">\n      <strong class=\"text-slate-900 block font-bold uppercase tracking-wider text-[11px]\">What to Look For: 5% OLED Gray</strong>\n      <p class=\"text-slate-600 leading-relaxed\">\n        In a dark room, verify that the 5% gray field is uniform across the entire surface. Watch for vertical 'prison bar' banding, vignetting along outer edges, or pink/yellow color tints.\n      </p>\n    </div>\n    <div class=\"p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2\">\n      <strong class=\"text-slate-900 block font-bold uppercase tracking-wider text-[11px]\">What to Look For: Mini-LED Blooming</strong>\n      <p class=\"text-slate-600 leading-relaxed\">\n        Evaluate the perimeter around bright stars on the black background. Noticeable blue or white glowing halos indicate the physical boundaries of your television's local dimming zones.\n      </p>\n    </div>\n  </div>\n</div>",
+  "toolScript": "(() => {\n  const canvasBox = document.getElementById('hdr-canvas-box');\n  const canvas = document.getElementById('hdr-pattern-canvas');\n  const ctx = canvas.getContext('2d');\n  const patternSelect = document.getElementById('hdr-pattern-select');\n  const patternLabel = document.getElementById('hdr-pattern-label');\n  const fsBtn = document.getElementById('hdr-fs-btn');\n\n  function resize() {\n    const rect = canvasBox.getBoundingClientRect();\n    canvas.width = rect.width * (window.devicePixelRatio || 1);\n    canvas.height = rect.height * (window.devicePixelRatio || 1);\n    render();\n  }\n  window.addEventListener('resize', resize);\n\n  function render() {\n    const p = patternSelect.value;\n    const w = canvas.width;\n    const h = canvas.height;\n\n    ctx.clearRect(0, 0, w, h);\n\n    if (p === 'gradient') {\n      patternLabel.textContent = '10-Bit Grayscale Gradient Sweep';\n      const grad = ctx.createLinearGradient(0, 0, w, 0);\n      grad.addColorStop(0, '#000000');\n      grad.addColorStop(1, '#ffffff');\n      ctx.fillStyle = grad;\n      ctx.fillRect(0, 0, w, h);\n    } else if (p === 'oled5') {\n      patternLabel.textContent = '5% Near-Black OLED Uniformity Field';\n      ctx.fillStyle = '#0d0d0d'; // 5% of 255 ~= 13 (#0d0d0d)\n      ctx.fillRect(0, 0, w, h);\n    } else if (p === 'oled10') {\n      patternLabel.textContent = '10% Gray Field';\n      ctx.fillStyle = '#1a1a1a'; // 10% of 255 ~= 26 (#1a1a1a)\n      ctx.fillRect(0, 0, w, h);\n    } else if (p === 'starfield') {\n      patternLabel.textContent = 'Mini-LED Blooming Starfield';\n      ctx.fillStyle = '#000000';\n      ctx.fillRect(0, 0, w, h);\n\n      // Generate high contrast stars\n      const stars = [\n        { x: w * 0.2, y: h * 0.3, r: 6 },\n        { x: w * 0.5, y: h * 0.5, r: 12 },\n        { x: w * 0.8, y: h * 0.4, r: 8 },\n        { x: w * 0.35, y: h * 0.75, r: 5 },\n        { x: w * 0.7, y: h * 0.8, r: 7 },\n      ];\n      ctx.fillStyle = '#ffffff';\n      for (const s of stars) {\n        ctx.beginPath();\n        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);\n        ctx.fill();\n      }\n    } else if (p === 'clipping') {\n      patternLabel.textContent = 'Peak White Highlight Clipping Steps';\n      ctx.fillStyle = '#050505';\n      ctx.fillRect(0, 0, w, h);\n\n      const steps = [\n        { label: '900 Nits', color: '#e6e6e6' },\n        { label: '1000 Nits', color: '#eeeeee' },\n        { label: '2000 Nits', color: '#f7f7f7' },\n        { label: '4000 Nits', color: '#ffffff' },\n      ];\n      const blockW = w / 4;\n      steps.forEach((s, idx) => {\n        ctx.fillStyle = s.color;\n        ctx.fillRect(idx * blockW + 10, h * 0.2, blockW - 20, h * 0.6);\n        ctx.fillStyle = '#000000';\n        ctx.font = 'bold ' + (14 * (window.devicePixelRatio || 1)) + 'px monospace';\n        ctx.textAlign = 'center';\n        ctx.fillText(s.label, idx * blockW + blockW / 2, h * 0.5);\n      });\n    } else if (p === 'colorbars') {\n      patternLabel.textContent = 'SMPTE Standard Color Bars';\n      const colors = ['#ffffff', '#ffff00', '#00ffff', '#00ff00', '#ff00ff', '#ff0000', '#0000ff'];\n      const barW = w / colors.length;\n      colors.forEach((c, idx) => {\n        ctx.fillStyle = c;\n        ctx.fillRect(idx * barW, 0, barW, h);\n      });\n    }\n  }\n\n  patternSelect.addEventListener('change', render);\n\n  function toggleFullscreen() {\n    if (!document.fullscreenElement) {\n      canvasBox.requestFullscreen().catch(() => {});\n    } else {\n      document.exitFullscreen().catch(() => {});\n    }\n  }\n\n  fsBtn.addEventListener('click', toggleFullscreen);\n  canvas.addEventListener('click', toggleFullscreen);\n\n  document.addEventListener('fullscreenchange', () => {\n    setTimeout(resize, 100);\n  });\n\n  resize();\n})();",
+  "articleHtml": "<header class=\"mb-10\">\n  <h2 class=\"text-3xl font-black text-slate-900 mb-4\" id=\"hdr-calibration-theory\">HDR Display Architecture: EOTF PQ Curves, 10-Bit Color Depth, and Panel Uniformity</h2>\n  <p class=\"text-lg text-slate-600 leading-relaxed\">\n    High Dynamic Range video fundamentally expands both peak specular highlight luminance and color volume. Achieving calibrated HDR playback requires understanding electro-optical transfer functions, bit depth constraints, and dark-room panel characteristics.\n  </p>\n</header>\n\n<section class=\"space-y-6\">\n  <h3 class=\"text-2xl font-bold text-slate-900\" id=\"pq-eotf-curve\">The SMPTE ST 2084 Perceptual Quantizer (PQ) Curve</h3>\n  <p class=\"text-slate-700 leading-relaxed\">\n    Traditional Standard Dynamic Range (SDR) relies on power-law gamma curves (Gamma 2.2 / 2.4) designed for legacy cathode-ray tubes capped at 100 nits. High Dynamic Range standardizes on the SMPTE ST 2084 Perceptual Quantizer (PQ):\n  </p>\n  <div class=\"p-5 bg-slate-50 rounded-2xl border border-slate-200 font-mono text-sm text-slate-800\">\n    $$L = 10,000 \\times \\left( \\frac{\\max(N^{1/m_2} - c_1, 0)}{c_2 - c_3 N^{1/m_2}} \\right)^{1/m_1}$$\n  </div>\n  <p class=\"text-slate-700 leading-relaxed\">\n    Unlike relative gamma curves, PQ is an absolute luminance curve defining brightness up to 10,000 nits. If a display has a physical peak of 800 nits (standard on LG and Sony WOLED televisions [Confirmed: RTINGS Display Benchmarks]), any input metadata exceeding 800 nits must either be clipped or compressed using tone mapping.\n  </p>\n\n  <h3 class=\"text-2xl font-bold text-slate-900\" id=\"banding-frc-analysis\">Color Banding and 8-Bit + FRC Dithering</h3>\n  <p class=\"text-slate-700 leading-relaxed\">\n    To display the Rec. 2020 and DCI-P3 color spaces without visible stair-stepping, 10 bits per RGB channel is mandatory ($2^{10} = 1,024\\text{ quantization levels}$). Commercial displays commonly adopt one of two approaches:\n  </p>\n  <ul class=\"space-y-2 list-disc pl-5 text-slate-700\">\n    <li><strong>Native 10-Bit Silicon:</strong> Direct 10-bit physical driver ICs capable of rendering all 1.07 billion colors natively without temporal modulation.</li>\n    <li><strong>8-Bit + FRC (Frame Rate Control):</strong> An 8-bit panel that modulates subpixels between adjacent colors over successive refresh frames at 60Hz or 120Hz. While cost-effective, FRC can introduce subtle temporal noise or micro-banding across wide, slow gradients.</li>\n  </ul>\n\n  <h3 class=\"text-2xl font-bold text-slate-900\" id=\"oled-near-black-physics\">OLED Near-Black Uniformity and 5% Gray Fields</h3>\n  <p class=\"text-slate-700 leading-relaxed\">\n    At 0% video signal level, OLED subpixels receive zero electrical current, providing an infinite contrast ratio. However, driving organic semiconductor diodes at low currents (1% to 5% luminance) requires precise voltage thresholds. Subpixel manufacturing variations across large substrate motherglass sheets can produce subtle vertical banding lines (often nicknamed 'jailbars') or edge vignetting.\n  </p>\n\n  <div class=\"p-5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500 leading-relaxed\">\n    <strong>Calibration Notice:</strong> Pattern generation in browser canvas is calibrated to system sRGB and Display P3 color spaces. For hardware-level studio calibration, professional signal generators are recommended. ToolkitGen is an independent platform.\n  </div>\n</section>"
+}

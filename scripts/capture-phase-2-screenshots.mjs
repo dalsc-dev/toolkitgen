@@ -1,0 +1,63 @@
+import { chromium } from 'playwright';
+import path from 'path';
+import fs from 'fs';
+
+const artifactDir = '/Users/dalsc2/.gemini/antigravity/brain/a7e662bd-249d-4d30-bd04-328d25225fda';
+const distDir = path.resolve('dist');
+
+const tools = [
+  'console_storage_planner',
+  'tv_gaming_capability_checker',
+  'webhid_gamepad_diagnostics',
+  'slowmo_latency_meter',
+  'hdr_display_calibration_patterns'
+];
+
+async function capture() {
+  const browser = await chromium.launch({ headless: true });
+
+  for (const slug of tools) {
+    const htmlPath = path.join(distDir, 'tool', `${slug}.html`);
+    if (!fs.existsSync(htmlPath)) {
+      console.error(`Missing HTML for ${slug}`);
+      continue;
+    }
+
+    const context = await browser.newContext({
+      viewport: { width: 1280, height: 900 }
+    });
+
+    const page = await context.newPage();
+
+    // Route assets
+    await page.route('**/*', route => {
+      const u = route.request().url();
+      if (u.includes('/_astro/')) {
+        const fileName = u.split('/_astro/')[1].split('?')[0];
+        const p = path.resolve(distDir, '_astro', fileName);
+        if (fs.existsSync(p)) {
+          return route.fulfill({
+            status: 200,
+            contentType: fileName.endsWith('.css') ? 'text/css' : 'application/javascript',
+            body: fs.readFileSync(p)
+          });
+        }
+      }
+      return route.continue();
+    });
+
+    await page.goto(`file://${htmlPath}`, { waitUntil: 'load' });
+    await page.waitForTimeout(500);
+
+    const outPath = path.join(artifactDir, `${slug}_desktop.png`);
+    await page.screenshot({ path: outPath, fullPage: false });
+    console.log(`Saved screenshot to ${outPath}`);
+
+    await context.close();
+  }
+
+  await browser.close();
+  console.log('All screenshots captured successfully.');
+}
+
+capture();

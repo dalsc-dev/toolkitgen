@@ -1,0 +1,201 @@
+# ToolkitGen
+
+> Free, high-performance browser-based tools, calculators, and hardware diagnostics. Every tool executes client-side in browser memory with no server uploads.
+
+## Documentation & AI Manifests
+- [Machine-Readable Tools Registry](https://toolkitgen.com/tools.json): JSON catalog of all tools, capabilities, parameters, and input/output contracts.
+- [Full Documentation Manifest](https://toolkitgen.com/llms-full.txt): Comprehensive technical descriptions, feature specifications, and procedures.
+- [XML Sitemap Index](https://toolkitgen.com/sitemap-index.xml): Authoritative index of all static tool and guide endpoints.
+
+## Developer / Data
+- [Crontab Generator & Visualizer](https://toolkitgen.com/tool/cron_job_visualizer): The Logic of Cron: Mastering the Pulse of Unix Automation In the intricate infrastructure of Unix-based systems, Cron is the heartbeat of the machine.
+- [cURL to Fetch, Axios, Node & Python Converter](https://toolkitgen.com/tool/curl_to_fetch_axios): Convert cURL commands to modern JavaScript Fetch API, Axios, Node.js, and Python Requests. Parses methods, headers, and payloads with local browser parsing.
+- [HAR File Sanitizer and Filter](https://toolkitgen.com/tool/har_sanitizer_viewer): Sanitize HTTP Archive HAR files by removing cookies, authorization tokens, and API keys locally in your browser before sharing support bundles.
+- [Local LLM VRAM Calculator](https://toolkitgen.com/tool/llm_vram_calculator): Calculate exact VRAM memory requirements for running local LLMs: analyze model weights, quantization formats (Q4_K_M, Q8, FP16), and KV cache context length.
+- [Online LaTeX Equation Editor](https://toolkitgen.com/tool/latex_equation_editor): Typesetting: Why LaTeX Defines Modern Science In the high-stakes world of academic publishing and scientific research, clarity is the primary currency.
+- [Probability Distribution Calculator](https://toolkitgen.com/tool/statistical_dist_plot): Uncertainty: A Masterclass in Probability Modeling Randomness is not chaos; it is a clinical structure governed by deterministic mathematical laws.
+- [Regex Visualizer & Debugger](https://toolkitgen.com/tool/regex_flowchart_gen): The Architecture of Patterns: A Masterclass in Regular Expression Logic Regular Expressions, or Regex , are the mathematical language of pattern recognition.
+- [Screenshot Secret Redactor & Scanner](https://toolkitgen.com/tool/screenshot_secret_scanner): Detect and redact API keys, tokens, credentials, and sensitive private data in pasted screenshots using client-side canvas masks.
+- [Search Query Formatter](https://toolkitgen.com/tool/advanced_search_operator_builder): Mastering search engine indexing algorithms, deterministic boolean query filters, Google Hacking Database (GHDB) dorking, and OSINT investigative techniques.
+- [SQLite WASM Explorer & In-Browser SQL Sandbox](https://toolkitgen.com/tool/sqlite_wasm_explorer): Inspect SQLite .db databases, run custom queries, and export results to CSV/JSON in your browser. Powered by WebAssembly with local file processing.
+- [Text Token Usage Calculator](https://toolkitgen.com/tool/text_token_reducer): The Token Economy: Mastering LLM Context Efficiency In the era of Generative AI, Large Language Models (LLMs) like GPT-4, Claude 3.
+
+## Crypto / Security
+- [Browser Configuration Analyzer](https://toolkitgen.com/tool/browser_fingerprint_id): Can Be Tracked Without Cookies For decades, the public's understanding of digital tracking was confined to the "Cookie"—a small text file saved in the browser.
+- [Data Anonymization Tool](https://toolkitgen.com/tool/data_anonymizer_local): The Sovereign Data Standard: Mastering Local PII Anonymization for GDPR and HIPAA In the information economy, data is often compared to oil.
+- [File Protection Utility](https://toolkitgen.com/tool/aes_gcm_vault_local): In an era of centralized surveillance and massive data breaches, the concept of Data Sovereignty has moved from a niche concern to a professional necessity.
+- [Invisible Image Watermarker](https://toolkitgen.com/tool/invisible_watermark_steno): Watermarking &amp; Steganography In an era of rampant content scraping and Generative AI, protecting your digital assets is no longer optional—it's essential.
+- [NDEF Tag Content Overwriter & Sanitizer](https://toolkitgen.com/tool/nfc_data_ghost_eraser): Sanitize and overwrite readable NDEF records on NFC tags using Web NFC in Chrome on Android. Overwrites user records; cannot format locked hardware sectors.
+- [Offline QR File Transfer](https://toolkitgen.com/tool/offline_qr_airgap): The Ultimate Guide to Air-Gapped Security: Optical Data Diodes In the realm of high-stakes cybersecurity, connectivity is a vulnerability.
+- [Password Strength Visual Analyzer](https://toolkitgen.com/tool/password_strength_visual_analyzer): Security Guide Understanding Shannon information theory, combinatorial search space explosion, GPU cluster brute-force metrics, and NIST SP 800-63B standards.
+- [Photo Metadata Cleaner](https://toolkitgen.com/tool/exif_data_scrubber): Every smartphone camera and modern DSLR embeds a complex metadata header known as EXIF (Exchangeable Image File Format) .
+- [Token Format Viewer](https://toolkitgen.com/tool/jwt_debugger_offline): Token Format Viewer: Validate, format, and debug configuration syntax, tokens, and data formats directly in your browser.
+
+## Camera / Sensor
+- [Camera Field of View Simulator](https://toolkitgen.com/tool/focal_length_sim): The Lens Field-of-View Sim on this Canvas platform is designed to provide a deterministic, mathematical preview of how light interacts with silicon.
+- [Eye Contact AI Trainer](https://toolkitgen.com/tool/eye_contact_tracker): Mastering Digital Gaze: How the Lens Focus Trainer Works In the age of Zoom calls and YouTube content, eye contact is the currency of trust.
+- [Eye Tracking Cognitive Load](https://toolkitgen.com/tool/eye_tracking_cognitive_load): Cognitive Load Your eyes don't just help you see—the way they move, blink, and focus provides remarkable insight into what's happening inside your brain.
+- [Face Age Detector](https://toolkitgen.com/tool/ai_face_age_scanner): Face Age Detector: Screen and track functional physiological indicators and ergonomics using standard device hardware.
+- [Magnetic Compass Anomaly & Stud Locator](https://toolkitgen.com/tool/magnetometer_metal_find): Locate ferromagnetic wall studs and magnetic anomalies using device compass sensors. Identifies field disturbances on mobile devices with magnetometer sensors.
+- [Online Stroboscope](https://toolkitgen.com/tool/stroboscope_tachometer): The Physics of Temporal Aliasing: A Masterclass in Stroboscopic Analysis Measurement in the physical world often requires a fixed frame of reference.
+- [Real-Time Emotion Detector](https://toolkitgen.com/tool/emotion_sentiment_cam): High-Precision Micro-Expression Mapping: How Local AI Resolves Human Sentiment Humans express emotions through subtle muscular shifts known as micro-expressions .
+- [Resistor Color Code Scanner](https://toolkitgen.com/tool/resistor_camera_id): Understanding Resistor Identification Resistors are the fundamental building blocks of electronics, used to control current flow.
+- [Webcam Heart Rate (rPPG)](https://toolkitgen.com/tool/webcam_heart_rate_ppg): Remote photoplethysmography (rPPG) captures these microscopic optical fluctuations using standard consumer webcams without touching your body.
+- [Webcam True FPS & Sensor Benchmark](https://toolkitgen.com/tool/webcam_hardware_fps_test): Shutter Latency Millions of remote workers, streamers, and students rely on webcams daily for Zoom meetings, Twitch broadcasting, and proctored examinations.
+
+## System / Network
+- [Docker Compose Validator](https://toolkitgen.com/tool/docker_compose_linter): YAML (Yet Another Markup Language), a data-serialization standard that prioritizes human readability but enforces a strict level of Significant Indentation .
+- [Internet Stability Test](https://toolkitgen.com/tool/wifi_speed_stability): The Physics of Lag: Why Speed is Not Stability Most users measure their internet health using a standard speed test.
+- [Manual AR Wi-Fi Heatmap Planner & Signal Drop Estimator](https://toolkitgen.com/tool/wifi_dead_zone_logger): Map domestic Wi-Fi coverage by plotting estimated signal drop across floor plans. Modern web browsers cannot read raw Wi-Fi RSSI or BSSID directly due to OS isolation.
+- [Productivity Time Analyzer](https://toolkitgen.com/tool/browser_history_analyzer): Attention Economy" treats your time as a harvestable commodity, understanding where your focus actually flows is the first step toward cognitive sovereignty .
+- [Universal 'AirDrop' (P2P WebRTC)](https://toolkitgen.com/tool/airdrop_web_universal): Universal 'AirDrop' (P2P WebRTC): Format, encrypt, and convert document data locally on your device with complete processing privacy.
+
+## Vision / Optometry
+- [Amsler Grid (Macular Degeneration)](https://toolkitgen.com/tool/amsler_grid_macular): Standard for Home Vision Screening Vision is arguably our most precious sense, yet conditions like Age-Related Macular Degeneration (AMD) can steal it silently.
+- [Blue Light Detector](https://toolkitgen.com/tool/blue_light_visualizer): The Science of Light Hygiene: Protecting Melatonin in a Digital World Humans evolved under the stable cycles of firelight and starlight.
+- [Color Blindness Simulator](https://toolkitgen.com/tool/color_blindness_sim): Designing for Color Vision Deficiency: Reclaiming Digital Inclusivity Over 300 million people globally—roughly 8% of the male population and 0.
+- [Contrast Sensitivity Function Test](https://toolkitgen.com/tool/contrast_sensitivity_function): Acuity: The Missing Half of Vision Standard ophthalmological exams rely almost universally on high-contrast letter charts (such as the Snellen or ETDRS chart).
+- [Duochrome Vision Balance Test](https://toolkitgen.com/tool/duochrome_vision_balance): The Physics of Color: Why Red and Green Reveal Your Prescription Chromatic aberration isn't just an optical defect — it's a diagnostic tool.
+- [Glasses PD Scanner](https://toolkitgen.com/tool/pupillary_distance_cam): Free online pupillary distance (pd) ruler online with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.
+- [Online Eye Chart](https://toolkitgen.com/tool/visual_acuity_snellen): The Complete Science of Visual Acuity: A Clinical Deep Dive Visual acuity is the fundamental metric of optical clarity.
+- [Screen Flicker & Rolling Shutter Banding Detector](https://toolkitgen.com/tool/pwm_flicker_eye_health_scanner): Detect visible OLED and LCD screen flicker and pulse-width modulation (PWM) using camera rolling shutter banding. Visual screening tool, not a photodiode meter.
+- [Visual Contrast Chart](https://toolkitgen.com/tool/astigmatism_fan_chart): Corneal Geometry: The Ultimate Guide to Astigmatism Astigmatism is a common vision condition caused by an irregularly shaped cornea or lens.
+
+## Audio / Sound
+- [Acoustic Earbud Seal & Sub-Bass Isolation Test](https://toolkitgen.com/tool/spatial_audio_seal_tester): Evaluate in-ear monitor (IEM) acoustic fit and sub-bass seal integrity using psychoacoustic 20Hz-60Hz audio sweeps and stereo phase cancellation tones.
+- [Audio Frequency Age Test](https://toolkitgen.com/tool/hearing_age_test): The Biological Clock of Sound: Why High Frequencies Fade First Hearing is our only sense that operates 24/7, even during deep sleep.
+- [Audio Frequency Response Test](https://toolkitgen.com/tool/hearing_audiogram_test): The Complete Science of Human Hearing: From Acoustics to Audiometry Hearing is one of the most sophisticated biological processes in nature.
+- [Audio Latency Test](https://toolkitgen.com/tool/audio_latency_loopback): Audio Latency Test: Analyze audio latency, acoustic spectra, and soundstage profiles with the Web Audio API in your browser.
+- [Audio to Text Transcriber](https://toolkitgen.com/tool/whisper_audio_transcriber): Transcribe audio recordings and speech locally in your browser with live playback synchronization, word timestamps, and SRT or VTT subtitle export.
+- [Audio Video Sync Test](https://toolkitgen.com/tool/av_sync_flash_tool): Monitor Latency In the high-fidelity world of professional video post-production, broadcast engineering, and gaming, synchronicity is the silent standard.
+- [Binaural Beat Brainwave Generator](https://toolkitgen.com/tool/binaural_beat_brainwave_gen): Free Binaural Beats: The Science of Brainwave Entrainment For thousands of years, monks and meditators used rhythm to alter consciousness.
+- [CPR Metronome (100-120 BPM) & Chest Pace Coach](https://toolkitgen.com/tool/cpr_metronome_bpm): American Heart Association (AHA) and ERC compliant 100-120 BPM audio metronome with visual pacing bar and 30:2 compression guide for hands-only CPR.
+- [Headphone Driver Rattle Test](https://toolkitgen.com/tool/headphone_driver_rattle_test): Harmonic Distortion A buzzing, rattling, or clicking sound in one ear of your headphones during bass-heavy music is one of the most frustrating acoustic defects.
+- [Left/Right Stereo Speaker Test](https://toolkitgen.com/tool/stereo_left_right_test): The Architecture of Auditory Space: A Masterclass in Stereo Calibration Sound is more than a series of vibrations—it is a geometric event.
+- [LUFS Meter for Streaming](https://toolkitgen.com/tool/lufs_loudness_meter): LUFS Meter for Streaming: Analyze audio latency, acoustic spectra, and soundstage profiles with the Web Audio API in your browser.
+- [Microphone Frequency Analyzer](https://toolkitgen.com/tool/mic_spectrum_analyzer): Real-Time Audio Spectrum Analysis Sound is more than what we hear—it is a measurable physical phenomenon governed by the laws of oscillation and pressure.
+- [Microphone Input Lag Test](https://toolkitgen.com/tool/mic_latency_loopback): Free online microphone latency loopback test with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.
+- [Noise Level Meter (Decibels)](https://toolkitgen.com/tool/noise_dosimeter_test): Guide to Occupational and Recreational Noise Safety Hearing damage is one of the most prevalent yet preventable health issues in the modern industrial world.
+- [Rhythm Synchronization Test](https://toolkitgen.com/tool/rhythm_synchronization_test): Why Some People Dance Better Than Others Have you ever wondered why some people can naturally keep perfect time while others struggle to clap along with music?
+- [Spatial Audio HRTF Simulator & Virtual Surround Calibrator](https://toolkitgen.com/tool/hrtf_spatial_audio_profiler): Simulate 3D spatial audio positioning and binaural room impulse responses using head-related transfer function models in the Web Audio API.
+- [Speaker Phase & Polarity Test](https://toolkitgen.com/tool/stereo_phase_test): Defines Your Auditory Fidelity Sound is more than volume; it is a physical interaction of air molecules controlled by the Geometric Phase of your speakers.
+- [Tone Frequency Matcher](https://toolkitgen.com/tool/tinnitus_frequency_matcher): Chronic Tinnitus Tinnitus is not a disease, but a biological symptom—a "phantom signal" generated by the auditory cortex in response to sensory deprivation.
+- [Typewriter Orchestra](https://toolkitgen.com/tool/beat_maker_typing): The Symphony of Syntax: Rhythmic Writing and Flow States Writing is often viewed as a purely intellectual exercise, yet it possesses an inherent physicality.
+- [Voice Pitch Analyzer](https://toolkitgen.com/tool/voice_pitch_monitor): Frequency Monitoring Whether you are a singer, a voiceover artist, or a public speaker, controlling your pitch is fundamental to effective communication.
+
+## Productivity / Office
+- [Image Background Remover](https://toolkitgen.com/tool/background_remover_ai): Remove image backgrounds locally in your browser using client-side segmentation with transparent PNG export, customizable tolerance, and preview.
+- [Image Compressor & Format Converter](https://toolkitgen.com/tool/image_compressor_converter): Compress and convert images between WebP, AVIF, JPEG, and PNG formats locally in your browser with customizable quality and instant byte savings.
+- [Image to Text OCR Extractor](https://toolkitgen.com/tool/ocr_image_to_text): Extract text from images, scans, and screenshots locally in your browser using optical character recognition with one-click copy and export.
+- [PDF Compressor & Size Reducer](https://toolkitgen.com/tool/pdf_compressor): Compress PDF files and optimize embedded images locally in your browser with custom DPI presets, instant size estimates, and zero remote uploads.
+- [PDF Merge and Reorder Tool](https://toolkitgen.com/tool/pdf_merge_reorder): Merge multiple PDF documents and reorder pages locally in your browser with instant client-side execution and zero data uploads to remote servers.
+- [PDF Metadata Remover & Sanitizer](https://toolkitgen.com/tool/pdf_metadata_remover): Sanitize PDF documents by stripping author, title, creation date, and software metadata locally in your browser before sharing or public release.
+- [PDF Split and Page Extractor](https://toolkitgen.com/tool/pdf_split_pages): Extract individual pages or split PDF files by custom ranges directly in your browser with private client-side processing and instant downloads.
+
+## Hardware / Diagnostics
+- [Battery Discharge & Drain Curve Monitor](https://toolkitgen.com/tool/battery_discharge_monitor): Track real-time battery percentage discharge rates, discharge duration estimates, and charging status using the Battery Status API in Chromium on Windows and Android.
+- [Bluetooth LE Device Scanner & GATT Explorer](https://toolkitgen.com/tool/web_bluetooth_scan): Discover nearby Bluetooth Low Energy peripherals and explore available GATT services and characteristics using Web Bluetooth in supported Chromium browsers.
+- [Bluetooth RSSI Signal Strength & Beacon Tracker](https://toolkitgen.com/tool/ble_rssi_meter): Track relative signal strength (RSSI) from advertising Bluetooth LE beacons in supported Chromium browsers to estimate proximity and locate nearby devices.
+- [Browser-Based GPU Stress & Thermal Test](https://toolkitgen.com/tool/gpu_thermal_throttling_test): Down It is a common scenario for gamers and creative professionals: you launch a demanding application, and for the first 15 minutes, performance is flawless.
+- [Gyroscope & Accelerometer Test](https://toolkitgen.com/tool/device_motion_logger): The Definitive Guide to Inertial Measurement Units (IMUs): Physics, Fusion, and Applications We live in an era defined by spatial awareness.
+- [Logic Gate Simulator](https://toolkitgen.com/tool/logic_gate_simulator): Logic Gate Simulator: Validate, format, and debug configuration syntax, tokens, and data formats directly in your browser.
+- [Online Gerber Viewer](https://toolkitgen.com/tool/gerber_file_viewer): Before a circuit board is etched, drilled, and populated with high-performance silicon, it exists in a purely mathematical state known as the Gerber format .
+- [SSD & Storage Speed Benchmark](https://toolkitgen.com/tool/ssd_speed_benchmark): IOPS Solid-State Drives (SSDs) and Non-Volatile Memory Express (NVMe) modules represent the single most impactful hardware upgrade for computer responsiveness.
+- [USB-C Power Delivery Sniffer & Protocol Simulator](https://toolkitgen.com/tool/usb_c_pd_negotiator_sniffer): Inspect USB-C Power Delivery contracts, VBUS voltages, and packet logs in your browser using Web Serial analyzer hardware or an interactive protocol simulator.
+- [Web Serial Terminal](https://toolkitgen.com/tool/web_serial_terminal): The Sovereign Engineer: Mastering Serial Communication in the Modern Web For decades, the serial port has been the umbilical cord of embedded engineering.
+- [Web-Haptic Feedback Vibration Designer](https://toolkitgen.com/tool/haptic_rhythm_designer): Mastering the Physics of Digital Touch: A Comprehensive Guide to Haptic Technology Welcome to the forefront of tactile design.
+- [WebGPU Compute & TFLOPs Benchmark](https://toolkitgen.com/tool/webgpu_compute_flops_benchmark): WebGPU Compute Architecture: GPGPU Shaders, FP32 TFLOPs, and Thermal Throttling Direct Answer: What is a WebGPU Compute Benchmark?
+- [WebGPU VRAM & Thermal Stability Stressor](https://toolkitgen.com/tool/webgpu_vram_thermal_check): Silicon: Why Your Laptop Slows Down Modern computing hardware is a miracle of miniaturization, packing desktop-class power into ultrathin chassis.
+
+## Brain / Cognition
+- [ADHD Focus Dashboard](https://toolkitgen.com/tool/flow_state_dashboard): Free online flow state focus dashboard with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.
+- [Digital Dementia Risk Screening](https://toolkitgen.com/tool/digital_dementia_risk_test): The Cognitive Cost of Our Connected World In an age where smartphones are virtually attached to our hands, a concerning phenomenon has emerged: digital dementia .
+- [Focus Reading Assistant](https://toolkitgen.com/tool/bionic_reading_engine): Reading Hacks the Neuro-Auditory Loop For decades, we have treated reading as a passive, linear process—a slow march of the eyes across a wall of uniform text.
+- [User Interface Hell](https://toolkitgen.com/tool/dark_pattern_simulator): Free online dark pattern ui simulator with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.
+
+## Productivity / Utility
+- [Black-Scholes Options Greeks & Volatility Matrix](https://toolkitgen.com/tool/black_scholes_heatmap): Calculate Black-Scholes European call/put pricing, Delta, Gamma, Theta, and Vega across strike and expiration surfaces with CSV volatility export.
+- [Bulk Certificate & PDF Editor](https://toolkitgen.com/tool/bulk_certificate_generator): Best Practices Generating certificates or custom reports for dozens of recipients is a standard task for modern businesses, educators, and community organizers.
+- [LLM Prompt Engineering Builder](https://toolkitgen.com/tool/prompt_template_builder): Large Language Model (LLM) , where the quality of your career, business, and education is increasingly dictated by the quality of your instructions.
+- [Map Data Visualizer](https://toolkitgen.com/tool/google_takeout_visualizer): The Digital Ghost: Deciphering the Metadata of Your Life For anyone with a smartphone, privacy is a series of trade-offs.
+- [Options Strategy Builder](https://toolkitgen.com/tool/option_strategy_builder): Blueprint: Mastering the Options Strategy Architect Options trading is often described as a 3D chess match against time, volatility, and price direction.
+- [Personal Finance & Business Suite](https://toolkitgen.com/tool/finance_suite_local): Personal Finance & Business Suite: Calculate investment schedules, cash flow valuations, and tax impacts with precise in-browser formulas.
+- [Printer Test Page Generator](https://toolkitgen.com/tool/printer_test_sheet): Diagnostic Science A printer is not merely an output device; it is a complex intersection of fluid dynamics , precision mechanics , and chromatic chemistry .
+- [Text to Speech Preview](https://toolkitgen.com/tool/screen_reader_sim): Proofreader: Why Listening to Your Writing is the Ultimate Editing Hack When we read our own writing, our brain performs an act of "predictive completion.
+
+## Wellness / Biofeedback
+- [AI Posture Corrector](https://toolkitgen.com/tool/posture_guard_ai): Posture Analysis Posture is not merely a physical state; it is a dynamic interaction between your skeletal structure, proprioception, and digital environment.
+- [Breathing Assessment Suite](https://toolkitgen.com/tool/breathing_coherence_trainer): Direct Clinical Definition The Breathing Assessment Suite provides two validated clinical respiratory diagnostics: (1) 0.
+- [Hand Tremor Stability Analyzer](https://toolkitgen.com/tool/hand_tremor_stability): Hand Tremors: Biomechanics, Classification, and Digital Screening Hand tremors are rhythmic, involuntary oscillatory movements of one or more body parts.
+- [HRV Biofeedback Trainer](https://toolkitgen.com/tool/hrv_biofeedback_trainer): HRV) represents one of the most important biomarkers for understanding your body's response to stress, recovery capacity, and overall cardiovascular health.
+- [IV Drip Rate Tapper / Calculator](https://toolkitgen.com/tool/iv_drip_rate_tapper): This guide details the foundational formulas, drop factor classifications, and best practice verification steps for nurses, paramedics, and clinical students.
+- [Wellness & Bio-Tracking Dashboard](https://toolkitgen.com/tool/health_metrics_dashboard): Calculate Mean Arterial Pressure (MAP), cumulative sleep debt, vagal resonance pacing, and body fat percentage locally in your browser.
+
+## Developer / Security
+- [C2PA Content Credentials Viewer](https://toolkitgen.com/tool/c2pa_metadata_viewer): Inspect C2PA Content Credentials, verify cryptographic provenance manifests, and detect AI-generated image source assertions locally.
+- [X.509 Certificate Decoder & Validator](https://toolkitgen.com/tool/x509_certificate_decoder): Decode PEM and DER SSL/TLS X.509 certificates locally. Inspect SANs, validity expiration, ASN.1 structures, and calculate SHA-256 fingerprints.
+
+## Everyday / Fun
+- [Communication History Graph](https://toolkitgen.com/tool/chat_timeline_visualizer): The Digital Pulse: A Comprehensive Guide to Chat Analytics and Relationship Data Communication is the foundational currency of any human connection.
+- [Instagram Follower Insights](https://toolkitgen.com/tool/ig_follower_insights): Safely Check Who Unfollowed You on Social Media (Free Tool) We have all been there: your follower count drops, and you are left wondering, "Who unfollowed me?
+- [Random Name Picker](https://toolkitgen.com/tool/mandi_chest_lucky_picker): Free online random name and item picker for fair giveaways, team selections, raffles, and group decisions. Runs locally in your browser.
+- [The CMYK Master](https://toolkitgen.com/tool/color_mixer_challenge): The CMYK Master: Format, encrypt, and convert document data locally on your device with complete processing privacy.
+- [The Ring Size Matcher](https://toolkitgen.com/tool/ring_size_calibrator): Conversion, and Buying Online Buying jewelry online offers endless variety, but it comes with a singular, persistent challenge: getting the fit right.
+- [The Wikipedia Racer](https://toolkitgen.com/tool/wiki_speed_racer): The Science of Six Degrees: Mastering the Wiki Race The Wiki Speed Racer is not merely a game; it is an interactive demonstration of Small-World Network Theory .
+- [Watch & Bracelet Sizer](https://toolkitgen.com/tool/wrist_watch_visualizer): Watch & Bracelet Sizer: Format, encrypt, and convert document data locally on your device with complete processing privacy.
+- [Where on Earth?](https://toolkitgen.com/tool/satellite_view_guesser): The Art of Geo-Deduction: Reading the Planet from Above For most of human history, geography was an abstract concept represented by hand-drawn lines on paper.
+- [Your Life in Numbers](https://toolkitgen.com/tool/life_stats_dashboard): Mathematics of Existence: Visualizing Time and Biology We measure our lives in years, but our bodies measure time in beats, breaths, and cellular regeneration.
+
+## Games & Interactive
+- [Console Storage Planner](https://toolkitgen.com/tool/console_storage_planner): Plan console SSD capacity, calculate available internal storage, and verify game installation fit across PlayStation and Xbox systems.
+- [Frame Time Calculator](https://toolkitgen.com/tool/frame_time_calculator): Convert frame rates to frame times, calculate frame budget tolerances, and evaluate 1% low and 0.1% low pacing stability.
+- [Game Download Time Calculator](https://toolkitgen.com/tool/game_download_time_calculator): Calculate download duration, transfer rates, and ISP data allowance impact for console and PC games based on bandwidth and network overhead.
+- [Gamepad Button & Input Tester](https://toolkitgen.com/tool/gamepad_button_input_tester): Test gamepad buttons, analog stick deadzones, trigger travel, and polling rate in your browser with the Gamepad API.
+- [Gamepad Drift & Input Diagnostic Suite](https://toolkitgen.com/tool/webhid_gamepad_diagnostics): Comprehensive controller diagnostics: measure analog stick drift, circularity error, centering jitter, trigger pressure curves, and export warranty RMA scorecards.
+- [HDR & OLED Calibration Patterns](https://toolkitgen.com/tool/hdr_display_calibration_patterns): Generate high-precision display test patterns: detect 8-bit FRC color banding, test 5% near-black OLED panel uniformity, and check Mini-LED blooming.
+- [Slow-Motion Video Input Lag Meter](https://toolkitgen.com/tool/slowmo_latency_meter): Measure end-to-end display latency and controller input lag using smartphone slow-motion video recordings with frame-by-frame timestamp analysis.
+- [TV & Gaming Display Capability Checker](https://toolkitgen.com/tool/tv_gaming_capability_checker): Test television and monitor gaming capabilities: detect real-time 60Hz and 120Hz refresh rates, inspect HDR dynamic range, verify HDMI 2.1 bandwidth, and calibrate HGiG game settings.
+- [TV Game Mode & Input Lag Tester](https://toolkitgen.com/tool/tv_game_mode_input_lag_tester): Benchmark perceived display latency, verify 60Hz and 120Hz frame pacing, and calibrate television Game Mode and ALLM settings.
+
+## Display / Screen
+- [Backlight Bleed Test](https://toolkitgen.com/tool/monitor_backlight_bleed): Most modern LCDs—including IPS, VA, and TN panels—rely on a background lighting array that must be filtered through layers of liquid crystals and polarizers.
+- [Critical Flicker Fusion Threshold](https://toolkitgen.com/tool/flicker_fusion_threshold): The Speed of Sight: Understanding Flicker Fusion Everything you see is actually a series of snapshots your brain assembles into continuous motion.
+- [Dead Pixel Checker](https://toolkitgen.com/tool/dead_pixel_check): Resource The Forensic Science of Display Defects: A Comprehensive Guide to Dead and Stuck Pixels A modern 4K monitor contains exactly 8,294,400 pixels.
+- [Display Color Gamut Visualizer](https://toolkitgen.com/tool/display_color_gamut_visualizer): Free online display gamut visualizer (srgb) with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.
+- [Monitor Calibration Tool](https://toolkitgen.com/tool/monitor_gamma_calibrator): Perception: A Master Guide to Monitor Calibration and Gamma Ramps A display is a window into a digital reality, but that window is rarely clean out of the box.
+- [Monitor Refresh Rate Test](https://toolkitgen.com/tool/monitor_refresh_tester): The Pursuit of Fluidity: A Masterclass in Refresh Rates and Motion Artifacts In the digital era, the monitor is our primary window into virtual reality.
+- [OLED Burn-In Remover](https://toolkitgen.com/tool/oled_burn_in_fixer): Organic Light Emitting Diode) technology represents the pinnacle of visual reproduction, offering infinite contrast ratios and near-instantaneous response times.
+- [OLED Screen Uniformity Test](https://toolkitgen.com/tool/oled_burnin_protector): Panel Lottery: A Scientific Guide to OLED Diagnostics OLED (Organic Light Emitting Diode) technology represents the current pinnacle of consumer display science.
+- [On-Screen Ruler](https://toolkitgen.com/tool/screen_pixel_ruler): Precision: Mastering the Pixel Perfect UI Audit In the high-bandwidth world of modern frontend development, Consistency is the silent architect of user trust.
+- [Online LUT Previewer](https://toolkitgen.com/tool/lut_previewer_webgl): Mastering 3D Look-Up Tables (LUTs) In the professional world of cinematography and high-end photography, color is not a byproduct—it is a narrative instrument.
+- [Sensor Dust Checker](https://toolkitgen.com/tool/sensor_dust_visualizer): How to Check for Sensor Dust (The Right Way) Every time you change a lens, your camera sensor is exposed to the elements.
+- [Stuck Pixel Fixer](https://toolkitgen.com/tool/dead_pixel_strobe): Fix a Stuck Pixel: The Ultimate Guide A modern digital display is a microscopic grid containing millions of individual transistors and liquid crystal shutters.
+- [The Screen Ruler](https://toolkitgen.com/tool/monitor_dead_zone_ruler): Your Screen Needs a Ruler: The Guide to Digital Measurement In an increasingly digital world, the bridge between the physical and the virtual is often blurred.
+- [Video Flashing Test (Epilepsy)](https://toolkitgen.com/tool/seizure_flash_check): A Masterclass in Photosensitive Diagnostics For approximately 3% of individuals living with epilepsy, the digital world is a minefield of potential triggers.
+
+## Display / Graphics
+- [Frame-Time CSV Benchmark Analyzer](https://toolkitgen.com/tool/frametime_csv_analyzer): Analyze PresentMon and CapFrameX CSV logs to calculate average FPS, 1% lows, 0.1% lows, and micro-stutter variance with interactive visual graphs.
+- [Screen and GPU Capability Report](https://toolkitgen.com/tool/screen_gpu_capability_report): Inspect display resolution, refresh rate, HDR color gamut, WebGL, WebGPU, and hardware video codecs directly in your browser with instant export.
+
+## Gaming / Input
+- [Don't Spill The Coffee](https://toolkitgen.com/tool/gyro_balance_challenge): Research • Updated May 2024 Your smartphone is more than just a communication device; it is a pocket-sized physics laboratory equipped with sophisticated sensors.
+- [Game Ping Test & Jitter](https://toolkitgen.com/tool/game_ping_stability_test): Game Ping Test & Jitter: Format, encrypt, and convert document data locally on your device with complete processing privacy.
+- [Gamepad & Stick Drift Tester](https://toolkitgen.com/tool/gamepad_drift_visualizer): The Physics of Precision: A Masterclass in Controller Drift and Axis Geometry In the digital domain, "drift" is the silent killer of competitive performance.
+- [Keyboard Ghosting Test](https://toolkitgen.com/tool/nkey_rollover_tester): A Scientific Analysis of N-Key Rollover (NKRO) In the high-latency landscape of digital communication, the keyboard is the primary biological-to-digital bridge.
+- [Keyboard Latency Test](https://toolkitgen.com/tool/keyboard_latency_test): The Physics of Presence: A Masterclass in Input Latency In the digital domain, "lag" is the primary friction point between human intent and machine execution.
+- [Mechanical Keyboard Chatter Detector](https://toolkitgen.com/tool/keyboard_chatter_detector): Mechanical Keyboard Chatter Detector: Measure monitor latency, input drift, and peripheral hardware metrics using high-frequency browser APIs.
+- [Mouse Polling Rate Test (Hz) & Jitter Benchmark](https://toolkitgen.com/tool/mouse_polling_rate_hz): Measure mouse polling rate in Hz, track interval jitter, and verify USB-IF stability thresholds. Runs locally in your browser with exportable reports.
+- [Mouse True DPI & CPI Deviation Benchmark](https://toolkitgen.com/tool/mouse_dpi_deviation_analyzer): The Science of Mouse CPI Deviation, Optical Sensor Focal Planes, and Angle Snapping Direct Answer: What is Mouse CPI Deviation?
+- [Phone Vibration Test](https://toolkitgen.com/tool/vibration_motor_test): A Masterclass in Haptic Engineering and Diagnostic In the digital ecosystem, haptics serve as the only physical handshake between a user and their machine.
+- [Pro Controller 'Snap-Back' & Jitter Map](https://toolkitgen.com/tool/gamepad_snapback_diagnostic): Pro Controller 'Snap-Back' & Jitter Map: Measure monitor latency, input drift, and peripheral hardware metrics using high-frequency browser APIs.
+- [Scream to Jump](https://toolkitgen.com/tool/voice_controlled_platformer): Strategy of Audio-Input Gaming Traditional gaming has always relied on tactile feedback—the press of a button, the flick of a joystick, or the swipe of a screen.
+- [Touchpad 'Dead Zone' & Gesture Heatmap](https://toolkitgen.com/tool/touchpad_gesture_heatmap): Guide to Touchpad Diagnostics: Dead Zones, Ghost Touches, and Jitter A malfunctioning touchpad or mouse can ruin your workflow and make gaming impossible.
+
+## Health & Biometrics
+- [Long Gaming Session Planner](https://toolkitgen.com/tool/long_gaming_session_planner): Structure extended gaming sessions with 20-20-20 visual rest intervals, scheduled hydration checkpoints, and ergonomic stretch routines.
+
+## Input / Peripherals
+- [Mouse and Touchscreen Tester](https://toolkitgen.com/tool/mouse_touch_tester): Test mouse switches for double-click chatter, measure click speed CPS, inspect scroll wheel delta, and verify multi-touch input points locally.
+
+## Hardware / Storage
+- [ZFS RAID Capacity Calculator](https://toolkitgen.com/tool/zfs_raid_calculator): Calculate usable storage capacity, parity overhead, and 80% pool fill limits for ZFS RAIDZ1, RAIDZ2, RAIDZ3, and mirrors with vdev planning.

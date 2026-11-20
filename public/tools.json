@@ -5,7 +5,7 @@
   "description": "Structured index of client-side web utilities, calculators, and hardware diagnostics designed for autonomous LLM agents and human developers.",
   "homepage": "https://toolkitgen.com",
   "totalTools": 148,
-  "generatedAt": "2026-11-20T10:37:44.115Z",
+  "generatedAt": "2026-11-20T10:49:40.562Z",
   "tools": [
     {
       "id": "advanced_search_operator_builder",

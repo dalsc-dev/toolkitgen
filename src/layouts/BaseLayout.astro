@@ -117,9 +117,97 @@ const metaDescription = formatDescription(description);
 
   <!-- Zen Mode Initialization -->
   <script is:inline>
-    if (localStorage.getItem('tk_zen_mode') === 'true') {
-      document.documentElement.classList.add('zen-mode');
-    }
+    try {
+      if (localStorage.getItem('tk_zen_mode') === 'true') {
+        document.documentElement.classList.add('zen-mode');
+      }
+    } catch (e) {}
+  </script>
+
+  <!-- Shared AdSlot & Vignette Anti-Trap Watchdog -->
+  <script is:inline>
+    window.__initAdSlot = function(containerDomId) {
+      function initSlot() {
+        var container = document.getElementById(containerDomId);
+        if (!container) return;
+        var ins = container.querySelector('ins.adsbygoogle');
+        if (!ins || ins.getAttribute('data-adsbygoogle-status')) return;
+
+        function pushSlot() {
+          if (ins.getAttribute('data-adsbygoogle-status')) return true;
+          try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            return true;
+          } catch (e) {
+            return false;
+          }
+        }
+
+        if (typeof IntersectionObserver !== 'undefined') {
+          var io = new IntersectionObserver(function(entries) {
+            for (var i = 0; i < entries.length; i++) {
+              var entry = entries[i];
+              if (entry.isIntersecting && entry.boundingClientRect.width > 0) {
+                if (pushSlot()) {
+                  io.disconnect();
+                  break;
+                }
+              }
+            }
+          }, { rootMargin: '300px 0px' });
+          io.observe(container);
+        } else {
+          var defer = window.requestIdleCallback || function(cb) { setTimeout(cb, 1000); };
+          defer(function() { pushSlot(); });
+        }
+      }
+
+      var schedule = window.requestIdleCallback || function(cb) { setTimeout(cb, 500); };
+      if (document.readyState === 'complete') {
+        schedule(initSlot);
+      } else {
+        window.addEventListener('load', function() { schedule(initSlot); }, { once: true, passive: true });
+      }
+    };
+
+    // Google AdSense Vignette Anti-Trap Watchdog
+    (() => {
+      function dismissStuckVignette() {
+        if (window.location.hash.includes('google_vignette')) {
+          try {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          } catch (e) {}
+        }
+        const overlays = document.querySelectorAll('div[style*="z-index: 2147483647"], div[style*="z-index: 2000000000"]');
+        overlays.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.width >= window.innerWidth && rect.height >= window.innerHeight) {
+            const closeBtn = el.querySelector('[aria-label*="Close"], button, #dismiss-button');
+            if (!closeBtn) {
+              el.style.display = 'none';
+              el.style.pointerEvents = 'none';
+            }
+          }
+        });
+      }
+
+      window.addEventListener('hashchange', () => {
+        if (window.location.hash.includes('google_vignette')) {
+          setTimeout(dismissStuckVignette, 2000);
+        }
+      }, { passive: true });
+
+      if (window.location.hash.includes('google_vignette')) {
+        setTimeout(dismissStuckVignette, 2000);
+      }
+
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.href && link.href.includes('#google_vignette')) {
+          link.href = link.href.replace('#google_vignette', '');
+        }
+      }, { capture: true, passive: true });
+    })();
   </script>
 
   <!-- KaTeX CSS (loaded only when math is present) -->
@@ -150,9 +238,11 @@ const metaDescription = formatDescription(description);
   <CommandPalette />
 
   <script is:inline>
-    if (localStorage.getItem('tk_zen_mode') === 'true') {
-      document.body.classList.add('zen-mode');
-    }
+    try {
+      if (localStorage.getItem('tk_zen_mode') === 'true') {
+        document.body.classList.add('zen-mode');
+      }
+    } catch (e) {}
   </script>
 </body>
 </html>

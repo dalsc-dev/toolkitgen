@@ -34,7 +34,9 @@ interface Props {
   faq?: FAQItem[];
   howTo?: HowToStep[];
   related?: RelatedItem[];
-  allTools?: RelatedItem[];
+  hotTools?: RelatedItem[];
+  recommendedTool?: RelatedItem;
+  diagnosticTools?: RelatedItem[];
   datePublished?: string;
   dateModified?: string;
   hasMath?: boolean;
@@ -50,7 +52,9 @@ const {
   faq = [],
   howTo = [],
   related = [],
-  allTools = [],
+  hotTools = [],
+  recommendedTool,
+  diagnosticTools = [],
   datePublished = '2025-01-15T00:00:00Z',
   dateModified = '2026-11-19T00:00:00Z',
   hasMath = false,
@@ -93,39 +97,6 @@ const jsonLd = generateJsonLd({
     { name: cleanName, url: `/tool/${id}` },
   ],
 });
-
-// Compute Hot Right Now (2 tools)
-const hotTools = allTools
-  .filter((t) => t.id !== id)
-  .slice(0, 2);
-
-// Enrich related tools with full catalog details (category, description, title)
-const validRelated = related
-  .filter((t) => t.id !== id)
-  .map((r) => {
-    const match = allTools.find((t) => t.id === r.id);
-    return match
-      ? {
-          ...match,
-          ...r,
-          name: r.name || match.name,
-          category: r.category || match.category,
-          description: r.description || match.description,
-        }
-      : r;
-  });
-
-// Compute Recommended Tool (1 tool - strictly distinct from current tool)
-const recommendedTool = validRelated.length > 0
-  ? validRelated[0]
-  : allTools.find((t) => t.id !== id) || { id: 'sqlite_wasm_explorer', name: 'SQLite WASM Explorer', description: 'In-browser SQL sandbox and analyzer.', category: 'DevOps & Code' };
-
-// Compute Recommended Diagnostics (5 tools - strictly distinct from current tool and recommendedTool)
-const remainingRelated = validRelated.filter((t) => t.id !== recommendedTool.id);
-const fallbackTools = allTools.filter(
-  (t) => t.id !== id && t.id !== recommendedTool.id && !remainingRelated.some((r) => r.id === t.id)
-);
-const diagnosticTools = [...remainingRelated, ...fallbackTools].slice(0, 5);
 
 const encodedTitle = encodeURIComponent(cleanName);
 const encodedUrl = encodeURIComponent(canonicalUrl);

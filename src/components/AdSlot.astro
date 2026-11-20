@@ -56,48 +56,8 @@ const containerDomId = `ad-slot-${slotId}`;
   )}
 
   <script is:inline define:vars={{ containerDomId }}>
-    (function() {
-      function initSlot() {
-        var container = document.getElementById(containerDomId);
-        if (!container) return;
-        var ins = container.querySelector('ins.adsbygoogle');
-        if (!ins || ins.getAttribute('data-adsbygoogle-status')) return;
-
-        function pushSlot() {
-          if (ins.getAttribute('data-adsbygoogle-status')) return true;
-          try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-            return true;
-          } catch (e) {
-            return false;
-          }
-        }
-
-        if (typeof IntersectionObserver !== 'undefined') {
-          var io = new IntersectionObserver(function(entries) {
-            for (var i = 0; i < entries.length; i++) {
-              var entry = entries[i];
-              if (entry.isIntersecting && entry.boundingClientRect.width > 0) {
-                if (pushSlot()) {
-                  io.disconnect();
-                  break;
-                }
-              }
-            }
-          }, { rootMargin: '300px 0px' });
-          io.observe(container);
-        } else {
-          var defer = window.requestIdleCallback || function(cb) { setTimeout(cb, 1000); };
-          defer(function() { pushSlot(); });
-        }
-      }
-
-      var schedule = window.requestIdleCallback || function(cb) { setTimeout(cb, 500); };
-      if (document.readyState === 'complete') {
-        schedule(initSlot);
-      } else {
-        window.addEventListener('load', function() { schedule(initSlot); }, { once: true, passive: true });
-      }
-    })();
+    if (typeof window.__initAdSlot === 'function') {
+      window.__initAdSlot(containerDomId);
+    }
   </script>
 </div>

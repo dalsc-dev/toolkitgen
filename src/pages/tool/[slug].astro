@@ -22,25 +22,74 @@ export async function getStaticPaths() {
     };
   });
 
-  return tools.map((tool) => ({
-    params: { slug: tool.data.id },
-    props: { tool, allTools: catalogSummary },
-  }));
+  return tools.map((tool) => {
+    const id = tool.data.id;
+    const related = tool.data.related || [];
+    const hotTools = catalogSummary.filter((t) => t.id !== id).slice(0, 2);
+    const validRelated = related
+      .filter((r: any) => r.id !== id)
+      .map((r: any) => {
+        const match = catalogSummary.find((t) => t.id === r.id);
+        return match
+          ? {
+              ...match,
+              ...r,
+              name: r.name || match.name,
+              category: r.category || match.category,
+              description: r.description || match.description,
+            }
+          : r;
+      });
+
+    const recommendedTool = validRelated.length > 0
+      ? validRelated[0]
+      : catalogSummary.find((t) => t.id !== id) || {
+          id: 'sqlite_wasm_explorer',
+          name: 'SQLite WASM Explorer',
+          title: 'SQLite WASM Explorer | Toolkit Gen',
+          description: 'In-browser SQL sandbox and analyzer.',
+          category: 'DevOps & Code',
+        };
+
+    const remainingRelated = validRelated.filter((t: any) => t.id !== recommendedTool.id);
+    const fallbackTools = catalogSummary.filter(
+      (t) => t.id !== id && t.id !== recommendedTool.id && !remainingRelated.some((r: any) => r.id === t.id)
+    );
+    const diagnosticTools = [...remainingRelated, ...fallbackTools].slice(0, 5);
+
+    return {
+      params: { slug: tool.data.id },
+      props: { tool, hotTools, recommendedTool, diagnosticTools },
+    };
+  });
 }
 
 interface Props {
   tool: CollectionEntry<'tools'>;
-  allTools: Array<{
+  hotTools: Array<{
     id: string;
     name: string;
     title: string;
     category: string;
     description: string;
-    featured?: boolean;
+  }>;
+  recommendedTool: {
+    id: string;
+    name: string;
+    title: string;
+    category: string;
+    description: string;
+  };
+  diagnosticTools: Array<{
+    id: string;
+    name: string;
+    title: string;
+    category: string;
+    description: string;
   }>;
 }
 
-const { tool, allTools } = Astro.props;
+const { tool, hotTools, recommendedTool, diagnosticTools } = Astro.props;
 const {
   id,
   name,
@@ -80,7 +129,9 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
   faq={faq}
   howTo={howTo}
   related={related}
-  allTools={allTools}
+  hotTools={hotTools}
+  recommendedTool={recommendedTool}
+  diagnosticTools={diagnosticTools}
   datePublished={datePublished}
   dateModified={dateModified}
   hasMath={hasMath}

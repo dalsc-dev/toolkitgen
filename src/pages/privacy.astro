@@ -92,6 +92,7 @@ const jsonLd = {
         <li><strong>Theme Preferences:</strong> Remembering your Zen Mode dark display setting (<code>tk_zen_mode</code>).</li>
         <li><strong>Local Scratchpad:</strong> Storing your temporary notes and clipboard calculations locally (<code>tk_scratchpad</code>).</li>
         <li><strong>Consent Preferences:</strong> Remembering your cookie and tracking consent choices (<code>tg_cookie_consent_v2</code>).</li>
+        <li><strong>Support Prompt Dismissal:</strong> Remembering your preference to dismiss the voluntary developer support line (<code>tg_support_dismissed</code>).</li>
       </ul>
       <p class="text-slate-700 leading-relaxed">
         You can erase this information at any time by clearing your browser cache or site data for <code>toolkitgen.com</code>.
@@ -137,7 +138,18 @@ const jsonLd = {
         <li><strong>Browser Cache API:</strong> Downloaded model files are stored locally in your browser so subsequent executions require zero network bandwidth and operate completely offline.</li>
       </ul>
 
-      <h2 class="text-2xl font-bold text-slate-900">8. Your Privacy Rights (GDPR &amp; CCPA/CPRA)</h2>
+      <h2 class="text-2xl font-bold text-slate-900">8. Voluntary Support &amp; Payment Processing (PayPal)</h2>
+      <p class="text-slate-700 leading-relaxed">
+        If you voluntarily choose to support Toolkit Gen's development and infrastructure hosting via our <a href="/support" class="text-blue-600 underline">Support</a> page, transactions are handled exclusively on PayPal's hosted platform (<code>paypal.com</code>):
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-slate-700">
+        <li><strong>Zero Payment Data Storage:</strong> Toolkit Gen does not collect, receive, process, or store credit card numbers, debit card details, bank account credentials, or billing addresses.</li>
+        <li><strong>External Link Privacy:</strong> The outbound support link to PayPal is a standard HTML hyperlink (<code>rel="noopener noreferrer"</code>) that loads zero PayPal JavaScript SDKs, tracking pixels, or third-party cookies onto Toolkit Gen.</li>
+        <li><strong>PayPal's Privacy Statement:</strong> When you navigate to PayPal to complete a voluntary payment, your relationship and personal data are governed strictly by PayPal's independent Privacy Statement.</li>
+        <li><strong>Local Storage Preference:</strong> If you dismiss the voluntary support note on a tool page, a binary flag (<code>tg_support_dismissed</code>) is stored locally on your device in browser <code>localStorage</code> to respect your preference. It is never transmitted across the network.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-slate-900">9. Your Privacy Rights (GDPR &amp; CCPA/CPRA)</h2>
       <p class="text-slate-700 leading-relaxed">
         Under the California Consumer Privacy Act (CCPA) and the EU General Data Protection Regulation (GDPR):
       </p>
@@ -147,7 +159,7 @@ const jsonLd = {
         <li><strong>We Do Not Sell Personal Information:</strong> Toolkit Gen never sells, rents, or monetizes user personal data or tool inputs.</li>
       </ul>
 
-      <h2 class="text-2xl font-bold text-slate-900">9. Contact Us Regarding Privacy</h2>
+      <h2 class="text-2xl font-bold text-slate-900">10. Contact Us Regarding Privacy</h2>
       <p class="text-slate-700 leading-relaxed">
         If you have questions, comments, or data rights requests concerning this Privacy Policy, contact our Data Privacy officer directly at:
       </p>

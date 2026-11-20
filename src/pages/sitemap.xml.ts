@@ -16,6 +16,7 @@ export const GET: APIRoute = async () => {
     { loc: `${site}/privacy`, lastmod: '2026-11-19', priority: '0.5', changefreq: 'monthly' },
     { loc: `${site}/terms`, lastmod: '2026-11-19', priority: '0.5', changefreq: 'monthly' },
     { loc: `${site}/disclaimer`, lastmod: '2026-11-19', priority: '0.5', changefreq: 'monthly' },
+    { loc: `${site}/support`, lastmod: '2026-11-20', priority: '0.6', changefreq: 'monthly' },
     { loc: `${site}/sitemap`, lastmod: '2026-11-19', priority: '0.7', changefreq: 'weekly' },
   ];
 

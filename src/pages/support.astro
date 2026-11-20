@@ -1,0 +1,213 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import { PAYPAL_SUPPORT_URL, SUPPORT_CONFIG } from '../config/support';
+
+const canonicalUrl = 'https://toolkitgen.com/support';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': 'https://toolkitgen.com/support#webpage',
+      url: canonicalUrl,
+      name: 'Support Toolkit Gen | Voluntary Development & Hosting Contributions',
+      description: 'Support voluntary development and hosting for Toolkit Gen. Free client-side tools and calculators processed locally on your device with no server uploads.',
+      isPartOf: {
+        '@id': 'https://toolkitgen.com/#website',
+      },
+      inLanguage: 'en-US',
+      dateModified: '2026-11-20T00:00:00Z',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://toolkitgen.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Support',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Support Toolkit Gen | Free Browser-Based Tools & Diagnostics"
+  description="Support voluntary development and hosting for Toolkit Gen. Free client-side tools and calculators processed locally on your device with no server uploads."
+  canonical={canonicalUrl}
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Support Toolkit Gen', url: '/support' }]} />
+
+  <div class="max-w-4xl mx-auto space-y-12 py-6">
+    <header class="text-center space-y-4">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-orange-50 text-orange-800 border border-orange-200">
+        Voluntary Platform Sustainability
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+        Support Toolkit Gen
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        Toolkit Gen is an independent web utility platform built to provide fast, privacy-focused calculators, diagnostics, and developer tools that run directly in your browser.
+      </p>
+    </header>
+
+    <!-- Operating Costs Breakdown -->
+    <section class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-sm space-y-6">
+      <h2 class="text-2xl font-bold text-slate-900 tracking-tight">
+        What Your Support Pays For
+      </h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+        We believe useful technical utilities should be fast, private, and accessible to anyone without subscriptions, account registrations, or paywalls. All calculations run locally in your browser memory with no server uploads. Voluntary contributions directly fund our recurring technical operating costs:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+          <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+            Edge Compute &amp; Asset Hosting
+          </h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Covers global edge routing, SSL certification, DNS availability, and static asset distribution across Cloudflare serverless edge nodes.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+          <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+            Hardware &amp; Calibration Testing
+          </h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Funds physical test devices (DualSense and Xbox controllers, HDR10 and 120Hz displays, camera sensors) to verify WebHID and display calibration accuracy.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+          <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+            Algorithm Verification &amp; Research
+          </h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Ensures mathematical integrity by cross-referencing industry standards (ITU-R, VESA, NIST, IEEE) against unit test suites.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+          <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">
+            Ad-Lite Experience
+          </h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Voluntary funding allows us to maintain strict limits on digital advertising: zero popups, zero interstitial delays, zero autoplay audio, and no intrusive formats.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suggested Contribution Tiers -->
+    <section class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-sm space-y-8">
+      <div class="text-center space-y-2">
+        <h2 class="text-2xl font-bold text-slate-900 tracking-tight">
+          Voluntary Contribution Options
+        </h2>
+        <p class="text-sm text-slate-500">
+          Choose a suggested amount or enter any custom contribution directly on PayPal.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {SUPPORT_CONFIG.tiers.map((tier) => (
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-4 text-center">
+            <div class="space-y-2">
+              <span class="text-3xl font-black text-slate-900 font-mono">{tier.amount}</span>
+              <h3 class="text-sm font-bold text-slate-800">{tier.name}</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">{tier.description}</p>
+            </div>
+            <a
+              href={PAYPAL_SUPPORT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full inline-block py-2.5 px-4 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 font-bold text-xs hover:bg-slate-100 transition-colors shadow-2xs"
+            >
+              Contribute {tier.amount}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Main Action Callout -->
+      <div class="pt-4 text-center space-y-4">
+        <a
+          href={PAYPAL_SUPPORT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-[#EE6C4D] text-white font-black text-base hover:bg-[#d95a3b] transition-all shadow-sm hover:shadow-md cursor-pointer"
+        >
+          <span>Support via PayPal</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+        <p class="text-xs text-slate-400">
+          Opens PayPal in a new secure browser tab. No card data touches Toolkit Gen.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mandatory Non-Charity Disclaimers -->
+    <section class="bg-amber-50/60 rounded-3xl p-8 border border-amber-200/80 space-y-4">
+      <h3 class="text-base font-bold text-amber-950 uppercase tracking-wider">
+        Important Disclaimers &amp; Transparency
+      </h3>
+      <ul class="space-y-2 text-xs text-amber-900 leading-relaxed list-disc pl-5">
+        <li><strong>Voluntary Support:</strong> Contributions are strictly voluntary personal gifts towards hosting, hardware testing, and technical maintenance.</li>
+        <li><strong>Not a Charity:</strong> Toolkit Gen is an independent technology project and is not a registered 501(c)(3), non-profit, or charitable organization.</li>
+        <li><strong>Not Tax-Deductible:</strong> Support payments are not tax-deductible as charitable donations under any federal, state, or international tax code.</li>
+        <li><strong>No Perks or Paywalls:</strong> Contributions do not unlock premium features, private accounts, ad exemptions, or special access. Every tool on Toolkit Gen is completely free and accessible to all visitors.</li>
+        <li><strong>Secure Payment Processing:</strong> Payments are processed entirely on PayPal's hosted infrastructure. Toolkit Gen never receives, handles, or stores credit card numbers or financial account details.</li>
+      </ul>
+    </section>
+
+    <!-- Support FAQ -->
+    <section class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-sm space-y-6">
+      <h2 class="text-2xl font-bold text-slate-900 tracking-tight">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-4">
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5">
+          <h3 class="text-sm font-bold text-slate-900">Are contributions tax-deductible?</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            No. Toolkit Gen is an independent web publication and software utility project, not a registered charity or 501(c)(3) organization. Voluntary contributions cannot be claimed as tax-deductible charitable gifts.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5">
+          <h3 class="text-sm font-bold text-slate-900">Do I get access to special features or ad-free tools?</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            No. All tools on Toolkit Gen are 100% free and open for everyone. We do not maintain user accounts, memberships, paywalls, or gated tiers. Contributions are made purely to sustain public access.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5">
+          <h3 class="text-sm font-bold text-slate-900">What is the refund policy?</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Because support contributions are voluntary gifts towards operational server expenses, they are generally non-refundable once processed. However, if a payment was submitted in error or unauthorized, refunds are handled in accordance with PayPal's standard user agreements.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5">
+          <h3 class="text-sm font-bold text-slate-900">How is my payment privacy protected?</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            The support link routes directly to PayPal's external hosted site. No payment forms, credit card fields, or PayPal tracking scripts exist on Toolkit Gen. We receive zero payment credentials, and our outbound link sets zero tracking cookies.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

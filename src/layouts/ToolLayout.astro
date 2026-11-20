@@ -4,6 +4,7 @@ import Breadcrumbs from '@components/Breadcrumbs.astro';
 import AdSlot from '@components/AdSlot.astro';
 import ToolCTA from '@components/ToolCTA.astro';
 import Callout from '@components/Callout.astro';
+import SupportCallout from '@components/SupportCallout.astro';
 import { generateJsonLd } from '@lib/schema';
 
 interface FAQItem {
@@ -564,6 +565,9 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
         </a>
       </div>
     </div>
+
+    <!-- Subtle Post-Action Voluntary Support Line (Excludes medical & emergency tools) -->
+    <SupportCallout toolId={id} />
 
     <!-- Optional bottom manual ad unit (never above the tool) -->
     <AdSlot slotId="toolBottomBanner" />

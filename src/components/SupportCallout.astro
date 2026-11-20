@@ -1,0 +1,80 @@
+---
+import { isSupportCalloutAllowed } from '../config/support';
+
+interface Props {
+  toolId: string;
+}
+
+const { toolId } = Astro.props;
+const allowed = isSupportCalloutAllowed(toolId);
+---
+
+{allowed && (
+  <aside
+    id="tool-support-callout"
+    class="hidden my-6 py-3 px-4 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 flex items-center justify-between gap-4 transition-all"
+    aria-label="Voluntary developer support prompt"
+  >
+    <div class="flex items-center gap-2">
+      <span class="font-medium">Found this useful?</span>
+      <a
+        href="/support"
+        class="text-slate-900 hover:text-[#EE6C4D] font-bold underline underline-offset-2 transition-colors"
+      >
+        Support Toolkit Gen
+      </a>
+      <span class="text-slate-400 hidden sm:inline">&bull; Voluntary, non-charitable support to fund hosting</span>
+    </div>
+    <button
+      type="button"
+      id="btn-dismiss-support"
+      class="text-slate-400 hover:text-slate-700 p-1 text-base leading-none rounded hover:bg-slate-200/50 transition-colors cursor-pointer"
+      aria-label="Dismiss support prompt"
+      title="Dismiss"
+    >
+      &times;
+    </button>
+  </aside>
+
+  <script is:inline>
+    (function() {
+      try {
+        if (sessionStorage.getItem('tg_support_dismissed') || localStorage.getItem('tg_support_dismissed')) {
+          return;
+        }
+        var callout = document.getElementById('tool-support-callout');
+        var dismissBtn = document.getElementById('btn-dismiss-support');
+        if (!callout) return;
+
+        function showCallout() {
+          if (sessionStorage.getItem('tg_support_shown')) return;
+          sessionStorage.setItem('tg_support_shown', 'true');
+          callout.classList.remove('hidden');
+        }
+
+        if (dismissBtn) {
+          dismissBtn.addEventListener('click', function() {
+            callout.classList.add('hidden');
+            sessionStorage.setItem('tg_support_dismissed', 'true');
+            localStorage.setItem('tg_support_dismissed', 'true');
+          });
+        }
+
+        // Trigger on user copy event
+        document.addEventListener('copy', function() {
+          setTimeout(showCallout, 600);
+        }, { passive: true });
+
+        // Trigger on click of action buttons (copy, export, download, calculate, share)
+        var actionSelectors = ['[data-action="copy"]', '.btn-copy', '#btn-copy', '[id*="copy"]', '[id*="export"]', '[id*="download"]'];
+        actionSelectors.forEach(function(sel) {
+          document.querySelectorAll(sel).forEach(function(el) {
+            el.addEventListener('click', function() {
+              setTimeout(showCallout, 800);
+            }, { passive: true });
+          });
+        });
+      } catch (e) {}
+    })();
+  </script>
+)}

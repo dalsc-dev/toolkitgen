@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+
+const canonicalUrl = 'https://toolkitgen.com/thanks';
+---
+
+<BaseLayout
+  title="Thank You | Toolkit Gen"
+  description="Thank you for supporting Toolkit Gen development and hosting."
+  canonical={canonicalUrl}
+  noindex={true}
+>
+  <Breadcrumbs items={[{ name: 'Thank You', url: '/thanks' }]} />
+
+  <div class="max-w-2xl mx-auto py-16 px-4 text-center space-y-8">
+    <div class="w-16 h-16 mx-auto rounded-2xl bg-orange-50 border border-orange-200/90 text-[#EE6C4D] flex items-center justify-center shadow-xs" aria-hidden="true">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+
+    <div class="space-y-3">
+      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+        Thank You for Your Support!
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        Your voluntary contribution directly helps keep Toolkit Gen running fast, private, and freely available for developers, engineers, and everyday users worldwide.
+      </p>
+    </div>
+
+    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-500 leading-relaxed space-y-2 text-left">
+      <p class="font-bold text-slate-700">Receipt &amp; Payment Details</p>
+      <p>
+        Payment processing and receipts are delivered directly to your email address by PayPal. Toolkit Gen never receives or stores your credit card, bank, or billing information.
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+      <a
+        href="/tool"
+        class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-colors shadow-xs"
+      >
+        Explore All Tools
+      </a>
+      <a
+        href="/"
+        class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white border border-slate-300 text-slate-700 font-bold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
+      >
+        Return to Homepage
+      </a>
+    </div>
+  </div>
+</BaseLayout>

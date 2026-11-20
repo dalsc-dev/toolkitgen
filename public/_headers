@@ -6,6 +6,12 @@
   Permissions-Policy: camera=(self), microphone=(self), geolocation=(), accelerometer=*, gyroscope=*, magnetometer=*, unload=*
   Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.googlesyndication.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://cdn.webpushr.com https://*.google.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.googleadservices.com https://*.doubleclick.net https://ep2.adtrafficquality.google https://*.adtrafficquality.google blob: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self' https: wss: blob: data: https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://ep2.adtrafficquality.google https://*.adtrafficquality.google; worker-src 'self' blob:; frame-src 'self' https://googleads.g.doubleclick.net https://*.googlesyndication.com https://*.google.com https://*.doubleclick.net https://ep2.adtrafficquality.google https://*.adtrafficquality.google https://*.googleadservices.com; object-src 'none'; base-uri 'self';
 
+/thanks
+  X-Robots-Tag: noindex, nofollow
+
+/mywot73343469a463c45df71b.html
+  X-Robots-Tag: noindex, nofollow
+
 /sw.js
   Cache-Control: public, max-age=0, no-cache, must-revalidate
 

@@ -4,7 +4,7 @@
  * Zero external scripts or tracking SDKs are loaded.
  */
 
-export const PAYPAL_SUPPORT_URL = 'https://www.paypal.com/paypalme/toolkitgen';
+export const PAYPAL_SUPPORT_URL = 'https://paypal.me/dalscx';
 
 export const SUPPORT_CONFIG = {
   paypalUrl: PAYPAL_SUPPORT_URL,

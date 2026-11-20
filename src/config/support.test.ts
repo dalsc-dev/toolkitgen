@@ -4,7 +4,8 @@ import { PAYPAL_SUPPORT_URL, SUPPORT_CONFIG, isSupportCalloutAllowed } from './s
 describe('Voluntary Support Configuration', () => {
   it('defines a valid outbound PayPal URL without raw email exposure', () => {
     expect(PAYPAL_SUPPORT_URL).toBeDefined();
-    expect(PAYPAL_SUPPORT_URL).toMatch(/^https:\/\/(www\.)?paypal\.com\//);
+    expect(PAYPAL_SUPPORT_URL).toBe('https://paypal.me/dalscx');
+    expect(PAYPAL_SUPPORT_URL).toMatch(/^https:\/\/(www\.)?paypal\.(com|me)\//);
     // Ensure no raw email address is accidentally hardcoded as the URL
     expect(PAYPAL_SUPPORT_URL).not.toContain('@');
   });

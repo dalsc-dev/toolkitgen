@@ -4,8 +4,8 @@
   "version": "2.0.0",
   "description": "Structured index of client-side web utilities, calculators, and hardware diagnostics designed for autonomous LLM agents and human developers.",
   "homepage": "https://toolkitgen.com",
-  "totalTools": 148,
-  "generatedAt": "2026-11-20T10:49:40.562Z",
+  "totalTools": 150,
+  "generatedAt": "2026-11-20T10:58:16.215Z",
   "tools": [
     {
       "id": "advanced_search_operator_builder",
@@ -2892,6 +2892,73 @@
       "noServerUploads": true
     },
     {
+      "id": "foldable_display_posture_tester",
+      "name": "Foldable & Dual-Screen Device Posture Tester",
+      "title": "Foldable & Dual-Screen Device Posture Tester (Device Posture API) | Toolkit Gen",
+      "description": "Test foldable smartphones and dual-screen devices: inspect Device Posture API states (folded vs continuous), visualize CSS viewport segments, and test touch continuity across the crease.",
+      "category": "Display / Screen",
+      "url": "https://toolkitgen.com/tool/foldable_display_posture_tester",
+      "tags": [
+        "foldable screen tester",
+        "device posture api test",
+        "viewport segments visualizer",
+        "crease touch dead zone test",
+        "galaxy z fold test",
+        "pixel fold test",
+        "dual screen web test"
+      ],
+      "features": [
+        "Real-Time W3C Device Posture API State Tracking ('continuous' vs 'folded')",
+        "CSS Viewport Segments Level 1 Visualizer (env(viewport-segment-width 0 0), etc.)",
+        "Interactive Crease Continuity Drag Canvas for Touch Dead-Zone Detection",
+        "Book Mode, Laptop Mode, and Clamshell Dual-Pane Responsive Layout Simulator",
+        "Touch Coordinate Delta Jitter and Micro-Snap Diagnostic Scorecard",
+        "CSS Media Query Responsive Implementation Snippets for Web Developers"
+      ],
+      "howTo": [
+        {
+          "name": "Open on Foldable Hardware",
+          "text": "Open this diagnostic on your foldable smartphone (Galaxy Z Fold/Flip, Pixel Fold, OnePlus Open) or dual-screen device in Chromium/Edge."
+        },
+        {
+          "name": "Inspect Device Posture",
+          "text": "Partially bend your device's hinge (approx. 90 to 120 degrees). Observe the live posture indicator transition from 'Continuous' to 'Folded'."
+        },
+        {
+          "name": "Review Viewport Segments",
+          "text": "Inspect the visual screen schematic to confirm whether the browser reports dual viewport segments or a unified single plane."
+        },
+        {
+          "name": "Perform Crease Drag Test",
+          "text": "Drag your finger slowly back and forth across the physical crease inside the interactive canvas to benchmark digitizer continuity."
+        },
+        {
+          "name": "Check Touch Telemetry",
+          "text": "Review the touch smoothness score and coordinate jump metrics to verify that the digitizer layer does not drop touches over the hinge."
+        }
+      ],
+      "faq": [
+        {
+          "q": "What is the W3C Device Posture API?",
+          "a": "The W3C Device Posture API provides web applications with real-time access to the physical state of folding devices via navigator.devicePosture.type. It distinguishes between 'continuous' (when the device is laid flat as a single canvas) and 'folded' (when the physical hinge is angled, forming two distinct ergonomic planes such as Laptop Mode or Book Mode) [Confirmed: W3C Specification]."
+        },
+        {
+          "q": "What are CSS Viewport Segments?",
+          "a": "CSS Viewport Segments Level 1 introduces environment variables—such as env(viewport-segment-width 0 0) and env(viewport-segment-top 0 1)—that allow web developers to identify the exact pixel boundaries of each physical display region. This enables responsive designs that place navigation on one screen and content on the other without placing text directly across the physical hinge crease."
+        },
+        {
+          "q": "Why do some foldable screens develop touch dead zones along the crease?",
+          "a": "Foldable screens utilize Ultra-Thin Glass (UTG) laminated with flexible indium tin oxide (ITO) or silver nanowire touch digitizer matrices. Repeated mechanical bending over tens of thousands of cycles can cause microscopic fatigue along the central flex line, occasionally resulting in dropped touch packets, coordinate snapping, or high-resistance dead zones directly over the hinge."
+        },
+        {
+          "q": "Does Safari on iPhone support the Device Posture API?",
+          "a": "Because Apple has not yet released a commercial folding hardware device, WebKit currently treats the Device Posture API as unsupported and defaults to a planar 'continuous' viewport."
+        }
+      ],
+      "clientSideOnly": true,
+      "noServerUploads": true
+    },
+    {
       "id": "frame_time_calculator",
       "name": "Frame Time Calculator",
       "title": "Frame Time Calculator and 1% Low Analyzer | Toolkit Gen",
@@ -4368,6 +4435,73 @@
         {
           "q": "Does this tool work on mobile devices and tablets?",
           "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
+        }
+      ],
+      "clientSideOnly": true,
+      "noServerUploads": true
+    },
+    {
+      "id": "iphone_mobile_capability_report",
+      "name": "iPhone & Mobile Browser Capability Checker",
+      "title": "iPhone & Mobile Browser Capability Checker (ProMotion, DPR, Safe Areas) | Toolkit Gen",
+      "description": "Benchmark mobile browser display capabilities: test physical pixels vs CSS points, Display P3 color gamut, ProMotion 120Hz refresh rates, notch/safe-area insets, and Safari Web API support.",
+      "category": "Display / Screen",
+      "url": "https://toolkitgen.com/tool/iphone_mobile_capability_report",
+      "tags": [
+        "iphone capability test",
+        "promotion 120hz safari test",
+        "iphone screen resolution test",
+        "safe area insets visualizer",
+        "safari web api support test",
+        "display p3 color test",
+        "mobile browser benchmark"
+      ],
+      "features": [
+        "True Physical Resolution vs CSS Point Geometry Calculator with 2x and 3x DPR",
+        "Wide Color Gamut (Display P3) and High Dynamic Range (HDR) Media Query Detection",
+        "Real-Time ProMotion Refresh Rate Sampler with Safari 60fps Feature Flag Override Guide",
+        "Interactive Notch, Dynamic Island, and Home Indicator Safe-Area Inset Visualizer",
+        "Comprehensive Web API Compatibility Matrix (WebGPU, WebXR, WebHID, Web Bluetooth, OPFS)",
+        "Orientation Switching Simulator (Portrait vs Landscape Safe-Area Insets)"
+      ],
+      "howTo": [
+        {
+          "name": "Open on Mobile Device",
+          "text": "Navigate to this diagnostic page in Safari, Chrome, or Firefox on your iPhone, iPad, or Android device."
+        },
+        {
+          "name": "Inspect Screen Resolution & DPR",
+          "text": "Review the physical sensor pixels, CSS viewport coordinates, and device pixel ratio ($dpr$) card."
+        },
+        {
+          "name": "Verify ProMotion Refresh Rate",
+          "text": "Observe the real-time refresh rate gauge. If your device features a 120Hz ProMotion screen but reports 60Hz in Safari, follow the included feature flag override instructions."
+        },
+        {
+          "name": "Test Safe-Area Insets",
+          "text": "Inspect the visual safe-area container to confirm how your notch or Dynamic Island behaves under portrait and landscape orientations."
+        },
+        {
+          "name": "Audit Web API Support",
+          "text": "Scroll through the Web API scorecard to inspect which modern hardware APIs are natively supported, experimental, or blocked by WebKit."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Why does my 120Hz iPhone Pro display 60Hz in Safari?",
+          "a": "Apple WebKit intentionally throttles requestAnimationFrame to 60Hz in Safari on iOS to conserve battery life, even on devices equipped with 120Hz ProMotion displays (iPhone 13 Pro through 16 Pro). This limit is governed by the internal WebKit feature flag 'Prefer Page Rendering Updates near 60fps'. You can unlock full 120Hz web rendering by opening iOS Settings > Apps > Safari > Advanced > Feature Flags, toggling 'Prefer Page Rendering Updates near 60fps' to OFF, and restarting Safari [Confirmed: WebKit Bugzilla, Apple Developer]."
+        },
+        {
+          "q": "What is the difference between physical pixels and CSS points on iPhone?",
+          "a": "Physical pixels represent the microscopic organic light-emitting diode (OLED) sub-pixel clusters on the hardware glass. CSS points represent the logical coordinates used by web layouts. Modern iPhones utilize a 3x Device Pixel Ratio ($dpr = 3.0$), meaning each logical point comprises a 3-by-3 grid of 9 physical sub-pixel units. For example, the iPhone 15 Pro features 393 x 852 CSS points, mapping to 1179 x 2556 physical pixels."
+        },
+        {
+          "q": "Why doesn't Safari support WebHID or Web Bluetooth?",
+          "a": "Apple's WebKit security and privacy team has consistently declined to implement the WebHID, WebUSB, and Web Bluetooth APIs in iOS Safari. Apple cites user fingerprinting risks, peripheral side-channel attacks, and potential security vulnerabilities in connected accessories as reasons for omitting these hardware connection APIs."
+        },
+        {
+          "q": "What are CSS safe-area-insets?",
+          "a": "Safe-area insets are standardized CSS environment variables—env(safe-area-inset-top), env(safe-area-inset-bottom), env(safe-area-inset-left), and env(safe-area-inset-right)—that specify padding values needed to keep interactive buttons, text, and navigation bars from being obscured by hardware notches, the Dynamic Island pill, or the iOS home indicator bar."
         }
       ],
       "clientSideOnly": true,

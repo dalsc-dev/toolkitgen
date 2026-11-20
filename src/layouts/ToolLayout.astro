@@ -37,6 +37,11 @@ interface Props {
   hotTools?: RelatedItem[];
   recommendedTool?: RelatedItem;
   diagnosticTools?: RelatedItem[];
+  relatedGuides?: Array<{
+    title: string;
+    slug: string;
+    description: string;
+  }>;
   datePublished?: string;
   dateModified?: string;
   hasMath?: boolean;
@@ -55,6 +60,7 @@ const {
   hotTools = [],
   recommendedTool,
   diagnosticTools = [],
+  relatedGuides = [],
   datePublished = '2025-01-15T00:00:00Z',
   dateModified = '2026-11-19T00:00:00Z',
   hasMath = false,
@@ -75,6 +81,12 @@ const categorySlug = category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const isVisionTool = category === 'Vision / Optometry' || id.includes('vision') || id.includes('amsler') || id.includes('astigmatism') || id.includes('snellen') || id.includes('color_blindness');
 const isHearingTool = id.includes('hearing') || id.includes('audiogram') || id.includes('tinnitus') || id.includes('noise_dosimeter');
 const isCameraOrMicTool = category === 'Camera / Sensor' || id.includes('cam') || id.includes('camera') || id.includes('mic') || id.includes('voice') || id.includes('eye_') || id.includes('posture');
+const isWebSerialTool = id === 'usb_c_pd_negotiator_sniffer' || id === 'web_serial_terminal';
+const isWebBluetoothTool = id === 'web_bluetooth_scan' || id === 'ble_rssi_meter';
+const isWebNfcTool = id === 'nfc_data_ghost_eraser';
+const isBatteryTool = id === 'battery_discharge_monitor';
+const isCompassTool = id === 'magnetometer_metal_find';
+const isWifiPlanner = id === 'wifi_dead_zone_logger';
 
 const breadcrumbs = [
   { name: category, url: `/category/${categorySlug}` },
@@ -132,6 +144,36 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
           <span class="px-2.5 py-1 rounded-md text-[11px] font-bold text-slate-600 bg-slate-100 border border-slate-200/60">
             Free
           </span>
+          {isWebSerialTool && (
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/60">
+              Desktop Chromium (Web Serial)
+            </span>
+          )}
+          {isWebBluetoothTool && (
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold text-blue-700 bg-blue-50 border border-blue-200/60">
+              Chrome / Edge (Bluetooth LE)
+            </span>
+          )}
+          {isWebNfcTool && (
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold text-purple-700 bg-purple-50 border border-purple-200/60">
+              Chrome on Android (Web NFC)
+            </span>
+          )}
+          {isBatteryTool && (
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200/60">
+              Chromium Battery API
+            </span>
+          )}
+          {isCompassTool && (
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold text-teal-700 bg-teal-50 border border-teal-200/60">
+              Mobile Compass Sensor
+            </span>
+          )}
+          {isWifiPlanner && (
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/60">
+              Manual AR Signal Planner
+            </span>
+          )}
         </div>
 
         <!-- Single Trust Line -->
@@ -248,6 +290,30 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
           </Callout>
         )}
 
+        {isWebSerialTool && (
+          <Callout variant="info" title="Hardware &amp; Simulator Notice">
+            Live packet analysis requires an external hardware analyzer connected via Web Serial in desktop Chromium browsers. In standard browsers without hardware, explore power delivery profiles in interactive simulator mode.
+          </Callout>
+        )}
+
+        {isWebNfcTool && (
+          <Callout variant="warning" title="Platform Compatibility Notice">
+            The Web NFC API is supported exclusively in Google Chrome on Android devices over HTTPS. It is not supported on iOS or desktop browsers. This utility sanitizes standard NDEF records and cannot format hardware-locked tag sectors.
+          </Callout>
+        )}
+
+        {isCompassTool && (
+          <Callout variant="info" title="Sensor Notice">
+            This tool reads magnetic heading deviations from internal mobile compass sensors. It identifies ferromagnetic materials (steel studs, screws) and does not detect non-ferrous metals such as copper or plastic pipes.
+          </Callout>
+        )}
+
+        {isWifiPlanner && (
+          <Callout variant="note" title="Browser Architecture Notice">
+            Due to operating system security isolation, web browsers cannot read raw Wi-Fi chipsets, BSSIDs, or hardware RSSI dBm values directly. This tool models signal decay via domestic distance attenuation physics and camera AR estimation.
+          </Callout>
+        )}
+
         <!-- e. Tool interactive stage (the tool itself) -->
         <section id="tool-app-stage" class="tool-card bg-white rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-xl overflow-hidden scroll-mt-28 min-w-0 max-w-full">
           <slot name="tool-ui" />
@@ -358,6 +424,42 @@ const encodedUrl = encodeURIComponent(canonicalUrl);
         ))}
       </div>
     </section>
+
+    <!-- Related Symptom & Diagnostic Guides -->
+    {relatedGuides && relatedGuides.length > 0 && (
+      <section id="related-symptom-guides" class="space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200/80 pb-3">
+          <h3 class="text-lg font-bold text-slate-900 uppercase tracking-wider text-xs">
+            Related Troubleshooting &amp; Engineering Guides
+          </h3>
+          <span class="text-xs text-slate-400">Engineering Analyses</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {relatedGuides.map((rg) => (
+            <a
+              href={`/guide/${rg.slug}`}
+              class="group p-5 bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md hover:border-[#EE6C4D]/40 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[#EE6C4D] bg-orange-50 px-2 py-0.5 rounded border border-orange-200/60">
+                  Diagnostic Guide
+                </span>
+                <h4 class="text-sm font-bold text-slate-900 group-hover:text-[#EE6C4D] transition-colors mt-2 leading-snug">
+                  {rg.title}
+                </h4>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                  {rg.description}
+                </p>
+              </div>
+              <span class="text-xs font-bold text-[#EE6C4D] mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span>Read Troubleshooting Guide</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <!-- i. FAQ: 4 to 6 tool-specific questions written from tool behavior -->
     {faq && faq.length > 0 && (

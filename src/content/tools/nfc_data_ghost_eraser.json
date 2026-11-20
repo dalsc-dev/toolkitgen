@@ -1,8 +1,8 @@
 {
   "id": "nfc_data_ghost_eraser",
-  "name": "NFC Data Ghost Eraser",
-  "title": "NFC Data Ghost Eraser | Toolkit Gen",
-  "description": "Near Field Communication (NFC) tags are embedded in everything from smart business cards and marketing posters to home automation triggers and amiibo figures.",
+  "name": "NDEF Tag Content Overwriter & Sanitizer",
+  "title": "NDEF Tag Content Overwriter & Sanitizer | Toolkit Gen",
+  "description": "Sanitize and overwrite readable NDEF records on NFC tags using Web NFC in Chrome on Android. Overwrites user records; cannot format locked hardware sectors.",
   "category": "Crypto / Security",
   "tags": [
     "NFC tag eraser",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "NFC Data Ghost Eraser is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Sanitize NFC tags by overwriting active NDEF payload records with blank zero-byte data using the Web NFC API. Supported in Chrome on Android over HTTPS; cannot format write-locked tags or overwrite proprietary manufacturer memory sectors.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,38 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch NFC Data Ghost Eraser directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Verify Android Chrome Compatibility",
+      "text": "Ensure you are using Google Chrome or Microsoft Edge on an Android device with NFC enabled in system settings."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Initialize Tag Scanner",
+      "text": "Tap 'Scan & Sanitize Tag' and grant the browser permission to access near-field communication hardware."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Hold Tag Against NFC Coil",
+      "text": "Hold the NFC tag firmly against the upper rear portion of your Android phone until a haptic vibration confirms detection."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Verify Overwrite Confirmation",
+      "text": "The tool writes an empty NDEF payload to overwrite previous URL, text, or credential records stored on the tag."
     }
   ],
   "faq": [
     {
-      "q": "Why does the tool say my browser isn't supported?",
-      "a": "Apple currently restricts the WebNFC API on iOS (iPhones). As of this writing, you must use Google Chrome on an Android smartphone to allow a website to access your phone's NFC hardware. Desktop computers typically lack NFC hardware altogether."
+      "q": "Does Web NFC work on iPhone or desktop browsers?",
+      "a": "No. The W3C Web NFC specification is implemented exclusively in Chromium-based browsers on Android (Chrome 89+). Apple iOS restricts NFC tag access to native iOS apps via CoreNFC, and desktop operating systems lack standardized consumer NFC reader integrations."
     },
     {
-      "q": "I locked my tag by mistake. How do I unlock it?",
-      "a": "Unfortunately, you cannot unlock it. The \"Make Read-Only\" command utilizes the one-time programmable (OTP) lock bits on the chip itself. Once those bits are flipped to '1', it is a permanent hardware alteration. You will need to purchase a new blank tag."
+      "q": "Can this tool erase hardware write-locked NFC tags?",
+      "a": "No. Standard NFC chips (such as NXP NTAG213, NTAG215, NTAG216) feature physical one-time-programmable (OTP) lock bytes. Once those lock bits are set, the chip's internal logic permanently prevents further writes at the silicon level."
     },
     {
-      "q": "Can I erase hotel key cards, credit cards, or transit passes?",
-      "a": "No. Those items use highly encrypted standards like MIFARE DESFire or EMV protocols, which are protected by complex cryptographic keys. This tool is designed to format standard, unencrypted NDEF-formatted consumer tags (like NTAG213, 215, 216, or Topaz)."
+      "q": "What is the difference between NDEF records and raw tag memory?",
+      "a": "NDEF (NFC Data Exchange Format) is a standardized data container specification for URLs, vCards, and plain text readable by all smartphones. Raw memory includes manufacturer configuration blocks, password protection bytes, and proprietary memory pages."
     },
     {
-      "q": "My phone vibrates, but the write fails. Why?",
-      "a": "This usually happens if you pull the phone away too quickly. Writing data takes slightly longer than reading it. Hold the phone against the tag steadily for a full 2 seconds. Also, ensure the tag is not sitting on a metal table or attached to a metal object, as metal blocks the radio frequency."
+      "q": "Can I use this tool to reset Nintendo Amiibo tags?",
+      "a": "No. Amiibo figures and NTAG215 clones have encrypted key sectors and permanent lock bits written during manufacture. While you can overwrite unlocked NDEF records on standard NFC stickers, proprietary locked amiibo data cannot be cleared."
     }
   ],
   "related": [],

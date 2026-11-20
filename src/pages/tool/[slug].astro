@@ -8,6 +8,7 @@ import { processMath } from '@lib/math';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
+  const guides = await getCollection('guides');
   const catalogSummary = tools.map((t) => {
     const cleanName = (t.data.name || t.data.title || t.data.id)
       .replace(/\s*\|\s*Toolkit Gen.*$/i, '')
@@ -57,9 +58,17 @@ export async function getStaticPaths() {
     );
     const diagnosticTools = [...remainingRelated, ...fallbackTools].slice(0, 5);
 
+    const relatedGuides = guides
+      .filter((g) => g.data.relatedTools.includes(id))
+      .map((g) => ({
+        title: g.data.title,
+        slug: g.data.slug,
+        description: g.data.description,
+      }));
+
     return {
       params: { slug: tool.data.id },
-      props: { tool, hotTools, recommendedTool, diagnosticTools },
+      props: { tool, hotTools, recommendedTool, diagnosticTools, relatedGuides },
     };
   });
 }
@@ -87,9 +96,14 @@ interface Props {
     category: string;
     description: string;
   }>;
+  relatedGuides?: Array<{
+    title: string;
+    slug: string;
+    description: string;
+  }>;
 }
 
-const { tool, hotTools, recommendedTool, diagnosticTools } = Astro.props;
+const { tool, hotTools, recommendedTool, diagnosticTools, relatedGuides = [] } = Astro.props;
 const {
   id,
   name,
@@ -132,6 +146,7 @@ const hasMath = articleHasMath || toolHasMath || qaHasMath;
   hotTools={hotTools}
   recommendedTool={recommendedTool}
   diagnosticTools={diagnosticTools}
+  relatedGuides={relatedGuides}
   datePublished={datePublished}
   dateModified={dateModified}
   hasMath={hasMath}

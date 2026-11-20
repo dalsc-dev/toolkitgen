@@ -1,8 +1,8 @@
 {
   "id": "usb_c_pd_negotiator_sniffer",
-  "name": "USB-C Power Delivery 'Handshake' Sniffer",
-  "title": "USB-C Power Delivery 'Handshake' Sniffer | Toolkit Gen",
-  "description": "Deciphering the Digital Handshake: The Engineering Behind USB-C Power Delivery The era of \"dumb\" electricity is over.",
+  "name": "USB-C Power Delivery Sniffer & Protocol Simulator",
+  "title": "USB-C Power Delivery Sniffer & Protocol Simulator | Toolkit Gen",
+  "description": "Inspect USB-C Power Delivery contracts, VBUS voltages, and packet logs in your browser using Web Serial analyzer hardware or an interactive protocol simulator.",
   "category": "Hardware / Diagnostics",
   "tags": [
     "usb c pd sniffer",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "USB-C Power Delivery 'Handshake' Sniffer is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Inspect USB-C Power Delivery contracts, power data objects (PDOs), and VBUS negotiation packets directly in your browser. Connect compatible Web Serial hardware analyzers or test power profiles interactively in simulated protocol mode.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,38 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch USB-C Power Delivery 'Handshake' Sniffer directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Choose Mode",
+      "text": "Select Live Web Serial Hardware mode if you have a serial protocol analyzer, or choose Interactive Protocol Simulator mode to test power profiles."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Connect Serial Analyzer",
+      "text": "In hardware mode, click Connect Serial Device and select your USB-C analyzer COM port at 115200 baud."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Audit Power Data Objects (PDOs)",
+      "text": "Inspect Source Capabilities advertisements, Fixed Supply voltages (5V, 9V, 15V, 20V), and PPS (Programmable Power Supply) step increments."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Inspect Contract Logs",
+      "text": "Verify Request packets, Accept acknowledgments, and PS_RDY transitions to ensure compliant power negotiation."
     }
   ],
   "faq": [
     {
-      "q": "Can I use a 100W cable for a 20W phone?",
-      "a": "Yes, absolutely. USB-C is backward compatible. A cable rated for 100W (5 Amps) simply has thicker wires. When used with a 20W phone, the phone will only request the power it needs. Using a \"stronger\" cable is always safe; using a \"weaker\" cable typically results in slower charging but is also safe due to the E-Marker safety checks."
+      "q": "Can a browser sniff USB-C Power Delivery packets without extra hardware?",
+      "a": "No. Standard computer USB controller chips do not expose raw CC-pin (Configuration Channel) BMC packets to the host operating system. To capture live PD packets, you need an external hardware analyzer (such as a Power-Z or open-source serial sniffer) connected via Web Serial."
     },
     {
-      "q": "How does the WebSerial API work for sniffing?",
-      "a": "Browser security models (sandbox) prevent websites from directly accessing your computer's USB hardware. However, the Web Serial API allows a user to explicitly grant a website permission to talk to a specific serial device (like a COM port). This tool connects to an external microcontroller (like an Arduino or ESP32 running Twinkie or similar firmware) that acts as a \"Man-in-the-Middle\" on the CC line, relaying the text logs to this webpage for visualization."
+      "q": "What is an EPR (Extended Power Range) USB-C contract?",
+      "a": "USB PD 3.1 Extended Power Range (EPR) increases maximum USB-C power delivery from 100W (20V at 5A) up to 240W (48V at 5A). EPR requires electronically marked 240W cables and specific EPR handshake negotiation."
     },
     {
-      "q": "What is the difference between Thunderbolt 4 and USB4?",
-      "a": "While both use the USB-C connector and can support 100W+ charging, the difference lies in data and certification. Thunderbolt 4 guarantees minimum specs (like 40Gbps data, dual 4K monitor support, and 32Gbps PCIe tunneling). USB4 has various \"tiers\" (20Gbps or 40Gbps). Crucially, almost all Thunderbolt 4 cables are E-Marked for 100W charging, making them the gold standard for reliable power delivery."
+      "q": "How do USB-C E-marker chips report cable wattage ratings?",
+      "a": "Electronically marked cables contain a small SOP' responder microchip powered by VCONN on the CC2 line. During initial discovery, the host queries the cable with a Discover Identity command, and the cable replies with maximum supported voltage and current (3A vs 5A)."
     },
     {
-      "q": "Does this tool work on mobile devices and tablets?",
-      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
+      "q": "Which browsers support the Web Serial API?",
+      "a": "The Web Serial API is supported in Chromium-based desktop browsers (Google Chrome, Microsoft Edge, Opera) on Windows, macOS, Linux, and ChromeOS. It is not supported in Mozilla Firefox, Apple Safari, or mobile browsers."
     }
   ],
   "related": [

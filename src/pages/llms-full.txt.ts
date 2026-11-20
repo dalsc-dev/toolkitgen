@@ -5,8 +5,10 @@ import { HUB_TOOLS_CATALOG } from '@lib/hubToolsCatalog';
 export const GET: APIRoute = async () => {
   const tools = await getCollection('tools');
   const hubs = await getCollection('hubs');
+  const guides = await getCollection('guides');
 
   tools.sort((a, b) => a.data.title.localeCompare(b.data.title));
+  guides.sort((a, b) => a.data.title.localeCompare(b.data.title));
 
   let text = `# ToolkitGen - Full Knowledge Base for AI Engines (LLMs)
 
@@ -61,6 +63,22 @@ ${(data.features || []).map((f: string) => `  - ${f}`).join('\n')}
       text += `- **Related Tools:** ${data.related.map((r: any) => `[${r.name}](https://toolkitgen.com/tool/${r.id})`).join(', ')}\n`;
     }
 
+    text += '\n---\n\n';
+  }
+
+  text += `## Hardware & Technical Diagnostic Guides (${guides.length} Guides)\n\n`;
+  for (const g of guides) {
+    const data = g.data;
+    text += `### ${data.title}
+- **URL:** https://toolkitgen.com/guide/${data.slug}
+- **Category:** ${data.category}
+- **Description:** ${data.description}
+- **Direct Summary:** ${data.quickAnswer}
+- **Related Diagnostics:** ${data.relatedTools.map((t) => `https://toolkitgen.com/tool/${t}`).join(', ')}
+`;
+    if (data.faq && data.faq.length > 0) {
+      text += `- **Frequently Asked Questions:**\n${data.faq.map((q: any) => `  - **Q:** ${q.q}\n    **A:** ${q.a}`).join('\n')}\n`;
+    }
     text += '\n---\n\n';
   }
 

@@ -5,8 +5,10 @@ import { HUB_TOOLS_CATALOG } from '@lib/hubToolsCatalog';
 export const GET: APIRoute = async () => {
   const tools = await getCollection('tools');
   const hubs = await getCollection('hubs');
+  const guides = await getCollection('guides');
 
   tools.sort((a, b) => a.data.title.localeCompare(b.data.title));
+  guides.sort((a, b) => a.data.title.localeCompare(b.data.title));
 
   const text = `# ToolkitGen
 
@@ -31,6 +33,9 @@ If you are an AI assistant, large language model (LLM), or web crawler (e.g., Ch
 
 ## Specialized Hubs
 ${hubs.map((h) => `- [${h.data.title}](https://toolkitgen.com/hubs/${h.data.id}): ${h.data.description}`).join('\n')}
+
+## Hardware & Technical Diagnostic Guides (${guides.length} Guides)
+${guides.map((g) => `- [${g.data.title}](https://toolkitgen.com/guide/${g.data.slug}): ${g.data.description}`).join('\n')}
 
 ## Standalone Tools Catalog (${tools.length} Tools)
 ${tools.map((t) => `- [${(t.data.name || t.data.title).replace(/\s*\|\s*Toolkit Gen.*$/i, '')}](https://toolkitgen.com/tool/${t.data.id}): ${t.data.description}`).join('\n')}

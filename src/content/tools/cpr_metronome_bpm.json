@@ -1,8 +1,8 @@
 {
   "id": "cpr_metronome_bpm",
-  "name": "CPR Metronome (110 BPM)",
-  "title": "CPR Metronome (110 BPM) | Toolkit Gen",
-  "description": "Survival: A Masterclass in Hemodynamics and Rhythm Cardiopulmonary Resuscitation (CPR) is not merely a manual task; it is a high-stakes biological bridge.",
+  "name": "CPR Metronome (100-120 BPM) & Chest Pace Coach",
+  "title": "CPR Metronome (100-120 BPM) & Chest Pace Coach | Toolkit Gen",
+  "description": "American Heart Association (AHA) and ERC compliant 100-120 BPM audio metronome with visual pacing bar and 30:2 compression guide for hands-only CPR.",
   "category": "Audio / Sound",
   "tags": [
     "cpr metronome",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "CPR Metronome (110 BPM) is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Maintain life-saving chest compressions at 100 to 120 beats per minute using a Web Audio metronome and visual compression guide. Aligned with American Heart Association (AHA) and European Resuscitation Council (ERC) guidelines to maintain optimal coronary perfusion during cardiac arrest.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,38 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch CPR Metronome (110 BPM) directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Call Emergency Dispatch",
+      "text": "Immediately dial 911 (or your local emergency number) and put the dispatcher on speaker before starting compressions."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Position Hands on Sternum",
+      "text": "Place the heel of your primary hand on the center of the chest (lower half of breastbone), lace your other hand on top, and lock your elbows straight."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Start 110 BPM Metronome",
+      "text": "Activate the audio metronome and synchronize your chest compressions with the rhythmic click and visual pulse bar."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Maintain 2-Inch Depth",
+      "text": "Push hard and fast to a depth of 2 to 2.4 inches (5 to 6 cm) on adults, allowing full chest recoil between every compression."
     }
   ],
   "faq": [
     {
-      "q": "What if I am untrained? Should I try?",
-      "a": "YES. Doing something is infinitely better than doing nothing. Bad CPR is better than no CPR. The 911 dispatcher will guide you, but using this 110 BPM tool helps you keep the pace. Push hard and fast in the center of the chest."
+      "q": "What is the recommended CPR compression rate in 2026?",
+      "a": "100 to 120 compressions per minute, established by the American Heart Association (AHA) and European Resuscitation Council (ERC). Compressing within this window ensures sufficient blood flow to the brain and vital organs."
     },
     {
-      "q": "How do I know if I am pushing deep enough?",
-      "a": "Without electronic feedback pads, it is difficult to judge. The rule of thumb for adults is \"at least 2 inches.\" This feels surprisingly deep. You are compressing one-third of the chest depth. If you are not using significant upper body force, you are likely too shallow."
+      "q": "Why is compressing faster than 120 BPM dangerous?",
+      "a": "Compressing too fast does not allow the heart chambers enough time to refill with venous blood between compressions (diastolic filling time), significantly reducing coronary perfusion pressure."
     },
     {
-      "q": "Can I use this for children?",
-      "a": "The Rate (110 BPM) is appropriate for children and infants. However, the Depth and Force are different. For a child, use one hand (about 2 inches). For an infant, use two fingers (about 1.5 inches). The rhythm provided by this tool remains the standard."
+      "q": "What is the difference between Hands-Only CPR and conventional CPR?",
+      "a": "Hands-Only CPR involves continuous chest compressions without rescue breaths and is strongly recommended for untrained bystanders witnessing sudden adult collapse. Conventional CPR with 30:2 compressions-to-breaths is used by trained rescuers and for drowning or pediatric cardiac arrests."
     },
     {
-      "q": "Does this tool work on mobile devices and tablets?",
-      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
+      "q": "When should chest compressions be stopped?",
+      "a": "Only stop compressions if the person shows signs of life (waking up, breathing normally), an automated external defibrillator (AED) instructs everyone to stand clear, qualified EMS personnel take over, or you become physically too exhausted to continue."
     }
   ],
   "related": [

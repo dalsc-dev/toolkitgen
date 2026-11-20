@@ -1,8 +1,8 @@
 {
   "id": "wifi_dead_zone_logger",
-  "name": "Wi-Fi Dead Zone Logger",
-  "title": "Wi-Fi Dead Zone Logger | Toolkit Gen",
-  "description": "The Physics of the Wireless Void: Mastering Your Home Network Architecture Wi-Fi signals are high-frequency electromagnetic waves, typically vibrating at 2.",
+  "name": "Manual AR Wi-Fi Heatmap Planner & Signal Drop Estimator",
+  "title": "Wi-Fi Heatmap Planner & Signal Drop Estimator | Toolkit Gen",
+  "description": "Map domestic Wi-Fi coverage by plotting estimated signal drop across floor plans. Modern web browsers cannot read raw Wi-Fi RSSI or BSSID directly due to OS isolation.",
   "category": "System / Network",
   "tags": [
     "wifi dead zone mapper",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Wi-Fi Dead Zone Logger is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Calculate domestic Wi-Fi signal attenuation and chart dead zones through visual distance estimation and browser downlink telemetry. Web browsers cannot access raw Wi-Fi chipsets or RSSI dBm values directly due to operating system security isolation.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,38 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch Wi-Fi Dead Zone Logger directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Camera and Distance Setup",
+      "text": "Launch the visual planner and grant camera access to project markers into your physical workspace."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Map Signal Attenuation",
+      "text": "Walk toward rooms experiencing signal drops while logging estimated downlinks and physical obstructions like drywall, concrete, or metal."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Evaluate Attenuation Table",
+      "text": "Cross-reference signal drops with the material attenuation table to identify physical barriers absorbing 2.4GHz and 5GHz frequencies."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Export Layout Findings",
+      "text": "Export your obstruction list and layout observations to reposition your router or configure a dedicated mesh backhaul node."
     }
   ],
   "faq": [
     {
-      "q": "1. The \"Water Sponge\" Anomaly",
-      "a": "The Fact: Wi-Fi signals are extremely similar in frequency to the resonance of water molecules. This is why a microwave oven (which vibrates water to heat food) operates on the 2.4GHz band. The Trick: If you have a large aquarium or a dense indoor \"jungle\" of plants, do not place your router near them. They will literally \"soak up\" the radio waves, creating a massive dead zone behind them."
+      "q": "Can web browsers measure exact Wi-Fi signal strength in dBm?",
+      "a": "No. The W3C and major browser vendors intentionally do not expose raw Wi-Fi RSSI (received signal strength indicator) or BSSID (access point MAC address) to web applications to prevent geographic location fingerprinting. Browsers only expose estimated connection downlink metrics via navigator.connection."
     },
     {
-      "q": "2. The \"Elevated Vantege\" Strategy",
-      "a": "The Fact: Wi-Fi signals radiate outward and downward more effectively than upward. Most furniture (couches, desks, chairs) is made of wood and metal that sits below the 3-foot mark. The Trick: Place your router at least 5 to 6 feet high (on a shelf or wall-mounted). This gives the signal a \"Clear Line of Sight\" to your devices, bypassing the dense mass of furniture that usually causes scattering and signal degradation."
+      "q": "Why does 5 GHz Wi-Fi drop through walls faster than 2.4 GHz?",
+      "a": "According to electromagnetic propagation physics, higher frequencies attenuate faster when penetrating solid matter. While 5 GHz provides wider channel widths and higher throughput, solid materials like concrete, brick, and tile absorb 5 GHz waves at nearly double the decibel loss of 2.4 GHz waves."
     },
     {
-      "q": "3. The DFS Channel Hack (For Pro Users)",
-      "a": "The Fact: Most routers default to standard 5GHz channels that are crowded with neighbors. DFS (Dynamic Frequency Selection) channels are a range of 5GHz frequencies usually reserved for military and weather radar. The Trick: Log into your router settings and look for \"DFS\" enabled channels. If you live in a dense apartment complex, switching to a DFS channel can often triple your speeds because no one else is using them. (Warning: The router will temporarily disconnect if it detects a radar signal)."
+      "q": "How does domestic material attenuation cause dead zones?",
+      "a": "Drywall and interior wood doors typically cause 2 to 5 dB of signal loss. In contrast, masonry, brick, reinforced concrete, and metal-backed mirrors cause 15 to 30 dB of loss, which can attenuate over 95% of radio frequency energy, producing an immediate dead zone behind the barrier."
     },
     {
-      "q": "Does this tool work on mobile devices and tablets?",
-      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
+      "q": "What is the difference between an extender and a mesh Wi-Fi system?",
+      "a": "A basic Wi-Fi extender repeats incoming wireless packets on the same frequency band, immediately cutting available throughput by 50% due to half-duplex communication. A mesh system uses dedicated wireless or Ethernet backhaul channels, enabling seamless roaming and full bandwidth across nodes."
     }
   ],
   "related": [

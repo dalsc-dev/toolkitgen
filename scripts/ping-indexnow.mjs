@@ -15,12 +15,16 @@ async function pingIndexNow() {
   }
 
   const files = fs.readdirSync(distToolsDir).filter(f => f.endsWith('.html'));
+  const distGuidesDir = path.join(rootDir, 'dist', 'guide');
+  const guideFiles = fs.existsSync(distGuidesDir) ? fs.readdirSync(distGuidesDir).filter(f => f.endsWith('.html')) : [];
+
   const urls = [
     'https://toolkitgen.com/',
     'https://toolkitgen.com/tool',
     'https://toolkitgen.com/about',
     'https://toolkitgen.com/sitemap',
-    ...files.map(f => `https://toolkitgen.com/tool/${f.replace('.html', '')}`)
+    ...files.map(f => `https://toolkitgen.com/tool/${f.replace('.html', '')}`),
+    ...guideFiles.map(f => `https://toolkitgen.com/guide/${f.replace('.html', '')}`),
   ];
 
   const payload = {

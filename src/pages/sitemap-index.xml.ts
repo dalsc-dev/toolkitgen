@@ -8,6 +8,7 @@ export const GET: APIRoute = async () => {
     `${site}/sitemap-core.xml`,
     `${site}/sitemap-hubs.xml`,
     `${site}/sitemap-tools.xml`,
+    `${site}/sitemap-guides.xml`,
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

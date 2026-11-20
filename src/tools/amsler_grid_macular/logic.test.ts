@@ -1,36 +1,44 @@
 import { describe, it, expect } from 'vitest';
 import {
   createInitialState,
-  setGridMode,
-  toggleAmdSimulation,
-  getStatusMessage,
+  setTestedEye,
+  addMarking,
+  clearMarkings,
+  generateAmslerClinicalReport,
 } from './logic';
 
 describe('Amsler Grid Logic', () => {
-  it('initializes in standard mode without distortion simulation', () => {
+  it('creates initial state correctly', () => {
     const state = createInitialState();
     expect(state.mode).toBe('standard');
     expect(state.isSimulating).toBe(false);
-    expect(getStatusMessage(state).text).toContain('Standard Diagnostic Grid');
+    expect(state.eye).toBe('right');
+    expect(state.markings.length).toBe(0);
   });
 
-  it('switches between standard and inverted contrast modes', () => {
+  it('handles eye switching and anomaly marking', () => {
     let state = createInitialState();
-    state = setGridMode(state, 'inverted');
-    expect(state.mode).toBe('inverted');
-    expect(getStatusMessage(state).text).toContain('High-Contrast');
+    state = setTestedEye(state, 'left');
+    expect(state.eye).toBe('left');
 
-    state = setGridMode(state, 'standard');
-    expect(state.mode).toBe('standard');
+    state = addMarking(state, 45, 60);
+    expect(state.markings.length).toBe(1);
+    expect(state.markings[0].x).toBe(45);
+    expect(state.markings[0].y).toBe(60);
+
+    state = clearMarkings(state);
+    expect(state.markings.length).toBe(0);
   });
 
-  it('toggles distortion simulation and updates status alert', () => {
+  it('generates a clinical summary report with clinical disclaimer', () => {
     let state = createInitialState();
-    state = toggleAmdSimulation(state);
-    expect(state.isSimulating).toBe(true);
-    expect(getStatusMessage(state).text).toContain('Simulating AMD');
+    state = setTestedEye(state, 'left');
+    state = addMarking(state, 30, 40);
 
-    state = toggleAmdSimulation(state);
-    expect(state.isSimulating).toBe(false);
+    const report = generateAmslerClinicalReport(state);
+    expect(report).toContain('Amsler Grid Visual Self-Evaluation Summary');
+    expect(report).toContain('Eye Monitored: LEFT Eye');
+    expect(report).toContain('IMPORTANT CLINICAL DISCLAIMER');
+    expect(report).toContain('https://toolkitgen.com/tool/amsler_grid_macular');
   });
 });

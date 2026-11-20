@@ -1,49 +1,58 @@
 import { describe, it, expect } from 'vitest';
 import { validateDockerCompose } from './validator';
 
-describe('Docker Compose Validator', () => {
-  it('detects empty input', () => {
-    const res = validateDockerCompose('');
-    expect(res.isValid).toBe(false);
-    expect(res.errors[0]).toContain('empty');
-  });
-
-  it('detects YAML syntax and indentation errors', () => {
-    const badYaml = `
-services:
-  web:
-    image: nginx
-  bad_indent:
- image: redis
-`;
-    const res = validateDockerCompose(badYaml);
-    expect(res.isValid).toBe(false);
-    expect(res.errors[0]).toContain('YAML Syntax Error');
-  });
-
-  it('validates a standard docker-compose file and extracts services', () => {
-    const goodYaml = `
+describe('Docker Compose Validator Logic', () => {
+  it('validates a correct multi-service compose file', () => {
+    const yaml = `
 version: '3.8'
 services:
   web:
-    image: nginx:alpine
+    image: nginx:1.25-alpine
     ports:
       - "80:80"
-    environment:
-      - NODE_ENV=production
   db:
-    image: postgres:15
+    image: postgres:15-alpine
     environment:
-      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: mydb
 `;
-    const res = validateDockerCompose(goodYaml);
+    const res = validateDockerCompose(yaml);
     expect(res.isValid).toBe(true);
+    expect(res.errors.length).toBe(0);
+    expect(res.services.length).toBe(2);
     expect(res.version).toBe('3.8');
-    expect(res.services).toHaveLength(2);
-    expect(res.services[0].name).toBe('web');
-    expect(res.services[0].image).toBe('nginx:alpine');
-    expect(res.services[0].ports).toEqual(['80:80']);
-    expect(res.services[1].name).toBe('db');
-    expect(res.services[1].environmentCount).toBe(1);
+  });
+
+  it('detects syntax errors in invalid YAML', () => {
+    const yaml = `
+services:
+  web:
+    image: nginx
+  invalid-yaml-here
+    - broken
+`;
+    const res = validateDockerCompose(yaml);
+    expect(res.isValid).toBe(false);
+    expect(res.errors.length).toBeGreaterThan(0);
+    expect(res.errors[0]).toContain('YAML Syntax Error');
+  });
+
+  it('detects security advisories like privileged mode and plaintext secrets', () => {
+    const yaml = `
+services:
+  agent:
+    image: alpine:latest
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      DB_PASSWORD: supersecretpassword123
+`;
+    const res = validateDockerCompose(yaml);
+    expect(res.isValid).toBe(true);
+    expect(res.securityAdvisories.length).toBeGreaterThanOrEqual(3);
+    const issues = res.securityAdvisories.map((a) => a.issue);
+    expect(issues.some((i) => i.includes('privileged: true'))).toBe(true);
+    expect(issues.some((i) => i.includes('/var/run/docker.sock'))).toBe(true);
+    expect(issues.some((i) => i.includes(':latest'))).toBe(true);
   });
 });

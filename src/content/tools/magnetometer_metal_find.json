@@ -1,8 +1,8 @@
 {
   "id": "magnetometer_metal_find",
-  "name": "Metal Detector & Stud Finder",
-  "title": "Metal Detector & Stud Finder | Toolkit Gen",
-  "description": "Scanning with the Magnetic Wall Finder Every modern residential and commercial wall is a complex ecosystem of hidden supports, utilities, and potential hazards.",
+  "name": "Magnetic Compass Anomaly & Stud Locator",
+  "title": "Magnetic Compass Anomaly & Stud Locator | Toolkit Gen",
+  "description": "Locate ferromagnetic wall studs and magnetic anomalies using device compass sensors. Identifies field disturbances on mobile devices with magnetometer sensors.",
   "category": "Camera / Sensor",
   "tags": [
     "metal detector app",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Metal Detector & Stud Finder is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Detect magnetic field disturbances and locate ferromagnetic wall studs using device compass orientation sensors. Mobile browsers read heading flux anomalies to identify structural nails, screws, and conduits behind drywall without requiring native app installations.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,42 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch Metal Detector & Stud Finder directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Calibrate Compass Sensor",
+      "text": "Hold your smartphone flat and move it in a figure-eight pattern for 5 seconds to calibrate internal orientation and magnetometer sensors."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Establish Ambient Baseline",
+      "text": "Hold the phone in open air away from metal objects to establish the baseline ambient magnetic heading and flux reading."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Slowly Sweep Wall Surface",
+      "text": "Glide the back of the smartphone smoothly across the drywall surface. Watch for sudden spikes in the magnetic flux deviation needle."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Mark Stud Centers",
+      "text": "Ferromagnetic drywall screws and structural steel studs cause localized magnetic disturbances. Mark the peak deflection point on the wall."
     }
   ],
   "faq": [
     {
-      "q": "Why does the tool require \"Motion & Orientation\" access?",
-      "a": "Modern web browsers (especially on iOS) require explicit user consent to access the device's internal sensors. The magnetometer is part of the orientation sensor suite. We only use this data to calculate the Magnetic Flux Delta; no physical location or movement tracking is performed or stored."
+      "q": "Can a smartphone actually detect studs in a drywall?",
+      "a": "Yes, provided the smartphone has an internal magnetometer sensor and the wall contains ferromagnetic metals (such as steel studs or steel drywall screws driven into wooden studs). The phone detects localized distortions in the Earth's ambient magnetic field."
     },
     {
-      "q": "Can this tool detect plastic pipes (PEX)?",
-      "a": "No. Plastic, PVC, and PEX piping are non-magnetic materials. They do not interact with the Earth's magnetic field and cannot be detected by a Hall Effect sensor. If you suspect plumbing is in the area, look for nearby faucets or toilets to estimate the pipe path. This tool is specifically for Ferrous Metals (Steel/Iron) and Electromagnetic Fields."
+      "q": "Does this web tool measure absolute magnetic microteslas (µT)?",
+      "a": "Standard mobile web browsers provide access to DeviceOrientation and DeviceMotion events, which reflect compass orientation and heading delta. Direct absolute microtesla (µT) access via the Generic Sensor API requires experimental browser flags and HTTPS on Android."
     },
     {
-      "q": "Does this work on Android or mobile?",
-      "a": "Perfectly. In fact, it is designed only for mobile devices. Desktops and many laptops do not have the required magnetometer hardware. For the best experience on Android, use Chrome or Samsung Internet. On iOS, use Safari and ensure you respond \"Allow\" to the sensor permission prompt."
+      "q": "Why is figure-eight calibration necessary before scanning?",
+      "a": "Smartphone compass sensors suffer from soft-iron and hard-iron bias caused by internal phone components, battery currents, and speaker magnets. The figure-eight motion allows the sensor fusion firmware to subtract local magnetic bias."
     },
     {
-      "q": "How do I know if I've hit a wire vs. a screw?",
-      "a": "Frequency Analysis. A screw gives a \"stationary\" peak—the number stays high as long as you hold the phone still over it. A live wire under load often causes the numbers to \"dance\" or vibrate rapidly (50-60 Hz oscillation), even if your hand is perfectly still. If the reading is jittery, assume electricity is present and drill elsewhere."
-    },
-    {
-      "q": "Why does the tool require \"Motion &amp; Orientation\" access?",
-      "a": "Modern web browsers (especially on iOS) require explicit user consent to access the device's internal sensors. The magnetometer is part of the orientation sensor suite. We only use this data to calculate the Magnetic Flux Delta ; no physical location or movement tracking is performed or stored."
+      "q": "Can this tool find non-ferrous metals like copper pipes or PVC?",
+      "a": "No. Magnetic field sensors only interact with ferromagnetic materials (iron, steel, nickel, cobalt). Non-ferrous materials such as copper plumbing, aluminum conduits, and plastic PVC pipes do not distort magnetic fields and require specialized dielectric wall scanners."
     }
   ],
   "related": [

@@ -1,8 +1,8 @@
 {
   "id": "black_scholes_heatmap",
-  "name": "Options Theta Decay Visualizer",
-  "title": "Black-Scholes Options Calculator | Toolkit Gen",
-  "description": "Free online black-scholes options calculator with instant results. No account required. Calculations run in your browser, and inputs are not uploaded.",
+  "name": "Black-Scholes Options Greeks & Volatility Matrix",
+  "title": "Black-Scholes Options Greeks & Volatility Matrix | Toolkit Gen",
+  "description": "Calculate Black-Scholes European call/put pricing, Delta, Gamma, Theta, and Vega across strike and expiration surfaces with CSV volatility export.",
   "category": "Productivity / Utility",
   "tags": [
     "options heatmap",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Black-Scholes Options Calculator is a free online utility built for developers, designers, and professionals. It runs directly on your device using standard HTML5 APIs and WebAssembly. No signup or account is required. Calculations run locally in your browser, and your input parameters or files are not uploaded to our servers.",
+  "quickAnswer": "Calculate theoretical option prices and sensitivity Greeks (Delta, Gamma, Theta, Vega, Rho) across a 2D volatility and expiration surface. Uses the Black-Scholes-Merton model with continuous dividend yield adjustments and exportable matrix CSV data.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,38 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch Options Theta Decay Visualizer directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Enter Asset & Strike Parameters",
+      "text": "Input current underlying stock price ($S$), option strike price ($K$), days to expiration ($T$), and annual risk-free rate ($r$)."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Adjust Implied Volatility",
+      "text": "Set implied volatility ($\\\\sigma$) and continuous dividend yield ($q$) to match real-time market options chain pricing."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Toggle Greek Sensitivity Surfaces",
+      "text": "Switch between Option Price, Delta, Gamma, Theta (daily decay), and Vega heatmaps to visualize risk exposure across price intervals."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Export Surface Matrix",
+      "text": "Export the complete calculated Greek matrix to a CSV file for financial modeling in Excel or Python."
     }
   ],
   "faq": [
     {
-      "q": "Why does the Delta of a Call approach 1.00?",
-      "a": "Linguistically, a Delta of 1.00 means the option is 'synthetically equivalent' to owning 100 shares of the stock. As the stock price moves far above the strike price (Deep In-the-Money), the probability of the option expiring worthless drops to nearly zero. At this point, for every $1 the stock goes up, the option also goes up by $1. In our heatmap, these are the darkest blue zones."
+      "q": "What are the limitations of the Black-Scholes model in modern markets?",
+      "a": "Black-Scholes assumes constant volatility, constant interest rates, log-normal asset price distributions, and European exercise (no early exercise). Real-world markets exhibit volatility smiles/skews, fat-tailed returns, and American-style early exercise risk."
     },
     {
-      "q": "What is the \"Gamma Flip\"?",
-      "a": "The 'Gamma Flip' is a macroeconomic event where the aggregate position of market makers shifts from 'Long Gamma' (dampening volatility) to 'Short Gamma' (amplifying volatility). By using our Gamma Heatmap, you can see the strikes where Gamma is most concentrated. When the stock price crosses these levels, market makers must hedge aggressively, often causing the rapid price surges or crashes seen in the S&P 500."
+      "q": "What does Option Theta measure?",
+      "a": "Theta (\\Theta) quantifies the rate of decline in the option's value with the passage of time (time decay), expressed in dollars per share per calendar day. Theta accelerates exponentially in the final 30 days before expiration for at-the-money options."
     },
     {
-      "q": "Does this work on Android or mobile?",
-      "a": "Perfectly. The Options Greeks Heatmap is fully responsive. On Android and iPhone, the heatmap grid allows for horizontal scrolling, while the control inputs stack vertically. You can perform a quick 'Risk Audit' of your open positions while on the go. Open Chrome on your Android device, tap the three dots, and select 'Add to Home Screen' to use it as an offline PWA."
+      "q": "How does dividend yield affect European Call and Put prices?",
+      "a": "Dividends decrease the future expected price of the underlying stock. A higher continuous dividend yield ($q$) lowers call prices and increases put prices."
     },
     {
-      "q": "Does this tool work on mobile devices and tablets?",
-      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
+      "q": "What is the difference between Delta and probability of expiring ITM?",
+      "a": "While Delta is often colloquially used as an approximation of the probability that an option will expire in-the-money (ITM), the true risk-neutral probability is $N(d_2)$, whereas Delta is $e^{-qT} N(d_1)$."
     }
   ],
   "related": [

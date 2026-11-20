@@ -30,6 +30,7 @@ User-agent: Bytespider
 User-agent: diffbot
 User-agent: FacebookBot
 User-agent: Applebot
+User-agent: Applebot-Extended
 User-agent: DuckDuckBot
 User-agent: Bingbot
 User-agent: Slurp

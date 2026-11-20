@@ -1,8 +1,8 @@
 {
   "id": "sqlite_wasm_explorer",
-  "name": "Online SQLite Viewer",
-  "title": "Online SQLite Viewer | Toolkit Gen",
-  "description": "Data Stack: Why Local SQLite Browsing is the Security Standard In the modern era of cloud-centric applications, the \"Serverless\" movement is often misunderstood.",
+  "name": "SQLite WASM Explorer & In-Browser SQL Sandbox",
+  "title": "SQLite WASM Explorer & In-Browser SQL Sandbox | Toolkit Gen",
+  "description": "Inspect SQLite .db databases, run custom queries, and export results to CSV/JSON in your browser. Powered by WebAssembly with local file processing.",
   "category": "Developer / Data",
   "tags": [
     "sqlite browser online",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Online SQLite Viewer is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Inspect SQLite database files and execute SQL queries directly in your browser using official SQLite WebAssembly. Drag and drop any .db, .sqlite, or .sqlite3 file to analyze schemas, run queries, and export datasets without server uploads.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,38 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch Online SQLite Viewer directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Load Database File",
+      "text": "Drag and drop any .db or .sqlite file into the workspace, or click 'Load Sample Database' to explore a pre-populated schema."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Inspect Schema Tables",
+      "text": "Click on tables in the schema viewer to preview column data types, primary keys, and foreign key relationships."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Execute SQL Query",
+      "text": "Type standard SQLite queries (e.g. SELECT, JOIN, GROUP BY) into the editor and click Execute or press Ctrl+Enter."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Export Query Results",
+      "text": "Export the resulting tabular dataset as a standard CSV or JSON file with one click for offline reporting."
     }
   ],
   "faq": [
     {
-      "q": "Can I use this for non-SQLite files like Excel or CSV?",
-      "a": "No. This tool is specifically optimized for the SQLite 3 binary format. While CSV data can be imported into SQLite, this browser is a 'Viewer' for existing .db and .sqlite artifacts. For CSV analysis, we recommend our specialized 'CSV to SQL Matrix' tool in the sidebar."
+      "q": "Is it safe to open confidential SQLite databases in this browser tool?",
+      "a": "Yes. The tool runs official SQLite compiled to WebAssembly (WASM). All database pages are parsed in your browser's local sandbox memory; no database bytes are uploaded to external servers."
     },
     {
-      "q": "Is there a file size limit for the local browser?",
-      "a": "The limit is determined by your Desktop or Android device's available memory. Since the database is read into your RAM, a 500MB database requires at least 1GB of available system memory to operate smoothly. For standard application databases (1MB - 100MB), the performance is nearly instantaneous."
+      "q": "What SQLite database file formats are supported?",
+      "a": "All standard SQLite 3 binary database formats (.db, .sqlite, .sqlite3, .db3), including WAL (Write-Ahead Logging) and rollback journal files."
     },
     {
-      "q": "Does this work on mobile/Android browsers?",
-      "a": "Perfectly. Modern Android browsers (Chrome and Samsung Internet) have robust WASM support. You can select a .db file from your \"Downloads\" or \"Documents\" folder and perform queries directly on your phone. This is exceptionally useful for mobile developers debugging local storage outcomes in the field."
+      "q": "Can I modify data or export the modified database file?",
+      "a": "Yes. You can execute INSERT, UPDATE, and CREATE TABLE queries in memory and export the updated database file directly to your downloads."
     },
     {
-      "q": "Does this tool work on mobile devices and tablets?",
-      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
+      "q": "What is the maximum database file size supported?",
+      "a": "In desktop Chromium and Firefox, browser WebAssembly can allocate up to 2GB of virtual memory, supporting database files up to 500MB comfortably depending on system RAM."
     }
   ],
   "related": [

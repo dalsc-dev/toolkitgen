@@ -1,0 +1,193 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import Callout from '@components/Callout.astro';
+import { generateJsonLd } from '@lib/schema';
+import { processMath } from '@lib/math';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  const allTools = await getCollection('tools');
+
+  return guides.map((guide) => {
+    const relatedToolObjects = guide.data.relatedTools
+      .map((slug) => allTools.find((t) => t.data.id === slug))
+      .filter(Boolean);
+
+    return {
+      params: { slug: guide.data.slug },
+      props: { guide, relatedTools: relatedToolObjects },
+    };
+  });
+}
+
+interface Props {
+  guide: CollectionEntry<'guides'>;
+  relatedTools: Array<CollectionEntry<'tools'>>;
+}
+
+const { guide, relatedTools } = Astro.props;
+const {
+  title,
+  slug,
+  description,
+  category,
+  hubSlug,
+  datePublished,
+  dateModified,
+  quickAnswer,
+  articleHtml,
+  faq = [],
+} = guide.data;
+
+const canonicalUrl = `https://toolkitgen.com/guide/${slug}`;
+const browserTitle = `${title} | Toolkit Gen`;
+
+const { html: processedArticleHtml, hasMath: articleHasMath } = processMath(articleHtml || '');
+const { html: processedQuickAnswer, hasMath: qaHasMath } = processMath(quickAnswer || '');
+const hasMath = articleHasMath || qaHasMath;
+
+const breadcrumbs = [
+  { name: 'Directory', url: '/tool' },
+  { name: category, url: `/category/${hubSlug}` },
+  { name: title, url: canonicalUrl },
+];
+
+const jsonLd = generateJsonLd({
+  type: 'article',
+  title,
+  description,
+  url: canonicalUrl,
+  category,
+  datePublished,
+  dateModified,
+  faq,
+  breadcrumbs: [
+    { name: 'Home', url: '/' },
+    { name: category, url: `/category/${hubSlug}` },
+    { name: title, url: canonicalUrl },
+  ],
+});
+---
+
+<BaseLayout
+  title={browserTitle}
+  description={description}
+  canonical={canonicalUrl}
+  ogType="article"
+  jsonLd={jsonLd}
+  hasMath={hasMath}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 py-6">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <!-- Guide Header Block -->
+    <header class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div class="flex items-center gap-2">
+          <a
+            href={`/category/${hubSlug}`}
+            class="px-2.5 py-1 rounded-md text-[11px] font-black uppercase tracking-wider bg-orange-50 text-[#EE6C4D] border border-orange-200/60 hover:bg-orange-100 transition-colors"
+          >
+            {category} Hub
+          </a>
+          <span class="px-2.5 py-1 rounded-md text-[11px] font-bold text-slate-600 bg-slate-100 border border-slate-200/60">
+            Hardware Diagnostic Guide
+          </span>
+        </div>
+        <span class="text-xs text-slate-400">
+          Last reviewed: {new Date(dateModified).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+        {title}
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+        {description}
+      </p>
+    </header>
+
+    <!-- Quick Answer Callout Box -->
+    <Callout variant="note" title="Direct Answer Summary">
+      <div set:html={processedQuickAnswer} />
+    </Callout>
+
+    <!-- Interactive Diagnostics Jump Strip -->
+    {relatedTools.length > 0 && (
+      <section class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-8 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-black uppercase tracking-wider text-slate-900">
+            Related In-Browser Diagnostic Utilities
+          </h2>
+          <span class="text-[11px] font-bold text-[#EE6C4D]">Runs locally in your browser</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          {relatedTools.map((t) => (
+            <a
+              href={`/tool/${t.data.id}`}
+              class="group p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs hover:shadow-md hover:border-[#EE6C4D]/40 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t.data.category}</span>
+                <h3 class="text-sm font-bold text-slate-900 group-hover:text-[#EE6C4D] transition-colors mt-0.5">
+                  {(t.data.name || t.data.title).replace(/\s*\|\s*Toolkit Gen.*$/i, '')}
+                </h3>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                  {t.data.description}
+                </p>
+              </div>
+              <span class="text-xs font-bold text-[#EE6C4D] mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span>Launch Tool</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Longform Article Body -->
+    <article class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm prose max-w-none prose-slate">
+      <div set:html={processedArticleHtml} />
+    </article>
+
+    <!-- Frequently Asked Questions -->
+    {faq && faq.length > 0 && (
+      <section id="guide-faq" class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm space-y-6">
+        <h2 class="text-2xl font-black text-slate-900 tracking-tight">Frequently Asked Questions</h2>
+        <div class="space-y-3">
+          {faq.map((item) => (
+            <details class="group bg-slate-50 rounded-2xl border border-slate-200/80 open:bg-white open:shadow-md transition-all duration-200">
+              <summary class="flex justify-between items-center font-bold text-slate-800 p-4 cursor-pointer list-none select-none text-sm">
+                <span>{item.q}</span>
+                <span class="transition-transform group-open:rotate-180 text-slate-400">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </span>
+              </summary>
+              <div class="text-slate-600 px-4 pb-4 pt-1 text-xs leading-relaxed border-t border-slate-100">
+                {item.a}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Return to Category Hub Footer -->
+    <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <h3 class="text-lg font-bold text-white">Explore More in {category}</h3>
+        <p class="text-xs text-slate-400 mt-1">Access all free client-side diagnostics and guides in this category.</p>
+      </div>
+      <a
+        href={`/category/${hubSlug}`}
+        class="px-5 py-2.5 bg-[#EE6C4D] hover:bg-orange-600 text-white text-xs font-bold rounded-xl transition-all shadow-md shrink-0"
+      >
+        View {category} Hub
+      </a>
+    </div>
+  </div>
+</BaseLayout>

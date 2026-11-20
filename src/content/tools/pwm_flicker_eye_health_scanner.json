@@ -1,8 +1,8 @@
 {
   "id": "pwm_flicker_eye_health_scanner",
-  "name": "PWM Flicker Eye Health Scanner",
-  "title": "PWM Flicker Eye Health Scanner | Toolkit Gen",
-  "description": "Have you ever stared at your brand-new smartphone or monitor and felt an inexplicable onset of eye fatigue, a dull headache, or even nausea within minutes?",
+  "name": "Screen Flicker & Rolling Shutter Banding Detector",
+  "title": "Screen Flicker & Rolling Shutter Banding Detector | Toolkit Gen",
+  "description": "Detect visible OLED and LCD screen flicker and pulse-width modulation (PWM) using camera rolling shutter banding. Visual screening tool, not a photodiode meter.",
   "category": "Vision / Optometry",
   "tags": [
     "PWM flicker test",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "PWM Flicker Eye Health Scanner is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Identify pulse-width modulation (PWM) display flicker by observing rolling shutter dark interference bands through your camera. Provides a rapid visual presence test to detect screen flicker without needing dedicated laboratory photodiode equipment.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,42 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch PWM Flicker Eye Health Scanner directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Prepare Display Screen",
+      "text": "Open a solid white image or blank document on the screen you wish to inspect and lower display brightness to 25% to 50%."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Align Smartphone Camera",
+      "text": "Point your smartphone camera at the target screen at a distance of 4 to 8 inches (10 to 20 cm) and focus carefully."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Observe Rolling Shutter Banding",
+      "text": "Look for traveling horizontal black and gray bars across the camera viewfinder. Thick, visible bands indicate active pulse-width modulation."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Compare at 100% Brightness",
+      "text": "Increase screen brightness to 100%. If the dark bands disappear or become uniform, the display uses PWM duty-cycle dimming at lower brightness levels."
     }
   ],
   "faq": [
     {
-      "q": "Is Blue Light or PWM Flicker worse for my eyes?",
-      "a": "They cause entirely different problems. Blue light primarily affects your circadian rhythm by suppressing melatonin production, making it hard to fall asleep. PWM Flicker is a direct neurological and muscular stressor. It causes the pupil to rapidly contract and dilate, leading to intense physical eye fatigue, asthenopia, and migraines. For immediate physical pain and headaches, PWM is significantly worse than blue light."
+      "q": "How does camera rolling shutter detect display flicker?",
+      "a": "CMOS camera sensors read pixel rows sequentially from top to bottom (rolling shutter). When a display uses PWM to dim its backlight by flashing rapidly on and off, the sensor captures illuminated rows when the backlight is ON and dark bands when the backlight is OFF."
     },
     {
-      "q": "Why do companies still use PWM if it causes migraines?",
-      "a": "Cost, engineering simplicity, and color accuracy. OLED panels are notoriously difficult to dim using direct voltage reduction (DC Dimming). If you simply lower the power to an OLED pixel, the colors distort—greys look green or purple, and the image looks \"muddy.\" PWM solves this instantly by running the pixel at full power, just for fractions of a second. It is a cheap, effective engineering shortcut that prioritizes screen aesthetics over the biological comfort of a minority of sensitive users."
+      "q": "Can a smartphone camera measure exact PWM flicker frequency in kHz?",
+      "a": "No. Smartphone camera rolling shutter frame rates and exposure times are typically limited to between 1/30s and 1/8000s, which can visually reveal flicker up to approximately 480Hz. Precise measurement of high-frequency (e.g. 1920Hz to 3840Hz) flicker requires an optical photodiode connected to an oscilloscope."
     },
     {
-      "q": "Can I train my eyes to get used to PWM flicker?",
-      "a": "No. PWM sensitivity is largely a biological and neurological trait, relating to how your visual cortex processes temporal light modulation. You cannot \"build a tolerance\" to it by forcing yourself to endure the migraines. In fact, prolonged exposure while experiencing symptoms can exacerbate chronic asthenopia. The only solution is avoidance or mitigation through software settings."
+      "q": "Why does low-frequency PWM cause headaches and eye strain?",
+      "a": "Even when screen flicker is too fast to be consciously perceived, the human retina and pupillary sphincter muscles continuously respond to rapid light pulses. This causes micro-contractions in eye muscles, resulting in asthenopia (eye strain), migraines, and visual fatigue."
     },
     {
-      "q": "Why does the scanner show thicker bands on some screens and thinner bands on others?",
-      "a": "The thickness of the dark bands relates directly to the PWM frequency and the duty cycle. Thick, prominent bands that move slowly usually indicate a very low frequency (e.g., 240Hz), which is more likely to cause eye strain. Very thin, faint, rapidly vibrating lines indicate a much higher frequency (e.g., 1920Hz or 2160Hz), which is significantly safer for human physiology. If the screen has absolutely no bands and remains perfectly smooth, it is using DC Dimming and is flicker-free."
-    },
-    {
-      "q": "Why does the scanner show thicker bands on some screens and thinner bands on others?",
-      "a": "The thickness of the dark bands relates directly to the PWM frequency and the duty cycle. Thick, prominent bands that move slowly usually indicate a very low frequency (e.g., 240Hz), which is more likely to cause eye strain. Very thin, faint, rapidly vibrating lines indicate a much higher frequency (e.g., 1920Hz or 2160Hz), which is significantly safer for human physiology. If the screen has absolutely no bands and remains perfectly smooth, it is using DC Dimming and is flicker-free."
+      "q": "What display technologies eliminate PWM flicker?",
+      "a": "Displays with DC dimming (analog voltage regulation) or flicker-free LED backlights adjust LED current amplitude rather than pulsing power. High-frequency PWM displays (over 2160Hz) are also significantly more comfortable than low-frequency 240Hz PWM panels."
     }
   ],
   "related": [],

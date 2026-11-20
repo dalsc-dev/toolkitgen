@@ -1,8 +1,8 @@
 {
   "id": "web_bluetooth_scan",
-  "name": "Bluetooth LE Scanner",
-  "title": "Bluetooth LE Scanner | Toolkit Gen",
-  "description": "The Sovereign Auditor: Mastering IoT Security We live in a world where the air is thick with invisible conversations.",
+  "name": "Bluetooth LE Device Scanner & GATT Explorer",
+  "title": "Bluetooth LE Device Scanner & GATT Explorer | Toolkit Gen",
+  "description": "Discover nearby Bluetooth Low Energy peripherals and explore available GATT services and characteristics using Web Bluetooth in supported Chromium browsers.",
   "category": "Hardware / Diagnostics",
   "tags": [
     "web bluetooth scanner",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Bluetooth LE Scanner is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Scan for nearby Bluetooth Low Energy (BLE) peripherals and inspect GATT services and characteristics in real time. Runs via the Web Bluetooth API in Chrome and Edge on desktop and Android with user-granted Bluetooth permissions.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,38 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch Bluetooth LE Scanner directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Verify Browser Support",
+      "text": "Open this tool in Google Chrome, Microsoft Edge, or Opera on Windows, macOS, Linux, ChromeOS, or Android."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Request Bluetooth Device",
+      "text": "Click 'Scan for BLE Devices' to prompt the browser security dialog. Select the peripheral you wish to pair with."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Connect to GATT Server",
+      "text": "Establish an authenticated GATT connection to inspect generic access, battery service, device information, and custom UUIDs."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Read and Subscribe Characteristics",
+      "text": "Read readable characteristic values or subscribe to notifications to observe live incoming telemetry data."
     }
   ],
   "faq": [
     {
-      "q": "Why does the browser say \"Bluetooth is not supported\"?",
-      "a": "Web Bluetooth requires a Secure Context (HTTPS). It will not work on http:// websites to prevent man-in-the-middle attacks. Additionally, it is currently supported in Chrome, Edge, and Opera. Firefox and Safari have currently disabled this API due to fingerprinting concerns. If you are on Android, ensure you are using the mobile version of Chrome."
+      "q": "Which web browsers support the Web Bluetooth API?",
+      "a": "The Web Bluetooth API is supported in Google Chrome, Microsoft Edge, and Chromium-based browsers on macOS, Windows 10/11, Linux, ChromeOS, and Android. It is not supported in Mozilla Firefox, Apple Safari on iOS or macOS, or Chromium iOS."
     },
     {
-      "q": "Is my device safe if it's \"Hidden\"?",
-      "a": "No. \"Security through obscurity\" is a fallacy. A device that is not broadcasting a name still has a MAC address and still uses the 2.4GHz spectrum. Sophisticated sniffers (like our tool's 'Accept All Devices' logic) can see the signal activity even if the SSID is masked. True safety comes from Pairing (Just Works vs Passkey) and Data Layer Encryption."
+      "q": "Can a website scan for Bluetooth devices silently in the background?",
+      "a": "No. The W3C Web Bluetooth specification strictly mandates user-initiated interaction. A browser permission picker always appears, requiring the user to explicitly select and authorize the specific device before any communication can occur."
     },
     {
-      "q": "Is my input data private when using this tool?",
-      "a": "Yes. Processing runs entirely in your local browser memory. Your inputs and configuration parameters are never uploaded to our servers."
+      "q": "What are GATT services and characteristics?",
+      "a": "GATT (Generic Attribute Profile) organizes Bluetooth LE data into Services (logical groupings identified by 16-bit or 128-bit UUIDs, e.g. Battery Service 0x180F) and Characteristics (specific data points with read, write, or notify permissions)."
     },
     {
-      "q": "Does this tool work on mobile devices and tablets?",
-      "a": "Yes. The interface is responsive and works across all modern mobile, tablet, and desktop web browsers."
+      "q": "Why doesn't Web Bluetooth work on Apple Safari or iOS?",
+      "a": "Apple has declined to implement Web Bluetooth in Safari due to security and privacy concerns regarding device fingerprinting and potential hardware exploitation from malicious websites."
     }
   ],
   "related": [

@@ -1,36 +1,176 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { CANONICAL_13_CATEGORIES } from '@lib/taxonomy';
+
+const allTools = await getCollection('tools');
+
+const popularSlugs = [
+  'mouse_polling_rate_hz',
+  'amsler_grid_macular',
+  'docker_compose_linter',
+  'cpr_metronome_bpm',
+  'sqlite_wasm_explorer',
+  'black_scholes_heatmap',
+];
+
+const popularTools = popularSlugs
+  .map((s) => allTools.find((t) => t.data.id === s))
+  .filter(Boolean);
 ---
 
 <BaseLayout
   title="404 - Page Not Found | Toolkit Gen"
-  description="The page you requested could not be found. Explore our directory of free online tools and calculators."
+  description="The tool or page you requested could not be found. Search our catalog of free client-side tools or browse popular utilities."
   noindex={true}
 >
-  <div class="py-20 text-center space-y-6 max-w-lg mx-auto">
-    <div class="w-20 h-20 rounded-3xl bg-orange-100 text-[#EE6C4D] mx-auto flex items-center justify-center font-black text-3xl shadow-sm">
-      404
+  <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 space-y-12 text-center">
+    <!-- 404 Error Header -->
+    <div class="space-y-4">
+      <div class="w-20 h-20 rounded-3xl bg-orange-100 text-[#EE6C4D] mx-auto flex items-center justify-center font-black text-3xl shadow-sm">
+        404
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+        Page Not Found
+      </h1>
+      <p class="text-sm sm:text-base text-slate-600 max-w-lg mx-auto leading-relaxed">
+        The tool or resource you requested may have been renamed or moved. Use the quick search below or explore our most popular utilities.
+      </p>
     </div>
 
-    <h1 class="text-3xl font-black text-slate-900 tracking-tight">Page Not Found</h1>
+    <!-- Live Tool Search Box -->
+    <div class="max-w-md mx-auto relative">
+      <input
+        type="text"
+        id="error-search-input"
+        placeholder="Search 132+ client-side tools..."
+        class="w-full bg-white border-2 border-slate-200 focus:border-[#EE6C4D] rounded-2xl py-3 pl-11 pr-4 text-xs sm:text-sm text-slate-800 outline-none transition-all shadow-sm"
+      />
+      <svg class="w-4 h-4 text-slate-400 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <!-- Live Dropdown Results -->
+      <div id="error-search-results" class="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden hidden z-50 text-left max-h-60 overflow-y-auto"></div>
+    </div>
 
-    <p class="text-sm text-slate-600 leading-relaxed">
-      The tool or resource you are looking for may have been updated, consolidated into one of our specialized OS suites, or moved.
-    </p>
-
-    <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+    <!-- Quick Action Navigation Buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-3">
       <a
         href="/"
-        class="px-5 py-2.5 text-xs font-bold text-white bg-[#EE6C4D] hover:bg-[#d75a3c] rounded-xl shadow-sm transition-colors"
+        class="px-5 py-2.5 text-xs font-bold text-white bg-[#EE6C4D] hover:bg-orange-600 rounded-xl shadow-sm transition-colors"
       >
         Return to Homepage
       </a>
       <a
         href="/tool"
-        class="px-5 py-2.5 text-xs font-bold text-slate-700 bg-white border border-slate-200/80 hover:bg-slate-50 rounded-xl transition-colors"
+        class="px-5 py-2.5 text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl transition-colors"
       >
-        Browse Tool Directory
+        Browse All Tools
       </a>
     </div>
+
+    <!-- Popular Tools Recovery Strip -->
+    <div class="space-y-4 pt-6 border-t border-slate-200 text-left">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs font-black uppercase tracking-wider text-slate-900">
+          Popular Online Utilities
+        </h2>
+        <a href="/tool" class="text-xs font-bold text-[#EE6C4D] hover:underline">
+          View all tools &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {popularTools.map((t) => (
+          <a
+            href={`/tool/${t!.data.id}`}
+            class="group p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs hover:shadow-md hover:border-[#EE6C4D]/40 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t!.data.category}</span>
+              <h3 class="text-sm font-bold text-slate-900 group-hover:text-[#EE6C4D] transition-colors mt-0.5">
+                {(t!.data.name || t!.data.title).replace(/\s*\|\s*Toolkit Gen.*$/i, '')}
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                {t!.data.description}
+              </p>
+            </div>
+            <span class="text-xs font-bold text-[#EE6C4D] mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span>Open Tool</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Category Links Grid -->
+    <div class="space-y-4 pt-6 border-t border-slate-200 text-left">
+      <h2 class="text-xs font-black uppercase tracking-wider text-slate-900">
+        Browse by Category Hub
+      </h2>
+      <div class="flex flex-wrap gap-2">
+        {CANONICAL_13_CATEGORIES.map((cat) => (
+          <a
+            href={`/category/${cat.slug}`}
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-orange-50 hover:text-[#EE6C4D] text-slate-700 border border-slate-200/80 transition-colors"
+          >
+            {cat.name}
+          </a>
+        ))}
+      </div>
+    </div>
   </div>
+
+  <script is:inline>
+    (async function() {
+      const input = document.getElementById('error-search-input');
+      const resultsEl = document.getElementById('error-search-results');
+      let catalog = [];
+
+      try {
+        const res = await fetch('/search-index.json');
+        if (res.ok) {
+          catalog = await res.json();
+        }
+      } catch (e) {}
+
+      if (!input || !resultsEl) return;
+
+      input.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        if (q.length < 2) {
+          resultsEl.classList.add('hidden');
+          resultsEl.innerHTML = '';
+          return;
+        }
+
+        const matches = catalog.filter((t) =>
+          t.name.toLowerCase().includes(q) ||
+          (t.description && t.description.toLowerCase().includes(q)) ||
+          (t.category && t.category.toLowerCase().includes(q))
+        ).slice(0, 5);
+
+        if (matches.length === 0) {
+          resultsEl.innerHTML = '<div class="p-4 text-xs text-slate-500">No matching tools found.</div>';
+          resultsEl.classList.remove('hidden');
+          return;
+        }
+
+        resultsEl.innerHTML = matches.map((m) =>
+          '<a href="/tool/' + m.id + '" class="block p-3 hover:bg-slate-50 border-b border-slate-100 last:border-0">' +
+            '<div class="text-xs font-bold text-slate-900">' + m.name + '</div>' +
+            '<div class="text-[11px] text-slate-500 truncate">' + (m.description || '') + '</div>' +
+          '</a>'
+        ).join('');
+        resultsEl.classList.remove('hidden');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!input.contains(e.target) && !resultsEl.contains(e.target)) {
+          resultsEl.classList.add('hidden');
+        }
+      });
+    })();
+  </script>
 </BaseLayout>

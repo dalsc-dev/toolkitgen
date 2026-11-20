@@ -54,7 +54,30 @@ const hubsCollection = defineCollection({
   }),
 });
 
+const guidesCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    title: z.string(),
+    description: z.string(),
+    category: z.string(),
+    hubSlug: z.string(),
+    author: z.string().default('ToolkitGen Engineering Team'),
+    datePublished: z.string().default('2025-02-01T00:00:00Z'),
+    dateModified: z.string().default('2026-11-20T00:00:00Z'),
+    relatedTools: z.array(z.string()).default([]),
+    quickAnswer: z.string(),
+    articleHtml: z.string(),
+    faq: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).default([]),
+  }),
+});
+
 export const collections = {
   tools: toolsCollection,
   hubs: hubsCollection,
+  guides: guidesCollection,
 };

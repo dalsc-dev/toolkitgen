@@ -5,6 +5,8 @@ import { getCollection } from 'astro:content';
 
 const tools = await getCollection('tools');
 const toolCount = tools.length;
+const guides = await getCollection('guides');
+const guideCount = guides.length;
 
 const canonicalUrl = 'https://toolkitgen.com/about';
 
@@ -15,13 +17,13 @@ const jsonLd = {
       '@type': 'AboutPage',
       '@id': 'https://toolkitgen.com/about#webpage',
       url: canonicalUrl,
-      name: 'About Toolkit Gen | Client-Side Architecture & Privacy Commitment',
-      description: `Learn about Toolkit Gen's mission to provide ${toolCount} free, privacy-focused digital tools for developers, creators, and health professionals.`,
+      name: 'About Toolkit Gen | Architecture, Testing Methodology & Editorial Standards',
+      description: `Learn about Toolkit Gen's mission to provide ${toolCount} client-side web tools and ${guideCount} diagnostic guides with verified mathematical accuracy and local browser processing.`,
       isPartOf: {
         '@id': 'https://toolkitgen.com/#website',
       },
       inLanguage: 'en-US',
-      dateModified: '2026-11-19T00:00:00Z',
+      dateModified: '2026-11-20T00:00:00Z',
     },
     {
       '@type': 'Organization',
@@ -32,8 +34,18 @@ const jsonLd = {
       sameAs: [
         'https://github.com/dalsc2/toolkitgen'
       ],
-      description: `Free privacy-focused online tools and calculators. Calculations run in your browser. Your inputs are not uploaded to our servers.`,
+      description: 'Free client-side online tools, calculators, and hardware diagnostics. Calculations run in your browser, and inputs are not uploaded to our servers.',
       foundingDate: '2023',
+      publishingPrinciples: 'https://toolkitgen.com/about#editorial-policy',
+      correctionsPolicy: 'https://toolkitgen.com/contact',
+      knowsAbout: [
+        'Web Audio API',
+        'WebAssembly',
+        'Computer Display Diagnostics',
+        'Input Latency & Polling Rate',
+        'Quantitative Financial Modeling',
+        'Developer Utilities'
+      ],
       contactPoint: {
         '@type': 'ContactPoint',
         email: 'toolkitgen@gmail.com',
@@ -62,24 +74,24 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title="About Toolkit Gen | Our Mission & Privacy Commitment"
-  description={`Toolkit Gen provides ${toolCount}+ free, client-side web utilities for developers, designers, and professionals. All tool inputs are processed in your browser and never uploaded.`}
+  title="About Toolkit Gen | Engineering Standards & Privacy Commitment"
+  description={`Toolkit Gen provides ${toolCount} free client-side web utilities and ${guideCount} diagnostic guides. All tool calculations execute in your browser with zero data uploads.`}
   canonical={canonicalUrl}
   jsonLd={jsonLd}
 >
-  <Breadcrumbs items={[{ name: 'About Us', url: '/about' }]} />
+  <div class="max-w-5xl mx-auto space-y-12 py-6 px-4 sm:px-6 lg:px-8">
+    <Breadcrumbs items={[{ name: 'About Us', url: '/about' }]} />
 
-  <div class="max-w-4xl mx-auto space-y-12 py-6">
-    <!-- Hero Section -->
+    <!-- Hero Header -->
     <header class="text-center space-y-4">
       <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
-        Browser-Based Architecture
+        Engineering &amp; Editorial Standards
       </span>
       <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
         About Toolkit Gen
       </h1>
-      <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-        A directory of {toolCount} client-side web tools. No account required. Calculations run in your browser, and your inputs are not uploaded to our servers.
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        A directory of {toolCount} client-side web utilities and {guideCount} diagnostic symptom guides. No account required. Calculations run in your browser, and your inputs are not uploaded to our servers.
       </p>
     </header>
 
@@ -87,88 +99,179 @@ const jsonLd = {
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
       <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
         <div class="text-3xl font-black text-[#EE6C4D]">{toolCount}</div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Tools Available</div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Standalone Tools</div>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div class="text-3xl font-black text-blue-600">{guideCount}</div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Diagnostic Guides</div>
       </div>
       <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
         <div class="text-3xl font-black text-emerald-600">Local</div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Execution Mode</div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Browser Sandbox</div>
       </div>
       <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
-        <div class="text-3xl font-black text-blue-600">In-Browser</div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Architecture</div>
-      </div>
-      <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
-        <div class="text-3xl font-black text-purple-600">0 Uploads</div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Input Retention</div>
+        <div class="text-3xl font-black text-purple-600">Zero</div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Data Uploads</div>
       </div>
     </div>
 
-    <!-- Longform Mission Article -->
-    <article class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm prose max-w-none space-y-6">
-      <h2 class="text-2xl font-bold text-slate-900">Our Story &amp; Purpose</h2>
-      <p class="text-slate-700 leading-relaxed">
-        Toolkit Gen was built out of frustration with modern web utilities. Simple tasks—like converting a cURL command to fetch, calculating IV drop rates, inspecting display refresh rates, or analyzing password entropy—too often require creating accounts, navigating intrusive paywalls, or unwittingly uploading sensitive credentials and telemetry to third-party backends.
+    <!-- Longform Article Body -->
+    <article class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm prose max-w-none space-y-8">
+      <h2>Mission &amp; Architectural Standard</h2>
+      <p>
+        Toolkit Gen was created to solve a pervasive problem across the modern internet: simple computational tasks—such as converting terminal cURL commands, testing display refresh rates, validating Docker Compose files, calculating IV drip drop factors, or evaluating options Greeks—frequently require user registration, subscription paywalls, or uploading sensitive proprietary data to remote servers.
       </p>
-      <p class="text-slate-700 leading-relaxed">
-        We believe everyday tools should be <strong>instant, open, and accessible and local-first</strong>. By leveraging modern browser APIs (such as WebAssembly, Web Audio API, Canvas 2D, and WebGL), our utilities execute mathematical formulas, audio tests, and formatting scripts directly in your device's memory.
+      <p>
+        We believe everyday tools should be <strong>instant, open, and processed in your local browser</strong>. By leveraging modern W3C Web APIs (such as WebAssembly, Web Audio API, WebGPU, and Canvas 2D), our utilities execute mathematical formulas, signal tests, and formatting scripts directly inside client device memory.
       </p>
 
-      <div class="my-8 p-6 bg-slate-50 border border-emerald-200 bg-emerald-50/60 rounded-2xl space-y-2">
-        <h3 class="text-base font-bold text-emerald-950 uppercase tracking-wider m-0">Our Core Privacy Rule</h3>
-        <p class="text-sm text-slate-700 m-0">
-          <strong>Calculations run in your browser. Your inputs are not uploaded to our servers.</strong> Whether you enter code snippets, calculate health metrics, or inspect cryptographic keys, processing occurs locally on your device.
+      <div class="my-6 p-6 bg-emerald-50/60 border border-emerald-200 rounded-2xl">
+        <h3 class="text-sm font-bold text-emerald-950 uppercase tracking-wider m-0">The Toolkit Gen Architecture Rule</h3>
+        <p class="text-sm text-slate-700 mt-2 mb-0">
+          <strong>Calculations run in your browser. Inputs are not uploaded to our servers.</strong> Whether you analyze database files, test mouse polling rates, or calculate health ratios, data processing executes locally inside your browser tab sandbox.
         </p>
       </div>
 
-      <h2 class="text-2xl font-bold text-slate-900">What We Stand For</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 not-prose">
-        <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
-          <div class="font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold"><svg class="w-4 h-4 inline-block text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
-            Zero Account Requirement
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Every tool is accessible immediately upon page load. No email collection, no passwords, and no login walls.
-          </p>
-        </div>
-        <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
-          <div class="font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold"><svg class="w-4 h-4 inline-block text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
-            Audited In-Browser Computation
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            All computation occurs inside sandboxed browser memory. Inspect network tabs on any tool to verify zero outbound payloads.
-          </p>
-        </div>
-        <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
-          <div class="font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold"><svg class="w-4 h-4 inline-block text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
-            Algorithmic Rigor
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            From Black-Scholes financial pricing to medical drop factor ratios and audio FFT frequency analysis, our logic is unit-tested against verified standards.
-          </p>
-        </div>
-        <div class="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-2">
-          <div class="font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold"><svg class="w-4 h-4 inline-block text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
-            Honest Sustainability
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            We support free serverless hosting through non-intrusive Google AdSense slots. Ads are strictly separated from tools and never push interactive components down.
-          </p>
+      <h2>Testing Methodology &amp; Automated Verification</h2>
+      <p>
+        Reliability is paramount when providing developer utilities and diagnostic calculators. Toolkit Gen enforces a multi-tiered continuous integration (CI) pipeline before any software update is published:
+      </p>
+      <ul>
+        <li><strong>Unit Test Coverage:</strong> Mathematical algorithms and parsing functions are covered by automated unit tests using the Vitest framework. Formulas are tested against canonical peer-reviewed references (such as Black-Scholes-Merton differential equations, AHA CPR guidelines, and RFC 7230 HTTP specifications).</li>
+        <li><strong>Browser Performance Budgets:</strong> Tools are audited against strict performance budgets. Total Blocking Time (TBT) must remain under 200 milliseconds, and long tasks during tool idle must not exceed 50 milliseconds.</li>
+        <li><strong>Hang Guard &amp; CPU Throttle Testing:</strong> In-browser signal generators and real-time canvas renderers are audited under simulated 6x CPU throttling conditions to guarantee that main-thread event loops never lock or freeze low-end mobile devices.</li>
+        <li><strong>Zero Synthetic Data Rule:</strong> We do not publish simulated or fabricated benchmark data. When browser APIs cannot access hardware metrics (for example, raw Wi-Fi RSSI or Bluetooth MAC addresses), tools explicitly disclose operating system limitations.</li>
+      </ul>
+
+      <h2>Browser Web API Reference &amp; Hardware Compatibility</h2>
+      <p>
+        Modern web browsers provide advanced hardware interfaces. The table below details the specific W3C Web APIs utilized across Toolkit Gen, their browser engine compatibility, and underlying security boundaries:
+      </p>
+
+      <div class="overflow-x-auto my-6 not-prose">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse border border-slate-200 bg-white rounded-2xl overflow-hidden shadow-sm">
+          <thead class="bg-slate-100 text-slate-700 font-black uppercase text-[10px] tracking-wider border-b border-slate-200">
+            <tr>
+              <th class="p-3 sm:p-4">Browser Web API</th>
+              <th class="p-3 sm:p-4">Primary Tools</th>
+              <th class="p-3 sm:p-4">Chromium Support</th>
+              <th class="p-3 sm:p-4">Gecko / Firefox</th>
+              <th class="p-3 sm:p-4">WebKit / Safari</th>
+              <th class="p-3 sm:p-4">Security / Permission Model</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-600 font-mono">
+            <tr>
+              <td class="p-3 sm:p-4 font-sans font-bold text-slate-800">Web Audio API</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">Audio Latency, Hearing Audiogram, Tinnitus Matcher, CPR Metronome</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">Requires explicit user gesture to resume AudioContext.</td>
+            </tr>
+            <tr>
+              <td class="p-3 sm:p-4 font-sans font-bold text-slate-800">Web Serial API</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">USB-C PD Sniffer, Web Serial Terminal</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Desktop Only</td>
+              <td class="p-3 sm:p-4 text-rose-600 font-bold">Unsupported</td>
+              <td class="p-3 sm:p-4 text-rose-600 font-bold">Unsupported</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">Explicit browser device picker; HTTPS required.</td>
+            </tr>
+            <tr>
+              <td class="p-3 sm:p-4 font-sans font-bold text-slate-800">Web Bluetooth API</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">Bluetooth LE Scanner, BLE RSSI Meter</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Chrome &amp; Edge</td>
+              <td class="p-3 sm:p-4 text-rose-600 font-bold">Unsupported</td>
+              <td class="p-3 sm:p-4 text-rose-600 font-bold">Unsupported</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">User-initiated device pairing picker; HTTPS required.</td>
+            </tr>
+            <tr>
+              <td class="p-3 sm:p-4 font-sans font-bold text-slate-800">Web NFC API</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">NDEF Tag Overwriter</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Android Only</td>
+              <td class="p-3 sm:p-4 text-rose-600 font-bold">Unsupported</td>
+              <td class="p-3 sm:p-4 text-rose-600 font-bold">Unsupported</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">Explicit NFC permission prompt; HTTPS required.</td>
+            </tr>
+            <tr>
+              <td class="p-3 sm:p-4 font-sans font-bold text-slate-800">DeviceOrientation &amp; Motion</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">Compass Stud Locator, Motion Logger</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full (Mobile)</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full (Mobile)</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">iOS Permission</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">iOS requires `requestPermission()` user prompt.</td>
+            </tr>
+            <tr>
+              <td class="p-3 sm:p-4 font-sans font-bold text-slate-800">Performance Timeline &amp; PointerEvents</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">Mouse Polling Rate, Keyboard Latency, Refresh Tester</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">High-resolution microsecond timestamps (`performance.now`).</td>
+            </tr>
+            <tr>
+              <td class="p-3 sm:p-4 font-sans font-bold text-slate-800">WebAssembly &amp; OPFS</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">SQLite WASM Explorer, Docker Linter</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 text-emerald-600 font-bold">Full</td>
+              <td class="p-3 sm:p-4 font-sans text-xs">Isolated origin private file storage; in-memory processing.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="editorial-policy">Editorial Policy &amp; Review Process</h2>
+      <p>
+        Content integrity is maintained through our strict editorial workflow:
+      </p>
+      <ul>
+        <li><strong>Authored by Engineers:</strong> Technical guides, hardware troubleshooting articles, and educational documentation are authored by software engineers and technical researchers with hands-on systems experience.</li>
+        <li><strong>Factual Verification &amp; Source Citations:</strong> All technical specifications (e.g. HDMI/DisplayPort bandwidth ceilings, USB-IF HID polling tolerances, medical drop factor constants) cite official standard-setting bodies (VESA, USB-IF, IETF, AHA, W3C).</li>
+        <li><strong>Deprecation &amp; Maintenance Audits:</strong> Our editorial board reviews browser API status quarterly to update compatibility badges and ensure accurate guidance as web standards evolve.</li>
+      </ul>
+
+      <h2>Health &amp; Medical Disclaimer</h2>
+      <div class="p-6 bg-rose-50/70 border border-rose-200 rounded-2xl not-prose space-y-3">
+        <h3 class="text-sm font-bold text-rose-950 uppercase tracking-wider m-0">Important Health &amp; Diagnostic Disclosure</h3>
+        <p class="text-xs sm:text-sm text-rose-900 leading-relaxed m-0">
+          Health and optometry utilities on Toolkit Gen (including the Amsler Grid Macular Test, Snellen Visual Acuity Chart, Astigmatism Fan Chart, Hearing Audiogram, and Tinnitus Matcher) are informational self-evaluation tools designed to promote personal health awareness. They are <strong>NOT diagnostic medical devices</strong> and do not provide medical advice or diagnoses.
+        </p>
+        <div class="border-t border-rose-200/80 pt-3">
+          <h4 class="text-xs font-bold text-rose-950 uppercase tracking-wider">When to Seek Immediate Professional Medical Attention:</h4>
+          <ul class="list-disc list-inside text-xs text-rose-800 mt-1 space-y-1">
+            <li>Sudden, painless loss of vision in one or both eyes.</li>
+            <li>Sudden appearance of dark curtains, flashes of light, or dense floaters.</li>
+            <li>Sudden onset of distorted, wavy lines (metamorphopsia) in central vision.</li>
+            <li>Sudden sensorineural hearing loss or acute pain in the ear canal.</li>
+            <li>Unilateral (single-sided) tinnitus or pulsatile ringing rhythmic with your heartbeat.</li>
+            <li>Acute chest pain, shortness of breath, or suspected cardiac arrest (immediately dial 911 or local emergency services).</li>
+          </ul>
         </div>
       </div>
 
-      <h2 class="text-2xl font-bold text-slate-900">How We Test Our Utilities</h2>
-      <p class="text-slate-700 leading-relaxed">
-        Every tool calculation is implemented with strict TypeScript typings and covered by automated Vitest unit test suites. Mathematical calculations are checked against peer-reviewed formulas and standard reference libraries. For specialized medical or financial calculations, clear educational disclaimers are prominently displayed.
+      <h2>Quantitative Financial Disclaimer</h2>
+      <p>
+        Financial tools (such as the Black-Scholes Options Calculator, Startup Runway Suite, and Compound Interest Calculators) provide quantitative mathematical projections based on idealized continuous models. Real-world financial markets involve severe liquidity risks, stochastic volatility smiles, American-style early assignment, discrete dividend payments, and transaction costs. Output data does not constitute financial, legal, tax, or investment advice.
       </p>
 
-      <h2 class="text-2xl font-bold text-slate-900">Get in Touch</h2>
-      <p class="text-slate-700 leading-relaxed">
-        Toolkit Gen is maintained by an independent group of software engineers and technical researchers. For inquiries, bug reports, or feature suggestions, reach us directly at <a href="mailto:toolkitgen@gmail.com" class="text-blue-600 font-semibold underline">toolkitgen@gmail.com</a>.
+      <h2>Author &amp; Engineering Attribution</h2>
+      <p>
+        Toolkit Gen is developed and maintained by the <strong>ToolkitGen Engineering Team</strong>, an independent group of software engineers, systems programmers, and quantitative analysts dedicated to building high-performance, private, client-side web software.
       </p>
+      <p>
+        For inquiries, technical corrections, or feature proposals, contact our engineering board directly at <a href="mailto:toolkitgen@gmail.com" class="text-blue-600 font-bold underline">toolkitgen@gmail.com</a>.
+      </p>
+
+      <h2>Privacy &amp; Terms Reference</h2>
+      <p>
+        For detailed disclosures regarding our cookie policies, local storage utilization, and terms of service, review our dedicated legal documentation:
+      </p>
+      <ul>
+        <li><a href="/privacy" class="text-blue-600 font-bold underline">Privacy Policy</a>: Complete breakdown of client-side execution, localStorage keys, and third-party advertising disclosures.</li>
+        <li><a href="/terms" class="text-blue-600 font-bold underline">Terms of Service</a>: Terms governing client-side web utility usage.</li>
+        <li><a href="/disclaimer" class="text-blue-600 font-bold underline">General &amp; Medical Disclaimer</a>: Full statutory liability disclosures.</li>
+      </ul>
     </article>
   </div>
 </BaseLayout>

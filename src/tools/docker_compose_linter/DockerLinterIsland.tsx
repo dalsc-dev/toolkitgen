@@ -5,7 +5,7 @@ const SAMPLE_COMPOSE = `version: '3.8'
 
 services:
   web:
-    image: nginx:alpine
+    image: nginx:1.25-alpine
     ports:
       - "8080:80"
     environment:
@@ -36,10 +36,30 @@ volumes:
 export default function DockerLinterIsland() {
   const [content, setContent] = useState(SAMPLE_COMPOSE);
   const [result, setResult] = useState<ValidationResult>(() => validateDockerCompose(SAMPLE_COMPOSE));
+  const [copied, setCopied] = useState(false);
 
   const handleValidate = () => {
     const res = validateDockerCompose(content);
     setResult(res);
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(content).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([content], { type: 'text/yaml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'docker-compose.yml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -60,97 +80,149 @@ export default function DockerLinterIsland() {
           </button>
         </div>
 
-        <button
-          type="button"
-          onClick={handleValidate}
-          className="px-5 py-2 text-xs font-bold text-white bg-[#EE6C4D] hover:bg-[#d75a3c] rounded-xl shadow-sm transition-colors flex items-center gap-1.5"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          Validate YAML
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs"
+          >
+            {copied ? 'Copied YAML!' : 'Copy YAML'}
+          </button>
+          <button
+            type="button"
+            onClick={handleDownload}
+            className="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs"
+          >
+            Download
+          </button>
+          <button
+            type="button"
+            onClick={handleValidate}
+            className="px-4 py-1.5 text-xs font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition-all shadow-2xs"
+          >
+            Re-Validate
+          </button>
+        </div>
       </div>
 
-      {/* Code Area */}
-      <div>
-        <textarea
-          value={content}
-          onInput={(e) => setContent((e.target as HTMLTextAreaElement).value)}
-          rows={14}
-          spellcheck={false}
-          className="w-full font-mono text-xs sm:text-sm p-4 bg-slate-900 text-slate-100 rounded-2xl border border-slate-800 focus:outline-none focus:ring-2 focus:ring-[#EE6C4D] leading-relaxed resize-y"
-          placeholder="Paste docker-compose.yml here..."
-        />
-      </div>
+      {/* Editor & Results Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Editor Area (7 cols) */}
+        <div className="lg:col-span-7 space-y-2">
+          <textarea
+            value={content}
+            onInput={(e: any) => {
+              setContent(e.target.value);
+              setResult(validateDockerCompose(e.target.value));
+            }}
+            rows={15}
+            spellcheck={false}
+            className="w-full bg-slate-950 text-slate-100 font-mono text-xs rounded-2xl p-4 border border-slate-800 outline-none focus:ring-2 focus:ring-[#EE6C4D] leading-relaxed resize-y custom-scrollbar"
+            placeholder="Paste your docker-compose.yml content here..."
+          />
+        </div>
 
-      {/* Results Section */}
-      <div className="space-y-4">
-        {result.isValid ? (
-          <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-xs sm:text-sm flex items-start gap-3">
-            <svg className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-            <div>
-              <p className="font-bold text-emerald-900">Valid Docker Compose Structure</p>
-              <p className="mt-0.5 text-emerald-700">No syntax errors found. Ready for deployment with docker compose up.</p>
+        {/* Validation Output (5 cols) */}
+        <div className="lg:col-span-5 space-y-4">
+          {/* Status Banner */}
+          <div
+            className={`p-4 rounded-2xl border flex items-center justify-between ${
+              result.isValid
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                : 'bg-rose-50 border-rose-200 text-rose-800'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <span
+                className={`w-2.5 h-2.5 rounded-full ${
+                  result.isValid ? 'bg-emerald-500' : 'bg-rose-500'
+                }`}
+              />
+              <span className="font-bold text-xs uppercase tracking-wider">
+                {result.isValid ? 'Valid Compose Structure' : 'Syntax / Validation Errors'}
+              </span>
             </div>
+            {result.version && (
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/80 border border-slate-200 text-slate-700">
+                v{result.version}
+              </span>
+            )}
           </div>
-        ) : (
-          <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-xs sm:text-sm space-y-1">
-            <div className="flex items-center gap-2 font-bold text-rose-900">
-              <svg className="w-5 h-5 text-rose-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
-              <span>Validation Errors ({result.errors.length})</span>
+
+          {/* Errors */}
+          {result.errors.length > 0 && (
+            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-1.5">
+              <h4 className="text-xs font-bold text-rose-900 uppercase tracking-wider">Syntax Errors:</h4>
+              <ul className="list-disc list-inside text-xs text-rose-700 space-y-1">
+                {result.errors.map((err, i) => (
+                  <li key={i}>{err}</li>
+                ))}
+              </ul>
             </div>
-            <ul className="list-disc list-inside space-y-1 pl-2 text-rose-700 font-mono text-xs">
-              {result.errors.map((err, i) => (
-                <li key={i}>{err}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+          )}
 
-        {/* Warnings */}
-        {result.warnings.length > 0 && (
-          <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-amber-800 text-xs space-y-1">
-            <span className="font-bold text-amber-900">Warnings &amp; Best Practices:</span>
-            <ul className="list-disc list-inside space-y-0.5 pl-2 text-amber-700">
-              {result.warnings.map((w, i) => (
-                <li key={i}>{w}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Services Overview */}
-        {result.services.length > 0 && (
-          <div>
-            <h4 className="text-xs font-black uppercase tracking-wider text-slate-500 mb-3">
-              Parsed Services ({result.services.length})
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-              {result.services.map((svc) => (
-                <div key={svc.name} className="p-3 bg-slate-50 border border-slate-200/80 rounded-xl space-y-1.5 text-xs">
-                  <div className="font-bold text-slate-900 flex items-center justify-between">
-                    <span>{svc.name}</span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 font-mono">service</span>
+          {/* Security Advisories */}
+          {result.securityAdvisories.length > 0 && (
+            <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 space-y-2">
+              <h4 className="text-xs font-bold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
+                <svg className="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                Security Advisories ({result.securityAdvisories.length})
+              </h4>
+              <div className="space-y-2 max-h-52 overflow-y-auto custom-scrollbar pr-1">
+                {result.securityAdvisories.map((adv, i) => (
+                  <div key={i} className="text-xs p-2.5 rounded-xl bg-white/80 border border-amber-200/80 space-y-1">
+                    <div className="flex items-center justify-between font-bold text-slate-900">
+                      <span>Service: {adv.service}</span>
+                      <span className={`text-[10px] uppercase px-1.5 py-0.2 rounded font-black ${adv.severity === 'high' ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700'}`}>
+                        {adv.severity}
+                      </span>
+                    </div>
+                    <p className="text-slate-700 font-medium">{adv.issue}</p>
+                    <p className="text-slate-500 text-[11px] leading-tight">{adv.recommendation}</p>
                   </div>
-                  {svc.image && (
-                    <div className="text-[11px] text-slate-500 font-mono truncate" title={svc.image}>
-                      image: {svc.image}
-                    </div>
-                  )}
-                  {svc.build && (
-                    <div className="text-[11px] text-slate-500 font-mono">
-                      build: {svc.build}
-                    </div>
-                  )}
-                  {svc.ports && (
-                    <div className="text-[11px] text-emerald-700 font-mono">
-                      ports: {svc.ports.join(', ')}
-                    </div>
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+
+          {/* Warnings */}
+          {result.warnings.length > 0 && (
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">Notices:</h4>
+              <ul className="list-disc list-inside text-xs text-slate-600 space-y-1">
+                {result.warnings.map((warn, i) => (
+                  <li key={i}>{warn}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Service Summary Table */}
+          {result.services.length > 0 && (
+            <div className="border border-slate-200 rounded-2xl overflow-hidden shadow-2xs">
+              <div className="bg-slate-100 px-4 py-2 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                Parsed Services ({result.services.length})
+              </div>
+              <div className="divide-y divide-slate-100 text-xs">
+                {result.services.map((s, i) => (
+                  <div key={i} className="p-3 bg-white space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-slate-900">{s.name}</span>
+                      <span className="font-mono text-slate-500 text-[11px]">
+                        {s.image || (s.build ? 'build: ' + s.build : 'custom')}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 text-slate-500 text-[11px]">
+                      <span>Ports: {s.ports ? s.ports.join(', ') : 'none'}</span>
+                      <span>•</span>
+                      <span>Env vars: {s.environmentCount}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

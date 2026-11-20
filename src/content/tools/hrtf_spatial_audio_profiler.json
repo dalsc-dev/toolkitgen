@@ -1,8 +1,8 @@
 {
   "id": "hrtf_spatial_audio_profiler",
-  "name": "Personalized HRTF (Spatial Audio) Profiler",
-  "title": "Personalized HRTF (Spatial Audio) Profiler | Toolkit Gen",
-  "description": "Acoustic Engineering Unlock \"God-Tier\" Audio with Personalized HRTF Why does your expensive gaming headset still sound like the audio is \"inside your head\"?",
+  "name": "Spatial Audio HRTF Simulator & Virtual Surround Calibrator",
+  "title": "Spatial Audio HRTF Simulator & Virtual Surround Calibrator | Toolkit Gen",
+  "description": "Simulate 3D spatial audio positioning and binaural room impulse responses using head-related transfer function models in the Web Audio API.",
   "category": "Audio / Sound",
   "tags": [
     "HRTF generator",
@@ -16,9 +16,9 @@
   ],
   "featured": false,
   "datePublished": "2025-01-15T00:00:00Z",
-  "dateModified": "2026-11-06T08:27:44Z",
+  "dateModified": "2026-11-20T00:00:00Z",
   "author": "ToolkitGen Engineering Team",
-  "quickAnswer": "Personalized HRTF (Spatial Audio) Profiler is a browser-based utility developed for professionals requiring immediate results without server dependencies. It executes all calculations locally on your client device using modern Web APIs, ensuring that your inputs, files, and diagnostic data remain within browser memory. No registration or software installation is required.",
+  "quickAnswer": "Simulate 3D spatial audio cues and headphone surround localization using head-related transfer function (HRTF) algorithms in the Web Audio API. Provides algorithmic sound positioning to test stereo imaging and pinna filtering effects.",
   "features": [
     "Local Browser Processing",
     "Instant Calculation",
@@ -27,38 +27,38 @@
   ],
   "howTo": [
     {
-      "name": "Open Tool",
-      "text": "Launch Personalized HRTF (Spatial Audio) Profiler directly in your browser on ToolkitGen. No account creation or installation needed."
+      "name": "Wear Stereo Headphones",
+      "text": "Put on standard over-ear or in-ear stereo headphones. Disable any external virtual surround sound DSP processing in your OS."
     },
     {
-      "name": "Configure Input",
-      "text": "Input your data, adjust slider parameters, or upload files directly into the client-side workspace."
+      "name": "Calibrate Head Dimensions",
+      "text": "Adjust the estimated interaural time difference (ITD) slider to match your head circumference and ear spacing."
     },
     {
-      "name": "Instant Calculation",
-      "text": "Review real-time calculations or interactive visualizations generated on-device with instant local execution."
+      "name": "Position Virtual Sound Source",
+      "text": "Drag the 3D sound node across azimuth (horizontal angle), elevation (vertical angle), and distance coordinates."
     },
     {
-      "name": "Export or Copy",
-      "text": "Copy results to clipboard or download files with direct browser download and no data upload."
+      "name": "Evaluate Binaural Localization",
+      "text": "Listen to the simulated frequency coloration and interaural time delays to test your acoustic soundstage localization."
     }
   ],
   "faq": [
     {
-      "q": "Does this work with any headphones?",
-      "a": "Yes. Because HRTF processing happens in the software (before the sound reaches the headphones), it works on any stereo headset. However, open-back headphones generally provide a wider natural soundstage, which complements the HRTF processing better than closed-back models."
+      "q": "How does HRTF simulate 3D audio in ordinary stereo headphones?",
+      "a": "Head-Related Transfer Functions (HRTF) model the precise acoustic filtering that occurs as sound waves bounce off your shoulders, head, and ear pinna folds before entering the ear canal. By applying these frequency-dependent filters and microsecond time delays, stereo headphones can convincingly place sounds in 3D space."
     },
     {
-      "q": "Is the webcam data sent to the cloud?",
-      "a": "Absolutely not. Privacy is our priority. The video stream is processed frame-by-frame directly in your browser's JavaScript engine. We do not store, record, or transmit your face data. The \"download\" is generated locally on your machine."
+      "q": "Can a browser camera scan real ear pinna geometry accurately?",
+      "a": "No. High-accuracy custom HRTF generation requires multi-camera photogrammetry or laser scanning to build an exact 3D mesh of the outer ear, followed by boundary element method (BEM) acoustic simulations. Browser tools use parametric approximations based on head radius."
     },
     {
-      "q": "What is a .SOFA file?",
-      "a": "SOFA stands for Spatially Oriented Format for Acoustics. It is the AES standard (AES69-2015) for storing HRTF data. While this web tool outputs a parametric JSON summary, professional tools can convert these parameters into the binary SOFA format for use in Digital Audio Workstations (DAWs)."
+      "q": "What is the difference between generic HRTF and personalized SOFA files?",
+      "a": "Generic HRTF profiles (like the KEMAR acoustic dummy head standardized in the W3C Web Audio PannerNode) use average human measurements. Personalized SOFA (Spatially Oriented Format for Acoustics) files contain measured impulse responses tailored to an individual's unique ear anatomy."
     },
     {
-      "q": "Can this fix muffled audio in Warzone?",
-      "a": "Often, \"muffled\" audio is a result of frequency masking or poor downmixing from 7.1 to stereo. A proper HRTF profile separates frequencies spatially, which can \"de-clutter\" the mix, making footsteps distinct from explosions. It won't fix bad game code, but it maximizes the clarity of what is there."
+      "q": "Why do some spatial audio profiles sound muffled or unnatural?",
+      "a": "If the simulated HRTF filter curves mismatch your personal pinna geometry, your brain interprets the unexpected notch filters as muffled sound rather than elevated or behind-the-head acoustic cues."
     }
   ],
   "related": [
